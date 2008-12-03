@@ -106,6 +106,7 @@
     <Content Include="Admin\PreviewFrame.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Assets\Css\tree.css" />
     <Content Include="Admin\Assets\Css\default.css" />
     <Content Include="Admin\Assets\Css\iepngfix.htc" />
     <Content Include="Admin\Assets\Css\reset.css" />
@@ -114,6 +115,19 @@
     <Content Include="Admin\Assets\Images\Theme\bannerRight.gif" />
     <Content Include="Admin\Assets\Images\Theme\logo.gif" />
     <Content Include="Admin\Assets\Images\Theme\logOut.gif" />
+    <Content Include="Admin\Assets\Images\Tree\arrow_refresh.png" />
+    <Content Include="Admin\Assets\Images\Tree\collapsable-last.gif" />
+    <Content Include="Admin\Assets\Images\Tree\collapsable.gif" />
+    <Content Include="Admin\Assets\Images\Tree\expandable-last.gif" />
+    <Content Include="Admin\Assets\Images\Tree\expandable.gif" />
+    <Content Include="Admin\Assets\Images\Tree\leaf-last.gif" />
+    <Content Include="Admin\Assets\Images\Tree\leaf.gif" />
+    <Content Include="Admin\Assets\Images\Tree\line_bg.gif" />
+    <Content Include="Admin\Assets\Images\Tree\line_bg_over.gif" />
+    <Content Include="Admin\Assets\Images\Tree\line_bg_over_last.gif" />
+    <Content Include="Admin\Assets\Images\Tree\spacer.gif" />
+    <Content Include="Admin\Assets\Images\Tree\spinner.gif" />
+    <Content Include="Admin\Assets\Images\Tree\tree_line.gif" />
     <Content Include="Admin\Assets\Images\vgrabber.gif" />
     <Content Include="Admin\Assets\JS\jquery-vsdoc.js" />
     <Content Include="Admin\Assets\JS\jquery.js" />

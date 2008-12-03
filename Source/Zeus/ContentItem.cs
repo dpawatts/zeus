@@ -177,11 +177,9 @@ namespace Zeus
 			get
 			{
 				if (IsPage)
-				{
 					return new Uri(VirtualPathUtility.ToAbsolute(TemplateUrl)).AppendQuery("page", ID).ToString();
-				}
 
-				for (ContentItem ancestorItem = Parent; ancestorItem != null; ancestorItem = ancestorItem.Parent)
+				for (ContentItem ancestorItem = this.Parent; ancestorItem != null; ancestorItem = ancestorItem.Parent)
 					if (ancestorItem.IsPage)
 						return new Uri(VirtualPathUtility.ToAbsolute(ancestorItem.TemplateUrl)).AppendQuery("page", ancestorItem.ID).AppendQuery("item", ID).ToString();
 
@@ -192,7 +190,10 @@ namespace Zeus
 			}
 		}
 
-		/// <summary>Gets the public url to this item. This is computed by walking the parent path and prepending their names to the url.</summary>
+		/// <summary>
+		/// Gets the public url to this item. This is computed by walking the 
+		/// parent path and prepending their names to the url.
+		/// </summary>
 		public virtual string Url
 		{
 			get
@@ -201,6 +202,18 @@ namespace Zeus
 					(_urlParser != null && VersionOf == null)
 						? _urlParser.BuildUrl(this)
 						: RewrittenUrl);
+			}
+		}
+
+		/// <summary>The logical path to the node from the root node.</summary>
+		public string Path
+		{
+			get
+			{
+				string path = "/";
+				for (ContentItem item = this; item.Parent != null; item = item.Parent)
+					path = "/" + item.Name + path;
+				return path;
 			}
 		}
 
@@ -401,6 +414,55 @@ namespace Zeus
 				}
 
 				siblings.Add(this);
+			}
+		}
+
+		/// <summary>
+		/// Gets child items that the user is allowed to access.
+		/// It doesn't have to return the same collection as
+		/// the Children property.
+		/// </summary>
+		/// <returns></returns>
+		public virtual IEnumerable<ContentItem> GetChildren()
+		{
+			return this.Children;
+		}
+
+		/// <summary>
+		/// Tries to get a child item with a given name. This method ignores
+		/// user permissions and any trailing '.aspx' that might be part of
+		/// the name.
+		/// </summary>
+		/// <param name="childName">The name of the child item to get.</param>
+		/// <returns>The child item if it is found otherwise null.</returns>
+		/// <remarks>If the method is passed an empty or null string it will return itself.</remarks>
+		public virtual ContentItem GetChild(string childName)
+		{
+			if (string.IsNullOrEmpty(childName))
+				return null;
+
+			int slashIndex = childName.IndexOf('/');
+			if (slashIndex == 0) // starts with slash
+			{
+				if (childName.Length == 1)
+					return this;
+				else
+					return GetChild(childName.Substring(1));
+			}
+			else if (slashIndex > 0) // contains a slash further down
+			{
+				string nameSegment = childName.Substring(0, slashIndex);
+				foreach (ContentItem child in GetChildren())
+					if (child.Equals(nameSegment))
+						return child.GetChild(childName.Substring(slashIndex));
+				return null;
+			}
+			else // no slash, only a name
+			{
+				foreach (ContentItem child in GetChildren())
+					if (child.Equals(childName))
+						return child;
+				return null;
 			}
 		}
 

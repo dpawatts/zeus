@@ -12,6 +12,14 @@ namespace Zeus
 		}
 
 		/// <summary>
+		/// Gets the current page. This is retrieved by the page querystring.
+		/// </summary>
+		public static ContentItem CurrentPage
+		{
+			get { return Current.UrlParser.CurrentPage; }
+		}
+
+		/// <summary>
 		/// Gets Zeus persistence manager used for database persistence of content.
 		/// </summary>
 		public static Persistence.IPersister Persister

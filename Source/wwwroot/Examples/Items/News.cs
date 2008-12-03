@@ -3,7 +3,7 @@ using Zeus.Integrity;
 using Zeus.Details;
 using System.Web.UI.WebControls;
 
-namespace Zeus.Templates.Items
+namespace Zeus.Examples.Items
 {
 	[Definition("News", "News", "A news page.", "", 155)]
 	[RestrictParents(typeof(NewsContainer))]

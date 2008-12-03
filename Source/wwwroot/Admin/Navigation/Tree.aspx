@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tree.aspx.cs" Inherits="Zeus.Admin.Navigation.Tree" %>
+<%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
@@ -68,7 +69,7 @@
 </head>
 <body>
 	<div id="container">
-		<asp:PlaceHolder runat="server" ID="plcTree" />
+		<admin:Tree runat="server" />
 	</div>
 	
 	<ul id="myMenu" class="contextMenu">

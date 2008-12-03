@@ -39,6 +39,11 @@ namespace Zeus.Engine
 			get { return new Host((HostSection) ConfigurationManager.GetSection("zeus/host")); }
 		}
 
+		public IUrlParser UrlParser
+		{
+			get { return _container.Resolve<IUrlParser>(); }
+		}
+
 		#endregion
 
 		#region Constructor

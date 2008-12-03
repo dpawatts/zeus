@@ -14,6 +14,11 @@ namespace Zeus.Persistence
 			_sessionProvider = sessionProvider;
 		}
 
+		public ContentItem Load(int id)
+		{
+			return _sessionProvider.OpenSession.Load<ContentItem>(id);
+		}
+
 		public void Save(ContentItem contentItem)
 		{
 			contentItem.Updated = DateTime.Now;

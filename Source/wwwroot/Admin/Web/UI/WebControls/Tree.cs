@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI;
+using Zeus.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Web;
 
 namespace Zeus.Admin.Web.UI.WebControls
 {
@@ -23,22 +27,22 @@ namespace Zeus.Admin.Web.UI.WebControls
 		{
 			base.CreateChildControls();
 
-			string selected = Request.QueryString["selected"];
+			string selected = this.Page.Request.QueryString["selected"];
 			if (!string.IsNullOrEmpty(selected))
-				_selectedItem = this.StartNode.GetChild(selected);
+				_selectedItem = this.RootNode.GetChild(selected);
 			else
-				_selectedItem = this.StartNode;
+				_selectedItem = this.RootNode;
 
-			Web.Tree tree = Web.Tree.Between(_selectedItem, this.StartNode, true)
+			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
 				.OpenTo(_selectedItem)
 				.LinkProvider(BuildLink)
 				.ToControl();
 
-			AppendExpanderNodeRecursive(tree);
+			AppendExpanderNodeRecursive(treeNode);
 
-			tree.LiClass = "root";
+			treeNode.LiClass = "root";
 
-			plcTree.Controls.Add(tree);
+			this.Controls.Add(treeNode);
 		}
 
 		public static void AppendExpanderNodeRecursive(Control tree)
@@ -56,16 +60,16 @@ namespace Zeus.Admin.Web.UI.WebControls
 		public static void AppendExpanderNode(TreeNode tn)
 		{
 			HtmlGenericControl li = new HtmlGenericControl("li");
-			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selected=" + HttpUtility.UrlEncode(tn.Node.GetPath()) + "}";
+			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selected=" + HttpUtility.UrlEncode(tn.Node.Path) + "}";
 
 			tn.UlClass = "ajax";
 			tn.Controls.Add(li);
 		}
 
-		private Control BuildLink(IContentItem node)
+		private Control BuildLink(ContentItem node)
 		{
 			HtmlAnchor anchor = new HtmlAnchor();
-			anchor.HRef = node.GetUrl();
+			anchor.HRef = node.Url;
 			anchor.Target = "preview";
 
 			HtmlImage image = new HtmlImage();
@@ -74,11 +78,9 @@ namespace Zeus.Admin.Web.UI.WebControls
 			anchor.Controls.Add(new LiteralControl(node.Title));
 
 			HtmlGenericControl span = new HtmlGenericControl("span");
-			span.ID = "span" + node.GetType().FullName.Replace(".", string.Empty) + node.ID;
-			span.Attributes["data-adminurl"] = node.AdminUrl;
-			span.Attributes["data-type"] = node.GetType().FullName;
+			span.ID = "span" + node.ID;
 			span.Attributes["data-id"] = node.ID.ToString();
-			if (node.GetType() == _selectedItem.GetType() && node.ID == _selectedItem.ID)
+			if (node == _selectedItem)
 				span.Attributes["class"] = "active";
 			span.Controls.Add(anchor);
 
