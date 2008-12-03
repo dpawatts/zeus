@@ -1,0 +1,151 @@
+/* no js */
+
+#js {
+	text-align: center;
+	background: #d6dcc5;
+	padding: 10px 10px;
+	border-bottom: 2px dashed #003d02;
+}
+
+#js p {
+	font-size: 13px;
+	color: #003d02;
+}
+
+#js p a {
+	color: #3d241b;
+	font-weight: bold;
+}
+
+/* splitter and frames */
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+#splitter {
+	height: 510px;
+}
+
+#LeftPane { 
+	width: 260px;
+	min-width: 50px;
+	float:left;
+	background:#fff;
+}
+
+#RightPane {
+	min-width: 50px;
+	overflow: hidden;
+	width:790px;
+	float:left;
+	background:#fff;
+}
+
+#splitter .vsplitbar {
+	width: 5px;
+	background: #CECECE url(../images/vgrabber.gif) no-repeat 50% 50%;
+}
+
+#splitter .vsplitbar.active, #splitter .vsplitbar:hover { 
+	background-color: #e2e3e3; 
+}
+
+#splitter iframe {
+	width:100%; 
+}
+
+/************************* header *********************/
+
+#header {
+	height: 54px;
+	background: url('../images/theme/bannerBg.gif') top left repeat-x;
+}
+
+#headerRight {
+	height: 54px;
+	float: right;
+	width: 395px;
+	background: url('../images/theme/bannerRight.gif') top right no-repeat;
+}
+
+#header img {
+	float: left;
+	display: block;
+	width: 201px;
+}
+
+#header p {
+	font-family: arial;
+	color: #fff;
+	font-size: 14px;
+	letter-spacing: 0px;
+}
+
+#header p span {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#header #logOut {
+	display: block;
+	float: right;
+	width: 99px;
+	height: 29px;
+	background: url('../images/theme/logOut.gif') top left no-repeat;
+	text-indent: -9999px;
+	margin: 13px 10px 0px 0px; 
+}
+
+#header #loggedAs {
+	margin: 20px 10px 0 0;
+	display: block;
+	float: right;
+	text-align: right;
+	width: 272px;
+}
+
+#header #logOut:hover {
+	background: url('../images/theme/logOut.gif') bottom left no-repeat;
+}
+
+#header #title {
+	float: left;
+	display: block;
+	width: 322px;
+	margin: 20px 0 0 16px;
+}
+
+/* toolbar */
+
+#toolbar
+{
+	background-color: #f1f2f2;
+	padding: 2px;
+	height: 25px;
+	border-bottom: solid 5px #CECECE;
+}
+
+#toolbar input, #toolbar a
+{
+	display: block;
+	float: left;
+	background-color: #f1f2f2;
+	color: #808285;
+	border: solid 1px #808285;
+	font-size: 12px;
+	padding: 3px;
+	margin-right: 3px;
+}
+
+#toolbar .separator
+{
+	display: block;
+	float: left;
+	width: 1px;
+	background-color: #808285;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 100%;
+}
