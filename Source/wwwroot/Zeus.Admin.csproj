@@ -72,6 +72,13 @@
     <Compile Include="Admin\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Install\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Install\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Navigation\Tree.aspx.cs">
       <DependentUpon>Tree.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -138,6 +145,7 @@
     <Content Include="Admin\Assets\JS\Plugins\jquery.simpleTree.js" />
     <Content Include="Admin\Assets\JS\Plugins\jquery.splitter.js" />
     <Content Include="Admin\Assets\JS\zeus.js" />
+    <Content Include="Admin\Install\Default.aspx" />
     <Content Include="Admin\Web.config" />
   </ItemGroup>
   <ItemGroup>

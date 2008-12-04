@@ -177,7 +177,7 @@ namespace Zeus
 			get
 			{
 				if (IsPage)
-					return new Uri(VirtualPathUtility.ToAbsolute(TemplateUrl)).AppendQuery("page", ID).ToString();
+					return Zeus.Web.Url.Parse(this.TemplateUrl).AppendQuery("page", ID).ToString();
 
 				for (ContentItem ancestorItem = this.Parent; ancestorItem != null; ancestorItem = ancestorItem.Parent)
 					if (ancestorItem.IsPage)

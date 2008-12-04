@@ -124,7 +124,8 @@
     <Compile Include="Edit\IEditable.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
     <Compile Include="Find.cs" />
-    <Compile Include="Install\Migrations\Migration001.cs" />
+    <Compile Include="Installation\InstallationManager.cs" />
+    <Compile Include="Installation\Migrations\Migration001.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Web\UI\IContentTemplate.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditor.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs" />
+    <Compile Include="Web\Url.cs" />
     <Compile Include="ZeusException.cs" />
   </ItemGroup>
   <ItemGroup>
