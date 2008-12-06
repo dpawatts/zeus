@@ -1,19 +1,19 @@
 ﻿using System;
 using NUnit.Framework;
 using Zeus.Tests.Definitions.Items;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 
 namespace Zeus.Tests.Definitions
 {
 	[TestFixture]
 	public class DefinitionTests
 	{
-		private DefinitionManager _definitionManager;
+		private ContentTypeManager _definitionManager;
 
 		[SetUp]
 		public void SetUp()
 		{
-			_definitionManager = new DefinitionManager();
+			_definitionManager = new ContentTypeManager();
 		}
 
 		[Test]

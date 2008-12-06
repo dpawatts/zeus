@@ -1,0 +1,38 @@
+#content
+{
+	padding: 10px;
+}
+
+h2
+{
+	font-weight: bold;
+	color: #bcbec0;
+	font-size: 18px;
+	margin: 0px 0 20px 0;
+}
+
+#toolbar
+{
+	background-color: #f1f2f2;
+	padding: 5px;
+}
+
+#toolbar input
+{
+	height: 24px;
+	padding: 4px;
+	padding-left: 20px;
+	border: solid 1px #bcbec0;
+}
+
+#toolbar .save
+{
+	background-image: url(../images/icons/page_save.png);
+	background-repeat: no-repeat;
+	background-position: 4px 4px;
+}
+
+#toolbar .save:hover {
+	border-color: #606060;
+	background-color: #B5BBBB;
+}

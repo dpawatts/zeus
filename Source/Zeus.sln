@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{AAB76390
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{951F5AA6-FECA-4A78-B5B2-32856CFED612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMigration", "..\..\SoundInTheory.NMigration\Source\NMigration\NMigration.csproj", "{53264600-A2A8-499B-A32F-9E9EB45CEF86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isis", "..\..\Isis\Source\Isis\Isis.csproj", "{76EF3F95-5CEC-47A8-8D99-2EF19018536C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +39,10 @@ Global
 		{5162314B-637B-430C-94FE-B387AA60A81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5162314B-637B-430C-94FE-B387AA60A81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5162314B-637B-430C-94FE-B387AA60A81B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53264600-A2A8-499B-A32F-9E9EB45CEF86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53264600-A2A8-499B-A32F-9E9EB45CEF86}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53264600-A2A8-499B-A32F-9E9EB45CEF86}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53264600-A2A8-499B-A32F-9E9EB45CEF86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76EF3F95-5CEC-47A8-8D99-2EF19018536C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76EF3F95-5CEC-47A8-8D99-2EF19018536C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76EF3F95-5CEC-47A8-8D99-2EF19018536C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76EF3F95-5CEC-47A8-8D99-2EF19018536C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

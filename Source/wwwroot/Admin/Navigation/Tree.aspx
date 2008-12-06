@@ -5,6 +5,7 @@
 <head runat="server">
 	<title>Navigation</title>
 	
+	<link rel="stylesheet" href="../assets/css/shared.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 	<link rel="stylesheet" href="../assets/css/tree.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 	
 	<script type="text/javascript" src="../assets/js/jquery.js"></script>
@@ -24,14 +25,14 @@
 			function(action, el, pos) {
 				switch (action) {
 					case "new":
-						top.preview.location.href = "/admin/add.aspx?parenttype=" + $(el).attr("data-type") + "&parentid=" + $(el).attr("data-id");
+						top.preview.location.href = "/admin/new.aspx?parentid=" + $(el).attr("data-id");
 						break;
 					case "edit":
-						top.preview.location.href = "/admin/" + $(el).attr("data-adminurl") + "/edit.aspx?id=" + $(el).attr("data-id");
+						top.preview.location.href = "/admin/edit.aspx?id=" + $(el).attr("data-id");
 						break;
 					case "delete":
 						if (confirm("Are you sure you wish to delete this item?"))
-							top.preview.location.href = "/admin/delete.aspx?type=" + $(el).attr("data-type") + "&id=" + $(el).attr("data-id");
+							top.preview.location.href = "/admin/delete.aspx?id=" + $(el).attr("data-id");
 						break;
 				}
 			});

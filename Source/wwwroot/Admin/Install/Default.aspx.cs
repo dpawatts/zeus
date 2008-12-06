@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using Zeus.Installation;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 
 namespace Zeus.Admin.Install
 {
@@ -18,15 +18,15 @@ namespace Zeus.Admin.Install
 
 			if (!IsPostBack)
 			{
-				ICollection<ItemDefinition> definitions = Zeus.Context.Current.Definitions.GetDefinitions();
-				foreach (ItemDefinition definition in definitions)
+				ICollection<ContentType> definitions = Zeus.Context.Current.ContentTypes.GetDefinitions();
+				foreach (ContentType definition in definitions)
 					ddlRootItem.Items.Add(new ListItem(definition.DefinitionAttribute.Title, definition.ItemType.AssemblyQualifiedName));
 			}
 		}
 
 		protected void btnSubmit_Click(object sender, EventArgs e)
 		{
-			ContentItem item = Zeus.Context.Current.Definitions.CreateInstance(Type.GetType(ddlRootItem.SelectedValue), null);
+			ContentItem item = Zeus.Context.Current.ContentTypes.CreateInstance(Type.GetType(ddlRootItem.SelectedValue), null);
 			item.Name = "root";
 			item.Title = "Root node";
 			Zeus.Context.Persister.Save(item);

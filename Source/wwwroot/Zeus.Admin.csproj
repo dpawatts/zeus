@@ -58,6 +58,9 @@
     <Content Include="Admin\New.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,10 +116,20 @@
     <Content Include="Admin\PreviewFrame.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Assets\Css\edit.css" />
+    <Content Include="Admin\Assets\Css\preview.css" />
+    <Content Include="Admin\Assets\Css\shared.css" />
     <Content Include="Admin\Assets\Css\tree.css" />
     <Content Include="Admin\Assets\Css\default.css" />
     <Content Include="Admin\Assets\Css\iepngfix.htc" />
     <Content Include="Admin\Assets\Css\reset.css" />
+    <Content Include="Admin\Assets\Images\Edit\inputText.gif" />
+    <Content Include="Admin\Assets\Images\Icons\page.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_add.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_delete.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_edit.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_save.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_white.png" />
     <Content Include="Admin\Assets\Images\Theme\bannerBg.gif" />
     <Content Include="Admin\Assets\Images\blank.gif" />
     <Content Include="Admin\Assets\Images\Theme\bannerRight.gif" />

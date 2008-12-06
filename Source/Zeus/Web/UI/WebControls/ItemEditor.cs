@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using Zeus.Engine;
-using Zeus.Definitions;
-using Zeus.Edit;
+using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Collections.Generic;
+using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -23,9 +23,8 @@ namespace Zeus.Web.UI.WebControls
 			{
 				if (_currentItem == null && !string.IsNullOrEmpty(this.Discriminator))
 				{
-					//ContentItem parentItem = this.Engine.Resolve<N2.Edit.Navigator>().Navigate(ParentPath);//.Persister.Get(ParentItemID);
-					//_currentItem = this.Engine.Definitions.CreateInstance(this.CurrentItemType, parentItem);
-					_currentItem = this.Engine.Definitions.CreateInstance(this.CurrentItemType, null);
+					ContentItem parentItem = this.Engine.Persister.Get(this.ParentItemID);
+					_currentItem = this.Engine.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
 				}
 				return _currentItem;
 			}
@@ -34,9 +33,9 @@ namespace Zeus.Web.UI.WebControls
 				_currentItem = value;
 				if (value != null)
 				{
-					this.Discriminator = this.Engine.Definitions[value.GetType()].Discriminator;
+					this.Discriminator = this.Engine.ContentTypes[value.GetType()].Discriminator;
 					EnsureChildControls();
-					foreach (IEditable editable in this.CurrentItemDefinition.Editables)
+					foreach (IEditor editable in this.CurrentItemDefinition.EditableProperties)
 						editable.UpdateEditor(value, _addedEditors[editable.Name]);
 				}
 				else
@@ -46,12 +45,18 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		public ItemDefinition CurrentItemDefinition
+		public int ParentItemID
+		{
+			get { return (int) (ViewState["ParentItemID"] ?? 0); }
+			set { ViewState["ParentItemID"] = value; }
+		}
+
+		public ContentType CurrentItemDefinition
 		{
 			get
 			{
 				if (!string.IsNullOrEmpty(this.Discriminator))
-					return this.Engine.Definitions[this.Discriminator];
+					return this.Engine.ContentTypes[this.Discriminator];
 				else
 					return null;
 			}
@@ -63,7 +68,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get
 			{
-				ItemDefinition def = this.CurrentItemDefinition;
+				ContentType def = this.CurrentItemDefinition;
 				if (def != null)
 					return def.ItemType;
 				else
@@ -97,12 +102,12 @@ namespace Zeus.Web.UI.WebControls
 		protected override void CreateChildControls()
 		{
 			// Get ItemDefinition for current type.
-			ItemDefinition itemDefinition = this.CurrentItemDefinition;
+			ContentType itemDefinition = this.CurrentItemDefinition;
 			_addedEditors = new Dictionary<string, Control>();
-			foreach (IEditable editable in itemDefinition.Editables)
+			foreach (IEditor editable in itemDefinition.EditableProperties)
 				_addedEditors.Add(editable.Name, editable.AddTo(this));
 			if (!Page.IsPostBack)
-				foreach (IEditable editable in itemDefinition.Editables)
+				foreach (IEditor editable in itemDefinition.EditableProperties)
 					editable.UpdateEditor(this.CurrentItem, _addedEditors[editable.Name]);
 
 			base.CreateChildControls();
@@ -111,7 +116,7 @@ namespace Zeus.Web.UI.WebControls
 		public void Save()
 		{
 			EnsureChildControls();
-			foreach (IEditable editable in this.CurrentItemDefinition.Editables)
+			foreach (IEditor editable in this.CurrentItemDefinition.EditableProperties)
 				editable.UpdateItem(this.CurrentItem, _addedEditors[editable.Name]);
 			this.Engine.Persister.Save(this.CurrentItem);
 		}

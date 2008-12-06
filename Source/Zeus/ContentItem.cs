@@ -19,8 +19,8 @@ namespace Zeus
 		private DateTime? _published = DateTime.Now;
 		private DateTime? _expires = null;
 		private IList<ContentItem> _children = new List<ContentItem>();
-		private IDictionary<string, Details.ContentDetail> _details = new Dictionary<string, Details.ContentDetail>();
-		private IDictionary<string, Details.DetailCollection> _detailCollections = new Dictionary<string, Details.DetailCollection>();
+		private IDictionary<string, ContentTypes.Properties.ContentDetail> _details = new Dictionary<string, ContentTypes.Properties.ContentDetail>();
+		private IDictionary<string, ContentTypes.Properties.DetailCollection> _detailCollections = new Dictionary<string, ContentTypes.Properties.DetailCollection>();
 		private IUrlParser _urlParser;
 
 		#endregion
@@ -129,14 +129,14 @@ namespace Zeus
 		}
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		public virtual IDictionary<string, Details.ContentDetail> Details
+		public virtual IDictionary<string, ContentTypes.Properties.ContentDetail> Details
 		{
 			get { return _details; }
 			set { _details = value; }
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		public virtual IDictionary<string, Details.DetailCollection> DetailCollections
+		public virtual IDictionary<string, ContentTypes.Properties.DetailCollection> DetailCollections
 		{
 			get { return _detailCollections; }
 			set { _detailCollections = value; }
@@ -168,7 +168,7 @@ namespace Zeus
 		/// <summary>Gets the icon of this item. This can be used to distinguish item types in edit mode.</summary>
 		public virtual string IconUrl
 		{
-			get { return VirtualPathUtility.ToAbsolute("~/edit/img/ico/" + (IsPage ? "page.gif" : "page_white.gif")); }
+			get { return Web.Url.ToAbsolute("~/admin/assets/images/icons/" + (IsPage ? "page.png" : "page_white.png")); }
 		}
 
 		/// <summary>Gets the non-friendly url to this item (e.g. "/default.aspx?page=1"). This is used to uniquely identify this item when rewriting to the template page. Non-page items have two query string properties; page and item (e.g. "/default.aspx?page=1&amp;item&#61;27").</summary>
@@ -273,7 +273,7 @@ namespace Zeus
 						value = Utility.Convert(value, info.PropertyType);
 					info.SetValue(this, value, null);
 				}
-				else if (value is Details.DetailCollection)
+				else if (value is ContentTypes.Properties.DetailCollection)
 					throw new ZeusException("Cannot set a detail collection this way, add it to the DetailCollections collection instead.");
 				else
 				{
@@ -334,7 +334,7 @@ namespace Zeus
 		/// <param name="value">The value to set. If this parameter is null the detail is removed.</param>
 		protected virtual void SetDetail<T>(string detailName, T value)
 		{
-			Details.ContentDetail detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
+			ContentTypes.Properties.ContentDetail detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
 
 			if (detail != null && value != null && typeof(T).IsAssignableFrom(detail.ValueType))
 			{
@@ -348,7 +348,7 @@ namespace Zeus
 					Details.Remove(detailName);
 				if (value != null)
 					// add new detail
-					Details.Add(detailName, Zeus.Details.ContentDetail.New(this, detailName, value));
+					Details.Add(detailName, Zeus.ContentTypes.Properties.ContentDetail.New(this, detailName, value));
 			}
 		}
 
@@ -360,13 +360,13 @@ namespace Zeus
 		/// <param name="collectionName">The name of the detail collection to get.</param>
 		/// <param name="createWhenEmpty">Wether a new collection should be created if none exists. Setting this to false means null will be returned if no collection exists.</param>
 		/// <returns>A new or existing detail collection or null if the createWhenEmpty parameter is false and no collection with the given name exists..</returns>
-		public virtual Details.DetailCollection GetDetailCollection(string collectionName, bool createWhenEmpty)
+		public virtual ContentTypes.Properties.DetailCollection GetDetailCollection(string collectionName, bool createWhenEmpty)
 		{
 			if (DetailCollections.ContainsKey(collectionName))
 				return DetailCollections[collectionName];
 			else if (createWhenEmpty)
 			{
-				Details.DetailCollection collection = new Details.DetailCollection(this, collectionName);
+				ContentTypes.Properties.DetailCollection collection = new ContentTypes.Properties.DetailCollection(this, collectionName);
 				DetailCollections.Add(collectionName, collection);
 				return collection;
 			}
@@ -464,6 +464,11 @@ namespace Zeus
 						return child;
 				return null;
 			}
+		}
+
+		protected virtual bool Equals(string name)
+		{
+			return this.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		#endregion

@@ -1,7 +1,7 @@
 ﻿using System;
 using Zeus.Linq;
 using Zeus.Persistence;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 using Zeus.Web;
 using System.Configuration;
 using Zeus.Configuration;
@@ -24,9 +24,9 @@ namespace Zeus.Engine
 			get { return new ContentContext(_container.Resolve<ISessionProvider>()); }
 		}
 
-		public IDefinitionManager Definitions
+		public IContentTypeManager ContentTypes
 		{
-			get { return _container.Resolve<IDefinitionManager>(); }
+			get { return _container.Resolve<IContentTypeManager>(); }
 		}
 
 		public IPersister Persister
@@ -54,6 +54,8 @@ namespace Zeus.Engine
 
 			_container = new WindsorContainer();
 
+			AddComponentInstance<DatabaseSection>(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
+
 			XmlInterpreter interpreter = new XmlInterpreter(resource);
 			interpreter.ProcessResource(resource, _container.Kernel.ConfigurationStore);
 
@@ -62,5 +64,16 @@ namespace Zeus.Engine
 		}
 
 		#endregion
+
+		public T Resolve<T>()
+		{
+			return _container.Resolve<T>();
+		}
+
+		public void AddComponentInstance<T>(T instance)
+		{
+			if (instance != null)
+				_container.Kernel.AddComponentInstance(typeof(T).FullName, typeof(T), instance);
+		}
 	}
 }

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHibernate.Caches.SysCache2, Version=2.0.0.1001, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\NHibernate.Caches.SysCache2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -56,7 +60,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examples\Items\News.cs" />
+    <Compile Include="Examples\Items\NewsItem.cs" />
     <Compile Include="Examples\Items\NewsContainer.cs" />
     <Compile Include="Examples\Items\StartPage.cs" />
     <Compile Include="Examples\UI\MasterPages\Default.Master.cs">
@@ -65,6 +69,20 @@
     </Compile>
     <Compile Include="Examples\UI\MasterPages\Default.Master.designer.cs">
       <DependentUpon>Default.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UI\Views\NewsItem.aspx.cs">
+      <DependentUpon>NewsItem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Examples\UI\Views\NewsItem.aspx.designer.cs">
+      <DependentUpon>NewsItem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Examples\UI\Views\NewsContainer.aspx.cs">
+      <DependentUpon>NewsContainer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Examples\UI\Views\NewsContainer.aspx.designer.cs">
+      <DependentUpon>NewsContainer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Examples\UI\Views\StartPage.aspx.cs">
       <DependentUpon>StartPage.aspx</DependentUpon>
@@ -84,7 +102,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Examples\Assets\Images\Icons\newspaper.png" />
+    <Content Include="Examples\Assets\Images\Icons\newspaper_link.png" />
     <Content Include="Examples\UI\MasterPages\Default.Master" />
+    <Content Include="Examples\UI\Views\NewsItem.aspx" />
+    <Content Include="Examples\UI\Views\NewsContainer.aspx" />
     <Content Include="Examples\UI\Views\StartPage.aspx" />
   </ItemGroup>
   <ItemGroup>

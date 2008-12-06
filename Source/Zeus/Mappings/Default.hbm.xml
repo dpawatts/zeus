@@ -13,7 +13,7 @@
 	</class>
 
 	<!-- ContentDetail: Boolean-, Integer-, Link-, Double-, DateTime-, String-, Object-Detail -->
-	<class name="Zeus.Details.ContentDetail, Zeus" table="zeusDetails">
+	<class name="Zeus.ContentTypes.Properties.ContentDetail, Zeus" table="zeusDetails">
 		<cache usage="read-write" />
 
 		<id name="ID" column="ID" type="Int32" unsaved-value="0">
@@ -22,35 +22,35 @@
 		<discriminator column="Type" type="String" />
 
 		<many-to-one name="EnclosingItem" column="ItemID" class="Zeus.ContentItem, Zeus" not-null="true" fetch="select" />
-		<many-to-one name="EnclosingCollection" column="DetailCollectionID" class="Zeus.Details.DetailCollection, Zeus" fetch="select" lazy="proxy"/>
+		<many-to-one name="EnclosingCollection" column="DetailCollectionID" class="Zeus.ContentTypes.Properties.DetailCollection, Zeus" fetch="select" lazy="proxy"/>
 
 		<property name="Name" type="String" length="50" />
 
-		<subclass name="Zeus.Details.BooleanDetail, Zeus" discriminator-value="Bool">
+		<subclass name="Zeus.ContentTypes.Properties.BooleanDetail, Zeus" discriminator-value="Bool">
 			<property name="BoolValue" type="Boolean" />
 		</subclass>
 
-		<subclass name="Zeus.Details.IntegerDetail, Zeus" discriminator-value="Int">
+		<subclass name="Zeus.ContentTypes.Properties.IntegerDetail, Zeus" discriminator-value="Int">
 			<property name="IntValue" type="Int32" />
 		</subclass>
 
-		<subclass name="Zeus.Details.LinkDetail, Zeus" discriminator-value="Link">
+		<subclass name="Zeus.ContentTypes.Properties.LinkDetail, Zeus" discriminator-value="Link">
 			<many-to-one name="LinkedItem" column="LinkValue" class="Zeus.ContentItem, Zeus" lazy="proxy" />
 		</subclass>
 
-		<subclass name="Zeus.Details.DoubleDetail, Zeus" discriminator-value="Double">
+		<subclass name="Zeus.ContentTypes.Properties.DoubleDetail, Zeus" discriminator-value="Double">
 			<property name="DoubleValue" type="Double" />
 		</subclass>
 
-		<subclass name="Zeus.Details.DateTimeDetail, Zeus" discriminator-value="DateTime">
+		<subclass name="Zeus.ContentTypes.Properties.DateTimeDetail, Zeus" discriminator-value="DateTime">
 			<property name="DateTimeValue" type="DateTime" />
 		</subclass>
 
-		<subclass name="Zeus.Details.StringDetail, Zeus" discriminator-value="String">
+		<subclass name="Zeus.ContentTypes.Properties.StringDetail, Zeus" discriminator-value="String">
 			<property name="StringValue" type="StringClob" length="1073741823" />
 		</subclass>
 
-		<subclass name="Zeus.Details.ObjectDetail, Zeus" discriminator-value="Object">
+		<subclass name="Zeus.ContentTypes.Properties.ObjectDetail, Zeus" discriminator-value="Object">
 			<property name="Value" type="Serializable" length="2147483647" />
 		</subclass>
 	</class>
@@ -91,14 +91,14 @@
 			<cache usage="read-write" />
 			<key column="ItemID" />
 			<index column="Name" type="String" />
-			<one-to-many class="Zeus.Details.ContentDetail, Zeus"/>
+			<one-to-many class="Zeus.ContentTypes.Properties.ContentDetail, Zeus"/>
 		</map>
 
 		<map name="DetailCollections" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
 			<cache usage="read-write" />
 			<key column="ItemID" />
 			<index column="Name" type="String" />
-			<one-to-many class="Zeus.Details.DetailCollection, Zeus"/>
+			<one-to-many class="Zeus.ContentTypes.Properties.DetailCollection, Zeus"/>
 		</map>
 
 		<bag name="AuthorizedRoles" inverse="true" cascade="all-delete-orphan" generic="true" fetch="join" lazy="true">
@@ -109,7 +109,7 @@
 	</class>
 
 	<!-- DetailCollection -->
-	<class name="Zeus.Details.DetailCollection, Zeus" table="zeusDetailCollections">
+	<class name="Zeus.ContentTypes.Properties.DetailCollection, Zeus" table="zeusDetailCollections">
 		<cache usage="read-write" />
 
 		<id name="ID" column="ID" type="Int32" unsaved-value="0">
@@ -122,7 +122,7 @@
 		<bag name="Details" generic="true" lazy="false" cascade="all-delete-orphan" inverse="true">
 			<cache usage="nonstrict-read-write"/>
 			<key column="DetailCollectionID" />
-			<one-to-many class="Zeus.Details.ContentDetail, Zeus"/>
+			<one-to-many class="Zeus.ContentTypes.Properties.ContentDetail, Zeus"/>
 		</bag>
 	</class>
 

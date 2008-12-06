@@ -1,15 +1,17 @@
 ﻿using System;
 using NHibernate.Cfg;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 using System.Text;
 using System.Collections.Generic;
 using System.Reflection;
+using Zeus.Configuration;
+using System.Configuration;
 
 namespace Zeus.Persistence
 {
 	public class ConfigurationBuilder : IConfigurationBuilder
 	{
-		private IDefinitionManager _definitions;
+		private IContentTypeManager _definitions;
 		private NHibernate.Cfg.Configuration _configuration;
 		private string _mappingFormat = @"<?xml version=""1.0"" encoding=""utf-16""?>
 <hibernate-mapping xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""urn:nhibernate-mapping-2.2"">
@@ -23,11 +25,27 @@ namespace Zeus.Persistence
 			get { return _configuration; }
 		}
 
-		public ConfigurationBuilder(IDefinitionManager definitions)
+		public ConfigurationBuilder(IContentTypeManager definitions, DatabaseSection databaseSectionConfig)
 		{
 			_definitions = definitions;
 
+			if (databaseSectionConfig == null)
+				databaseSectionConfig = new DatabaseSection();
+
+			IDictionary<string, string> properties = new Dictionary<string, string>();
+			properties["dialect"] = "NHibernate.Dialect.MsSql2005Dialect";
+			properties["connection.provider"] = "NHibernate.Connection.DriverConnectionProvider";
+			properties["connection.driver_class"] = "NHibernate.Driver.SqlClientDriver";
+			properties["connection.connection_string"] = ConfigurationManager.ConnectionStrings[databaseSectionConfig.ConnectionStringName].ConnectionString;
+			properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();
+			properties["cache.use_query_cache"] = databaseSectionConfig.CacheEnabled.ToString();
+			properties["cache.provider_class"] = databaseSectionConfig.CacheProviderClass;
+
 			_configuration = new NHibernate.Cfg.Configuration();
+
+			foreach (KeyValuePair<string, string> pair in properties)
+				_configuration.SetProperty(pair.Key, pair.Value);
+
 			_configuration.AddAssembly(Assembly.GetExecutingAssembly());
 
 			// For each definition, add a <subclass> element to mapping file.
@@ -40,7 +58,7 @@ namespace Zeus.Persistence
 		private IEnumerable<Type> EnumerateDefinedTypes()
 		{
 			List<Type> types = new List<Type>();
-			foreach (ItemDefinition definition in _definitions.GetDefinitions())
+			foreach (ContentType definition in _definitions.GetDefinitions())
 				foreach (Type t in EnumerateBaseTypes(definition.ItemType))
 				{
 					if (t.IsSubclassOf(typeof(ContentItem)) && !types.Contains(t))
@@ -72,7 +90,7 @@ namespace Zeus.Persistence
 
 		private string GetDiscriminator(Type itemType)
 		{
-			ItemDefinition definition = _definitions[itemType];
+			ContentType definition = _definitions[itemType];
 			if (definition != null)
 				return definition.Discriminator;
 			else

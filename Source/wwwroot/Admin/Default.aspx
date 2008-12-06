@@ -5,6 +5,7 @@
 	<title>Zeus Administration</title>
 	
 	<link rel="stylesheet" href="assets/css/reset.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+	<link rel="stylesheet" href="assets/css/shared.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 	<link rel="stylesheet" href="assets/css/default.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 	
 	<script type="text/javascript" src="assets/js/jquery.js"></script>

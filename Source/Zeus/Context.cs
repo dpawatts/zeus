@@ -1,14 +1,22 @@
 ﻿using System;
 using Zeus.Persistence;
 using Zeus.Engine;
+using System.Web;
 
 namespace Zeus
 {
 	public static class Context
 	{
+		private static ContentEngine _engine;
+
 		public static ContentEngine Current
 		{
-			get { return new ContentEngine(); }
+			get
+			{
+				if (_engine == null)
+					_engine = new ContentEngine();
+				return _engine;
+			}
 		}
 
 		/// <summary>

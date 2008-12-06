@@ -9,5 +9,10 @@ namespace Zeus.Configuration
 		{
 			get { return (HostSection) Sections["host"]; }
 		}
+
+		public DatabaseSection Database
+		{
+			get { return (DatabaseSection) Sections["database"]; }
+		}
 	}
 }

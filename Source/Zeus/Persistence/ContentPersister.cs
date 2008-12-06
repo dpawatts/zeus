@@ -14,6 +14,11 @@ namespace Zeus.Persistence
 			_sessionProvider = sessionProvider;
 		}
 
+		public ContentItem Get(int id)
+		{
+			return _sessionProvider.OpenSession.Get<ContentItem>(id);
+		}
+
 		public ContentItem Load(int id)
 		{
 			return _sessionProvider.OpenSession.Load<ContentItem>(id);

@@ -8,18 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.Edit {
+namespace Zeus.Admin {
     
     
     public partial class New {
         
         /// <summary>
-        /// rptItemDefinitions control.
+        /// lsvChildTypes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptItemDefinitions;
+        protected global::System.Web.UI.WebControls.ListView lsvChildTypes;
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
-using Zeus.Details;
+using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Tests.Definitions.Items
 {
-	[Definition("Text page")]
+	[ContentType("Text page")]
 	public class TestTextPage : ContentItem
 	{
 		[EditableFreeTextArea("Text", 100)]

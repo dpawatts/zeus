@@ -1,5 +1,5 @@
 ﻿using System;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 using System.Collections.Generic;
 
 namespace Zeus.Integrity
@@ -37,9 +37,9 @@ namespace Zeus.Integrity
 		/// <summary>Changes allowed parents on the item definition.</summary>
 		/// <param name="currentDefinition">The definition to alter.</param>
 		/// <param name="allDefinitions">All definitions.</param>
-		public void Refine(ItemDefinition currentDefinition, IList<ItemDefinition> allDefinitions)
+		public void Refine(ContentType currentDefinition, IList<ContentType> allDefinitions)
 		{
-			foreach (ItemDefinition definition in allDefinitions)
+			foreach (ContentType definition in allDefinitions)
 			{
 				bool assignable = IsAssignable(definition.ItemType);
 				if (assignable)

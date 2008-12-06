@@ -4,17 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.Definitions;
+using Zeus.ContentTypes;
 
-namespace Zeus.Edit
+namespace Zeus.Admin
 {
 	public partial class New : System.Web.UI.Page
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			DefinitionManager manager = new DefinitionManager();
-			rptItemDefinitions.DataSource = manager.GetDefinitions();
-			rptItemDefinitions.DataBind();
+			ContentItem parentItem = Zeus.Context.Persister.Get(Convert.ToInt32(Request.QueryString["parentid"]));
+
+			ContentTypeManager manager = new ContentTypeManager();
+			lsvChildTypes.DataSource = manager[parentItem.GetType()].AllowedChildren;
+			lsvChildTypes.DataBind();
 		}
 	}
 }

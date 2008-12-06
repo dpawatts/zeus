@@ -5,13 +5,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Zeus.Edit
+namespace Zeus.Admin
 {
 	public partial class PreviewFrame : System.Web.UI.MasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnPreRender(e);
+
+			h2Title.InnerText = Page.Title;
 		}
 	}
 }

@@ -1,0 +1,21 @@
+label {
+	width: 150px;
+	float: left;
+	text-align: right;
+	display: block;
+	margin: 0 15px 0 0;
+	font-size: 14px;
+	color: #808285;
+}
+
+input.textEditor
+{
+	width: 482px;
+	height: 16px;
+	border: 1px solid #fff;
+	background: url('../images/edit/inputText.gif') top left no-repeat;
+	font-size: 13px;
+	color: #808285;
+	margin: 0 0 15px 0;
+	padding: 4px 0 0 3px;
+}
