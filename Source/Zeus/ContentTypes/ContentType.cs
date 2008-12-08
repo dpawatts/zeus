@@ -21,7 +21,7 @@ namespace Zeus.ContentTypes
 
 		public string Discriminator
 		{
-			get { return this.DefinitionAttribute.Name ?? this.ItemType.Name; }
+			get { return this.ContentTypeAttribute.Name ?? this.ItemType.Name; }
 		}
 
 		public Type ItemType
@@ -35,7 +35,7 @@ namespace Zeus.ContentTypes
 			get { return ((ContentItem) Activator.CreateInstance(this.ItemType)).IconUrl; }
 		}
 
-		public ContentTypeAttribute DefinitionAttribute
+		public ContentTypeAttribute ContentTypeAttribute
 		{
 			get;
 			set;
@@ -55,7 +55,12 @@ namespace Zeus.ContentTypes
 
 		public IEnumerable<Property> EditableProperties
 		{
-			get { return GetPropertiesWithAttribute<IEditor>(); }
+			get { return GetPropertiesWithAttribute<IEditor>().OrderBy(p => p.Editor.SortOrder); }
+		}
+
+		public IEnumerable<Property> DisplayableProperties
+		{
+			get { return GetPropertiesWithAttribute<IDisplayer>(); }
 		}
 
 		#endregion
@@ -63,7 +68,7 @@ namespace Zeus.ContentTypes
 		public ContentType(Type itemType)
 		{
 			this.ItemType = itemType;
-			this.DefinitionAttribute = new ContentTypeAttribute { Title = itemType.Name, Name = itemType.Name };
+			this.ContentTypeAttribute = new ContentTypeAttribute { Title = itemType.Name, Name = itemType.Name };
 		}
 
 		#region Methods

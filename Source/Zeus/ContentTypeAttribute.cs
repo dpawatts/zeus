@@ -84,7 +84,7 @@ namespace Zeus
 			if (string.IsNullOrEmpty(this.Title))
 				Title = currentDefinition.ItemType.Name;
 
-			currentDefinition.DefinitionAttribute = this;
+			currentDefinition.ContentTypeAttribute = this;
 			currentDefinition.IsDefined = true;
 		}
 	}

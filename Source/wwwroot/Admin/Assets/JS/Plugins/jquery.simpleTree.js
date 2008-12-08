@@ -49,6 +49,7 @@ $.fn.simpleTree = function(opt) {
 			autoclose: false,
 			speed: 'fast',
 			afterAjax: false,
+			moving: false,
 			afterMove: false,
 			afterClick: false,
 			afterDblClick: false,
@@ -157,6 +158,8 @@ $.fn.simpleTree = function(opt) {
 				}
 				return false;
 			}).mousedown(function(event) {
+				if (event.button == 2)
+					return;
 				mousePressed = true;
 				cloneNode = $(this).parent().clone();
 				var LI = $(this).parent();
@@ -354,6 +357,10 @@ $.fn.simpleTree = function(opt) {
 			}
 		};
 		TREE.moveNodeToLine = function(node) {
+			if (typeof (TREE.option.moving) == 'function') {
+				if (!TREE.option.moving($(node), $(dragNode_source)))
+					return;
+			}
 			TREE.checkNodeIsLast(dragNode_source[0]);
 			TREE.checkLineIsLast(node);
 			var parent = $(dragNode_source).parents('li:first');

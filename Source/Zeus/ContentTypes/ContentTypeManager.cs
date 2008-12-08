@@ -23,7 +23,13 @@ namespace Zeus.ContentTypes
 
 		public ContentType this[Type type]
 		{
-			get { return _definitions[type]; }
+			get
+			{
+				if (_definitions.ContainsKey(type))
+					return _definitions[type];
+				else
+					return null;
+			}
 		}
 
 		public ContentType this[string discriminator]

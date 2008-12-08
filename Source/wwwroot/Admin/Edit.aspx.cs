@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using Isis.Web;
 using Zeus.ContentTypes;
 
 namespace Zeus.Admin
@@ -8,22 +9,28 @@ namespace Zeus.Admin
 	{
 		protected override void OnInit(EventArgs e)
 		{
-			string discriminator = Request.QueryString["discriminator"];
-			zeusItemEditor.Discriminator = discriminator;
+			if (Request.QueryString["discriminator"] != null)
+			{
+				string discriminator = Request.QueryString["discriminator"];
+				zeusItemView.Discriminator = discriminator;
+			}
 
 			if (Request.QueryString["parentid"] != null)
-				zeusItemEditor.ParentItemID = Convert.ToInt32(Request.QueryString["parentid"]);
+				zeusItemView.ParentItemID = Request.GetRequiredInt("parentid");
 
-			ContentType definition = Zeus.Context.Current.ContentTypes[discriminator];
-			this.Title = "Edit \"" + definition.DefinitionAttribute.Title + "\"";
+			if (Request.QueryString["id"] != null)
+				zeusItemView.CurrentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("id"));
+
+			//ContentType definition = Zeus.Context.Current.ContentTypes[discriminator];
+			//this.Title = "Edit \"" + definition.ContentTypeAttribute.Title + "\"";
 
 			base.OnInit(e);
 		}
 
 		protected void btnSave_Command(object sender, CommandEventArgs e)
 		{
-			zeusItemEditor.Save();
-			Refresh(zeusItemEditor.CurrentItem, false);
+			zeusItemView.Save();
+			Refresh(zeusItemView.CurrentItem, false);
 		}
 	}
 }

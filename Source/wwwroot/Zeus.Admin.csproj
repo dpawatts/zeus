@@ -106,6 +106,10 @@
     <Compile Include="Admin\Web\UI\WebControls\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>
@@ -123,6 +127,7 @@
     <Content Include="Admin\Assets\Css\default.css" />
     <Content Include="Admin\Assets\Css\iepngfix.htc" />
     <Content Include="Admin\Assets\Css\reset.css" />
+    <Content Include="Admin\Assets\Images\Edit\inputGradient.png" />
     <Content Include="Admin\Assets\Images\Edit\inputText.gif" />
     <Content Include="Admin\Assets\Images\Icons\page.png" />
     <Content Include="Admin\Assets\Images\Icons\page_add.png" />

@@ -37,7 +37,7 @@
 				}
 			});
 		}
-		
+
 		$(document).ready(function() {
 			simpleTreeCollection = $('.simpleTree').simpleTree({
 				autoclose: false,
@@ -48,20 +48,21 @@
 				afterDblClick: function(node) {
 					//alert("text-"+$('span:first',node).text());
 				},
+				moving: function(destination, source) {
+					return confirm("Are you sure you wish to move this item?");
+				},
 				afterMove: function(destination, source, pos) {
-					if (confirm("Are you sure you wish to move this item?")) {
-						var sourceID = $("span:first", source).attr('data-id');
-						var sourceType = $("span:first", source).attr('data-type');
-						var destinationID = $("span:first", destination).attr('data-id');
-						var destinationType = $("span:first", destination).attr('data-type');
-						top.preview.location.href = "/admin/move.aspx?sourcetype=" + sourceType + "&sourceid=" + sourceID + "&destinationtype=" + destinationType + "&destinationid=" + destinationID + "&pos=" + pos;
-					}
+					var sourceID = $("span:first", source).attr('data-id');
+					var sourceType = $("span:first", source).attr('data-type');
+					var destinationID = $("span:first", destination).attr('data-id');
+					var destinationType = $("span:first", destination).attr('data-type');
+					top.preview.location.href = "/admin/move.aspx?sourcetype=" + sourceType + "&sourceid=" + sourceID + "&destinationtype=" + destinationType + "&destinationid=" + destinationID + "&pos=" + pos;
 				},
 				afterAjax: function() {
 					initContextMenu();
 				},
-				animate: true
-				//,docToFolderConvert:true
+				animate: true,
+				docToFolderConvert: true
 			});
 
 			initContextMenu();
@@ -74,15 +75,15 @@
 	</div>
 	
 	<ul id="myMenu" class="contextMenu">
-    <li class="new">
-        <a href="#new">New</a>
-    </li>
-    <li class="edit">
-        <a href="#edit">Edit</a>
-    </li>
-    <li class="delete">
-        <a href="#delete">Delete</a>
-    </li>
+		<li class="new">
+			<a href="#new">New</a>
+		</li>
+		<li class="edit">
+			<a href="#edit">Edit</a>
+		</li>
+		<li class="delete">
+			<a href="#delete">Delete</a>
+		</li>
 	</ul>
 	
 	<form runat="server"></form>

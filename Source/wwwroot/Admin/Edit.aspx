@@ -5,6 +5,6 @@
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<asp:Button runat="server" ID="btnSave" OnCommand="btnSave_Command" Text="Save" CssClass="save" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-	<zeus:ItemEditor runat="server" ID="zeusItemEditor" />
+<asp:Content runat="server" ContentPlaceHolderID="Content">
+	<zeus:ItemView runat="server" ID="zeusItemView" Mode="Edit" />
 </asp:Content>

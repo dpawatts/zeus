@@ -20,7 +20,7 @@ namespace Zeus.Admin.Install
 			{
 				ICollection<ContentType> definitions = Zeus.Context.Current.ContentTypes.GetDefinitions();
 				foreach (ContentType definition in definitions)
-					ddlRootItem.Items.Add(new ListItem(definition.DefinitionAttribute.Title, definition.ItemType.AssemblyQualifiedName));
+					ddlRootItem.Items.Add(new ListItem(definition.ContentTypeAttribute.Title, definition.ItemType.AssemblyQualifiedName));
 			}
 		}
 

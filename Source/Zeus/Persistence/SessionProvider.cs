@@ -5,6 +5,7 @@ using System.Text;
 using NHibernate;
 using NHibernate.Cfg;
 using System.Reflection;
+using System.Web;
 
 namespace Zeus.Persistence
 {
@@ -16,7 +17,10 @@ namespace Zeus.Persistence
 		{
 			get
 			{
-				return _sessionFactory.OpenSession();
+				ISession session = HttpContext.Current.Items["OpenSession"] as ISession;
+				if (session == null)
+					HttpContext.Current.Items["OpenSession"] = session = _sessionFactory.OpenSession();
+				return session;
 			}
 		}
 

@@ -4,6 +4,7 @@ using System.Web;
 using System.IO;
 using Isis.Web;
 using Zeus.Web.UI;
+using NHibernate;
 
 namespace Zeus.Web.Modules
 {
@@ -13,11 +14,12 @@ namespace Zeus.Web.Modules
 		{
 			context.BeginRequest += new EventHandler(context_BeginRequest);
 			context.AcquireRequestState += new EventHandler(context_AcquireRequestState);
+			context.EndRequest += new EventHandler(context_EndRequest);
 		}
 
 		private void context_BeginRequest(object sender, EventArgs e)
 		{
-			if (Path.GetExtension(HttpContext.Current.Request.Path) != ".aspx")
+			if (Path.GetExtension(HttpContext.Current.Request.Path) != ".aspx" || HttpContext.Current.Request.Path.StartsWith("/admin/"))
 				return;
 
 			// Check if url matches one of our "managed" pages.
@@ -68,6 +70,13 @@ namespace Zeus.Web.Modules
 			IContentTemplate template = HttpContext.Current.Handler as IContentTemplate;
 			if (template != null)
 				template.CurrentItem = (ContentItem) HttpContext.Current.Items["CurrentPage"];
+		}
+
+		private void context_EndRequest(object sender, EventArgs e)
+		{
+			ISession session = HttpContext.Current.Items["OpenSession"] as ISession;
+			if (session != null)
+				session.Dispose();
 		}
 
 		public void Dispose()

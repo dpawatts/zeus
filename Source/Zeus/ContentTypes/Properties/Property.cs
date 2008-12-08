@@ -37,7 +37,13 @@ namespace Zeus.ContentTypes.Properties
 
 		public IEditor Editor
 		{
-			get { return this.UnderlyingProperty.GetCustomAttribute<IEditor>(false, false); }
+			get
+			{
+				IEditor editor = this.UnderlyingProperty.GetCustomAttribute<IEditor>(false, false);
+				if (editor != null)
+					editor.Name = this.Name;
+				return editor;
+			}
 		}
 
 		public bool HasDisplayer

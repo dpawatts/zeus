@@ -4,18 +4,19 @@ label {
 	text-align: right;
 	display: block;
 	margin: 0 15px 0 0;
+	padding-top: 3px;
 	font-size: 14px;
 	color: #808285;
 }
 
-input.textEditor
+input[type="text"]
 {
+	vertical-align: text-bottom;
+	border: solid 1px #999;
+	background: #FFF url(../images/edit/inputGradient.png) repeat-x top left;
 	width: 482px;
-	height: 16px;
-	border: 1px solid #fff;
-	background: url('../images/edit/inputText.gif') top left no-repeat;
 	font-size: 13px;
 	color: #808285;
 	margin: 0 0 15px 0;
-	padding: 4px 0 0 3px;
+	padding: 3px;
 }

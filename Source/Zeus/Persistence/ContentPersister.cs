@@ -27,7 +27,11 @@ namespace Zeus.Persistence
 		public void Save(ContentItem contentItem)
 		{
 			contentItem.Updated = DateTime.Now;
-			_sessionProvider.OpenSession.SaveOrUpdate(contentItem);
+			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			{
+				_sessionProvider.OpenSession.SaveOrUpdate(contentItem);
+				transaction.Commit();
+			}
 		}
 	}
 }

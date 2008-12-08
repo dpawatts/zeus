@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.Edit {
+namespace Zeus.Admin {
     
     
     public partial class Default {

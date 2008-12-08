@@ -10,11 +10,16 @@ namespace Zeus.Web.UI.WebControls
 {
 	public class ItemView : WebControl
 	{
-		private IDictionary<string, Control> _addedEditors;
+		private IDictionary<string, Control> _propertyControls;
 		private ContentItem _currentItem;
-		private ContentEngine _engine;
 
 		#region Properties
+
+		public ItemViewMode Mode
+		{
+			get { return ViewState["Mode"] as ItemViewMode? ?? ItemViewMode.Display; }
+			set { ViewState["Mode"] = value; }
+		}
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
 		public ContentItem CurrentItem
@@ -25,8 +30,8 @@ namespace Zeus.Web.UI.WebControls
 				{
 					if (!string.IsNullOrEmpty(this.Discriminator))
 					{
-						ContentItem parentItem = this.Engine.Persister.Get(this.ParentItemID);
-						_currentItem = this.Engine.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
+						ContentItem parentItem = Zeus.Context.Current.Persister.Get(this.ParentItemID);
+						_currentItem = Zeus.Context.Current.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
 					}
 					else
 					{
@@ -40,10 +45,11 @@ namespace Zeus.Web.UI.WebControls
 				_currentItem = value;
 				if (value != null)
 				{
-					this.Discriminator = this.Engine.ContentTypes[value.GetType()].Discriminator;
+					this.Discriminator = Zeus.Context.Current.ContentTypes[value.GetType()].Discriminator;
 					EnsureChildControls();
-					foreach (IEditor editable in this.CurrentItemDefinition.EditableProperties)
-						editable.UpdateEditor(value, _addedEditors[editable.Name]);
+					if (this.Mode == ItemViewMode.Edit)
+						foreach (Property editableProperty in this.CurrentItemDefinition.EditableProperties)
+							editableProperty.Editor.UpdateEditor(value, _propertyControls[editableProperty.Name]);
 				}
 				else
 				{
@@ -63,7 +69,9 @@ namespace Zeus.Web.UI.WebControls
 			get
 			{
 				if (!string.IsNullOrEmpty(this.Discriminator))
-					return this.Engine.ContentTypes[this.Discriminator];
+					return Zeus.Context.Current.ContentTypes[this.Discriminator];
+				else if (this.CurrentItem != null)
+					return Zeus.Context.Current.ContentTypes[this.CurrentItem.GetType()];
 				else
 					return null;
 			}
@@ -75,9 +83,9 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get
 			{
-				ContentType def = this.CurrentItemDefinition;
-				if (def != null)
-					return def.ItemType;
+				ContentType contentType = this.CurrentItemDefinition;
+				if (contentType != null)
+					return contentType.ItemType;
 				else
 					return null;
 			}
@@ -88,12 +96,6 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get { return (string) ViewState["Discriminator"] ?? string.Empty; }
 			set { ViewState["Discriminator"] = value; }
-		}
-
-		protected ContentEngine Engine
-		{
-			get { return _engine ?? Zeus.Context.Current; }
-			set { _engine = value; }
 		}
 
 		#endregion
@@ -110,12 +112,21 @@ namespace Zeus.Web.UI.WebControls
 		{
 			// Get ItemDefinition for current type.
 			ContentType itemDefinition = this.CurrentItemDefinition;
-			_addedEditors = new Dictionary<string, Control>();
-			foreach (IEditor editable in itemDefinition.EditableProperties)
-				_addedEditors.Add(editable.Name, editable.AddTo(this));
-			if (!Page.IsPostBack)
-				foreach (IEditor editable in itemDefinition.EditableProperties)
-					editable.UpdateEditor(this.CurrentItem, _addedEditors[editable.Name]);
+			_propertyControls = new Dictionary<string, Control>();
+			switch (this.Mode)
+			{
+				case ItemViewMode.Display:
+					foreach (Property displayableProperty in itemDefinition.DisplayableProperties)
+						_propertyControls.Add(displayableProperty.Name, displayableProperty.Displayer.AddTo(this, this.CurrentItem, displayableProperty.Name));
+					break;
+				case ItemViewMode.Edit:
+					foreach (Property editableProperty in itemDefinition.EditableProperties)
+						_propertyControls.Add(editableProperty.Name, editableProperty.Editor.AddTo(this));
+					if (!Page.IsPostBack)
+						foreach (Property editableProperty in itemDefinition.EditableProperties)
+							editableProperty.Editor.UpdateEditor(this.CurrentItem, _propertyControls[editableProperty.Name]);
+					break;
+			}
 
 			base.CreateChildControls();
 		}
@@ -123,9 +134,9 @@ namespace Zeus.Web.UI.WebControls
 		public void Save()
 		{
 			EnsureChildControls();
-			foreach (IEditor editable in this.CurrentItemDefinition.EditableProperties)
-				editable.UpdateItem(this.CurrentItem, _addedEditors[editable.Name]);
-			this.Engine.Persister.Save(this.CurrentItem);
+			foreach (Property editableProperty in this.CurrentItemDefinition.EditableProperties)
+				editableProperty.Editor.UpdateItem(this.CurrentItem, _propertyControls[editableProperty.Name]);
+			Zeus.Context.Persister.Save(this.CurrentItem);
 		}
 
 		#endregion

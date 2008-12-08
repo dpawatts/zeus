@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zeus.Edit
+namespace Zeus.Admin
 {
 	public partial class Default : System.Web.UI.Page
 	{

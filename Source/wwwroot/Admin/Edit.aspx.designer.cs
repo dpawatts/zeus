@@ -12,6 +12,23 @@ namespace Zeus.Admin {
     
     
     public partial class Edit {
-			protected Zeus.Web.UI.WebControls.ItemView zeusItemEditor;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// zeusItemView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Zeus.Web.UI.WebControls.ItemView zeusItemView;
     }
 }

@@ -9,7 +9,8 @@
 		<ItemTemplate>
 			<p>
 				<a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&parentid=<%# Request.QueryString["parentid"] %>"><img runat="server" src='<%# Eval("IconUrl") %>' alt="" /></a>
-				<a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&parentid=<%# Request.QueryString["parentid"] %>"><%# Eval("DefinitionAttribute.Title") %></a>
+				<strong><a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&parentid=<%# Request.QueryString["parentid"] %>"><%# Eval("ContentTypeAttribute.Title")%></a></strong>
+				<%# Eval("ContentTypeAttribute.Description") %>
 			</p>
 		</ItemTemplate>
 		<EmptyDataTemplate>
