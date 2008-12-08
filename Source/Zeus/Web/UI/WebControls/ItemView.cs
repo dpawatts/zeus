@@ -8,7 +8,7 @@ using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class ItemEditor : WebControl
+	public class ItemView : WebControl
 	{
 		private IDictionary<string, Control> _addedEditors;
 		private ContentItem _currentItem;
@@ -21,10 +21,17 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get
 			{
-				if (_currentItem == null && !string.IsNullOrEmpty(this.Discriminator))
+				if (_currentItem == null)
 				{
-					ContentItem parentItem = this.Engine.Persister.Get(this.ParentItemID);
-					_currentItem = this.Engine.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
+					if (!string.IsNullOrEmpty(this.Discriminator))
+					{
+						ContentItem parentItem = this.Engine.Persister.Get(this.ParentItemID);
+						_currentItem = this.Engine.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
+					}
+					else
+					{
+						_currentItem = this.FindCurrentItem();
+					}
 				}
 				return _currentItem;
 			}

@@ -27,31 +27,31 @@
 		<property name="Name" type="String" length="50" />
 
 		<subclass name="Zeus.ContentTypes.Properties.BooleanDetail, Zeus" discriminator-value="Bool">
-			<property name="BoolValue" type="Boolean" />
+			<property name="TypedValue" column="BoolValue" type="Boolean" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.IntegerDetail, Zeus" discriminator-value="Int">
-			<property name="IntValue" type="Int32" />
+			<property name="TypedValue" column="IntValue" type="Int32" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.LinkDetail, Zeus" discriminator-value="Link">
-			<many-to-one name="LinkedItem" column="LinkValue" class="Zeus.ContentItem, Zeus" lazy="proxy" />
+			<many-to-one name="TypedValue" column="LinkValue" class="Zeus.ContentItem, Zeus" lazy="proxy" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.DoubleDetail, Zeus" discriminator-value="Double">
-			<property name="DoubleValue" type="Double" />
+			<property name="TypedValue" column="DoubleValue" type="Double" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.DateTimeDetail, Zeus" discriminator-value="DateTime">
-			<property name="DateTimeValue" type="DateTime" />
+			<property name="TypedValue" column="DateTimeValue" type="DateTime" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.StringDetail, Zeus" discriminator-value="String">
-			<property name="StringValue" type="StringClob" length="1073741823" />
+			<property name="TypedValue" column="StringValue" type="StringClob" length="1073741823" />
 		</subclass>
 
 		<subclass name="Zeus.ContentTypes.Properties.ObjectDetail, Zeus" discriminator-value="Object">
-			<property name="Value" type="Serializable" length="2147483647" />
+			<property name="TypedValue" column="Value" type="Serializable" length="2147483647" />
 		</subclass>
 	</class>
 

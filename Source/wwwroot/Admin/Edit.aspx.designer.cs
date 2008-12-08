@@ -12,6 +12,6 @@ namespace Zeus.Admin {
     
     
     public partial class Edit {
-			protected Zeus.Web.UI.WebControls.ItemEditor zeusItemEditor;
+			protected Zeus.Web.UI.WebControls.ItemView zeusItemEditor;
     }
 }

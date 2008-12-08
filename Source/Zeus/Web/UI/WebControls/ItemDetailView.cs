@@ -7,7 +7,7 @@ using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class Displayer : Control, IContentItemContainer
+	public class ItemDetailView : Control, IContentItemContainer
 	{
 		#region Fields
 
@@ -38,7 +38,7 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["PropertyName"] = value; }
 		}
 
-		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(Displayer))]
+		[Browsable(false), PersistenceMode(PersistenceMode.InnerProperty), TemplateContainer(typeof(ItemDetailView))]
 		public virtual ITemplate LayoutTemplate
 		{
 			get;

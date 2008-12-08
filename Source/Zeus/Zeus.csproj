@@ -104,6 +104,7 @@
     <Compile Include="Configuration\HostSection.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
+    <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
     <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
@@ -178,12 +179,14 @@
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\Displayer.cs">
+    <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\ItemEditor.cs">
+    <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
+    <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
