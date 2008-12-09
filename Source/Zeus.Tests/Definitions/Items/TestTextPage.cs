@@ -6,7 +6,7 @@ namespace Zeus.Tests.Definitions.Items
 	[ContentType("Text page")]
 	public class TestTextPage : ContentItem
 	{
-		[EditableFreeTextArea("Text", 100)]
+		[HtmlTextBoxEditor("Text", 100)]
 		public virtual string Text
 		{
 			get { return (string) (GetDetail("Text") ?? string.Empty); }

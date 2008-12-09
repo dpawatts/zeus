@@ -4,11 +4,12 @@ using System.Web.UI.WebControls;
 namespace Zeus.ContentTypes.Properties
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class EditableFreeTextAreaAttribute : EditableTextBoxAttribute
+	public class HtmlTextBoxEditorAttribute : EditableTextBoxAttribute
 	{
-		public EditableFreeTextAreaAttribute(string title, int sortOrder)
+		public HtmlTextBoxEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
+			
 		}
 
 		protected override void ModifyEditor(TextBox tb)
@@ -18,8 +19,7 @@ namespace Zeus.ContentTypes.Properties
 
 		protected override TextBox CreateEditor()
 		{
-			//return new FreeTextArea();
-			return new TextBox();
+			return new HtmlTextBox();
 		}
 	}
 }

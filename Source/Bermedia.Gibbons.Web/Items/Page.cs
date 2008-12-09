@@ -9,14 +9,14 @@ namespace Bermedia.Gibbons.Items
 	[RestrictParents(typeof(Page), typeof(Department))]
 	public class Page : StructuralPage
 	{
-		[EditableFreeTextArea("Navigation Text", 100)]
+		[HtmlTextBoxEditor("Navigation Text", 100)]
 		public string NavigationText
 		{
 			get { return GetDetail<string>("NavigationText", string.Empty); }
 			set { SetDetail<string>("NavigationText", value); }
 		}
 
-		[EditableFreeTextArea("Text", 110)]
+		[HtmlTextBoxEditor("Text", 110)]
 		public string Text
 		{
 			get { return GetDetail<string>("Text", string.Empty); }

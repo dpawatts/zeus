@@ -21,7 +21,7 @@ namespace Zeus.Examples.Items
 			set { base.Name = value; }
 		}
 
-		[EditableFreeTextArea("Text", 100)]
+		[HtmlTextBoxEditor("Text", 100)]
 		public virtual string Text
 		{
 			get { return GetDetail<string>("Text", string.Empty); }

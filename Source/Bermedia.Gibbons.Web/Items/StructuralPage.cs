@@ -22,14 +22,14 @@ namespace Bermedia.Gibbons.Items
 
 		public override string IconUrl
 		{
-			get { return "~/Gibbons/Assets/Images/Icons/" + this.IconName + ".png"; }
+			get { return "~/Assets/Images/Icons/" + this.IconName + ".png"; }
 		}
 
 		protected abstract string IconName { get; }
 
 		public override string TemplateUrl
 		{
-			get { return "~/Gibbons/UI/Views/" + this.TemplateName + ".aspx"; }
+			get { return "~/UI/Views/" + this.TemplateName + ".aspx"; }
 		}
 
 		protected virtual string TemplateName

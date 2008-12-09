@@ -14,9 +14,13 @@ input[type="text"]
 	vertical-align: text-bottom;
 	border: solid 1px #999;
 	background: #FFF url(../images/edit/inputGradient.png) repeat-x top left;
-	width: 482px;
+	width: 500px;
 	font-size: 13px;
 	color: #808285;
-	margin: 0 0 15px 0;
 	padding: 3px;
+}
+
+.editDetail
+{
+	margin-bottom: 15px;
 }

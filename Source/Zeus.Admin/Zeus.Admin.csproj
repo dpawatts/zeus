@@ -154,6 +154,7 @@
     <Content Include="Admin\Assets\Images\Tree\spinner.gif" />
     <Content Include="Admin\Assets\Images\Tree\tree_line.gif" />
     <Content Include="Admin\Assets\Images\vgrabber.gif" />
+    <Content Include="Admin\Assets\JS\tinymce.js" />
     <Content Include="Admin\Assets\JS\jquery-vsdoc.js" />
     <Content Include="Admin\Assets\JS\jquery.js" />
     <Content Include="Admin\Assets\JS\Plugins\jquery.contextMenu.js" />

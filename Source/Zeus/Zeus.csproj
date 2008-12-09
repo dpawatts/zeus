@@ -106,6 +106,7 @@
     <Compile Include="ContentItem.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
     <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\NameEditorAttribute.cs" />
@@ -163,7 +164,7 @@
     <Compile Include="Web\UI\ContentPage.generic.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Web\UI\ExtensionMethods.cs" />
+    <Compile Include="Web\UI\Control.extensions.cs" />
     <Compile Include="Web\UI\IContentItemContainer.cs" />
     <Compile Include="Web\UI\IContentTemplate.cs">
       <SubType>Code</SubType>
@@ -188,6 +189,7 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
+    <Compile Include="Web\UI\WebControls\NameEditor.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -211,6 +213,9 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

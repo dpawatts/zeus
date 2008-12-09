@@ -9,7 +9,7 @@ namespace Bermedia.Gibbons.Items
 	[RestrictParents(typeof(Page), typeof(Department))]
 	public class Department : StructuralPage
 	{
-		[EditableFreeTextArea("Text", 100)]
+		[HtmlTextBoxEditor("Text", 100)]
 		public string Text
 		{
 			get { return GetDetail<string>("Text", string.Empty); }
