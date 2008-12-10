@@ -11,7 +11,7 @@ namespace Zeus.ContentTypes.Properties
 		public NameEditorAttribute(string title, int sortOrder)
 			: base(title, "Name", sortOrder)
 		{
-			
+			this.Required = true;
 		}
 
 		protected override Control AddEditor(Control container)

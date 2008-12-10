@@ -12,25 +12,29 @@ namespace Zeus.Admin
 			if (Request.QueryString["discriminator"] != null)
 			{
 				string discriminator = Request.QueryString["discriminator"];
-				zeusItemView.Discriminator = discriminator;
+				zeusItemEditView.Discriminator = discriminator;
 			}
 
 			if (Request.QueryString["parentid"] != null)
-				zeusItemView.ParentItemID = Request.GetRequiredInt("parentid");
+				zeusItemEditView.ParentItemID = Request.GetRequiredInt("parentid");
 
 			if (Request.QueryString["id"] != null)
-				zeusItemView.CurrentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("id"));
-
-			//ContentType definition = Zeus.Context.Current.ContentTypes[discriminator];
-			//this.Title = "Edit \"" + definition.ContentTypeAttribute.Title + "\"";
+			{
+				zeusItemEditView.CurrentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("id"));
+				this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
+			}
+			else
+			{
+				this.Title = "New " + zeusItemEditView.CurrentItemDefinition.ContentTypeAttribute.Title;
+			}
 
 			base.OnInit(e);
 		}
 
 		protected void btnSave_Command(object sender, CommandEventArgs e)
 		{
-			zeusItemView.Save();
-			Refresh(zeusItemView.CurrentItem, false);
+			zeusItemEditView.Save();
+			Refresh(zeusItemEditView.CurrentItem, false);
 		}
 	}
 }

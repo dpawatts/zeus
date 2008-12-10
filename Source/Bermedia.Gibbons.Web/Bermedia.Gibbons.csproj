@@ -71,6 +71,7 @@
     <Compile Include="Items\StartPage.cs" />
     <Compile Include="Items\StructuralPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tabs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.Admin\Zeus.Admin.csproj">

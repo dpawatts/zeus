@@ -9,19 +9,25 @@ namespace Zeus.ContentTypes
 	{
 		private List<IContainable> _contained = new List<IContainable>();
 
+		public EditorContainerAttribute(string name, int sortOrder)
+		{
+			this.Name = name;
+			this.SortOrder = sortOrder;
+		}
+
 		public string Name
 		{
 			get;
 			set;
 		}
 
-		public string ContainerName
+		public int SortOrder
 		{
 			get;
 			set;
 		}
 
-		public int SortOrder
+		public string ContainerName
 		{
 			get;
 			set;

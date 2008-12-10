@@ -2,6 +2,6 @@ body {
 	font-family: arial;
 }
 
-p, input {
+body, p, input {
 	font-size: 12px;
 }

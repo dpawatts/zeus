@@ -6,5 +6,6 @@
 	<asp:Button runat="server" ID="btnSave" OnCommand="btnSave_Command" Text="Save" CssClass="save" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<zeus:ItemView runat="server" ID="zeusItemView" Mode="Edit" />
+	<asp:ValidationSummary runat="server" CssClass="validationSummary" />
+	<zeus:ItemEditView runat="server" ID="zeusItemEditView" />
 </asp:Content>

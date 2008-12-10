@@ -8,7 +8,7 @@ using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class ItemView : WebControl
+	public abstract class ItemView : WebControl
 	{
 		private ContentItem _currentItem;
 
@@ -18,12 +18,6 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get;
 			private set;
-		}
-
-		public ItemViewMode Mode
-		{
-			get { return ViewState["Mode"] as ItemViewMode? ?? ItemViewMode.Display; }
-			set { ViewState["Mode"] = value; }
 		}
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
@@ -52,15 +46,18 @@ namespace Zeus.Web.UI.WebControls
 				{
 					this.Discriminator = Zeus.Context.Current.ContentTypes[value.GetType()].Discriminator;
 					EnsureChildControls();
-					if (this.Mode == ItemViewMode.Edit)
-						foreach (Property editableProperty in this.CurrentItemDefinition.EditableProperties)
-							editableProperty.Editor.UpdateEditor(value, this.PropertyControls[editableProperty.Name]);
+					OnCurrentItemChanged(EventArgs.Empty);
 				}
 				else
 				{
 					this.Discriminator = null;
 				}
 			}
+		}
+
+		protected virtual void OnCurrentItemChanged(EventArgs eventArgs)
+		{
+			
 		}
 
 		public int ParentItemID
@@ -118,31 +115,12 @@ namespace Zeus.Web.UI.WebControls
 			// Get ItemDefinition for current type.
 			ContentType itemDefinition = this.CurrentItemDefinition;
 			this.PropertyControls = new Dictionary<string, Control>();
-			switch (this.Mode)
-			{
-				case ItemViewMode.Display:
-					foreach (Property displayableProperty in itemDefinition.DisplayableProperties)
-						this.PropertyControls.Add(displayableProperty.Name, displayableProperty.Displayer.AddTo(this, this.CurrentItem, displayableProperty.Name));
-					break;
-				case ItemViewMode.Edit:
-					foreach (Property editableProperty in itemDefinition.EditableProperties)
-						this.PropertyControls.Add(editableProperty.Name, editableProperty.Editor.AddTo(this));
-					if (!Page.IsPostBack)
-						foreach (Property editableProperty in itemDefinition.EditableProperties)
-							editableProperty.Editor.UpdateEditor(this.CurrentItem, this.PropertyControls[editableProperty.Name]);
-					break;
-			}
+			AddPropertyControls();
 
 			base.CreateChildControls();
 		}
 
-		public void Save()
-		{
-			EnsureChildControls();
-			foreach (Property editableProperty in this.CurrentItemDefinition.EditableProperties)
-				editableProperty.Editor.UpdateItem(this.CurrentItem, this.PropertyControls[editableProperty.Name]);
-			Zeus.Context.Persister.Save(this.CurrentItem);
-		}
+		protected abstract void AddPropertyControls();
 
 		#endregion
 	}

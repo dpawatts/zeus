@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Isis.Web;
 using Zeus.ContentTypes;
 
 namespace Zeus.Admin
@@ -12,9 +13,9 @@ namespace Zeus.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			ContentItem parentItem = Zeus.Context.Persister.Get(Convert.ToInt32(Request.QueryString["parentid"]));
+			ContentItem parentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("parentid"));
 
-			ContentTypeManager manager = new ContentTypeManager();
+			IContentTypeManager manager = Zeus.Context.Current.Resolve<IContentTypeManager>();
 			lsvChildTypes.DataSource = manager[parentItem.GetType()].AllowedChildren;
 			lsvChildTypes.DataBind();
 		}

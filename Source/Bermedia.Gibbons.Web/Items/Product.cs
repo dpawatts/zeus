@@ -10,7 +10,8 @@ namespace Bermedia.Gibbons.Items
 {
 	[ContentType(Description = "e.g. Calvin Klein Striped Socks, Must de Cartier Eau de Toilette")]
 	[RestrictParents(typeof(Category))]
-	[TabPanel(Tabs.General, "General", 0)]
+	[TabPanel(Tabs.ColoursSizes, "Colors & Sizes", 1)]
+	[TabPanel(Tabs.Recommendations, "Recommendations", 2)]
 	public class Product : StructuralPage
 	{
 		protected override string IconName
@@ -20,14 +21,14 @@ namespace Bermedia.Gibbons.Items
 
 		#region Public properties
 
-		[TextBoxEditor("Vendor Style Number", 200, ContainerName = Tabs.General)]
+		[TextBoxEditor("Vendor Style Number", 200, ContainerName = Tabs.General, Required = true)]
 		public string VendorStyleNumber
 		{
 			get { return GetDetail<string>("VendorStyleNumber", string.Empty); }
 			set { SetDetail<string>("VendorStyleNumber", value); }
 		}
 
-		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General)]
+		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true)]
 		public decimal RegularPrice
 		{
 			get { return GetDetail<decimal>("RegularPrice", 0); }
@@ -69,7 +70,7 @@ namespace Bermedia.Gibbons.Items
 			set { SetDetail<bool>("Exclusive", value); }
 		}
 
-		[CheckBoxEditor("Gift Item?", "", 270, ContainerName = Tabs.Recommendations)]
+		[CheckBoxEditor("Gift Item?", "", 270, ContainerName = Tabs.General)]
 		public bool GiftItem
 		{
 			get { return GetDetail<bool>("GiftItem", false); }
@@ -78,15 +79,13 @@ namespace Bermedia.Gibbons.Items
 
 		// Free Gift?
 
-		// Free Gift Product
+		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(Product), IncludeSelf = false, ContainerName = Tabs.General)]
+		public Product FreeGiftProduct
+		{
+			get { return GetDetail<Product>("FreeGiftProduct", null); }
+			set { SetDetail<Product>("FreeGiftProduct", value); }
+		}
 
 		#endregion
-
-		private static class Tabs
-		{
-			public const string General = "General";
-			public const string ColoursSizes = "ColoursSizes";
-			public const string Recommendations = "Recommendations";
-		}
 	}
 }

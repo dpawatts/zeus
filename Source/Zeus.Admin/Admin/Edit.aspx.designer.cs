@@ -29,6 +29,6 @@ namespace Zeus.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ItemView zeusItemView;
+        protected global::Zeus.Web.UI.WebControls.ItemEditView zeusItemEditView;
     }
 }

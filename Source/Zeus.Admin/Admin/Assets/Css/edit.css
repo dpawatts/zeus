@@ -9,20 +9,23 @@ label {
 	text-align: right;
 	display: block;
 	margin: 0 15px 0 0;
-	
 	font-size: 14px;
 	color: #808285;
 }
 
-input[type="text"], textarea
+input[type="text"], textarea, select
 {
 	vertical-align: text-bottom;
 	border: solid 1px #999;
-	background: #FFF url(../images/edit/inputGradient.png) repeat-x top left;
 	width: 500px;
-	font-size: 13px;
 	color: #808285;
 	padding: 3px;
+}
+
+input[type="text"], textarea
+{
+	font-size: 13px;
+	background: #FFF url(../images/edit/inputGradient.png) repeat-x top left;
 }
 
 textarea
@@ -51,4 +54,14 @@ span.clearFile label
 	display: inline;
 	margin: 0;
 	padding: 3px;
+}
+
+div.validationSummary {
+	border: 1px dashed #FF0000;
+	padding: 10px;
+	background-color: #FDE1E2;
+}
+
+input[type="text"].required, textarea.required, select.required {
+	border: 1px solid #E6ACAC;
 }

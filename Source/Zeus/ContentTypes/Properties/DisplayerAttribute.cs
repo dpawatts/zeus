@@ -19,6 +19,12 @@ namespace Zeus.ContentTypes.Properties
 
 		#region Properties
 
+		public string Name
+		{
+			get;
+			set;
+		}
+
 		public Type ControlType
 		{
 			get;

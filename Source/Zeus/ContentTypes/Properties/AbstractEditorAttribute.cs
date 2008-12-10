@@ -7,6 +7,8 @@ namespace Zeus.ContentTypes.Properties
 {
 	public abstract class AbstractEditorAttribute : Attribute, IEditor
 	{
+		private string _requiredText, _requiredErrorMessage;
+
 		#region Properties
 
 		/// <summary>Gets or sets the name of the detail (property) on the content item's object.</summary>
@@ -34,6 +36,24 @@ namespace Zeus.ContentTypes.Properties
 		{
 			get;
 			set;
+		}
+
+		public bool Required
+		{
+			get;
+			set;
+		}
+
+		public string RequiredText
+		{
+			get { return _requiredText ?? "&nbsp;*"; }
+			set { _requiredText = value; }
+		}
+
+		public string RequiredErrorMessage
+		{
+			get { return _requiredErrorMessage ?? string.Format("{0} is required", this.Title); }
+			set { _requiredErrorMessage = value; }
 		}
 
 		#endregion
@@ -78,6 +98,8 @@ namespace Zeus.ContentTypes.Properties
 			Control editor = AddEditor(panel);
 			if (label != null && editor != null && !string.IsNullOrEmpty(editor.ID))
 				label.AssociatedControlID = editor.ID;
+			if (this.Required)
+				AddRequiredFieldValidator(panel, editor);
 
 			return editor;
 		}
@@ -109,6 +131,19 @@ namespace Zeus.ContentTypes.Properties
 		/// <param name="container">The container onto which to add the editor.</param>
 		/// <returns>A reference to the added editor.</returns>
 		protected abstract Control AddEditor(Control container);
+
+		protected virtual IValidator AddRequiredFieldValidator(Control container, Control editor)
+		{
+			RequiredFieldValidator rfv = new RequiredFieldValidator();
+			rfv.ID = "rfv" + this.Name;
+			rfv.ControlToValidate = editor.ID;
+			rfv.Display = ValidatorDisplay.Dynamic;
+			rfv.Text = this.RequiredText;
+			rfv.ErrorMessage = this.RequiredErrorMessage;
+			container.Controls.Add(rfv);
+
+			return rfv;
+		}
 
 		/// <summary>Compares two values regarding null values as equal.</summary>
 		protected bool AreEqual(object editorValue, object itemValue)

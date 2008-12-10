@@ -8,12 +8,12 @@ $.fn.tabPanel = function(options) {
 	var opts = $.extend({}, $.fn.tabPanel.defaults, options);
 
 	// Plugin implementation.
-	var tabContainer = this.get(0).before("<ul class='tabs'></ul>").prev().get(0);
+	var tabContainer = $($(this.get(0)).before("<ul class='tabs'></ul>").prev().get(0));
 	$(this).each(function() {
 		tabContainer.append('<li><a href="#' + this.id + '"><span>' + this.title + '</span></a></li>');
 	});
 
-	$(tabContainer).tabs();
+	tabContainer.tabs();
 };
 
 // plugin defaults - added as a property on our plugin function

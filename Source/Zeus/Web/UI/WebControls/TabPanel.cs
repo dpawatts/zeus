@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using Isis.Web.UI;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -17,6 +18,8 @@ namespace Zeus.Web.UI.WebControls
 			this.Page.ClientScript.RegisterClientScriptInclude("JQueryUICore", ResolveClientUrl("~/admin/assets/js/plugins/ui.core.js"));
 			this.Page.ClientScript.RegisterClientScriptInclude("JQueryUITabs", ResolveClientUrl("~/admin/assets/js/plugins/ui.tabs.js"));
 			this.Page.ClientScript.RegisterClientScriptInclude("JQueryTabPanel", ResolveClientUrl("~/admin/assets/js/plugins/jquery.tabPanel.js"));
+
+			this.Page.AddStyleSheet("~/admin/assets/css/tabPanel.css");
 
 			string script = "$(document).ready(function() { $('.tabPanel').tabPanel(); });";
 			this.Page.ClientScript.RegisterStartupScript(typeof(TabPanel), "InitTabPanels", script, true);

@@ -178,6 +178,7 @@
     <Content Include="Admin\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Assets\Css\tabPanel.css" />
     <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />

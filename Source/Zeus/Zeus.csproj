@@ -109,17 +109,22 @@
     <Compile Include="Configuration\HostSection.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
+    <Compile Include="ContentTypes\ContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
+    <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
+    <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
+    <Compile Include="ContentTypes\Properties\LinkDropDownListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\NameEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\Property.cs" />
+    <Compile Include="ContentTypes\RootEditorContainer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContentTypeAttribute.cs" />
     <Compile Include="ContentTypes\ContentTypeManager.cs" />
@@ -204,6 +209,8 @@
     <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\ItemDisplayView.cs" />
+    <Compile Include="Web\UI\WebControls\ItemEditView.cs" />
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
     </Compile>

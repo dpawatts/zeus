@@ -13,7 +13,8 @@ namespace Zeus.Tests.Definitions
 		[SetUp]
 		public void SetUp()
 		{
-			_definitionManager = new ContentTypeManager();
+			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder();
+			_definitionManager = new ContentTypeManager(contentTypeBuilder);
 		}
 
 		[Test]

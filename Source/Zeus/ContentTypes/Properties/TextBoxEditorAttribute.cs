@@ -101,6 +101,8 @@ namespace Zeus.ContentTypes.Properties
 			TextBox tb = CreateEditor();
 			tb.ID = Name;
 			tb.CssClass += " textEditor";
+			if (this.Required)
+				tb.CssClass += " required";
 			ModifyEditor(tb);
 			container.Controls.Add(tb);
 
