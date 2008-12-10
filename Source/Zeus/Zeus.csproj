@@ -110,6 +110,8 @@
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
+    <Compile Include="ContentTypes\IEditorContainer.cs" />
+    <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />

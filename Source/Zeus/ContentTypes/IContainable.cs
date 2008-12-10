@@ -7,8 +7,10 @@ namespace Zeus.ContentTypes
 	/// Classes implementing this interface can add a graphical representation to 
 	/// a control hierarchy.
 	/// </summary>
-	public interface IContainable
+	public interface IContainable : IUniquelyNamed
 	{
+		string ContainerName { get; set; }
+
 		/// <summary>The order of this container compared to other containers and editors. Editors within the container are sorted according to their sort order.</summary>
 		int SortOrder { get; set; }
 
