@@ -24,6 +24,12 @@ namespace Zeus.ContentTypes
 			get { return this.ContentTypeAttribute.Name ?? this.ItemType.Name; }
 		}
 
+		public IList<EditorContainerAttribute> EditorContainers
+		{
+			get;
+			set;
+		}
+
 		public Type ItemType
 		{
 			get;

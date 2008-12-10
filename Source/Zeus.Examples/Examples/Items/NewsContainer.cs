@@ -7,7 +7,7 @@ namespace Zeus.Examples.Items
 	[ContentType("News Container", "NewsContainer", "A list of news. News items can be added to this page.", "", 150)]
 	public class NewsContainer : ContentItem
 	{
-		[EditableTextBox("Title", 10)]
+		[TextBoxEditor("Title", 10)]
 		public override string Title
 		{
 			get { return base.Title; }

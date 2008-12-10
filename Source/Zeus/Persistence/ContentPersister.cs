@@ -14,6 +14,27 @@ namespace Zeus.Persistence
 			_sessionProvider = sessionProvider;
 		}
 
+		public void Delete(ContentItem contentItem)
+		{
+			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			{
+				DeleteRecursive(contentItem);
+				transaction.Commit();
+			}
+		}
+
+		private void DeleteRecursive(ContentItem contentItem)
+		{
+			foreach (ContentItem child in contentItem.Children)
+				DeleteRecursive(child);
+
+			contentItem.AddTo(null);
+
+			// delete inbound links
+
+			_sessionProvider.OpenSession.Delete(contentItem);
+		}
+
 		public ContentItem Get(int id)
 		{
 			return _sessionProvider.OpenSession.Get<ContentItem>(id);
@@ -30,6 +51,7 @@ namespace Zeus.Persistence
 			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
 			{
 				_sessionProvider.OpenSession.SaveOrUpdate(contentItem);
+				contentItem.AddTo(contentItem.Parent);
 				transaction.Commit();
 			}
 		}

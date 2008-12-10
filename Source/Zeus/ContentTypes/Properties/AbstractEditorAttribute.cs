@@ -30,6 +30,12 @@ namespace Zeus.ContentTypes.Properties
 			set;
 		}
 
+		public string ContainerName
+		{
+			get;
+			set;
+		}
+
 		#endregion
 
 		#region Constructors

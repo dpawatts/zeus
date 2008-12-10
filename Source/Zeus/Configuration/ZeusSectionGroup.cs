@@ -14,5 +14,10 @@ namespace Zeus.Configuration
 		{
 			get { return (DatabaseSection) Sections["database"]; }
 		}
+
+		public FileSystemSection FileSystem
+		{
+			get { return (FileSystemSection) Sections["fileSystem"]; }
+		}
 	}
 }

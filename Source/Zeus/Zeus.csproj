@@ -67,6 +67,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
+    </Reference>
     <Reference Include="SoundInTheory.NMigration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.NMigration.dll</HintPath>
@@ -100,11 +104,14 @@
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\HostSection.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
+    <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
+    <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
@@ -126,15 +133,24 @@
     <Compile Include="ContentTypes\Properties\DetailCollection.cs" />
     <Compile Include="ContentTypes\Properties\DoubleDetail.cs" />
     <Compile Include="ContentTypes\Properties\EditableAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\EditableCheckBoxAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\CheckBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\EditableFreeTextAreaAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\EditableTextBoxAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\TextBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\IntegerDetail.cs" />
     <Compile Include="ContentTypes\Properties\LinkDetail.cs" />
     <Compile Include="ContentTypes\Properties\ObjectDetail.cs" />
     <Compile Include="ContentTypes\Properties\StringDetail.cs" />
     <Compile Include="ContentTypes\Properties\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
+    <Compile Include="FileSystem\DatabaseFile.cs" />
+    <Compile Include="FileSystem\DatabaseFileIdentifier.cs" />
+    <Compile Include="FileSystem\DatabaseFolder.cs" />
+    <Compile Include="FileSystem\DatabaseFileSystem.cs" />
+    <Compile Include="FileSystem\IFile.cs" />
+    <Compile Include="FileSystem\IFileIdentifier.cs" />
+    <Compile Include="FileSystem\IFileSystem.cs" />
+    <Compile Include="FileSystem\IFolder.cs" />
+    <Compile Include="FileSystem\Migrations\Migration001.cs" />
     <Compile Include="Find.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
@@ -169,6 +185,7 @@
     <Compile Include="Web\UI\IContentTemplate.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,6 +198,7 @@
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -190,6 +208,7 @@
     <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
+    <Compile Include="Web\UI\WebControls\TabPanel.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -216,6 +235,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FileSystem\DatabaseFileSystem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FileSystem\fileSystem.castle.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

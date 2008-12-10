@@ -14,7 +14,7 @@ namespace Zeus.Examples.Items
 			Visible = false;
 		}
 
-		[EditableTextBox("Introduction", 90, TextMode = TextBoxMode.MultiLine, Rows = 4, Columns = 80)]
+		[TextBoxEditor("Introduction", 90, TextMode = TextBoxMode.MultiLine, Rows = 4, Columns = 80)]
 		[LiteralDisplayer]
 		public virtual string Introduction
 		{

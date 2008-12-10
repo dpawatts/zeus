@@ -68,6 +68,13 @@
     <Compile Include="Admin\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -88,6 +95,9 @@
     </Compile>
     <Compile Include="Admin\Navigation\Tree.aspx.designer.cs">
       <DependentUpon>Tree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Navigation\TreeLoader.ashx.cs">
+      <DependentUpon>TreeLoader.ashx</DependentUpon>
     </Compile>
     <Compile Include="Admin\New.aspx.cs">
       <DependentUpon>New.aspx</DependentUpon>
@@ -166,6 +176,13 @@
     <Content Include="Admin\Assets\JS\zeus.js" />
     <Content Include="Admin\Install\Default.aspx" />
     <Content Include="Admin\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
+    <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
+    <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />
+    <Content Include="Admin\Delete.aspx" />
+    <Content Include="Admin\Navigation\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

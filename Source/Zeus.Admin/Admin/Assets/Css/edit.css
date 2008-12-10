@@ -1,15 +1,20 @@
+div.editDetail
+{
+	margin-bottom: 15px;
+}
+
 label {
 	width: 150px;
 	float: left;
 	text-align: right;
 	display: block;
 	margin: 0 15px 0 0;
-	padding-top: 3px;
+	
 	font-size: 14px;
 	color: #808285;
 }
 
-input[type="text"]
+input[type="text"], textarea
 {
 	vertical-align: text-bottom;
 	border: solid 1px #999;
@@ -20,7 +25,30 @@ input[type="text"]
 	padding: 3px;
 }
 
-.editDetail
+textarea
 {
-	margin-bottom: 15px;
+	height: 100px;
+}
+
+img.image
+{
+	clear: both;
+	margin-left: 165px;
+	margin-top: 5px;
+}
+
+span.clearFile input
+{
+	margin-top: 5px;
+	margin-left: 165px;
+}
+
+span.clearFile label
+{
+	width: auto;
+	float: none;
+	text-align: inherit;
+	display: inline;
+	margin: 0;
+	padding: 3px;
 }

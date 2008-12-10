@@ -6,7 +6,7 @@ namespace Bermedia.Gibbons.Items
 {
 	public abstract class StructuralPage : ContentItem
 	{
-		[EditableTextBox("Title", 10)]
+		[TextBoxEditor("Title", 10)]
 		public override string Title
 		{
 			get { return base.Title; }

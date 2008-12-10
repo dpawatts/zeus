@@ -4,7 +4,7 @@ using System.Web.UI.WebControls;
 namespace Zeus.ContentTypes.Properties
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class HtmlTextBoxEditorAttribute : EditableTextBoxAttribute
+	public class HtmlTextBoxEditorAttribute : TextBoxEditorAttribute
 	{
 		public HtmlTextBoxEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
