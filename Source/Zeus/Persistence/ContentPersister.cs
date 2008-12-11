@@ -2,6 +2,8 @@
 using NHibernate;
 using NHibernate.Cfg;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Zeus.Persistence
 {
@@ -43,6 +45,33 @@ namespace Zeus.Persistence
 		public ContentItem Load(int id)
 		{
 			return _sessionProvider.OpenSession.Load<ContentItem>(id);
+		}
+
+		public void Move(ContentItem toMove, ContentItem newParent)
+		{
+			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			{
+				toMove.AddTo(newParent);
+				Save(toMove);
+				transaction.Commit();
+			}
+		}
+
+		public void UpdateSortOrder(ContentItem contentItem, int newPos)
+		{
+			IEnumerable<ContentItem> siblings = contentItem.Parent.Children.Where(c => c != contentItem).OrderBy(c => c.SortOrder);
+			IEnumerable<ContentItem> previousSiblings = siblings.Where(c => c.SortOrder <= newPos).OrderBy(c => c.SortOrder);
+			IEnumerable<ContentItem> nextSiblings = siblings.Where(c => c.SortOrder >= newPos).OrderBy(c => c.SortOrder);
+
+			int currentSortOrder = 0;
+			foreach (ContentItem sibling in previousSiblings)
+				sibling.SortOrder = currentSortOrder++;
+			contentItem.SortOrder = currentSortOrder++;
+			foreach (ContentItem sibling in nextSiblings)
+				sibling.SortOrder = currentSortOrder++;
+
+			foreach (ContentItem item in siblings)
+				Save(item);
 		}
 
 		public void Save(ContentItem contentItem)

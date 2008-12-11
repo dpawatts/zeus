@@ -61,6 +61,13 @@
     <Compile Include="Admin\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\Move.aspx.cs">
+      <DependentUpon>Move.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Move.aspx.designer.cs">
+      <DependentUpon>Move.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,6 +189,7 @@
     <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />
+    <Content Include="Admin\Move.aspx" />
     <Content Include="Admin\Delete.aspx" />
     <Content Include="Admin\Navigation\TreeLoader.ashx" />
   </ItemGroup>

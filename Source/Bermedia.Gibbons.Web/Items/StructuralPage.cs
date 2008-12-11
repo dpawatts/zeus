@@ -6,7 +6,6 @@ using Zeus.Web.UI;
 
 namespace Bermedia.Gibbons.Items
 {
-	[TabPanel(Tabs.General, "General", 0)]
 	public abstract class StructuralPage : BaseContentItem
 	{
 		[TextBoxEditor("Title", 10, ContainerName = Tabs.General, Required = true)]

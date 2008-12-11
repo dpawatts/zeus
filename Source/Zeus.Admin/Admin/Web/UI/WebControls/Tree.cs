@@ -4,6 +4,7 @@ using System.Web.UI;
 using Zeus.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web;
+using Isis.Web;
 
 namespace Zeus.Admin.Web.UI.WebControls
 {
@@ -27,11 +28,8 @@ namespace Zeus.Admin.Web.UI.WebControls
 		{
 			base.CreateChildControls();
 
-			string selected = this.Page.Request.QueryString["selected"];
-			if (!string.IsNullOrEmpty(selected))
-				_selectedItem = this.RootNode.GetChild(selected);
-			else
-				_selectedItem = this.RootNode;
+			int? itemID = this.Page.Request.GetOptionalInt("selecteditem");
+			_selectedItem = (itemID != null) ? Zeus.Context.Persister.Get(itemID.Value) : this.RootNode;
 
 			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
 				.OpenTo(_selectedItem)
@@ -60,7 +58,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 		public static void AppendExpanderNode(TreeNode tn)
 		{
 			HtmlGenericControl li = new HtmlGenericControl("li");
-			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selected=" + HttpUtility.UrlEncode(tn.Node.Path) + "}";
+			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selecteditem=" + tn.Node.ID.ToString() + "}";
 
 			tn.UlClass = "ajax";
 			tn.Controls.Add(li);

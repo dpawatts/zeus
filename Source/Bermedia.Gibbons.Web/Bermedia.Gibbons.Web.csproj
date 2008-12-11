@@ -66,12 +66,21 @@
   <ItemGroup>
     <Compile Include="Items\BaseContentItem.cs" />
     <Compile Include="Items\Brand.cs" />
-    <Compile Include="Items\Category.cs" />
     <Compile Include="Items\BrandContainer.cs" />
+    <Compile Include="Items\BaseCategory.cs" />
+    <Compile Include="Items\FreeGiftProduct.cs" />
+    <Compile Include="Items\Details\ProductRecommendationsEditor.cs" />
+    <Compile Include="Items\NonFragranceBeautyDepartment.cs" />
+    <Compile Include="Items\NonFragranceBeautyCategory.cs" />
+    <Compile Include="Items\NonFragranceBeautyProduct.cs" />
+    <Compile Include="Items\FragranceBeautyProduct.cs" />
+    <Compile Include="Items\FragranceBeautyCategory.cs" />
+    <Compile Include="Items\FragranceBeautyDepartment.cs" />
     <Compile Include="Items\RootItem.cs" />
-    <Compile Include="Items\Department.cs" />
+    <Compile Include="Items\BaseDepartment.cs" />
     <Compile Include="Items\Page.cs" />
-    <Compile Include="Items\Product.cs" />
+    <Compile Include="Items\BaseProduct.cs" />
+    <Compile Include="Items\StandardProduct.cs" />
     <Compile Include="Items\StartPage.cs" />
     <Compile Include="Items\StructuralPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

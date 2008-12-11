@@ -5,11 +5,9 @@ using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Items
 {
-	[ContentType(Description = "e.g. Children & Baby, 9 West, Bath, etc.")]
-	[RestrictParents(typeof(Page), typeof(Department))]
-	public class Department : StructuralPage
+	public abstract class BaseDepartment : StructuralPage
 	{
-		[HtmlTextBoxEditor("Text", 100)]
+		[HtmlTextBoxEditor("Text", 100, ContainerName = Tabs.General)]
 		public string Text
 		{
 			get { return GetDetail<string>("Text", string.Empty); }

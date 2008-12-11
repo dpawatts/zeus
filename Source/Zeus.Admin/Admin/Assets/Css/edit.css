@@ -3,7 +3,7 @@ div.editDetail
 	margin-bottom: 15px;
 }
 
-label {
+.editorLabel {
 	width: 150px;
 	float: left;
 	text-align: right;
@@ -46,16 +46,6 @@ span.clearFile input
 	margin-left: 165px;
 }
 
-span.clearFile label
-{
-	width: auto;
-	float: none;
-	text-align: inherit;
-	display: inline;
-	margin: 0;
-	padding: 3px;
-}
-
 div.validationSummary {
 	border: 1px dashed #FF0000;
 	padding: 10px;
@@ -64,4 +54,13 @@ div.validationSummary {
 
 input[type="text"].required, textarea.required, select.required {
 	border: 1px solid #E6ACAC;
+}
+
+.checkBoxList {
+	display: block;
+	float: left;
+}
+
+.checkBoxList input[type="checkbox"] {
+	margin-right: 3px;
 }

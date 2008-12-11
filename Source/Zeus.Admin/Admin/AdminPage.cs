@@ -18,7 +18,7 @@ else
 		public void Refresh(ContentItem contentItem, bool justPreview)
 		{
 			string script = string.Format((justPreview) ? RefreshPreviewFormat : RefreshBothFormat,
-				"/admin/navigation/tree.aspx?selected=" + contentItem.Path, // 0
+				"/admin/navigation/tree.aspx?selecteditem=" + contentItem.ID, // 0
 				contentItem.Url // 1
 			);
 

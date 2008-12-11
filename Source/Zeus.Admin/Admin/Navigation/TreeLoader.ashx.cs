@@ -2,27 +2,19 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
+using Isis.Web;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin.Navigation
 {
 	public class TreeLoader : IHttpHandler
 	{
-		private ContentItem StartNode
-		{
-			get { return Find.RootItem; }
-		}
-
 		public void ProcessRequest(HttpContext context)
 		{
 			context.Response.ContentType = "text/plain";
 
-			string selected = context.Request.QueryString["selected"];
-			ContentItem selectedItem;
-			if (!string.IsNullOrEmpty(selected))
-				selectedItem = this.StartNode.GetChild(selected);
-			else
-				selectedItem = this.StartNode;
+			int? itemID = context.Request.GetOptionalInt("selecteditem");
+			ContentItem selectedItem = (itemID != null) ? Zeus.Context.Persister.Get(itemID.Value) : Find.RootItem;
 
 			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
 				.LinkProvider(BuildLink)

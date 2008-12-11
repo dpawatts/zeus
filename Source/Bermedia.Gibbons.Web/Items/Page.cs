@@ -6,17 +6,17 @@ using Zeus.ContentTypes.Properties;
 namespace Bermedia.Gibbons.Items
 {
 	[ContentType(Description = "e.g. Women's Trends")]
-	[RestrictParents(typeof(Page), typeof(Department))]
+	[RestrictParents(typeof(Page), typeof(BaseDepartment))]
 	public class Page : StructuralPage
 	{
-		[HtmlTextBoxEditor("Navigation Text", 100)]
+		[HtmlTextBoxEditor("Navigation Text", 100, ContainerName = Tabs.General)]
 		public string NavigationText
 		{
 			get { return GetDetail<string>("NavigationText", string.Empty); }
 			set { SetDetail<string>("NavigationText", value); }
 		}
 
-		[HtmlTextBoxEditor("Text", 110)]
+		[HtmlTextBoxEditor("Text", 110, ContainerName = Tabs.General)]
 		public string Text
 		{
 			get { return GetDetail<string>("Text", string.Empty); }

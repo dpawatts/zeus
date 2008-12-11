@@ -88,6 +88,28 @@ namespace Zeus.ContentTypes.Properties
 			return detail;
 		}
 
+		public void Replace(IEnumerable values)
+		{
+			bool[] valuesToKeep = new bool[this.Count];
+
+			// Add new items and mark items that should be kept.
+			foreach (object value in values)
+			{
+				int i = this.IndexOf(value);
+				if (i < 0)
+					this.Add(value);
+				else
+					valuesToKeep[i] = true;
+			}
+
+			// Remove items that are not present in the supplied collection
+			for (int i = valuesToKeep.Length - 1; i >= 0; i--)
+			{
+				if (!valuesToKeep[i])
+					this.RemoveAt(i);
+			}
+		}
+
 		#endregion
 
 		#region IList Members

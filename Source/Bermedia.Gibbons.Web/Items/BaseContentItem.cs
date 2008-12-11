@@ -1,8 +1,10 @@
 ﻿using System;
 using Zeus;
+using Zeus.Web.UI;
 
 namespace Bermedia.Gibbons.Items
 {
+	[TabPanel(Tabs.General, "General", 0)]
 	public abstract class BaseContentItem : ContentItem
 	{
 		public override string IconUrl
