@@ -14,9 +14,16 @@ namespace Zeus.Web
 			set;
 		}
 
+		public int StartPageID
+		{
+			get;
+			set;
+		}
+
 		public Host(HostSection hostSection)
 		{
 			this.RootItemID = hostSection.RootItemID;
+			this.StartPageID = hostSection.StartPageID;
 		}
 	}
 }

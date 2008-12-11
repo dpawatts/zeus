@@ -17,6 +17,7 @@ namespace Zeus.Persistence
 		/// <summary>Gets the site's root items.</summary>
 		public static TRoot RootItem
 		{
+			//get { return (TStart) Context.Current.UrlParser.RootItem; }
 			get { return (TRoot) Context.Persister.Load(Context.Current.Host.RootItemID); }
 		}
 

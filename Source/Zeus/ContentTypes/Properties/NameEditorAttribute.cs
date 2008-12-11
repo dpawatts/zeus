@@ -17,6 +17,8 @@ namespace Zeus.ContentTypes.Properties
 		protected override Control AddEditor(Control container)
 		{
 			NameEditor nameEditor = new NameEditor { ID = "txtNameEditor" };
+			if (this.Required)
+				nameEditor.CssClass += " required";
 			container.Controls.Add(nameEditor);
 			return nameEditor;
 		}

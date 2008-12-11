@@ -33,7 +33,7 @@ namespace Zeus.Web.Modules
 			else
 			{
 				string[] splitUrl = url.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-				currentItem = Context.Persister.Load(Context.Current.Host.RootItemID);
+				currentItem = Context.Persister.Load(Context.Current.Host.StartPageID);
 				if (currentItem != null)
 				{
 					for (int i = 0, length = splitUrl.Length; i < length; i++)

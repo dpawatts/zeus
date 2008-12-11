@@ -11,12 +11,18 @@
 
 		// Plugin implementation.
 		var t = this;
-		$("#" + options.titleEditorID).bind("change", function() {
-			var newTitle = getNameFromTitle($(this).val());
+		$(document).bind("NameEditor_NameChanged", function(event, titleTextBox) {
+			var newTitle = getNameFromTitle($(titleTextBox).val());
 			t.each(function() {
 				$(this).val(newTitle);
 			});
-		})
+		});
+		$("#" + options.titleEditorID).change(function() {
+			$(document).trigger("NameEditor_NameChanged", this);
+		});
+		$("#" + options.titleEditorID).keyup(function() {
+			$(document).trigger("NameEditor_NameChanged", this);
+		});
 	};
 
 	// private function

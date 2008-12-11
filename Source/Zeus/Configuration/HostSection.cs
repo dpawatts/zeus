@@ -11,5 +11,12 @@ namespace Zeus.Configuration
 			get { return (int) base["rootItemID"]; }
 			set { base["rootItemID"] = value; }
 		}
+
+		[ConfigurationProperty("startPageID", DefaultValue = 1)]
+		public int StartPageID
+		{
+			get { return (int) base["startPageID"]; }
+			set { base["startPageID"] = value; }
+		}
 	}
 }

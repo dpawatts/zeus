@@ -120,7 +120,7 @@
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
-    <Compile Include="ContentTypes\Properties\LinkDropDownListEditorAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\LinkedItemDropDownListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\NameEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\Property.cs" />

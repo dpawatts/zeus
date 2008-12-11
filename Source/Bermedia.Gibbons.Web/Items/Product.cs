@@ -16,7 +16,7 @@ namespace Bermedia.Gibbons.Items
 	{
 		protected override string IconName
 		{
-			get { return "tag_orange"; }
+			get { return "tag_green"; }
 		}
 
 		#region Public properties
@@ -36,10 +36,10 @@ namespace Bermedia.Gibbons.Items
 		}
 
 		[TextBoxEditor("Sale Price", 220, ContainerName = Tabs.General)]
-		public decimal SalePrice
+		public decimal? SalePrice
 		{
-			get { return GetDetail<decimal>("SalePrice", 0); }
-			set { SetDetail<decimal>("SalePrice", value); }
+			get { return GetDetail<decimal?>("SalePrice", null); }
+			set { SetDetail<decimal?>("SalePrice", value); }
 		}
 
 		[TextBoxEditor("Description", 230, TextMode = TextBoxMode.MultiLine, ContainerName = Tabs.General)]
@@ -79,7 +79,7 @@ namespace Bermedia.Gibbons.Items
 
 		// Free Gift?
 
-		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(Product), IncludeSelf = false, ContainerName = Tabs.General)]
+		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(Product), ExcludeSelf = true, ContainerName = Tabs.General)]
 		public Product FreeGiftProduct
 		{
 			get { return GetDetail<Product>("FreeGiftProduct", null); }

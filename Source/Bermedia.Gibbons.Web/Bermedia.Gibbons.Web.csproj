@@ -64,7 +64,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Items\BaseContentItem.cs" />
+    <Compile Include="Items\Brand.cs" />
     <Compile Include="Items\Category.cs" />
+    <Compile Include="Items\BrandContainer.cs" />
+    <Compile Include="Items\RootItem.cs" />
     <Compile Include="Items\Department.cs" />
     <Compile Include="Items\Page.cs" />
     <Compile Include="Items\Product.cs" />

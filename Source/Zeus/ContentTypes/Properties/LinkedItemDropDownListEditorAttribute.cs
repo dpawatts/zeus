@@ -23,7 +23,7 @@ namespace Zeus.ContentTypes.Properties
 
 		#endregion
 
-		public bool IncludeSelf
+		public bool ExcludeSelf
 		{
 			get;
 			set;
@@ -45,7 +45,11 @@ namespace Zeus.ContentTypes.Properties
 
 		protected override string GetValue(ContentItem item)
 		{
-			return ((ContentItem) item[this.Name]).ID.ToString();
+			ContentItem linkedItem = (ContentItem) item[this.Name];
+			if (linkedItem != null)
+				return linkedItem.ID.ToString();
+			else
+				return string.Empty;
 		}
 
 		protected override ListItem[] GetListItems(ContentItem item)
@@ -53,7 +57,7 @@ namespace Zeus.ContentTypes.Properties
 			IEnumerable<ContentItem> items = Zeus.Context.Current.Database.ContentItems;
 			if (this.TypeFilter != null)
 				items = items.OfType(this.TypeFilter);
-			if (!this.IncludeSelf)
+			if (this.ExcludeSelf)
 				items = items.Where(i => i != item);
 			return items.OrderBy(i => i.Title)
 				.Select(i => new ListItem { Value = i.ID.ToString(), Text = i.Title })

@@ -7,18 +7,13 @@ using Zeus.Integrity;
 
 namespace Bermedia.Gibbons.Items
 {
-	[ContentType("Start Page")]
-	[RestrictParents(typeof(RootItem))]
-	public class StartPage : Page
+	[ContentType("Root Item")]
+	[RestrictParents(AllowedTypes.None)]
+	public class RootItem : BaseContentItem
 	{
 		protected override string IconName
 		{
-			get { return "house"; }
-		}
-
-		protected override string TemplateName
-		{
-			get { return "Page"; }
+			get { return "page_gear"; }
 		}
 	}
 }

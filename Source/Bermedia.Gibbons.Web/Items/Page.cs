@@ -25,7 +25,7 @@ namespace Bermedia.Gibbons.Items
 
 		protected override string IconName
 		{
-			get { return "tag_green"; }
+			get { return "page"; }
 		}
 	}
 }

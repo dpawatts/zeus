@@ -19,7 +19,7 @@ namespace Zeus.Web.UI.WebControls
 			this.Page.ClientScript.RegisterClientScriptInclude("JQueryUITabs", ResolveClientUrl("~/admin/assets/js/plugins/ui.tabs.js"));
 			this.Page.ClientScript.RegisterClientScriptInclude("JQueryTabPanel", ResolveClientUrl("~/admin/assets/js/plugins/jquery.tabPanel.js"));
 
-			this.Page.AddStyleSheet("~/admin/assets/css/tabPanel.css");
+			this.Page.RegisterCssInclude("~/admin/assets/css/tabPanel.css");
 
 			string script = "$(document).ready(function() { $('.tabPanel').tabPanel(); });";
 			this.Page.ClientScript.RegisterStartupScript(typeof(TabPanel), "InitTabPanels", script, true);

@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Add New Item" Language="C#" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="Zeus.Admin.New" MasterPageFile="PreviewFrame.Master" %>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<p>Please choose the type of item you would like to add.</p>
+	<br />
 	
 	<asp:ListView runat="server" ID="lsvChildTypes">
 		<LayoutTemplate>

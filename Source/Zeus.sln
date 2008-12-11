@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Admin", "Zeus.Admin\Ze
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Examples", "Zeus.Examples\Zeus.Examples.csproj", "{B42B07DF-2C6D-4170-9BF9-B9185EC06818}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bermedia.Gibbons", "Bermedia.Gibbons.Web\Bermedia.Gibbons.csproj", "{7F435B5A-097A-41C8-904B-81A14DACAE65}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bermedia.Gibbons.Web", "Bermedia.Gibbons.Web\Bermedia.Gibbons.Web.csproj", "{7F435B5A-097A-41C8-904B-81A14DACAE65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
