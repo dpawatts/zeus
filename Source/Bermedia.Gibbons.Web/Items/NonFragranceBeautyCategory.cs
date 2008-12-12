@@ -9,9 +9,6 @@ namespace Bermedia.Gibbons.Items
 	[RestrictParents(typeof(NonFragranceBeautyDepartment), typeof(NonFragranceBeautyCategory))]
 	public class NonFragranceBeautyCategory : BaseCategory
 	{
-		protected override string IconName
-		{
-			get { return "tag_red"; }
-		}
+		
 	}
 }

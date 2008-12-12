@@ -8,7 +8,7 @@ using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemView : WebControl
+	public abstract class ItemView : WebControl, INamingContainer, IItemView
 	{
 		private ContentItem _currentItem;
 
@@ -31,10 +31,6 @@ namespace Zeus.Web.UI.WebControls
 					{
 						ContentItem parentItem = Zeus.Context.Current.Persister.Get(this.ParentItemID);
 						_currentItem = Zeus.Context.Current.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
-					}
-					else
-					{
-						_currentItem = this.FindCurrentItem();
 					}
 				}
 				return _currentItem;
@@ -104,11 +100,11 @@ namespace Zeus.Web.UI.WebControls
 
 		#region Methods
 
-		protected override void OnLoad(EventArgs e)
+		/*protected override void OnLoad(EventArgs e)
 		{
 			EnsureChildControls();
-			base.OnInit(e);
-		}
+			base.OnLoad(e);
+		}*/
 
 		protected override void CreateChildControls()
 		{

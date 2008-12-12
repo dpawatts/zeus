@@ -8,7 +8,8 @@ using Bermedia.Gibbons.Items.Details;
 
 namespace Bermedia.Gibbons.Items
 {
-	[TabPanel(Tabs.ColoursSizes, "Colors & Sizes", 1)]
+	[TabPanel(Tabs.Colours, "Colors", 1)]
+	[TabPanel(Tabs.Sizes, "Sizes", 1)]
 	[TabPanel(Tabs.Recommendations, "Recommendations", 2)]
 	public abstract class StandardProduct : BaseProduct
 	{
@@ -54,7 +55,13 @@ namespace Bermedia.Gibbons.Items
 			set { SetDetail<FreeGiftProduct>("FreeGiftProduct", value); }
 		}
 
-		[ProductRecommendationsEditor("Recommendations", 50, ContainerName = Tabs.Recommendations)]
+		[ChildrenEditor("Associated Sizes", 400, TypeFilter = typeof(ProductSizeLink), ContainerName = Tabs.Sizes)]
+		public IList<ProductSizeLink> AssociatedSizes
+		{
+			get { return GetChildren<ProductSizeLink>(); }
+		}
+
+		[ProductRecommendationsEditor("Recommendations", 500, ContainerName = Tabs.Recommendations)]
 		public DetailCollection Recommendations
 		{
 			get { return GetDetailCollection("Recommendations", true); }

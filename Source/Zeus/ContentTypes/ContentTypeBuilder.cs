@@ -38,7 +38,7 @@ namespace Zeus.ContentTypes
 				itemDefinition.Editors = GetAttributes<IEditor>(itemDefinition.ItemType).OrderBy(e => e.SortOrder);
 				itemDefinition.Displayers = GetAttributes<IDisplayer>(itemDefinition.ItemType);
 				itemDefinition.Containers = itemDefinition.ItemType.GetCustomAttributes<IEditorContainer>(true, false).OrderBy(c => c.SortOrder);
-				itemDefinition.RootContainer = BuildContainerHierarchy(itemDefinition.Containers, itemDefinition.Editors);
+				itemDefinition.RootContainer = BuildContainerHierarchy(itemDefinition, itemDefinition.Containers, itemDefinition.Editors);
 				definitions.Add(itemDefinition);
 			}
 
@@ -58,7 +58,7 @@ namespace Zeus.ContentTypes
 			return attributes;
 		}
 
-		private IEditorContainer BuildContainerHierarchy(IEnumerable<IEditorContainer> containers, IEnumerable<IEditor> editors)
+		private IEditorContainer BuildContainerHierarchy(ContentType contentType, IEnumerable<IEditorContainer> containers, IEnumerable<IEditor> editors)
 		{
 			RootEditorContainer rootContainer = new RootEditorContainer();
 
@@ -74,7 +74,7 @@ namespace Zeus.ContentTypes
 			{
 				IEditorContainer container = FindContainer(editor.ContainerName, rootContainer, containers);
 				if (container == null)
-					throw new ZeusException("The container '{0}' referenced by editor '{1}' could not be found.", editor.ContainerName, editor.Name);
+					throw new ZeusException("The container '{0}' referenced by editor '{1}' in content type '{2}' could not be found.", editor.ContainerName, editor.Name, contentType.ContentTypeAttribute.Title);
 				container.AddContained(editor);
 			}
 

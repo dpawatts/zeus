@@ -4,21 +4,24 @@ using NHibernate.Cfg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zeus.ContentTypes.Properties;
 
 namespace Zeus.Persistence
 {
 	public class ContentPersister : IPersister
 	{
-		private ISessionProvider _sessionProvider;
+		private IRepository<int, ContentItem> _contentRepository;
+		private IRepository<int, LinkDetail> _linkRepository;
 
-		public ContentPersister(ISessionProvider sessionProvider)
+		public ContentPersister(IRepository<int, ContentItem> contentRepository, IRepository<int, LinkDetail> linkRepository)
 		{
-			_sessionProvider = sessionProvider;
+			_contentRepository = contentRepository;
+			_linkRepository = linkRepository;
 		}
 
 		public void Delete(ContentItem contentItem)
 		{
-			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			using (ITransaction transaction = _contentRepository.BeginTransaction())
 			{
 				DeleteRecursive(contentItem);
 				transaction.Commit();
@@ -32,24 +35,35 @@ namespace Zeus.Persistence
 
 			contentItem.AddTo(null);
 
-			// delete inbound links
+			DeleteInboundLinks(contentItem);
 
-			_sessionProvider.OpenSession.Delete(contentItem);
+			_contentRepository.Delete(contentItem);
+		}
+
+		private void DeleteInboundLinks(ContentItem itemNoMore)
+		{
+			foreach (LinkDetail detail in _linkRepository.Where(ld => ld.TypedValue == itemNoMore))
+			{
+				if (detail.EnclosingCollection != null)
+					detail.EnclosingCollection.Remove(detail);
+				detail.EnclosingItem.Details.Remove(detail.Name);
+				_linkRepository.Delete(detail);
+			}
 		}
 
 		public ContentItem Get(int id)
 		{
-			return _sessionProvider.OpenSession.Get<ContentItem>(id);
+			return _contentRepository.Get(id);
 		}
 
 		public ContentItem Load(int id)
 		{
-			return _sessionProvider.OpenSession.Load<ContentItem>(id);
+			return _contentRepository.Load(id);
 		}
 
 		public void Move(ContentItem toMove, ContentItem newParent)
 		{
-			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			using (ITransaction transaction = _contentRepository.BeginTransaction())
 			{
 				toMove.AddTo(newParent);
 				Save(toMove);
@@ -77,9 +91,9 @@ namespace Zeus.Persistence
 		public void Save(ContentItem contentItem)
 		{
 			contentItem.Updated = DateTime.Now;
-			using (ITransaction transaction = _sessionProvider.OpenSession.BeginTransaction())
+			using (ITransaction transaction = _contentRepository.BeginTransaction())
 			{
-				_sessionProvider.OpenSession.SaveOrUpdate(contentItem);
+				_contentRepository.SaveOrUpdate(contentItem);
 				contentItem.AddTo(contentItem.Parent);
 				transaction.Commit();
 			}

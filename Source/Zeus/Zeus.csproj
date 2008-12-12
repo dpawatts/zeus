@@ -88,6 +88,9 @@
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -114,6 +117,7 @@
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
+    <Compile Include="ContentTypes\Properties\ChildrenEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
@@ -172,7 +176,9 @@
     <Compile Include="Persistence\GenericFind.cs" />
     <Compile Include="Persistence\IConfigurationBuilder.cs" />
     <Compile Include="Persistence\IPersister.cs" />
+    <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\ISessionProvider.cs" />
+    <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Persistence\SessionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizedRole.cs" />
@@ -189,6 +195,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\UI\Control.extensions.cs" />
+    <Compile Include="Web\UI\HtmlControls\HtmlFieldSet.cs" />
     <Compile Include="Web\UI\IContentItemContainer.cs" />
     <Compile Include="Web\UI\IContentTemplate.cs">
       <SubType>Code</SubType>
@@ -206,11 +213,13 @@
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\IItemView.cs" />
     <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\ItemDisplayView.cs" />
+    <Compile Include="Web\UI\WebControls\ItemEditorList.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditView.cs" />
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
@@ -251,6 +260,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FileSystem\fileSystem.castle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\UI\WebControls\Images\add.png" />
+    <EmbeddedResource Include="Web\UI\WebControls\Images\delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

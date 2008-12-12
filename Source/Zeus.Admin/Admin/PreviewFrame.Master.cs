@@ -11,7 +11,7 @@ namespace Zeus.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			this.ID = "master";
 		}
 
 		protected override void OnPreRender(EventArgs e)

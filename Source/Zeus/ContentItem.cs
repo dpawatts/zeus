@@ -3,6 +3,7 @@ using Zeus.Integrity;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web;
+using System.Linq;
 using Zeus.Web;
 using Zeus.Security;
 
@@ -423,9 +424,14 @@ namespace Zeus
 		/// the Children property.
 		/// </summary>
 		/// <returns></returns>
-		public virtual IEnumerable<ContentItem> GetChildren()
+		public virtual IList<ContentItem> GetChildren()
 		{
 			return this.Children;
+		}
+
+		public virtual IList<T> GetChildren<T>()
+		{
+			return this.Children.OfType<T>().ToList();
 		}
 
 		/// <summary>

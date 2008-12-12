@@ -68,6 +68,8 @@
     <Compile Include="Items\Brand.cs" />
     <Compile Include="Items\BrandContainer.cs" />
     <Compile Include="Items\BaseCategory.cs" />
+    <Compile Include="Items\ProductSizeLink.cs" />
+    <Compile Include="Items\ProductSizeContainer.cs" />
     <Compile Include="Items\FreeGiftProduct.cs" />
     <Compile Include="Items\Details\ProductRecommendationsEditor.cs" />
     <Compile Include="Items\NonFragranceBeautyDepartment.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Items\FragranceBeautyProduct.cs" />
     <Compile Include="Items\FragranceBeautyCategory.cs" />
     <Compile Include="Items\FragranceBeautyDepartment.cs" />
+    <Compile Include="Items\ProductSize.cs" />
     <Compile Include="Items\RootItem.cs" />
     <Compile Include="Items\BaseDepartment.cs" />
     <Compile Include="Items\Page.cs" />

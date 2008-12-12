@@ -5,9 +5,9 @@ using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Items
 {
-	[ContentType(Description = "Product brands")]
-	[RestrictParents(typeof(BrandContainer))]
-	public class Brand : BaseContentItem
+	[ContentType("Product Size")]
+	[RestrictParents(typeof(ProductSizeContainer))]
+	public class ProductSize : BaseContentItem
 	{
 		[TextBoxEditor("Name", 10, Required = true)]
 		public override string Title

@@ -58,7 +58,7 @@ namespace Zeus.ContentTypes.Properties
 			}
 		}
 
-		/// <summary>Gets or sets the <see cref="N2.Details.DetailCollection"/> associated with this detail. This value can be null which means it's a named detail directly on the item.</summary>
+		/// <summary>Gets or sets the <see cref="Zeus.Details.DetailCollection"/> associated with this detail. This value can be null which means it's a named detail directly on the item.</summary>
 		public virtual DetailCollection EnclosingCollection
 		{
 			get { return _collection; }

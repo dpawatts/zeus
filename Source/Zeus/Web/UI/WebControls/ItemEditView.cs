@@ -7,13 +7,19 @@ namespace Zeus.Web.UI.WebControls
 {
 	public class ItemEditView : ItemView
 	{
+		private bool _postedBack;
+		public event EventHandler<ItemEventArgs> Saved;
+
 		protected override void AddPropertyControls()
 		{
-			// Add editors and containers recursively.
-			AddPropertyControlsRecursive(this, this.CurrentItemDefinition.RootContainer);
-				
-			if (!Page.IsPostBack)
-				UpdateEditors();
+			if (CurrentItemDefinition != null)
+			{
+				// Add editors and containers recursively.
+				AddPropertyControlsRecursive(this, this.CurrentItemDefinition.RootContainer);
+
+				if (!_postedBack)
+					UpdateEditors();
+			}
 		}
 
 		private void AddPropertyControlsRecursive(Control control, IContainable contained)
@@ -24,6 +30,12 @@ namespace Zeus.Web.UI.WebControls
 			if (contained is IEditorContainer)
 				foreach (IContainable subContained in ((IEditorContainer) contained).GetContained())
 					AddPropertyControlsRecursive(addedControl, subContained);
+		}
+
+		protected override void LoadViewState(object savedState)
+		{
+			base.LoadViewState(savedState);
+			_postedBack = true;
 		}
 
 		private void UpdateEditors()
@@ -37,7 +49,14 @@ namespace Zeus.Web.UI.WebControls
 			EnsureChildControls();
 			foreach (IEditor editor in this.CurrentItemDefinition.Editors)
 				editor.UpdateItem(this.CurrentItem, this.PropertyControls[editor.Name]);
+			OnSaved(new ItemEventArgs(this.CurrentItem));
 			Zeus.Context.Persister.Save(this.CurrentItem);
+		}
+
+		protected virtual void OnSaved(ItemEventArgs args)
+		{
+			if (this.Saved != null)
+				this.Saved(this, args);
 		}
 	}
 }
