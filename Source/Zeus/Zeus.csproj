@@ -118,6 +118,7 @@
     <Compile Include="ContentTypes\IEditorContainer.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\Properties\ChildrenEditorAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\ColourEditor.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Web\UI\WebControls\ChildrenDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ContentDataSource.cs">
       <SubType>Code</SubType>
     </Compile>

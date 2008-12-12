@@ -185,13 +185,44 @@
     <Content Include="Admin\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Assets\Css\colorpicker.css" />
     <Content Include="Admin\Assets\Css\tabPanel.css" />
+    <Content Include="Admin\Assets\Images\ColorPicker\blank.gif" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_background.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hex.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_b.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_h.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_s.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_indic.gif" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_overlay.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_b.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_g.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_r.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_select.gif" />
+    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_submit.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_background.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_hex.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_b.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_h.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_s.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_indic.gif" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_b.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_g.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_r.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\custom_submit.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\select.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\select2.png" />
+    <Content Include="Admin\Assets\Images\ColorPicker\slider.png" />
+    <Content Include="Admin\Assets\JS\Plugins\jquery.colorpicker.js" />
     <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />
     <Content Include="Admin\Move.aspx" />
     <Content Include="Admin\Delete.aspx" />
     <Content Include="Admin\Navigation\TreeLoader.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Admin\Assets\Images\ColorPicker\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

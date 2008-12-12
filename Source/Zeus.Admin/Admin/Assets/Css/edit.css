@@ -99,3 +99,9 @@ fieldset legend
 {
 	display: none;
 }
+
+.colorpicker input[type="text"] {
+	background: none;
+	vertical-align: inherit;
+	width: auto;
+}

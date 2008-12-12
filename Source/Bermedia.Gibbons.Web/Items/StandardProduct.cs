@@ -9,8 +9,8 @@ using Bermedia.Gibbons.Items.Details;
 namespace Bermedia.Gibbons.Items
 {
 	[TabPanel(Tabs.Colours, "Colors", 1)]
-	[TabPanel(Tabs.Sizes, "Sizes", 1)]
-	[TabPanel(Tabs.Recommendations, "Recommendations", 2)]
+	[TabPanel(Tabs.Sizes, "Sizes", 2)]
+	[TabPanel(Tabs.Recommendations, "Recommendations", 3)]
 	public abstract class StandardProduct : BaseProduct
 	{
 		[TextBoxEditor("Vendor Style Number", 200, ContainerName = Tabs.General, Required = true)]
@@ -46,6 +46,13 @@ namespace Bermedia.Gibbons.Items
 		{
 			get { return GetDetail<bool>("GiftItem", false); }
 			set { SetDetail<bool>("GiftItem", value); }
+		}
+
+		[ColourEditor("Colour", 270, ContainerName = Tabs.General)]
+		public string Colour
+		{
+			get { return GetDetail<string>("Colour", string.Empty); }
+			set { SetDetail<string>("Colour", value); }
 		}
 
 		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(FreeGiftProduct), ContainerName = Tabs.General)]
