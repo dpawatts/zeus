@@ -4,11 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.Web.UI;
 
-namespace Bermedia.Gibbons.Web.UI.Views
+namespace Zeus.Admin
 {
-	public partial class Department : ContentPage<Bermedia.Gibbons.Web.Items.BaseDepartment>
+	public partial class Popup : System.Web.UI.MasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

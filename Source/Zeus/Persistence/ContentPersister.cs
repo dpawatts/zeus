@@ -66,7 +66,7 @@ namespace Zeus.Persistence
 			using (ITransaction transaction = _contentRepository.BeginTransaction())
 			{
 				toMove.AddTo(newParent);
-				Save(toMove);
+				_contentRepository.Save(toMove);
 				transaction.Commit();
 			}
 		}

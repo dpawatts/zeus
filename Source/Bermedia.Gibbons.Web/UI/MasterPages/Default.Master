@@ -43,32 +43,8 @@
 			</div>
 		</div>
 		<div id="navContainer">
+			<zeus:Menu runat="server" BranchMode="false" CssClass="sf-menu" OfType="Bermedia.Gibbons.Web.Items.BaseDepartment" />
 			<ul class="sf-menu">
-				<li class="current"><a href="../fragranceAndBeautyExample/tops.aspx">Fragrance &amp; Beauty</a> </li>
-				<li><a href="../mac/default.aspx">MAC</a></li>
-				<li><a href="../women/default.aspx">Women</a>
-					<ul>
-						<li><a href="../women/default.aspx">Women's Department</a></li>
-						<li><a href="../nineWest/default.aspx">Nine West</a></li>
-						<li><a href="../twenty5reidst/default.aspx">Twenty 5 Reid Street</a></li>
-						<li><a href="../fullerFigure/default.aspx">Fuller Figure</a></li>
-						<li><a href="../accessories/default.aspx">Accessories</a></li>
-					</ul>
-				</li>
-				<li><a href="../lingerie/default.aspx">Lingerie</a>	  </li>
-				<li><a href="../mens/default.aspx">Men</a></li>
-					<li><a href="../juniors/default.aspx">Juniors</a></li>
-					<li><a href="../ChildrenBaby/default.aspx">Children &amp; Baby</a></li>
-					<li><a href="#">Home Furnishings</a>							
-						<ul>
-							<li><a href="../bed/default.aspx">Bed</a></li>
-							<li><a href="../bath/default.aspx">Bath</a></li>
-							<li><a href="../homeDecor/default.aspx">D&eacute;cor</a></li>
-							<li><a href=../kitchen/default.aspx>Kitchen</a></li>
-							<li><a href="../tabletop/default.aspx">Tabletop</a></li>
-						</ul>
-					</li>
-				<li><a href="../fabric_crafts/default.aspx">Fabric &amp; Crafts</a></li>
 				<li><a href="../giftcards/default.aspx">Gift Cards</a></li>
 				<li><a href="../about/contact.aspx">Contact</a></li>
 			</ul>

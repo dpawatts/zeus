@@ -159,11 +159,15 @@
     <Compile Include="FileSystem\DatabaseFileIdentifier.cs" />
     <Compile Include="FileSystem\DatabaseFolder.cs" />
     <Compile Include="FileSystem\DatabaseFileSystem.cs" />
+    <Compile Include="FileSystem\File.cs" />
+    <Compile Include="FileSystem\FileSystemNode.cs" />
     <Compile Include="FileSystem\IFile.cs" />
     <Compile Include="FileSystem\IFileIdentifier.cs" />
     <Compile Include="FileSystem\IFileSystem.cs" />
-    <Compile Include="FileSystem\IFolder.cs" />
+    <Compile Include="FileSystem\Folder.cs" />
     <Compile Include="FileSystem\Migrations\Migration001.cs" />
+    <Compile Include="FileSystem\NtfsFile.cs" />
+    <Compile Include="FileSystem\NtfsFolder.cs" />
     <Compile Include="Find.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
@@ -172,6 +176,13 @@
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
     <Compile Include="Linq\ContentContext.cs" />
+    <Compile Include="Linq\Filters\AccessFilter.cs" />
+    <Compile Include="Linq\Filters\CompositeFilter.cs" />
+    <Compile Include="Linq\Filters\ItemFilter.cs" />
+    <Compile Include="Linq\Filters\NavigationFilter.cs" />
+    <Compile Include="Linq\Filters\PublishedFilter.cs" />
+    <Compile Include="Linq\Filters\TypeFilter.cs" />
+    <Compile Include="Linq\Filters\VisibleFilter.cs" />
     <Compile Include="Persistence\ConfigurationBuilder.cs" />
     <Compile Include="Persistence\ContentPersister.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
@@ -179,6 +190,7 @@
     <Compile Include="Persistence\IItemNotifier.cs" />
     <Compile Include="Persistence\IPersister.cs" />
     <Compile Include="Persistence\IRepository.cs" />
+    <Compile Include="Persistence\ISelfPersister.cs" />
     <Compile Include="Persistence\ISessionProvider.cs" />
     <Compile Include="Persistence\ItemNotifier.cs" />
     <Compile Include="Persistence\NotifyingInterceptor.cs" />
@@ -234,6 +246,7 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
+    <Compile Include="Web\UI\WebControls\Menu.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabPanel.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">

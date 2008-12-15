@@ -8,7 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<isis:TypedExtendedFormView runat="server" DataSourceID="cdsCurrentItem" DataMember="CurrentItem" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct" DefaultMode="ReadOnly">
 		<ItemTemplate>
-			<h1><%# Container.DataItem.Brand.Name %> <%# Container.DataItem.Title %></h1> 
+			<h1><%# Container.DataItem.Brand.Title %> <%# Container.DataItem.Title %></h1> 
 			
 			<div id="productImage">
 				<sitdap:DynamicImage runat="server">

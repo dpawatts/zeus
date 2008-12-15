@@ -61,6 +61,15 @@
     <Compile Include="Admin\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\FileManager\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FileManager\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FileSystem\Items\AbstractDirectory.cs" />
+    <Compile Include="Admin\FileSystem\Items\Directory.cs" />
     <Compile Include="Admin\Move.aspx.cs">
       <DependentUpon>Move.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -112,6 +121,13 @@
     </Compile>
     <Compile Include="Admin\New.aspx.designer.cs">
       <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Popup.Master.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Popup.Master.designer.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
     </Compile>
     <Compile Include="Admin\PreviewFrame.Master.cs">
       <DependentUpon>PreviewFrame.Master</DependentUpon>
@@ -217,12 +233,15 @@
     <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
     <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />
+    <Content Include="Admin\FileManager\Default.aspx" />
     <Content Include="Admin\Move.aspx" />
     <Content Include="Admin\Delete.aspx" />
     <Content Include="Admin\Navigation\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Admin\Assets\Images\ColorPicker\Thumbs.db" />
+    <Content Include="Admin\Assets\Images\Icons\folder.png" />
+    <Content Include="Admin\Popup.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

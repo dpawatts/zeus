@@ -38,7 +38,7 @@ namespace Zeus.Collections
 				if (previousNode != null)
 					previousNode.Parent = currentNode;
 
-				foreach (ContentItem childItem in currentItem.GetChildren())
+				foreach (ContentItem childItem in GetChildren(currentItem))
 				{
 					if (previousNode != null && previousNode.Current.ID == childItem.ID)
 					{

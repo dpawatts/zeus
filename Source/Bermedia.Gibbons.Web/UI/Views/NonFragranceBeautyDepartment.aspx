@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/App_Shared/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="Department.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.Department" %>
-<%@ Register TagPrefix="gibbons" TagName="DepartmentNavigation" Src="~/App_Shared/UserControls/DepartmentNavigation.ascx" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="../MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="NonFragranceBeautyDepartment.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.NonFragranceBeautyDepartment" %>
+<%@ Register TagPrefix="gibbons" TagName="DepartmentNavigation" Src="../UserControls/DepartmentNavigation.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphStyle" runat="server">
 	#contentContainer {
 		padding: 0;

@@ -10,6 +10,7 @@ namespace Zeus.Persistence
 		void Delete(TEntity contentItem);
 		TEntity Get(TKey id);
 		TEntity Load(int id);
+		void Save(TEntity toMove);
 		void SaveOrUpdate(TEntity contentItem);
 	}
 }

@@ -10,6 +10,7 @@ namespace Bermedia.Gibbons.Web.Items
 	public abstract class StructuralPage : BaseContentItem
 	{
 		[TextBoxEditor("Title", 10, ContainerName = Tabs.General, Required = true)]
+		[LiteralDisplayer]
 		public override string Title
 		{
 			get { return base.Title; }

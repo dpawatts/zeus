@@ -18,7 +18,7 @@ namespace Zeus.ContentTypes.Properties
 			this.Page.ClientScript.RegisterClientScriptInclude("tinymce.js", ResolveClientUrl("~/admin/assets/js/tinymce.js"));
 			this.Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
 				"InitHtmlTextBox" + this.UniqueID,
-				string.Format(@"htmlEditor_init('/Admin/FileManagement/default.aspx',
+				string.Format(@"htmlEditor_init('/Admin/FileManager/default.aspx',
 					{{
 						elements: '{0}',
 						'content_css': '/Admin/Assets/Css/Editor.css'

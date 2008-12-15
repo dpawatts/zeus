@@ -11,6 +11,6 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class Department {
+    public partial class NonFragranceBeautyDepartment {
     }
 }

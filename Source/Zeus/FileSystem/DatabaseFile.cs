@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Zeus.FileSystem
 {
-	public class DatabaseFile : IFile
+	public class DatabaseFile : File
 	{
 		public int ID
 		{

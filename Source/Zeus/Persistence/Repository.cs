@@ -37,6 +37,11 @@ namespace Zeus.Persistence
 			return _sessionProvider.OpenSession.Load<TEntity>(id);
 		}
 
+		public void Save(TEntity contentItem)
+		{
+			_sessionProvider.OpenSession.Save(contentItem);
+		}
+
 		public void SaveOrUpdate(TEntity contentItem)
 		{
 			_sessionProvider.OpenSession.SaveOrUpdate(contentItem);

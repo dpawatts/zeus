@@ -119,12 +119,12 @@
     <Compile Include="UI\Views\Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Department.aspx.cs">
-      <DependentUpon>Department.aspx</DependentUpon>
+    <Compile Include="UI\Views\NonFragranceBeautyDepartment.aspx.cs">
+      <DependentUpon>NonFragranceBeautyDepartment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI\Views\Department.aspx.designer.cs">
-      <DependentUpon>Department.aspx</DependentUpon>
+    <Compile Include="UI\Views\NonFragranceBeautyDepartment.aspx.designer.cs">
+      <DependentUpon>NonFragranceBeautyDepartment.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Product.aspx.cs">
       <DependentUpon>Product.aspx</DependentUpon>
@@ -178,7 +178,7 @@
     <Content Include="UI\MasterPages\Default.Master" />
     <Content Include="UI\UserControls\DepartmentNavigation.ascx" />
     <Content Include="UI\Views\Category.aspx" />
-    <Content Include="UI\Views\Department.aspx" />
+    <Content Include="UI\Views\NonFragranceBeautyDepartment.aspx" />
     <Content Include="UI\Views\Product.aspx" />
     <Content Include="UI\Views\Page.aspx" />
   </ItemGroup>

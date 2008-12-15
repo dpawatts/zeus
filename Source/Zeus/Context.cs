@@ -2,6 +2,7 @@
 using Zeus.Persistence;
 using Zeus.Engine;
 using System.Web;
+using Zeus.Web;
 
 namespace Zeus
 {
@@ -33,6 +34,11 @@ namespace Zeus
 		public static Persistence.IPersister Persister
 		{
 			get { return Current.Persister; }
+		}
+
+		public static UrlParser UrlParser
+		{
+			get { return Current.UrlParser; }
 		}
 	}
 }

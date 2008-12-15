@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Zeus.Linq.Filters;
 
 namespace Zeus.Collections
 {
@@ -13,6 +14,11 @@ namespace Zeus.Collections
 		public ItemHierarchyNavigator(HierarchyNode<ContentItem> currentNode)
 		{
 			_currentNode = currentNode;
+		}
+
+		public ItemHierarchyNavigator(HierarchyBuilder builder, params ItemFilter[] filters)
+		{
+			_currentNode = builder.Build(filters);
 		}
 
 		public ItemHierarchyNavigator(HierarchyBuilder builder)

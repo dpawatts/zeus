@@ -8,7 +8,7 @@
 	<gibbons:DepartmentNavigation runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
-	<h1><%# this.CurrentItem.Title %></h1> 
+	<h1><zeus:ItemDetailView runat="server" PropertyName="Title" /></h1>
 
 	<div id="categoryImage">
 		<sitdap:DynamicImage runat="server">
@@ -25,7 +25,7 @@
 		</sitdap:DynamicImage>
 	</div>
 	
-	<isis:TypedListView runat="server" DataSource='<%# this.CurrentItem.GetChildren().OfType<Bermedia.Gibbons.Web.Items.StandardProduct>() %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct">
+	<isis:TypedListView runat="server" DataSourceID="cdsChildren" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct">
 		<LayoutTemplate>
 			<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
 		</LayoutTemplate>
@@ -51,7 +51,7 @@
 				<br />
 			
 				<a href="<%# Container.DataItem.Url %>">
-					<strong><%# Container.DataItem.Brand.Name %> <%# Container.DataItem.Title %></strong><br />
+					<strong><%# Container.DataItem.Brand.Title %> <%# Container.DataItem.Title %></strong><br />
 					
 					<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem %>'>
 						<isis:ConditionalView runat="server" Expression="it.SalePrice == null">
@@ -78,4 +78,5 @@
 			</div>
 		</ItemTemplate>
 	</isis:TypedListView>
+	<zeus:ContentDataSource runat="server" ID="cdsChildren" OfType="Bermedia.Gibbons.Web.Items.StandardProduct" />
 </asp:Content>

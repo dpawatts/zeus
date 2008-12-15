@@ -6,6 +6,7 @@ using System.Web;
 using System.Linq;
 using Zeus.Web;
 using Zeus.Security;
+using Zeus.Linq.Filters;
 
 namespace Zeus
 {
@@ -295,6 +296,7 @@ namespace Zeus
 			this.Created = DateTime.Now;
 			this.Updated = DateTime.Now;
 			this.Published = DateTime.Now;
+			this.Visible = true;
 		}
 
 		#region GetDetail & SetDetail<T> Methods
@@ -450,7 +452,24 @@ namespace Zeus
 		/// <returns></returns>
 		public virtual IList<ContentItem> GetChildren()
 		{
-			return this.Children;
+			return GetChildren(new AccessFilter());
+		}
+
+		/// <summary>Gets children applying filters.</summary>
+		/// <param name="filters">The filters to apply on the children.</param>
+		/// <returns>A list of filtered child items.</returns>
+		public virtual IList<ContentItem> GetChildren(params ItemFilter[] filters)
+		{
+			return GetChildren(new CompositeFilter(filters));
+		}
+
+		/// <summary>Gets children applying filters.</summary>
+		/// <param name="filter">The filters to apply on the children.</param>
+		/// <returns>A list of filtered child items.</returns>
+		public virtual IList<ContentItem> GetChildren(ItemFilter filter)
+		{
+			IEnumerable<ContentItem> items = this.VersionOf == null ? this.Children : this.VersionOf.Children;
+			return filter.Filter(items.AsQueryable()).ToList();
 		}
 
 		public virtual IList<T> GetChildren<T>()
