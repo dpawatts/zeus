@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Zeus;
 
-namespace Bermedia.Gibbons.Items.Details
+namespace Bermedia.Gibbons.Web.Items.Details
 {
 	public class ProductRecommendationsEditor : CheckBoxListEditorAttribute
 	{

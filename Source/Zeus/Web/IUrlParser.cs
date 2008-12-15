@@ -27,11 +27,6 @@ namespace Zeus.Web
 		/// <returns>True if the item is a start page or a root page</returns>
 		bool IsRootOrStartPage(ContentItem item);
 
-		/// <summary>Finds an item by traversing names from the starting point root.</summary>
-		/// <param name="url">The url that should be traversed.</param>
-		/// <returns>The content item matching the supplied url.</returns>
-		ContentItem Parse(string url);
-
 		/// <summary>Finds a page by traversing names from the start page.</summary>
 		/// <param name="url">The url that should be traversed.</param>
 		/// <returns>The content page matching the supplied url.</returns>

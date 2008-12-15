@@ -12,6 +12,7 @@ namespace Zeus.Persistence
 	public class SessionProvider : ISessionProvider
 	{
 		private ISessionFactory _sessionFactory;
+		private IInterceptor _interceptor;
 
 		public ISession OpenSession
 		{
@@ -19,14 +20,15 @@ namespace Zeus.Persistence
 			{
 				ISession session = HttpContext.Current.Items["OpenSession"] as ISession;
 				if (session == null)
-					HttpContext.Current.Items["OpenSession"] = session = _sessionFactory.OpenSession();
+					HttpContext.Current.Items["OpenSession"] = session = _sessionFactory.OpenSession(_interceptor);
 				return session;
 			}
 		}
 
-		public SessionProvider(IConfigurationBuilder configurationBuilder)
+		public SessionProvider(IConfigurationBuilder configurationBuilder, IInterceptor interceptor)
 		{
 			_sessionFactory = configurationBuilder.Configuration.BuildSessionFactory();
+			_interceptor = interceptor;
 		}
 	}
 }

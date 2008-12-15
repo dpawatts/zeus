@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace Zeus.Web
 {
@@ -55,6 +56,33 @@ namespace Zeus.Web
 		public override string ToString()
 		{
 			return _url + "?" + _query;
+		}
+
+		public static string PathPart(string url)
+		{
+			url = RemoveHash(url);
+
+			int queryIndex = QueryIndex(url);
+			if (queryIndex >= 0)
+				url = url.Substring(0, queryIndex);
+
+			return url;
+		}
+
+		private static int QueryIndex(string url)
+		{
+			return url.IndexOf('?');
+		}
+
+		/// <summary>Removes the hash (#...) from an url.</summary>
+		/// <param name="url">An url that might hav a hash in it.</param>
+		/// <returns>An url without the hash part.</returns>
+		public static string RemoveHash(string url)
+		{
+			int hashIndex = url.IndexOf('#');
+			if (hashIndex >= 0)
+				url = url.Substring(0, hashIndex);
+			return url;
 		}
 	}
 }

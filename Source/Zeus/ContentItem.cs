@@ -154,6 +154,12 @@ namespace Zeus
 
 		#region Public Properties (generated)
 
+		/// <summary>The default file extension for this content item, e.g. ".aspx".</summary>
+		public virtual string Extension
+		{
+			get { return ".aspx"; }
+		}
+
 		/// <summary>Gets whether this item is a page. This is used for and site map purposes.</summary>
 		public virtual bool IsPage
 		{
@@ -416,6 +422,24 @@ namespace Zeus
 
 				siblings.Add(this);
 			}
+		}
+
+		public TAncestor FindFirstAncestor<TAncestor>()
+			where TAncestor : ContentItem
+		{
+			return FindFirstAncestorRecursive<TAncestor>(this);
+		}
+
+		private static TAncestor FindFirstAncestorRecursive<TAncestor>(ContentItem contentItem)
+			where TAncestor : ContentItem
+		{
+			if (contentItem == null)
+				return null;
+
+			if (contentItem is TAncestor)
+				return (TAncestor) contentItem;
+
+			return FindFirstAncestorRecursive<TAncestor>(contentItem.Parent);
 		}
 
 		/// <summary>

@@ -5,9 +5,9 @@ using Zeus.ContentTypes.Properties;
 using Zeus.FileSystem;
 using System.Web.UI.WebControls;
 using Zeus.Web.UI;
-using Bermedia.Gibbons.Items.Details;
+using Bermedia.Gibbons.Web.Items.Details;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	public abstract class BaseProduct : StructuralPage
 	{

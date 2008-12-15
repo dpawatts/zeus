@@ -2,7 +2,7 @@
 using Zeus;
 using Zeus.Web.UI;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	public abstract class BaseContentItem : ContentItem
 	{

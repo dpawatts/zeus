@@ -4,7 +4,7 @@ using Zeus;
 using Zeus.Web.UI.WebControls;
 using Zeus.Web.UI;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[TabPanel(Tabs.General, "General", 0)]
 	public abstract class StructuralPage : BaseContentItem

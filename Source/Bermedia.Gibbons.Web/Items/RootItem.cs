@@ -5,7 +5,7 @@ using System.Web;
 using Zeus;
 using Zeus.Integrity;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Root Item")]
 	[RestrictParents(AllowedTypes.None)]

@@ -36,7 +36,7 @@ namespace Zeus.Engine
 
 		public Host Host
 		{
-			get { return new Host((HostSection) ConfigurationManager.GetSection("zeus/host")); }
+			get { return _container.Resolve<Host>(); }
 		}
 
 		public IUrlParser UrlParser
@@ -55,6 +55,7 @@ namespace Zeus.Engine
 			_container = new WindsorContainer();
 
 			AddComponentInstance<DatabaseSection>(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
+			AddComponentInstance<Host>(new Host((HostSection) ConfigurationManager.GetSection("zeus/host")));
 
 			XmlInterpreter interpreter = new XmlInterpreter(resource);
 			interpreter.ProcessResource(resource, _container.Kernel.ConfigurationStore);

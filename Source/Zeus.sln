@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Examples", "Zeus.Examp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bermedia.Gibbons.Web", "Bermedia.Gibbons.Web\Bermedia.Gibbons.Web.csproj", "{7F435B5A-097A-41C8-904B-81A14DACAE65}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{4FFD8740-F10F-453F-97FD-DAE6C34FF0CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundInTheory.DynamicImage.Sources.Zeus", "SoundInTheory.DynamicImage.Sources.Zeus\SoundInTheory.DynamicImage.Sources.Zeus.csproj", "{86C14F34-4C12-4D11-B341-D57FDDF42435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{7F435B5A-097A-41C8-904B-81A14DACAE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F435B5A-097A-41C8-904B-81A14DACAE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F435B5A-097A-41C8-904B-81A14DACAE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C14F34-4C12-4D11-B341-D57FDDF42435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C14F34-4C12-4D11-B341-D57FDDF42435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C14F34-4C12-4D11-B341-D57FDDF42435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C14F34-4C12-4D11-B341-D57FDDF42435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +67,6 @@ Global
 		{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF} = {AAB76390-02E2-4B9A-9C8B-BC0057E660AC}
 		{B42B07DF-2C6D-4170-9BF9-B9185EC06818} = {951F5AA6-FECA-4A78-B5B2-32856CFED612}
 		{7F435B5A-097A-41C8-904B-81A14DACAE65} = {951F5AA6-FECA-4A78-B5B2-32856CFED612}
+		{86C14F34-4C12-4D11-B341-D57FDDF42435} = {4FFD8740-F10F-453F-97FD-DAE6C34FF0CD}
 	EndGlobalSection
 EndGlobal

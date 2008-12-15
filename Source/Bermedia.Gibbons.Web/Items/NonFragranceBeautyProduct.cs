@@ -6,7 +6,7 @@ using Zeus.FileSystem;
 using System.Web.UI.WebControls;
 using Zeus.Web.UI;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Product", Description = "e.g. Calvin Klein Striped Socks, Must de Cartier Eau de Toilette")]
 	[RestrictParents(typeof(NonFragranceBeautyCategory))]
@@ -15,7 +15,7 @@ namespace Bermedia.Gibbons.Items
 		#region Public properties
 
 		[LinkedItemDropDownListEditor("Brand", 205, TypeFilter = typeof(Brand), ContainerName = Tabs.General, Required = true)]
-		public Brand Brand
+		public override Brand Brand
 		{
 			get { return GetDetail<Brand>("Brand", null); }
 			set { SetDetail<Brand>("Brand", value); }

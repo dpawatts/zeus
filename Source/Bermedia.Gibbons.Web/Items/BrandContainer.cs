@@ -2,7 +2,7 @@
 using Zeus;
 using Zeus.Integrity;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Brand Container", Description = "Container for brands")]
 	[RestrictParents(typeof(RootItem))]

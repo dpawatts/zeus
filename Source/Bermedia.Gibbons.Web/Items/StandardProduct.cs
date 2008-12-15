@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using Zeus.Web.UI;
 using Zeus.ContentTypes.Properties;
-using Bermedia.Gibbons.Items.Details;
+using Bermedia.Gibbons.Web.Items.Details;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[TabPanel(Tabs.Colours, "Colors", 1)]
 	[TabPanel(Tabs.Sizes, "Sizes", 2)]
@@ -18,6 +18,12 @@ namespace Bermedia.Gibbons.Items
 		{
 			get { return GetDetail<string>("VendorStyleNumber", string.Empty); }
 			set { SetDetail<string>("VendorStyleNumber", value); }
+		}
+
+		public abstract Brand Brand
+		{
+			get;
+			set;
 		}
 
 		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true)]
@@ -48,18 +54,17 @@ namespace Bermedia.Gibbons.Items
 			set { SetDetail<bool>("GiftItem", value); }
 		}
 
-		[ColourEditor("Colour", 270, ContainerName = Tabs.General)]
-		public string Colour
-		{
-			get { return GetDetail<string>("Colour", string.Empty); }
-			set { SetDetail<string>("Colour", value); }
-		}
-
 		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(FreeGiftProduct), ContainerName = Tabs.General)]
 		public FreeGiftProduct FreeGiftProduct
 		{
 			get { return GetDetail<FreeGiftProduct>("FreeGiftProduct", null); }
 			set { SetDetail<FreeGiftProduct>("FreeGiftProduct", value); }
+		}
+
+		[ProductRecommendationsEditor("Associated Colors", 300, ContainerName = Tabs.Colours)]
+		public DetailCollection AssociatedColours
+		{
+			get { return GetDetailCollection("AssociatedColours", true); }
 		}
 
 		[ChildrenEditor("Associated Sizes", 400, TypeFilter = typeof(ProductSizeLink), ContainerName = Tabs.Sizes)]

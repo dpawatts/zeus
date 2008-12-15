@@ -5,7 +5,7 @@ using System.Web;
 using Zeus;
 using Zeus.Integrity;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Start Page")]
 	[RestrictParents(typeof(RootItem))]

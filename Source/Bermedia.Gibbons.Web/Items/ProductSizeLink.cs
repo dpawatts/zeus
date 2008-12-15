@@ -3,12 +3,17 @@ using Zeus;
 using Zeus.Integrity;
 using Zeus.ContentTypes.Properties;
 
-namespace Bermedia.Gibbons.Items
+namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Associated Size")]
 	[RestrictParents(typeof(StandardProduct))]
 	public class ProductSizeLink : BaseContentItem
 	{
+		public override string Title
+		{
+			get { return (this.ProductSize != null) ? this.ProductSize.Title : "[None]"; }
+		}
+
 		[LinkedItemDropDownListEditor("Product Size", 200, TypeFilter = typeof(ProductSize), Required = true)]
 		public ProductSize ProductSize
 		{
