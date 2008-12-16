@@ -22,7 +22,8 @@
 	relative_urls: false,
 	noneditable_noneditable_class: 'cs,csharp,vb,js',
 	width: "500px",
-	height: "400px"
+	height: "400px",
+	forced_root_block: false
 };
 var fileBrowserUrl;
 var srcField;

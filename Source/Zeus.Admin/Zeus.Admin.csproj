@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SoundInTheory.DynamicImage.Caching.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="SoundInTheory.NMigration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SoundInTheory.NMigration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -67,6 +75,20 @@
     </Compile>
     <Compile Include="Admin\FileManager\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\FileManager\Upload.aspx.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\FileManager\Upload.aspx.designer.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Move.aspx.cs">
       <DependentUpon>Move.aspx</DependentUpon>
@@ -134,6 +156,7 @@
     <Compile Include="Admin\PreviewFrame.Master.designer.cs">
       <DependentUpon>PreviewFrame.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Web\UI\WebControls\FileTree.cs" />
     <Compile Include="Admin\Web\UI\WebControls\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,7 +261,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Admin\Assets\Images\ColorPicker\Thumbs.db" />
+    <Content Include="Admin\Assets\Css\login.css" />
+    <Content Include="Admin\Assets\Css\thickbox.css" />
     <Content Include="Admin\Assets\Images\Icons\folder.png" />
+    <Content Include="Admin\Assets\Images\Login\button.gif" />
+    <Content Include="Admin\Assets\Images\Login\mainBox.gif" />
+    <Content Include="Admin\Assets\Images\Login\textBox.gif" />
+    <Content Include="Admin\Assets\Images\ThickBox\loadingAnimation.gif" />
+    <Content Include="Admin\Assets\JS\Plugins\thickbox.js" />
+    <Content Include="Admin\FileManager\Upload.aspx" />
+    <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\Popup.Master" />
   </ItemGroup>
   <ItemGroup>

@@ -39,8 +39,9 @@ namespace Zeus.FileSystem.Details
 			if (ce.Upload.PostedFile != null && ce.Upload.PostedFile.ContentLength > 0)
 			{
 				f.Name = System.IO.Path.GetFileName(ce.Upload.PostedFile.FileName);
-				f.PhysicalPath = System.IO.Path.Combine(f.Folder.PhysicalPath, f.Name);
-				ce.Upload.PostedFile.SaveAs(f.PhysicalPath);
+				f.Data = ce.Upload.FileBytes;
+				f.ContentType = ce.Upload.PostedFile.ContentType;
+				f.Size = ce.Upload.PostedFile.ContentLength;
 				return true;
 			}
 			else if (ce.ChangeName.Text.Length > 0)
@@ -54,7 +55,7 @@ namespace Zeus.FileSystem.Details
 		{
 			CompositeEditor ce = editor as CompositeEditor;
 			File f = item as File;
-			if (!string.IsNullOrEmpty(f.PhysicalPath) && System.IO.File.Exists(f.PhysicalPath))
+			if (f.Size != null)
 			{
 				ce.Upload.Visible = false;
 				ce.ChangeName.Text = f.Name;

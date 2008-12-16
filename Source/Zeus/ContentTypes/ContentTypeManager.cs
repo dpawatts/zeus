@@ -65,7 +65,7 @@ namespace Zeus.ContentTypes
 			item.Parent = parentItem;
 		}
 
-		public ICollection<ContentType> GetDefinitions()
+		public ICollection<ContentType> GetContentTypes()
 		{
 			return _definitions.Values;
 		}
@@ -76,6 +76,14 @@ namespace Zeus.ContentTypes
 				return _definitions[type];
 			else
 				return null;
+		}
+
+		public IList<ContentType> GetAllowedChildren(ContentType contentType)
+		{
+			List<ContentType> allowedChildren = new List<ContentType>();
+			allowedChildren.AddRange(contentType.AllowedChildren);
+			allowedChildren.Sort();
+			return allowedChildren;
 		}
 
 		public ContentType GetContentType(string discriminator)

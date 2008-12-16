@@ -11,18 +11,7 @@
 	<h1><zeus:ItemDetailView runat="server" PropertyName="Title" /></h1>
 
 	<div id="categoryImage">
-		<sitdap:DynamicImage runat="server">
-			<Layers>
-				<sitdap:ImageLayer>
-					<Source>
-						<sitdap:ZeusImageSource PropertyName="Image" ContentID='<%$ CurrentPage:ID %>' />
-					</Source>
-					<Filters>
-						<sitdap:ResizeFilter Width="300" Mode="UseWidth" />
-					</Filters>
-				</sitdap:ImageLayer>
-			</Layers>
-		</sitdap:DynamicImage>
+		<zeus:ItemDetailView runat="server" PropertyName="Image" />
 	</div>
 	
 	<isis:TypedListView runat="server" DataSourceID="cdsChildren" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct">
@@ -36,7 +25,7 @@
 						<Layers>
 							<sitdap:ImageLayer>
 								<Source>
-									<sitdap:ZeusImageSource PropertyName="Image" ContentID='<%# Container.DataItem.ID %>' />
+									<zeus:ZeusImageSource ContentID='<%# (Container.DataItem.Image != null) ? Container.DataItem.Image.ID : 0 %>' />
 								</Source>
 								<AlternateSource>
 									<sitdap:FileImageSource FileName="~/Assets/Images/no-image.jpg" />

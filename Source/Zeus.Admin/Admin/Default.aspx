@@ -26,8 +26,8 @@
 	
 	<form runat="server">
 		<div id="header" class="clearfix">
-			<img src="assets/images/theme/logo.gif" border="0" alt="Sound In Theory"/>
-			<p id="title"><span>zeus</span> administration site</p>
+			<img runat="server" id="imgLogo" src="assets/images/theme/logo.gif" border="0" alt="Sound In Theory"/>
+			<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName" /></span></p>
 			<div id="headerRight">
 				<asp:LoginStatus runat="server" ID="logOut" />
 				<p id="loggedAs">You are logged in as <asp:LoginName runat="server" /></p>

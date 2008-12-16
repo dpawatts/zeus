@@ -19,6 +19,12 @@ namespace Zeus.Persistence
 			_linkRepository = linkRepository;
 		}
 
+		/// <summary>Occurs when an item has been deleted</summary>
+		public event EventHandler<ItemEventArgs> ItemDeleted;
+
+		/// <summary>Occurs when an item has been saved</summary>
+		public event EventHandler<ItemEventArgs> ItemSaved;
+
 		public void Delete(ContentItem contentItem)
 		{
 			if (contentItem is ISelfPersister)
@@ -33,6 +39,8 @@ namespace Zeus.Persistence
 					transaction.Commit();
 				}
 			}
+			if (ItemDeleted != null)
+				ItemDeleted(this, new ItemEventArgs(contentItem));
 		}
 
 		private void DeleteRecursive(ContentItem contentItem)
@@ -118,6 +126,8 @@ namespace Zeus.Persistence
 					transaction.Commit();
 				}
 			}
+			if (ItemSaved != null)
+				ItemSaved(this, new ItemEventArgs(contentItem));
 		}
 	}
 }

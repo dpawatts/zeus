@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{86C14F34-4C12-4D11-B341-D57FDDF42435}</ProjectGuid>
+    <ProjectGuid>{E567E87F-E181-4965-9745-483E329CB177}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SoundInTheory.DynamicImage.Sources</RootNamespace>
-    <AssemblyName>SoundInTheory.DynamicImage.Sources.Zeus</AssemblyName>
+    <RootNamespace>Zeus.AddIns.Images</RootNamespace>
+    <AssemblyName>Zeus.AddIns.Images</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -51,8 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ZeusImageSource.cs" />
+    <Compile Include="Items\Details\ImageDisplayerAttribute.cs" />
+    <Compile Include="Items\Details\ImageUploadEditorAttribute.cs" />
+    <Compile Include="Items\Image.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\WebControls\ImageEditor.cs" />
+    <Compile Include="ZeusImageSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus\Zeus.csproj">

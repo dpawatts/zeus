@@ -58,7 +58,7 @@ namespace Zeus.Persistence
 		private IEnumerable<Type> EnumerateDefinedTypes()
 		{
 			List<Type> types = new List<Type>();
-			foreach (ContentType definition in _definitions.GetDefinitions())
+			foreach (ContentType definition in _definitions.GetContentTypes())
 				foreach (Type t in EnumerateBaseTypes(definition.ItemType))
 				{
 					if (t.IsSubclassOf(typeof(ContentItem)) && !types.Contains(t))

@@ -9,6 +9,11 @@ namespace Zeus.ContentTypes.Properties
 	{
 		#region Constructor
 
+		public DisplayerAttribute()
+		{
+
+		}
+
 		public DisplayerAttribute(Type controlType, string controlPropertyName)
 		{
 			this.ControlType = controlType;

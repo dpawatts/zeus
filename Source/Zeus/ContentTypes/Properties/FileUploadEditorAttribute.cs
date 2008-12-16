@@ -3,6 +3,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI;
 using Zeus.FileSystem;
 using Zeus.Web.UI.WebControls;
+using Zeus.Admin;
 
 namespace Zeus.ContentTypes.Properties
 {
@@ -18,53 +19,61 @@ namespace Zeus.ContentTypes.Properties
 	/// }
 	/// </example>
 	[AttributeUsage(AttributeTargets.Property)]
-	public class ImageUploadEditorAttribute : AbstractEditorAttribute
+	public class FileUploadEditorAttribute : AbstractEditorAttribute
 	{
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		public ImageUploadEditorAttribute(string title, int sortOrder)
+		public FileUploadEditorAttribute(string title, int sortOrder, string folderPath)
 			: base(title, sortOrder)
 		{
+			this.FolderPath = folderPath;
 		}
 
 		#region Properties
 
+		public string FolderPath
+		{
+			get;
+			set;
+		}
+
 		#endregion
+
+		protected virtual File CreateNewItem()
+		{
+			return new File();
+		}
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
-			/*ImageEditor fileUpload = editor as ImageEditor;
-			IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
-			IFileIdentifier fileIdentifier = item[this.Name] as IFileIdentifier;
+			FileUpload fileUpload = editor as FileUpload;
+			File existingImage = item[this.Name] as File;
 
+			bool result = false;
 			if (fileUpload.HasFile)
 			{
-				if (fileIdentifier != null)
-					fileSystem.DeleteFile(fileIdentifier);
-
 				// Add new file.
-				fileIdentifier = fileSystem.AddFile(fileUpload.FileName, fileUpload.FileBytes);
-				item[this.Name] = fileIdentifier;
+				File newImage = existingImage;
+				if (newImage == null)
+				{
+					newImage = CreateNewItem();
+
+					Folder folder = (Folder) Zeus.Context.Current.Resolve<Navigator>().Navigate(this.FolderPath);
+					newImage.AddTo(folder);
+				}
+
+				newImage.Name = System.IO.Path.GetFileName(fileUpload.PostedFile.FileName);
+				newImage.Data = fileUpload.FileBytes;
+				newImage.ContentType = fileUpload.PostedFile.ContentType;
+				newImage.Size = fileUpload.PostedFile.ContentLength;
+
+				item[this.Name] = newImage;
+
+				result = true;
 			}
-			else if (fileUpload.ClearImage)
-			{
-				fileSystem.DeleteFile(fileIdentifier);
-				item[this.Name] = null;
-			}*/
 
-			return true;
-		}
-
-		public override void UpdateEditor(ContentItem item, Control editor)
-		{
-			/*IFileIdentifier fileIdentifier = item[this.Name] as IFileIdentifier;
-			if (fileIdentifier != null)
-			{
-				IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
-				ImageEditor fileUpload = editor as ImageEditor;
-				fileUpload.Image = fileSystem.GetFile(fileIdentifier).Data;
-			}*/
+			return result;
 		}
 
 		/// <summary>Creates a text box editor.</summary>
@@ -72,11 +81,21 @@ namespace Zeus.ContentTypes.Properties
 		/// <returns>A text box control.</returns>
 		protected override Control AddEditor(Control container)
 		{
-			ImageEditor fileUpload = new ImageEditor();
+			Control fileUpload = CreateEditor();
 			fileUpload.ID = Name;
 			container.Controls.Add(fileUpload);
 
 			return fileUpload;
+		}
+
+		public override void UpdateEditor(ContentItem item, Control editor)
+		{
+			
+		}
+
+		protected virtual Control CreateEditor()
+		{
+			return new FileUpload();
 		}
 	}
 }

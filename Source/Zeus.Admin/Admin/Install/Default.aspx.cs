@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using Zeus.Installation;
 using Zeus.ContentTypes;
+using SoundInTheory.NMigration;
+using System.Web.Hosting;
+using System.IO;
 
 namespace Zeus.Admin.Install
 {
@@ -18,7 +21,7 @@ namespace Zeus.Admin.Install
 
 			if (!IsPostBack)
 			{
-				ICollection<ContentType> definitions = Zeus.Context.Current.ContentTypes.GetDefinitions();
+				ICollection<ContentType> definitions = Zeus.Context.Current.ContentTypes.GetContentTypes();
 				foreach (ContentType definition in definitions)
 					ddlRootItem.Items.Add(new ListItem(definition.ContentTypeAttribute.Title, definition.ItemType.AssemblyQualifiedName));
 			}
@@ -30,6 +33,12 @@ namespace Zeus.Admin.Install
 			item.Name = "root";
 			item.Title = "Root node";
 			Zeus.Context.Persister.Save(item);
+		}
+
+		protected void btnInstallDynamicImageCaching_Click(object sender, EventArgs e)
+		{
+			string connectionString = ConfigurationManager.ConnectionStrings["zeus"].ConnectionString;
+			MigrationManager.Migrate(connectionString, Path.Combine(HostingEnvironment.ApplicationPhysicalPath, @"bin\SoundInTheory.DynamicImage.Caching.Linq.dll"), "SoundInTheory.DynamicImage.Caching.Migrations");
 		}
 	}
 }

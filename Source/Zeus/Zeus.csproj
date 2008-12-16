@@ -108,6 +108,7 @@
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\AdminSection.cs" />
     <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\HostSection.cs" />
@@ -160,9 +161,7 @@
     <Compile Include="FileSystem\File.cs" />
     <Compile Include="FileSystem\FileSystemNode.cs" />
     <Compile Include="FileSystem\Folder.cs" />
-    <Compile Include="FileSystem\BaseFolder.cs" />
     <Compile Include="FileSystem\IFileSystemContainer.cs" />
-    <Compile Include="FileSystem\RootFolder.cs" />
     <Compile Include="Find.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
@@ -197,6 +196,7 @@
     <Compile Include="Utility.cs" />
     <Compile Include="Web\Compilation\CurrentPageExpressionBuilder.cs" />
     <Compile Include="Web\Compilation\ZeusExpressionBuilder.cs" />
+    <Compile Include="Web\Handlers\FileHandler.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\Modules\ContentModule.cs" />
     <Compile Include="Web\ExtensionMethods.cs" />
@@ -230,7 +230,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\IItemView.cs" />
-    <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
     </Compile>

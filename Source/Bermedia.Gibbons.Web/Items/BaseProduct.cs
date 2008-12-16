@@ -6,6 +6,8 @@ using Zeus.FileSystem;
 using System.Web.UI.WebControls;
 using Zeus.Web.UI;
 using Bermedia.Gibbons.Web.Items.Details;
+using Zeus.AddIns.Images.Items.Details;
+using SoundInTheory.DynamicImage.Filters;
 
 namespace Bermedia.Gibbons.Web.Items
 {
@@ -30,11 +32,12 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<string>("Description", value); }
 		}
 
-		[ImageUploadEditor("Image", 240, ContainerName = Tabs.General)]
-		public string Image
+		[ImageDisplayer(Width = 260, ResizeMode = ResizeMode.UseWidth)]
+		[ImageUploadEditor("Image", 240, "~/Upload/Products", ContainerName = Tabs.General)]
+		public Zeus.AddIns.Images.Items.Image Image
 		{
-			get { return GetDetail<string>("Image", null); }
-			set { SetDetail<string>("Image", value); }
+			get { return GetDetail<Zeus.AddIns.Images.Items.Image>("Image", null); }
+			set { SetDetail<Zeus.AddIns.Images.Items.Image>("Image", value); }
 		}
 
 		[CheckBoxEditor("Display On Website", "", 250, ContainerName = Tabs.General)]

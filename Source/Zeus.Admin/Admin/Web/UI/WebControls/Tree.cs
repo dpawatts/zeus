@@ -18,7 +18,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 			set { _selectedItem = value; }
 		}
 
-		public ContentItem RootNode
+		public virtual ContentItem RootNode
 		{
 			get { return _rootItem ?? Find.RootItem; }
 			set { _rootItem = value; }
@@ -29,7 +29,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 			base.CreateChildControls();
 
 			string path = this.Page.Request.GetOptionalString("selected");
-			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : Find.RootItem;
+			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : this.RootNode;
 
 			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
 				.OpenTo(_selectedItem)
@@ -69,6 +69,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 			HtmlAnchor anchor = new HtmlAnchor();
 			anchor.HRef = node.Url;
 			anchor.Target = "preview";
+			anchor.Attributes["data-url"] = Zeus.Web.Url.ToAbsolute(node.Url);
 
 			HtmlImage image = new HtmlImage();
 			image.Src = node.IconUrl;
@@ -78,6 +79,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 			HtmlGenericControl span = new HtmlGenericControl("span");
 			span.ID = "span" + node.ID;
 			span.Attributes["data-path"] = node.Path;
+			span.Attributes["data-type"] = node.GetType().Name;
 			if (node.Path == _selectedItem.Path)
 				span.Attributes["class"] = "active";
 			span.Controls.Add(anchor);

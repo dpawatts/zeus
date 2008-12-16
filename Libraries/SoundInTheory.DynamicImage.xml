@@ -1345,5 +1345,12 @@
             <param name="cornerRadius"></param>
             <returns></returns>
         </member>
+        <member name="M:Isis.Drawing.ImageHelper.FromBytes(System.Byte[])">
+            <summary>
+            You MUST call Dispose on the returned image, otherwise the source memory stream will be left open
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

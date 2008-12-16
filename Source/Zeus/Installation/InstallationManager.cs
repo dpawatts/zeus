@@ -14,7 +14,7 @@ namespace Zeus.Installation
 		{
 			string connectionString = ConfigurationManager.ConnectionStrings["zeus"].ConnectionString;
 			MigrationManager.Migrate(connectionString, Assembly.GetExecutingAssembly(), "Zeus.Installation.Migrations");
-			MigrationManager.Migrate(connectionString, Assembly.GetExecutingAssembly(), "Zeus.FileSystem.Migrations");
+			//MigrationManager.Migrate(connectionString, Assembly.GetExecutingAssembly(), "Zeus.FileSystem.Migrations");
 		}
 	}
 }

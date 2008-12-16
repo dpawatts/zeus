@@ -11,18 +11,7 @@
 			<h1><%# Container.DataItem.Brand.Title %> <%# Container.DataItem.Title %></h1> 
 			
 			<div id="productImage">
-				<sitdap:DynamicImage runat="server">
-					<Layers>
-						<sitdap:ImageLayer>
-							<Source>
-								<sitdap:ZeusImageSource PropertyName="Image" ContentID='<%# Container.DataItem.ID %>' />
-							</Source>
-							<Filters>
-								<sitdap:ResizeFilter Width="260" Mode="UseWidth" />
-							</Filters>
-						</sitdap:ImageLayer>
-					</Layers>
-				</sitdap:DynamicImage>
+				<zeus:ItemDetailView runat="server" PropertyName="Image" />
 				
 				<isis:TypedListView runat="server" DataSource='<%# Container.DataItem.AssociatedColours %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.ProductColour">
 					<LayoutTemplate>

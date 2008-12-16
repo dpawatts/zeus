@@ -34,6 +34,7 @@ namespace Zeus.Admin.Navigation
 			HtmlAnchor anchor = new HtmlAnchor();
 			anchor.HRef = node.Url;
 			anchor.Target = "preview";
+			anchor.Attributes["data-url"] = Zeus.Web.Url.ToAbsolute(node.Url);
 
 			HtmlImage image = new HtmlImage();
 			image.Src = node.IconUrl;
@@ -43,6 +44,7 @@ namespace Zeus.Admin.Navigation
 			HtmlGenericControl span = new HtmlGenericControl("span");
 			span.ID = "span" + node.ID;
 			span.Attributes["data-path"] = node.Path;
+			span.Attributes["data-type"] = node.GetType().Name;
 			span.Controls.Add(anchor);
 
 			return span;

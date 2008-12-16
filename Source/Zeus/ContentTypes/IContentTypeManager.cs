@@ -16,6 +16,8 @@ namespace Zeus.ContentTypes
 		}
 
 		ContentItem CreateInstance(Type itemType, ContentItem parentItem);
-		ICollection<ContentType> GetDefinitions();
+		ICollection<ContentType> GetContentTypes();
+		ContentType GetContentType(Type type);
+		IList<ContentType> GetAllowedChildren(ContentType contentType);
 	}
 }

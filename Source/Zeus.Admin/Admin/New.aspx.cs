@@ -15,7 +15,8 @@ namespace Zeus.Admin
 		{
 			ContentItem parentItem = this.SelectedItem;
 			IContentTypeManager manager = Zeus.Context.Current.Resolve<IContentTypeManager>();
-			lsvChildTypes.DataSource = manager[parentItem.GetType()].AllowedChildren;
+			ContentType contentType = manager.GetContentType(parentItem.GetType());
+			lsvChildTypes.DataSource = manager.GetAllowedChildren(contentType);
 			lsvChildTypes.DataBind();
 		}
 	}

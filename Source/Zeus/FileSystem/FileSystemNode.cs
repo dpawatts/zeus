@@ -14,16 +14,5 @@ namespace Zeus.FileSystem
 			get { return this.Name; }
 			set { this.Name = value; }
 		}
-
-		public virtual string PhysicalPath
-		{
-			get;
-			set;
-		}
-
-		public virtual BaseFolder Folder
-		{
-			get { return this.Parent as BaseFolder; }
-		}
 	}
 }

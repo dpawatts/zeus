@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SoundInTheory.DynamicImage.Sources.Zeus")]
+[assembly: AssemblyTitle("Zeus.AddIns.Image")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SoundInTheory.DynamicImage.Sources.Zeus")]
+[assembly: AssemblyProduct("Zeus.AddIns.Image")]
 [assembly: AssemblyCopyright("Copyright ©  2008")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("aa1bdb59-46ca-4a5e-8382-51c56080f873")]
+[assembly: Guid("14ccc928-9977-429f-bddc-8443a983ff8c")]
 
 // Version information for an assembly consists of the following four values:
 //

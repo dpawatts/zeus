@@ -5,30 +5,36 @@ using SoundInTheory.DynamicImage.Sources;
 using SoundInTheory.DynamicImage.Filters;
 using System.Web.UI;
 
-namespace Zeus.Web.UI.WebControls
+namespace Zeus.AddIns.Images.UI.WebControls
 {
 	public class ImageEditor : FileUpload
 	{
 		private CheckBox chkClearImage;
 
-		public byte[] Image
+		#region Properties
+
+		public int ContentID
 		{
-			get;
-			set;
+			get { return (int) (this.ViewState["ContentID"] ?? 0); }
+			set { this.ViewState["ContentID"] = value; }
 		}
 
 		public bool ClearImage
 		{
 			get
 			{
-				return (chkClearImage != null) ? chkClearImage.Checked : false;
+				return chkClearImage.Checked;
 			}
 		}
 
-		protected override void OnInit(EventArgs e)
+
+		#endregion
+
+		protected override void OnLoad(EventArgs e)
 		{
-			base.OnInit(e);
-			EnsureChildControls();
+			base.OnLoad(e);
+			if (this.Page.IsPostBack)
+				EnsureChildControls();
 		}
 
 		protected override void CreateChildControls()
@@ -37,7 +43,7 @@ namespace Zeus.Web.UI.WebControls
 
 			this.Controls.Add(new LiteralControl("<br />"));
 
-			if (this.Image != null)
+			if (this.ContentID != 0)
 			{
 				// Add DynamicImage control to render existing image.
 				this.Controls.Add(new DynamicImage
@@ -49,7 +55,7 @@ namespace Zeus.Web.UI.WebControls
 					{
 						Source = new ImageSourceCollection
 						{
-							new BytesImageSource { Bytes = this.Image }
+							new ZeusImageSource { ContentID = this.ContentID }
 						},
 						Filters = new FilterCollection
 						{

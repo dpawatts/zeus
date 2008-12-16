@@ -54,14 +54,10 @@ namespace Zeus.Web.UI.WebControls
 			
 			// Get selected property from content item.
 			ContentType contentType = Zeus.Context.Current.ContentTypes[contentItem.GetType()];
-			Property property = contentType.Properties.SingleOrDefault(p => p.Name == this.PropertyName);
-			if (property == null)
-				throw new ZeusException("Could not find property '{0}' on content type '{1}'.", this.PropertyName, contentType.Discriminator);
-
-			// Add Displayer control.
-			if (!property.HasDisplayer)
+			IDisplayer displayer = contentType.Displayers.SingleOrDefault(d => d.Name == this.PropertyName);
+			if (displayer == null)
 				throw new ZeusException("Could not find Displayer on property '{0}' on content type '{1}'.", this.PropertyName, contentType.Discriminator);
-			property.Displayer.AddTo(this, contentItem, this.PropertyName);
+			displayer.AddTo(this, contentItem, this.PropertyName);
 		}
 
 		protected virtual void EnsureLayoutTemplate()

@@ -6,7 +6,7 @@ using Isis.Reflection;
 
 namespace Zeus.ContentTypes
 {
-	public class ContentType
+	public class ContentType : IComparable<ContentType>
 	{
 		private IList<ContentType> _allowedChildren = new List<ContentType>();
 
@@ -21,6 +21,11 @@ namespace Zeus.ContentTypes
 		public string Discriminator
 		{
 			get { return this.ContentTypeAttribute.Name ?? this.ItemType.Name; }
+		}
+
+		public int SortOrder
+		{
+			get { return this.ContentTypeAttribute.SortOrder; }
 		}
 
 		public IList<EditorContainerAttribute> EditorContainers
@@ -107,6 +112,15 @@ namespace Zeus.ContentTypes
 			if (this.AllowedChildren.Contains(definition))
 				this.AllowedChildren.Remove(definition);
 		}
+
+		#region IComparable
+
+		int IComparable<ContentType>.CompareTo(ContentType other)
+		{
+			return SortOrder - other.SortOrder;
+		}
+
+		#endregion
 
 		#endregion
 	}

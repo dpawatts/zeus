@@ -7,27 +7,22 @@ using System.Security.Permissions;
 using Microsoft.Win32;
 using System.IO;
 using Zeus.FileSystem.Details;
+using System.Web;
 
 namespace Zeus.FileSystem
 {
-	[RestrictParents(typeof(BaseFolder))]
-	public class File : FileSystemNode, ISelfPersister
+	[ContentType(Description = "A node that represents a file.")]
+	[RestrictParents(typeof(Folder))]
+	public class File : FileSystemNode
 	{
-		public File()
+		public override string IconUrl
 		{
-
+			get { return "~/Admin/Assets/Images/Icons/page_white.png"; }
 		}
 
-		public File(BaseFolder parent, FileInfo file)
+		public override string Url
 		{
-			this.Name = file.Name;
-			this.Title = file.Name;
-			this.Size = file.Length;
-			this.Updated = file.LastWriteTime;
-			this.Created = file.CreationTime;
-			this.PhysicalPath = file.FullName;
-			this.Parent = parent;
-			((IUrlParserDependency) this).SetUrlParser(Zeus.Context.UrlParser);
+			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(base.Path); }
 		}
 
 		[UploadEditor]
@@ -37,113 +32,22 @@ namespace Zeus.FileSystem
 			set { base.Name = value; }
 		}
 
-		public long Size
+		public byte[] Data
 		{
-			get;
-			set;
+			get { return GetDetail<byte[]>("Data", null); }
+			set { SetDetail<byte[]>("Data", value); }
 		}
 
-		public override string IconUrl
+		public string ContentType
 		{
-			get { return "~/Admin/Assets/Images/Icons/page_white.png"; }
+			get { return GetDetail<string>("ContentType", null); }
+			set { SetDetail<string>("ContentType", value); }
 		}
 
-		public string GetMimeType()
+		public long? Size
 		{
-			string fileExtension = this.Extension.ToLower();
-
-			RegistryPermission registryPermission = new RegistryPermission(RegistryPermissionAccess.Read, @"\\HKEY_CLASSES_ROOT");
-			RegistryKey classesRoot = Registry.ClassesRoot;
-			RegistryKey typeKey = classesRoot.OpenSubKey(@"MIME\Database\Content Type");
-			foreach (string keyName in typeKey.GetSubKeyNames())
-			{
-				RegistryKey currentKey = typeKey.OpenSubKey(keyName);
-				if (((string) currentKey.GetValue("Extension")).ToLower() == fileExtension)
-					return keyName;
-			}
-
-			return string.Empty;
-		}
-
-		public override void AddTo(ContentItem newParent)
-		{
-			if (newParent != null)
-				MoveTo(newParent);
-		}
-
-		public void Save()
-		{
-			string expectedPath = System.IO.Path.Combine(this.Folder.PhysicalPath, this.Name);
-			if (expectedPath != this.PhysicalPath)
-			{
-				try
-				{
-					if (this.PhysicalPath != null)
-						System.IO.Directory.Move(this.PhysicalPath, expectedPath);
-					else
-						System.IO.Directory.CreateDirectory(expectedPath);
-					this.PhysicalPath = expectedPath;
-				}
-				catch (Exception ex)
-				{
-					Trace.TraceError(ex.ToString());
-				}
-			}
-		}
-
-		public void Delete()
-		{
-			try
-			{
-				System.IO.File.Delete(this.PhysicalPath);
-			}
-			catch (Exception ex)
-			{
-				Trace.TraceError(ex.ToString());
-			}
-		}
-
-		public void MoveTo(ContentItem destination)
-		{
-			BaseFolder d = BaseFolder.EnsureFolder(destination);
-
-			string from = this.PhysicalPath;
-			string to = System.IO.Path.Combine(d.PhysicalPath, Name);
-			if (System.IO.File.Exists(to))
-				throw new NameOccupiedException(this, destination);
-
-			try
-			{
-				System.IO.File.Move(from, to);
-				this.PhysicalPath = to;
-				this.Parent = destination;
-			}
-			catch (Exception ex)
-			{
-				Trace.TraceError(ex.ToString());
-			}
-		}
-
-		public ContentItem CopyTo(ContentItem destination)
-		{
-			BaseFolder d = BaseFolder.EnsureFolder(destination);
-
-			string from = PhysicalPath;
-			string to = System.IO.Path.Combine(d.PhysicalPath, Name);
-			if (System.IO.File.Exists(to))
-				throw new NameOccupiedException(this, destination);
-
-
-			try
-			{
-				System.IO.File.Copy(from, to);
-				return (File) destination.GetChild(Name);
-			}
-			catch (Exception ex)
-			{
-				Trace.TraceError(ex.ToString());
-				return this;
-			}
+			get { return GetDetail<long?>("Size", null); }
+			set { SetDetail<long?>("Size", value); }
 		}
 	}
 }

@@ -4,6 +4,11 @@ namespace Zeus.Persistence
 {
 	public interface IPersister
 	{
+		/// <summary>Occurs when an item has been deleted</summary>
+		event EventHandler<ItemEventArgs> ItemDeleted;
+		/// <summary>Occurs when an item has been saved</summary>
+		event EventHandler<ItemEventArgs> ItemSaved;
+
 		void Delete(ContentItem contentItem);
 		ContentItem Get(int id);
 		ContentItem Load(int id);

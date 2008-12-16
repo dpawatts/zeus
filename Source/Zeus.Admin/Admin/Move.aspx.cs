@@ -7,11 +7,8 @@ namespace Zeus.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			int sourceID = Request.GetRequiredInt("sourceid");
-			ContentItem sourceContentItem = Zeus.Context.Persister.Get(sourceID);
-
-			int destinationID = Request.GetRequiredInt("destinationid");
-			ContentItem destinationContentItem = Zeus.Context.Persister.Get(destinationID);
+			ContentItem sourceContentItem = this.SelectedItem;
+			ContentItem destinationContentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(Request.GetRequiredString("destination"));
 
 			// Change parent if necessary.
 			if (sourceContentItem.Parent.ID != destinationContentItem.ID)

@@ -14,6 +14,8 @@
     <p>Root Item: <asp:DropDownList runat="server" ID="ddlRootItem" /></p>
     
     <p><asp:Button runat="server" ID="btnSubmit" Text="Submit" OnClick="btnSubmit_Click" /></p>
+    
+    <p><asp:Button runat="server" ID="btnInstallDynamicImageCaching" Text="Install DynamicImage Caching" OnClick="btnInstallDynamicImageCaching_Click" /></p>
     </div>
     </form>
 </body>
