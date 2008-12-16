@@ -9,12 +9,11 @@ using Zeus.ContentTypes;
 
 namespace Zeus.Admin
 {
-	public partial class New : System.Web.UI.Page
+	public partial class New : AdminPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			ContentItem parentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("parentid"));
-
+			ContentItem parentItem = this.SelectedItem;
 			IContentTypeManager manager = Zeus.Context.Current.Resolve<IContentTypeManager>();
 			lsvChildTypes.DataSource = manager[parentItem.GetType()].AllowedChildren;
 			lsvChildTypes.DataBind();

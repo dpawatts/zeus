@@ -28,8 +28,8 @@ namespace Zeus.Admin.Web.UI.WebControls
 		{
 			base.CreateChildControls();
 
-			int? itemID = this.Page.Request.GetOptionalInt("selecteditem");
-			_selectedItem = (itemID != null) ? Zeus.Context.Persister.Get(itemID.Value) : this.RootNode;
+			string path = this.Page.Request.GetOptionalString("selected");
+			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : Find.RootItem;
 
 			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
 				.OpenTo(_selectedItem)
@@ -58,7 +58,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 		public static void AppendExpanderNode(TreeNode tn)
 		{
 			HtmlGenericControl li = new HtmlGenericControl("li");
-			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selecteditem=" + tn.Node.ID.ToString() + "}";
+			li.InnerText = "{url:/Admin/Navigation/TreeLoader.ashx?selected=" + HttpUtility.UrlEncode(tn.Node.Path) + "}";
 
 			tn.UlClass = "ajax";
 			tn.Controls.Add(li);
@@ -77,8 +77,8 @@ namespace Zeus.Admin.Web.UI.WebControls
 
 			HtmlGenericControl span = new HtmlGenericControl("span");
 			span.ID = "span" + node.ID;
-			span.Attributes["data-id"] = node.ID.ToString();
-			if (node == _selectedItem)
+			span.Attributes["data-path"] = node.Path;
+			if (node.Path == _selectedItem.Path)
 				span.Attributes["class"] = "active";
 			span.Controls.Add(anchor);
 

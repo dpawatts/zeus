@@ -31,10 +31,10 @@ namespace Bermedia.Gibbons.Web.Items
 		}
 
 		[ImageUploadEditor("Image", 240, ContainerName = Tabs.General)]
-		public IFileIdentifier Image
+		public string Image
 		{
-			get { return GetDetail<IFileIdentifier>("Image", null); }
-			set { SetDetail<IFileIdentifier>("Image", value); }
+			get { return GetDetail<string>("Image", null); }
+			set { SetDetail<string>("Image", value); }
 		}
 
 		[CheckBoxEditor("Display On Website", "", 250, ContainerName = Tabs.General)]

@@ -11,17 +11,13 @@ namespace Zeus.Admin.FileManager
 {
 	public partial class Default : System.Web.UI.Page
 	{
-		protected void Page_Load(object sender, EventArgs e)
+		/*protected void Page_Load(object sender, EventArgs e)
 		{
 			IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
 			HtmlGenericControl ul = new HtmlGenericControl("ul");
 			ul.Attributes["class"] = "simpleTree";
 			BuildTree(fileSystem.RootFolder, ul, true);
 			plcFileTree.Controls.Add(ul);
-
-			/*IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
-			rptFiles.DataSource = fileSystem.RootFolder.Files;
-			rptFiles.DataBind();*/
 		}
 
 		private void BuildTree(IFolder folder, Control parentControl, bool root)
@@ -50,7 +46,7 @@ namespace Zeus.Admin.FileManager
 			}
 
 			parentControl.Controls.Add(li);
-		}
+		}*/
 
 		/*protected void btnUploadFile_Click(object sender, EventArgs e)
 		{

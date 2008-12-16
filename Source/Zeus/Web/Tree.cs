@@ -58,7 +58,7 @@ namespace Zeus.Web
 		public Tree OpenTo(ContentItem item)
 		{
 			IList<ContentItem> items = Find.ListParents(item);
-			return ClassProvider(c => (items.Any(i => i.ID == c.ID) || c == item) ? "open" : string.Empty);
+			return ClassProvider(c => (items.Contains(c) || c == item) ? "open" : string.Empty);
 		}
 
 		public TreeNode ToControl()

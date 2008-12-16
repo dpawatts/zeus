@@ -515,6 +515,24 @@ namespace Zeus
 			}
 		}
 
+		public override bool Equals(object obj)
+		{
+			if (this == obj) return true;
+			if ((obj == null) || (obj.GetType() != GetType())) return false;
+			ContentItem item = obj as ContentItem;
+			if (ID != 0 && item.ID != 0)
+				return ID == item.ID;
+			else
+				return ReferenceEquals(this, item);
+		}
+
+		/// <summary>Gets a hash code based on the item's id.</summary>
+		/// <returns>A hash code.</returns>
+		public override int GetHashCode()
+		{
+			return this.ID.GetHashCode();
+		}
+
 		protected virtual bool Equals(string name)
 		{
 			return this.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);

@@ -25,14 +25,14 @@
 			function(action, el, pos) {
 				switch (action) {
 					case "new":
-						top.preview.location.href = "/admin/new.aspx?parentid=" + $(el).attr("data-id");
+						top.preview.location.href = "/admin/new.aspx?selected=" + $(el).attr("data-path");
 						break;
 					case "edit":
-						top.preview.location.href = "/admin/edit.aspx?id=" + $(el).attr("data-id");
+						top.preview.location.href = "/admin/edit.aspx?selected=" + $(el).attr("data-path");
 						break;
 					case "delete":
 						if (confirm("Are you sure you wish to delete this item?"))
-							top.preview.location.href = "/admin/delete.aspx?id=" + $(el).attr("data-id");
+							top.preview.location.href = "/admin/delete.aspx?selected=" + $(el).attr("data-path");
 						break;
 				}
 			});

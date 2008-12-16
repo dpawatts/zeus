@@ -16,6 +16,11 @@ namespace Zeus.Web
 			get { return Url.Parse(HttpContext.Current.Request.RawUrl); }
 		}
 
+		public string MapPath(string path)
+		{
+			return HttpContext.Current.Server.MapPath(path);
+		}
+
 		public string ToAbsolute(string virtualPath)
 		{
 			return Url.ToAbsolute(virtualPath);

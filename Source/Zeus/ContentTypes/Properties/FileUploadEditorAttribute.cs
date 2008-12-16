@@ -34,7 +34,7 @@ namespace Zeus.ContentTypes.Properties
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
-			ImageEditor fileUpload = editor as ImageEditor;
+			/*ImageEditor fileUpload = editor as ImageEditor;
 			IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
 			IFileIdentifier fileIdentifier = item[this.Name] as IFileIdentifier;
 
@@ -51,20 +51,20 @@ namespace Zeus.ContentTypes.Properties
 			{
 				fileSystem.DeleteFile(fileIdentifier);
 				item[this.Name] = null;
-			}
+			}*/
 
 			return true;
 		}
 
 		public override void UpdateEditor(ContentItem item, Control editor)
 		{
-			IFileIdentifier fileIdentifier = item[this.Name] as IFileIdentifier;
+			/*IFileIdentifier fileIdentifier = item[this.Name] as IFileIdentifier;
 			if (fileIdentifier != null)
 			{
 				IFileSystem fileSystem = Zeus.Context.Current.Resolve<IFileSystem>();
 				ImageEditor fileUpload = editor as ImageEditor;
 				fileUpload.Image = fileSystem.GetFile(fileIdentifier).Data;
-			}
+			}*/
 		}
 
 		/// <summary>Creates a text box editor.</summary>

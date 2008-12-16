@@ -68,8 +68,6 @@
     <Compile Include="Admin\FileManager\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\FileSystem\Items\AbstractDirectory.cs" />
-    <Compile Include="Admin\FileSystem\Items\Directory.cs" />
     <Compile Include="Admin\Move.aspx.cs">
       <DependentUpon>Move.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

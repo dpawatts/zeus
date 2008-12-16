@@ -13,19 +13,13 @@ namespace Zeus.Admin
 			{
 				string discriminator = Request.QueryString["discriminator"];
 				zeusItemEditView.Discriminator = discriminator;
-			}
-
-			if (Request.QueryString["parentid"] != null)
-				zeusItemEditView.ParentItemID = Request.GetRequiredInt("parentid");
-
-			if (Request.QueryString["id"] != null)
-			{
-				zeusItemEditView.CurrentItem = Zeus.Context.Persister.Get(Request.GetRequiredInt("id"));
-				this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
+				zeusItemEditView.ParentPath = this.SelectedItem.Path;
+				this.Title = "New " + zeusItemEditView.CurrentItemDefinition.ContentTypeAttribute.Title;
 			}
 			else
 			{
-				this.Title = "New " + zeusItemEditView.CurrentItemDefinition.ContentTypeAttribute.Title;
+				zeusItemEditView.CurrentItem = this.SelectedItem;
+				this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
 			}
 
 			base.OnInit(e);

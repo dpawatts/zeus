@@ -9,8 +9,8 @@
 		</LayoutTemplate>
 		<ItemTemplate>
 			<p>
-				<a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&parentid=<%# Request.QueryString["parentid"] %>"><img runat="server" src='<%# Eval("IconUrl") %>' alt="" /></a>
-				<strong><a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&parentid=<%# Request.QueryString["parentid"] %>"><%# Eval("ContentTypeAttribute.Title")%></a></strong>
+				<a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&selected=<%# Request.QueryString["selected"] %>"><img runat="server" src='<%# Eval("IconUrl") %>' alt="" /></a>
+				<strong><a href="edit.aspx?discriminator=<%# Eval("Discriminator") %>&selected=<%# Request.QueryString["selected"] %>"><%# Eval("ContentTypeAttribute.Title")%></a></strong>
 				<%# Eval("ContentTypeAttribute.Description") %>
 			</p>
 		</ItemTemplate>

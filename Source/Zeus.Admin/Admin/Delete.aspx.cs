@@ -7,10 +7,8 @@ namespace Zeus.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			int id = Request.GetRequiredInt("id");
-			ContentItem contentItem = Zeus.Context.Persister.Get(id);
-			ContentItem parent = contentItem.Parent;
-			Zeus.Context.Persister.Delete(contentItem);
+			ContentItem parent = this.SelectedItem.Parent;
+			Zeus.Context.Persister.Delete(this.SelectedItem);
 			Refresh(parent, false);
 		}
 	}

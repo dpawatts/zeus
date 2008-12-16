@@ -10,6 +10,8 @@ namespace Zeus.Web
 		/// <summary>The local part of the requested path, e.g. /path/to/a/page.aspx?some=query.</summary>
 		Url LocalUrl { get; }
 
+		string MapPath(string path);
+
 		/// <summary>Converts a virtual path to an an absolute path. E.g. ~/hello.aspx -> /MyVirtualDirectory/hello.aspx.</summary>
 		/// <param name="virtualPath">The virtual url to make absolute.</param>
 		/// <returns>The absolute url.</returns>

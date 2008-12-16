@@ -36,7 +36,7 @@ namespace Zeus
 			get { return Current.Persister; }
 		}
 
-		public static UrlParser UrlParser
+		public static IUrlParser UrlParser
 		{
 			get { return Current.UrlParser; }
 		}

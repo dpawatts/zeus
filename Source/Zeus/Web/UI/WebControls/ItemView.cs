@@ -5,6 +5,7 @@ using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Collections.Generic;
 using Zeus.ContentTypes.Properties;
+using Zeus.Admin;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -29,7 +30,7 @@ namespace Zeus.Web.UI.WebControls
 				{
 					if (!string.IsNullOrEmpty(this.Discriminator))
 					{
-						ContentItem parentItem = Zeus.Context.Current.Persister.Get(this.ParentItemID);
+						ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(this.ParentPath);
 						_currentItem = Zeus.Context.Current.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
 					}
 				}
@@ -56,10 +57,10 @@ namespace Zeus.Web.UI.WebControls
 			
 		}
 
-		public int ParentItemID
+		public string ParentPath
 		{
-			get { return (int) (ViewState["ParentItemID"] ?? 0); }
-			set { ViewState["ParentItemID"] = value; }
+			get { return (string) ViewState["ParentPath"] ?? string.Empty; }
+			set { ViewState["ParentPath"] = value; }
 		}
 
 		public ContentType CurrentItemDefinition

@@ -13,8 +13,8 @@ namespace Zeus.Admin.Navigation
 		{
 			context.Response.ContentType = "text/plain";
 
-			int? itemID = context.Request.GetOptionalInt("selecteditem");
-			ContentItem selectedItem = (itemID != null) ? Zeus.Context.Persister.Get(itemID.Value) : Find.RootItem;
+			string path = context.Request.GetRequiredString("selected");
+			ContentItem selectedItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(path);
 
 			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
 				.LinkProvider(BuildLink)
@@ -42,7 +42,7 @@ namespace Zeus.Admin.Navigation
 
 			HtmlGenericControl span = new HtmlGenericControl("span");
 			span.ID = "span" + node.ID;
-			span.Attributes["data-id"] = node.ID.ToString();
+			span.Attributes["data-path"] = node.Path;
 			span.Controls.Add(anchor);
 
 			return span;

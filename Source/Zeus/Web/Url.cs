@@ -5,12 +5,108 @@ namespace Zeus.Web
 {
 	public class Url
 	{
-		private string _url;
-		private string _query;
+		public string Scheme
+		{
+			get;
+			private set;
+		}
+
+		public string Authority
+		{
+			get;
+			private set;
+		}
+
+		public string Path
+		{
+			get;
+			private set;
+		}
+
+		public string Query
+		{
+			get;
+			private set;
+		}
+
+		public string Fragment
+		{
+			get;
+			private set;
+		}
+
+		public Url(string scheme, string authority, string path, string query, string fragment)
+		{
+			this.Scheme = scheme;
+			this.Authority = authority;
+			this.Path = path;
+			this.Query = query;
+			this.Fragment = fragment;
+		}
 
 		public Url(string url)
 		{
-			_url = url;
+			if (url != null)
+			{
+				int queryIndex = QueryIndex(url);
+				int hashIndex = url.IndexOf('#', queryIndex > 0 ? queryIndex : 0);
+				int authorityIndex = url.IndexOf("://");
+
+				if (hashIndex >= 0)
+					this.Fragment = url.Substring(hashIndex + 1);
+				else
+					this.Fragment = null;
+
+				if (hashIndex >= 0 && queryIndex >= 0)
+					this.Query = url.Substring(queryIndex + 1, hashIndex - queryIndex - 1);
+				else if (queryIndex >= 0)
+					this.Query = url.Substring(queryIndex + 1);
+				else
+					this.Query = null;
+
+				if (authorityIndex >= 0)
+				{
+					this.Scheme = url.Substring(0, authorityIndex);
+					int slashIndex = url.IndexOf('/', authorityIndex + 3);
+					if (slashIndex > 0)
+					{
+						this.Authority = url.Substring(authorityIndex + 3, slashIndex - authorityIndex - 3);
+						if (queryIndex >= slashIndex)
+							this.Path = url.Substring(slashIndex, queryIndex - slashIndex);
+						else if (hashIndex >= 0)
+							this.Path = url.Substring(slashIndex, hashIndex - slashIndex);
+						else
+							this.Path = url.Substring(slashIndex);
+					}
+					else
+					{
+						// is this case tolerated?
+						this.Authority = url.Substring(authorityIndex + 3);
+						this.Path = "/";
+					}
+				}
+				else
+				{
+					this.Scheme = null;
+					this.Authority = null;
+					if (queryIndex >= 0)
+						this.Path = url.Substring(0, queryIndex);
+					else if (hashIndex >= 0)
+						this.Path = url.Substring(0, hashIndex);
+					else if (url.Length > 0)
+						this.Path = url;
+					else
+						this.Path = "/";
+				}
+			}
+			else
+			{
+				this.Scheme = null;
+				this.Authority = null;
+				this.Path = "/";
+				this.Query = null;
+				this.Fragment = null;
+			}
 		}
 
 		public static string ApplicationPath
@@ -26,11 +122,34 @@ namespace Zeus.Web
 
 		public Url AppendQuery(string keyValue)
 		{
-			if (string.IsNullOrEmpty(_query))
-				_query = keyValue;
+			if (string.IsNullOrEmpty(this.Query))
+				this.Query = keyValue;
 			else
-				_query += "&" + keyValue;
+				this.Query += "&" + keyValue;
 			return this;
+		}
+
+		public Url AppendSegment(string segment, string extension)
+		{
+			string newPath;
+			if (string.IsNullOrEmpty(this.Path) || this.Path == "/")
+				newPath = "/" + segment + extension;
+			else if (!string.IsNullOrEmpty(extension))
+			{
+				int extensionIndex = this.Path.LastIndexOf(extension);
+				if (extensionIndex >= 0)
+					newPath = this.Path.Insert(extensionIndex, "/" + segment);
+				else if (this.Path.EndsWith("/"))
+					newPath = this.Path + segment + extension;
+				else
+					newPath = this.Path + "/" + segment + extension;
+			}
+			else if (this.Path.EndsWith("/"))
+				newPath = this.Path + segment;
+			else
+				newPath = this.Path + "/" + segment;
+
+			return new Url(this.Scheme, this.Authority, newPath, this.Query, this.Fragment);
 		}
 
 		public static Url Parse(string url)
@@ -55,7 +174,16 @@ namespace Zeus.Web
 
 		public override string ToString()
 		{
-			return _url + "?" + _query;
+			string url;
+			if (this.Authority != null)
+				url = this.Scheme + "://" + this.Authority + this.Path;
+			else
+				url = this.Path;
+			if (this.Query != null)
+				url += "?" + this.Query;
+			if (this.Fragment != null)
+				url += "#" + this.Fragment;
+			return url;
 		}
 
 		public static string PathPart(string url)

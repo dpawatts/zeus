@@ -101,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Collections\TreeHierarchyBuilder.cs" />
     <Compile Include="Collections\ItemHierarchyNavigator.cs" />
     <Compile Include="Collections\IHierarchyNavigator.cs" />
@@ -155,23 +156,18 @@
     <Compile Include="ContentTypes\Properties\StringDetail.cs" />
     <Compile Include="ContentTypes\Properties\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
-    <Compile Include="FileSystem\DatabaseFile.cs" />
-    <Compile Include="FileSystem\DatabaseFileIdentifier.cs" />
-    <Compile Include="FileSystem\DatabaseFolder.cs" />
-    <Compile Include="FileSystem\DatabaseFileSystem.cs" />
+    <Compile Include="FileSystem\Details\UploadEditorAttribute.cs" />
     <Compile Include="FileSystem\File.cs" />
     <Compile Include="FileSystem\FileSystemNode.cs" />
-    <Compile Include="FileSystem\IFile.cs" />
-    <Compile Include="FileSystem\IFileIdentifier.cs" />
-    <Compile Include="FileSystem\IFileSystem.cs" />
     <Compile Include="FileSystem\Folder.cs" />
-    <Compile Include="FileSystem\Migrations\Migration001.cs" />
-    <Compile Include="FileSystem\NtfsFile.cs" />
-    <Compile Include="FileSystem\NtfsFolder.cs" />
+    <Compile Include="FileSystem\BaseFolder.cs" />
+    <Compile Include="FileSystem\IFileSystemContainer.cs" />
+    <Compile Include="FileSystem\RootFolder.cs" />
     <Compile Include="Find.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
+    <Compile Include="Integrity\NameOccupiedException.cs" />
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
@@ -279,17 +275,14 @@
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FileSystem\DatabaseFileSystem.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="FileSystem\fileSystem.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\Images\add.png" />
     <EmbeddedResource Include="Web\UI\WebControls\Images\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\web.castle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\admin.castle.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

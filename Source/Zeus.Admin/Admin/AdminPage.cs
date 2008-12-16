@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace Zeus.Admin
 {
@@ -15,10 +16,34 @@ if (window.top.zeus)
 else
 	window.location = '{1}';";
 
+		public virtual ContentItem SelectedItem
+		{
+			get
+			{
+				ContentItem selectedItem = GetFromViewState()
+					?? GetFromUrl()
+					?? Zeus.Context.UrlParser.StartPage;
+				return selectedItem;
+			}
+			set
+			{
+				if (value != null)
+					SelectedItemID = value.ID;
+				else
+					SelectedItemID = 0;
+			}
+		}
+
+		private int SelectedItemID
+		{
+			get { return (int) (ViewState["SelectedItemID"] ?? 0); }
+			set { ViewState["SelectedItemID"] = value; }
+		}
+
 		public void Refresh(ContentItem contentItem, bool justPreview)
 		{
 			string script = string.Format((justPreview) ? RefreshPreviewFormat : RefreshBothFormat,
-				"/admin/navigation/tree.aspx?selecteditem=" + contentItem.ID, // 0
+				"/admin/navigation/tree.aspx?selected=" + HttpUtility.UrlEncode(contentItem.Path), // 0
 				contentItem.Url // 1
 			);
 
@@ -26,6 +51,22 @@ else
 				typeof(AdminPage),
 				"AddRefreshEditScript",
 				script, true);
+		}
+
+		private ContentItem GetFromViewState()
+		{
+			if (SelectedItemID != 0)
+				return Zeus.Context.Persister.Get(SelectedItemID);
+			return null;
+		}
+
+		private ContentItem GetFromUrl()
+		{
+			string selected = Request.QueryString["selected"];
+			if (!string.IsNullOrEmpty(selected))
+				return Zeus.Context.Current.Resolve<Navigator>().Navigate(selected);
+
+			return null;
 		}
 	}
 }

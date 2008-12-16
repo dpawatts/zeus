@@ -21,10 +21,17 @@ namespace Zeus.Persistence
 
 		public void Delete(ContentItem contentItem)
 		{
-			using (ITransaction transaction = _contentRepository.BeginTransaction())
+			if (contentItem is ISelfPersister)
 			{
-				DeleteRecursive(contentItem);
-				transaction.Commit();
+				((ISelfPersister) contentItem).Delete();
+			}
+			else
+			{
+				using (ITransaction transaction = _contentRepository.BeginTransaction())
+				{
+					DeleteRecursive(contentItem);
+					transaction.Commit();
+				}
 			}
 		}
 
@@ -63,11 +70,18 @@ namespace Zeus.Persistence
 
 		public void Move(ContentItem toMove, ContentItem newParent)
 		{
-			using (ITransaction transaction = _contentRepository.BeginTransaction())
+			if (toMove is ISelfPersister)
 			{
-				toMove.AddTo(newParent);
-				_contentRepository.Save(toMove);
-				transaction.Commit();
+				((ISelfPersister) toMove).MoveTo(newParent);
+			}
+			else
+			{
+				using (ITransaction transaction = _contentRepository.BeginTransaction())
+				{
+					toMove.AddTo(newParent);
+					_contentRepository.Save(toMove);
+					transaction.Commit();
+				}
 			}
 		}
 
@@ -90,12 +104,19 @@ namespace Zeus.Persistence
 
 		public void Save(ContentItem contentItem)
 		{
-			contentItem.Updated = DateTime.Now;
-			using (ITransaction transaction = _contentRepository.BeginTransaction())
+			if (contentItem is ISelfPersister)
 			{
-				_contentRepository.SaveOrUpdate(contentItem);
-				contentItem.AddTo(contentItem.Parent);
-				transaction.Commit();
+				((ISelfPersister) contentItem).Save();
+			}
+			else
+			{
+				contentItem.Updated = DateTime.Now;
+				using (ITransaction transaction = _contentRepository.BeginTransaction())
+				{
+					_contentRepository.SaveOrUpdate(contentItem);
+					contentItem.AddTo(contentItem.Parent);
+					transaction.Commit();
+				}
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 
 namespace Zeus.FileSystem
 {
-	public interface IFileIdentifier
+	public interface IFileSystemContainer
 	{
 	}
 }

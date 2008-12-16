@@ -44,6 +44,11 @@ namespace Zeus.Engine
 			get { return _container.Resolve<IUrlParser>(); }
 		}
 
+		public IWebContext WebContext
+		{
+			get { return _container.Resolve<IWebContext>(); }
+		}
+
 		#endregion
 
 		#region Constructor
