@@ -9,6 +9,7 @@ namespace Bermedia.Gibbons.Web.Items
 	[RestrictParents(typeof(BrandContainer))]
 	public class Brand : BaseContentItem
 	{
+		[LiteralDisplayer(Title = "Name")]
 		[TextBoxEditor("Name", 10, Required = true)]
 		public override string Title
 		{

@@ -9,7 +9,7 @@ namespace Zeus.Admin
 		{
 			ContentItem parent = this.SelectedItem.Parent;
 			Zeus.Context.Persister.Delete(this.SelectedItem);
-			Refresh(parent, false);
+			Refresh(parent, AdminFrame.Both, false);
 		}
 	}
 }

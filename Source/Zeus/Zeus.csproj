@@ -83,6 +83,7 @@
     <Reference Include="System.Data.Entity">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -123,6 +124,7 @@
     <Compile Include="ContentTypes\Properties\ColourEditor.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\ColourDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />

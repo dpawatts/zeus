@@ -9,6 +9,7 @@ namespace Bermedia.Gibbons.Web.Items
 	[RestrictParents(typeof(ProductColourContainer))]
 	public class ProductColour : BaseContentItem
 	{
+		[LiteralDisplayer(Title = "Name")]
 		[TextBoxEditor("Name", 10, Required = true)]
 		public override string Title
 		{
@@ -16,6 +17,7 @@ namespace Bermedia.Gibbons.Web.Items
 			set { base.Title = value; }
 		}
 
+		[ColourDisplayer(Title = "Colour")]
 		[ColourEditor("Hex Ref", 20, Required = true)]
 		public string HexRef
 		{

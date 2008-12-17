@@ -34,17 +34,19 @@
 			</div>
 		</div>
 		
-		<div id="toolbar">
-			<a href="/admin/filemanagement/default.aspx" target="preview">Files</a>
-			<div class="separator">&nbsp;</div>
-		</div>
-		
-		<div id="splitter">
-			<div id="LeftPane">
-				<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
+		<div id="outerSplitter">
+			<div id="toolbar">
+				<a href="/admin/filemanagement/default.aspx" target="preview">Files</a>
+				<div class="separator">&nbsp;</div>
 			</div>
-			<div id="RightPane">
-				<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
+			
+			<div id="splitter">
+				<div id="LeftPane">
+					<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
+				</div>
+				<div id="RightPane">
+					<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
+				</div>
 			</div>
 		</div>
 	</form>

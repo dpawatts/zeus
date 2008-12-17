@@ -125,6 +125,10 @@ form {
 	padding: 2px;
 	height: 25px;
 	border-bottom: solid 5px #CECECE;
+	width: 20px;
+	float: left;
+	min-width: 20px;
+	overflow:hidden;
 }
 
 #toolbar input, #toolbar a

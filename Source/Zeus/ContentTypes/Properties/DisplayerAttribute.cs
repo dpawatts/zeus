@@ -30,6 +30,12 @@ namespace Zeus.ContentTypes.Properties
 			set;
 		}
 
+		public string Title
+		{
+			get;
+			set;
+		}
+
 		public Type ControlType
 		{
 			get;

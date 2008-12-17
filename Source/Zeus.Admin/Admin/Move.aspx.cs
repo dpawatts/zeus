@@ -18,7 +18,7 @@ namespace Zeus.Admin
 			int pos = Request.GetRequiredInt("pos");
 			Zeus.Context.Persister.UpdateSortOrder(sourceContentItem, pos);
 
-			Refresh(sourceContentItem, false);
+			Refresh(sourceContentItem, AdminFrame.Both, false);
 		}
 	}
 }

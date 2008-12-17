@@ -5,6 +5,11 @@ namespace Zeus.Admin
 {
 	public abstract class AdminPage : System.Web.UI.Page
 	{
+		private const string RefreshNavigationFormat = @"
+if (window.top.zeus)
+	window.top.zeus.refreshNavigation('{0}');
+else
+	window.location = '{1}';";
 		private const string RefreshPreviewFormat = @"
 if (window.top.zeus)
 	window.top.zeus.refreshPreview('{1}');
@@ -40,17 +45,36 @@ else
 			set { ViewState["SelectedItemID"] = value; }
 		}
 
-		public void Refresh(ContentItem contentItem, bool justPreview)
+		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)
 		{
-			string script = string.Format((justPreview) ? RefreshPreviewFormat : RefreshBothFormat,
+			string script = null;
+			switch (frame)
+			{
+				case AdminFrame.Preview:
+					script = RefreshPreviewFormat;
+					break;
+				case AdminFrame.Navigation:
+					script = RefreshNavigationFormat;
+					break;
+				case AdminFrame.Both:
+					script = RefreshBothFormat;
+					break;
+			}
+			script = string.Format(script,
 				"/admin/navigation/tree.aspx?selected=" + HttpUtility.UrlEncode(contentItem.Path), // 0
 				contentItem.Url // 1
 			);
 
-			this.ClientScript.RegisterClientScriptBlock(
-				typeof(AdminPage),
-				"AddRefreshEditScript",
-				script, true);
+			if (insideUpdatePanel)
+				System.Web.UI.ScriptManager.RegisterStartupScript(
+					this, typeof(AdminPage),
+					"AddRefreshEditScript",
+					script, true);
+			else
+				this.ClientScript.RegisterStartupScript(
+					typeof(AdminPage),
+					"AddRefreshEditScript",
+					script, true);
 		}
 
 		private ContentItem GetFromViewState()
@@ -68,5 +92,12 @@ else
 
 			return null;
 		}
+	}
+
+	public enum AdminFrame
+	{
+		Navigation,
+		Preview,
+		Both
 	}
 }

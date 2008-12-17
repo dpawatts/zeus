@@ -19,5 +19,10 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return "ipod_cast"; }
 		}
+
+		public override string TemplateUrl
+		{
+			get { return "~/Admin/View.aspx?selected=" + this.Path; }
+		}
 	}
 }

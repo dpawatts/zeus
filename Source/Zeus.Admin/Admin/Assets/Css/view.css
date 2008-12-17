@@ -1,0 +1,62 @@
+table.tb {
+	margin: 0 0 10px 0;
+	width: 100%;
+}
+
+table.tb th  {
+	background: #c9c9c9;
+	color: #fff;
+	padding: 3px;
+	font-size: 14px;
+}
+
+table.tb th.on {
+	background: #aeaeae url('../images/view/arrowDown.gif') 97% 50% no-repeat;
+}
+
+table.tb th.hover {
+	background: #b7b7b7;
+}
+
+
+table.tb td {
+	background: #f1f2f2;
+	font-size: 11px;
+	color: #808285;
+	vertical-align: middle;
+	padding: 3px;
+}
+
+table.tb td, table.tb th {
+	border: 1px solid #fff;
+	vertical-align: center;
+}
+
+table.tb .check {
+	width: 23px;
+	text-align: center;
+}
+
+table.tb .edit, .add {
+	width: 48px;
+	padding: 0;
+}
+
+table.tb .edit a, .add a {
+	display: block;
+	height: 23px;
+	width: 54px;
+	text-indent: -99999px;
+}
+
+table.tb .edit a {
+	background: url('../images/view/edit.gif') top left no-repeat;
+}
+
+.add a {
+	background: url('../images/view/add.gif') top left no-repeat;
+}
+
+table.tb .edit a:hover, .add a:hover {
+	background-position: bottom left;
+}
