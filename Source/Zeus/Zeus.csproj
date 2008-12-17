@@ -102,7 +102,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminFrame.cs" />
+    <Compile Include="Admin\AdminTargetFrame.cs" />
     <Compile Include="Admin\Navigator.cs" />
+    <Compile Include="Admin\ToolbarPluginAttribute.cs" />
     <Compile Include="Collections\TreeHierarchyBuilder.cs" />
     <Compile Include="Collections\ItemHierarchyNavigator.cs" />
     <Compile Include="Collections\IHierarchyNavigator.cs" />

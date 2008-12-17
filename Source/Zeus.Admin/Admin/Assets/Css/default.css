@@ -43,7 +43,7 @@ form {
 	background:#fff;
 }
 
-#splitter .vsplitbar {
+#outerSplitter .vsplitbar, #splitter .vsplitbar {
 	width: 5px;
 	background: #CECECE url(../images/vgrabber.gif) no-repeat 50% 50%;
 }
@@ -121,14 +121,10 @@ form {
 
 #toolbar
 {
+	border-bottom: solid 5px #CECECE;
 	background-color: #f1f2f2;
 	padding: 2px;
 	height: 25px;
-	border-bottom: solid 5px #CECECE;
-	width: 20px;
-	float: left;
-	min-width: 20px;
-	overflow:hidden;
 }
 
 #toolbar input, #toolbar a

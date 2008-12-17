@@ -4,11 +4,6 @@ frameManager.prototype = {
 		///	<summary>
 		///		Initialises the navigation and preview frames, with a splitter in the middle
 		///	</summary>
-		$("#outerSplitter").splitter({
-			type: "v",
-			initA: true
-		});
-
 		$("#splitter").splitter({
 			type: 'v',
 			initA: true // use width of A (#leftPane) from styles
@@ -21,9 +16,9 @@ frameManager.prototype = {
 		});
 	},
 	repaint: function() {
-	$("#outerSplitter").trigger("resize");
-	$("#outerSplitter").height(this.contentHeight());
-		$("#outerSplitter *").height(this.contentHeight());
+		$("#splitter").trigger("resize");
+		$("#splitter").height(this.contentHeight());
+		$("#splitter *").height(this.contentHeight());
 	},
 	contentHeight: function() {
 		return document.documentElement.clientHeight - (jQuery.browser.msie ? 88 : 88);

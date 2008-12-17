@@ -93,11 +93,4 @@ else
 			return null;
 		}
 	}
-
-	public enum AdminFrame
-	{
-		Navigation,
-		Preview,
-		Both
-	}
 }

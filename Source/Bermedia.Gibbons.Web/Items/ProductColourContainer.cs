@@ -17,7 +17,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		protected override string IconName
 		{
-			get { return "ipod_cast"; }
+			get { return "color_swatch"; }
 		}
 
 		public override string TemplateUrl

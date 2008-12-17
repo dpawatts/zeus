@@ -27,7 +27,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		protected override string IconName
 		{
-			get { return "ipod"; }
+			get { return "color_wheel"; }
 		}
 	}
 }

@@ -34,19 +34,21 @@
 			</div>
 		</div>
 		
-		<div id="outerSplitter">
-			<div id="toolbar">
-				<a href="/admin/filemanagement/default.aspx" target="preview">Files</a>
-				<div class="separator">&nbsp;</div>
+		<div id="toolbar">
+			<a href="/admin/view.aspx?selected=/Brands/&page=9" target="preview"><img src="/assets/images/icons/ipod_cast.png" /></a>
+			<a href="/admin/view.aspx?selected=/ProductSizes/&page=52" target="preview"><img src="/assets/images/icons/arrow_out.png" /></a>
+			<a href="/admin/view.aspx?selected=/ProductColours/&page=49" target="preview"><img src="/assets/images/icons/color_swatch.png" /></a>
+			<a href="/admin/view.aspx?selected=/GiftWrapTypes/&page=54" target="preview"><img src="/assets/images/icons/package_green.png" /></a>
+			<!--div class="separator">&nbsp;</div-->
+			<asp:PlaceHolder runat="server" ID="plcToolbar" />
+		</div>
+		
+		<div id="splitter">
+			<div id="LeftPane">
+				<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
 			</div>
-			
-			<div id="splitter">
-				<div id="LeftPane">
-					<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
-				</div>
-				<div id="RightPane">
-					<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
-				</div>
+			<div id="RightPane">
+				<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
 			</div>
 		</div>
 	</form>

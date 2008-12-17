@@ -5,19 +5,19 @@ using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	[ContentType("Product Size Container", Description = "Container for product sizes")]
+	[ContentType("Gift Wrap Type Container", Description = "Container for gift wrap types")]
 	[RestrictParents(typeof(RootItem))]
-	public class ProductSizeContainer : BaseContentItem
+	public class GiftWrapTypeContainer : BaseContentItem
 	{
-		public ProductSizeContainer()
+		public GiftWrapTypeContainer()
 		{
-			this.Name = "ProductSizes";
-			this.Title = "Product Sizes";
+			this.Name = "GiftWrapTypes";
+			this.Title = "Gift Wrap Types";
 		}
 
 		protected override string IconName
 		{
-			get { return "arrow_out"; }
+			get { return "package_green"; }
 		}
 
 		public override string TemplateUrl

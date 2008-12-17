@@ -5,9 +5,9 @@ using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	[ContentType("Product Size")]
-	[RestrictParents(typeof(ProductSizeContainer))]
-	public class ProductSize : BaseContentItem
+	[ContentType("International Shipping Delivery Type")]
+	[RestrictParents(typeof(InternationalShippingRateContainer))]
+	public class InternationalShippingDeliveryType : BaseContentItem
 	{
 		[LiteralDisplayer(Title = "Name")]
 		[TextBoxEditor("Name", 10, Required = true)]
@@ -19,7 +19,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		protected override string IconName
 		{
-			get { return "arrow_right"; }
+			get { return "world_go"; }
 		}
 	}
 }
