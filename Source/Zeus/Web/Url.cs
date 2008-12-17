@@ -5,6 +5,8 @@ namespace Zeus.Web
 {
 	public class Url
 	{
+		private static readonly char[] _dotsAndSlashes = new[] { '.', '/' };
+
 		public string Scheme
 		{
 			get;
@@ -33,6 +35,21 @@ namespace Zeus.Web
 		{
 			get;
 			private set;
+		}
+
+		public string Extension
+		{
+			get
+			{
+				int index = this.Path.LastIndexOfAny(_dotsAndSlashes);
+
+				if (index < 0)
+					return null;
+				if (this.Path[index] == '/')
+					return null;
+
+				return this.Path.Substring(index);
+			}
 		}
 
 		public Url(string scheme, string authority, string path, string query, string fragment)
@@ -127,6 +144,14 @@ namespace Zeus.Web
 			else
 				this.Query += "&" + keyValue;
 			return this;
+		}
+
+		public Url AppendSegment(string segment)
+		{
+			if (string.IsNullOrEmpty(Path) || Path == "/")
+				return AppendSegment(segment, ".aspx");
+
+			return AppendSegment(segment, Extension);
 		}
 
 		public Url AppendSegment(string segment, string extension)

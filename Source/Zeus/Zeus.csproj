@@ -125,6 +125,7 @@
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\Properties\ChildrenEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ColourEditor.cs" />
+    <Compile Include="ContentTypes\Properties\ComboBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ColourDisplayerAttribute.cs" />
@@ -221,16 +222,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
+    <Compile Include="Web\UI\WebControls\ChildrenDataSource.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
+    <Compile Include="Web\UI\WebControls\ComboBox.cs" />
     <Compile Include="Web\UI\WebControls\ContentDataSource.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\ContentDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>

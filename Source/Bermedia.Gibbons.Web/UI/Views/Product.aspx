@@ -6,7 +6,7 @@
 	<gibbons:DepartmentNavigation runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
-	<isis:TypedExtendedFormView runat="server" DataSourceID="cdsCurrentItem" DataMember="CurrentItem" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct" DefaultMode="ReadOnly">
+	<isis:TypedExtendedFormView runat="server" DataSourceID="cdsCurrentItem" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct" DefaultMode="ReadOnly">
 		<ItemTemplate>
 			<h1><%# Container.DataItem.Brand.Title %> <%# Container.DataItem.Title %></h1> 
 			
@@ -84,5 +84,5 @@
 		</ItemTemplate>
 	</isis:TypedExtendedFormView>
 	
-	<zeus:ContentDataSource runat="server" ID="cdsCurrentItem" />
+	<zeus:CurrentItemDataSource runat="server" ID="cdsCurrentItem" />
 </asp:Content>

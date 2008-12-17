@@ -36,7 +36,7 @@
 <ul>
 	<li>Looking for a gift?</li>
 
-	<li><a href="../mens/gifts.aspx">under $10</a></li>
-	<li><a href="#">under $20</a></li>
-	<li><a href="#">under $50</a></li>
+	<li><a href="<%= this.Department.GiftsUnder10Url %>">under $10</a></li>
+	<li><a href="<%= this.Department.GiftsUnder20Url %>">under $20</a></li>
+	<li><a href="<%= this.Department.GiftsUnder50Url %>">under $50</a></li>
 </ul>

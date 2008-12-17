@@ -12,5 +12,5 @@
 			</div>
 		</ItemTemplate>
 	</asp:ListView>
-	<zeus:ContentDataSource id="cdsNews" runat="server" OfType="Zeus.Examples.Items.NewsItem" />
+	<zeus:ChildrenDataSource id="cdsNews" runat="server" OfType="Zeus.Examples.Items.NewsItem" />
 </asp:Content>

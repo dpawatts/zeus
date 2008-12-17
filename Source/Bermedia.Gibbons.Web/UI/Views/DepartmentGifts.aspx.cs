@@ -6,13 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.Web.UI;
 
-namespace Zeus.Examples.UI.Views
+namespace Bermedia.Gibbons.Web.UI.Views
 {
-	public partial class StartPage : ContentPage<Zeus.Examples.Items.StartPage>
+	public partial class DepartmentGifts : ContentPage<Bermedia.Gibbons.Web.Items.BaseDepartment>
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			
 		}
 	}
 }

@@ -8,18 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.Examples.UI.Views {
+namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class NewsContainer {
+    public partial class DepartmentGifts {
         
         /// <summary>
-        /// cdsNews control.
+        /// cdsGifts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ChildrenDataSource cdsNews;
+        protected global::Zeus.Web.UI.WebControls.ChildrenDataSource cdsGifts;
     }
 }

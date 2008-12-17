@@ -23,7 +23,7 @@ namespace Zeus.AddIns.Images.UI.WebControls
 		{
 			get
 			{
-				return chkClearImage.Checked;
+				return chkClearImage != null && chkClearImage.Checked;
 			}
 		}
 

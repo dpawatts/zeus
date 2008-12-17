@@ -14,12 +14,12 @@ namespace Bermedia.Gibbons.Web.UI.Views {
     public partial class Category {
         
         /// <summary>
-        /// cdsCurrentItem control.
+        /// cdsChildren control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Zeus.Web.UI.WebControls.ContentDataSource cdsCurrentItem;
+        protected global::Zeus.Web.UI.WebControls.ChildrenDataSource cdsChildren;
     }
 }

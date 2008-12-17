@@ -132,12 +132,26 @@
     <Compile Include="UI\UserControls\DepartmentNavigation.ascx.designer.cs">
       <DependentUpon>DepartmentNavigation.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\ProductListing.ascx.cs">
+      <DependentUpon>ProductListing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\ProductListing.ascx.designer.cs">
+      <DependentUpon>ProductListing.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\Category.aspx.cs">
       <DependentUpon>Category.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\Views\Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\DepartmentGifts.aspx.cs">
+      <DependentUpon>DepartmentGifts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\DepartmentGifts.aspx.designer.cs">
+      <DependentUpon>DepartmentGifts.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\NonFragranceBeautyDepartment.aspx.cs">
       <DependentUpon>NonFragranceBeautyDepartment.aspx</DependentUpon>
@@ -221,6 +235,11 @@
     <Content Include="Configuration\SoundInTheory.DynamicImage.config" />
     <Content Include="Default.aspx" />
     <Content Include="Plugins\ShippingRates.aspx" />
+    <Content Include="UI\UserControls\ProductListing.ascx" />
+    <Content Include="UI\Views\DepartmentGifts.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Items\ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

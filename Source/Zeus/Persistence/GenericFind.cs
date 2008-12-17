@@ -65,6 +65,36 @@ namespace Zeus.Persistence
 			return null;
 		}
 
+		/// <summary>Enumerates child items and their children, and so on.</summary>
+		/// <param name="item">The parent item whose child items to enumerate. The item itself is not returned.</param>
+		/// <returns>An enumeration of all children of an item.</returns>
+		public static IEnumerable<ContentItem> EnumerateChildren(ContentItem item)
+		{
+			if (item.VersionOf != null) item = item.VersionOf;
+
+			foreach (ContentItem child in item.Children)
+			{
+				yield return child;
+				foreach (ContentItem childItem in EnumerateChildren(child))
+					yield return childItem;
+			}
+		}
+
+		/// <summary>Enumerates child items and their children, and so on.</summary>
+		/// <param name="item">The parent item whose child items to enumerate. The item itself is not returned.</param>
+		/// <returns>An enumeration of all children of an item.</returns>
+		public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item)
+		{
+			if (item.VersionOf != null) item = item.VersionOf;
+
+			foreach (ContentItem child in item.GetChildren())
+			{
+				yield return child;
+				foreach (ContentItem childItem in EnumerateAccessibleChildren(child))
+					yield return childItem;
+			}
+		}
+
 		public static IList<ContentItem> ListParents(ContentItem initialItem)
 		{
 			return new List<ContentItem>(EnumerateParents(initialItem, null, false));

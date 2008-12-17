@@ -54,7 +54,8 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<bool>("GiftItem", value); }
 		}
 
-		[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(FreeGiftProduct), ContainerName = Tabs.General)]
+		//[LinkedItemDropDownListEditor("Free Gift Product", 290, TypeFilter = typeof(FreeGiftProduct), ContainerName = Tabs.General)]
+		[ComboBoxEditor("Free Gift Product", 290, ContainerName = Tabs.General)]
 		public FreeGiftProduct FreeGiftProduct
 		{
 			get { return GetDetail<FreeGiftProduct>("FreeGiftProduct", null); }
