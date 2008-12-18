@@ -54,7 +54,7 @@ namespace Zeus.ContentTypes.Properties
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			IEnumerable<ContentItem> items = Zeus.Context.Current.Database.ContentItems;
+			IEnumerable<ContentItem> items = Zeus.Context.Current.Finder;
 			if (this.TypeFilter != null)
 				items = items.OfType(this.TypeFilter);
 			if (this.ExcludeSelf)

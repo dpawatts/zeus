@@ -14,7 +14,7 @@ namespace Bermedia.Gibbons.Web.Plugins
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			IEnumerable<InternationalShippingDeliveryType> deliveryTypes = Zeus.Context.Current.Database.ContentItems.ToArray().OfType<InternationalShippingDeliveryType>();
+			IEnumerable<InternationalShippingDeliveryType> deliveryTypes = Zeus.Context.Current.Finder.ToArray().OfType<InternationalShippingDeliveryType>();
 
 			TableRow tr = new TableRow();
 			tr.CssClass = "titles";
@@ -22,8 +22,8 @@ namespace Bermedia.Gibbons.Web.Plugins
 			tr.Cells.AddRange(deliveryTypes.Select(dt => new TableHeaderCell { Text = dt.Title }).ToArray());
 			tblShippingRates.Rows.Add(tr);
 
-			IEnumerable<InternationalShippingPriceRange> priceRanges = Zeus.Context.Current.Database.ContentItems.ToArray().OfType<InternationalShippingPriceRange>();
-			IEnumerable<InternationalShippingRate> rates = Zeus.Context.Current.Database.ContentItems.ToArray().OfType<InternationalShippingRate>();
+			IEnumerable<InternationalShippingPriceRange> priceRanges = Zeus.Context.Current.Finder.ToArray().OfType<InternationalShippingPriceRange>();
+			IEnumerable<InternationalShippingRate> rates = Zeus.Context.Current.Finder.ToArray().OfType<InternationalShippingRate>();
 			foreach (InternationalShippingPriceRange priceRange in priceRanges)
 			{
 				TableRow tableRow = new TableRow();
@@ -51,7 +51,7 @@ namespace Bermedia.Gibbons.Web.Plugins
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			IEnumerable<InternationalShippingRate> rates = Zeus.Context.Current.Database.ContentItems.ToArray().OfType<InternationalShippingRate>();
+			IEnumerable<InternationalShippingRate> rates = Zeus.Context.Current.Finder.ToArray().OfType<InternationalShippingRate>();
 			for (int i = 1; i < tblShippingRates.Rows.Count; i++)
 			{
 				TableRow tr = tblShippingRates.Rows[i];

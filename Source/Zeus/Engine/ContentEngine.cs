@@ -19,9 +19,9 @@ namespace Zeus.Engine
 
 		#region Properties
 
-		public ContentContext Database
+		public IItemFinder Finder
 		{
-			get { return new ContentContext(_container.Resolve<ISessionProvider>()); }
+			get { return _container.Resolve<IItemFinder>(); }
 		}
 
 		public IContentTypeManager ContentTypes

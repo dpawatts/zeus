@@ -20,6 +20,11 @@ namespace Zeus
 			}
 		}
 
+		public static ContentTypes.IContentTypeManager ContentTypes
+		{
+			get { return Current.ContentTypes; }
+		}
+
 		/// <summary>
 		/// Gets the current page. This is retrieved by the page querystring.
 		/// </summary>

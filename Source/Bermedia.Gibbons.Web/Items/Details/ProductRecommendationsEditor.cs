@@ -30,7 +30,7 @@ namespace Bermedia.Gibbons.Web.Items.Details
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			return Zeus.Context.Current.Database.ContentItems
+			return Zeus.Context.Current.Finder
 				.ToArray() // TODO: REMOVE THIS!!!! Once the new LINQ to NHibernate comes out.
 				.OfType<StandardProduct>()
 				.Select(p => new ListItem(p.Title, p.ID.ToString()))

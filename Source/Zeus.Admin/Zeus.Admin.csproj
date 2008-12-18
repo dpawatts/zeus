@@ -280,6 +280,8 @@
     <Content Include="Admin\Assets\Css\login.css" />
     <Content Include="Admin\Assets\Css\thickbox.css" />
     <Content Include="Admin\Assets\Images\Icons\folder.png" />
+    <Content Include="Admin\Assets\Images\Icons\group.png" />
+    <Content Include="Admin\Assets\Images\Icons\user.png" />
     <Content Include="Admin\Assets\Images\Login\button.gif" />
     <Content Include="Admin\Assets\Images\Login\mainBox.gif" />
     <Content Include="Admin\Assets\Images\Login\textBox.gif" />

@@ -28,7 +28,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 			if (!IsPostBack)
 			{
 				// TODO: Remove ToArray
-				foreach (BaseDepartment department in Zeus.Context.Current.Database.ContentItems.ToArray().OfType<BaseDepartment>())
+				foreach (BaseDepartment department in Zeus.Context.Current.Finder.ToArray().OfType<BaseDepartment>())
 				{
 					ListItem item = new ListItem(department.Title, department.ID.ToString());
 					ddlSearchDepartment.Items.Add(item);
