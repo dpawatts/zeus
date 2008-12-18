@@ -20,6 +20,6 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ChildrenDataSource cdsChildren;
+        protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsChildren;
     }
 }

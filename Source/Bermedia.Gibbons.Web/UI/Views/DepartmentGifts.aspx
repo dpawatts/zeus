@@ -6,10 +6,10 @@
 	<h1>Gifts Under $<%= Request.QueryString["PriceLimit"] %></h1>
 	
 	<gibbons:ProductListing runat="server" DataSourceID="cdsGifts" />
-	<zeus:ChildrenDataSource runat="server" ID="cdsGifts" OfType="Bermedia.Gibbons.Web.Items.StandardProduct"
+	<zeus:ContentDataSource runat="server" ID="cdsGifts" OfType="Bermedia.Gibbons.Web.Items.StandardProduct"
 		Where="RegularPrice <= @PriceLimit && GiftItem" Axis="Descendant">
 		<WhereParameters>
 			<asp:QueryStringParameter Name="PriceLimit" QueryStringField="PriceLimit" Type="Decimal" />
 		</WhereParameters>
-	</zeus:ChildrenDataSource>
+	</zeus:ContentDataSource>
 </asp:Content>

@@ -2,7 +2,7 @@
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class CurrentItemDataSource : ContentDataSource<CurrentItemDataSourceView>
+	public class CurrentItemDataSource : BaseContentDataSource<CurrentItemDataSourceView>
 	{
 		protected override CurrentItemDataSourceView CreateView()
 		{

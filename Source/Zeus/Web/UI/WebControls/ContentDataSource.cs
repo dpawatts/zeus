@@ -1,101 +1,56 @@
-﻿using System.Collections;
-using System.Web.UI;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.ComponentModel;
 using System.Web.UI.WebControls;
-using System.Collections.ObjectModel;
-using System;
+using System.Web.UI;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ContentDataSource<TView> : DataSourceControl
-		where TView : ContentDataSourceView
+	[ParseChildren(true), PersistChildren(false)]
+	public class ContentDataSource : BaseContentDataSource<ContentDataSourceView>
 	{
-		private TView _view = null;
-		private ICollection _viewNames;
-		protected const string DefaultViewName = "DefaultView";
-		private ContentItem _currentItem = null;
-
-		internal TView View
+		[DefaultValue("")]
+		public string OfType
 		{
-			get
-			{
-				if (this._view == null)
-					this.View = CreateView();
-				return this._view;
-			}
-
-			private set
-			{
-				this._view = value;
-				if ((this._view != null) && base.IsTrackingViewState && (this is IStateManager))
-					((IStateManager) this._view).TrackViewState();
-			}
+			get { return this.View.OfType; }
+			set { this.View.OfType = value; }
 		}
 
-		public virtual ContentItem CurrentItem
+		[DefaultValue("")]
+		public string Where
 		{
-			get
-			{
-				if (_currentItem == null)
-					_currentItem = (ContentItem) this.Context.Items["CurrentPage"];
-				return _currentItem;
-			}
-			set { _currentItem = value; }
+			get { return this.View.Where; }
+			set { this.View.Where = value; }
 		}
 
-		#region Methods
-
-		protected abstract TView CreateView();
-
-		protected override ICollection GetViewNames()
+		public ContentDataSourceAxis Axis
 		{
-			if (this._viewNames == null)
-				this._viewNames = new ReadOnlyCollection<string>(new string[] { DefaultViewName });
-			return this._viewNames;
+			get { return this.View.Axis; }
+			set { this.View.Axis = value; }
 		}
 
-		protected override DataSourceView GetView(string viewName)
+		[DefaultValue(null), Browsable(false), MergableProperty(false), PersistenceMode(PersistenceMode.InnerProperty), Category("Data")]
+		public ParameterCollection WhereParameters
 		{
-			if (viewName == null)
-				throw new ArgumentNullException("viewName");
-			if ((viewName.Length != 0) && !string.Equals(viewName, DefaultViewName, StringComparison.OrdinalIgnoreCase))
-				throw new ArgumentException(string.Format("Content data source '{0}' only supports a single view named '{1}'. You may also leave the view name empty for the default view to be chosen.", new object[] { this.ID, DefaultViewName }), "viewName");
-			return this.View;
+			get { return this.View.WhereParameters; }
 		}
 
-		protected override void LoadViewState(object savedState)
+		protected override ContentDataSourceView CreateView()
 		{
-			if (savedState == null)
-			{
-				base.LoadViewState(null);
-			}
-			else
-			{
-				Pair pair = (Pair) savedState;
-				base.LoadViewState(pair.First);
-				if ((this is IStateManager) && pair.Second != null)
-					((IStateManager) this.View).LoadViewState(pair.Second);
-			}
+			return new ContentDataSourceView(this, DefaultViewName, this.Context, this.CurrentItem);
 		}
 
-		protected override object SaveViewState()
+		private void LoadCompleteEventHandler(object sender, EventArgs e)
 		{
-			Pair pair = new Pair();
-			pair.First = base.SaveViewState();
-			if ((this is IStateManager) && this._view != null)
-				pair.Second = ((IStateManager) this._view).SaveViewState();
-			if ((pair.First == null) && (pair.Second == null))
-				return null;
-			return pair;
+			this.WhereParameters.UpdateValues(this.Context, this);
 		}
 
-		protected override void TrackViewState()
+		protected override void OnInit(EventArgs e)
 		{
-			base.TrackViewState();
-			if ((this is IStateManager) && this._view != null)
-				((IStateManager) this._view).TrackViewState();
+			base.OnInit(e);
+			this.Page.LoadComplete += new EventHandler(this.LoadCompleteEventHandler);
 		}
-
-		#endregion
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class CurrentItemDataSourceView : ContentDataSourceView
+	public class CurrentItemDataSourceView : BaseContentDataSourceView
 	{
 		public CurrentItemDataSourceView(IDataSource owner, string viewName, ContentItem parentItem)
 			: base(owner, viewName, parentItem)
