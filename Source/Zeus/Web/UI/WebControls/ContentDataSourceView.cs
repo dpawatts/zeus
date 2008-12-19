@@ -23,7 +23,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private bool _tracking;
 
-		private string _ofType, _where;
+		private string _ofType, _where, _select, _query;
 		private ContentDataSourceAxis _axis = ContentDataSourceAxis.Child;
 		private ParameterCollection _whereParameters;
 
@@ -59,6 +59,22 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
+		public string SelectNew
+		{
+			get
+			{
+				return (this._select ?? string.Empty);
+			}
+			set
+			{
+				if (this._select != value)
+				{
+					this._select = value;
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
+
 		public ContentDataSourceAxis Axis
 		{
 			get { return _axis; }
@@ -67,6 +83,22 @@ namespace Zeus.Web.UI.WebControls
 				if (this._axis != value)
 				{
 					this._axis = value;
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
+
+		public string Query
+		{
+			get
+			{
+				return (this._query ?? string.Empty);
+			}
+			set
+			{
+				if (this._query != value)
+				{
+					this._query = value;
 					this.OnDataSourceViewChanged(EventArgs.Empty);
 				}
 			}
@@ -99,18 +131,22 @@ namespace Zeus.Web.UI.WebControls
 			_context = context;
 		}
 
-		protected override IEnumerable<ContentItem> GetItems()
+		protected override IEnumerable GetItems()
 		{
 			if (this.ParentItem != null)
 			{
+				ContentItem startingPoint = this.ParentItem;
+				if (!string.IsNullOrEmpty(this.Query))
+					startingPoint = Find.RootItem;
+
 				IQueryable children = null;
 				switch (this.Axis)
 				{
 					case ContentDataSourceAxis.Child:
-						children = this.ParentItem.GetChildren().AsQueryable();
+						children = startingPoint.GetChildren().AsQueryable();
 						break;
 					case ContentDataSourceAxis.Descendant:
-						children = Find.EnumerateAccessibleChildren(this.ParentItem).AsQueryable();
+						children = Find.EnumerateAccessibleChildren(startingPoint).AsQueryable();
 						break;
 					default :
 						throw new NotImplementedException();
@@ -126,7 +162,17 @@ namespace Zeus.Web.UI.WebControls
 				if (!string.IsNullOrEmpty(this.Where))
 					children = children.Where(this.Where, EscapeParameterKeys(whereParameterValues));
 
-				return children.Cast<ContentItem>();
+				if (!string.IsNullOrEmpty(this.SelectNew))
+				{
+					IEnumerable tempChildren = children.Select(this.SelectNew, null);
+					List<object> result = new List<object>();
+					foreach (IEnumerable child in tempChildren)
+						foreach (object value in child)
+							result.Add(value);
+					children = result.AsQueryable();
+				}
+
+				return children;
 			}
 			else
 				return null;

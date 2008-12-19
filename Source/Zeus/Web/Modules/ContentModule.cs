@@ -53,11 +53,24 @@ namespace Zeus.Web.Modules
 
 		private void context_AuthorizeRequest(object sender, EventArgs e)
 		{
-			Zeus.Context.Current.Resolve<ISecurityEnforcer>().AuthoriseRequest();
+			try
+			{
+				Zeus.Context.Current.Resolve<ISecurityEnforcer>().AuthoriseRequest();
+			}
+			catch (UnauthorizedAccessException)
+			{
+				HttpContext.Current.Items["RedirectToLogin"] = true;
+			}
 		}
 
 		private void context_EndRequest(object sender, EventArgs e)
 		{
+			if (HttpContext.Current.Items["RedirectToLogin"] != null && (bool) HttpContext.Current.Items["RedirectToLogin"] == true)
+			{
+				// TODO: Find login page.
+				HttpContext.Current.Response.Redirect("~/Login.aspx");
+			}
+
 			ISession session = HttpContext.Current.Items["OpenSession"] as ISession;
 			if (session != null)
 				session.Dispose();

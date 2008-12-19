@@ -27,6 +27,9 @@ namespace Zeus.Admin
 
 		protected void btnSave_Command(object sender, CommandEventArgs e)
 		{
+			if (!IsValid)
+				return;
+
 			zeusItemEditView.Save();
 			Refresh(zeusItemEditView.CurrentItem, AdminFrame.Both, false);
 		}

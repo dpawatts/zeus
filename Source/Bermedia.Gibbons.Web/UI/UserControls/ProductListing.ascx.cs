@@ -15,6 +15,11 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 			set { ViewState["DataSourceID"] = value; }
 		}
 
+		public string HeaderText
+		{
+			set { h1Header.InnerText = value; }
+		}
+
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);

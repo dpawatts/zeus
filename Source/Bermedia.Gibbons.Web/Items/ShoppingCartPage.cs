@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using Zeus;
 using Zeus.Integrity;
-using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType(Description = "[Internal Use Only]")]
 	[RestrictParents(typeof(StartPage))]
-	public class LoginPage : StructuralPage
+	public class ShoppingCartPage : StructuralPage
 	{
 		protected override string IconName
 		{
@@ -16,7 +18,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		protected override string TemplateName
 		{
-			get { return "Login"; }
+			get { return "ShoppingCart"; }
 		}
 	}
 }

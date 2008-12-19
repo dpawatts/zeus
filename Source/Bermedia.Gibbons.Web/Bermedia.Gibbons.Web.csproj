@@ -83,6 +83,10 @@
     <Compile Include="Items\Brand.cs" />
     <Compile Include="Items\BrandContainer.cs" />
     <Compile Include="Items\BaseCategory.cs" />
+    <Compile Include="Items\ShoppingCartContainer.cs" />
+    <Compile Include="Items\ShoppingCartPage.cs" />
+    <Compile Include="Items\ShoppingCartItem.cs" />
+    <Compile Include="Items\MyAccount.cs" />
     <Compile Include="Items\LoginPage.cs" />
     <Compile Include="Items\Customer.cs" />
     <Compile Include="Items\InternationalShippingPriceRange.cs" />
@@ -108,6 +112,7 @@
     <Compile Include="Items\BaseDepartment.cs" />
     <Compile Include="Items\Page.cs" />
     <Compile Include="Items\BaseProduct.cs" />
+    <Compile Include="Items\ShoppingCart.cs" />
     <Compile Include="Items\StandardProduct.cs" />
     <Compile Include="Items\StartPage.cs" />
     <Compile Include="Items\StructuralPage.cs" />
@@ -155,6 +160,13 @@
     <Compile Include="UI\Views\DepartmentGifts.aspx.designer.cs">
       <DependentUpon>DepartmentGifts.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\NonFragranceBeautyDepartment.aspx.cs">
       <DependentUpon>NonFragranceBeautyDepartment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -176,12 +188,22 @@
     <Compile Include="UI\Views\Page.aspx.designer.cs">
       <DependentUpon>Page.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Secured\MyAccount.aspx.cs">
+    <Compile Include="UI\Views\MyAccount.aspx.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI\Views\Secured\MyAccount.aspx.designer.cs">
+    <Compile Include="UI\Views\MyAccount.aspx.designer.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SecurePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ShoppingCart.aspx.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ShoppingCart.aspx.designer.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +270,12 @@
     <Content Include="UI\Views\DepartmentGifts.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Browsers\RewriteFormAction.browser" />
     <None Include="Items\ClassDiagram.cd" />
-    <Content Include="UI\Views\Secured\MyAccount.aspx" />
+    <Content Include="UI\Views\Login.aspx" />
+    <Content Include="UI\Views\MyAccount.aspx" />
     <Content Include="UI\Views\Secured\Web.config" />
+    <Content Include="UI\Views\ShoppingCart.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

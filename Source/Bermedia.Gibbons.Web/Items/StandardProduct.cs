@@ -40,6 +40,11 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<decimal?>("SalePrice", value); }
 		}
 
+		public decimal CurrentPrice
+		{
+			get { return (decimal) (this.SalePrice ?? this.RegularPrice); }
+		}
+
 		[CheckBoxEditor("Exclusive", "", 260, ContainerName = Tabs.General)]
 		public bool Exclusive
 		{

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bermedia.Gibbons.Web.UI.Views.Secured {
+namespace Bermedia.Gibbons.Web.UI.Views {
     
     
     public partial class MyAccount {

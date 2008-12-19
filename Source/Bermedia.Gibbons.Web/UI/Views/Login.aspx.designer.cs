@@ -8,27 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bermedia.Gibbons.Web.UI.UserControls {
+namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class ProductListing {
+    public partial class Login {
         
         /// <summary>
-        /// h1Header control.
+        /// lgnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1Header;
-        
-        /// <summary>
-        /// lsvProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.StandardProduct> lsvProducts;
+        protected global::System.Web.UI.WebControls.Login lgnLogin;
     }
 }

@@ -17,8 +17,6 @@
 body {
 	background-image: url(/assets/images/BGpage.png);
 	background-repeat: repeat-y;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: x-small;
 	text-align: center;
 	margin: 0px;
 	color:#333333;
@@ -28,6 +26,11 @@ body {
 	margin-left: 0px;
 	background-position: center;
 	line-height: 130%;
+}
+
+body, th, td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
 }
 
 p
@@ -292,16 +295,23 @@ hr { color:#C2EAF0;}
 	margin: 0 20px 20px 0;
 }
 
-.categoryProduct img
-{
-	margin-bottom: 10px;
-}
-
 .categoryProduct
 {
 	width: 150px;
 	float: left;
-	margin-bottom: 20px;
+	display: block;
+	margin-bottom: 35px;
+	margin-right: 10px;
+}
+
+.categoryProduct .image
+{
+	min-height: 135px;
+}
+
+.categoryProduct .image img
+{
+	margin-bottom: 10px;
 }
 
 #productDetails

@@ -205,6 +205,10 @@
     <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\SecurityEnforcer.cs" />
     <Compile Include="Security\SecurityManager.cs" />
+    <Compile Include="Web\Adapters\FormAdapter.cs" />
+    <Compile Include="Web\Compilation\CodeExpressionBuilder.cs" />
+    <Compile Include="Web\Compilation\HasItemsExpressionBuilder.cs" />
+    <Compile Include="Web\Compilation\HasValueExpressionBuilder.cs" />
     <Compile Include="Web\Security\ContentMembershipProvider.cs" />
     <Compile Include="Web\Security\ContentProfileProvider.cs" />
     <Compile Include="Web\Security\ContentRoleProvider.cs" />

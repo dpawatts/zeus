@@ -14,5 +14,5 @@
 	</div>
 	
 	<gibbons:ProductListing runat="server" DataSourceID="cdsChildren" />
-	<zeus:ChildrenDataSource runat="server" ID="cdsChildren" OfType="Bermedia.Gibbons.Web.Items.StandardProduct" />
+	<zeus:ContentDataSource runat="server" ID="cdsChildren" OfType="Bermedia.Gibbons.Web.Items.StandardProduct" />
 </asp:Content>

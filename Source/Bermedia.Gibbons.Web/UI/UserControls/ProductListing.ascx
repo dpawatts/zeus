@@ -2,30 +2,31 @@
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Zeus" %>
 
-<isis:TypedListView runat="server" ID="lsvProducts" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct">
+<h1 runat="server" id="h1Header" />
+
+<isis:TypedListView runat="server" ID="lsvProducts" DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct, Bermedia.Gibbons.Web">
 	<LayoutTemplate>
 		<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
 	</LayoutTemplate>
 	<ItemTemplate>
 		<div class="categoryProduct">
-			<a href="<%# Container.DataItem.Url %>">
-				<sitdap:DynamicImage runat="server">
-					<Layers>
-						<sitdap:ImageLayer>
-							<Source>
-								<zeus:ZeusImageSource ContentID='<%# (Container.DataItem.Image != null) ? Container.DataItem.Image.ID : 0 %>' />
-							</Source>
-							<AlternateSource>
-								<sitdap:FileImageSource FileName="~/Assets/Images/no-image.jpg" />
-							</AlternateSource>
-							<Filters>
-								<sitdap:ResizeFilter Width="125" Mode="UseWidth" />
-							</Filters>
-						</sitdap:ImageLayer>
-					</Layers>
-				</sitdap:DynamicImage>
-			</a>
-			<br />
+			<div class="image">
+				<a href="<%# Container.DataItem.Url %>"><sitdap:DynamicImage runat="server">
+						<Layers>
+							<sitdap:ImageLayer>
+								<Source>
+									<zeus:ZeusImageSource ContentID='<%# (Container.DataItem.Image != null) ? Container.DataItem.Image.ID : 0 %>' />
+								</Source>
+								<AlternateSource>
+									<sitdap:FileImageSource FileName="~/Assets/Images/no-image.jpg" />
+								</AlternateSource>
+								<Filters>
+									<sitdap:ResizeFilter Width="125" Height="125" />
+								</Filters>
+							</sitdap:ImageLayer>
+						</Layers>
+					</sitdap:DynamicImage></a>
+			</div>
 		
 			<a href="<%# Container.DataItem.Url %>">
 				<strong><%# Container.DataItem.Brand.Title %> <%# Container.DataItem.Title %></strong><br />

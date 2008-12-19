@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -12,7 +13,7 @@ namespace Zeus.Web.UI.WebControls
 
 		}
 
-		protected override IEnumerable<ContentItem> GetItems()
+		protected override IEnumerable GetItems()
 		{
 			if (this.ParentItem != null)
 				return new ContentItem[] { this.ParentItem };

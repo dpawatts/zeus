@@ -25,10 +25,25 @@ namespace Zeus.Web.UI.WebControls
 			set { this.View.Where = value; }
 		}
 
+		[DefaultValue("")]
+		public string Select
+		{
+			get { return this.View.SelectNew; }
+			set { this.View.SelectNew = value; }
+		}
+
+		// TODO - change to use XPath / XQuery syntax
 		public ContentDataSourceAxis Axis
 		{
 			get { return this.View.Axis; }
 			set { this.View.Axis = value; }
+		}
+
+		// TODO - change to use XPath / XQuery syntax
+		public string Query
+		{
+			get { return this.View.Query; }
+			set { this.View.Query = value; }
 		}
 
 		[DefaultValue(null), Browsable(false), MergableProperty(false), PersistenceMode(PersistenceMode.InnerProperty), Category("Data")]

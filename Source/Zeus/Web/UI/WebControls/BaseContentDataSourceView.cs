@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Web.UI;
+using System.Collections;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -11,7 +12,7 @@ namespace Zeus.Web.UI.WebControls
 		#region Fields
 
 		private ContentItem _parentItem = null;
-		private IEnumerable<ContentItem> _items = null;
+		private IEnumerable _items = null;
 		private string _currentSortExpression = string.Empty;
 
 		#endregion
@@ -58,23 +59,23 @@ namespace Zeus.Web.UI.WebControls
 
 		#region Methods
 
-		private IEnumerable<ContentItem> GetCachedItems()
+		private IEnumerable GetCachedItems()
 		{
 			if (_items == null)
 				_items = GetItems();
 			return _items;
 		}
 
-		protected abstract IEnumerable<ContentItem> GetItems();
+		protected abstract IEnumerable GetItems();
 
 		protected override System.Collections.IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
 		{
-			IEnumerable<ContentItem> allItems = GetCachedItems();
+			IEnumerable allItems = GetCachedItems();
 			if (allItems == null)
 				return null;
 
 			if (arguments.RetrieveTotalRowCount)
-				arguments.TotalRowCount = allItems.Count();
+				arguments.TotalRowCount = allItems.AsQueryable().Count();
 
 			if (!string.IsNullOrEmpty(arguments.SortExpression) && arguments.SortExpression != _currentSortExpression)
 			{

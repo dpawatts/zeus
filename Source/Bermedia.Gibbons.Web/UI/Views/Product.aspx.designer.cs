@@ -14,12 +14,39 @@ namespace Bermedia.Gibbons.Web.UI.Views {
     public partial class Product {
         
         /// <summary>
-        /// cdsCurrentItem control.
+        /// ddlSizes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected Zeus.Web.UI.WebControls.CurrentItemDataSource cdsCurrentItem;
+        protected global::Isis.Web.UI.WebControls.DropDownList ddlSizes;
+        
+        /// <summary>
+        /// ddlColours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Isis.Web.UI.WebControls.DropDownList ddlColours;
+        
+        /// <summary>
+        /// txtQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtQuantity;
+        
+        /// <summary>
+        /// btnAddToCart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SoundInTheory.DynamicImage.DynamicImageButton btnAddToCart;
     }
 }
