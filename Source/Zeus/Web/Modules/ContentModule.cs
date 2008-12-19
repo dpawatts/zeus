@@ -5,6 +5,7 @@ using System.IO;
 using Isis.Web;
 using Zeus.Web.UI;
 using NHibernate;
+using Zeus.Security;
 
 namespace Zeus.Web.Modules
 {
@@ -14,6 +15,7 @@ namespace Zeus.Web.Modules
 		{
 			context.BeginRequest += new EventHandler(context_BeginRequest);
 			context.AcquireRequestState += new EventHandler(context_AcquireRequestState);
+			context.AuthorizeRequest += new EventHandler(context_AuthorizeRequest);
 			context.EndRequest += new EventHandler(context_EndRequest);
 		}
 
@@ -47,6 +49,11 @@ namespace Zeus.Web.Modules
 			IContentTemplate template = HttpContext.Current.Handler as IContentTemplate;
 			if (template != null)
 				template.CurrentItem = Zeus.Context.Current.Resolve<IWebContext>().CurrentPage;
+		}
+
+		private void context_AuthorizeRequest(object sender, EventArgs e)
+		{
+			Zeus.Context.Current.Resolve<ISecurityEnforcer>().AuthoriseRequest();
 		}
 
 		private void context_EndRequest(object sender, EventArgs e)

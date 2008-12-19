@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 
 namespace Zeus.Security
 {
@@ -28,5 +29,15 @@ namespace Zeus.Security
 		}
 
 		#endregion
+
+		/// <summary>Determines wether a user is permitted according to this role.</summary>
+		/// <param name="user">The user to check.</param>
+		/// <returns>True if the user is permitted.</returns>
+		public bool IsAuthorized(IPrincipal user)
+		{
+			if (user != null && user.IsInRole(Role))
+				return true;
+			return false;
+		}
 	}
 }

@@ -3,8 +3,11 @@ using Zeus.ContentTypes;
 using Zeus.Persistence;
 using Zeus.Web;
 using Zeus.Linq;
+using System.Configuration;
+using Zeus.Configuration;
+using System.Web.Compilation;
 
-namespace Zeus.Security
+namespace Zeus.Web.Security
 {
 	/// <summary>
 	/// Provides access to users and roles stored as nodes in the item 
@@ -51,7 +54,7 @@ namespace Zeus.Security
 
 		public virtual Items.User CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey)
 		{
-			Items.User u = definitions.CreateInstance<Items.User>(GetUserContainer(true));
+			Items.User u = CreateUserObject();
 			u.Title = username;
 			u.Name = username;
 			u.Password = password;
@@ -64,6 +67,17 @@ namespace Zeus.Security
 			persister.Save(u);
 
 			return u;
+		}
+
+		protected virtual Items.User CreateUserObject()
+		{
+			Items.UserContainer parent = GetUserContainer(true);
+
+			MembershipSection membershipSection = ConfigurationManager.GetSection("zeus/membership") as MembershipSection;
+			if (membershipSection != null && !string.IsNullOrEmpty(membershipSection.CustomUserClass))
+				return (Items.User) definitions.CreateInstance(BuildManager.GetType(membershipSection.CustomUserClass, true), parent);
+			else
+				return definitions.CreateInstance<Items.User>(parent);
 		}
 
 		public virtual Items.User GetUser(string username)

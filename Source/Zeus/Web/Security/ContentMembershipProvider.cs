@@ -4,7 +4,7 @@ using System.Web.Security;
 using System.Collections.Generic;
 using Zeus.Linq.Filters;
 
-namespace Zeus.Security
+namespace Zeus.Web.Security
 {
 	/// <summary>
 	/// Implements the default ASP.NET membership provider. Stores users as 
@@ -17,7 +17,7 @@ namespace Zeus.Security
 			get { return Context.Current.Resolve<ItemBridge>(); }
 		}
 
-		private string applicationName = "Zeus.Security";
+		private string applicationName = "Zeus.Security.Membership";
 
 		public override string ApplicationName
 		{

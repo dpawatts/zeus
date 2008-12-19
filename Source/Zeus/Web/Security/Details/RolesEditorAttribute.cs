@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Web.Security;
 using System.Web.UI;
 
-namespace Zeus.Security.Details
+namespace Zeus.Web.Security.Details
 {
 	public class RolesEditorAttribute : AbstractEditorAttribute
 	{

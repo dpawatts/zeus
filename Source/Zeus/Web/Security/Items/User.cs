@@ -2,9 +2,9 @@
 using Zeus.Integrity;
 using Zeus.ContentTypes.Properties;
 using System.Web.Security;
-using Zeus.Security.Details;
+using Zeus.Web.Security.Details;
 
-namespace Zeus.Security.Items
+namespace Zeus.Web.Security.Items
 {
 	[ContentType]
 	[RestrictParents(typeof(UserContainer))]

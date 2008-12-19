@@ -24,5 +24,10 @@ namespace Zeus.Configuration
 		{
 			get { return (FileSystemSection) Sections["fileSystem"]; }
 		}
+
+		public MembershipSection Membership
+		{
+			get { return (MembershipSection) Sections["membership"]; }
+		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 
 namespace Zeus.Web
 {
@@ -9,6 +10,9 @@ namespace Zeus.Web
 
 		/// <summary>The local part of the requested path, e.g. /path/to/a/page.aspx?some=query.</summary>
 		Url LocalUrl { get; }
+
+		/// <summary>Gets the current user principal (may be null).</summary>
+		IPrincipal User { get; }
 
 		string MapPath(string path);
 

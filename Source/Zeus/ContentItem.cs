@@ -7,6 +7,7 @@ using System.Linq;
 using Zeus.Web;
 using Zeus.Security;
 using Zeus.Linq.Filters;
+using System.Security.Principal;
 
 namespace Zeus
 {
@@ -536,6 +537,22 @@ namespace Zeus
 		protected virtual bool Equals(string name)
 		{
 			return this.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+		}
+
+		/// <summary>Gets wether a certain user is authorized to view this item.</summary>
+		/// <param name="user">The user to check.</param>
+		/// <returns>True if the item is open for all or the user has the required permissions.</returns>
+		public virtual bool IsAuthorised(IPrincipal user)
+		{
+			if (AuthorizedRoles == null || AuthorizedRoles.Count == 0)
+				return true;
+
+			// Iterate allowed roles to find an allowed role
+			foreach (Security.AuthorizedRole auth in this.AuthorizedRoles)
+				if (auth.IsAuthorized(user))
+					return true;
+			return false;
+
 		}
 
 		#endregion

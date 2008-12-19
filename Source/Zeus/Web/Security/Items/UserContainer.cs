@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Web.Security;
 using Zeus.Linq.Filters;
 
-namespace Zeus.Security.Items
+namespace Zeus.Web.Security.Items
 {
 	[ContentType("User Container")]
 	public class UserContainer : ContentItem

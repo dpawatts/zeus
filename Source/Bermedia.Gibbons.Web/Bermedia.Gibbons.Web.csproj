@@ -83,6 +83,8 @@
     <Compile Include="Items\Brand.cs" />
     <Compile Include="Items\BrandContainer.cs" />
     <Compile Include="Items\BaseCategory.cs" />
+    <Compile Include="Items\LoginPage.cs" />
+    <Compile Include="Items\Customer.cs" />
     <Compile Include="Items\InternationalShippingPriceRange.cs" />
     <Compile Include="Items\InternationalShippingDeliveryType.cs" />
     <Compile Include="Items\InternationalShippingRate.cs" />
@@ -174,6 +176,13 @@
     <Compile Include="UI\Views\Page.aspx.designer.cs">
       <DependentUpon>Page.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\Secured\MyAccount.aspx.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\Secured\MyAccount.aspx.designer.cs">
+      <DependentUpon>MyAccount.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
@@ -240,6 +249,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="UI\Views\Secured\MyAccount.aspx" />
+    <Content Include="UI\Views\Secured\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
