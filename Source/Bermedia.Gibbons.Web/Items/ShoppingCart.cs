@@ -16,6 +16,12 @@ namespace Bermedia.Gibbons.Web.Items
 			get { return "page"; }
 		}
 
+		public BaseDeliveryType DeliveryType
+		{
+			get { return GetDetail<BaseDeliveryType>("DeliveryType", null); }
+			set { SetDetail<BaseDeliveryType>("DeliveryType", value); }
+		}
+
 		public decimal TotalPrice
 		{
 			get

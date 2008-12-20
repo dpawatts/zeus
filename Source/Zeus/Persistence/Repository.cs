@@ -32,6 +32,12 @@ namespace Zeus.Persistence
 			return _sessionProvider.OpenSession.Get<TEntity>(id);
 		}
 
+		public T Get<T>(TKey id)
+			where T : ContentItem
+		{
+			return _sessionProvider.OpenSession.Get<T>(id);
+		}
+
 		public TEntity Load(int id)
 		{
 			return _sessionProvider.OpenSession.Load<TEntity>(id);

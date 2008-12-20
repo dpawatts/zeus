@@ -11,6 +11,7 @@ namespace Zeus.Persistence
 
 		void Delete(ContentItem contentItem);
 		ContentItem Get(int id);
+		T Get<T>(int id) where T : ContentItem;
 		ContentItem Load(int id);
 		void Move(ContentItem toMove, ContentItem newParent);
 		void Save(ContentItem contentItem);

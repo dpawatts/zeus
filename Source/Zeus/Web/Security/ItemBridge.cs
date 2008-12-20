@@ -66,6 +66,12 @@ namespace Zeus.Web.Security
 
 			persister.Save(u);
 
+			if (providerUserKey == null)
+			{
+				u.ProviderUserKey = u.ID;
+				persister.Save(u);
+			}
+
 			return u;
 		}
 

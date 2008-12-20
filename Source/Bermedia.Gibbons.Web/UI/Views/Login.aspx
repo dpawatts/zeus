@@ -4,9 +4,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphSubNavigation" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
-	<h1>Returning Guests</h1>
+	<h1>Sign In or create a Gibbons Online account</h1>
 	
-	<p>If you have an account with Gibbons, please sign in:</p>
+	<h2>Returning Guests</h2>
+	
+	<p>If you have an account with Gibbons Online, please sign in:</p>
 	
 	<asp:Login runat="server" ID="lgnLogin" OnLoggedIn="lgnLogin_LoggedIn">
 		<LayoutTemplate>
@@ -42,7 +44,7 @@
 	<p><a href="forgotten-password.aspx">Forgot your password?</a></p>
 			
 	<p>&nbsp;</p>
-	<h2>New Guests</h2>
+	<h2>New To Gibbons Online?</h2>
 	<p>If you do not have an account, please create one now.</p>
 
 	<p><a href="register.aspx?ReturnUrl=<%= Server.UrlEncode(Request.QueryString["ReturnUrl"]) %>">

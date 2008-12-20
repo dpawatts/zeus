@@ -329,3 +329,8 @@ hr { color:#C2EAF0;}
 {
 	vertical-align: middle;
 }
+
+.error
+{
+	color: Red;
+}

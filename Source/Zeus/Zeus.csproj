@@ -67,6 +67,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.ProxyGenerators.CastleDynamicProxy, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\NHibernate.ProxyGenerators.CastleDynamicProxy.dll</HintPath>
+    </Reference>
     <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>

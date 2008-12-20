@@ -35,5 +35,10 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return "money"; }
 		}
+
+		public bool Matches(decimal orderPrice)
+		{
+			return this.MinimumPrice <= orderPrice && (this.MaximumPrice == null || this.MaximumPrice >= orderPrice);
+		}
 	}
 }

@@ -83,6 +83,11 @@
     <Compile Include="Items\Brand.cs" />
     <Compile Include="Items\BrandContainer.cs" />
     <Compile Include="Items\BaseCategory.cs" />
+    <Compile Include="Items\CheckoutDeliveryMethod.cs" />
+    <Compile Include="Items\BaseDeliveryType.cs" />
+    <Compile Include="Items\RegisterPage.cs" />
+    <Compile Include="Items\DeliveryTypeContainer.cs" />
+    <Compile Include="Items\DeliveryType.cs" />
     <Compile Include="Items\ShoppingCartContainer.cs" />
     <Compile Include="Items\ShoppingCartPage.cs" />
     <Compile Include="Items\ShoppingCartItem.cs" />
@@ -152,6 +157,20 @@
     </Compile>
     <Compile Include="UI\Views\Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutDeliveryMethod.aspx.cs">
+      <DependentUpon>CheckoutDeliveryMethod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutDeliveryMethod.aspx.designer.cs">
+      <DependentUpon>CheckoutDeliveryMethod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\DepartmentGifts.aspx.cs">
       <DependentUpon>DepartmentGifts.aspx</DependentUpon>
@@ -271,7 +290,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Browsers\RewriteFormAction.browser" />
+    <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="TsAndCs.htm" />
+    <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
+    <Content Include="UI\Views\Register.aspx" />
     <Content Include="UI\Views\Login.aspx" />
     <Content Include="UI\Views\MyAccount.aspx" />
     <Content Include="UI\Views\Secured\Web.config" />
