@@ -34,13 +34,24 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<Address>("BillingAddress", value); }
 		}
 
-		public decimal TotalPrice
+		public decimal ItemTotalPrice
 		{
 			get
 			{
 				decimal result = 0;
 				foreach (ShoppingCartItem shoppingCartItem in this.Children)
 					result += shoppingCartItem.Price;
+				return result;
+			}
+		}
+
+		public decimal TotalPrice
+		{
+			get
+			{
+				decimal result = this.ItemTotalPrice;
+				if (this.DeliveryType != null)
+					result += this.DeliveryType.GetPrice(this);
 				return result;
 			}
 		}

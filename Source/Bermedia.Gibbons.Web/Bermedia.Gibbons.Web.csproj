@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="SoundInTheory.PaymentProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SoundInTheory.PaymentProcessing.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -91,8 +95,15 @@
     <Compile Include="Items\CheckoutBillingAddress.cs" />
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
+    <Compile Include="Items\NewsletterSubscription.cs" />
+    <Compile Include="Items\NewsletterSubscriptionContainer.cs" />
+    <Compile Include="Items\OrderItem.cs" />
+    <Compile Include="Items\Order.cs" />
     <Compile Include="Items\CountryContainer.cs" />
     <Compile Include="Items\Country.cs" />
+    <Compile Include="Items\OrderStatus.cs" />
+    <Compile Include="Items\PaymentStatus.cs" />
+    <Compile Include="Items\RefundStatus.cs" />
     <Compile Include="Items\RegisterPage.cs" />
     <Compile Include="Items\DeliveryTypeContainer.cs" />
     <Compile Include="Items\DeliveryType.cs" />
@@ -193,6 +204,13 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutBillingAddress.aspx.designer.cs">
       <DependentUpon>CheckoutBillingAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutSummary.aspx.cs">
+      <DependentUpon>CheckoutSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutSummary.aspx.designer.cs">
+      <DependentUpon>CheckoutSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -326,6 +344,7 @@
     <Content Include="UI\Views\CheckoutShippingAddress.aspx" />
     <Content Include="UI\Views\CheckoutPaymentDetails.aspx" />
     <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
+    <Content Include="UI\Views\CheckoutSummary.aspx" />
     <Content Include="UI\Views\Register.aspx" />
     <Content Include="UI\Views\Login.aspx" />
     <Content Include="UI\Views\MyAccount.aspx" />

@@ -7,14 +7,19 @@ namespace Bermedia.Gibbons.Web.Items
 	{
 		public string FirstName
 		{
-			get { return GetDetail<string>("FirstName", null); }
+			get { return GetDetail<string>("FirstName", string.Empty); }
 			set { SetDetail<string>("FirstName", value); }
 		}
 
 		public string LastName
 		{
-			get { return GetDetail<string>("LastName", null); }
+			get { return GetDetail<string>("LastName", string.Empty); }
 			set { SetDetail<string>("LastName", value); }
+		}
+
+		public string FullName
+		{
+			get { return (this.FirstName + " " + this.LastName).Trim(); }
 		}
 
 		public bool ReceiveOffers

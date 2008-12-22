@@ -14,5 +14,10 @@ namespace Zeus.Admin
 		{
 			Refresh(this.SelectedItem, AdminFrame.Navigation, true);
 		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			base.OnPreRender(e);
+		}
 	}
 }

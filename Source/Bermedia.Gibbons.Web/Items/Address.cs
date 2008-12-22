@@ -6,7 +6,7 @@ using Zeus.ContentTypes.Properties;
 namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType(Description = "Address")]
-	[RestrictParents(typeof(Customer))]
+	[RestrictParents(typeof(Customer), typeof(Order))]
 	public class Address : BaseContentItem
 	{
 		public string AddressLine1

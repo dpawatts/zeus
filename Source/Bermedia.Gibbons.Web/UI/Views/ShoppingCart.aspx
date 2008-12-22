@@ -103,7 +103,7 @@
 				<td valign="top">
 					<asp:TextBox runat="server" ID="txtQuantity" Width="30px" Text='<%# Container.DataItem.Quantity %>' />
 				</td>
-				<td valign="top"><%# Container.DataItem.PurchasePricePerUnit.ToString("C2") %></td>
+				<td valign="top"><%# Container.DataItem.Price.ToString("C2") %></td>
 				<td valign="top">
 					<asp:CheckBox runat="server" ID="chkIsGift" Checked='<%# Container.DataItem.IsGift %>' />
 				</td>

@@ -427,6 +427,66 @@ namespace Zeus
 			}
 		}
 
+		/// <summary>Creats a copy of this item including details and authorized roles resetting ID.</summary>
+		/// <param name="includeChildren">Wether this item's child items also should be cloned.</param>
+		/// <returns>The cloned item with or without cloned child items.</returns>
+		public virtual ContentItem Clone(bool includeChildren)
+		{
+			ContentItem cloned = (ContentItem) MemberwiseClone();
+			cloned.ID = 0;
+			cloned._url = null;
+
+			CloneDetails(cloned);
+			CloneChildren(includeChildren, cloned);
+			CloneAuthorizedRoles(cloned);
+
+			return cloned;
+		}
+
+		#region Clone Helper Methods
+		private void CloneAuthorizedRoles(ContentItem cloned)
+		{
+			if (AuthorizedRoles != null)
+			{
+				cloned.AuthorizedRoles = new List<Security.AuthorizedRole>();
+				foreach (Security.AuthorizedRole role in AuthorizedRoles)
+				{
+					Security.AuthorizedRole clonedRole = role.Clone();
+					clonedRole.EnclosingItem = cloned;
+					cloned.AuthorizedRoles.Add(clonedRole);
+				}
+			}
+		}
+
+		private void CloneChildren(bool includeChildren, ContentItem cloned)
+		{
+			cloned.Children = new List<ContentItem>();
+			if (includeChildren)
+			{
+				foreach (ContentItem child in Children)
+				{
+					ContentItem clonedChild = child.Clone(true);
+					clonedChild.AddTo(cloned);
+				}
+			}
+		}
+
+		private void CloneDetails(ContentItem cloned)
+		{
+			cloned.Details = new Dictionary<string, Zeus.ContentTypes.Properties.ContentDetail>();
+			foreach (Zeus.ContentTypes.Properties.ContentDetail detail in Details.Values)
+				cloned[detail.Name] = detail.Value;
+
+			cloned.DetailCollections = new Dictionary<string, Zeus.ContentTypes.Properties.DetailCollection>();
+			foreach (Zeus.ContentTypes.Properties.DetailCollection collection in DetailCollections.Values)
+			{
+				Zeus.ContentTypes.Properties.DetailCollection clonedCollection = collection.Clone();
+				clonedCollection.EnclosingItem = cloned;
+				cloned.DetailCollections[collection.Name] = clonedCollection;
+			}
+		}
+		#endregion
+
 		public TAncestor FindFirstAncestor<TAncestor>()
 			where TAncestor : ContentItem
 		{

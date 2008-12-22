@@ -4,7 +4,7 @@
 	theme: 'advanced',
 	plugins: 'style,layer,table,advimage,advlink,iespell,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,inlinepopups',
 	theme_advanced_buttons1_add_before: '',
-	theme_advanced_buttons1_add: 'sup,|,print,fullscreen,|,search,replace,iespell',
+	theme_advanced_buttons1_add: 'sup,|,print,fullscreen,|,search,replace,iespell,|,forecolorpicker',
 	theme_advanced_buttons2_add_before: 'cut,copy,paste,pastetext,pasteword,|',
 	theme_advanced_buttons2_add: '|,table,media,insertlayer,inlinepopups',
 	theme_advanced_buttons3: '',

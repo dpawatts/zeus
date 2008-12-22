@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace Zeus.ContentTypes.Properties
 {
-	public class DetailCollection : IEnumerable, ICollection, IList
+	public class DetailCollection : IEnumerable, ICollection, IList, ICloneable
 	{
 		#region Private fields
 
@@ -274,6 +274,32 @@ namespace Zeus.ContentTypes.Properties
 				enumeratorIndex = -1;
 			}
 			#endregion
+		}
+
+		#endregion
+
+		#region ICloneable Members
+
+		/// <summary>Clones the collection and </summary>
+		/// <returns></returns>
+		public DetailCollection Clone()
+		{
+			DetailCollection collection = new DetailCollection();
+			collection.ID = 0;
+			collection.Name = this.Name;
+			collection.EnclosingItem = this.EnclosingItem;
+			foreach (ContentDetail detail in this.Details)
+			{
+				ContentDetail cloned = detail.Clone();
+				cloned.EnclosingCollection = collection;
+				collection.Add(cloned);
+			}
+			return collection;
+		}
+
+		object ICloneable.Clone()
+		{
+			return Clone();
 		}
 
 		#endregion

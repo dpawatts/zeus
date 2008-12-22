@@ -28,7 +28,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			this.CheckoutData.PaymentCardNumber = txtCardNumber.Text;
 			this.CheckoutData.PaymentCvv2 = txtCVV2.Text;
 
-			Response.Redirect("~/checkout-billing-address.aspx");
+			if (Request.QueryString["return"] != null)
+				Response.Redirect("~/checkout-summary.aspx");
+			else
+				Response.Redirect("~/checkout-billing-address.aspx");
 		}
 
 		protected void btnCorporateNext_Click(object sender, EventArgs e)

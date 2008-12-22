@@ -68,7 +68,8 @@ namespace Zeus.Web.Modules
 			if (HttpContext.Current.Items["RedirectToLogin"] != null && (bool) HttpContext.Current.Items["RedirectToLogin"] == true)
 			{
 				// TODO: Find login page.
-				HttpContext.Current.Response.Redirect("~/Login.aspx");
+				string returnUrl = HttpContext.Current.Request.RawUrl;
+				HttpContext.Current.Response.Redirect("~/Login.aspx?ReturnUrl=" + HttpUtility.UrlEncode(returnUrl));
 			}
 
 			ISession session = HttpContext.Current.Items["OpenSession"] as ISession;

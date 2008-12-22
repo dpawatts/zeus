@@ -43,7 +43,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			this.ShoppingCart.ShippingAddress = Zeus.Context.Persister.Get<Address>(addressID);
 			Zeus.Context.Persister.Save(this.ShoppingCart);
 
-			Response.Redirect("~/checkout-payment-details.aspx");
+			if (Request.QueryString["return"] != null)
+				Response.Redirect("~/checkout-summary.aspx");
+			else
+				Response.Redirect("~/checkout-payment-details.aspx");
 		}
 	}
 }

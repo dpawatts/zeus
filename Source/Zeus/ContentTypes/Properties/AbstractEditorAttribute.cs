@@ -2,6 +2,7 @@
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.ContentTypes.Properties
 {
@@ -39,6 +40,18 @@ namespace Zeus.ContentTypes.Properties
 		}
 
 		public bool Required
+		{
+			get;
+			set;
+		}
+
+		public string Description
+		{
+			get;
+			set;
+		}
+
+		public bool IsLocallyUnique
 		{
 			get;
 			set;
@@ -100,6 +113,10 @@ namespace Zeus.ContentTypes.Properties
 				label.AssociatedControlID = editor.ID;
 			if (this.Required)
 				AddRequiredFieldValidator(panel, editor);
+			if (this.IsLocallyUnique)
+				AddLocallyUniqueValidator(panel, editor);
+			if (!string.IsNullOrEmpty(this.Description))
+				container.Controls.Add(new LiteralControl("<span class=\"description\">" + this.Description + "</span>"));
 
 			return editor;
 		}
@@ -140,6 +157,21 @@ namespace Zeus.ContentTypes.Properties
 			rfv.Display = ValidatorDisplay.Dynamic;
 			rfv.Text = this.RequiredText;
 			rfv.ErrorMessage = this.RequiredErrorMessage;
+			container.Controls.Add(rfv);
+
+			return rfv;
+		}
+
+		protected virtual IValidator AddLocallyUniqueValidator(Control container, Control editor)
+		{
+			LocallyUniqueValidator rfv = new LocallyUniqueValidator();
+			rfv.ID = "luv" + this.Name;
+			rfv.ControlToValidate = editor.ID;
+			rfv.Display = ValidatorDisplay.Dynamic;
+			rfv.DisplayName = this.Title;
+			rfv.PropertyName = this.Name;
+			rfv.Text = "*";
+			rfv.ErrorMessage = "*";
 			container.Controls.Add(rfv);
 
 			return rfv;

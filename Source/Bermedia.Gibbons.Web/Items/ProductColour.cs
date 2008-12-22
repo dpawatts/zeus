@@ -10,7 +10,7 @@ namespace Bermedia.Gibbons.Web.Items
 	public class ProductColour : BaseContentItem
 	{
 		[LiteralDisplayer(Title = "Name")]
-		[TextBoxEditor("Name", 10, Required = true)]
+		[TextBoxEditor("Name", 10, Required = true, IsLocallyUnique = true)]
 		public override string Title
 		{
 			get { return base.Title; }
@@ -18,7 +18,7 @@ namespace Bermedia.Gibbons.Web.Items
 		}
 
 		[ColourDisplayer(Title = "Colour")]
-		[ColourEditor("Hex Ref", 20, Required = true)]
+		[ColourEditor("Hex Ref", 20, Required = true, Description = "If you cannot find the hexadecimal code for the colour or are unfamiliar with hexadecimal codes then <a href=\"http://www.colorschemer.com/online.html\" target=\"_blank\">click here</a> to find an alternative converter that allows you to either pick a colour from a palette or convert your RGB references.")]
 		public string HexRef
 		{
 			get { return GetDetail<string>("HexRef", "FFFFFF"); }

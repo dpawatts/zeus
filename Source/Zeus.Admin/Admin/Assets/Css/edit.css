@@ -105,3 +105,16 @@ fieldset legend
 	vertical-align: inherit;
 	width: auto;
 }
+
+.description
+{
+	float: left;
+	margin-left: 165px;
+	color: #808285;
+	font-size: 10px;
+}
+
+a
+{
+	text-decoration: underline;
+}

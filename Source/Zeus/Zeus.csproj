@@ -177,6 +177,8 @@
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
+    <Compile Include="Integrity\IIntegrityManager.cs" />
+    <Compile Include="Integrity\IntegrityManager.cs" />
     <Compile Include="Integrity\NameOccupiedException.cs" />
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
@@ -273,6 +275,7 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
+    <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
     <Compile Include="Web\UI\WebControls\Menu.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabPanel.cs" />
@@ -320,6 +323,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Security\security.castle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Integrity\integrity.castle.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

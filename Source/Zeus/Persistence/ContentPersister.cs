@@ -25,6 +25,33 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been saved</summary>
 		public event EventHandler<ItemEventArgs> ItemSaved;
 
+		/// <summary>Copies an item and all sub-items to a destination</summary>
+		/// <param name="source">The item to copy</param>
+		/// <param name="destination">The destination below which to place the copied item</param>
+		/// <returns>The copied item</returns>
+		public virtual ContentItem Copy(ContentItem source, ContentItem destination)
+		{
+			return Copy(source, destination, true);
+		}
+
+		/// <summary>Copies an item and all sub-items to a destination</summary>
+		/// <param name="source">The item to copy</param>
+		/// <param name="destination">The destination below which to place the copied item</param>
+		/// <param name="includeChildren">Whether child items should be copied as well.</param>
+		/// <returns>The copied item</returns>
+		public virtual ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren)
+		{
+			if (source is ISelfPersister)
+				return (source as ISelfPersister).CopyTo(destination);
+
+			ContentItem cloned = source.Clone(includeChildren);
+
+			cloned.Parent = destination;
+			Save(cloned);
+
+			return cloned;
+		}
+
 		public void Delete(ContentItem contentItem)
 		{
 			if (contentItem is ISelfPersister)

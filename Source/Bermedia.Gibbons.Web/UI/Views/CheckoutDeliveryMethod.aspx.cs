@@ -41,9 +41,9 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			Zeus.Context.Persister.Save(this.ShoppingCart);
 
 			if (this.ShoppingCart.DeliveryType.RequiresShippingAddress)
-				Response.Redirect("checkout-shipping-address.aspx");
+				Response.Redirect("~/checkout-shipping-address.aspx");
 			else
-				Response.Redirect("checkout-payment-details.aspx");
+				Response.Redirect("~/checkout-payment-details.aspx");
 		}
 	}
 }

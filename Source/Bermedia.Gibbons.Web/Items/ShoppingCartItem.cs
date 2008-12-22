@@ -47,17 +47,21 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<GiftWrapType>("GiftWrapType", value); }
 		}
 
-		public decimal Price
+		public virtual decimal PricePerUnit
 		{
 			get
 			{
-				decimal currentPrice = 0;
 				if (this.Size != null && this.Size.CurrentPrice != null)
-					currentPrice = this.Size.CurrentPrice.Value;
+					return this.Size.CurrentPrice.Value;
 				else
-					currentPrice = this.Product.CurrentPrice;
-				return currentPrice * this.Quantity;
+					return this.Product.CurrentPrice;
 			}
+			set { throw new NotImplementedException(); }
+		}
+
+		public decimal Price
+		{
+			get { return this.PricePerUnit * this.Quantity; }
 		}
 
 		protected override string IconName

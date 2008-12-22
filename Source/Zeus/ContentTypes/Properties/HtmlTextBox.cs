@@ -21,7 +21,7 @@ namespace Zeus.ContentTypes.Properties
 				string.Format(@"htmlEditor_init('/Admin/FileManager/default.aspx',
 					{{
 						elements: '{0}',
-						'content_css': '/Admin/Assets/Css/Editor.css'
+						'content_css': '/Assets/Css/Core.css'
 					}}
 					);", this.ClientID), true);
 		}

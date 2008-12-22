@@ -3,7 +3,7 @@ using System.Security.Principal;
 
 namespace Zeus.Security
 {
-	public class AuthorizedRole
+	public class AuthorizedRole : ICloneable
 	{
 		#region Public Properties
 
@@ -39,5 +39,24 @@ namespace Zeus.Security
 				return true;
 			return false;
 		}
+
+		#region ICloneable Members
+
+		/// <summary>Copies this AuthorizedRole clearing id and enclosing item.</summary>
+		/// <returns>A copy of this AuthorizedRole.</returns>
+		public virtual AuthorizedRole Clone()
+		{
+			AuthorizedRole cloned = (AuthorizedRole) this.MemberwiseClone();
+			cloned.ID = 0;
+			cloned.EnclosingItem = null;
+			return cloned;
+		}
+
+		object ICloneable.Clone()
+		{
+			return this.Clone();
+		}
+
+		#endregion
 	}
 }

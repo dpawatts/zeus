@@ -25,7 +25,7 @@ namespace Zeus.FileSystem
 			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(base.Path); }
 		}
 
-		[UploadEditor]
+		[UploadEditor(IsLocallyUnique = true)]
 		public override string Name
 		{
 			get { return base.Name; }

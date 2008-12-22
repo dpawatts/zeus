@@ -22,6 +22,13 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			if (_postedBack)
+				EnsureChildControls();
+		}
+
 		private void AddPropertyControlsRecursive(Control control, IContainable contained)
 		{
 			Control addedControl = contained.AddTo(control);

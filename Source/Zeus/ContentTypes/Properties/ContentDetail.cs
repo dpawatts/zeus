@@ -2,7 +2,7 @@
 
 namespace Zeus.ContentTypes.Properties
 {
-	public abstract class ContentDetail
+	public abstract class ContentDetail : ICloneable
 	{
 		#region Private fields
 
@@ -96,6 +96,26 @@ namespace Zeus.ContentTypes.Properties
 				return new LinkDetail(item, name, (ContentItem) value);
 			else
 				return new ObjectDetail(item, name, value);
+		}
+
+		#endregion
+
+		#region ICloneable Members
+
+		/// <summary>Creates a cloned object with the id set to 0.</summary>
+		/// <returns>A new ContentDetail with the same Name and Value.</returns>
+		public virtual ContentDetail Clone()
+		{
+			ContentDetail cloned = (ContentDetail) Activator.CreateInstance(this.GetType());
+			cloned.ID = 0;
+			cloned.Name = this.Name;
+			cloned.Value = this.Value;
+			return cloned;
+		}
+
+		object ICloneable.Clone()
+		{
+			return this.Clone();
 		}
 
 		#endregion

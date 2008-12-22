@@ -26,7 +26,8 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				{
 					shoppingCart = new Web.Items.ShoppingCart();
 
-					shoppingCart.AddTo(this.Customer);
+					Web.Items.ShoppingCartContainer container = (Web.Items.ShoppingCartContainer) Find.RootItem.GetChild("ShoppingCarts");
+					shoppingCart.AddTo(container);
 					Zeus.Context.Persister.Save(shoppingCart);
 
 					HttpCookie cookie = new HttpCookie("ShoppingCartID", shoppingCart.ID.ToString());

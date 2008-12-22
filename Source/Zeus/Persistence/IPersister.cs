@@ -9,6 +9,8 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been saved</summary>
 		event EventHandler<ItemEventArgs> ItemSaved;
 
+		ContentItem Copy(ContentItem source, ContentItem destination);
+		ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren);
 		void Delete(ContentItem contentItem);
 		ContentItem Get(int id);
 		T Get<T>(int id) where T : ContentItem;

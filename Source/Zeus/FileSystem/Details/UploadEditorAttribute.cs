@@ -16,10 +16,16 @@ namespace Zeus.FileSystem.Details
 			Title = "Upload";
 		}
 
+		[ValidationProperty("Name")]
 		private class CompositeEditor : Control
 		{
 			public FileUpload Upload = new FileUpload();
 			public TextBox ChangeName = new TextBox();
+
+			public string Name
+			{
+				get { return (Upload != null) ? Upload.FileName : ChangeName.Text; }
+			}
 
 			protected override void OnInit(EventArgs e)
 			{
@@ -69,6 +75,7 @@ namespace Zeus.FileSystem.Details
 		protected override Control AddEditor(Control container)
 		{
 			CompositeEditor editor = new CompositeEditor();
+			editor.ID = "compositeEditor";
 			container.Controls.Add(editor);
 			return editor;
 		}
