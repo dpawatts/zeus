@@ -17,15 +17,17 @@ namespace Zeus.Admin
 		{
 			try
 			{
-				if (FormsAuthentication.Authenticate(lgnLogin.UserName, lgnLogin.Password))
+				TextBox txtUserName = (TextBox) lgnLogin.FindControl("UserName");
+				TextBox txtPassword = (TextBox) lgnLogin.FindControl("Password");
+				if (FormsAuthentication.Authenticate(txtUserName.Text, txtPassword.Text))
 				{
 					e.Authenticated = true;
 					FormsAuthentication.RedirectFromLoginPage(lgnLogin.UserName, lgnLogin.RememberMeSet);
 				}
-				else if (System.Web.Security.Membership.ValidateUser(lgnLogin.UserName, lgnLogin.Password))
+				else if (System.Web.Security.Membership.ValidateUser(txtUserName.Text, txtPassword.Text))
 				{
 					e.Authenticated = true;
-					FormsAuthentication.RedirectFromLoginPage(lgnLogin.UserName, lgnLogin.RememberMeSet);
+					FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, lgnLogin.RememberMeSet);
 				}
 			}
 			catch (Exception ex)

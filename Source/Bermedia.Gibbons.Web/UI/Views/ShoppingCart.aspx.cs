@@ -19,7 +19,6 @@ namespace Bermedia.Gibbons.Web.UI.Views
 					Web.Items.ShoppingCartItem shoppingCartItem = new Web.Items.ShoppingCartItem();
 					shoppingCartItem.Product = (Web.Items.StandardProduct) Zeus.Context.Persister.Get(Request.GetRequiredInt("add"));
 					shoppingCartItem.Quantity = Request.GetRequiredInt("quantity");
-					shoppingCartItem.PurchasePricePerUnit = shoppingCartItem.Product.CurrentPrice;
 
 					if (Request.QueryString["size"] != null)
 						shoppingCartItem.Size = (Web.Items.ProductSizeLink) Zeus.Context.Persister.Get(Request.GetRequiredInt("size"));

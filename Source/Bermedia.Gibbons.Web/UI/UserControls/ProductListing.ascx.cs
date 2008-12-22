@@ -17,7 +17,11 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 
 		public string HeaderText
 		{
-			set { h1Header.InnerText = value; }
+			set
+			{
+				h1Header.InnerText = value;
+				h1Header.Visible = !string.IsNullOrEmpty(value);
+			}
 		}
 
 		protected override void OnLoad(EventArgs e)
@@ -27,6 +31,9 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 			DataSourceControl dataSourceControl = this.NamingContainer.FindControl(this.DataSourceID) as DataSourceControl;
 			lsvProducts.DataSource = dataSourceControl;
 			lsvProducts.DataBind();
+
+			if (lsvProducts.Items.Count == 0)
+				h1Header.Visible = false;
 		}
 	}
 }

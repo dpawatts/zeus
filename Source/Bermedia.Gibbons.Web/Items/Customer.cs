@@ -1,4 +1,5 @@
 ﻿using System;
+using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Web.Items
 {
@@ -20,6 +21,16 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return GetDetail<bool>("ReceiveOffers", false); }
 			set { SetDetail<bool>("ReceiveOffers", value); }
+		}
+
+		public DetailCollection ShippingAddresses
+		{
+			get { return GetDetailCollection("ShippingAddresses", true); }
+		}
+
+		public DetailCollection BillingAddresses
+		{
+			get { return GetDetailCollection("BillingAddresses", true); }
 		}
 	}
 }

@@ -42,6 +42,11 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<decimal?>("SalePrice", value); }
 		}
 
+		public decimal? CurrentPrice
+		{
+			get { return (decimal) (this.SalePrice ?? this.RegularPrice); }
+		}
+
 		protected override string IconName
 		{
 			get { return "arrow_join"; }

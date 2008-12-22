@@ -7,10 +7,10 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Shopping Cart</h1>
 
-  <p>The following items are in your shopping cart:</p>
-  
   <isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.ShoppingCartItem, Bermedia.Gibbons.Web" DataKeyNames="ID">
 		<LayoutTemplate>
+		  <p>The following items are in your shopping cart:</p>
+  
 			<table width="700" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<th width="200" valign="top" style="border-bottom:#CCCCCC solid 1px;">Item</th>
@@ -115,6 +115,9 @@
 				</td>
 			</tr>
 		</ItemTemplate>
+		<EmptyDataTemplate>
+			<p><b>There are currently no items in your shopping cart.</b></p>
+		</EmptyDataTemplate>
   </isis:TypedListView>
    
   <gibbons:ProductListing runat="server" DataSourceID="cdsRecommendedProducts" HeaderText="You might also like" />

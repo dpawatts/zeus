@@ -85,6 +85,14 @@
     <Compile Include="Items\BaseCategory.cs" />
     <Compile Include="Items\CheckoutDeliveryMethod.cs" />
     <Compile Include="Items\BaseDeliveryType.cs" />
+    <Compile Include="Items\CheckoutShippingAddress.cs" />
+    <Compile Include="Items\Address.cs" />
+    <Compile Include="Items\CheckoutPaymentDetails.cs" />
+    <Compile Include="Items\CheckoutBillingAddress.cs" />
+    <Compile Include="Items\CheckoutSummary.cs" />
+    <Compile Include="Items\CheckoutConfirmation.cs" />
+    <Compile Include="Items\CountryContainer.cs" />
+    <Compile Include="Items\Country.cs" />
     <Compile Include="Items\RegisterPage.cs" />
     <Compile Include="Items\DeliveryTypeContainer.cs" />
     <Compile Include="Items\DeliveryType.cs" />
@@ -164,6 +172,27 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutDeliveryMethod.aspx.designer.cs">
       <DependentUpon>CheckoutDeliveryMethod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutShippingAddress.aspx.cs">
+      <DependentUpon>CheckoutShippingAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutShippingAddress.aspx.designer.cs">
+      <DependentUpon>CheckoutShippingAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutPaymentDetails.aspx.cs">
+      <DependentUpon>CheckoutPaymentDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutPaymentDetails.aspx.designer.cs">
+      <DependentUpon>CheckoutPaymentDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutBillingAddress.aspx.cs">
+      <DependentUpon>CheckoutBillingAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutBillingAddress.aspx.designer.cs">
+      <DependentUpon>CheckoutBillingAddress.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -294,6 +323,9 @@
     <None Include="Items\ClassDiagram.cd" />
     <Content Include="TsAndCs.htm" />
     <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
+    <Content Include="UI\Views\CheckoutShippingAddress.aspx" />
+    <Content Include="UI\Views\CheckoutPaymentDetails.aspx" />
+    <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
     <Content Include="UI\Views\Register.aspx" />
     <Content Include="UI\Views\Login.aspx" />
     <Content Include="UI\Views\MyAccount.aspx" />

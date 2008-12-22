@@ -22,6 +22,18 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<BaseDeliveryType>("DeliveryType", value); }
 		}
 
+		public Address ShippingAddress
+		{
+			get { return GetDetail<Address>("ShippingAddress", null); }
+			set { SetDetail<Address>("ShippingAddress", value); }
+		}
+
+		public Address BillingAddress
+		{
+			get { return GetDetail<Address>("BillingAddress", null); }
+			set { SetDetail<Address>("BillingAddress", value); }
+		}
+
 		public decimal TotalPrice
 		{
 			get

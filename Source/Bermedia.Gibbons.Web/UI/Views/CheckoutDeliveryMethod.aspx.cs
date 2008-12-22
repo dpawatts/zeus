@@ -40,7 +40,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			this.ShoppingCart.DeliveryType = Zeus.Context.Persister.Get<Web.Items.BaseDeliveryType>(Convert.ToInt32(rblDeliveryMethod.SelectedValue));
 			Zeus.Context.Persister.Save(this.ShoppingCart);
 
-			Response.Redirect("checkout-payment-details.aspx");
+			if (this.ShoppingCart.DeliveryType.RequiresShippingAddress)
+				Response.Redirect("checkout-shipping-address.aspx");
+			else
+				Response.Redirect("checkout-payment-details.aspx");
 		}
 	}
 }

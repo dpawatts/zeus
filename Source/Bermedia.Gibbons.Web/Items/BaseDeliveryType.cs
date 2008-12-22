@@ -20,6 +20,13 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<string>("Description", value); }
 		}
 
+		[CheckBoxEditor("Requires Shipping Address", "", 30, Required = true)]
+		public bool RequiresShippingAddress
+		{
+			get { return GetDetail<bool>("RequiresShippingAddress", true); }
+			set { SetDetail<bool>("RequiresShippingAddress", value); }
+		}
+
 		protected override string IconName
 		{
 			get { return "world_go"; }
