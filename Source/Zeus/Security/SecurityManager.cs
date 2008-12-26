@@ -15,10 +15,10 @@ namespace Zeus.Security
 		/// <returns>True if the item has public access or the principal is allowed to access it.</returns>
 		public virtual bool IsAuthorized(ContentItem item, IPrincipal principal)
 		{
-			if (principal.Identity.Name == "administrator")
+			if (principal != null && principal.Identity.Name == "administrator")
 				return true;
 
-			if (principal.IsInRole("Administrator"))
+			if (principal != null && principal.IsInRole("Administrator"))
 				return true;
 
 			return item.IsAuthorised(principal);

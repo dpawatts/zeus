@@ -57,7 +57,9 @@ namespace Zeus.Web.UI.WebControls
 			IDisplayer displayer = contentType.Displayers.SingleOrDefault(d => d.Name == this.PropertyName);
 			if (displayer == null)
 				throw new ZeusException("Could not find Displayer on property '{0}' on content type '{1}'.", this.PropertyName, contentType.Discriminator);
-			displayer.AddTo(this, contentItem, this.PropertyName);
+			//displayer.AddTo(this, contentItem, this.PropertyName);
+			displayer.InstantiateIn(this);
+			displayer.SetValue(this, contentItem, this.PropertyName);
 		}
 
 		protected virtual void EnsureLayoutTemplate()

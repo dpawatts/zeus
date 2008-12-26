@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Principal;
 
 namespace Zeus.ContentTypes
 {
@@ -21,6 +22,6 @@ namespace Zeus.ContentTypes
 
 		ICollection<ContentType> GetContentTypes();
 		ContentType GetContentType(Type type);
-		IList<ContentType> GetAllowedChildren(ContentType contentType);
+		IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user);
 	}
 }

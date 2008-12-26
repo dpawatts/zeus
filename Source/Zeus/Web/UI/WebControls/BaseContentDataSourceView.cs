@@ -13,7 +13,6 @@ namespace Zeus.Web.UI.WebControls
 
 		private ContentItem _parentItem = null;
 		private IEnumerable _items = null;
-		private string _currentSortExpression = string.Empty;
 
 		#endregion
 
@@ -45,6 +44,11 @@ namespace Zeus.Web.UI.WebControls
 			get { return _parentItem != null; }
 		}
 
+		public override bool CanDelete
+		{
+			get { return true; }
+		}
+
 		public override bool CanRetrieveTotalRowCount
 		{
 			get { return true; }
@@ -68,6 +72,27 @@ namespace Zeus.Web.UI.WebControls
 
 		protected abstract IEnumerable GetItems();
 
+		protected virtual IEnumerable<ContentItem> GetItemsFromIdentifiers(IDictionary keys)
+		{
+			List<ContentItem> items = new List<ContentItem>();
+			foreach (int itemID in keys.Values)
+				items.Add(Zeus.Context.Persister.Get(itemID));
+			return items;
+		}
+
+		protected override int ExecuteDelete(IDictionary keys, IDictionary oldValues)
+		{
+			IEnumerable<ContentItem> items = GetItemsFromIdentifiers(keys);
+
+			foreach (ContentItem item in items)
+				Zeus.Context.Persister.Delete(item);
+
+			if (items.Count() > 0)
+				OnDataSourceViewChanged(EventArgs.Empty);
+
+			return items.Count();
+		}
+
 		protected override System.Collections.IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
 		{
 			IEnumerable allItems = GetCachedItems();
@@ -77,10 +102,21 @@ namespace Zeus.Web.UI.WebControls
 			if (arguments.RetrieveTotalRowCount)
 				arguments.TotalRowCount = allItems.AsQueryable().Count();
 
-			if (!string.IsNullOrEmpty(arguments.SortExpression) && arguments.SortExpression != _currentSortExpression)
+			if (arguments.MaximumRows > 0 && arguments.StartRowIndex >= 0)
 			{
+				allItems = allItems.AsQueryable().Skip(arguments.StartRowIndex);
+				allItems = allItems.AsQueryable().Take(arguments.MaximumRows);
+			}
+
+			if (!string.IsNullOrEmpty(arguments.SortExpression))
+			{
+				if (allItems.AsQueryable().Any())
+				{
+					Array typedArray = Array.CreateInstance(allItems.Cast<object>().First().GetType(), allItems.AsQueryable().Count());
+					Array.Copy(allItems.Cast<object>().ToArray(), typedArray, typedArray.Length);
+					allItems = typedArray;
+				}
 				allItems = allItems.AsQueryable().OrderBy(arguments.SortExpression);
-				_currentSortExpression = arguments.SortExpression;
 			}
 
 			return allItems;

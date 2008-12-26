@@ -7,6 +7,7 @@ using Zeus.ContentTypes.Properties;
 using System.IO;
 using System.Web;
 using System.Diagnostics;
+using System.Security.Principal;
 
 namespace Zeus.ContentTypes
 {
@@ -78,10 +79,18 @@ namespace Zeus.ContentTypes
 				return null;
 		}
 
-		public IList<ContentType> GetAllowedChildren(ContentType contentType)
+		public IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user)
 		{
 			List<ContentType> allowedChildren = new List<ContentType>();
-			allowedChildren.AddRange(contentType.AllowedChildren);
+
+			foreach (ContentType childItem in contentType.AllowedChildren)
+			{
+				if (!childItem.IsDefined)
+					continue;
+				if (!childItem.IsAuthorized(user))
+					continue;
+				allowedChildren.Add(childItem);
+			}
 			allowedChildren.Sort();
 			return allowedChildren;
 		}

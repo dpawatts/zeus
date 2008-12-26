@@ -156,6 +156,17 @@ namespace Zeus
 
 		#region Public Properties (generated)
 
+		public string HierarchicalTitle
+		{
+			get
+			{
+				string result = this.Title;
+				if (this.Parent != null)
+					result = this.Parent.HierarchicalTitle + " - " + result;
+				return result;
+			}
+		}
+
 		/// <summary>The default file extension for this content item, e.g. ".aspx".</summary>
 		public virtual string Extension
 		{
@@ -190,7 +201,7 @@ namespace Zeus
 
 				for (ContentItem ancestorItem = this.Parent; ancestorItem != null; ancestorItem = ancestorItem.Parent)
 					if (ancestorItem.IsPage)
-						return new Uri(VirtualPathUtility.ToAbsolute(ancestorItem.TemplateUrl)).AppendQuery("page", ancestorItem.ID).AppendQuery("item", ID).ToString();
+						return new Url(Web.Url.ToAbsolute(ancestorItem.TemplateUrl)).AppendQuery("page", ancestorItem.ID).AppendQuery("item", ID).ToString();
 
 				if (VersionOf != null)
 					return VersionOf.TemplateUrl;
@@ -569,7 +580,7 @@ namespace Zeus
 			}
 			else // no slash, only a name
 			{
-				foreach (ContentItem child in GetChildren())
+				foreach (ContentItem child in GetChildren(new NullFilter()))
 					if (child.Equals(childName))
 						return child;
 				return null;

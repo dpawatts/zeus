@@ -7,6 +7,8 @@ namespace Zeus.ContentTypes.Properties
 	[AttributeUsage(AttributeTargets.Property)]
 	public class DisplayerAttribute : Attribute, IDisplayer
 	{
+		private Control _displayerControl;
+
 		#region Constructor
 
 		public DisplayerAttribute()
@@ -50,12 +52,15 @@ namespace Zeus.ContentTypes.Properties
 
 		#endregion
 
-		public virtual Control AddTo(Control container, ContentItem item, string propertyName)
+		public virtual void InstantiateIn(Control container)
 		{
-			Control displayer = (Control) Activator.CreateInstance(this.ControlType);
-			displayer.SetValue(this.ControlPropertyName, item[propertyName], false);
-			container.Controls.Add(displayer);
-			return displayer;
+			_displayerControl = (Control) Activator.CreateInstance(this.ControlType);
+			container.Controls.Add(_displayerControl);
+		}
+
+		public virtual void SetValue(Control container, ContentItem item, string propertyName)
+		{
+			_displayerControl.SetValue(this.ControlPropertyName, item[propertyName], false);
 		}
 	}
 }

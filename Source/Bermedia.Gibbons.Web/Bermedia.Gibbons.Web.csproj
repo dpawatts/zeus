@@ -339,6 +339,8 @@
     <Content Include="App_Browsers\RewriteFormAction.browser" />
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="Assets\Images\Icons\email.png" />
+    <Content Include="Assets\Images\Icons\newspaper.png" />
     <Content Include="TsAndCs.htm" />
     <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
     <Content Include="UI\Views\CheckoutShippingAddress.aspx" />

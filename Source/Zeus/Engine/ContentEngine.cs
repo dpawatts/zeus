@@ -10,6 +10,7 @@ using Castle.Windsor.Configuration.Interpreters;
 using Castle.Core.Resource;
 using Castle.Windsor.Installer;
 using Castle.MicroKernel;
+using Zeus.Security;
 
 namespace Zeus.Engine
 {
@@ -32,6 +33,11 @@ namespace Zeus.Engine
 		public IPersister Persister
 		{
 			get { return _container.Resolve<IPersister>(); }
+		}
+
+		public ISecurityManager SecurityManager
+		{
+			get { return _container.Resolve<ISecurityManager>(); }
 		}
 
 		public Host Host

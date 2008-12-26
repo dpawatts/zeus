@@ -3,9 +3,9 @@ using System.Web.UI;
 
 namespace Zeus.ContentTypes.Properties
 {
-	public interface IDisplayer : IUniquelyNamed
+	public interface IDisplayer : IUniquelyNamed, ITemplate
 	{
 		string Title { get; }
-		Control AddTo(Control container, ContentItem item, string propertyName);
+		void SetValue(Control container, ContentItem item, string propertyName);
 	}
 }

@@ -123,6 +123,7 @@
     <Compile Include="Configuration\HostSection.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
+    <Compile Include="ContentTypes\ContentTypeAuthorizedRolesAttribute.cs" />
     <Compile Include="ContentTypes\ContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
@@ -183,6 +184,8 @@
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
+    <Compile Include="Linq\Filters\NullFilter.cs" />
+    <Compile Include="Linq\Filters\PageFilter.cs" />
     <Compile Include="Linq\ItemFinder.cs" />
     <Compile Include="Linq\Filters\AccessFilter.cs" />
     <Compile Include="Linq\Filters\CompositeFilter.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Persistence\SessionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthorizedRole.cs" />
+    <Compile Include="Security\AuthorizedRolesAttribute.cs" />
     <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\SecurityEnforcer.cs" />
     <Compile Include="Security\SecurityManager.cs" />
@@ -259,6 +263,7 @@
     <Compile Include="Web\UI\WebControls\BaseContentDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
       <SubType>Code</SubType>
@@ -278,6 +283,7 @@
     <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
     <Compile Include="Web\UI\WebControls\Menu.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
+    <Compile Include="Web\UI\WebControls\P.cs" />
     <Compile Include="Web\UI\WebControls\TabPanel.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">
       <SubType>Code</SubType>
@@ -326,6 +332,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Integrity\integrity.castle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\UI\WebControls\ItemGridView.LayoutTemplate.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

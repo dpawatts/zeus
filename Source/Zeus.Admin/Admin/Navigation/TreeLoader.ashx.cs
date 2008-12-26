@@ -4,6 +4,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using Isis.Web;
 using Zeus.Web.UI.WebControls;
+using Zeus.Linq.Filters;
 
 namespace Zeus.Admin.Navigation
 {
@@ -16,8 +17,12 @@ namespace Zeus.Admin.Navigation
 			string path = context.Request.GetRequiredString("selected");
 			ContentItem selectedItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(path);
 
+			ItemFilter filter = new AccessFilter(context.User, Zeus.Context.SecurityManager);
+			if (context.User.Identity.Name != "administrator")
+				filter = new CompositeFilter(new PageFilter(), filter);
 			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
 				.LinkProvider(BuildLink)
+				.Filters(filter)
 				.ToControl();
 
 			Zeus.Admin.Web.UI.WebControls.Tree.AppendExpanderNodeRecursive(tree);

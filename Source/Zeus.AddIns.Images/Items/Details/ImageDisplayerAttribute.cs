@@ -9,6 +9,8 @@ namespace Zeus.AddIns.Images.Items.Details
 {
 	public class ImageDisplayerAttribute : DisplayerAttribute
 	{
+		private DynamicImage _dynamicImage;
+
 		public int Width
 		{
 			get;
@@ -32,12 +34,16 @@ namespace Zeus.AddIns.Images.Items.Details
 			this.ResizeMode = ResizeMode.Uniform;
 		}
 
-		public override Control AddTo(Control container, ContentItem item, string propertyName)
+		public override void InstantiateIn(Control container)
 		{
-			DynamicImage dynamicImage = null;
+			
+		}
+
+		public override void SetValue(Control container, ContentItem item, string propertyName)
+		{
 			if (item[propertyName] as Image != null)
 			{
-				dynamicImage = new DynamicImage
+				DynamicImage dynamicImage = new DynamicImage
 				{
 					CssClass = "image",
 					Layers = new LayerCollection
@@ -57,7 +63,6 @@ namespace Zeus.AddIns.Images.Items.Details
 				};
 				container.Controls.Add(dynamicImage);
 			}
-			return dynamicImage;
 		}
 	}
 }

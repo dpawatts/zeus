@@ -41,6 +41,11 @@ namespace Zeus
 			get { return Current.Persister; }
 		}
 
+		public static Security.ISecurityManager SecurityManager
+		{
+			get { return Current.SecurityManager; }
+		}
+
 		public static IUrlParser UrlParser
 		{
 			get { return Current.UrlParser; }

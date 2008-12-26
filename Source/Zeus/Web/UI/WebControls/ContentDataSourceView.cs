@@ -27,6 +27,11 @@ namespace Zeus.Web.UI.WebControls
 		private ContentDataSourceAxis _axis = ContentDataSourceAxis.Child;
 		private ParameterCollection _whereParameters;
 
+		public override bool CanPage
+		{
+			get { return true; }
+		}
+
 		public string OfType
 		{
 			get

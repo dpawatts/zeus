@@ -49,6 +49,7 @@ namespace Zeus.Admin
 			HyperLink link = new HyperLink();
 			link.NavigateUrl = this.Url;
 			link.Target = this.Target;
+			link.ToolTip = this.ToolTip;
 
 			Image image = new Image();
 			image.ImageUrl = this.ImageUrl;

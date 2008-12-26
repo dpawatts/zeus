@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zeus.ContentTypes.Properties;
 using Isis.Reflection;
+using System.Security.Principal;
 
 namespace Zeus.ContentTypes
 {
@@ -57,6 +58,13 @@ namespace Zeus.ContentTypes
 			internal set;
 		}
 
+		/// <summary>Gets roles or users allowed to edit items defined by this content type.</summary>
+		public IList<string> AuthorizedRoles
+		{
+			get;
+			internal set;
+		}
+
 		public IEnumerable<Property> Properties
 		{
 			get;
@@ -103,6 +111,16 @@ namespace Zeus.ContentTypes
 		{
 			if (!this.AllowedChildren.Contains(definition))
 				this.AllowedChildren.Add(definition);
+		}
+
+		public bool IsAuthorized(IPrincipal user)
+		{
+			if (user == null || this.AuthorizedRoles == null)
+				return true;
+			foreach (string role in this.AuthorizedRoles)
+				if (string.Equals(user.Identity.Name, role, StringComparison.OrdinalIgnoreCase) || user.IsInRole(role))
+					return true;
+			return false;
 		}
 
 		/// <summary>Removes an allowed child definition from the list of allowed definitions if not already removed.</summary>

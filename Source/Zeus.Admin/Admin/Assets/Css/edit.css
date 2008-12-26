@@ -1,6 +1,7 @@
 div.editDetail
 {
 	margin-top: 15px;
+	clear: both;
 }
 
 .editorLabel {
@@ -117,4 +118,37 @@ fieldset legend
 a
 {
 	text-decoration: underline;
+}
+
+span.nameLabel
+{
+	font-size: 14px;
+	color: #808285;
+	display: block;
+	float: left;
+}
+
+span.edit {
+	width: 48px;
+	padding: 0;
+}
+
+span.edit a {
+	display: block;
+	height: 23px;
+	width: 54px;
+	text-indent: -99999px;
+	clear:both;
+	float:left;
+	margin-top: 3px;
+	margin-bottom:15px;
+	margin-left:165px;
+}
+
+span.edit a {
+	background: url('../images/view/edit.gif') top left no-repeat;
+}
+
+span.edit a:hover {
+	background-position: bottom left;
 }

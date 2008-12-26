@@ -22,7 +22,7 @@ namespace Zeus.Admin
 				if (FormsAuthentication.Authenticate(txtUserName.Text, txtPassword.Text))
 				{
 					e.Authenticated = true;
-					FormsAuthentication.RedirectFromLoginPage(lgnLogin.UserName, lgnLogin.RememberMeSet);
+					FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, lgnLogin.RememberMeSet);
 				}
 				else if (System.Web.Security.Membership.ValidateUser(txtUserName.Text, txtPassword.Text))
 				{

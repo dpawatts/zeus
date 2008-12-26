@@ -14,7 +14,10 @@
 		$(document).bind("NameEditor_NameChanged", function(event, titleTextBox) {
 			var newTitle = getNameFromTitle($(titleTextBox).val());
 			t.each(function() {
-				$(this).val(newTitle);
+				if (this.tagName == "SPAN")
+					$(this).text(newTitle);
+				else
+					$(this).val(newTitle);
 			});
 		});
 		$("#" + options.titleEditorID).change(function() {

@@ -22,5 +22,10 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return this.GetType().Name; }
 		}
+
+		public override bool IsPage
+		{
+			get { return false; }
+		}
 	}
 }

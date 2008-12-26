@@ -60,7 +60,7 @@ namespace Zeus.ContentTypes.Properties
 			if (this.ExcludeSelf)
 				items = items.Where(i => i != item);
 			return items.OrderBy(i => i.Title)
-				.Select(i => new ListItem { Value = i.ID.ToString(), Text = i.Title })
+				.Select(i => new ListItem { Value = i.ID.ToString(), Text = i.HierarchicalTitle })
 				.ToArray();
 		}
 	}

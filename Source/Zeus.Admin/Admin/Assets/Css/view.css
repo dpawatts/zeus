@@ -4,27 +4,46 @@ table.tb {
 }
 
 table.tb th  {
-	background: #c9c9c9;
 	color: #fff;
 	padding: 3px;
 	font-size: 14px;
+	background-color: #C9C9C9;
 }
 
-table.tb th.on {
-	background: #aeaeae url('../images/view/arrowDown.gif') 97% 50% no-repeat;
+table.tb th.data {
+	background: #C9C9C9 url(../images/view/arrowSortable.gif) no-repeat 2px 3px;
+	padding-left: 16px;
 }
 
-table.tb th.hover {
-	background: #b7b7b7;
+table.tb th:hover {
+	background-color: #b7b7b7;
 }
 
+table.tb td:hover {
+	background-color: #e2e2e2;
+}
+
+table.tb tr > th.asc
+{
+	/* override the sorting icon */
+	background: #C9C9C9 url(../images/view/arrowUp.gif) no-repeat 2px 3px;
+}
+table.tb tr > th.desc
+{
+	/* override the sorting icon */
+	background: #C9C9C9 url(../images/view/arrowDown.gif) no-repeat 2px 3px;
+}
 
 table.tb td {
-	background: #f1f2f2;
+	background-color: #f1f2f2;
 	font-size: 11px;
 	color: #808285;
 	vertical-align: middle;
 	padding: 3px;
+}
+
+table.tb td.sort {
+	background-color: #E6E8E8;
 }
 
 table.tb td, table.tb th {
@@ -59,4 +78,102 @@ table.tb .edit a {
 
 table.tb .edit a:hover, .add a:hover {
 	background-position: bottom left;
+}
+
+/* Delete buttons */
+
+.delete {
+	font-size: 14px;
+	display: block;
+	height: 22px;
+	color: #a7a9ac;
+	background: url('../images/view/trash.gif') bottom left no-repeat;
+	padding: 7px 0 0px 20px;
+	line-height: 25px;
+	float: left;
+	position: relative;
+	bottom: 8px;
+	font-weight: bold;
+	
+}
+.deleteOn {
+	font-size: 14px;
+	display: block;
+	height: 22px;
+	color: #a7a9ac;
+	background: url('../images/view/trashOpen.gif') bottom left no-repeat;
+	padding: 7px 0 0px 20px;
+	line-height: 25px;
+	float: left;
+	position: relative;
+	bottom: 8px;
+	font-weight: bold;
+}
+
+.delete:hover {
+	background: url('../images/view/trashOpen.gif') bottom left no-repeat;
+	color: #8b8c8d;
+}
+
+.confirm {
+	display: block;
+	background: url('../images/view/confirm.gif') top left no-repeat;
+	height: 12px;
+	width: 48px;
+	float: left;
+	text-indent: -9999px;
+	margin: 5px 0 0 10px;
+}
+
+.cancel {
+	display: block;
+	background: url('../images/view/cancel.gif') top left no-repeat;
+	height: 12px;
+	width: 46px;
+	float: left;
+	text-indent: -9999px;
+	margin: 5px 0 0 3px;
+}
+
+.cancel:hover, .confirm:hover {
+	background-position: left bottom;
+}
+
+/* Page numbers*/	
+
+.gridToolbar
+{
+	/*background: #f1f2f2;
+	padding: 2px;
+	height: 20px;*/
+}
+
+.pageNo {
+	float: right;
+	width: 300px;
+	text-align: right;
+}
+
+.pageNo select, .pageNo input[type="text"] {
+	color: #a7a9ac;
+}
+
+.pageNo span {
+	font-size: 12px;
+	font-weight: bold;
+	display: inline;
+	color: #a7a9ac;
+}
+
+.pageNo input[type="image"] {
+	padding: 3px;
+	border: solid 1px #a7a9ac;
+	vertical-align: text-bottom;
+}
+
+.divide {
+	height: 1px;
+	background: #aeaeae;
+	clear: both;
+	margin: 0 0 10px 0;
 }

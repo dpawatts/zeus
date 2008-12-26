@@ -15,5 +15,10 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return "page_gear"; }
 		}
+
+		public override bool IsPage
+		{
+			get { return true; }
+		}
 	}
 }

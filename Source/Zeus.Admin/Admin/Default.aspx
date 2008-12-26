@@ -35,10 +35,11 @@
 		</div>
 		
 		<div id="toolbar">
-			<a href="/admin/view.aspx?selected=/Brands/&page=9" target="preview"><img src="/assets/images/icons/ipod_cast.png" /></a>
-			<a href="/admin/view.aspx?selected=/ProductSizes/&page=52" target="preview"><img src="/assets/images/icons/arrow_out.png" /></a>
-			<a href="/admin/view.aspx?selected=/ProductColours/&page=49" target="preview"><img src="/assets/images/icons/color_swatch.png" /></a>
-			<a href="/admin/view.aspx?selected=/GiftWrapTypes/&page=54" target="preview"><img src="/assets/images/icons/package_green.png" /></a>
+			<a href="/admin/view.aspx?selected=/Brands/&page=9" target="preview" title="Brands"><img src="/assets/images/icons/ipod_cast.png" /></a>
+			<a href="/admin/view.aspx?selected=/ProductSizes/&page=52" target="preview" title="Product Sizes"><img src="/assets/images/icons/arrow_out.png" /></a>
+			<a href="/admin/view.aspx?selected=/ProductColours/&page=49" target="preview" title="Product Colours"><img src="/assets/images/icons/color_swatch.png" /></a>
+			<a href="/admin/view.aspx?selected=/GiftWrapTypes/&page=54" target="preview" title="Gift Wrap Types"><img src="/assets/images/icons/package_green.png" /></a>
+			<a href="/admin/view.aspx?selected=/Newsletter Subscriptions/&page=194" target="preview" title="Newsletter Subscriptions"><img src="/assets/images/icons/email.png" /></a>
 			<!--div class="separator">&nbsp;</div-->
 			<asp:PlaceHolder runat="server" ID="plcToolbar" />
 		</div>

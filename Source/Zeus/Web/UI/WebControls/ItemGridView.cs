@@ -11,13 +11,22 @@ using System.Web;
 using System.Collections.Generic;
 using System.Data;
 using System.Collections;
+using Isis.Web.UI.WebControls;
+using Isis.Reflection;
+using System.Reflection;
+using Isis.Web.UI.HtmlControls;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class ItemGridView : CompositeControl
+	public class ItemGridView : ListView
 	{
-		private GridView _innerGridView;
-		private Literal _totalRecords;
+		private ContentType _contentType;
+		private int? _sortCellIndex;
+
+		public ItemGridView()
+		{
+			this.DataKeyNames = new string[] { "ID" };
+		}
 
 		public ContentItem CurrentItem
 		{
@@ -25,165 +34,220 @@ namespace Zeus.Web.UI.WebControls
 			set;
 		}
 
-		protected override HtmlTextWriterTag TagKey
+		private ContentType ContentType
 		{
-			get { return HtmlTextWriterTag.Div; }
+			get
+			{
+				if (_contentType == null)
+				{
+					IContentTypeManager contentTypeManager = Zeus.Context.Current.ContentTypes;
+					if (this.CurrentItem.Children.Any())
+						_contentType = contentTypeManager.GetContentType(this.CurrentItem.Children[0].GetType());
+				}
+				return _contentType;
+			}
 		}
 
-		protected override void CreateChildControls()
+		protected override void CreateLayoutTemplate()
 		{
-			base.CreateChildControls();
+			this.LayoutTemplate = new LayoutTemplateControl(this.Page, this.ContentType);
+			this.ItemTemplate = new ItemTemplateControl(this.ContentType);
 
-			if (this.CurrentItem.Children.Count > 0)
+			base.CreateLayoutTemplate();
+		}
+
+		protected override bool OnBubbleEvent(object source, EventArgs e)
+		{
+			if (e is CommandEventArgs)
 			{
-				_totalRecords = new Literal();
-				this.Controls.Add(_totalRecords);
-
-				_innerGridView = new GridView();
-				_innerGridView.ID = "innerGridView";
-				_innerGridView.CssClass = "tb";
-				_innerGridView.HeaderStyle.CssClass = "titles";
-
-				_innerGridView.AllowPaging = true;
-				_innerGridView.PageSize = 25;
-				_innerGridView.PagerSettings.Mode = PagerButtons.Numeric;
-				_innerGridView.PageIndexChanging += new GridViewPageEventHandler(_innerGridView_PageIndexChanging);
-
-				_innerGridView.AllowSorting = true;
-				_innerGridView.Sorting += new GridViewSortEventHandler(_innerGridView_Sorting);
-
-				_innerGridView.AutoGenerateColumns = false;
-
-				IContentTypeManager contentTypeManager = Zeus.Context.Current.ContentTypes;
-				ContentType contentType = contentTypeManager.GetContentType(this.CurrentItem.Children[0].GetType());
-
-				TemplateField deleteField = new TemplateField();
-				deleteField.ItemStyle.Width = Unit.Pixel(20);
-				deleteField.HeaderImageUrl = "/admin/assets/images/littleTick.gif";
-				deleteField.HeaderStyle.CssClass = "check";
-				deleteField.ItemStyle.CssClass = "check";
-				deleteField.ItemTemplate = new DeleteButtonTemplate();
-				_innerGridView.Columns.Add(deleteField);
-
-				ImageField iconField = new ImageField();
-				iconField.ItemStyle.Width = Unit.Pixel(20);
-				iconField.DataImageUrlField = "IconUrl";
-				_innerGridView.Columns.Add(iconField);
-
-				foreach (IDisplayer displayer in contentType.Displayers)
+				string commandName = ((CommandEventArgs) e).CommandName;
+				if (commandName != null)
 				{
-					TemplateField displayField = new TemplateField();
-					displayField.ItemTemplate = new DisplayTemplate(displayer);
-					displayField.HeaderText = displayer.Title;
-					displayField.SortExpression = displayer.Name;
-					_innerGridView.Columns.Add(displayField);
+					if (commandName == "Delete")
+					{
+						bool flag = false;
+						foreach (ListViewDataItem item in this.Items)
+						{
+							CheckBox box = item.FindControl("chkDelete") as CheckBox;
+							if (box != null)
+							{
+								flag = true;
+								if (box.Checked)
+									this.DeleteItem(item.DisplayIndex);
+							}
+						}
+						if (flag)
+							return true;
+					}
+				}
+			}
+			return base.OnBubbleEvent(source, e);
+		}
+
+		protected override void OnItemDataBound(ListViewItemEventArgs e)
+		{
+			base.OnItemDataBound(e);
+
+			//  if there is no sort expression, don't bother
+			if (this.SortExpression.Length > 0)
+			{
+				//  if this is the first time ItemDataBound has fired, figure out what column
+				//  is being sorted by
+				if (this._sortCellIndex == null)
+				{
+					HtmlTableRow header = ((HtmlTable) this.FindControl("dataTable")).Rows[0];
+
+					//  loop through the cells and find the one that contains the linkbutton
+					//  with the commandargument of the ListView's current SortExpression
+					for (int i = 0; i < header.Cells.Count; i++)
+					{
+						HtmlTableCell th = header.Cells[i];
+						//  find the LinkButton control
+						foreach (Control c in th.Controls)
+						{
+							LinkButton linkButton = c as LinkButton;
+							if (linkButton != null && linkButton.CommandArgument == this.SortExpression)
+							{
+								//  keep track of the cell index
+								this._sortCellIndex = i;
+
+								//  add the sort class to this item                        
+								string originalHeaderStyle = th.Attributes["class"].Replace("asc", string.Empty).Replace("desc", string.Empty);
+								th.Attributes["class"] = string.Format("{0} {1}", originalHeaderStyle, this.SortDirection == SortDirection.Ascending ? "asc" : "desc").Trim();
+								break;
+							}
+						}
+					}
 				}
 
-				TemplateField editField = new TemplateField();
-				editField.ItemStyle.Width = Unit.Pixel(50);
-				editField.HeaderStyle.CssClass = "edit";
-				editField.ItemStyle.CssClass = "edit";
-				editField.ItemTemplate = new EditButtonTemplate();
-				_innerGridView.Columns.Add(editField);
-
-				this.Controls.Add(_innerGridView);
-
-				_innerGridView.DataSource = this.CurrentItem.Children;
-				ReBind();
+				//  set the cells css class as well
+				HtmlTableRow tr = (HtmlTableRow) e.Item.FindControl("row");
+				HtmlTableCell td = tr.Cells[this._sortCellIndex.Value];
+				string originalCellStyle = td.Attributes["class"];
+				td.Attributes["class"] = string.Format("{0} {1}", originalCellStyle, "sort").Trim();
 			}
 		}
 
-		private void _innerGridView_Sorting(object sender, GridViewSortEventArgs e)
-		{
-			IList<ContentItem> dataSource = _innerGridView.DataSource as IList<ContentItem>;
-			Array typedDataSource = Array.CreateInstance(dataSource.First().GetType(), dataSource.Count);
-			Array.Copy(dataSource.ToArray(), typedDataSource, dataSource.Count);
+		#region LayoutTemplateControl class
 
-			if (dataSource != null)
+		private class LayoutTemplateControl : ITemplate
+		{
+			public LayoutTemplateControl(Page currentPage, ContentType contentType)
 			{
-				_innerGridView.DataSource = typedDataSource.AsQueryable().OrderBy(e.SortExpression + " " + e.SortDirection).Cast<ContentItem>().ToList();
-				ReBind();
-			}
-		}
-
-		private void _innerGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
-		{
-			_innerGridView.PageIndex = e.NewPageIndex;
-			ReBind();
-		}
-
-		private void ReBind()
-		{
-			_innerGridView.DataBind();
-			_totalRecords.Text = string.Format("<p>There are {0} total records.</p>", _innerGridView.Rows.Count);
-		}
-
-		private class DeleteButtonTemplate : ITemplate
-		{
-			public void InstantiateIn(System.Web.UI.Control container)
-			{
-				container.Controls.Add(new CheckBox { ID = "chkDelete", CssClass = "orangeChk" });
-			}
-		}
-
-		private class DisplayTemplate : ITemplate
-		{
-			private IDisplayer _displayer;
-
-			public DisplayTemplate(IDisplayer displayer)
-			{
-				_displayer = displayer;
+				this.CurrentPage = currentPage;
+				this.ContentType = contentType;
 			}
 
-			public void InstantiateIn(System.Web.UI.Control container)
-			{
-				PlaceHolder placeHolder = new PlaceHolder();
-				placeHolder.DataBinding += new EventHandler(placeHolder_DataBinding);
-				container.Controls.Add(placeHolder);
-			}
-
-			private void placeHolder_DataBinding(object sender, EventArgs e)
-			{
-				PlaceHolder placeHolder = (PlaceHolder) sender;
-				GridViewRow row = (GridViewRow) placeHolder.NamingContainer;
-				_displayer.AddTo(placeHolder, (ContentItem) row.DataItem, _displayer.Name);
-			}
-		}
-
-		private class EditButtonTemplate : ITemplate
-		{
-			public int ID
+			public Page CurrentPage
 			{
 				get;
 				set;
 			}
 
-			public string Title
+			public ContentType ContentType
 			{
 				get;
 				set;
 			}
 
-			public void InstantiateIn(System.Web.UI.Control container)
+			public void InstantiateIn(Control container)
 			{
-				HyperLink link = new HyperLink
+				string layoutTemplateString = Assembly.GetExecutingAssembly().GetStringResource(typeof(ItemGridView).FullName + ".LayoutTemplate.ascx");
+				Control layoutTemplate = this.CurrentPage.ParseControl(layoutTemplateString);
+				container.Controls.Add(layoutTemplate);
+
+				// Add column headers to layout template.
+				if (this.ContentType != null)
+				{
+					Control columnsPlaceholder = layoutTemplate.Controls[5].Controls[0];
+					int index = 1;
+					foreach (IDisplayer displayer in this.ContentType.Displayers)
+					{
+						HtmlTableCell sortableColumnHeader = new HtmlTableCell("th");
+						sortableColumnHeader.Attributes["class"] = "data";
+						columnsPlaceholder.Controls.AddAt(index++, sortableColumnHeader);
+
+						LinkButton linkButton = new LinkButton { ID = "lnkSort" + displayer.Name, Text = displayer.Title, CommandName = "Sort", CommandArgument = displayer.Name };
+						sortableColumnHeader.Controls.Add(linkButton);
+					}
+				}
+			}
+		}
+
+		#endregion
+
+		#region ItemTemplateControl class
+
+		private class ItemTemplateControl : ITemplate
+		{
+			private int _autoID = 0;
+
+			public ItemTemplateControl(ContentType contentType)
+			{
+				this.ContentType = contentType;
+			}
+
+			public ContentType ContentType
+			{
+				get;
+				set;
+			}
+
+			public void InstantiateIn(Control container)
+			{
+				HtmlTableRow tr = new HtmlTableRow { ID = "row" };
+				container.Controls.Add(tr);
+
+				HtmlTableCell tdDelete = new HtmlTableCell();
+				tdDelete.Attributes["class"] = "check";
+				tr.Controls.Add(tdDelete);
+
+				CheckBox chkDelete = new CheckBox { ID = "chkDelete" };
+				tdDelete.Controls.Add(chkDelete);
+
+				foreach (IDisplayer displayer in this.ContentType.Displayers)
+				{
+					HtmlTableCell td = new HtmlTableCell();
+					tr.Controls.Add(td);
+
+					PlaceHolder placeHolder = new PlaceHolder { ID = displayer.Name };
+					displayer.InstantiateIn(placeHolder);
+					placeHolder.DataBinding += new EventHandler(placeHolder_DataBinding);
+					td.Controls.Add(placeHolder);
+				}
+
+				HtmlTableCell tdEdit = new HtmlTableCell();
+				tdEdit.Attributes["class"] = "edit";
+				tr.Controls.Add(tdEdit);
+
+				HyperLink editLink = new HyperLink
 				{
 					ID = "btnShowPopup",
 					CssClass = "thickbox",
 					Text = "Edit"
 				};
-				link.DataBinding += new EventHandler(link_DataBinding);
-
-				container.Controls.Add(link);
+				editLink.DataBinding += new EventHandler(editLink_DataBinding);
+				tdEdit.Controls.Add(editLink);
 			}
 
-			private void link_DataBinding(object sender, EventArgs e)
+			private void placeHolder_DataBinding(object sender, EventArgs e)
+			{
+				PlaceHolder placeHolder = (PlaceHolder) sender;
+				ListViewDataItem listViewDataItem = (ListViewDataItem) placeHolder.NamingContainer;
+				IDisplayer displayer = this.ContentType.Displayers.Single(d => d.Name == placeHolder.ID);
+				displayer.SetValue(placeHolder, (ContentItem) listViewDataItem.DataItem, displayer.Name);
+			}
+
+			private void editLink_DataBinding(object sender, EventArgs e)
 			{
 				HyperLink link = (HyperLink) sender;
-				GridViewRow row = (GridViewRow) link.NamingContainer;
-				link.ToolTip = string.Format("Details for {0}", DataBinder.Eval(row.DataItem, "Title"));
-				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=700", HttpUtility.UrlEncode(DataBinder.Eval(row.DataItem, "Path").ToString()));
+				ListViewDataItem listViewDataItem = (ListViewDataItem) link.NamingContainer;
+				link.ToolTip = string.Format("Details for {0}", DataBinder.Eval(listViewDataItem.DataItem, "Title"));
+				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=700",
+					HttpUtility.UrlEncode(DataBinder.Eval(listViewDataItem.DataItem, "Path").ToString()));
 			}
 		}
+
+		#endregion
 	}
 }

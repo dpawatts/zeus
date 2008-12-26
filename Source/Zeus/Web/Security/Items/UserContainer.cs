@@ -23,6 +23,11 @@ namespace Zeus.Web.Security.Items
 			get { return "~/Admin/Assets/Images/Icons/group.png"; }
 		}
 
+		public override bool IsPage
+		{
+			get { return false; }
+		}
+
 		[TextBoxEditor("Roles", 100, TextMode = TextBoxMode.MultiLine)]
 		public virtual string Roles
 		{

@@ -7,21 +7,24 @@ namespace Zeus.ContentTypes.Properties
 {
 	public class ColourDisplayerAttribute : DisplayerAttribute
 	{
-		public override Control AddTo(Control container, ContentItem item, string propertyName)
+		private Panel _panel;
+
+		public override void InstantiateIn(Control container)
+		{
+			_panel = new Panel();
+			_panel.Width = Unit.Pixel(50);
+			_panel.Height = Unit.Pixel(17);
+			container.Controls.Add(_panel);
+		}
+
+		public override void SetValue(Control container, ContentItem item, string propertyName)
 		{
 			string hexRef = item[propertyName] as string;
-			Control result = null;
 			if (hexRef != null)
 			{
-				Panel panel = new Panel();
-				panel.BackColor = ColorTranslator.FromHtml("#" + hexRef);
-				panel.Width = Unit.Pixel(50);
-				panel.Height = Unit.Pixel(17);
-				panel.ToolTip = hexRef;
-				container.Controls.Add(panel);
-				result = panel;
+				_panel.BackColor = ColorTranslator.FromHtml("#" + hexRef);
+				_panel.ToolTip = hexRef;
 			}
-			return result;
 		}
 	}
 }

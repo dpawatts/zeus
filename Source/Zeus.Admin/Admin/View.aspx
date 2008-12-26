@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/thickbox.js"></script>
 	<script type="text/javascript" src="assets/js/zeus.js"></script>
+	<script type="text/javascript" src="assets/js/view.js"></script>
 	
 	<script type="text/javascript">
 	function updated() {
@@ -21,6 +22,8 @@
 		if (args.get_isPartialLoad()) {
 			//  reapply the thick box stuff
 			tb_init('a.thickbox');
+
+			delButtons();
 		}
 	}
 	</script>
@@ -32,10 +35,11 @@
 	
 	<p><span class="add"><a href="New.aspx?selected=<asp:Literal runat="server" Text="<%$ CurrentPage:Path %>" />">Add</a></span></p>
 	<br />
-		
-	<asp:UpdatePanel runat="server">
+	
+	<asp:UpdatePanel runat="server" ID="updUpdatePanel">
 		<ContentTemplate>
-			<zeus:ItemGridView runat="server" ID="zeusItemGridView" />
+			<zeus:ItemGridView runat="server" ID="zeusItemGridView" DataSourceID="cdsChildren" />
+			<zeus:ContentDataSource runat="server" ID="cdsChildren" />
 			<asp:Button runat="server" ID="btnRefreshGrid" style="display:none" OnClick="btnRefreshGrid_Click" />
 		</ContentTemplate>
 	</asp:UpdatePanel>
