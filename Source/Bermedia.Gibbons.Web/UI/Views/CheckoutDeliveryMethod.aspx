@@ -6,7 +6,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Choose Delivery Method</h1>
 	
-	<p>Please <a href="/app_assets/images/hamilton.jpg" target="_blank">view the map of Hamilton</a> to check the city delivery limits.</p>
+	<p><strong>Welcome back, <%= this.Customer.FirstName %>.</strong><br />
+	Please <a href="/assets/images/hamilton.jpg" target="_blank">view the map of Hamilton</a> to check the city delivery limits.</p>
 	
 	<asp:RadioButtonList runat="server" ID="rblDeliveryMethod" DataSourceID="cdsDeliveryTypes" DataTextField="Description" DataValueField="ID" />
 	<zeus:ContentDataSource runat="server" ID="cdsDeliveryTypes" Axis="Descendant" Query="RootItem" OfType="Bermedia.Gibbons.Web.Items.BaseDeliveryType" />

@@ -60,7 +60,7 @@
 
 					<td valign="top">&nbsp;</td>
 					<td colspan="4" align="right" valign="top">
-						<sitdap:DynamicImageButton runat="server" ID="btnUpdateQuantities" TemplateName="WhiteButton" AlternateText="update quantities" OnClick="btnUpdateQuantities_Click">
+						<sitdap:DynamicImageButton runat="server" ID="btnUpdateQuantities" TemplateName="FixedWidthWhiteButton" AlternateText="update quantities" OnClick="btnUpdateQuantities_Click">
 							<Layers>
 								<sitdap:TextLayer Name="Text" Text="update quantities" />
 							</Layers>
@@ -72,7 +72,7 @@
 					<td valign="top">&nbsp;</td>
 					<td valign="top">&nbsp;</td>
 					<td colspan="4" align="right" valign="top">
-						<sitdap:DynamicImageButton runat="server" ID="btnContinueShopping" TemplateName="WhiteButton" AlternateText="continue shopping" OnClick="btnContinueShopping_Click">
+						<sitdap:DynamicImageButton runat="server" ID="btnContinueShopping" TemplateName="FixedWidthWhiteButton" AlternateText="continue shopping" OnClick="btnContinueShopping_Click">
 							<Layers>
 								<sitdap:TextLayer Name="Text" Text="continue shopping" />
 							</Layers>
@@ -85,7 +85,7 @@
 					<td valign="top">&nbsp;</td>
 					<td valign="top">&nbsp;</td>
 					<td colspan="4" align="right" valign="top"><a href="/checkout-delivery-method.aspx">
-						<sitdap:DynamicImage runat="server" TemplateName="Button" AlternateText="proceed to checkout">
+						<sitdap:DynamicImage runat="server" TemplateName="FixedWidthButton" AlternateText="proceed to checkout">
 							<Layers>
 								<sitdap:TextLayer Name="Text" Text="proceed to checkout" />
 							</Layers>

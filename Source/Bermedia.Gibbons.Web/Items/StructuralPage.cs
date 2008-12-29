@@ -24,6 +24,13 @@ namespace Bermedia.Gibbons.Web.Items
 			set { base.Name = value; }
 		}
 
+		[CheckBoxEditor("Visible", "", 25, ContainerName = Tabs.General)]
+		public override bool Visible
+		{
+			get { return base.Visible; }
+			set { base.Visible = value; }
+		}
+
 		public override bool IsPage
 		{
 			get { return true; }

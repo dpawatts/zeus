@@ -23,6 +23,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1Header;
 
 				protected global::System.Web.UI.WebControls.Label ltlPageLinks;
+				protected global::System.Web.UI.WebControls.PlaceHolder plcPageLinks;
         
         /// <summary>
         /// lsvProducts control.

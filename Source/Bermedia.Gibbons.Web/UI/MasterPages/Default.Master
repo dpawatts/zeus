@@ -51,17 +51,13 @@
 			</div>
 		</div>
 		<div id="navContainer">
-			<zeus:Menu runat="server" BranchMode="false" CssClass="sf-menu" OfType="Bermedia.Gibbons.Web.Items.BaseDepartment" />
-			<ul class="sf-menu">
-				<li><a href="../giftcards/default.aspx">Gift Cards</a></li>
-				<li><a href="../about/contact.aspx">Contact</a></li>
-			</ul>
+			<zeus:Menu runat="server" BranchMode="false" CssClass="sf-menu" SelectedCssClass="on" OfType="Bermedia.Gibbons.Web.Items.StructuralPage, Bermedia.Gibbons.Web" />
 			
 			<script type="text/javascript">
 				$(document).ready(function() {
 					$("ul.sf-menu").superfish({
 						autoArrows: false,
-						delay: 500,
+						delay: 300,
 						speed: 'fast'
 					});
 				});

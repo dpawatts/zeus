@@ -4,8 +4,10 @@
 
 <h1 runat="server" id="h1Header" />
 
-<asp:Label runat="server" ID="ltlPageLinks" Visible="false" style="float:right;height:20px;margin-bottom:10px;" />
-<br style="clear:both" />
+<asp:PlaceHolder runat="server" ID="plcPageLinks" Visible="false">
+	<asp:Label runat="server" ID="ltlPageLinks" style="float:right;height:20px;margin-bottom:10px;" />
+	<br style="clear:both" />
+</asp:PlaceHolder>
 		
 <isis:TypedListView runat="server" ID="lsvProducts" DataItemTypeName="Bermedia.Gibbons.Web.UI.UserControls.ProductGroup, Bermedia.Gibbons.Web">
 	<LayoutTemplate>

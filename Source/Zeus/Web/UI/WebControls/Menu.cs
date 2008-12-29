@@ -55,6 +55,13 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["MaxLevels"] = value; }
 		}
 
+		[Themeable(true)]
+		public string SelectedCssClass
+		{
+			get { return ViewState["SelectedCssClass"] as string ?? "current"; }
+			set { ViewState["SelectedCssClass"] = value; }
+		}
+
 		public string OfType
 		{
 			get { return ViewState["OfType"] as string ?? string.Empty; }
@@ -94,6 +101,8 @@ namespace Zeus.Web.UI.WebControls
 			if (!string.IsNullOrEmpty(this.OfType))
 				this.Filters.Add(new TypeFilter(BuildManager.GetType(this.OfType, true)));
 
+			this.Filters.Add(new VisibleFilter());
+
 			if (currentItem == null)
 				currentItem = startPage;
 
@@ -130,7 +139,7 @@ namespace Zeus.Web.UI.WebControls
 				li.Controls.Add(anchor);
 
 				if (current == selectedPage || current.Url == selectedPage.Url)
-					li.Attributes["class"] = "current";
+					li.Attributes["class"] = this.SelectedCssClass;
 				else if (ancestors.Contains(current))
 					li.Attributes["class"] = "trail";
 

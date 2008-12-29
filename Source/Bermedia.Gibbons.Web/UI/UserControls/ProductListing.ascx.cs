@@ -75,7 +75,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 							pageLinks += " | ";
 					}
 					ltlPageLinks.Text = pageLinks;
-					ltlPageLinks.Visible = true;
+					plcPageLinks.Visible = true;
 
 					groups = groups.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 				}
