@@ -17,7 +17,6 @@
 	<script type="text/javascript" src="/assets/js/jquery.js" charset="utf-8"></script> 
 	<script type="text/javascript" src="/assets/js/jquery.hoverIntent.js" charset="utf-8"></script> 
 	<script type="text/javascript" src="/assets/js/superfish.js" charset="utf-8"></script> 
-	<script src="/assets/js/core.js" type="text/javascript" charset="utf-8"></script>
 	
 	<style type="text/css">
 		<asp:ContentPlaceHolder runat="server" ID="cphStyle" />
@@ -27,16 +26,18 @@
 	<form runat="server">
 	<div id="shell">
 		<div id="header">
-			<a href="/">Home</a>
-			| <a href="#" onclick="var mailer='mailto:?subject='+document.location.href+'&body=I saw this on the Gibbons Company website and thought you might be interested:'+document.location.href;window.open(mailer);">Email A Friend</a>
-			| <a href="/my-account.aspx">My Account</a>
-			| <a href="/shopping-cart.aspx">Shopping Cart</a>
+			<div id="headerNavigation">
+				<a href="/">Home</a>
+				| <a href="#" onclick="var mailer='mailto:?subject='+document.location.href+'&body=I saw this on the Gibbons Company website and thought you might be interested:'+document.location.href;window.open(mailer);">Email A Friend</a>
+				| <a href="/my-account.aspx">My Account</a>
+				| <a href="/shopping-cart.aspx">Shopping Cart</a>
 
-			<script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript"></script>
-			<script type="text/javascript">
-				_uacct = "<%= System.Configuration.ConfigurationManager.AppSettings["GoogleAnalyticsTrackingCode"] %>";
-				urchinTracker();
-			</script>
+				<script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript"></script>
+				<script type="text/javascript">
+					_uacct = "<%= System.Configuration.ConfigurationManager.AppSettings["GoogleAnalyticsTrackingCode"] %>";
+					urchinTracker();
+				</script>
+			</div>
 
 			<div id="loginNotice">
 				<asp:LoginView runat="server">
@@ -76,12 +77,12 @@
 			<div id="content">
 				<asp:ContentPlaceHolder runat="server" ID="cphContent" />
 			</div>
-		</div>
-		
-		<div id="footer">
-			<p><strong><a href="../store/terms.aspx#refunds">Returns Policy </a> |
-			<a href="../store/faqs.aspx">FAQs</a> | 
-			<a href="../store/terms.aspx">Terms and Conditions</a></strong></p>
+			
+			<div id="footer">
+				<p><strong><a href="../store/terms.aspx#refunds">Returns Policy </a> |
+				<a href="../store/faqs.aspx">FAQs</a> | 
+				<a href="../store/terms.aspx">Terms and Conditions</a></strong></p>
+			</div>
 		</div>
 	</div>
 	</form>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Zeus;
 using Zeus.Integrity;
 using Zeus.ContentTypes.Properties;
@@ -26,6 +27,11 @@ namespace Bermedia.Gibbons.Web.Items
 		protected override string IconName
 		{
 			get { return "page"; }
+		}
+
+		protected override string TemplateName
+		{
+			get { return (Find.ListParents(this).OfType<BaseDepartment>().Any()) ? "DepartmentPage" : base.TemplateName; }
 		}
 	}
 }

@@ -11,26 +11,33 @@
 namespace Bermedia.Gibbons.Web.UI.UserControls {
     
     
-    public partial class ProductListing {
+    public partial class Search {
         
         /// <summary>
-        /// h1Header control.
+        /// txtSearchText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl h1Header;
-
-				protected global::System.Web.UI.WebControls.Label ltlPageLinks;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchText;
         
         /// <summary>
-        /// lsvProducts control.
+        /// ddlSearchDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.UI.UserControls.ProductGroup> lsvProducts;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSearchDepartment;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
     }
 }

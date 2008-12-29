@@ -8,27 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bermedia.Gibbons.Web.UI.UserControls {
+namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class DepartmentNavigation {
+    public partial class Search {
         
         /// <summary>
-        /// rptChildPages control.
+        /// rptSearchResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedRepeater<Zeus.ContentItem> rptChildPages;
-        
-        /// <summary>
-        /// rptCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Zeus.ContentItem> rptCategories;
+        protected global::System.Web.UI.WebControls.Repeater rptSearchResults;
     }
 }

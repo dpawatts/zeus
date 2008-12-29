@@ -9,10 +9,10 @@
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1><zeus:ItemDetailView runat="server" PropertyName="Title" /></h1>
 
-	<div id="categoryImage">
+	<div runat="server" id="categoryImage" visible="<%$ HasValue:Image %>">
 		<zeus:ItemDetailView runat="server" PropertyName="Image" />
 	</div>
 	
-	<gibbons:ProductListing runat="server" DataSourceID="cdsChildren" />
-	<zeus:ContentDataSource runat="server" ID="cdsChildren" OfType="Bermedia.Gibbons.Web.Items.StandardProduct" />
+	<gibbons:ProductListing runat="server" ID="uscProductListing1" />
+	<gibbons:ProductListing runat="server" ID="uscProductListing2" />
 </asp:Content>

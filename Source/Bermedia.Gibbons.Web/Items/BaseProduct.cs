@@ -26,7 +26,7 @@ namespace Bermedia.Gibbons.Web.Items
 		#region Public properties
 
 		[TextBoxEditor("Description", 230, TextMode = TextBoxMode.MultiLine, ContainerName = Tabs.General)]
-		public string Description
+		public virtual string Description
 		{
 			get { return GetDetail<string>("Description", string.Empty); }
 			set { SetDetail<string>("Description", value); }
@@ -48,5 +48,10 @@ namespace Bermedia.Gibbons.Web.Items
 		}
 
 		#endregion
+
+		public BaseDepartment Department
+		{
+			get { return this.FindFirstAncestor<BaseDepartment>(); }
+		}
 	}
 }

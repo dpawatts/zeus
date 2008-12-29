@@ -99,6 +99,7 @@
     <Compile Include="Items\CheckoutBillingAddress.cs" />
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
+    <Compile Include="Items\SearchPage.cs" />
     <Compile Include="Items\Details\ProductColoursEditor.cs" />
     <Compile Include="Items\NewsletterLogEntry.cs" />
     <Compile Include="Items\Newsletter.cs" />
@@ -196,12 +197,26 @@
     <Compile Include="UI\UserControls\DepartmentNavigation.ascx.designer.cs">
       <DependentUpon>DepartmentNavigation.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\PageNavigation.ascx.cs">
+      <DependentUpon>PageNavigation.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\PageNavigation.ascx.designer.cs">
+      <DependentUpon>PageNavigation.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\ProductListing.ascx.cs">
       <DependentUpon>ProductListing.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UI\UserControls\ProductListing.ascx.designer.cs">
       <DependentUpon>ProductListing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserControls\Search.ascx.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\Search.ascx.designer.cs">
+      <DependentUpon>Search.ascx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Category.aspx.cs">
       <DependentUpon>Category.aspx</DependentUpon>
@@ -244,6 +259,34 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutSummary.aspx.designer.cs">
       <DependentUpon>CheckoutSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SearchDepartment.aspx.cs">
+      <DependentUpon>SearchDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\SearchDepartment.aspx.designer.cs">
+      <DependentUpon>SearchDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\StartPage.aspx.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\StartPage.aspx.designer.cs">
+      <DependentUpon>StartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\DepartmentPage.aspx.cs">
+      <DependentUpon>DepartmentPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\DepartmentPage.aspx.designer.cs">
+      <DependentUpon>DepartmentPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
@@ -379,11 +422,17 @@
     <Content Include="Plugins\Newsletters\Send.aspx" />
     <Content Include="Plugins\Newsletters\SendTest.aspx" />
     <Content Include="TsAndCs.htm" />
+    <Content Include="UI\UserControls\PageNavigation.ascx" />
+    <Content Include="UI\UserControls\Search.ascx" />
     <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
     <Content Include="UI\Views\CheckoutShippingAddress.aspx" />
     <Content Include="UI\Views\CheckoutPaymentDetails.aspx" />
     <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
     <Content Include="UI\Views\CheckoutSummary.aspx" />
+    <Content Include="UI\Views\SearchDepartment.aspx" />
+    <Content Include="UI\Views\Search.aspx" />
+    <Content Include="UI\Views\StartPage.aspx" />
+    <Content Include="UI\Views\DepartmentPage.aspx" />
     <Content Include="UI\Views\Register.aspx" />
     <Content Include="UI\Views\Login.aspx" />
     <Content Include="UI\Views\MyAccount.aspx" />

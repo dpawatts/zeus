@@ -25,16 +25,6 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!IsPostBack)
-			{
-				// TODO: Remove ToArray
-				foreach (BaseDepartment department in Zeus.Context.Current.Finder.ToArray().OfType<BaseDepartment>())
-				{
-					ListItem item = new ListItem(department.Title, department.ID.ToString());
-					ddlSearchDepartment.Items.Add(item);
-				}
-			}
-
 			rptChildPages.DataBind();
 			rptCategories.DataBind();
 		}

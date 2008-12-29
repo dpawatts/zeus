@@ -27,7 +27,7 @@ namespace Zeus.Web.Modules
 			ContentItem currentItem = Zeus.Context.Current.UrlParser.ParsePage(HttpContext.Current.Request.Path);
 
 			// If url matches a physical page, don't rewrite.
-			if (!File.Exists(HttpContext.Current.Request.PhysicalPath))
+			if (!File.Exists(HttpContext.Current.Request.PhysicalPath) || HttpContext.Current.Request.Path.ToLower() == "/default.aspx")
 			{
 				// Rewrite URL.
 				HttpContext.Current.RewritePath(currentItem.TemplateUrl + HttpContext.Current.Request.Url.Query);

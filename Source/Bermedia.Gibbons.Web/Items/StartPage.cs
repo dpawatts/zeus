@@ -16,10 +16,5 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return "house"; }
 		}
-
-		protected override string TemplateName
-		{
-			get { return "Page"; }
-		}
 	}
 }

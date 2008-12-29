@@ -47,6 +47,12 @@ namespace Bermedia.Gibbons.Web.Items
 			set;
 		}
 
+		public string SearchText
+		{
+			get;
+			set;
+		}
+
 		public override ContentItem GetChild(string childName)
 		{
 			if (childName.Equals("gifts-under-10", StringComparison.CurrentCultureIgnoreCase))
@@ -67,6 +73,11 @@ namespace Bermedia.Gibbons.Web.Items
 				this.PriceLimit = 50;
 				return this;
 			}
+			else if (childName.Equals("search", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "search";
+				return this;
+			}
 			return base.GetChild(childName);
 		}
 
@@ -78,6 +89,8 @@ namespace Bermedia.Gibbons.Web.Items
 				{
 					case "gifts":
 						return "~/UI/Views/DepartmentGifts.aspx?PriceLimit=" + this.PriceLimit;
+					case "search" :
+						return "~/UI/Views/SearchDepartment.aspx";
 					default:
 						return base.TemplateUrl;
 				}

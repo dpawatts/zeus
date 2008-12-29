@@ -24,6 +24,7 @@ namespace Zeus.Web.UI.WebControls
 		private bool _tracking;
 
 		private string _ofType, _where, _select, _query;
+		private int? _skip, _take;
 		private ContentDataSourceAxis _axis = ContentDataSourceAxis.Child;
 		private ParameterCollection _whereParameters;
 
@@ -109,6 +110,38 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
+		public int Skip
+		{
+			get
+			{
+				return (this._skip ?? 0);
+			}
+			set
+			{
+				if (this._skip != value)
+				{
+					this._skip = value;
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
+
+		public int? Take
+		{
+			get
+			{
+				return _take;
+			}
+			set
+			{
+				if (this._take != value)
+				{
+					this._take = value;
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
+
 		public ParameterCollection WhereParameters
 		{
 			get
@@ -155,6 +188,12 @@ namespace Zeus.Web.UI.WebControls
 					default :
 						throw new NotImplementedException();
 				}
+
+				if (this.Skip > 0)
+					children = children.Skip(this.Skip);
+
+				if (this.Take != null)
+					children = children.Take(this.Take.Value);
 
 				if (!string.IsNullOrEmpty(this.OfType))
 				{

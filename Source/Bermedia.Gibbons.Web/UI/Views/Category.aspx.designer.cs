@@ -14,12 +14,30 @@ namespace Bermedia.Gibbons.Web.UI.Views {
     public partial class Category {
         
         /// <summary>
-        /// cdsChildren control.
+        /// categoryImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsChildren;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl categoryImage;
+        
+        /// <summary>
+        /// uscProductListing1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing1;
+        
+        /// <summary>
+        /// uscProductListing2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing2;
     }
 }

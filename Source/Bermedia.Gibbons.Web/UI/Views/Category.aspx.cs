@@ -12,7 +12,17 @@ namespace Bermedia.Gibbons.Web.UI.Views
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			if (this.CurrentItem.Image != null)
+			{
+				uscProductListing1.ProductsPerRow = 2;
+				uscProductListing1.DataSource = this.CurrentItem.GetChildren<Items.StandardProduct>().Take(4).OrderBy(p => p.Title).OrderBy(p => p.Brand.Title);
+				uscProductListing2.DataSource = this.CurrentItem.GetChildren<Items.StandardProduct>().Skip(4).OrderBy(p => p.Title).OrderBy(p => p.Brand.Title);
+			}
+			else
+			{
+				uscProductListing1.DataSource = this.CurrentItem.GetChildren<Items.StandardProduct>().OrderBy(p => p.Title).OrderBy(p => p.Brand.Title);
+				uscProductListing2.Visible = false;
+			}
 		}
 	}
 }

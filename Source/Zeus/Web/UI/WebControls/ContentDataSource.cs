@@ -25,6 +25,20 @@ namespace Zeus.Web.UI.WebControls
 			set { this.View.Where = value; }
 		}
 
+		[DefaultValue(0)]
+		public int Skip
+		{
+			get { return this.View.Skip; }
+			set { this.View.Skip = value; }
+		}
+
+		[DefaultValue(null)]
+		public int? Take
+		{
+			get { return this.View.Take; }
+			set { this.View.Take = value; }
+		}
+
 		[DefaultValue("")]
 		public string Select
 		{

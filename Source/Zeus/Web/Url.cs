@@ -5,7 +5,9 @@ namespace Zeus.Web
 {
 	public class Url
 	{
+		public const string Amp = "&";
 		private static readonly char[] _dotsAndSlashes = new[] { '.', '/' };
+		private static readonly string[] _querySplitter = new[] { "&amp;", Amp };
 
 		public string Scheme
 		{
@@ -50,6 +52,15 @@ namespace Zeus.Web
 
 				return this.Path.Substring(index);
 			}
+		}
+
+		public Url(Url other)
+		{
+			this.Scheme = other.Scheme;
+			this.Authority = other.Authority;
+			this.Path = other.Path;
+			this.Query = other.Query;
+			this.Fragment = other.Fragment;
 		}
 
 		public Url(string scheme, string authority, string path, string query, string fragment)
@@ -131,19 +142,83 @@ namespace Zeus.Web
 			get { return System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath; }
 		}
 
+		public Url AppendQuery(string key, string value)
+		{
+			return AppendQuery(key + "=" + HttpUtility.UrlEncode(value));
+		}
+
 		public Url AppendQuery(string key, int value)
 		{
-			string keyValue = key + "=" + value;
-			return AppendQuery(keyValue);
+			return AppendQuery(key + "=" + value);
+		}
+
+		public Url AppendQuery(string key, object value)
+		{
+			if (value == null)
+				return this;
+
+			return AppendQuery(key + "=" + value);
 		}
 
 		public Url AppendQuery(string keyValue)
 		{
+			var clone = new Url(this);
 			if (string.IsNullOrEmpty(this.Query))
-				this.Query = keyValue;
+				clone.Query = keyValue;
+			else if (!string.IsNullOrEmpty(keyValue))
+				clone.Query += Amp + keyValue;
+			return clone;
+		}
+
+		public Url SetQueryParameter(string key, int value)
+		{
+			return SetQueryParameter(key, value.ToString());
+		}
+
+		public Url SetQueryParameter(string key, string value)
+		{
+			if (this.Query == null)
+				return AppendQuery(key, value);
+
+			var clone = new Url(this);
+			string[] queries = this.Query.Split(_querySplitter, StringSplitOptions.RemoveEmptyEntries);
+			for (int i = 0; i < queries.Length; i++)
+			{
+				if (queries[i].StartsWith(key + "=", StringComparison.InvariantCultureIgnoreCase))
+				{
+					if (value != null)
+					{
+						queries[i] = key + "=" + HttpUtility.UrlEncode(value);
+						clone.Query = string.Join(Amp, queries);
+						return clone;
+					}
+
+					if (queries.Length == 1)
+						clone.Query = null;
+					else if (Query.Length == 2)
+						clone.Query = queries[i == 0 ? 1 : 0];
+					else if (i == 0)
+						clone.Query = string.Join(Amp, queries, 1, queries.Length - 1);
+					else if (i == queries.Length - 1)
+						clone.Query = string.Join(Amp, queries, 0, queries.Length - 1);
+					else
+						clone.Query = string.Join(Amp, queries, 0, i) + Amp + string.Join(Amp, queries, i + 1, queries.Length - i - 1);
+					return clone;
+				}
+			}
+			return AppendQuery(key, value);
+		}
+
+		public Url SetQueryParameter(string keyValue)
+		{
+			if (this.Query == null)
+				return AppendQuery(keyValue);
+
+			int eqIndex = keyValue.IndexOf('=');
+			if (eqIndex >= 0)
+				return SetQueryParameter(keyValue.Substring(0, eqIndex), keyValue.Substring(eqIndex + 1));
 			else
-				this.Query += "&" + keyValue;
-			return this;
+				return SetQueryParameter(keyValue, string.Empty);
 		}
 
 		public Url AppendSegment(string segment)
