@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Admin\AdminFrame.cs" />
     <Compile Include="Admin\AdminTargetFrame.cs" />
+    <Compile Include="Admin\GridViewPluginAttribute.cs" />
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\ToolbarPluginAttribute.cs" />
     <Compile Include="Collections\TreeHierarchyBuilder.cs" />
@@ -128,13 +129,17 @@
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
+    <Compile Include="ContentTypes\IRootItem.cs" />
+    <Compile Include="ContentTypes\ISelfPopulator.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
     <Compile Include="ContentTypes\Properties\ChildrenEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\ColourEditor.cs" />
+    <Compile Include="ContentTypes\Properties\ColourEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ComboBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ColourDisplayerAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\DateDisplayerAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\DateEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
@@ -263,6 +268,8 @@
     <Compile Include="Web\UI\WebControls\BaseContentDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Web\UI\WebControls\DateEditorTextBox.cs" />
+    <Compile Include="Web\UI\WebControls\FileEditor.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">

@@ -31,6 +31,13 @@ namespace Zeus.Admin
 				return;
 
 			zeusItemEditView.Save();
+
+			if (Request.QueryString["discriminator"] != null && (zeusItemEditView.CurrentItem is ISelfPopulator))
+			{
+				((ISelfPopulator) zeusItemEditView.CurrentItem).Populate();
+				Zeus.Context.Persister.Save(zeusItemEditView.CurrentItem);
+			}
+
 			Refresh(zeusItemEditView.CurrentItem, AdminFrame.Both, false);
 		}
 	}

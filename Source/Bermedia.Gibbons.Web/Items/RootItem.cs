@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using Zeus;
 using Zeus.Integrity;
+using Zeus.ContentTypes;
 
 namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Root Item")]
 	[RestrictParents(AllowedTypes.None)]
-	public class RootItem : BaseContentItem
+	public class RootItem : BaseContentItem, IRootItem
 	{
 		protected override string IconName
 		{

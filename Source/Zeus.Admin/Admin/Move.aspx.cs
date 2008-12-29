@@ -1,5 +1,6 @@
 ﻿using System;
 using Isis.Web;
+using System.Collections.Generic;
 
 namespace Zeus.Admin
 {
@@ -16,7 +17,10 @@ namespace Zeus.Admin
 
 			// Update sort order based on new pos.
 			int pos = Request.GetRequiredInt("pos");
-			Zeus.Context.Persister.UpdateSortOrder(sourceContentItem, pos);
+			IList<ContentItem> siblings = sourceContentItem.Parent.Children;
+			Utility.MoveToIndex(siblings, sourceContentItem, pos);
+			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
+				Zeus.Context.Persister.Save(updatedItem);
 
 			Refresh(sourceContentItem, AdminFrame.Both, false);
 		}

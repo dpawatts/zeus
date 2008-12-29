@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate.Caches.SysCache2.dll</HintPath>
     </Reference>
+    <Reference Include="SMTP.Net, Version=3.0.1.12, Culture=neutral, PublicKeyToken=986a9aa31056680b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SMTP.Net.dll</HintPath>
+    </Reference>
     <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
@@ -95,6 +99,13 @@
     <Compile Include="Items\CheckoutBillingAddress.cs" />
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
+    <Compile Include="Items\Details\ProductColoursEditor.cs" />
+    <Compile Include="Items\NewsletterLogEntry.cs" />
+    <Compile Include="Items\Newsletter.cs" />
+    <Compile Include="Items\NewsletterAttachment.cs" />
+    <Compile Include="Items\NewsletterContainer.cs" />
+    <Compile Include="Items\NewsletterLogEntryStatus.cs" />
+    <Compile Include="Items\NewsletterStatus.cs" />
     <Compile Include="Items\NewsletterSubscription.cs" />
     <Compile Include="Items\NewsletterSubscriptionContainer.cs" />
     <Compile Include="Items\OrderItem.cs" />
@@ -140,6 +151,28 @@
     <Compile Include="Items\StandardProduct.cs" />
     <Compile Include="Items\StartPage.cs" />
     <Compile Include="Items\StructuralPage.cs" />
+    <Compile Include="Plugins\Newsletters\MailoutManager.cs" />
+    <Compile Include="Plugins\Newsletters\Reset.aspx.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Newsletters\Reset.aspx.designer.cs">
+      <DependentUpon>Reset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Newsletters\Send.aspx.cs">
+      <DependentUpon>Send.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Newsletters\Send.aspx.designer.cs">
+      <DependentUpon>Send.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Newsletters\SendTest.aspx.cs">
+      <DependentUpon>SendTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Newsletters\SendTest.aspx.designer.cs">
+      <DependentUpon>SendTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\ShippingRates.aspx.cs">
       <DependentUpon>ShippingRates.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -341,6 +374,10 @@
     <None Include="Items\ClassDiagram.cd" />
     <Content Include="Assets\Images\Icons\email.png" />
     <Content Include="Assets\Images\Icons\newspaper.png" />
+    <Content Include="Assets\Images\Icons\world.png" />
+    <Content Include="Plugins\Newsletters\Reset.aspx" />
+    <Content Include="Plugins\Newsletters\Send.aspx" />
+    <Content Include="Plugins\Newsletters\SendTest.aspx" />
     <Content Include="TsAndCs.htm" />
     <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
     <Content Include="UI\Views\CheckoutShippingAddress.aspx" />

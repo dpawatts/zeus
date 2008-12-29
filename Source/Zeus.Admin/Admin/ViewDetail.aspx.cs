@@ -9,8 +9,18 @@ namespace Zeus.Admin
 	{
 		protected override void OnInit(EventArgs e)
 		{
-			zeusItemEditView.CurrentItem = this.SelectedItem;
-			this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
+			if (Request.QueryString["discriminator"] != null)
+			{
+				string discriminator = Request.QueryString["discriminator"];
+				zeusItemEditView.Discriminator = discriminator;
+				zeusItemEditView.ParentPath = this.SelectedItem.Path;
+				this.Title = "New " + zeusItemEditView.CurrentItemDefinition.ContentTypeAttribute.Title;
+			}
+			else
+			{
+				zeusItemEditView.CurrentItem = this.SelectedItem;
+				this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
+			}
 
 			base.OnInit(e);
 		}

@@ -67,7 +67,7 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<FreeGiftProduct>("FreeGiftProduct", value); }
 		}
 
-		[ProductRecommendationsEditor("Associated Colors", 300, ContainerName = Tabs.Colours)]
+		[ProductColoursEditor("Associated Colors", 300, ContainerName = Tabs.Colours)]
 		public DetailCollection AssociatedColours
 		{
 			get { return GetDetailCollection("AssociatedColours", true); }

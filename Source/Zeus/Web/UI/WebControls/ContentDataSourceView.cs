@@ -138,12 +138,11 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override IEnumerable GetItems()
 		{
-			if (this.ParentItem != null)
+			ContentItem startingPoint = this.ParentItem;
+			if (!string.IsNullOrEmpty(this.Query))
+				startingPoint = Find.RootItem;
+			if (startingPoint != null)
 			{
-				ContentItem startingPoint = this.ParentItem;
-				if (!string.IsNullOrEmpty(this.Query))
-					startingPoint = Find.RootItem;
-
 				IQueryable children = null;
 				switch (this.Axis)
 				{

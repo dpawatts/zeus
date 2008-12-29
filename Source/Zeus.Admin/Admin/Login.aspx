@@ -34,7 +34,7 @@
 				
 				<div id="tryAgain"><asp:Literal runat="server" ID="FailureText" /></div>
 				
-				<asp:Button runat="server" ID="loginButton" Text="Log in" CommandName="Login" />
+				<asp:Button runat="server" ID="loginButton" CommandName="Login" />
 			</LayoutTemplate>
 		</asp:Login>
 	</form>

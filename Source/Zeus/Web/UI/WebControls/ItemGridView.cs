@@ -15,6 +15,9 @@ using Isis.Web.UI.WebControls;
 using Isis.Reflection;
 using System.Reflection;
 using Isis.Web.UI.HtmlControls;
+using Zeus.Admin;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -50,8 +53,8 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override void CreateLayoutTemplate()
 		{
-			this.LayoutTemplate = new LayoutTemplateControl(this.Page, this.ContentType);
-			this.ItemTemplate = new ItemTemplateControl(this.ContentType);
+			this.LayoutTemplate = new LayoutTemplateControl(this, this.Page, this.ContentType);
+			this.ItemTemplate = new ItemTemplateControl(this, this.ContentType);
 
 			base.CreateLayoutTemplate();
 		}
@@ -132,8 +135,11 @@ namespace Zeus.Web.UI.WebControls
 
 		private class LayoutTemplateControl : ITemplate
 		{
-			public LayoutTemplateControl(Page currentPage, ContentType contentType)
+			private ItemGridView _parent;
+
+			public LayoutTemplateControl(ItemGridView parent, Page currentPage, ContentType contentType)
 			{
+				_parent = parent;
 				this.CurrentPage = currentPage;
 				this.ContentType = contentType;
 			}
@@ -170,6 +176,12 @@ namespace Zeus.Web.UI.WebControls
 						LinkButton linkButton = new LinkButton { ID = "lnkSort" + displayer.Name, Text = displayer.Title, CommandName = "Sort", CommandArgument = displayer.Name };
 						sortableColumnHeader.Controls.Add(linkButton);
 					}
+
+					foreach (GridViewPluginAttribute plugin in _parent.GetPlugins())
+					{
+						HtmlTableCell tdPlugin = new HtmlTableCell("th");
+						columnsPlaceholder.Controls.AddAt(index++, tdPlugin);
+					}
 				}
 			}
 		}
@@ -180,10 +192,12 @@ namespace Zeus.Web.UI.WebControls
 
 		private class ItemTemplateControl : ITemplate
 		{
+			private ItemGridView _parent;
 			private int _autoID = 0;
 
-			public ItemTemplateControl(ContentType contentType)
+			public ItemTemplateControl(ItemGridView parent, ContentType contentType)
 			{
+				_parent = parent;
 				this.ContentType = contentType;
 			}
 
@@ -216,6 +230,15 @@ namespace Zeus.Web.UI.WebControls
 					td.Controls.Add(placeHolder);
 				}
 
+				foreach (GridViewPluginAttribute plugin in _parent.GetPlugins())
+				{
+					HtmlTableCell tdPlugin = new HtmlTableCell();
+					tdPlugin.ID = plugin.Name;
+					plugin.AddTo(tdPlugin);
+					tdPlugin.DataBinding += new EventHandler(tdPlugin_DataBinding);
+					tr.Controls.Add(tdPlugin);
+				}
+
 				HtmlTableCell tdEdit = new HtmlTableCell();
 				tdEdit.Attributes["class"] = "edit";
 				tr.Controls.Add(tdEdit);
@@ -228,6 +251,14 @@ namespace Zeus.Web.UI.WebControls
 				};
 				editLink.DataBinding += new EventHandler(editLink_DataBinding);
 				tdEdit.Controls.Add(editLink);
+			}
+
+			private void tdPlugin_DataBinding(object sender, EventArgs e)
+			{
+				HtmlTableCell cell = (HtmlTableCell) sender;
+				ListViewDataItem listViewDataItem = (ListViewDataItem) cell.NamingContainer;
+				foreach (GridViewPluginAttribute plugin in _parent.GetPlugins().Where(p => p.Name == cell.ID))
+					plugin.SetValue(cell, (ContentItem) listViewDataItem.DataItem);
 			}
 
 			private void placeHolder_DataBinding(object sender, EventArgs e)
@@ -249,5 +280,71 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		#endregion
+
+		private IEnumerable<GridViewPluginAttribute> GetPlugins()
+		{
+			ContentType contentType = Zeus.Context.ContentTypes.GetContentType(this.CurrentItem.GetType());
+			Type childType = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, this.Page.User)[0].ItemType;
+			List<GridViewPluginAttribute> plugins = new List<GridViewPluginAttribute>();
+			foreach (Assembly assembly in GetAssemblies())
+				foreach (GridViewPluginAttribute plugin in FindPluginsIn(assembly))
+					if (plugin.Type.IsAssignableFrom(childType))
+						plugins.Add(plugin);
+			return plugins;
+		}
+
+		private IEnumerable<GridViewPluginAttribute> FindPluginsIn(Assembly a)
+		{
+			foreach (GridViewPluginAttribute attribute in a.GetCustomAttributes(typeof(GridViewPluginAttribute), false))
+				yield return attribute;
+			foreach (Type t in a.GetTypes())
+			{
+				foreach (GridViewPluginAttribute attribute in t.GetCustomAttributes(typeof(GridViewPluginAttribute), false))
+					yield return attribute;
+			}
+		}
+
+		// Copied from ContentTypeBuilder
+		private string _assemblySkipLoadingPattern = "^System|^mscorlib|^Microsoft|^CppCodeProvider|^VJSharpCodeProvider|^WebDev|^Castle|^Iesi|^log4net|^NHibernate|^nunit|^TestDriven|^MbUnit|^Rhino|^QuickGraph|^TestFu|^SoundInTheory\\.NMigration|^SoundInTheory\\.DynamicImage";
+
+		private IList<Assembly> GetAssemblies()
+		{
+			List<Assembly> assemblies = new List<Assembly>();
+
+			foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+			{
+				if (Matches(assembly.FullName))
+					assemblies.Add(assembly);
+			}
+
+			foreach (string dllPath in Directory.GetFiles(HttpContext.Current.Server.MapPath("~/bin"), "*.dll"))
+			{
+				try
+				{
+					Assembly assembly = Assembly.ReflectionOnlyLoadFrom(dllPath);
+					if (Matches(assembly.FullName) && !assemblies.Any(a => a.FullName == assembly.FullName))
+					{
+						Assembly loadedAssembly = AppDomain.CurrentDomain.Load(assembly.FullName);
+						assemblies.Add(loadedAssembly);
+					}
+				}
+				catch (BadImageFormatException ex)
+				{
+					//Trace.TraceError(ex.ToString());
+				}
+			}
+
+			return assemblies;
+		}
+
+		private bool Matches(string assemblyFullName)
+		{
+			return !Matches(assemblyFullName, _assemblySkipLoadingPattern);
+		}
+
+		private bool Matches(string assemblyFullName, string pattern)
+		{
+			return Regex.IsMatch(assemblyFullName, pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		}
 	}
 }

@@ -72,7 +72,8 @@ namespace Zeus.Persistence
 
 		private void DeleteRecursive(ContentItem contentItem)
 		{
-			foreach (ContentItem child in contentItem.Children)
+			List<ContentItem> children = new List<ContentItem>(contentItem.Children);
+			foreach (ContentItem child in children)
 				DeleteRecursive(child);
 
 			contentItem.AddTo(null);
@@ -88,6 +89,7 @@ namespace Zeus.Persistence
 			{
 				if (detail.EnclosingCollection != null)
 					detail.EnclosingCollection.Remove(detail);
+				object test = detail.EnclosingItem.Details.Values; // TODO: Investigate why this is necessary, on a PersistentGenericMap
 				detail.EnclosingItem.Details.Remove(detail.Name);
 				_linkRepository.Delete(detail);
 			}
@@ -156,11 +158,22 @@ namespace Zeus.Persistence
 				{
 					_contentRepository.SaveOrUpdate(contentItem);
 					contentItem.AddTo(contentItem.Parent);
+					EnsureSortOrder(contentItem);
 					transaction.Commit();
 				}
 			}
 			if (ItemSaved != null)
 				ItemSaved(this, new ItemEventArgs(contentItem));
+		}
+
+		private void EnsureSortOrder(ContentItem unsavedItem)
+		{
+			if (unsavedItem.Parent != null)
+			{
+				IEnumerable<ContentItem> updatedItems = Utility.UpdateSortOrder(unsavedItem.Parent.Children);
+				foreach (ContentItem updatedItem in updatedItems)
+					_contentRepository.SaveOrUpdate(updatedItem);
+			}
 		}
 	}
 }

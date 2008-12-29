@@ -22,7 +22,7 @@ namespace Zeus.Web.UI
 		public override Control AddTo(Control container)
 		{
 			TabPanel tabPanel = new TabPanel();
-			tabPanel.ID = this.Name;
+			tabPanel.ID = "tabPanel" + this.Name;
 			tabPanel.ToolTip = this.Title;
 			container.Controls.Add(tabPanel);
 			return tabPanel;

@@ -17,7 +17,19 @@ namespace Zeus.FileSystem
 	{
 		public override string IconUrl
 		{
-			get { return "~/Admin/Assets/Images/Icons/page_white.png"; }
+			get
+			{
+				switch (this.FileExtension)
+				{
+					case ".pdf" :
+						return "~/Admin/Assets/Images/Icons/page_white_acrobat.png";
+					case ".doc" :
+					case ".docx":
+						return "~/Admin/Assets/Images/Icons/page_white_word.png";
+					default :
+						return "~/Admin/Assets/Images/Icons/page_white.png";
+			}
+			}
 		}
 
 		public override string Url
@@ -30,6 +42,11 @@ namespace Zeus.FileSystem
 		{
 			get { return base.Name; }
 			set { base.Name = value; }
+		}
+
+		public string FileExtension
+		{
+			get { return System.IO.Path.GetExtension(this.Name); }
 		}
 
 		public byte[] Data

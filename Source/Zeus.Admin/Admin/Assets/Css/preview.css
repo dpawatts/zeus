@@ -3,12 +3,16 @@
 	padding: 10px;
 }
 
-h2
+h2, h3
 {
 	font-weight: bold;
 	color: #bcbec0;
 	font-size: 18px;
 	margin: 0px 0 10px 0;
+}
+
+h3 {
+	font-size: 14px;
 }
 
 #toolbar
@@ -35,4 +39,9 @@ h2
 #toolbar .save:hover {
 	border-color: #606060;
 	background-color: #B5BBBB;
+}
+
+.error
+{
+	color: Red;
 }

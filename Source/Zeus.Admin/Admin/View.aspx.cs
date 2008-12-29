@@ -1,4 +1,5 @@
 ﻿using System;
+using Zeus.ContentTypes;
 
 namespace Zeus.Admin
 {
@@ -7,11 +8,16 @@ namespace Zeus.Admin
 		protected override void OnInit(EventArgs e)
 		{
 			zeusItemGridView.CurrentItem = this.SelectedItem;
+
+			ContentType contentType = Zeus.Context.ContentTypes.GetContentType(this.SelectedItem.GetType());
+			ltlDiscriminator.Text = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, this.User)[0].Discriminator;
+
 			base.OnInit(e);
 		}
 
 		protected void btnRefreshGrid_Click(object sender, EventArgs e)
 		{
+			zeusItemGridView.DataBind();
 			Refresh(this.SelectedItem, AdminFrame.Navigation, true);
 		}
 

@@ -8,6 +8,7 @@ namespace Zeus.Web.UI.WebControls
 	public class ItemEditView : ItemView
 	{
 		private bool _postedBack;
+		public event EventHandler<ItemEventArgs> Saving;
 		public event EventHandler<ItemEventArgs> Saved;
 
 		protected override void AddPropertyControls()
@@ -56,8 +57,15 @@ namespace Zeus.Web.UI.WebControls
 			EnsureChildControls();
 			foreach (IEditor editor in this.CurrentItemDefinition.Editors)
 				editor.UpdateItem(this.CurrentItem, this.PropertyControls[editor.Name]);
-			OnSaved(new ItemEventArgs(this.CurrentItem));
+			OnSaving(new ItemEventArgs(this.CurrentItem));
 			Zeus.Context.Persister.Save(this.CurrentItem);
+			OnSaved(new ItemEventArgs(this.CurrentItem));
+		}
+
+		protected virtual void OnSaving(ItemEventArgs args)
+		{
+			if (this.Saving != null)
+				this.Saving(this, args);
 		}
 
 		protected virtual void OnSaved(ItemEventArgs args)

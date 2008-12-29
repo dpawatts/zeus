@@ -276,11 +276,15 @@
   <ItemGroup>
     <None Include="Admin\Assets\Images\ColorPicker\Thumbs.db" />
     <Content Include="Admin\Assets\Css\jquery.mcdropdown.css" />
+    <Content Include="Admin\Assets\Css\ui.datepicker.css" />
     <Content Include="Admin\Assets\Css\view.css" />
     <Content Include="Admin\Assets\Css\login.css" />
     <Content Include="Admin\Assets\Css\thickbox.css" />
+    <Content Include="Admin\Assets\Images\DatePicker\calendar.gif" />
     <Content Include="Admin\Assets\Images\Icons\folder.png" />
     <Content Include="Admin\Assets\Images\Icons\group.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_white_acrobat.png" />
+    <Content Include="Admin\Assets\Images\Icons\page_white_word.png" />
     <Content Include="Admin\Assets\Images\Icons\user.png" />
     <Content Include="Admin\Assets\Images\Login\button.gif" />
     <Content Include="Admin\Assets\Images\Login\mainBox.gif" />
@@ -305,6 +309,7 @@
     <Content Include="Admin\Assets\Images\View\trashOpen.gif" />
     <Content Include="Admin\Assets\JS\Plugins\jquery.mcdropdown.js" />
     <Content Include="Admin\Assets\JS\Plugins\thickbox.js" />
+    <Content Include="Admin\Assets\JS\Plugins\ui.datepicker.js" />
     <Content Include="Admin\Assets\JS\view.js" />
     <Content Include="Admin\ViewDetail.aspx" />
     <Content Include="Admin\FileManager\Upload.aspx" />
@@ -330,7 +335,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55755</DevelopmentServerPort>
+          <DevelopmentServerPort>54347</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

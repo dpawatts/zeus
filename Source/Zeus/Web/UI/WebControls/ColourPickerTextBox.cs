@@ -29,7 +29,7 @@ namespace Zeus.Web.UI.WebControls
 .bind('keyup', function() {
 	$(this).ColorPickerSetColor(this.value);
 });";
-			this.Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), "ColourPicker", script, true);
+			this.Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), this.ClientID, script, true);
 		}
 	}
 }

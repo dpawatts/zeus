@@ -5,10 +5,13 @@ using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using System.Web.Security;
 using Zeus.Linq.Filters;
+using Zeus.Integrity;
+using Zeus.ContentTypes;
 
 namespace Zeus.Web.Security.Items
 {
 	[ContentType("User Container")]
+	[RestrictParents(typeof(IRootItem))]
 	public class UserContainer : ContentItem
 	{
 		[TextBoxEditor("Title", 10, Required = true)]

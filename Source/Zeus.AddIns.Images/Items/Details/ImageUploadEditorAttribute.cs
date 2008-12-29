@@ -34,18 +34,16 @@ namespace Zeus.AddIns.Images.Items.Details
 			}
 		}
 
-		public override bool UpdateItem(ContentItem item, Control editor)
+		protected override bool OnItemUpdated(ContentItem item, Control editor)
 		{
-			bool result = base.UpdateItem(item, editor);
-
 			ImageEditor fileUpload = editor as ImageEditor;
 			if (fileUpload.ClearImage)
 			{
 				item[this.Name] = null;
-				result = true;
+				return true;
 			}
 
-			return result;
+			return false;
 		}
 
 		protected override System.Web.UI.Control CreateEditor()

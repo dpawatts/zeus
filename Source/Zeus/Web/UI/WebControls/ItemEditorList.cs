@@ -250,8 +250,8 @@ namespace Zeus.Web.UI.WebControls
 		protected virtual void AddToContainer(Control container, ItemEditView itemEditor, ContentItem item)
 		{
 			HtmlFieldSet fs = new HtmlFieldSet();
-			string status = (item.ID != 0) ? "#" + item.ID : "(Unsaved)";
-			fs.Legend = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " ID " + status;
+			string status = (item.ID != 0) ? "ID #" + item.ID : "(Unsaved)";
+			fs.Legend = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status;
 			container.Controls.Add(fs);
 			fs.Controls.Add(itemEditor);
 		}

@@ -8,6 +8,7 @@ using Zeus.Web;
 using Zeus.Security;
 using Zeus.Linq.Filters;
 using System.Security.Principal;
+using Zeus.ContentTypes;
 
 namespace Zeus
 {

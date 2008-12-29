@@ -14,7 +14,7 @@ div.editDetail
 	color: #808285;
 }
 
-input[type="text"], textarea, select
+input[type="text"], textarea, div.editDetail > select
 {
 	vertical-align: text-bottom;
 	border: solid 1px #999;
@@ -44,6 +44,18 @@ img.image
 span.clearFile input
 {
 	margin-top: 5px;
+	margin-left: 165px;
+	margin-right: 3px;
+}
+
+span.fileName img
+{
+	margin-top: 5px;
+}
+
+span.fileName
+{
+	clear: both;
 	margin-left: 165px;
 }
 

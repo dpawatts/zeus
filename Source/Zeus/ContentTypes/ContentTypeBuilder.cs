@@ -141,20 +141,23 @@ namespace Zeus.ContentTypes
 					assemblies.Add(assembly);
 			}
 
-			foreach (string dllPath in Directory.GetFiles(HttpContext.Current.Server.MapPath("~/bin"), "*.dll"))
+			if (HttpContext.Current != null)
 			{
-				try
+				foreach (string dllPath in Directory.GetFiles(HttpContext.Current.Server.MapPath("~/bin"), "*.dll"))
 				{
-					Assembly assembly = Assembly.ReflectionOnlyLoadFrom(dllPath);
-					if (Matches(assembly.FullName) && !assemblies.Any(a => a.FullName == assembly.FullName))
+					try
 					{
-						Assembly loadedAssembly = AppDomain.CurrentDomain.Load(assembly.FullName);
-						assemblies.Add(loadedAssembly);
+						Assembly assembly = Assembly.ReflectionOnlyLoadFrom(dllPath);
+						if (Matches(assembly.FullName) && !assemblies.Any(a => a.FullName == assembly.FullName))
+						{
+							Assembly loadedAssembly = AppDomain.CurrentDomain.Load(assembly.FullName);
+							assemblies.Add(loadedAssembly);
+						}
 					}
-				}
-				catch (BadImageFormatException ex)
-				{
-					Trace.TraceError(ex.ToString());
+					catch (BadImageFormatException ex)
+					{
+						Trace.TraceError(ex.ToString());
+					}
 				}
 			}
 

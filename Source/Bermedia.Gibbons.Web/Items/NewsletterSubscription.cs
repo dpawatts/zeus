@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Zeus;
 using Zeus.Integrity;
 using Zeus.ContentTypes.Properties;
+using System.Collections.Generic;
 
 namespace Bermedia.Gibbons.Web.Items
 {
@@ -43,6 +45,11 @@ namespace Bermedia.Gibbons.Web.Items
 		protected override string IconName
 		{
 			get { return "email"; }
+		}
+
+		public IList<NewsletterLogEntry> LogEntries
+		{
+			get { return this.GetChildren<NewsletterLogEntry>(); }
 		}
 	}
 }

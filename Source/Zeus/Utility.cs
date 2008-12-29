@@ -72,5 +72,36 @@ namespace Zeus
 		{
 			return string.Format(format, Evaluate(item, expression));
 		}
+
+		/// <summary>Moves an item in a list to a new index.</summary>
+		/// <param name="siblings">A list of items where the item to move is listed.</param>
+		/// <param name="itemToMove">The item that should be moved (must be in the list)</param>
+		/// <param name="newIndex">The new index onto which to place the item.</param>
+		/// <remarks>To persist the new ordering one should call <see cref="Utility.UpdateSortOrder"/> and save the returned items. If the items returned from the <see cref="ContentItem.GetChildren"/> are moved with this method the changes will not be persisted since this is a new list instance.</remarks>
+		public static void MoveToIndex(IList<ContentItem> siblings, ContentItem itemToMove, int newIndex)
+		{
+			siblings.Remove(itemToMove);
+			siblings.Insert(newIndex, itemToMove);
+		}
+
+		/// <summary>Iterates items and ensures that the item's sort order is ascending.</summary>
+		/// <param name="siblings">The items to iterate.</param>
+		/// <returns>A list of items whose sort order was changed.</returns>
+		public static IEnumerable<ContentItem> UpdateSortOrder(IEnumerable siblings)
+		{
+			List<ContentItem> updatedItems = new List<ContentItem>();
+			int lastSortOrder = int.MinValue;
+			foreach (ContentItem sibling in siblings)
+			{
+				if (sibling.SortOrder <= lastSortOrder)
+				{
+					sibling.SortOrder = ++lastSortOrder;
+					updatedItems.Add(sibling);
+				}
+				else
+					lastSortOrder = sibling.SortOrder;
+			}
+			return updatedItems;
+		}
 	}
 }

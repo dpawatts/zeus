@@ -13,7 +13,7 @@
   <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
 <body>
-	<form runat="server" id="frmForm">
+	<form runat="server" id="frmForm" enctype="multipart/form-data">
 	<asp:ScriptManager runat="server" />
 	<div>
 		<div id="toolbar">

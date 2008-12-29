@@ -4,6 +4,7 @@ using System.Web.UI;
 using Zeus.FileSystem;
 using Zeus.Web.UI.WebControls;
 using Zeus.Admin;
+using Zeus.Web.UI;
 
 namespace Zeus.ContentTypes.Properties
 {
@@ -73,7 +74,22 @@ namespace Zeus.ContentTypes.Properties
 				result = true;
 			}
 
+			if (OnItemUpdated(item, editor))
+				result = true;
+
 			return result;
+		}
+
+		protected virtual bool OnItemUpdated(ContentItem item, Control editor)
+		{
+			FileEditor fileUpload = editor as FileEditor;
+			if (fileUpload.ShouldClear)
+			{
+				item[this.Name] = null;
+				return true;
+			}
+
+			return false;
 		}
 
 		/// <summary>Creates a text box editor.</summary>
@@ -90,12 +106,17 @@ namespace Zeus.ContentTypes.Properties
 
 		public override void UpdateEditor(ContentItem item, Control editor)
 		{
-			
+			File file = item[this.Name] as File;
+			if (file != null)
+			{
+				FileEditor fileUpload = editor as FileEditor;
+				fileUpload.ContentID = file.ID;
+			}
 		}
 
 		protected virtual Control CreateEditor()
 		{
-			return new FileUpload();
+			return new FileEditor();
 		}
 	}
 }

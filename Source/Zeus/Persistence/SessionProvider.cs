@@ -6,6 +6,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using System.Reflection;
 using System.Web;
+using System.Collections;
 
 namespace Zeus.Persistence
 {
@@ -14,13 +15,16 @@ namespace Zeus.Persistence
 		private ISessionFactory _sessionFactory;
 		private IInterceptor _interceptor;
 
+		private Dictionary<string, object> _requestItems = new Dictionary<string, object>();
+
 		public ISession OpenSession
 		{
 			get
 			{
-				ISession session = HttpContext.Current.Items["OpenSession"] as ISession;
+				IDictionary dictionary = (HttpContext.Current != null) ? HttpContext.Current.Items : _requestItems;
+				ISession session = dictionary["OpenSession"] as ISession;
 				if (session == null)
-					HttpContext.Current.Items["OpenSession"] = session = _sessionFactory.OpenSession(_interceptor);
+					dictionary["OpenSession"] = session = _sessionFactory.OpenSession(_interceptor);
 				return session;
 			}
 		}
