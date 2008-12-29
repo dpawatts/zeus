@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 17.25, 15.125" name="OldGibbonsDataClasses">
+  <DataContextMoniker Name="/OldGibbonsDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8d4cc82a-5a9a-4e18-8074-d2966b1de84f" absoluteBounds="6.25, 4.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/BillingAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5651bf76-41ea-4ca9-ae63-f43126b192dc" absoluteBounds="6.265, 5.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7f45df26-49ab-4427-ab46-b3b356bfa79a" absoluteBounds="3.5, 12.25, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/SubCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="569eae3b-c17a-4141-8eda-c6e5e96fd1f0" absoluteBounds="3.515, 12.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4efe0190-eff3-436f-8c5e-91a681e8582b" absoluteBounds="3.5, 9.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Brand" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b8516247-786e-4a68-8f3e-98baf342fb80" absoluteBounds="3.515, 9.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4d3af323-d7fe-41d4-816b-0255ef62bd8d" absoluteBounds="6.25, 12.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Collection" />
+      <nestedChildShapes>
+        <elementListCompartment Id="579bc78d-650a-4ba0-8551-bf43bdc49fde" absoluteBounds="6.265, 12.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="508419d9-93da-4b7e-b105-d04b9cf5c8b6" absoluteBounds="0.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/ColourOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4371eaa2-335a-4992-8848-93e81f20a2ec" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1f4d472-b5b1-43a3-ad2d-79ba463d5b61" absoluteBounds="0.75, 5.5, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Country" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e0580e29-13a4-4558-aaf7-5f54c1574a05" absoluteBounds="0.765, 5.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="610da1ff-d328-43bd-b064-2c1854f04242" absoluteBounds="9.25, 4.125, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d2add254-023b-4e6e-bd4a-b602dedbbb78" absoluteBounds="9.265, 4.585, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1ccda8c3-b4d8-44f2-b820-81ccf93d6400" absoluteBounds="15, 4.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/DeliveryAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ff2f6c7-800a-4bf5-8054-2733990cc7b6" absoluteBounds="15.015, 5.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cec26d69-d329-47a8-8f1a-10aeb376f22b" absoluteBounds="0.75, 12.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="07bd4e7a-a946-468c-8970-6cdecbaad505" absoluteBounds="0.765, 12.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0753dc94-7ab5-4f37-957e-afe6e4196a7c" absoluteBounds="14.75, 8.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/GiftCard" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6e654d7-fb82-48b8-849d-ac59bec7b624" absoluteBounds="14.765, 8.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ad5339a3-b4f1-4fef-8486-1abead5801cd" absoluteBounds="3.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Newsletter" />
+      <nestedChildShapes>
+        <elementListCompartment Id="860ad249-8461-4ba3-899b-2ecb817e4835" absoluteBounds="3.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c41e6a7b-7294-41c5-89b1-69fbaa2b9a5c" absoluteBounds="6.75, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/NewsletterSubscription" />
+      <nestedChildShapes>
+        <elementListCompartment Id="64ded18e-7a5d-40b5-81fe-085a72466bdc" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c1012243-3c71-48d0-9b96-fdca881efab5" absoluteBounds="9.75, 0.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/OrderedProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2e9e2397-2f7c-4468-b256-87f285f666df" absoluteBounds="9.765, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d5503173-7c3a-44a2-a651-27d9c3f711d2" absoluteBounds="12, 4.625, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Order" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb9e38f6-7f44-4b2b-ba51-6e9a1aa16bde" absoluteBounds="12.015, 5.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51c1e526-4e35-43a0-8bbd-01dae96ac041" absoluteBounds="3.5, 5.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/ParishState" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ddc02c4-e159-4969-9635-904ad3cf4c30" absoluteBounds="3.515, 5.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ebb3e72-458a-41f8-a178-8d8914f92ce4" absoluteBounds="11.75, 11.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/ProductImage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0141125a-ec2f-4680-b9db-30bcf1096b48" absoluteBounds="11.765, 12.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a65d5c26-8515-4a01-9bd7-34b51d9a6b97" absoluteBounds="9, 11, 2, 3.8862125651041666">
+      <DataClassMoniker Name="/OldGibbonsDataClassesDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47e36542-60a6-4159-b87f-a5ae422d73a6" absoluteBounds="9.015, 11.46, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 9.97199625651042); (7.25 : 9.97199625651042); (7.25 : 12.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Brand/Brand_Collection" />
+      <nodes>
+        <classShapeMoniker Id="4efe0190-eff3-436f-8c5e-91a681e8582b" />
+        <classShapeMoniker Id="4d3af323-d7fe-41d4-816b-0255ef62bd8d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 12.9431469726562); (6.25 : 12.9431469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/SubCategory/SubCategory_Collection" />
+      <nodes>
+        <classShapeMoniker Id="7f45df26-49ab-4427-ab46-b3b356bfa79a" />
+        <classShapeMoniker Id="4d3af323-d7fe-41d4-816b-0255ef62bd8d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 6.69399251302083); (1.75 : 7.09059895833333); (2.19791916666667 : 7.09059895833333 : JumpStart); (2.36458583333333 : 7.09059895833333 : JumpEnd); (4.41666666666667 : 7.09059895833333 : JumpStart); (4.58333333333333 : 7.09059895833333 : JumpEnd); (6.25 : 7.09059895833333)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Country/Country_BillingAddress" />
+      <nodes>
+        <classShapeMoniker Id="d1f4d472-b5b1-43a3-ad2d-79ba463d5b61" />
+        <classShapeMoniker Id="8d4cc82a-5a9a-4e18-8074-d2966b1de84f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.25 : 5.99120198567708); (8.25 : 5.99120198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Customer/Customer_BillingAddress" />
+      <nodes>
+        <classShapeMoniker Id="610da1ff-d328-43bd-b064-2c1854f04242" />
+        <classShapeMoniker Id="8d4cc82a-5a9a-4e18-8074-d2966b1de84f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.2812525 : 6.69399251302083); (2.2812525 : 7.71555826822917); (9.25 : 7.71555826822917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Country/Country_Customer" />
+      <nodes>
+        <classShapeMoniker Id="d1f4d472-b5b1-43a3-ad2d-79ba463d5b61" />
+        <classShapeMoniker Id="610da1ff-d328-43bd-b064-2c1854f04242" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.09699625651042); (3.25 : 6.09699625651042); (3.25 : 3.875); (8.91666666666667 : 3.875 : JumpStart); (9.08333333333333 : 3.875 : JumpEnd); (12.9166666666667 : 3.875 : JumpStart); (13.0833333333333 : 3.875 : JumpEnd); (16 : 3.875); (16 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Country/Country_DeliveryAddress" />
+      <nodes>
+        <classShapeMoniker Id="d1f4d472-b5b1-43a3-ad2d-79ba463d5b61" />
+        <classShapeMoniker Id="1ccda8c3-b4d8-44f2-b820-81ccf93d6400" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 7.68430876822917); (12.9166666666667 : 7.68430876822917 : JumpStart); (13.0833333333333 : 7.68430876822917 : JumpEnd); (16 : 7.68430876822917); (16 : 7.35740397135417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Customer/Customer_DeliveryAddress" />
+      <nodes>
+        <classShapeMoniker Id="610da1ff-d328-43bd-b064-2c1854f04242" />
+        <classShapeMoniker Id="1ccda8c3-b4d8-44f2-b820-81ccf93d6400" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 12.9719962565104); (3.5 : 12.9719962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Department/Department_SubCategory" />
+      <nodes>
+        <classShapeMoniker Id="cec26d69-d329-47a8-8f1a-10aeb376f22b" />
+        <classShapeMoniker Id="7f45df26-49ab-4427-ab46-b3b356bfa79a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(13 : 7.35740397135417); (13 : 9.03929768880208); (14.75 : 9.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Order/Order_GiftCard" />
+      <nodes>
+        <classShapeMoniker Id="d5503173-7c3a-44a2-a651-27d9c3f711d2" />
+        <classShapeMoniker Id="0753dc94-7ab5-4f37-957e-afe6e4196a7c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 5.27684899283854); (9 : 5.27684899283854); (9 : 3.625); (13 : 3.625); (13 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/BillingAddress/BillingAddress_Order" />
+      <nodes>
+        <classShapeMoniker Id="8d4cc82a-5a9a-4e18-8074-d2966b1de84f" />
+        <classShapeMoniker Id="d5503173-7c3a-44a2-a651-27d9c3f711d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 5.99120198567708); (12 : 5.99120198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Customer/Customer_Order" />
+      <nodes>
+        <classShapeMoniker Id="610da1ff-d328-43bd-b064-2c1854f04242" />
+        <classShapeMoniker Id="d5503173-7c3a-44a2-a651-27d9c3f711d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(15 : 5.99120198567708); (14 : 5.99120198567708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/DeliveryAddress/DeliveryAddress_Order" />
+      <nodes>
+        <classShapeMoniker Id="1ccda8c3-b4d8-44f2-b820-81ccf93d6400" />
+        <classShapeMoniker Id="d5503173-7c3a-44a2-a651-27d9c3f711d2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.06814697265625); (6.25 : 6.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/ParishState/ParishState_BillingAddress" />
+      <nodes>
+        <classShapeMoniker Id="51c1e526-4e35-43a0-8bbd-01dae96ac041" />
+        <classShapeMoniker Id="8d4cc82a-5a9a-4e18-8074-d2966b1de84f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 6.7612939453125); (4.5 : 7.53647861979167); (9.25 : 7.53647861979167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/ParishState/ParishState_Customer" />
+      <nodes>
+        <classShapeMoniker Id="51c1e526-4e35-43a0-8bbd-01dae96ac041" />
+        <classShapeMoniker Id="610da1ff-d328-43bd-b064-2c1854f04242" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 5.69032148632813); (6 : 5.69032148632813); (6 : 4); (8.91666666666667 : 4 : JumpStart); (9.08333333333333 : 4 : JumpEnd); (12.9166666666667 : 4 : JumpStart); (13.0833333333333 : 4 : JumpEnd); (15.468748 : 4); (15.468748 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/ParishState/ParishState_DeliveryAddress" />
+      <nodes>
+        <classShapeMoniker Id="51c1e526-4e35-43a0-8bbd-01dae96ac041" />
+        <classShapeMoniker Id="1ccda8c3-b4d8-44f2-b820-81ccf93d6400" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.73599812825521); (3.16666666666667 : 5.73599812825521 : JumpStart); (3.33333333333333 : 5.73599812825521 : JumpEnd); (3.5 : 5.73599812825521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Country/Country_ParishState" />
+      <nodes>
+        <classShapeMoniker Id="d1f4d472-b5b1-43a3-ad2d-79ba463d5b61" />
+        <classShapeMoniker Id="51c1e526-4e35-43a0-8bbd-01dae96ac041" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 12.9527498372396); (11.75 : 12.9527498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Product/Product_ProductImage" />
+      <nodes>
+        <classShapeMoniker Id="a65d5c26-8515-4a01-9bd7-34b51d9a6b97" />
+        <classShapeMoniker Id="2ebb3e72-458a-41f8-a178-8d8914f92ce4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 12.9142976888021); (9 : 12.9142976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/OldGibbonsDataClassesDataContext/Collection/Collection_Product" />
+      <nodes>
+        <classShapeMoniker Id="4d3af323-d7fe-41d4-816b-0255ef62bd8d" />
+        <classShapeMoniker Id="a65d5c26-8515-4a01-9bd7-34b51d9a6b97" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
