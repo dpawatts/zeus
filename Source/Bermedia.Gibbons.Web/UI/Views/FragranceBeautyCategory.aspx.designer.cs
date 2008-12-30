@@ -11,7 +11,7 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class DepartmentGifts {
+    public partial class FragranceBeautyCategory {
         
         /// <summary>
         /// uscProductListing control.

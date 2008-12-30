@@ -14,6 +14,12 @@ namespace Zeus.Linq
 			_sessionProvider = sessionProvider;
 		}
 
+		public IOrderedQueryable<T> Elements<T>()
+			where T : ContentItem
+		{
+			return _sessionProvider.OpenSession.Linq<T>();
+		}
+
 		private IOrderedQueryable<ContentItem> ContentItems
 		{
 			get { return _sessionProvider.OpenSession.Linq<ContentItem>(); }

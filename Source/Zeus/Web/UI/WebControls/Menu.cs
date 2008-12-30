@@ -83,8 +83,10 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override void CreateChildControls()
 		{
+			Page.Trace.Write("Create Menu controls - Begin");
 			BuildControlHierarchy(this.CurrentPage, this.StartPage);
 			base.CreateChildControls();
+			Page.Trace.Write("Create Menu controls - End");
 		}
 
 		private static HtmlGenericControl CreateAndAdd(Control container, string tagName, string cssClass)

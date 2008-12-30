@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<div id="navContainer">
-			<zeus:Menu runat="server" BranchMode="false" CssClass="sf-menu" SelectedCssClass="on" OfType="Bermedia.Gibbons.Web.Items.StructuralPage, Bermedia.Gibbons.Web" />
+			<zeus:Menu runat="server" BranchMode="false" CssClass="sf-menu" SelectedCssClass="on" OfType="Bermedia.Gibbons.Web.Items.BaseDepartment, Bermedia.Gibbons.Web" />
 			
 			<script type="text/javascript">
 				$(document).ready(function() {

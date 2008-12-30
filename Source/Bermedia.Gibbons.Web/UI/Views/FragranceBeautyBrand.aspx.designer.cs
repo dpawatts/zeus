@@ -11,33 +11,24 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class Category {
+    public partial class FragranceBeautyBrand {
         
         /// <summary>
-        /// categoryImage control.
+        /// ltlTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl categoryImage;
+        protected global::System.Web.UI.WebControls.Literal ltlTitle;
         
         /// <summary>
-        /// uscProductListing1 control.
+        /// uscProductListing control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing1;
-        
-        /// <summary>
-        /// uscProductListing2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing2;
+        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing;
     }
 }

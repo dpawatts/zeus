@@ -30,9 +30,8 @@ namespace Bermedia.Gibbons.Web.Items.Details
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			return Zeus.Context.Current.Finder
-				.ToList() // TODO: REMOVE THIS!!!! Once the new LINQ to NHibernate comes out.
-				.OfType<ProductColour>()
+			return Zeus.Context.Current.Finder.Elements<ProductScent>()
+				.ToList()
 				.Select(p => new ListItem(p.Title, p.ID.ToString()))
 				.ToArray();
 		}

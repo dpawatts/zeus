@@ -15,6 +15,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 		{
 			if (!IsPostBack)
 			{
+				Trace.Write("Populate search dropdown with departments - Begin");
 				foreach (Items.BaseDepartment department in Zeus.Find.StartPage.GetChildren<Items.BaseDepartment>())
 				{
 					AddDepartment(department, string.Empty);
@@ -22,6 +23,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 					foreach (Items.BaseDepartment childDepartment in department.GetChildren<Items.BaseDepartment>())
 						AddDepartment(childDepartment, " » ");
 				}
+				Trace.Write("Populate search dropdown with departments - End");
 			}
 		}
 

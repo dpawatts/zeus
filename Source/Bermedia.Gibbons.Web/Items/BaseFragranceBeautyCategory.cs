@@ -5,10 +5,12 @@ using Zeus.ContentTypes.Properties;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	[ContentType("Category", Description = "e.g. Women's Fragrance")]
 	[RestrictParents(typeof(FragranceBeautyDepartment))]
-	public class FragranceBeautyCategory : BaseFragranceBeautyCategory
+	public abstract class BaseFragranceBeautyCategory : BaseCategory
 	{
-		
+		protected override string TemplateName
+		{
+			get { return "FragranceBeautyCategory"; }
+		}
 	}
 }

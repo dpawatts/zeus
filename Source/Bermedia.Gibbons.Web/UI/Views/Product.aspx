@@ -6,7 +6,7 @@
 	<gibbons:DepartmentNavigation runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
-	<h1><%= this.CurrentItem.Brand.Title %> <%= this.CurrentItem.Title%></h1> 
+	<h1><%= this.CurrentItem.DisplayTitle %></h1> 
 			
 	<div id="productImage">
 		<zeus:ItemDetailView runat="server" PropertyName="Image" />
@@ -50,16 +50,16 @@
 			</p>
 		</asp:PlaceHolder>
 		
-		<isis:ConditionalMultiView runat="server" Value='<%$ Code:CurrentItem %>'>
+		<isis:ConditionalMultiView runat="server" Value='<%$ Code:CurrentItem %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct, Bermedia.Gibbons.Web">
 			<isis:ConditionalView runat="server" Expression="it.SalePrice == null">
 				<ItemTemplate>
-					<h2><%# ((decimal) Eval("RegularPrice")).ToString("C2") %></h2>
+					<h2><%# Container.DataItem.RegularPrice.ToString("C2") %></h2>
 				</ItemTemplate>
 			</isis:ConditionalView>
 			<isis:ConditionalView runat="server">
 				<ItemTemplate>
-					<h2><%# ((decimal) Eval("SalePrice")).ToString("C2") %> SALE</h2>
-					<h2 class="oldPrice">was <%# ((decimal) Eval("RegularPrice")).ToString("C2") %></h2><br />
+					<h2><%# Container.DataItem.SalePrice.Value.ToString("C2") %> SALE</h2>
+					<h2 class="oldPrice">was <%# Container.DataItem.RegularPrice.ToString("C2") %></h2><br />
 				</ItemTemplate>
 			</isis:ConditionalView>
 		</isis:ConditionalMultiView>

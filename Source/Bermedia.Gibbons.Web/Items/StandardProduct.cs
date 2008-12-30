@@ -26,6 +26,11 @@ namespace Bermedia.Gibbons.Web.Items
 			set;
 		}
 
+		public abstract string DisplayTitle
+		{
+			get;
+		}
+
 		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true)]
 		public decimal RegularPrice
 		{
@@ -68,7 +73,7 @@ namespace Bermedia.Gibbons.Web.Items
 		}
 
 		[ProductColoursEditor("Associated Colors", 300, ContainerName = Tabs.Colours)]
-		public DetailCollection AssociatedColours
+		public virtual DetailCollection AssociatedColours
 		{
 			get { return GetDetailCollection("AssociatedColours", true); }
 		}

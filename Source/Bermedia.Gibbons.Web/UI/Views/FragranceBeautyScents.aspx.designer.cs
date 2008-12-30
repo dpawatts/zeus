@@ -11,15 +11,15 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class DepartmentGifts {
+    public partial class FragranceBeautyScents {
         
         /// <summary>
-        /// uscProductListing control.
+        /// rptScents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Bermedia.Gibbons.Web.UI.UserControls.ProductListing uscProductListing;
+        protected global::System.Web.UI.WebControls.Repeater rptScents;
     }
 }

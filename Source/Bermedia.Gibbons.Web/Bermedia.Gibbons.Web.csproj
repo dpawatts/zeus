@@ -99,6 +99,13 @@
     <Compile Include="Items\CheckoutBillingAddress.cs" />
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
+    <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
+    <Compile Include="Items\ProductStrength.cs" />
+    <Compile Include="Items\ProductStrengthContainer.cs" />
+    <Compile Include="Items\FragranceBeautyBrandCategory.cs" />
+    <Compile Include="Items\FragranceBeautyCollection.cs" />
+    <Compile Include="Items\Details\ProductScentsEditor.cs" />
+    <Compile Include="Items\ProductScent.cs" />
     <Compile Include="Items\SearchPage.cs" />
     <Compile Include="Items\Details\ProductColoursEditor.cs" />
     <Compile Include="Items\NewsletterLogEntry.cs" />
@@ -211,6 +218,13 @@
     <Compile Include="UI\UserControls\ProductListing.ascx.designer.cs">
       <DependentUpon>ProductListing.ascx</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\ProductRows.ascx.cs">
+      <DependentUpon>ProductRows.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\ProductRows.ascx.designer.cs">
+      <DependentUpon>ProductRows.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\Search.ascx.cs">
       <DependentUpon>Search.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -218,12 +232,33 @@
     <Compile Include="UI\UserControls\Search.ascx.designer.cs">
       <DependentUpon>Search.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UI\Views\Category.aspx.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
+    <Compile Include="UI\Views\FragranceBeautyExclusives.aspx.cs">
+      <DependentUpon>FragranceBeautyExclusives.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UI\Views\Category.aspx.designer.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
+    <Compile Include="UI\Views\FragranceBeautyExclusives.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyExclusives.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyBrand.aspx.cs">
+      <DependentUpon>FragranceBeautyBrand.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyBrand.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyBrand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyCategory.aspx.cs">
+      <DependentUpon>FragranceBeautyCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyCategory.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\NonFragranceBeautyCategory.aspx.cs">
+      <DependentUpon>NonFragranceBeautyCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\NonFragranceBeautyCategory.aspx.designer.cs">
+      <DependentUpon>NonFragranceBeautyCategory.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\CheckoutDeliveryMethod.aspx.cs">
       <DependentUpon>CheckoutDeliveryMethod.aspx</DependentUpon>
@@ -259,6 +294,27 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutSummary.aspx.designer.cs">
       <DependentUpon>CheckoutSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyBrands.aspx.cs">
+      <DependentUpon>FragranceBeautyBrands.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyBrands.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyBrands.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyScents.aspx.cs">
+      <DependentUpon>FragranceBeautyScents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyScents.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyScents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyDepartment.aspx.cs">
+      <DependentUpon>FragranceBeautyDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FragranceBeautyDepartment.aspx.designer.cs">
+      <DependentUpon>FragranceBeautyDepartment.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\SearchDepartment.aspx.cs">
       <DependentUpon>SearchDepartment.aspx</DependentUpon>
@@ -384,7 +440,7 @@
     <Content Include="Assets\JS\superfish.js" />
     <Content Include="UI\MasterPages\Default.Master" />
     <Content Include="UI\UserControls\DepartmentNavigation.ascx" />
-    <Content Include="UI\Views\Category.aspx" />
+    <Content Include="UI\Views\NonFragranceBeautyCategory.aspx" />
     <Content Include="UI\Views\NonFragranceBeautyDepartment.aspx" />
     <Content Include="UI\Views\Product.aspx" />
     <Content Include="UI\Views\Page.aspx" />
@@ -415,6 +471,7 @@
     <Content Include="App_Browsers\RewriteFormAction.browser" />
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="Assets\Images\hamilton.jpg" />
     <Content Include="Assets\Images\Icons\email.png" />
     <Content Include="Assets\Images\Icons\newspaper.png" />
     <Content Include="Assets\Images\Icons\world.png" />
@@ -423,12 +480,19 @@
     <Content Include="Plugins\Newsletters\SendTest.aspx" />
     <Content Include="TsAndCs.htm" />
     <Content Include="UI\UserControls\PageNavigation.ascx" />
+    <Content Include="UI\UserControls\ProductRows.ascx" />
     <Content Include="UI\UserControls\Search.ascx" />
     <Content Include="UI\Views\CheckoutDeliveryMethod.aspx" />
     <Content Include="UI\Views\CheckoutShippingAddress.aspx" />
     <Content Include="UI\Views\CheckoutPaymentDetails.aspx" />
     <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
     <Content Include="UI\Views\CheckoutSummary.aspx" />
+    <Content Include="UI\Views\FragranceBeautyExclusives.aspx" />
+    <Content Include="UI\Views\FragranceBeautyBrand.aspx" />
+    <Content Include="UI\Views\FragranceBeautyCategory.aspx" />
+    <Content Include="UI\Views\FragranceBeautyBrands.aspx" />
+    <Content Include="UI\Views\FragranceBeautyScents.aspx" />
+    <Content Include="UI\Views\FragranceBeautyDepartment.aspx" />
     <Content Include="UI\Views\SearchDepartment.aspx" />
     <Content Include="UI\Views\Search.aspx" />
     <Content Include="UI\Views\StartPage.aspx" />
