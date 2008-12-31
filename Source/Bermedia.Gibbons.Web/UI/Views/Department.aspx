@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="../MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="NonFragranceBeautyDepartment.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.NonFragranceBeautyDepartment" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="../MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="Department.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.Department" %>
 <%@ Register TagPrefix="gibbons" TagName="DepartmentNavigation" Src="../UserControls/DepartmentNavigation.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphStyle" runat="server">
 	#contentContainer {

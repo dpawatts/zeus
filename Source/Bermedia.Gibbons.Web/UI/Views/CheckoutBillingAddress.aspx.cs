@@ -19,6 +19,9 @@ namespace Bermedia.Gibbons.Web.UI.Views
 
 		protected void btnNext_Click(object sender, EventArgs e)
 		{
+			if (!IsValid)
+				return;
+
 			// Save address
 			Address address = new Address();
 			address.AddressLine1 = txtAddress1.Text;

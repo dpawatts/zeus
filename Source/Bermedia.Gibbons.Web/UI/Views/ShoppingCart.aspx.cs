@@ -8,7 +8,7 @@ using Isis.Web;
 
 namespace Bermedia.Gibbons.Web.UI.Views
 {
-	public partial class ShoppingCart : SecurePage<Web.Items.ShoppingCartPage>
+	public partial class ShoppingCart : OnlineShopPage<Web.Items.ShoppingCartPage>
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -20,14 +20,20 @@ namespace Bermedia.Gibbons.Web.UI.Views
 					shoppingCartItem.Product = (Web.Items.StandardProduct) Zeus.Context.Persister.Get(Request.GetRequiredInt("add"));
 					shoppingCartItem.Quantity = Request.GetRequiredInt("quantity");
 
+					Web.Items.ProductSizeLink size = null;
 					if (Request.QueryString["size"] != null)
-						shoppingCartItem.Size = (Web.Items.ProductSizeLink) Zeus.Context.Persister.Get(Request.GetRequiredInt("size"));
+						size = Zeus.Context.Persister.Get<Web.Items.ProductSizeLink>(Request.GetRequiredInt("size"));
+					else if (shoppingCartItem.Product is Web.Items.FragranceBeautyProduct)
+						size = ((Web.Items.FragranceBeautyProduct) shoppingCartItem.Product).Size;
+					shoppingCartItem.Size = size;
 
 					if (Request.QueryString["colour"] != null)
 						shoppingCartItem.Colour = (Web.Items.ProductColour) Zeus.Context.Persister.Get(Request.GetRequiredInt("colour"));
 
 					shoppingCartItem.AddTo(this.ShoppingCart);
 					Zeus.Context.Persister.Save(shoppingCartItem);
+
+					Response.Redirect("~/shopping-cart.aspx");
 				}
 
 				ReBind();

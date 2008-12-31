@@ -341,3 +341,8 @@ hr { color:#C2EAF0;}
 {
 	color: Red;
 }
+
+a img
+{
+	border: 0;
+}

@@ -4,7 +4,7 @@ using Zeus.Web.UI;
 
 namespace Bermedia.Gibbons.Web.UI.Views
 {
-	public partial class FragranceBeautyDepartment : ContentPage<Bermedia.Gibbons.Web.Items.FragranceBeautyDepartment>
+	public partial class FragranceBeautyShopOnline : ContentPage<Bermedia.Gibbons.Web.Items.FragranceBeautyDepartment>
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

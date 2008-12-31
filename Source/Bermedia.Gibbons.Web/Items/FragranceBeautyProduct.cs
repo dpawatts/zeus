@@ -24,9 +24,9 @@ namespace Bermedia.Gibbons.Web.Items
 			get { return (this.AssociatedColours.Count > 0) ? (ProductScent) this.AssociatedColours[0] : null; }
 		}
 
-		public ProductSize Size
+		public ProductSizeLink Size
 		{
-			get { return (this.AssociatedSizes.Count > 0) ? this.AssociatedSizes[0].ProductSize : null; }
+			get { return (this.AssociatedSizes.Count > 0) ? this.AssociatedSizes[0] : null; }
 		}
 
 		public override Brand Brand
@@ -52,15 +52,15 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<ProductStrength>("Strength", value); }
 		}
 
-		public override string DisplayTitle
+		public override string SubTitle
 		{
 			get
 			{
-				string result = this.Brand.Title + " " + this.Title;
+				string result = string.Empty;
 				if (this.Strength != null)
-					result += " " + this.Strength.Title;
+					result += this.Strength.Title;
 				if (this.Size != null)
-					result += " " + this.Size.Title;
+					result += " " + this.Size.ProductSize.Title;
 				return result;
 			}
 		}

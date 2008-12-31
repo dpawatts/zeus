@@ -45,7 +45,7 @@
 						You are logged in as <asp:LoginName runat="server" /> | <asp:LoginStatus runat="server" />
 					</LoggedInTemplate>
 					<AnonymousTemplate>
-						<a href="/login.aspx">Login</a>
+						<a href="/login.aspx?ReturnUrl=<%= Server.UrlEncode(Request.RawUrl) %>">Login</a>
 					</AnonymousTemplate>
 				</asp:LoginView>
 			</div>

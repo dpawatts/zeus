@@ -86,6 +86,10 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 				}
 				ltlPageLinks.Text = pageLinks;
 			}
+			else
+			{
+				h1Header.Visible = false;
+			}
 		}
 
 		private void AddSection(IEnumerable<Web.Items.StandardProduct> products, UserControls.ProductRows uscProductRows, int productsPerRow)

@@ -44,7 +44,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		public decimal? CurrentPrice
 		{
-			get { return (decimal) (this.SalePrice ?? this.RegularPrice); }
+			get { return (this.SalePrice ?? this.RegularPrice); }
 		}
 
 		protected override string IconName

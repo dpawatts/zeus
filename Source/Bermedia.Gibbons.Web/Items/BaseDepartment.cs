@@ -96,5 +96,10 @@ namespace Bermedia.Gibbons.Web.Items
 				}
 			}
 		}
+
+		protected override string TemplateName
+		{
+			get { return "Department"; }
+		}
 	}
 }

@@ -11,7 +11,7 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class FragranceBeautyDepartment {
+    public partial class FragranceBeautyShopOnline {
         
         /// <summary>
         /// txtSearchText control.

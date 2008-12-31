@@ -21,11 +21,6 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<Brand>("Brand", value); }
 		}
 
-		public override string DisplayTitle
-		{
-			get { return this.Brand.Title + " " + this.Title; }
-		}
-
 		#endregion
 	}
 }

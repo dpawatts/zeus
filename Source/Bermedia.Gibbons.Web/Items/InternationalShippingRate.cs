@@ -10,14 +10,14 @@ namespace Bermedia.Gibbons.Web.Items
 	public class InternationalShippingRate : BaseContentItem
 	{
 		[LinkedItemDropDownListEditor("Price Range", 10, TypeFilter = typeof(InternationalShippingPriceRange), Required = true)]
-		public InternationalShippingPriceRange PriceRange
+		public virtual InternationalShippingPriceRange PriceRange
 		{
 			get { return GetDetail<InternationalShippingPriceRange>("PriceRange", null); }
 			set { SetDetail<InternationalShippingPriceRange>("PriceRange", value); }
 		}
 
 		[LinkedItemDropDownListEditor("Delivery Type", 20, TypeFilter = typeof(InternationalShippingDeliveryType), Required = true)]
-		public InternationalShippingDeliveryType DeliveryType
+		public virtual InternationalShippingDeliveryType DeliveryType
 		{
 			get { return GetDetail<InternationalShippingDeliveryType>("DeliveryType", null); }
 			set { SetDetail<InternationalShippingDeliveryType>("DeliveryType", value); }

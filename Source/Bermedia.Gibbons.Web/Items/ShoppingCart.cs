@@ -39,7 +39,7 @@ namespace Bermedia.Gibbons.Web.Items
 			get
 			{
 				decimal result = 0;
-				foreach (ShoppingCartItem shoppingCartItem in this.Children)
+				foreach (ShoppingCartItem shoppingCartItem in this.Children.OfType<ShoppingCartItem>())
 					result += shoppingCartItem.Price;
 				return result;
 			}

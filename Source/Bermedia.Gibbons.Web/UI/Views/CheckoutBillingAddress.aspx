@@ -7,7 +7,7 @@
 		<table border="0" cellpadding="1" cellspacing="0">
 			<tr>
 				<td><asp:Label runat="server" AssociatedControlID="txtAddress1">Address 1</asp:Label></td>
-				<td><asp:TextBox runat="server" ID="txtAddress1" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAddress1" Text="*" ValidationGroup="cuwRegister" /></td>
+				<td><asp:TextBox runat="server" ID="txtAddress1" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtAddress1" ErrorMessage="Address 1 is required" Text="*" ValidationGroup="cuwRegister" /></td>
 			</tr>
 			<tr>
 				<td><asp:Label runat="server" AssociatedControlID="txtAddress2">Address 2</asp:Label></td>
@@ -23,7 +23,7 @@
 			</tr>
 			<tr>
 				<td><asp:Label runat="server" AssociatedControlID="txtZip">ZIP</asp:Label></td>
-				<td><asp:TextBox runat="server" ID="txtZip" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtZip" Text="*" ValidationGroup="cuwRegister" /></td>
+				<td><asp:TextBox runat="server" ID="txtZip" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtZip" ErrorMessage="ZIP is required" Text="*" ValidationGroup="cuwRegister" /></td>
 			</tr>
 			<tr>
 				<td><asp:Label runat="server" AssociatedControlID="ddlCountry">Country</asp:Label></td>
@@ -34,11 +34,14 @@
 			</tr>
 			<tr>
 				<td><asp:Label runat="server" AssociatedControlID="txtPhone">Phone</asp:Label></td>
-				<td><asp:TextBox runat="server" ID="txtPhone" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone" Text="*" ValidationGroup="cuwRegister" /></td>
+				<td><asp:TextBox runat="server" ID="txtPhone" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone" ErrorMessage="Phone is required" Text="*" ValidationGroup="cuwRegister" /></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
+					<p><asp:ValidationSummary runat="server" ID="vlsSummary" ValidationGroup="cuwRegister" DisplayMode="List" /></p>
+					<br />
+					
 					<sitdap:DynamicImageButton runat="server" ID="btnNext" OnClick="btnNext_Click" TemplateName="Button" AlternateText="next" ValidationGroup="cuwRegister">
 						<Layers>
 							<sitdap:TextLayer Name="Text" Text="next" />

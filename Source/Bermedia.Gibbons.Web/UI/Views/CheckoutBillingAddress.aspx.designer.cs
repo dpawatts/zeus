@@ -14,19 +14,85 @@ namespace Bermedia.Gibbons.Web.UI.Views {
     public partial class CheckoutBillingAddress {
         
         /// <summary>
-        /// rblDeliveryMethod control.
+        /// txtAddress1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddress1;
-				protected global::System.Web.UI.WebControls.TextBox txtAddress2;
-				protected global::System.Web.UI.WebControls.TextBox txtCity;
-				protected global::System.Web.UI.WebControls.TextBox txtParishState;
-				protected global::System.Web.UI.WebControls.TextBox txtZip;
-				protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
-				protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        
+        /// <summary>
+        /// txtAddress2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAddress2;
+        
+        /// <summary>
+        /// txtCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCity;
+        
+        /// <summary>
+        /// txtParishState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParishState;
+        
+        /// <summary>
+        /// txtZip control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtZip;
+        
+        /// <summary>
+        /// ddlCountry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+        
+        /// <summary>
+        /// cdsCountries control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsCountries;
+        
+        /// <summary>
+        /// txtPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        
+        /// <summary>
+        /// vlsSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vlsSummary;
         
         /// <summary>
         /// btnNext control.
@@ -37,6 +103,13 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         /// </remarks>
         protected global::SoundInTheory.DynamicImage.DynamicImageButton btnNext;
         
-				protected global::System.Web.UI.WebControls.ListView lsvAddressBook;
+        /// <summary>
+        /// lsvAddressBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.Address> lsvAddressBook;
     }
 }

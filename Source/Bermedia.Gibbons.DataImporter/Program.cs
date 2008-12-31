@@ -83,14 +83,17 @@ namespace Bermedia.Gibbons.DataImporter
 					newProduct.Active = oldProduct.Active;
 
 					// Size
-					ProductSize newProductSize = _productSizes.SingleOrDefault(ps => ps.Name == oldProduct.Size);
-					if (newProductSize == null)
+					if (!string.IsNullOrEmpty(oldProduct.Size))
 					{
-						newProductSize = new ProductSize { Title = oldProduct.Size, Parent = sizeContainer };
-						Zeus.Context.Persister.Save(newProductSize);
-						_productSizes.Add(newProductSize);
+						ProductSize newProductSize = _productSizes.SingleOrDefault(ps => ps.Title == oldProduct.Size);
+						if (newProductSize == null)
+						{
+							newProductSize = new ProductSize { Name = GetName(oldProduct.Size), Title = oldProduct.Size, Parent = sizeContainer };
+							Zeus.Context.Persister.Save(newProductSize);
+							_productSizes.Add(newProductSize);
+						}
+						newProduct.Children.Add(new ProductSizeLink { ProductSize = newProductSize, Parent = newProduct });
 					}
-					newProduct.Children.Add(new ProductSizeLink { ProductSize = newProductSize });
 
 					// Colour
 					if (!string.IsNullOrEmpty(oldProduct.Color1))

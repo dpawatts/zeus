@@ -32,37 +32,31 @@
 	<div id="productDetails">
 		<p><%= this.CurrentItem.Description %></p>
 		
-		<asp:PlaceHolder runat="server" Visible='<%$ HasItems:AssociatedSizes %>'>
+		<% if (this.CurrentItem.AssociatedSizes.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
 			<p>
 				<strong>Available Sizes:</strong><br />
 				<isis:DropDownList runat="server" ID="ddlSizes" DataSource='<%$ CurrentPage:AssociatedSizes %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
 					<asp:ListItem Value="">Please select a size</asp:ListItem>
 				</isis:DropDownList>
 			</p>
-		</asp:PlaceHolder>
+		<% } %>
+		<%= this.CurrentItem.SubTitle %>
 		
-		<asp:PlaceHolder runat="server" Visible='<%$ HasItems:AssociatedColours %>'>
+		<% if (this.CurrentItem.AssociatedColours.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
 			<p>
 				<strong>Available Colors:</strong><br />
 				<isis:DropDownList runat="server" ID="ddlColours" DataSource='<%$ CurrentPage:AssociatedColours %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
 					<asp:ListItem Value="">Then select a color</asp:ListItem>
 				</isis:DropDownList>
 			</p>
-		</asp:PlaceHolder>
+		<% } %>
 		
-		<isis:ConditionalMultiView runat="server" Value='<%$ Code:CurrentItem %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct, Bermedia.Gibbons.Web">
-			<isis:ConditionalView runat="server" Expression="it.SalePrice == null">
-				<ItemTemplate>
-					<h2><%# Container.DataItem.RegularPrice.ToString("C2") %></h2>
-				</ItemTemplate>
-			</isis:ConditionalView>
-			<isis:ConditionalView runat="server">
-				<ItemTemplate>
-					<h2><%# Container.DataItem.SalePrice.Value.ToString("C2") %> SALE</h2>
-					<h2 class="oldPrice">was <%# Container.DataItem.RegularPrice.ToString("C2") %></h2><br />
-				</ItemTemplate>
-			</isis:ConditionalView>
-		</isis:ConditionalMultiView>
+		<% if (this.CurrentItem.SalePrice == null) { %>
+			<h2><%= this.CurrentItem.RegularPrice.ToString("C2") %></h2>
+		<% } else { %>
+			<h2><%= this.CurrentItem.SalePrice.Value.ToString("C2")%> SALE</h2>
+			<h2 class="oldPrice">was <%= this.CurrentItem.RegularPrice.ToString("C2")%></h2><br />
+		<% } %>
 		
 		<asp:PlaceHolder runat="server" Visible='<%$ Code:CurrentItem.Exclusive %>'>
 			<strong>Gibbons Exclusive</strong><br />

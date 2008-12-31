@@ -11,7 +11,12 @@ namespace Bermedia.Gibbons.Web.Items
 	{
 		public override ContentItem GetChild(string childName)
 		{
-			if (childName.Equals("scents", StringComparison.CurrentCultureIgnoreCase))
+			if (childName.Equals("shop-online", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "shop-online";
+				return this;
+			}
+			else if (childName.Equals("scents", StringComparison.CurrentCultureIgnoreCase))
 			{
 				this.Action = "scents";
 				return this;
@@ -40,6 +45,8 @@ namespace Bermedia.Gibbons.Web.Items
 			{
 				switch (Action)
 				{
+					case "shop-online":
+						return "~/UI/Views/FragranceBeautyShopOnline.aspx";
 					case "scents":
 						return "~/UI/Views/FragranceBeautyScents.aspx";
 					case "brands":

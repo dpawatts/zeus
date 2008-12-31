@@ -25,7 +25,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		public OrderStatus Status
 		{
-			get { return GetDetail<OrderStatus>("Status", 0); }
+			get { return GetDetail<OrderStatus>("Status", OrderStatus.Basket); }
 			set { SetDetail<OrderStatus>("Status", value); }
 		}
 

@@ -45,21 +45,14 @@
 			<ItemTemplate>
 				<td class="details">
 					<a href="<%# Container.DataItem.Url %>">
-						<strong><%# Container.DataItem.Title %></strong><br />
-						
-						<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.StandardProduct, Bermedia.Gibbons.Web">
-							<isis:ConditionalView runat="server" Expression="it.SalePrice == null">
-								<ItemTemplate>
-									<%# Container.DataItem.RegularPrice.ToString("C2") %><br />
-								</ItemTemplate>
-							</isis:ConditionalView>
-							<isis:ConditionalView runat="server">
-								<ItemTemplate>
-									<span class="oldPrice"><%# Container.DataItem.RegularPrice.ToString("C2") %></span><br />
-									<span class="sale"><%# Container.DataItem.SalePrice.ToString("C2") %> SALE</span><br />
-								</ItemTemplate>
-							</isis:ConditionalView>
-						</isis:ConditionalMultiView>
+						<strong><%# Container.DataItem.DisplayTitle %></strong><br />
+						<asp:PlaceHolder runat="server" Visible='<%# !string.IsNullOrEmpty(Container.DataItem.SubTitle) %>'>
+							<%# Container.DataItem.SubTitle %><br />
+						</asp:PlaceHolder>
+
+						<%# (Container.DataItem.SalePrice == null) ?
+									Container.DataItem.RegularPrice.ToString("C2") + "<br />" :
+									"<span class=\"oldPrice\">" + Container.DataItem.RegularPrice.ToString("C2") + "</span><br /><span class=\"sale\">" + Container.DataItem.SalePrice.Value.ToString("C2") + " SALE</span><br />" %>
 						
 						<asp:PlaceHolder runat="server" Visible='<%# Container.DataItem.AssociatedColours.Count > 1 %>'>
 							More Colours<br />

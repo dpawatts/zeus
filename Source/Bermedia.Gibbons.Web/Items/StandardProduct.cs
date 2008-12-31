@@ -26,9 +26,14 @@ namespace Bermedia.Gibbons.Web.Items
 			set;
 		}
 
-		public abstract string DisplayTitle
+		public string DisplayTitle
 		{
-			get;
+			get { return this.Brand.Title + " " + this.Title; }
+		}
+
+		public virtual string SubTitle
+		{
+			get { return string.Empty; }
 		}
 
 		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true)]

@@ -7,6 +7,7 @@ namespace Bermedia.Gibbons.Web.Items
 {
 	public enum OrderStatus
 	{
+		Basket,
 		New,
 		Collected,
 		Shipped,
