@@ -88,7 +88,7 @@ namespace Zeus.Web.Security
 
 		public override bool EnablePasswordRetrieval
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
@@ -238,7 +238,7 @@ namespace Zeus.Web.Security
 
 		public override bool RequiresQuestionAndAnswer
 		{
-			get { return false; }
+			get { return true; }
 		}
 
 		public override bool RequiresUniqueEmail

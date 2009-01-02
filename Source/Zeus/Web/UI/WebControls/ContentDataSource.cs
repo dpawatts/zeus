@@ -25,6 +25,13 @@ namespace Zeus.Web.UI.WebControls
 			set { this.View.Where = value; }
 		}
 
+		[DefaultValue("")]
+		public string OrderBy
+		{
+			get { return this.View.OrderBy; }
+			set { this.View.OrderBy = value; }
+		}
+
 		[DefaultValue(0)]
 		public int Skip
 		{

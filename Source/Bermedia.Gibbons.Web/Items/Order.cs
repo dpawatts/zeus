@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Isis;
 using Zeus;
 using Zeus.Integrity;
 
@@ -23,10 +24,22 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<decimal>("DeliveryPrice", value); }
 		}
 
+		public string TrackingNumber
+		{
+			get { return GetDetail<string>("TrackingNumber", string.Empty); }
+			set { SetDetail<string>("TrackingNumber", value); }
+		}
+
 		public OrderStatus Status
 		{
 			get { return GetDetail<OrderStatus>("Status", OrderStatus.Basket); }
 			set { SetDetail<OrderStatus>("Status", value); }
+		}
+
+		public DateTime ShippedDate
+		{
+			get { return GetDetail<DateTime>("ShippedDate", DateTime.MinValue); }
+			set { SetDetail<DateTime>("ShippedDate", value); }
 		}
 
 		public RefundStatus RefundStatus
@@ -60,6 +73,27 @@ namespace Bermedia.Gibbons.Web.Items
 						return PaymentStatus.None;
 				}
 			}
+		}
+
+		public string StatusDescription
+		{
+			get
+			{
+				switch (this.Status)
+				{
+					case OrderStatus.Shipped :
+						return "Shipped on " + this.ShippedDate;
+					case OrderStatus.Collected :
+						return "Picked up on " + this.ShippedDate;
+					default :
+						return this.Status.GetDescription();
+				}
+			}
+		}
+
+		protected override string TemplateName
+		{
+			get { return "ViewOrder"; }
 		}
 	}
 }

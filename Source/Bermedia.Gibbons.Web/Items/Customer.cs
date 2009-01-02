@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Linq;
 using Zeus.ContentTypes.Properties;
+using System.Collections.Generic;
 
 namespace Bermedia.Gibbons.Web.Items
 {
 	public class Customer : Zeus.Web.Security.Items.User
 	{
+		public override string Email
+		{
+			get { return base.Name; }
+			set { base.Name = value; }
+		}
+
 		public string FirstName
 		{
 			get { return GetDetail<string>("FirstName", string.Empty); }
@@ -36,6 +44,11 @@ namespace Bermedia.Gibbons.Web.Items
 		public DetailCollection BillingAddresses
 		{
 			get { return GetDetailCollection("BillingAddresses", true); }
+		}
+
+		public IEnumerable<Order> Orders
+		{
+			get { return this.GetChildren<Order>().Where(o => o.Status != OrderStatus.Basket); }
 		}
 	}
 }

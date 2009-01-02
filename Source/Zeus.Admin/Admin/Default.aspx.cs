@@ -64,7 +64,7 @@ namespace Zeus.Admin
 						assemblies.Add(loadedAssembly);
 					}
 				}
-				catch (BadImageFormatException ex)
+				catch (BadImageFormatException)
 				{
 					//Trace.TraceError(ex.ToString());
 				}

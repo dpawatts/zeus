@@ -10,7 +10,7 @@
 	
 	<p>If you have an account with Gibbons Online, please sign in:</p>
 	
-	<asp:Login runat="server" ID="lgnLogin" OnLoggedIn="lgnLogin_LoggedIn">
+	<asp:Login runat="server" ID="lgnLogin" OnLoggedIn="lgnLogin_LoggedIn" DestinationPageUrl="~/default.aspx">
 		<LayoutTemplate>
 			<asp:Panel runat="server" DefaultButton="btnLogin">
 				<table cellspacing="0" cellpadding="1" border="0">

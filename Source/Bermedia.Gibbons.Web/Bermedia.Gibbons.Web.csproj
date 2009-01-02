@@ -104,6 +104,7 @@
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
     <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
+    <Compile Include="Items\ForgotPasswordPage.cs" />
     <Compile Include="Items\NewsletterUnsubscribePage.cs" />
     <Compile Include="Items\NewsletterSubscribePage.cs" />
     <Compile Include="Items\ProductStrength.cs" />
@@ -251,6 +252,34 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutConfirmation.aspx.designer.cs">
       <DependentUpon>CheckoutConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\PersonalDetails.aspx.cs">
+      <DependentUpon>PersonalDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\PersonalDetails.aspx.designer.cs">
+      <DependentUpon>PersonalDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ViewOrder.aspx.cs">
+      <DependentUpon>ViewOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ViewOrder.aspx.designer.cs">
+      <DependentUpon>ViewOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\TrackOrders.aspx.cs">
+      <DependentUpon>TrackOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\TrackOrders.aspx.designer.cs">
+      <DependentUpon>TrackOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ForgottenPassword.aspx.cs">
+      <DependentUpon>ForgottenPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ForgottenPassword.aspx.designer.cs">
+      <DependentUpon>ForgottenPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\FreeGiftProduct.aspx.cs">
       <DependentUpon>FreeGiftProduct.aspx</DependentUpon>
@@ -516,6 +545,10 @@
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <Content Include="Configuration\SoundInTheory.PaymentProcessing.config" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="UI\Views\PersonalDetails.aspx" />
+    <Content Include="UI\Views\ViewOrder.aspx" />
+    <Content Include="UI\Views\TrackOrders.aspx" />
+    <Content Include="UI\Views\PasswordRecoveryMessage.txt" />
     <Content Include="UI\MasterPages\Popup.Master" />
     <Content Include="Assets\Images\hamilton.jpg" />
     <Content Include="Assets\Images\Icons\email.png" />
@@ -534,6 +567,7 @@
     <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
     <Content Include="UI\Views\CheckoutSummary.aspx" />
     <Content Include="UI\Views\CheckoutConfirmation.aspx" />
+    <Content Include="UI\Views\ForgottenPassword.aspx" />
     <Content Include="UI\Views\FreeGiftProduct.aspx" />
     <Content Include="UI\Views\NewsletterUnsubscribe.aspx" />
     <Content Include="UI\Views\NewsletterSubscribe.aspx" />

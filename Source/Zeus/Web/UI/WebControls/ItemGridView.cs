@@ -193,7 +193,6 @@ namespace Zeus.Web.UI.WebControls
 		private class ItemTemplateControl : ITemplate
 		{
 			private ItemGridView _parent;
-			private int _autoID = 0;
 
 			public ItemTemplateControl(ItemGridView parent, ContentType contentType)
 			{
@@ -328,7 +327,7 @@ namespace Zeus.Web.UI.WebControls
 						assemblies.Add(loadedAssembly);
 					}
 				}
-				catch (BadImageFormatException ex)
+				catch (BadImageFormatException)
 				{
 					//Trace.TraceError(ex.ToString());
 				}

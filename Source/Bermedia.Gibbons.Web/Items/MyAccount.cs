@@ -13,5 +13,42 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			get { return "page"; }
 		}
+
+		private string Action
+		{
+			get;
+			set;
+		}
+
+		public override ContentItem GetChild(string childName)
+		{
+			if (childName.Equals("track-orders", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "track-orders";
+				return this;
+			}
+			else if (childName.Equals("personal-details", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "personal-details";
+				return this;
+			}
+			return base.GetChild(childName);
+		}
+
+		public override string TemplateUrl
+		{
+			get
+			{
+				switch (Action)
+				{
+					case "track-orders":
+						return "~/UI/Views/TrackOrders.aspx";
+					case "personal-details":
+						return "~/UI/Views/PersonalDetails.aspx";
+					default:
+						return base.TemplateUrl;
+				}
+			}
+		}
 	}
 }

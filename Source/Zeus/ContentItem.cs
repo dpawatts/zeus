@@ -574,7 +574,7 @@ namespace Zeus
 			else if (slashIndex > 0) // contains a slash further down
 			{
 				string nameSegment = childName.Substring(0, slashIndex);
-				foreach (ContentItem child in GetChildren())
+				foreach (ContentItem child in GetChildren(new NullFilter()))
 					if (child.Equals(nameSegment))
 						return child.GetChild(childName.Substring(slashIndex));
 				return null;

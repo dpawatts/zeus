@@ -23,7 +23,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private bool _tracking;
 
-		private string _ofType, _where, _select, _query;
+		private string _ofType, _where, _orderBy, _select, _query;
 		private int? _skip, _take;
 		private ContentDataSourceAxis _axis = ContentDataSourceAxis.Child;
 		private ParameterCollection _whereParameters;
@@ -60,6 +60,22 @@ namespace Zeus.Web.UI.WebControls
 				if (this._where != value)
 				{
 					this._where = value;
+					this.OnDataSourceViewChanged(EventArgs.Empty);
+				}
+			}
+		}
+
+		public string OrderBy
+		{
+			get
+			{
+				return (this._orderBy ?? string.Empty);
+			}
+			set
+			{
+				if (this._orderBy != value)
+				{
+					this._orderBy = value;
 					this.OnDataSourceViewChanged(EventArgs.Empty);
 				}
 			}
@@ -200,6 +216,9 @@ namespace Zeus.Web.UI.WebControls
 					Type typeFilter = BuildManager.GetType(this.OfType, true);
 					children = children.OfType(typeFilter);
 				}
+
+				if (!string.IsNullOrEmpty(this.OrderBy))
+					children = children.OrderBy(this.OrderBy);
 
 				IDictionary<string, object> whereParameterValues = this.GetParameterValues(this.WhereParameters);
 				if (!string.IsNullOrEmpty(this.Where))

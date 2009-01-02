@@ -21,8 +21,6 @@
                adapterType="Isis.Web.UI.WebControls.Adapters.LoginStatusAdapter" />
 			<adapter controlType="System.Web.UI.WebControls.CreateUserWizard"
                adapterType="Isis.Web.UI.WebControls.Adapters.CreateUserWizardAdapter" />
-			<adapter controlType="System.Web.UI.WebControls.PasswordRecovery"
-               adapterType="Isis.Web.UI.WebControls.Adapters.PasswordRecoveryAdapter" />
 		</controlAdapters>
 	</browser>
 
