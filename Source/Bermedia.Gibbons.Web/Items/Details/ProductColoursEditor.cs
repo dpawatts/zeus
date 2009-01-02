@@ -30,8 +30,9 @@ namespace Bermedia.Gibbons.Web.Items.Details
 
 		protected override ListItem[] GetListItems(ContentItem item)
 		{
-			return Zeus.Context.Current.Finder.Elements<ProductScent>()
+			return Zeus.Context.Current.Finder.Elements<ProductColour>()
 				.ToList()
+				.Where(ps => ps.GetType() == typeof(ProductColour))
 				.Select(p => new ListItem(p.Title, p.ID.ToString()))
 				.ToArray();
 		}

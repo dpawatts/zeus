@@ -104,6 +104,8 @@
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
     <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
+    <Compile Include="Items\NewsletterUnsubscribePage.cs" />
+    <Compile Include="Items\NewsletterSubscribePage.cs" />
     <Compile Include="Items\ProductStrength.cs" />
     <Compile Include="Items\ProductStrengthContainer.cs" />
     <Compile Include="Items\FragranceBeautyBrandCategory.cs" />
@@ -201,6 +203,13 @@
     <Compile Include="UI\MasterPages\Default.Master.designer.cs">
       <DependentUpon>Default.Master</DependentUpon>
     </Compile>
+    <Compile Include="UI\MasterPages\Popup.Master.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\MasterPages\Popup.Master.designer.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+    </Compile>
     <Compile Include="UI\UserControls\DepartmentNavigation.ascx.cs">
       <DependentUpon>DepartmentNavigation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -242,6 +251,27 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutConfirmation.aspx.designer.cs">
       <DependentUpon>CheckoutConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\FreeGiftProduct.aspx.cs">
+      <DependentUpon>FreeGiftProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\FreeGiftProduct.aspx.designer.cs">
+      <DependentUpon>FreeGiftProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\NewsletterUnsubscribe.aspx.cs">
+      <DependentUpon>NewsletterUnsubscribe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\NewsletterUnsubscribe.aspx.designer.cs">
+      <DependentUpon>NewsletterUnsubscribe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\NewsletterSubscribe.aspx.cs">
+      <DependentUpon>NewsletterSubscribe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\NewsletterSubscribe.aspx.designer.cs">
+      <DependentUpon>NewsletterSubscribe.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\OnlineShopPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -486,6 +516,7 @@
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <Content Include="Configuration\SoundInTheory.PaymentProcessing.config" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="UI\MasterPages\Popup.Master" />
     <Content Include="Assets\Images\hamilton.jpg" />
     <Content Include="Assets\Images\Icons\email.png" />
     <Content Include="Assets\Images\Icons\newspaper.png" />
@@ -503,6 +534,9 @@
     <Content Include="UI\Views\CheckoutBillingAddress.aspx" />
     <Content Include="UI\Views\CheckoutSummary.aspx" />
     <Content Include="UI\Views\CheckoutConfirmation.aspx" />
+    <Content Include="UI\Views\FreeGiftProduct.aspx" />
+    <Content Include="UI\Views\NewsletterUnsubscribe.aspx" />
+    <Content Include="UI\Views\NewsletterSubscribe.aspx" />
     <Content Include="UI\Views\FragranceBeautyExclusives.aspx" />
     <Content Include="UI\Views\FragranceBeautyBrand.aspx" />
     <Content Include="UI\Views\FragranceBeautyCategory.aspx" />

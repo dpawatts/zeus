@@ -7,18 +7,18 @@ using Zeus.Integrity;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	[ContentType("Free Gift Product", Description = "e.g. Complimentary Perfume")]
-	[RestrictParents(typeof(BaseCategory))]
-	public class FreeGiftProduct : BaseProduct
+	[ContentType(Description = "[Internal Use Only]")]
+	[RestrictParents(typeof(StartPage))]
+	public class NewsletterSubscribePage : StructuralPage
 	{
 		protected override string IconName
 		{
-			get { return "tag_orange"; }
+			get { return "page"; }
 		}
 
 		protected override string TemplateName
 		{
-			get { return "FreeGiftProduct"; }
+			get { return "NewsletterSubscribe"; }
 		}
 	}
 }

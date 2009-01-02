@@ -15,6 +15,8 @@ namespace Zeus.Web.UI.WebControls
 	/// </summary>
 	public class Menu : WebControl, IContentTemplate
 	{
+		public event EventHandler<MenuItemCreatingEventArgs> MenuItemCreating;
+
 		private ContentItem startPage;
 		private ContentItem currentItem = null;
 
@@ -135,8 +137,15 @@ namespace Zeus.Web.UI.WebControls
 				HtmlGenericControl li = CreateAndAdd(container, "li", null);
 
 				ContentItem current = childHierarchy.Current;
+				string url = current.Url;
+				if (MenuItemCreating != null)
+				{
+					MenuItemCreatingEventArgs args = new MenuItemCreatingEventArgs { CurrentItem = current, Url = current.Url };
+					MenuItemCreating(this, args);
+					url = args.Url;
+				}
 				HtmlAnchor anchor = new HtmlAnchor();
-				anchor.HRef = current.Url;
+				anchor.HRef = url;
 				anchor.InnerText = current.Title;
 				li.Controls.Add(anchor);
 
@@ -168,5 +177,11 @@ namespace Zeus.Web.UI.WebControls
 		{
 			get { return Find.CurrentPage; }
 		}
+	}
+
+	public class MenuItemCreatingEventArgs : EventArgs
+	{
+		public ContentItem CurrentItem { get; internal set; }
+		public string Url { get; set; }
 	}
 }

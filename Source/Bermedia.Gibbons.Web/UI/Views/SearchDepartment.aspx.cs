@@ -14,10 +14,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			string searchText = Request.GetRequiredString("q").ToLower();
-			uscProductListing.DataSource = Zeus.Context.Current.Finder
-				.OfType<Items.StandardProduct>()
-				.ToList()
-				.Where(ci => ci.FindFirstAncestor<Web.Items.BaseDepartment>() == this.CurrentItem)
+			uscProductListing.DataSource = Zeus.Find.EnumerateAccessibleChildren(this.CurrentItem).OfType<Web.Items.StandardProduct>()
 				.Where(p => p.Brand.Title.ToLower().Contains(searchText) || p.Title.ToLower().Contains(searchText) || p.Description.ToLower().Contains(searchText))
 				.OrderBy(p => p.Title).OrderBy(p => p.Brand.Title);
 		}

@@ -34,20 +34,28 @@
 		
 		<% if (this.CurrentItem.AssociatedSizes.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
 			<p>
-				<strong>Available Sizes:</strong><br />
-				<isis:DropDownList runat="server" ID="ddlSizes" DataSource='<%$ CurrentPage:AssociatedSizes %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
-					<asp:ListItem Value="">Please select a size</asp:ListItem>
-				</isis:DropDownList>
+				<% if (this.CurrentItem.AssociatedSizes.Count == 1) { %>
+					<%= this.CurrentItem.AssociatedSizes[0].Title %>
+				<% } else { %>
+					<strong>Available Sizes:</strong><br />
+					<isis:DropDownList runat="server" ID="ddlSizes" DataSource='<%$ CurrentPage:AssociatedSizes %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
+						<asp:ListItem Value="">Please select a size</asp:ListItem>
+					</isis:DropDownList>
+				<% } %>
 			</p>
 		<% } %>
 		<%= this.CurrentItem.SubTitle %>
 		
 		<% if (this.CurrentItem.AssociatedColours.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
 			<p>
+			<% if (this.CurrentItem.AssociatedColours.Count == 1) { %>
+				<%= ((Bermedia.Gibbons.Web.Items.ProductColour) this.CurrentItem.AssociatedColours[0]).Title %>
+			<% } else { %>
 				<strong>Available Colors:</strong><br />
 				<isis:DropDownList runat="server" ID="ddlColours" DataSource='<%$ CurrentPage:AssociatedColours %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
 					<asp:ListItem Value="">Then select a color</asp:ListItem>
 				</isis:DropDownList>
+			<% } %>
 			</p>
 		<% } %>
 		
@@ -62,9 +70,9 @@
 			<strong>Gibbons Exclusive</strong><br />
 		</asp:PlaceHolder>
 		
-		<asp:PlaceHolder runat="server" Visible='<%$ HasValue:FreeGiftProduct %>'>
-			<a href="javascript:alert('todo');">Free gift with purchase</a>
-		</asp:PlaceHolder>
+		<% if (this.CurrentItem.FreeGiftProduct != null) { %>
+			<a href="<%= this.CurrentItem.FreeGiftProduct.Url %>" onclick="window.open($(this).attr('href'), 'FreeGift', 'width=500px,height=500px'); return false;">Free gift with purchase</a>
+		<% } %>
 		
 		<p><asp:TextBox runat="server" size="3" Text="1" ID="txtQuantity" /> <strong>Quantity</strong></p>
 		<sitdap:DynamicImageButton runat="server" ID="btnAddToCart" TemplateName="Button" AlternateText="add to cart" OnClick="btnAddToCart_Click">

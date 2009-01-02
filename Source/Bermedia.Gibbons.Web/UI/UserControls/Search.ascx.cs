@@ -42,7 +42,10 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 
 			string url;
 			if (!string.IsNullOrEmpty(ddlSearchDepartment.SelectedValue))
-				url = new Url(Zeus.Context.Persister.Get<Items.BaseDepartment>(Convert.ToInt32(ddlSearchDepartment.SelectedValue)).Url).AppendSegment("/search").ToString();
+			{
+				Items.BaseDepartment department = Zeus.Context.Persister.Get<Items.BaseDepartment>(Convert.ToInt32(ddlSearchDepartment.SelectedValue));
+				url = new Url(department.Url).AppendSegment("search").ToString();
+			}
 			else
 				url = "~/search.aspx";
 			url += "?q=" + txtSearchText.Text;

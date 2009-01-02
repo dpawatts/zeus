@@ -11,34 +11,16 @@
 namespace Bermedia.Gibbons.Web.UI.MasterPages {
     
     
-    public partial class Default {
+    public partial class Popup {
         
         /// <summary>
-        /// cphStyle control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphStyle;
-        
-        /// <summary>
-        /// zeusMenu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.Menu zeusMenu;
-        
-        /// <summary>
-        /// cphSubNavigation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphSubNavigation;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// cphContent control.

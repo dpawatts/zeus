@@ -24,11 +24,15 @@ namespace Bermedia.Gibbons.Web.UI.Views
 					if (Request.QueryString["size"] != null)
 						size = Zeus.Context.Persister.Get<Web.Items.ProductSizeLink>(Request.GetRequiredInt("size"));
 					else if (shoppingCartItem.Product is Web.Items.FragranceBeautyProduct)
-						size = ((Web.Items.FragranceBeautyProduct) shoppingCartItem.Product).Size;
+						size = ((Web.Items.FragranceBeautyProduct)shoppingCartItem.Product).Size;
+					else if (shoppingCartItem.Product.AssociatedSizes.Count == 1)
+						size = shoppingCartItem.Product.AssociatedSizes[0];
 					shoppingCartItem.Size = size;
 
 					if (Request.QueryString["colour"] != null)
 						shoppingCartItem.Colour = (Web.Items.ProductColour) Zeus.Context.Persister.Get(Request.GetRequiredInt("colour"));
+					else if (!(shoppingCartItem.Product is Web.Items.FragranceBeautyProduct) && shoppingCartItem.Product.AssociatedColours.Count == 1)
+						shoppingCartItem.Colour = (Web.Items.ProductColour) shoppingCartItem.Product.AssociatedColours[0];
 
 					shoppingCartItem.AddTo(this.ShoppingCart);
 					Zeus.Context.Persister.Save(shoppingCartItem);
