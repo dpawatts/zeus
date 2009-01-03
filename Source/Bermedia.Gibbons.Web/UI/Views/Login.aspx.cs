@@ -25,6 +25,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			TextBox txtUserName = (TextBox) lgnLogin.FindControl("UserName");
 			MembershipUser membershipUser = Membership.GetUser(txtUserName.Text);
 			Session["CustomerID"] = membershipUser.ProviderUserKey;
+
+			// Redirect.
+			if (!string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+				Response.Redirect(Request.QueryString["ReturnUrl"]);
 		}
 	}
 }

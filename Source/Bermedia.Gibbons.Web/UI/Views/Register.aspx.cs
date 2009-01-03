@@ -29,8 +29,6 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			customer.FirstName = txtFirstName.Text;
 			customer.LastName = txtLastName.Text;
 
-			Zeus.Context.Persister.Save(customer);
-
 			if (chkReceiveOffers.Checked)
 			{
 				Web.Items.NewsletterSubscription subscription = new Web.Items.NewsletterSubscription();
@@ -38,7 +36,11 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				subscription.LastName = customer.LastName;
 				subscription.EmailAddress = customer.Email;
 				Zeus.Context.Persister.Save(subscription);
+
+				customer.NewsletterSubscription = subscription;
 			}
+
+			Zeus.Context.Persister.Save(customer);
 
 			// Attempt login (we can't do this earlier since the user didn't have the role attached).
 			TextBox txtPassword = (TextBox) cusStep1.ContentTemplateContainer.FindControl("Password");

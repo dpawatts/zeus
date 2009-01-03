@@ -96,7 +96,7 @@
 					<td><%# Container.DataItem.Quantity %></td>
 					<td><%# (Container.DataItem.GiftWrapType != null)? Container.DataItem.GiftWrapType.Title : string.Empty %></td>
 					<td align="right"><%# Container.DataItem.Price.ToString("C2") %></td>
-					<td><a href="#">Edit Quantities</a></td>
+					<td><a href="checkout-change-quantities.aspx">Change Quantities</a></td>
 				</tr>
 			</ItemTemplate>
 		</isis:TypedListView>

@@ -91,6 +91,11 @@ namespace Bermedia.Gibbons.Web.Items
 			}
 		}
 
+		public Customer Customer
+		{
+			get { return this.Parent as Customer; }
+		}
+
 		protected override string TemplateName
 		{
 			get { return "ViewOrder"; }

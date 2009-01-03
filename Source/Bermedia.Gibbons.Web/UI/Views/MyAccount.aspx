@@ -16,6 +16,10 @@
   <ul>
 		<li><a href="<%= new Zeus.Web.Url(this.CurrentItem.Url).AppendSegment("personal-details") %>">Change name, email address or password</a></li>
     <li><a href="<%= new Zeus.Web.Url(this.CurrentItem.Url).AppendSegment("manage-address-book") %>">Manage address book</a></li>
-    <li><a href="#">Subscribe/Unsubscribe from mailing list</a></li>
+    <% if (this.Customer.NewsletterSubscription != null) { %>
+    <li><a href="<%= new Zeus.Web.Url(this.CurrentItem.Url).AppendSegment("unsubscribe") %>">Unsubscribe from mailing list</a></li>
+    <% } else { %>
+    <li><a href="<%= new Zeus.Web.Url(this.CurrentItem.Url).AppendSegment("subscribe") %>">Subscribe to mailing list</a></li>
+    <% } %>
   </ul>
 </asp:Content>

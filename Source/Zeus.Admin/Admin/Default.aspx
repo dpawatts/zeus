@@ -43,7 +43,8 @@
 			<a href="/admin/view.aspx?selected=/Newsletter Subscriptions/&page=194" target="preview" title="Newsletter Subscriptions"><img src="/assets/images/icons/email.png" /></a>
 			<a href="/admin/view.aspx?selected=/Newsletters/&page=211" target="preview" title="Newsletters"><img src="/assets/images/icons/newspaper.png" /></a>
 			<div class="separator">&nbsp;</div>
-			<asp:PlaceHolder runat="server" ID="plcToolbar" />
+			<a href="/plugins/orders/view.aspx" target="preview" title="Orders"><img src="/assets/images/icons/basket.png" /></a>
+			<div class="separator">&nbsp;</div><asp:PlaceHolder runat="server" ID="plcToolbar" />
 		</div>
 		
 		<div id="splitter">

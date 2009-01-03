@@ -52,7 +52,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				Zeus.Context.Persister.Save(orderItem);
 			}
 			
-			Payment payment = new Payment(order.ID.ToString(), Convert.ToDecimal(order.TotalPrice), -1);
+			Payment payment = new Payment(order.ID.ToString(), Convert.ToDecimal(order.TotalPrice), 060);
 
 			string authorisationHtml = PaymentManager.GetAuthorisationHtml(
 				payment,

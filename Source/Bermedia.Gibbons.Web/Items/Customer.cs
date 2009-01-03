@@ -25,6 +25,12 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<string>("LastName", value); }
 		}
 
+		public NewsletterSubscription NewsletterSubscription
+		{
+			get { return GetDetail<NewsletterSubscription>("NewsletterSubscription", null); }
+			set { SetDetail<NewsletterSubscription>("NewsletterSubscription", value); }
+		}
+
 		public string FullName
 		{
 			get { return (this.FirstName + " " + this.LastName).Trim(); }

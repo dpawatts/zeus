@@ -104,6 +104,7 @@
     <Compile Include="Items\CheckoutSummary.cs" />
     <Compile Include="Items\CheckoutConfirmation.cs" />
     <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
+    <Compile Include="Items\CheckoutChangeQuantities.cs" />
     <Compile Include="Items\ForgotPasswordPage.cs" />
     <Compile Include="Items\NewsletterUnsubscribePage.cs" />
     <Compile Include="Items\NewsletterSubscribePage.cs" />
@@ -188,6 +189,20 @@
     <Compile Include="Plugins\Newsletters\SendTest.aspx.designer.cs">
       <DependentUpon>SendTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Orders\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Orders\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Orders\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Orders\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\ShippingRates.aspx.cs">
       <DependentUpon>ShippingRates.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -252,6 +267,27 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutConfirmation.aspx.designer.cs">
       <DependentUpon>CheckoutConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutChangeQuantities.aspx.cs">
+      <DependentUpon>CheckoutChangeQuantities.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CheckoutChangeQuantities.aspx.designer.cs">
+      <DependentUpon>CheckoutChangeQuantities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CustomerUnsubscribe.aspx.cs">
+      <DependentUpon>CustomerUnsubscribe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CustomerUnsubscribe.aspx.designer.cs">
+      <DependentUpon>CustomerUnsubscribe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CustomerSubscribe.aspx.cs">
+      <DependentUpon>CustomerSubscribe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\CustomerSubscribe.aspx.designer.cs">
+      <DependentUpon>CustomerSubscribe.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\EditAddress.aspx.cs">
       <DependentUpon>EditAddress.aspx</DependentUpon>
@@ -557,8 +593,14 @@
   <ItemGroup>
     <Content Include="App_Browsers\RewriteFormAction.browser" />
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
+    <Content Include="Assets\Images\Icons\basket.png" />
     <Content Include="Configuration\SoundInTheory.PaymentProcessing.config" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="Plugins\Orders\Edit.aspx" />
+    <Content Include="Plugins\Orders\View.aspx" />
+    <Content Include="UI\Views\CheckoutChangeQuantities.aspx" />
+    <Content Include="UI\Views\CustomerUnsubscribe.aspx" />
+    <Content Include="UI\Views\CustomerSubscribe.aspx" />
     <Content Include="UI\Views\EditAddress.aspx" />
     <Content Include="UI\Views\ManageAddressBook.aspx" />
     <Content Include="UI\Views\PersonalDetails.aspx" />

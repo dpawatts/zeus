@@ -20,7 +20,7 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<string>("Description", value); }
 		}
 
-		[CheckBoxEditor("Requires Shipping Address", "", 30, Required = true)]
+		[CheckBoxEditor("Requires Shipping Address", "", 30)]
 		public bool RequiresShippingAddress
 		{
 			get { return GetDetail<bool>("RequiresShippingAddress", true); }

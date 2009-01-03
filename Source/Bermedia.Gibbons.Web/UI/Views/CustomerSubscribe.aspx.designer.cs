@@ -11,33 +11,33 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class CheckoutSummary {
+    public partial class CustomerSubscribe {
         
         /// <summary>
-        /// btnNext1 control.
+        /// plcForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SoundInTheory.DynamicImage.DynamicImageButton btnNext1;
+        protected global::System.Web.UI.WebControls.PlaceHolder plcForm;
         
         /// <summary>
-        /// lsvShoppingCartItems control.
+        /// btnSubscribe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.ShoppingCartItem> lsvShoppingCartItems;
+        protected global::SoundInTheory.DynamicImage.DynamicImageButton btnSubscribe;
         
         /// <summary>
-        /// btnNext2 control.
+        /// plcConfirmation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::SoundInTheory.DynamicImage.DynamicImageButton btnNext2;
+        protected global::System.Web.UI.WebControls.PlaceHolder plcConfirmation;
     }
 }
