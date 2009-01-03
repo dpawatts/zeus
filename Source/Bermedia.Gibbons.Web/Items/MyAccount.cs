@@ -32,6 +32,16 @@ namespace Bermedia.Gibbons.Web.Items
 				this.Action = "personal-details";
 				return this;
 			}
+			else if (childName.Equals("manage-address-book", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "manage-address-book";
+				return this;
+			}
+			else if (childName.Equals("edit-address", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "edit-address";
+				return this;
+			}
 			return base.GetChild(childName);
 		}
 
@@ -45,6 +55,10 @@ namespace Bermedia.Gibbons.Web.Items
 						return "~/UI/Views/TrackOrders.aspx";
 					case "personal-details":
 						return "~/UI/Views/PersonalDetails.aspx";
+					case "manage-address-book":
+						return "~/UI/Views/ManageAddressBook.aspx";
+					case "edit-address":
+						return "~/UI/Views/EditAddress.aspx";
 					default:
 						return base.TemplateUrl;
 				}

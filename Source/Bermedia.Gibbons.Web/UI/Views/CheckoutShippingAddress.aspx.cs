@@ -30,6 +30,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			address.ParishState = txtParishState.Text;
 			address.Country = Zeus.Context.Persister.Get<Country>(Convert.ToInt32(ddlCountry.SelectedValue));
 			address.PhoneNumber = txtPhone.Text;
+			address.Zip = txtZip.Text;
 			this.Customer.ShippingAddresses.Add(address);
 			Zeus.Context.Persister.Save(address);
 

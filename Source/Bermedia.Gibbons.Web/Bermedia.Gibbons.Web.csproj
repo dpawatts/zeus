@@ -253,6 +253,20 @@
     <Compile Include="UI\Views\CheckoutConfirmation.aspx.designer.cs">
       <DependentUpon>CheckoutConfirmation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Views\EditAddress.aspx.cs">
+      <DependentUpon>EditAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\EditAddress.aspx.designer.cs">
+      <DependentUpon>EditAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ManageAddressBook.aspx.cs">
+      <DependentUpon>ManageAddressBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\ManageAddressBook.aspx.designer.cs">
+      <DependentUpon>ManageAddressBook.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\PersonalDetails.aspx.cs">
       <DependentUpon>PersonalDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -545,6 +559,8 @@
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
     <Content Include="Configuration\SoundInTheory.PaymentProcessing.config" />
     <None Include="Items\ClassDiagram.cd" />
+    <Content Include="UI\Views\EditAddress.aspx" />
+    <Content Include="UI\Views\ManageAddressBook.aspx" />
     <Content Include="UI\Views\PersonalDetails.aspx" />
     <Content Include="UI\Views\ViewOrder.aspx" />
     <Content Include="UI\Views\TrackOrders.aspx" />
