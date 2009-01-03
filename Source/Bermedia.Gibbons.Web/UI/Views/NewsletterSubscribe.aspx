@@ -33,7 +33,12 @@
 				<td></td>
 				<td>
 					<p><asp:ValidationSummary runat="server" ID="vlsSummary" /></p>
-					<asp:Button runat="server" ID="btnSubscribe" Text="Subscribe" OnClick="btnSubscribe_Click" CssClass="cButton" />
+					
+					<sitdap:DynamicImageButton runat="server" ID="btnSubscribe" TemplateName="Button" AlternateText="subscribe" OnClick="btnSubscribe_Click">
+						<Layers>
+							<sitdap:TextLayer Name="Text" Text="subscribe" />
+						</Layers>
+					</sitdap:DynamicImageButton>
 				</td>
 			</tr>
 		</table>

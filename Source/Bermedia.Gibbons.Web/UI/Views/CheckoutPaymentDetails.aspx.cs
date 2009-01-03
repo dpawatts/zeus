@@ -19,6 +19,8 @@ namespace Bermedia.Gibbons.Web.UI.Views
 
 			// We ignore cardholder first and last name -
 			// it's not used by FAC.
+			this.CheckoutData.FirstName = txtFirstName.Text;
+			this.CheckoutData.LastName = txtLastName.Text;
 			this.CheckoutData.PaymentCardType = ddlCardType.SelectedValue;
 			//this.CheckoutData.Currency = PaymentManager.GetCountryIsoCode(txtCardNumber.Text);
 			this.CheckoutData.PaymentCardExpiryDate = new DateTime(
@@ -43,6 +45,8 @@ namespace Bermedia.Gibbons.Web.UI.Views
 	[Serializable]
 	public class CheckoutData
 	{
+		public string FirstName;
+		public string LastName;
 		public string PaymentCardType;
 		public int Currency = int.MinValue;
 

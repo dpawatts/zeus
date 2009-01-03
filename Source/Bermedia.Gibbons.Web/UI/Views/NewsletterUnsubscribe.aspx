@@ -18,7 +18,12 @@
 				<td></td>
 				<td>
 					<p><asp:ValidationSummary runat="server" ID="vlsSummary" /></p>
-					<asp:Button runat="server" ID="btnUnsubscribe" Text="Unsubscribe" OnClick="btnUnsubscribe_Click" CssClass="cButton" />
+					
+					<sitdap:DynamicImageButton runat="server" ID="btnUnsubscribe" TemplateName="Button" AlternateText="unsubscribe" OnClick="btnUnsubscribe_Click">
+						<Layers>
+							<sitdap:TextLayer Name="Text" Text="unsubscribe" />
+						</Layers>
+					</sitdap:DynamicImageButton>
 				</td>
 			</tr>
 		</table>

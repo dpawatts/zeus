@@ -43,19 +43,5 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				Response.Cookies.Remove("ShoppingCartID");
 			}
 		}
-
-		public CheckoutData CheckoutData
-		{
-			get
-			{
-				CheckoutData checkoutData = Session["CheckoutData"] as CheckoutData;
-				if (checkoutData == null)
-				{
-					checkoutData = new CheckoutData();
-					Session["CheckoutData"] = checkoutData;
-				}
-				return checkoutData;
-			}
-		}
 	}
 }
