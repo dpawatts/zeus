@@ -105,7 +105,14 @@
     <Compile Include="Items\CheckoutConfirmation.cs" />
     <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
     <Compile Include="Items\CheckoutChangeQuantities.cs" />
+    <Compile Include="Items\BaseShoppingCartItem.cs" />
+    <Compile Include="Items\GiftCardShoppingCartItem.cs" />
+    <Compile Include="Items\GiftCardThemePurchasePage.cs" />
+    <Compile Include="Items\GiftCardTheme.cs" />
+    <Compile Include="Items\GiftCardThemeContainer.cs" />
+    <Compile Include="Items\GiftCardPage.cs" />
     <Compile Include="Items\ForgotPasswordPage.cs" />
+    <Compile Include="Items\ITopNavVisible.cs" />
     <Compile Include="Items\NewsletterUnsubscribePage.cs" />
     <Compile Include="Items\NewsletterSubscribePage.cs" />
     <Compile Include="Items\ProductStrength.cs" />
@@ -274,6 +281,27 @@
     </Compile>
     <Compile Include="UI\Views\CheckoutChangeQuantities.aspx.designer.cs">
       <DependentUpon>CheckoutChangeQuantities.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardThemePurchase.aspx.cs">
+      <DependentUpon>GiftCardThemePurchase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardThemePurchase.aspx.designer.cs">
+      <DependentUpon>GiftCardThemePurchase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardThemes.aspx.cs">
+      <DependentUpon>GiftCardThemes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardThemes.aspx.designer.cs">
+      <DependentUpon>GiftCardThemes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardPage.aspx.cs">
+      <DependentUpon>GiftCardPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Views\GiftCardPage.aspx.designer.cs">
+      <DependentUpon>GiftCardPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\CustomerUnsubscribe.aspx.cs">
       <DependentUpon>CustomerUnsubscribe.aspx</DependentUpon>
@@ -599,6 +627,9 @@
     <Content Include="Plugins\Orders\Edit.aspx" />
     <Content Include="Plugins\Orders\View.aspx" />
     <Content Include="UI\Views\CheckoutChangeQuantities.aspx" />
+    <Content Include="UI\Views\GiftCardThemePurchase.aspx" />
+    <Content Include="UI\Views\GiftCardThemes.aspx" />
+    <Content Include="UI\Views\GiftCardPage.aspx" />
     <Content Include="UI\Views\CustomerUnsubscribe.aspx" />
     <Content Include="UI\Views\CustomerSubscribe.aspx" />
     <Content Include="UI\Views\EditAddress.aspx" />

@@ -7,7 +7,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Shopping Cart</h1>
 
-  <isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.ShoppingCartItem, Bermedia.Gibbons.Web" DataKeyNames="ID">
+  <isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.BaseShoppingCartItem, Bermedia.Gibbons.Web" DataKeyNames="ID">
 		<LayoutTemplate>
 		  <p>The following items are in your shopping cart:</p>
   
@@ -96,10 +96,10 @@
 		</LayoutTemplate>
 		<ItemTemplate>
 			<tr>
-				<td valign="top"><a href="<%# Container.DataItem.Product.Url %>"><%# Container.DataItem.Product.Brand.Title %> <%# Container.DataItem.Product.Title %></a></td>
+				<td valign="top"><%# Container.DataItem.ProductTitle %></td>
 
-				<td valign="top"><%# (Container.DataItem.Size != null) ? Container.DataItem.Size.Title : string.Empty %></td>
-				<td valign="top"><%# (Container.DataItem.Colour != null) ? Container.DataItem.Colour.Title : string.Empty %></td>
+				<td valign="top"><%# Container.DataItem.ProductSizeTitle %></td>
+				<td valign="top"><%# Container.DataItem.ProductColourTitle %></td>
 				<td valign="top">
 					<asp:TextBox runat="server" ID="txtQuantity" Width="30px" Text='<%# Container.DataItem.Quantity %>' />
 				</td>
@@ -123,7 +123,7 @@
   <gibbons:ProductListing runat="server" DataSourceID="cdsRecommendedProducts" HeaderText="You might also like" />
 	<zeus:ContentDataSource runat="server" ID="cdsRecommendedProducts" OfType="Bermedia.Gibbons.Web.Items.StandardProduct" Query="RootItem" Axis="Descendant" Where="ID == @ProductID" Select="Recommendations">
 		<WhereParameters>
-			<asp:QueryStringParameter Name="ProductID" QueryStringField="add" Type="Int32" DefaultValue="-1" />
+			<asp:QueryStringParameter Name="ProductID" QueryStringField="justadded" Type="Int32" DefaultValue="-1" />
 		</WhereParameters>
 	</zeus:ContentDataSource>
 </asp:Content>

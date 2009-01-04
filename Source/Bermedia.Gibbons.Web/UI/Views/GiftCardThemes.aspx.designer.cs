@@ -11,24 +11,15 @@
 namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class ShoppingCart {
+    public partial class GiftCardThemes {
         
         /// <summary>
-        /// lsvShoppingCartItems control.
+        /// cdsThemes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.BaseShoppingCartItem> lsvShoppingCartItems;
-        
-        /// <summary>
-        /// cdsRecommendedProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsRecommendedProducts;
+        protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsThemes;
     }
 }

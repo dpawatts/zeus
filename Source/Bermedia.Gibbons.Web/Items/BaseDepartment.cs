@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	public abstract class BaseDepartment : StructuralPage
+	public abstract class BaseDepartment : StructuralPage, ITopNavVisible
 	{
 		[HtmlTextBoxEditor("Text", 100, ContainerName = Tabs.General)]
 		public string Text

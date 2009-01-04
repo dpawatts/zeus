@@ -8,7 +8,10 @@ namespace Zeus.Web.UI
 		public static ContentItem FindCurrentItem(this Control control)
 		{
 			IContentItemContainer container = FindParent<IContentItemContainer>(control.Parent);
-			return (container != null) ? container.CurrentItem : null;
+			if (container != null)
+				return container.CurrentItem;
+			
+			return null;
 		}
 
 		public static T FindParent<T>(this Control control)
