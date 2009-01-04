@@ -1,0 +1,12 @@
+<config>
+	<fonts sizes="6,8,9,10,11,12,14,18,24,30,36,48" startSize="12">
+		<font name="Comic Sans" src="/swf/fonts/_ComicSans.swf" />
+		<font name="Courier" src="/swf/fonts/_Courier.swf" />
+		<font name="Eurostile" src="/swf/fonts/_Eurostile.swf" letterSpacing="1" />
+		<font name="Garamond" src="/swf/fonts/_Garamond.swf" />
+		<font name="Georgia" src="/swf/fonts/_Georgia.swf" />
+		<font name="Lucida Calligraphy" src="/swf/fonts/lucidaCalligraphy.swf" />
+		<font name="Tahoma" src="/swf/fonts/_Tahoma.swf" />
+		<font name="Times New Roman" src="/swf/fonts/_TimesNewRoman.swf" />
+	</fonts>
+</config>

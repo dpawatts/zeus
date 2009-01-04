@@ -8,54 +8,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bermedia.Gibbons.Web.UI.MasterPages {
+namespace Bermedia.Gibbons.Web.UI.Views {
     
     
-    public partial class Default {
+    public partial class GiftCardPersonalise {
         
         /// <summary>
-        /// cphHead control.
+        /// mlvPersonalise control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphHead;
+        protected global::System.Web.UI.WebControls.MultiView mlvPersonalise;
         
         /// <summary>
-        /// cphStyle control.
+        /// txtAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphStyle;
+        protected global::System.Web.UI.WebControls.TextBox txtAmount;
         
         /// <summary>
-        /// zeusMenu control.
+        /// csvAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.Menu zeusMenu;
+        protected global::System.Web.UI.WebControls.CustomValidator csvAmount;
         
         /// <summary>
-        /// cphSubNavigation control.
+        /// ddlQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphSubNavigation;
+        protected global::Isis.Web.UI.WebControls.DropDownList ddlQuantity;
         
         /// <summary>
-        /// cphContent control.
+        /// vlsSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder cphContent;
+        protected global::System.Web.UI.WebControls.ValidationSummary vlsSummary;
+        
+        /// <summary>
+        /// btnContinue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::SoundInTheory.DynamicImage.DynamicImageButton btnContinue;
     }
 }

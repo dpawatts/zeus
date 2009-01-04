@@ -13,7 +13,32 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!this.IsPostBack)
+			{
+				if (Request.QueryString["add"] != null)
+				{
+					switch (Request.QueryString["add"])
+					{
+						case "gc" :
+							int imageID = Request.GetRequiredInt("imageid");
+							decimal amount = Convert.ToDecimal(Request.GetRequiredString("am"));
+							int quantity = Request.GetRequiredInt("qty");
+
+							Web.Items.PersonalisedGiftCardShoppingCartItem shoppingCartItem = new Web.Items.PersonalisedGiftCardShoppingCartItem();
+							shoppingCartItem.PricePerUnit = amount;
+							shoppingCartItem.Quantity = quantity;
+							shoppingCartItem.Image = Zeus.Context.Persister.Get<Zeus.AddIns.Images.Items.Image>(imageID);
+
+							shoppingCartItem.AddTo(this.ShoppingCart);
+							Zeus.Context.Persister.Save(shoppingCartItem);
+
+							Response.Redirect("~/shopping-cart.aspx");
+
+							break;
+					}
+				}
+
 				ReBind();
+			}
 		}
 
 		private void ReBind()

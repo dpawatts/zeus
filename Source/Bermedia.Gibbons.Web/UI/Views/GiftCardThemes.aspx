@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="../MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="GiftCardThemes.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.GiftCardThemes" %>
-<%@ Register TagPrefix="gibbons" TagName="PageNavigation" Src="../UserControls/PageNavigation.ascx" %>
+<%@ Register TagPrefix="gibbons" TagName="GiftCardNavigation" Src="../UserControls/GiftCardNavigation.ascx" %>
 <asp:Content ContentPlaceHolderID="cphSubNavigation" runat="server">
-	<gibbons:PageNavigation runat="server" />
+	<gibbons:GiftCardNavigation runat="server" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Gibbons Gift Cards</h1>

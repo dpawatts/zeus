@@ -18,6 +18,8 @@
 	<script type="text/javascript" src="/assets/js/jquery.hoverIntent.js" charset="utf-8"></script> 
 	<script type="text/javascript" src="/assets/js/superfish.js" charset="utf-8"></script> 
 	
+	<asp:ContentPlaceHolder runat="server" ID="cphHead" />
+	
 	<style type="text/css">
 		<asp:ContentPlaceHolder runat="server" ID="cphStyle" />
 	</style>
