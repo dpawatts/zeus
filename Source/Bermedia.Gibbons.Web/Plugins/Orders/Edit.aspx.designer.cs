@@ -21,6 +21,7 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCollect;
+				protected global::System.Web.UI.WebControls.Button btnCollectCorporate;
         
         /// <summary>
         /// btnShip control.
@@ -30,6 +31,7 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnShip;
+				protected global::System.Web.UI.WebControls.Button btnShipCorporate;
         
         /// <summary>
         /// btnDeleteRefund control.
@@ -39,6 +41,7 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteRefund;
+				protected global::System.Web.UI.WebControls.Button btnDelete;
         
         /// <summary>
         /// btnDeleteCancel control.
@@ -101,6 +104,6 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedRepeater<Bermedia.Gibbons.Web.Items.OrderItem> rptOrderedProducts;
+        protected global::Isis.Web.UI.WebControls.TypedRepeater<Bermedia.Gibbons.Web.Items.BaseOrderItem> rptOrderedProducts;
     }
 }

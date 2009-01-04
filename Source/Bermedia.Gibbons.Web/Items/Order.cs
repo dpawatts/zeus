@@ -63,7 +63,14 @@ namespace Bermedia.Gibbons.Web.Items
 				switch (this.Status)
 				{
 					case OrderStatus.New:
-						return PaymentStatus.Authorized;
+						switch (this.PaymentMethod)
+						{
+							case PaymentMethod.CreditCard:
+								return PaymentStatus.Authorized;
+							case PaymentMethod.Corporate:
+								return PaymentStatus.Pending;
+						}
+						return PaymentStatus.None;
 					case OrderStatus.Collected:
 					case OrderStatus.Shipped:
 						return PaymentStatus.Received;

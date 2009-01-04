@@ -32,6 +32,7 @@
 				<strong>Total Cost:</strong> <%= this.CurrentItem.TotalPrice.ToString("C2") %><br />
 			</td>
 			<td valign="top" class="dottedTopBorder">
+				<% if (this.CurrentItem.BillingAddress != null) { %>
 				<strong>Billing Address:</strong><br />
 				<%= this.CurrentItem.BillingAddress.AddressLine1%><br />
 				<%= this.CurrentItem.BillingAddress.AddressLine2%><br />
@@ -40,6 +41,7 @@
 				<%= this.CurrentItem.BillingAddress.Zip%><br />
 				<%= this.CurrentItem.BillingAddress.Country.Title%><br />
 				<strong>Phone: </strong><%= this.CurrentItem.BillingAddress.PhoneNumber%><br />
+				<% } %>
 			</td>
 		</tr>
 		<tr>
@@ -57,15 +59,15 @@
 			<th>Gift Wrap</th>
 			<th align="right">Cost</th>
 		</tr>
-		<isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.OrderItem, Bermedia.Gibbons.Web">
+		<isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.BaseOrderItem, Bermedia.Gibbons.Web">
 			<LayoutTemplate>
 				<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
 			</LayoutTemplate>
 			<ItemTemplate>
 				<tr class="<%# (Container.DataItem.Refunded) ? "refunded" : string.Empty %>">
-					<td><%# Container.DataItem.Product.Title %></td>
-					<td><%# (Container.DataItem.Size != null) ? Container.DataItem.Size.Title : string.Empty %></td>
-					<td><%# (Container.DataItem.Colour != null) ? Container.DataItem.Colour.Title : string.Empty %></td>
+					<td><%# Container.DataItem.ProductTitle %></td>
+					<td><%# Container.DataItem.ProductSizeTitle %></td>
+					<td><%# Container.DataItem.ProductColourTitle %></td>
 					<td><%# Container.DataItem.Quantity %></td>
 					<td><%# (Container.DataItem.GiftWrapType != null)? Container.DataItem.GiftWrapType.Title : string.Empty %></td>
 					<td align="right"><%# Container.DataItem.Price.ToString("C2") %></td>

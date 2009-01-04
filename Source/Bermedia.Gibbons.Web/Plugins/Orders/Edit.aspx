@@ -13,9 +13,12 @@
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<asp:Button runat="server" ID="btnCollect" Visible="false" OnClick="btnCollect_Click" Text="Collect (processes payment)" /> 
+	<asp:Button runat="server" ID="btnCollectCorporate" Visible="false" OnClick="btnCollectCorporate_Click" Text="Collect" /> 
 	<asp:Button runat="server" ID="btnShip" Visible="false" OnClick="btnShip_Click" Text="Ship (processes payment)" /> 
+	<asp:Button runat="server" ID="btnShipCorporate" Visible="false" OnClick="btnShipCorporate_Click" Text="Ship" /> 
 	<asp:Button runat="server" ID="btnDeleteRefund" Visible="false" OnClick="btnDeleteRefund_Click" Text="Delete (refunds payment)" /> 
 	<asp:Button runat="server" ID="btnDeleteCancel" Visible="false" OnClick="btnDeleteCancel_Click" Text="Delete (cancels payment)" /> 
+	<asp:Button runat="server" ID="btnDelete" Visible="false" OnClick="btnDelete_Click" Text="Delete" /> 
 	<asp:Button runat="server" ID="btnRefundSelected" Visible="false" OnClick="btnRefundSelected_Click" Text="Refund Selected Items" /> 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
@@ -36,10 +39,10 @@
 						<span class="labelDescription">E-Mail:</span>
 						<%# Container.DataItem.Customer.Email %>
 					</td>
-					<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem.BillingAddress %>'>
-						<isis:ConditionalView runat="server" Expression="it != null">
-							<ItemTemplate>
-								<td style="vertical-align:top">
+					<td style="vertical-align:top">
+						<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem.BillingAddress %>'>
+							<isis:ConditionalView runat="server" Expression="it != null">
+								<ItemTemplate>
 									<%# Eval("AddressLine1") %><br />
 									<%# Eval("AddressLine2") %><br />
 									<%# Eval("City") %><br />
@@ -48,14 +51,14 @@
 									<%# Eval("Country.Name") %><br /><br />
 									<span class="labelDescription">Telephone:</span>
 									<%# Eval("PhoneNumber") %>
-								</td>
-							</ItemTemplate>
-						</isis:ConditionalView>
-					</isis:ConditionalMultiView>
-					<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem.ShippingAddress %>'>
-						<isis:ConditionalView runat="server" Expression="it != null">
-							<ItemTemplate>
-								<td style="vertical-align:top">
+								</ItemTemplate>
+							</isis:ConditionalView>
+						</isis:ConditionalMultiView>
+					</td>
+					<td style="vertical-align:top">
+						<isis:ConditionalMultiView runat="server" Value='<%# Container.DataItem.ShippingAddress %>'>
+							<isis:ConditionalView runat="server" Expression="it != null">
+								<ItemTemplate>
 									<%# Eval("AddressLine1") %><br />
 									<%# Eval("AddressLine2") %><br />
 									<%# Eval("City") %><br />
@@ -64,10 +67,10 @@
 									<%# Eval("Country.Name") %><br /><br />
 									<span class="labelDescription">Telephone:</span>
 									<%# Eval("PhoneNumber") %>
-								</td>
-							</ItemTemplate>
-						</isis:ConditionalView>
-					</isis:ConditionalMultiView>
+								</ItemTemplate>
+							</isis:ConditionalView>
+						</isis:ConditionalMultiView>
+					</td>
 				</tr>
 			</table>
 				
@@ -95,15 +98,15 @@
 
 			<table class="tb">
 				<tr class="titles">
-					<th style="width:5%">Cancel / Refund</th>
-					<th style="width:35%">Product</th>
+					<th style="width:6%">Cancel / Refund</th>
+					<th style="width:34%">Product</th>
 					<th style="width:10%">Gift Wrap</th>
 					<th style="width:10%">Gift Receipt Req.</th>
 					<th style="width:10%">Quantity Ordered</th>
 					<th style="width:10%">Purchase Price Per Unit</th>
 					<th style="width:10%">Purchase Price</th>
 				</tr>
-				<isis:TypedRepeater runat="server" ID="rptOrderedProducts" DataSource='<%# Container.DataItem.GetChildren<Bermedia.Gibbons.Web.Items.OrderItem>() %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.OrderItem, Bermedia.Gibbons.Web">
+				<isis:TypedRepeater runat="server" ID="rptOrderedProducts" DataSource='<%# Container.DataItem.GetChildren<Bermedia.Gibbons.Web.Items.BaseOrderItem>() %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.BaseOrderItem, Bermedia.Gibbons.Web">
 					<ItemTemplate>
 						<tr class="<%# Container.DataItem.Refunded ? "refunded" : string.Empty %>">
 							<td>
@@ -111,8 +114,8 @@
 								<asp:CheckBox runat="server" ID="chkCancel" Visible='<%# !Container.DataItem.Refunded && HasOrderBeenPaidFor() %>' />
 							</td>
 							<td>
-								<%# Container.DataItem.Product.VendorStyleNumber + "&nbsp;&nbsp;" + Container.DataItem.Product.Title %>
-								<%# Container.DataItem.Product.FreeGiftProduct.GetValueOrDefault(fgp => "(Free Gift: " + fgp.Title + ")", string.Empty) %>
+								<%# Container.DataItem.ProductTitle %> / <%# Container.DataItem.ProductSizeTitle %> / <%# Container.DataItem.ProductColourTitle %><br />
+								<a href="<%# Container.DataItem.FullImageUrl %>" target="_blank"><img src="<%# Container.DataItem.ThumbnailImageUrl %>" /></a>
 							</td>
 							<td><%# Container.DataItem.GiftWrapType.GetValueOrDefault(gwt => gwt.Title, string.Empty) %></td>
 							<td><%# (Container.DataItem.IsGift) ? "Yes" : "No" %></td>

@@ -38,7 +38,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 
 		protected void btnCorporateNext_Click(object sender, EventArgs e)
 		{
-			// TODO
+			this.ShoppingCart.PaymentMethod = PaymentMethod.Corporate;
+			Zeus.Context.Persister.Save(this.ShoppingCart);
+
+			Response.Redirect("~/checkout-summary.aspx");
 		}
 	}
 

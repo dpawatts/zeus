@@ -107,6 +107,9 @@
     <Compile Include="Items\BaseFragranceBeautyCategory.cs" />
     <Compile Include="Items\CheckoutChangeQuantities.cs" />
     <Compile Include="Items\BaseShoppingCartItem.cs" />
+    <Compile Include="Items\BaseOrderItem.cs" />
+    <Compile Include="Items\GiftCardOrderItem.cs" />
+    <Compile Include="Items\PaymentMethod.cs" />
     <Compile Include="Items\PersonalisedGiftCardShoppingCartItem.cs" />
     <Compile Include="Items\GiftCardPersonalisePage.cs" />
     <Compile Include="Items\GiftCardShoppingCartItem.cs" />
@@ -656,6 +659,7 @@
     <Content Include="Assets\Xml\giftCardConfig.xml" />
     <Content Include="Assets\Xml\site.xml" />
     <Content Include="Configuration\SoundInTheory.PaymentProcessing.config" />
+    <None Include="Assets\Documents\Gibbons_Corporate_Card_Purchase_Form.doc" />
     <None Include="Items\ClassDiagram.cd" />
     <Content Include="Plugins\Orders\Edit.aspx" />
     <Content Include="Plugins\Orders\View.aspx" />

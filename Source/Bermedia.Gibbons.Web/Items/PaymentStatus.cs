@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Bermedia.Gibbons.Web.Items
 {
@@ -7,6 +8,9 @@ namespace Bermedia.Gibbons.Web.Items
 		None,
 		Authorized,
 		Received,
-		Cancelled
+		Cancelled,
+
+		[Description("Payment Pending Via Fax")]
+		Pending
 	}
 }

@@ -25,27 +25,46 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders
 			fmvEntity.DataSource = new object[] { this.SelectedItem };
 			fmvEntity.DataBind();
 
+			btnCollect.Visible = btnCollectCorporate.Visible = btnShip.Visible = btnShipCorporate.Visible = btnDelete.Visible = btnDeleteCancel.Visible = btnRefundSelected.Visible = false;
+
 			Web.Items.Order order = this.SelectedOrder;
 			switch (order.Status)
 			{
 				case Web.Items.OrderStatus.New:
 					if (!order.DeliveryType.RequiresShippingAddress)
-						btnCollect.Visible = true;
+						if (order.PaymentMethod == Bermedia.Gibbons.Web.Items.PaymentMethod.CreditCard)
+							btnCollect.Visible = true;
+						else
+							btnCollectCorporate.Visible = true;
 					else
-						btnShip.Visible = true;
-					btnDeleteCancel.Visible = true;
+						if (order.PaymentMethod == Bermedia.Gibbons.Web.Items.PaymentMethod.CreditCard)
+							btnShip.Visible = true;
+						else
+							btnShipCorporate.Visible = true;
+					if (order.PaymentMethod == Bermedia.Gibbons.Web.Items.PaymentMethod.CreditCard)
+						btnDeleteCancel.Visible = true;
+					else
+						btnDelete.Visible = true;
 					break;
 				case Web.Items.OrderStatus.Collected:
 				case Web.Items.OrderStatus.Shipped:
-					btnDeleteRefund.Visible = true;
-					btnRefundSelected.Visible = true;
+					if (order.PaymentMethod == Bermedia.Gibbons.Web.Items.PaymentMethod.CreditCard)
+					{
+						btnDeleteRefund.Visible = true;
+						btnRefundSelected.Visible = true;
+					}
+					else
+					{
+						btnDelete.Visible = true;
+					}
 					break;
 			}
 		}
 
 		protected bool HasOrderBeenPaidFor()
 		{
-			return this.SelectedOrder.Status.EqualsAny(Web.Items.OrderStatus.Collected, Web.Items.OrderStatus.Shipped);
+			return this.SelectedOrder.PaymentMethod == Bermedia.Gibbons.Web.Items.PaymentMethod.CreditCard
+				&& this.SelectedOrder.Status.EqualsAny(Web.Items.OrderStatus.Collected, Web.Items.OrderStatus.Shipped);
 		}
 
 		protected void btnUpdateTrackingNumber_Click(object sender, EventArgs e)
@@ -61,8 +80,18 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders
 			DoPaymentAction(delegate(Payment payment, Web.Items.Order order)
 			{
 				PaymentManager.Bank(payment);
+				order.ShippedDate = DateTime.Now;
 				order.Status = Web.Items.OrderStatus.Collected;
 			});
+		}
+
+		protected void btnCollectCorporate_Click(object sender, EventArgs e)
+		{
+			Web.Items.Order order = this.SelectedOrder;
+			order.ShippedDate = DateTime.Now;
+			order.Status = Web.Items.OrderStatus.Collected;
+			Zeus.Context.Persister.Save(order);
+			ReBind();
 		}
 
 		protected void btnShip_Click(object sender, EventArgs e)
@@ -70,8 +99,18 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders
 			DoPaymentAction(delegate(Payment payment, Web.Items.Order order)
 			{
 				PaymentManager.Bank(payment);
+				order.ShippedDate = DateTime.Now;
 				order.Status = Web.Items.OrderStatus.Shipped;
 			});
+		}
+
+		protected void btnShipCorporate_Click(object sender, EventArgs e)
+		{
+			Web.Items.Order order = this.SelectedOrder;
+			order.ShippedDate = DateTime.Now;
+			order.Status = Web.Items.OrderStatus.Shipped;
+			Zeus.Context.Persister.Save(order);
+			ReBind();
 		}
 
 		protected void btnDeleteRefund_Click(object sender, EventArgs e)
@@ -90,6 +129,14 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders
 					PaymentManager.Reverse(payment);
 					order.Status = Web.Items.OrderStatus.Deleted;
 				});
+		}
+
+		protected void btnDelete_Click(object sender, EventArgs e)
+		{
+			Web.Items.Order order = this.SelectedOrder;
+			order.Status = Web.Items.OrderStatus.Deleted;
+			Zeus.Context.Persister.Save(order);
+			ReBind();
 		}
 
 		protected void btnRefundSelected_Click(object sender, EventArgs e)

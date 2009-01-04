@@ -22,6 +22,12 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<BaseDeliveryType>("DeliveryType", value); }
 		}
 
+		public PaymentMethod PaymentMethod
+		{
+			get { return GetDetail<PaymentMethod>("PaymentMethod", PaymentMethod.CreditCard); }
+			set { SetDetail<PaymentMethod>("PaymentMethod", value); }
+		}
+
 		public Address ShippingAddress
 		{
 			get { return GetDetail<Address>("ShippingAddress", null); }
@@ -39,7 +45,7 @@ namespace Bermedia.Gibbons.Web.Items
 			get
 			{
 				decimal result = 0;
-				foreach (ShoppingCartItem shoppingCartItem in this.Children.OfType<ShoppingCartItem>())
+				foreach (BaseShoppingCartItem shoppingCartItem in this.Children.OfType<BaseShoppingCartItem>())
 					result += shoppingCartItem.Price;
 				return result;
 			}

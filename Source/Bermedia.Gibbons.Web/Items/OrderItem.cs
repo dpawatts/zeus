@@ -9,18 +9,45 @@ namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType(Description = "[Internal Use Only]")]
 	[RestrictParents(typeof(Order))]
-	public class OrderItem : ShoppingCartItem
+	public class OrderItem : BaseOrderItem
 	{
-		public bool Refunded
+		public StandardProduct Product
 		{
-			get { return GetDetail<bool>("Refunded", false); }
-			set { SetDetail<bool>("Refunded", value); }
+			get { return GetDetail<StandardProduct>("StandardProduct", null); }
+			set { SetDetail<StandardProduct>("StandardProduct", value); }
 		}
 
-		public override decimal PricePerUnit
+		public override string ProductTitle
 		{
-			get { return GetDetail<decimal>("PricePerUnit", 0); }
-			set { SetDetail<decimal>("PricePerUnit", value); }
+			get
+			{
+				string result = this.Product.VendorStyleNumber + " " + this.Product.DisplayTitle;
+				if (this.Product.FreeGiftProduct != null)
+					result += "(Free Gift: " + this.Product.FreeGiftProduct.Title + ")";
+				return result;
+			}
+		}
+
+		public ProductSizeLink Size
+		{
+			get { return GetDetail<ProductSizeLink>("Size", null); }
+			set { SetDetail<ProductSizeLink>("Size", value); }
+		}
+
+		public override string ProductSizeTitle
+		{
+			get { return (this.Size != null) ? this.Size.Title : string.Empty; }
+		}
+
+		public ProductColour Colour
+		{
+			get { return GetDetail<ProductColour>("Colour", null); }
+			set { SetDetail<ProductColour>("Colour", value); }
+		}
+
+		public override string ProductColourTitle
+		{
+			get { return (this.Colour != null) ? this.Colour.Title : string.Empty; }
 		}
 	}
 }

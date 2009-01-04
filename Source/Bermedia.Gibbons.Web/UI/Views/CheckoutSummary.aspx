@@ -36,9 +36,11 @@
 					<tr>
 						<td colspan="2">
 							<br />
+							<% if (this.ShoppingCart.BillingAddress != null) { %>
 							<strong>Payment Details</strong><br />
 							<%= this.CheckoutData.CardDetails %><br />
 							<a href="checkout-payment-details.aspx?return=true">Change Payment Details</a>
+							<% } %>
 						</td>
 					</tr>
 				</table>
@@ -57,15 +59,17 @@
 					<a href="checkout-shipping-address.aspx?return=true">Change Address</a><br /><br />
 				</asp:PlaceHolder>
 				
+				<% if (this.ShoppingCart.BillingAddress != null) { %>
 				<strong>Billing Address:</strong><br />
-				<%= this.ShoppingCart.BillingAddress.AddressLine1 %><br />
-				<%= this.ShoppingCart.BillingAddress.AddressLine2 %><br />
-				<%= this.ShoppingCart.BillingAddress.City %><br />
-				<%= this.ShoppingCart.BillingAddress.ParishState %><br />
-				<%= this.ShoppingCart.BillingAddress.Zip %><br />
-				<%= this.ShoppingCart.BillingAddress.Country.Title %><br />
-				<strong>Phone: </strong><%= this.ShoppingCart.BillingAddress.PhoneNumber %><br />
+				<%= this.ShoppingCart.BillingAddress.AddressLine1%><br />
+				<%= this.ShoppingCart.BillingAddress.AddressLine2%><br />
+				<%= this.ShoppingCart.BillingAddress.City%><br />
+				<%= this.ShoppingCart.BillingAddress.ParishState%><br />
+				<%= this.ShoppingCart.BillingAddress.Zip%><br />
+				<%= this.ShoppingCart.BillingAddress.Country.Title%><br />
+				<strong>Phone: </strong><%= this.ShoppingCart.BillingAddress.PhoneNumber%><br />
 				<a href="checkout-billing-address.aspx?return=true">Change Address</a><br /><br />
+				<% } %>
 			</td>
 		</tr>
 		<tr>
@@ -84,15 +88,15 @@
 			<th align="right">Cost</th>
 			<th></th>
 		</tr>
-		<isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.ShoppingCartItem, Bermedia.Gibbons.Web">
+		<isis:TypedListView runat="server" ID="lsvShoppingCartItems" DataItemTypeName="Bermedia.Gibbons.Web.Items.BaseShoppingCartItem, Bermedia.Gibbons.Web">
 			<LayoutTemplate>
 				<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
 			</LayoutTemplate>
 			<ItemTemplate>
 				<tr>
-					<td><%# Container.DataItem.Product.Title %></td>
-					<td><%# (Container.DataItem.Size != null) ? Container.DataItem.Size.Title : string.Empty %></td>
-					<td><%# (Container.DataItem.Colour != null) ? Container.DataItem.Colour.Title : string.Empty %></td>
+					<td><%# Container.DataItem.ProductTitle %></td>
+					<td><%# Container.DataItem.ProductSizeTitle %></td>
+					<td><%# Container.DataItem.ProductColourTitle %></td>
 					<td><%# Container.DataItem.Quantity %></td>
 					<td><%# (Container.DataItem.GiftWrapType != null)? Container.DataItem.GiftWrapType.Title : string.Empty %></td>
 					<td align="right"><%# Container.DataItem.Price.ToString("C2") %></td>

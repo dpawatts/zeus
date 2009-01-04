@@ -29,7 +29,7 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.ShoppingCartItem> lsvShoppingCartItems;
+        protected global::Isis.Web.UI.WebControls.TypedListView<Bermedia.Gibbons.Web.Items.BaseShoppingCartItem> lsvShoppingCartItems;
         
         /// <summary>
         /// btnNext2 control.

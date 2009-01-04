@@ -10,7 +10,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		{
 			if (!this.IsPostBack)
 			{
-				lsvShoppingCartItems.DataSource = this.CurrentItem.GetChildren<Web.Items.OrderItem>();
+				lsvShoppingCartItems.DataSource = this.CurrentItem.GetChildren<Web.Items.BaseOrderItem>();
 				lsvShoppingCartItems.DataBind();
 			}
 		}

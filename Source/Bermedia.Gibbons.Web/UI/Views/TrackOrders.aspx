@@ -26,9 +26,9 @@
 				<td valign="top"><%# Container.DataItem.ID %></td>
 				<td valign="top">
 					<ul>
-						<isis:TypedRepeater runat="server" DataSource='<%# Container.DataItem.GetChildren<Bermedia.Gibbons.Web.Items.OrderItem>() %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.OrderItem, Bermedia.Gibbons.Web">
+						<isis:TypedRepeater runat="server" DataSource='<%# Container.DataItem.GetChildren<Bermedia.Gibbons.Web.Items.BaseOrderItem>() %>' DataItemTypeName="Bermedia.Gibbons.Web.Items.BaseOrderItem, Bermedia.Gibbons.Web">
 							<ItemTemplate>
-								<li><%# Container.DataItem.Quantity %> x <%# Container.DataItem.Product.DisplayTitle %></li>
+								<li><%# Container.DataItem.Quantity %> x <%# Container.DataItem.ProductTitle %></li>
 							</ItemTemplate>
 						</isis:TypedRepeater>
 					</ul>
