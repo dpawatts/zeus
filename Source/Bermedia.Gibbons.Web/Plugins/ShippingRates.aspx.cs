@@ -9,7 +9,7 @@ using Zeus.Admin;
 
 namespace Bermedia.Gibbons.Web.Plugins
 {
-	[Zeus.Admin.ToolbarPlugin("~/Plugins/ShippingRates.aspx", AdminTargetFrame.Preview, "~/Assets/Images/Icons/package_go.png", 100, ToolTip = "International Shipping Rates")]
+	[Zeus.Admin.ToolbarPlugin("~/Plugins/ShippingRates.aspx", AdminTargetFrame.Preview, "~/Assets/Images/Icons/package_go.png", 100, Text = "Shipping Rates", ToolTip = "International Shipping Rates")]
 	public partial class ShippingRates : System.Web.UI.Page
 	{
 		protected void Page_Load(object sender, EventArgs e)

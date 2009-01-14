@@ -38,6 +38,12 @@ namespace Zeus.Admin
 			set;
 		}
 
+		public string Text
+		{
+			get;
+			set;
+		}
+
 		public string ToolTip
 		{
 			get;
@@ -54,6 +60,9 @@ namespace Zeus.Admin
 			Image image = new Image();
 			image.ImageUrl = this.ImageUrl;
 			link.Controls.Add(image);
+
+			if (!string.IsNullOrEmpty(this.Text))
+				link.Controls.Add(new LiteralControl(this.Text));
 
 			container.Controls.Add(link);
 		}

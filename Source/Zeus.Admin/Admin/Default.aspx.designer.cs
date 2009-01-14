@@ -14,6 +14,15 @@ namespace Zeus.Admin {
     public partial class Default {
         
         /// <summary>
+        /// ltlAdminName1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlAdminName1;
+        
+        /// <summary>
         /// imgLogo control.
         /// </summary>
         /// <remarks>
@@ -23,13 +32,13 @@ namespace Zeus.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlImage imgLogo;
         
         /// <summary>
-        /// ltlAdminName control.
+        /// ltlAdminName2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlAdminName;
+        protected global::System.Web.UI.WebControls.Literal ltlAdminName2;
         
         /// <summary>
         /// logOut control.

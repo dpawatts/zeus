@@ -39,7 +39,7 @@
 	<asp:UpdatePanel runat="server" ID="updUpdatePanel">
 		<ContentTemplate>
 			<zeus:ItemGridView runat="server" ID="zeusItemGridView" DataSourceID="cdsChildren" />
-			<zeus:ContentDataSource runat="server" ID="cdsChildren" />
+			<zeus:ContentDataSource runat="server" ID="cdsChildren" OrderBy="Title" />
 			<asp:Button runat="server" ID="btnRefreshGrid" style="display:none" OnClick="btnRefreshGrid_Click" />
 		</ContentTemplate>
 	</asp:UpdatePanel>

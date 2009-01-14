@@ -20,7 +20,7 @@ namespace Zeus.ContentTypes.Properties
 		public override void SetValue(Control container, ContentItem item, string propertyName)
 		{
 			string hexRef = item[propertyName] as string;
-			if (hexRef != null)
+			if (hexRef != null && hexRef.Length == 6)
 			{
 				_panel.BackColor = ColorTranslator.FromHtml("#" + hexRef);
 				_panel.ToolTip = hexRef;

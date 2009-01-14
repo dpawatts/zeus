@@ -15,7 +15,7 @@ namespace Zeus.Admin
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			imgLogo.Visible = !((AdminSection) ConfigurationManager.GetSection("zeus/admin")).HideBranding;
-			ltlAdminName.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
+			ltlAdminName1.Text = ltlAdminName2.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
 
 			foreach (ToolbarPluginAttribute toolbarPlugin in GetToolbarPlugins())
 				toolbarPlugin.AddTo(plcToolbar);
