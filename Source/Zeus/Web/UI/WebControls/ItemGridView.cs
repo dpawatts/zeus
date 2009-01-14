@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Collections;
 using Isis.Web.UI.WebControls;
-using Isis.Reflection;
+using Isis.ExtensionMethods.Reflection;
 using System.Reflection;
 using Isis.Web.UI.HtmlControls;
 using Zeus.Admin;

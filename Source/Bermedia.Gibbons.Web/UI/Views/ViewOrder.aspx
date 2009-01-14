@@ -1,16 +1,19 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="ViewOrder.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.ViewOrder" %>
+<asp:Content ContentPlaceHolderID="cphHead" runat="server">
+	<link rel="stylesheet" href="/assets/css/myaccount.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>View Order #<%= this.CurrentItem.ID %></h1>
 
-	<table width="695" border="0" cellspacing="0" cellpadding="0">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td width="60%" valign="top" class="dottedTopBorder">
+			<td width="60%" valign="top">
 				<strong>Order Placed:</strong> <%= this.CurrentItem.DatePlaced.ToLongDateString() %><br />
 				<strong>Order Number:</strong> <%= this.CurrentItem.ID %><br />
 				<strong>Order Status:</strong> <%= this.CurrentItem.StatusDescription %><br />
 				<strong>Delivery Method:</strong> <%= this.CurrentItem.DeliveryType.Title %>
 			</td>
-			<td valign="top" class="dottedTopBorder">
+			<td valign="top">
 				<asp:PlaceHolder runat="server" Visible="<%$ Code:this.CurrentItem.DeliveryType.RequiresShippingAddress %>">
 					<strong>Shipping Address:</strong><br />
 					<%= this.Customer.FullName %><br />
@@ -26,12 +29,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" class="dottedTopBorder">
+			<td valign="top">
 				<strong>Shipping Cost:</strong> <%= this.CurrentItem.DeliveryType.GetPrice(this.CurrentItem).ToString("C2") %><br />
 				<strong>Item Cost Total:</strong> <%= this.CurrentItem.ItemTotalPrice.ToString("C2") %><br />
 				<strong>Total Cost:</strong> <%= this.CurrentItem.TotalPrice.ToString("C2") %><br />
 			</td>
-			<td valign="top" class="dottedTopBorder">
+			<td valign="top">
 				<% if (this.CurrentItem.BillingAddress != null) { %>
 				<strong>Billing Address:</strong><br />
 				<%= this.CurrentItem.BillingAddress.AddressLine1%><br />
@@ -44,11 +47,9 @@
 				<% } %>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" valign="top" class="dottedTopBorder">&nbsp;</td>
-		</tr>
 	</table>
 	
+	<br />
 	<h2>Items Ordered</h2>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="basket">
 		<tr>

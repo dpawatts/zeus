@@ -1,4 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="ManageAddressBook.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.ManageAddressBook" %>
+<asp:Content ContentPlaceHolderID="cphHead" runat="server">
+	<link rel="stylesheet" href="/assets/css/myaccount.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Manage Address Book</h1>
 	

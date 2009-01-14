@@ -1,4 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="EditAddress.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.EditAddress" %>
+<asp:Content ContentPlaceHolderID="cphHead" runat="server">
+	<link rel="stylesheet" href="/assets/css/myaccount.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Edit Address</h1>
 	
@@ -38,7 +41,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<p><asp:ValidationSummary runat="server" ID="vlsSummary" DisplayMode="List" /></p>
+					<p><asp:ValidationSummary runat="server" ID="vlsSummary" /></p>
 					<br />
 					
 					<sitdap:DynamicImageButton runat="server" ID="btnSave" OnClick="btnSave_Click" TemplateName="Button" AlternateText="save">

@@ -3,7 +3,7 @@ using Zeus.ContentTypes;
 using Zeus.Admin;
 using SoundInTheory.PaymentProcessing;
 using System.Web.UI.WebControls;
-using Isis;
+using Isis.ExtensionMethods;
 
 namespace Bermedia.Gibbons.Web.Plugins.Orders
 {

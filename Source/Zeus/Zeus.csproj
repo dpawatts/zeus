@@ -189,6 +189,8 @@
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
+    <Compile Include="Linq\ContentItemFilters.cs" />
+    <Compile Include="Linq\DetailPropertyVisitor.cs" />
     <Compile Include="Linq\Filters\NullFilter.cs" />
     <Compile Include="Linq\Filters\PageFilter.cs" />
     <Compile Include="Linq\ItemFinder.cs" />
@@ -200,6 +202,8 @@
     <Compile Include="Linq\Filters\PublishedFilter.cs" />
     <Compile Include="Linq\Filters\TypeFilter.cs" />
     <Compile Include="Linq\Filters\VisibleFilter.cs" />
+    <Compile Include="Linq\NHibernateExtensions.cs" />
+    <Compile Include="Linq\ZeusQueryProvider.cs" />
     <Compile Include="Persistence\ConfigurationBuilder.cs" />
     <Compile Include="Persistence\ContentPersister.cs" />
     <Compile Include="Persistence\GenericFind.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace Bermedia.Gibbons.Web.UI.Views
 {
@@ -48,9 +49,9 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				FormsAuthentication.SetAuthCookie(membershipUser.UserName, false);
 		}
 
-		protected void csvTerms_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs e)
+		protected void csvTerms_ServerValidate(object sender, System.Web.UI.WebControls.ServerValidateEventArgs e)
 		{
-			CheckBox chkAgree = (CheckBox) cwsFinish.CustomNavigationTemplateContainer.FindControl("chkAgree");
+			CheckBox chkAgree = (CheckBox) ((Control) sender).Parent.FindControl("chkAgree");
 			e.IsValid = chkAgree.Checked;
 		}
 

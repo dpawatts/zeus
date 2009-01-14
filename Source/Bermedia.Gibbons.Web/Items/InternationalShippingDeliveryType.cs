@@ -21,7 +21,7 @@ namespace Bermedia.Gibbons.Web.Items
 		{
 			// Look up InternationalShippingRate for this delivery type and the price of the shopping cart.
 			InternationalShippingRate rate = Zeus.Context.Current.Finder.Elements<InternationalShippingRate>().ToList()
-				.SingleOrDefault(r => r.DeliveryType == this && r.PriceRange.Matches(shoppingCart.ItemTotalPrice));
+				.SingleOrDefault(r => r.DeliveryType == this && r.PriceRange.Matches(shoppingCart.ItemTotalPriceExcludingGiftCards));
 			if (rate == null)
 				throw new ZeusException("Could not find shipping rate matching the total price");
 			return rate.Price;

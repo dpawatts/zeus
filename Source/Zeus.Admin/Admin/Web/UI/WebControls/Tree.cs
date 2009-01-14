@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.UI;
 using Zeus.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web;
-using Isis.Web;
+using Isis.ExtensionMethods.Web;
 using Zeus.Linq.Filters;
 
 namespace Zeus.Admin.Web.UI.WebControls

@@ -1,5 +1,5 @@
 ﻿using System;
-using Isis.Web;
+using Isis.ExtensionMethods.Web;
 using System.Collections.Generic;
 
 namespace Zeus.Admin

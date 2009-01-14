@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.Web;
+using Isis.ExtensionMethods.Web;
 using Zeus.Web.UI;
 
 namespace Bermedia.Gibbons.Web.UI.Views

@@ -44,7 +44,7 @@
 			<div id="loginNotice">
 				<asp:LoginView runat="server">
 					<LoggedInTemplate>
-						You are logged in as <asp:LoginName runat="server" /> | <asp:LoginStatus runat="server" />
+						You are logged in as <asp:LoginName runat="server" /> | <asp:LinkButton runat="server" ID="btnLogout" Text="Logout" OnClick="btnLogout_Click" />
 					</LoggedInTemplate>
 					<AnonymousTemplate>
 						<a href="/login.aspx?ReturnUrl=<%= Server.UrlEncode(Request.RawUrl) %>">Login</a>

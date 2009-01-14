@@ -1,4 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="PersonalDetails.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.PersonalDetails" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="PersonalDetails.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.PersonalDetails" %>
+<asp:Content ContentPlaceHolderID="cphHead" runat="server">
+	<link rel="stylesheet" href="/assets/css/myaccount.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</asp:Content>
 <asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Personal Details</h1>
 
@@ -11,16 +14,17 @@
 	<table width="90%" border="0" align="center" cellpadding="4" cellspacing="2">
 		<tr>
 			<td align="right"><strong>New first name:</strong></td>
-			<td><asp:TextBox runat="server" ID="txtNewFirstName" /></td>
+			<td><asp:TextBox runat="server" ID="txtNewFirstName" /> <asp:RequiredFieldValidator runat="server" ID="rfvNewFirstName" ControlToValidate="txtNewFirstName" Text="*" ErrorMessage="First name is required" /></td>
 		</tr>
 		<tr>
-			<td align="right"><strong>New last name:</strong></td>
-			<td><asp:TextBox runat="server" ID="txtNewLastName" /></td>
+			<td align="right"><strong>New surname:</strong></td>
+			<td><asp:TextBox runat="server" ID="txtNewLastName" /> <asp:RequiredFieldValidator runat="server" ID="rfvNewLastName" ControlToValidate="txtNewLastName" Text="*" ErrorMessage="Surname is required" /></td>
 		</tr>
 		<tr>
 			<td align="right"><strong>New e-mail address:</strong></td>
 			<td>
 				<asp:TextBox runat="server" ID="txtNewEmail" />
+				 <asp:RequiredFieldValidator runat="server" ID="rfvNewEmail" ControlToValidate="txtNewEmail" Text="*" ErrorMessage="E-mail address is required" />
 				<asp:CustomValidator runat="server" ID="csvNewEmail" OnServerValidate="csvNewEmail_ServerValidate" ControlToValidate="txtNewEmail" ErrorMessage="This e-mail address is already in use" Text="*" />
 			</td>
 		</tr>
@@ -47,7 +51,7 @@
 			<td align="right"><strong>Re-enter password:</strong></td>
 			<td>
 				<asp:TextBox runat="server" ID="txtNewPasswordConfirm" TextMode="Password" />
-				<asp:CompareValidator runat="server" ErrorMessage="The password fields must match."
+				<asp:CompareValidator runat="server" Text="*" ErrorMessage="The password fields must match."
 					ControlToCompare="txtNewPasswordConfirm" ControlToValidate="txtNewPassword" />
 			</td>
 		</tr>

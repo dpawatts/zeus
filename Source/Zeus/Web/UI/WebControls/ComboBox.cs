@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using Isis.Web.UI;
+using Isis.ExtensionMethods.Web.UI;
 using System.Web.UI.HtmlControls;
 
 namespace Zeus.Web.UI.WebControls

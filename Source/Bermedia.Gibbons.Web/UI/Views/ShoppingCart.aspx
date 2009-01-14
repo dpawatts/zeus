@@ -1,8 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="ShoppingCart.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.ShoppingCart" %>
 <%@ Register TagPrefix="gibbons" TagName="ProductListing" Src="../UserControls/ProductListing.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cphStyle" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphSubNavigation" runat="server">
+	#content
+	{
+		color: #666666;
+	}
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Shopping Cart</h1>
@@ -59,7 +61,7 @@
 					<td valign="top">&nbsp;</td>
 
 					<td valign="top">&nbsp;</td>
-					<td colspan="4" align="right" valign="top">
+					<td colspan="4" align="right" valign="top" style="padding-bottom:8px;">
 						<sitdap:DynamicImageButton runat="server" ID="btnUpdateQuantities" TemplateName="FixedWidthWhiteButton" AlternateText="update quantities" OnClick="btnUpdateQuantities_Click">
 							<Layers>
 								<sitdap:TextLayer Name="Text" Text="update quantities" />
@@ -71,7 +73,7 @@
 					<td valign="top">&nbsp;</td>
 					<td valign="top">&nbsp;</td>
 					<td valign="top">&nbsp;</td>
-					<td colspan="4" align="right" valign="top">
+					<td colspan="4" align="right" valign="top" style="padding-bottom:3px;">
 						<sitdap:DynamicImageButton runat="server" ID="btnContinueShopping" TemplateName="FixedWidthWhiteButton" AlternateText="continue shopping" OnClick="btnContinueShopping_Click">
 							<Layers>
 								<sitdap:TextLayer Name="Text" Text="continue shopping" />

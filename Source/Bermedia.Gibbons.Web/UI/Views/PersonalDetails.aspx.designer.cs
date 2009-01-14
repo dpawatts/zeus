@@ -23,6 +23,15 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         protected global::System.Web.UI.WebControls.TextBox txtNewFirstName;
         
         /// <summary>
+        /// rfvNewFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNewFirstName;
+        
+        /// <summary>
         /// txtNewLastName control.
         /// </summary>
         /// <remarks>
@@ -32,6 +41,15 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         protected global::System.Web.UI.WebControls.TextBox txtNewLastName;
         
         /// <summary>
+        /// rfvNewLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNewLastName;
+        
+        /// <summary>
         /// txtNewEmail control.
         /// </summary>
         /// <remarks>
@@ -39,6 +57,15 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewEmail;
+        
+        /// <summary>
+        /// rfvNewEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNewEmail;
         
         /// <summary>
         /// csvNewEmail control.

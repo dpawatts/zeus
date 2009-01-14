@@ -51,6 +51,17 @@ namespace Bermedia.Gibbons.Web.Items
 			}
 		}
 
+		public decimal ItemTotalPriceExcludingGiftCards
+		{
+			get
+			{
+				decimal result = 0;
+				foreach (ShoppingCartItem shoppingCartItem in this.Children.OfType<ShoppingCartItem>())
+					result += shoppingCartItem.Price;
+				return result;
+			}
+		}
+
 		public decimal TotalPrice
 		{
 			get

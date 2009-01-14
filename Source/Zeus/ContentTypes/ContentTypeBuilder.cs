@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
-using Isis.Reflection;
+using Isis.ExtensionMethods.Reflection;
 using Zeus.ContentTypes.Properties;
 
 namespace Zeus.ContentTypes

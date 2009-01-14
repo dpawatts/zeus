@@ -44,6 +44,10 @@
 			<a href="/admin/view.aspx?selected=/Newsletters/&page=211" target="preview" title="Newsletters"><img src="/assets/images/icons/newspaper.png" /></a>
 			<div class="separator">&nbsp;</div>
 			<a href="/plugins/orders/view.aspx" target="preview" title="Orders"><img src="/assets/images/icons/basket.png" /></a>
+			<div class="separator">&nbsp;</div>
+			<a href="/plugins/reports/salesbytimeframe.aspx" target="preview" title="Sales by Timeframe"><img src="/assets/images/icons/money.png" /></a>
+			<a href="/plugins/reports/salesbycategory.aspx" target="preview" title="Sales by Category"><img src="/assets/images/icons/money.png" /></a>
+			<a href="/plugins/reports/salesaverages.aspx" target="preview" title="Sales Averages"><img src="/assets/images/icons/money.png" /></a>
 			<div class="separator">&nbsp;</div><asp:PlaceHolder runat="server" ID="plcToolbar" />
 		</div>
 		

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Isis;
+using Isis.ExtensionMethods;
 using Zeus;
 using Zeus.Integrity;
 

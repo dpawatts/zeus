@@ -71,7 +71,6 @@
 				so.addParam("scale", "noscale");
 				so.addParam("menu", "false");
 				so.addVariable("saveImage", "/GiftCardImages.axd?O=Save%26Am=<%= txtAmount.Text %>%26Qty=<%= ddlQuantity.SelectedValue %>");
-				so.addVariable("bgTheme", "/assets/images/giftcards/test.png");
 				so.addVariable("uploadImage", "/GiftCardImages.axd?O=Upload");
 				so.addVariable("xmlPath", "/assets/xml/giftCardConfig.xml");
 				so.useExpressInstall('/assets/swf/expressinstall.swf');
@@ -82,4 +81,6 @@
 			</div>
 		</asp:View>
 	</asp:MultiView>
+	
+	<br style="clear:both" />
 </asp:Content>

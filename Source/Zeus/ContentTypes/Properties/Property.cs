@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Isis.Reflection;
+using Isis.ExtensionMethods.Reflection;
 
 namespace Zeus.ContentTypes.Properties
 {

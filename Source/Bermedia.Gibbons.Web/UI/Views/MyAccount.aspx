@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="MyAccount.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.MyAccount" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="cphStyle" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphSubNavigation" runat="server">
+﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="MyAccount.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.MyAccount" %>
+<asp:Content ContentPlaceHolderID="cphHead" runat="server">
+	<link rel="stylesheet" href="/assets/css/myaccount.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
 	<h1>My Account</h1>

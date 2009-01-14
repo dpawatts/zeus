@@ -216,6 +216,34 @@
     <Compile Include="Plugins\Orders\View.aspx.designer.cs">
       <DependentUpon>View.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Reports\SalesAverages.aspx.cs">
+      <DependentUpon>SalesAverages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Reports\SalesAverages.aspx.designer.cs">
+      <DependentUpon>SalesAverages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Reports\SalesByCategory.aspx.cs">
+      <DependentUpon>SalesByCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Reports\SalesByCategory.aspx.designer.cs">
+      <DependentUpon>SalesByCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Reports\DateRange.ascx.cs">
+      <DependentUpon>DateRange.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Reports\DateRange.ascx.designer.cs">
+      <DependentUpon>DateRange.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Reports\SalesByTimeframe.aspx.cs">
+      <DependentUpon>SalesByTimeframe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Reports\SalesByTimeframe.aspx.designer.cs">
+      <DependentUpon>SalesByTimeframe.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\ShippingRates.aspx.cs">
       <DependentUpon>ShippingRates.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -641,6 +669,7 @@
   <ItemGroup>
     <Content Include="App_Browsers\RewriteFormAction.browser" />
     <Content Include="App_Browsers\CssFriendlyAdapters.browser" />
+    <Content Include="Assets\Css\MyAccount.css" />
     <Content Include="Assets\Images\GiftCards\cardBlank.gif" />
     <Content Include="Assets\Images\GiftCards\test.png" />
     <Content Include="Assets\Images\Icons\basket.png" />
@@ -663,6 +692,10 @@
     <None Include="Items\ClassDiagram.cd" />
     <Content Include="Plugins\Orders\Edit.aspx" />
     <Content Include="Plugins\Orders\View.aspx" />
+    <Content Include="Plugins\Reports\SalesAverages.aspx" />
+    <Content Include="Plugins\Reports\SalesByCategory.aspx" />
+    <Content Include="Plugins\Reports\DateRange.ascx" />
+    <Content Include="Plugins\Reports\SalesByTimeframe.aspx" />
     <Content Include="UI\UserControls\GiftCardNavigation.ascx" />
     <Content Include="UI\Views\CheckoutChangeQuantities.aspx" />
     <Content Include="UI\Views\GiftCardPersonalise.aspx" />

@@ -15,25 +15,22 @@
 						<ContentTemplate>
 							<tr>
 								<td width="180"><asp:Label runat="server" AssociatedControlID="txtFirstName">First name</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="txtFirstName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" Text="*" ValidationGroup="cuwRegister" /></td>
+								<td><asp:TextBox runat="server" ID="txtFirstName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" Text="*" ErrorMessage="First name is required" ValidationGroup="cuwRegister" /></td>
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="txtLastName">Surname</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="txtLastName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" Text="*" ValidationGroup="cuwRegister" /></td>
+								<td><asp:TextBox runat="server" ID="txtLastName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" Text="*" ErrorMessage="Surname is required" ValidationGroup="cuwRegister" /></td>
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="UserName">E-mail address</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="UserName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" ValidationGroup="cuwRegister" /></td>
+								<td><asp:TextBox runat="server" ID="UserName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" ErrorMessage="E-mail address is required" ValidationGroup="cuwRegister" /></td>
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="ConfirmUserName">Re-enter your e-mail address</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="ConfirmUserName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmUserName" Text="*" ValidationGroup="cuwRegister" /></td>
-							</tr>
-							<tr>
-								<td></td>
 								<td>
-									<asp:CompareValidator runat="server" ErrorMessage="Both e-mail address fields must match."
-										ControlToCompare="ConfirmUserName" ControlToValidate="UserName" ValidationGroup="cuwRegister" />
+									<asp:TextBox runat="server" ID="ConfirmUserName" />
+									<asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmUserName" Text="*" ErrorMessage="Please confirm e-mail address" ValidationGroup="cuwRegister" />
+									<asp:CompareValidator runat="server" Text="*" ErrorMessage="Both e-mail address fields must match." ControlToCompare="ConfirmUserName" ControlToValidate="UserName" ValidationGroup="cuwRegister" />
 								</td>
 							</tr>
 							<tr>
@@ -44,17 +41,14 @@
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="Password" TextMode="Password" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" ValidationGroup="cuwRegister" /></td>
+								<td><asp:TextBox runat="server" ID="Password" TextMode="Password" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" ErrorMessage="Password is required" ValidationGroup="cuwRegister" /></td>
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="ConfirmPassword">Confirm Password</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword" Text="*" ValidationGroup="cuwRegister" /></td>
-							</tr>
-							<tr>
-								<td></td>
 								<td>
-									<asp:CompareValidator runat="server" ErrorMessage="The Password and Confirm Password fields must match."
-										ControlToCompare="ConfirmPassword" ControlToValidate="Password" ValidationGroup="cuwRegister" />
+									<asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" />
+									<asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword" Text="*" ErrorMessage="Please confirm password" ValidationGroup="cuwRegister" />
+									<asp:CompareValidator runat="server" Text="*" ErrorMessage="The Password and Confirm Password fields must match." ControlToCompare="ConfirmPassword" ControlToValidate="Password" ValidationGroup="cuwRegister" />
 								</td>
 							</tr>
 							<tr>
@@ -83,12 +77,12 @@
 										<asp:ListItem>Who is your favourite musical group or artist?</asp:ListItem>
 										<asp:ListItem>What is your favourite flavour of ice creme?</asp:ListItem>
 									</asp:DropDownList>
-									<asp:RequiredFieldValidator runat="server" ControlToValidate="Question" Text="*" ValidationGroup="cuwRegister" />
+									<asp:RequiredFieldValidator runat="server" ControlToValidate="Question" Text="*" ErrorMessage="Password hint is required" ValidationGroup="cuwRegister" />
 								</td>
 							</tr>
 							<tr>
 								<td><asp:Label runat="server" AssociatedControlID="Answer">Your password hint answer</asp:Label></td>
-								<td><asp:TextBox runat="server" ID="Answer" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Answer" Text="*" ValidationGroup="cuwRegister" /></td>
+								<td><asp:TextBox runat="server" ID="Answer" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Answer" Text="*" ErrorMessage="Password hint answer is required" ValidationGroup="cuwRegister" /></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -99,8 +93,8 @@
 								<td colspan="2">
 									<iframe src="/tsandcs.htm" width="500px" height="200x" scrolling="auto"></iframe>
 					
-									<p><asp:CheckBox runat="server" ID="chkAgree" Text="I agree with the terms and conditions" /></p>
-									<asp:CustomValidator runat="server" ID="csvTerms" OnServerValidate="csvTerms_ServerValidate" ErrorMessage="Please check the box to indicate you agree with the terms and conditions" ValidationGroup="Terms" />
+									<p><asp:CheckBox runat="server" ID="chkAgree" Text="I agree with the terms and conditions" />
+									<asp:CustomValidator runat="server" ID="csvTerms" OnServerValidate="csvTerms_ServerValidate" Text="*" ErrorMessage="Please check the box to indicate you agree with the terms and conditions" ValidationGroup="cuwRegister" /></p>
 								</td>
 							</tr>
 						</ContentTemplate>
@@ -108,6 +102,7 @@
 							<tr>
 								<td></td>
 								<td>
+									<p><asp:ValidationSummary runat="server" ID="vlsSummary" ValidationGroup="cuwRegister" /></p>
 									<sitdap:DynamicImageButton runat="server" ID="btnCreateAccount" CommandName="MoveNext" TemplateName="Button" AlternateText="create account" ValidationGroup="cuwRegister">
 										<Layers>
 											<sitdap:TextLayer Name="Text" Text="create account" />

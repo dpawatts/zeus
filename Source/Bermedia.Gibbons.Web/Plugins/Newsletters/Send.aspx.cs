@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using Quiksoft.EasyMail.SMTP;
-using Isis.Web;
+using Isis.ExtensionMethods.Web;
 using System.Threading;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Data;
-using Isis.Linq;
+using Isis.ExtensionMethods.Linq;
 using Zeus.Admin;
 using Bermedia.Gibbons.Web.Items;
 using System.Web;

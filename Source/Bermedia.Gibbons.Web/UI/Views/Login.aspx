@@ -16,11 +16,11 @@
 				<table cellspacing="0" cellpadding="1" border="0">
 					<tr>
 						<td width="130"><asp:Label runat="server" AssociatedControlID="UserName">Your e-mail address</asp:Label></td>
-						<td><asp:TextBox runat="server" ID="UserName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" /></td>
+						<td><asp:TextBox runat="server" ID="UserName" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" ErrorMessage="E-mail address is required" /></td>
 					</tr>
 					<tr>
 						<td><asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label></td>
-						<td><asp:TextBox runat="server" ID="Password" TextMode="Password" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" /></td>
+						<td><asp:TextBox runat="server" ID="Password" TextMode="Password" /> <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" ErrorMessage="Password is required" /></td>
 					</tr>
 					<tr>
 						<td></td>
@@ -29,6 +29,7 @@
 					<tr>
 						<td></td>
 						<td>
+							<p><asp:ValidationSummary runat="server" ID="vlsSummary" /></p>
 							<sitdap:DynamicImageButton runat="server" ID="btnLogin" CommandName="Login" TemplateName="Button" AlternateText="Sign In">
 								<Layers>
 									<sitdap:TextLayer Name="Text" Text="sign in" />

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.Linq;
-using Zeus.Web.UI;
+using Isis.ExtensionMethods.Linq;
 
 namespace Zeus.ContentTypes.Properties
 {

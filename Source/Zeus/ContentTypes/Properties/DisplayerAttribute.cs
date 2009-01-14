@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using Isis;
+using Isis.ExtensionMethods;
 
 namespace Zeus.ContentTypes.Properties
 {
