@@ -19,6 +19,13 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		[DefaultValue("")]
+		public string OfTypeExact
+		{
+			get { return this.View.OfTypeExact; }
+			set { this.View.OfTypeExact = value; }
+		}
+
+		[DefaultValue("")]
 		public string Where
 		{
 			get { return this.View.Where; }

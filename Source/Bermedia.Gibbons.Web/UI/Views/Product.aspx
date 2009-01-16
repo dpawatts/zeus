@@ -32,32 +32,36 @@
 	<div id="productDetails">
 		<p><%= this.CurrentItem.Description %></p>
 		
-		<% if (this.CurrentItem.AssociatedSizes.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
+		<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedSizes.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) %>'>
 			<p>
-				<% if (this.CurrentItem.AssociatedSizes.Count == 1) { %>
+				<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedSizes.Count == 1) %>'>
 					<%= this.CurrentItem.AssociatedSizes[0].Title %>
-				<% } else { %>
+				</asp:PlaceHolder>
+				<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedSizes.Count != 1) %>'>
 					<strong>Available Sizes:</strong><br />
 					<isis:DropDownList runat="server" ID="ddlSizes" DataSource='<%$ CurrentPage:AssociatedSizes %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
 						<asp:ListItem Value="">Please select a size</asp:ListItem>
 					</isis:DropDownList>
-				<% } %>
+					<asp:RequiredFieldValidator runat="server" ID="rfvSizes" ControlToValidate="ddlSizes" ErrorMessage="Please select a size" />
+				</asp:PlaceHolder>
 			</p>
-		<% } %>
+		</asp:PlaceHolder>
 		<%= this.CurrentItem.SubTitle %>
 		
-		<% if (this.CurrentItem.AssociatedColours.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) { %>
+		<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedColours.Count > 0 && !(this.CurrentItem is Bermedia.Gibbons.Web.Items.FragranceBeautyProduct)) %>'>
 			<p>
-			<% if (this.CurrentItem.AssociatedColours.Count == 1) { %>
+			<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedColours.Count == 1) %>'>
 				<%= ((Bermedia.Gibbons.Web.Items.ProductColour) this.CurrentItem.AssociatedColours[0]).Title %>
-			<% } else { %>
+			</asp:PlaceHolder>
+			<asp:PlaceHolder runat="server" Visible='<%$ Code:(this.CurrentItem.AssociatedColours.Count != 1) %>'>
 				<strong>Available Colors:</strong><br />
 				<isis:DropDownList runat="server" ID="ddlColours" DataSource='<%$ CurrentPage:AssociatedColours %>' DataTextField="Title" DataValueField="ID" AppendDataBoundItems="true" RequiresDataBinding="true">
 					<asp:ListItem Value="">Then select a color</asp:ListItem>
 				</isis:DropDownList>
-			<% } %>
+				<asp:RequiredFieldValidator runat="server" ID="rfvColours" ControlToValidate="ddlColours" ErrorMessage="Please select a color" />
+			</asp:PlaceHolder>
 			</p>
-		<% } %>
+		</asp:PlaceHolder>
 		
 		<% if (this.CurrentItem.SalePrice == null) { %>
 			<h2><%= this.CurrentItem.RegularPrice.ToString("C2") %></h2>

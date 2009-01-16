@@ -26,6 +26,7 @@
 					<strong>Phone: </strong><%= this.CurrentItem.ShippingAddress.PhoneNumber%><br />
 					<br />
 				</asp:PlaceHolder>
+				&nbsp;
 			</td>
 		</tr>
 		<tr>
@@ -45,6 +46,7 @@
 				<%= this.CurrentItem.BillingAddress.Country.Title%><br />
 				<strong>Phone: </strong><%= this.CurrentItem.BillingAddress.PhoneNumber%><br />
 				<% } %>
+				&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -67,10 +69,10 @@
 			<ItemTemplate>
 				<tr class="<%# (Container.DataItem.Refunded) ? "refunded" : string.Empty %>">
 					<td><%# Container.DataItem.ProductTitle %></td>
-					<td><%# Container.DataItem.ProductSizeTitle %></td>
-					<td><%# Container.DataItem.ProductColourTitle %></td>
+					<td><%# Container.DataItem.ProductSizeTitle %>&nbsp;</td>
+					<td><%# Container.DataItem.ProductColourTitle %>&nbsp;</td>
 					<td><%# Container.DataItem.Quantity %></td>
-					<td><%# (Container.DataItem.GiftWrapType != null)? Container.DataItem.GiftWrapType.Title : string.Empty %></td>
+					<td><%# (Container.DataItem.GiftWrapType != null)? Container.DataItem.GiftWrapType.Title : "&nbsp;" %></td>
 					<td align="right"><%# Container.DataItem.Price.ToString("C2") %></td>
 				</tr>
 			</ItemTemplate>

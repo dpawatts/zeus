@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Isis.ExtensionMethods.Web;
 using Isis.Linq;
 using System.Linq.Dynamic;
 using System.Web.UI.WebControls;
@@ -44,7 +45,9 @@ namespace Zeus.Web.UI.WebControls
 				if (_contentType == null)
 				{
 					IContentTypeManager contentTypeManager = Zeus.Context.Current.ContentTypes;
-					if (this.CurrentItem.Children.Any())
+					if (!string.IsNullOrEmpty(Page.Request.GetOptionalString("discriminator")))
+						_contentType = contentTypeManager.GetContentType(Page.Request.GetRequiredString("discriminator"));
+					else if (this.CurrentItem.Children.Any())
 						_contentType = contentTypeManager.GetContentType(this.CurrentItem.Children[0].GetType());
 				}
 				return _contentType;
@@ -273,7 +276,7 @@ namespace Zeus.Web.UI.WebControls
 				HyperLink link = (HyperLink) sender;
 				ListViewDataItem listViewDataItem = (ListViewDataItem) link.NamingContainer;
 				link.ToolTip = string.Format("Details for {0}", DataBinder.Eval(listViewDataItem.DataItem, "Title"));
-				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=700",
+				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&amp;TB_iframe=true&amp;height=400&amp;width=750",
 					HttpUtility.UrlEncode(DataBinder.Eval(listViewDataItem.DataItem, "Path").ToString()));
 			}
 		}

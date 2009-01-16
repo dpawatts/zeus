@@ -12,6 +12,12 @@ namespace Zeus.ContentTypes.Properties
 			
 		}
 
+		public bool DomainAbsoluteUrls
+		{
+			get;
+			set;
+		}
+
 		protected override void ModifyEditor(TextBox tb)
 		{
 			// do nothing
@@ -19,7 +25,7 @@ namespace Zeus.ContentTypes.Properties
 
 		protected override TextBox CreateEditor()
 		{
-			return new HtmlTextBox();
+			return new HtmlTextBox { DomainAbsoluteUrls = this.DomainAbsoluteUrls };
 		}
 	}
 }

@@ -1,5 +1,5 @@
 <%@ Page Language="C#" MasterPageFile="~/Admin/PreviewFrame.Master" AutoEventWireup="true" CodeBehind="Send.aspx.cs" Inherits="Bermedia.Gibbons.Web.Plugins.Newsletters.Send" %>
-<%@ Import Namespace="Isis" %>
+<%@ Import Namespace="Isis.ExtensionMethods" %>
 <%@ Import Namespace="Bermedia.Gibbons.Web.Items" %>
 <asp:Content runat="server" ContentPlaceHolderID="Head">
 	<link rel="stylesheet" href="/admin/assets/css/shared.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>

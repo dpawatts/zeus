@@ -92,7 +92,7 @@
 			<asp:AsyncPostBackTrigger ControlID="ddlFilterByStatus" EventName="SelectedIndexChanged" />
 		</Triggers>
 	</asp:UpdatePanel>
-	<zeus:ContentDataSource runat="server" ID="cdsChildren" Axis="Descendant" Query="RootItem" OfType="Bermedia.Gibbons.Web.Items.Order" Where="(Status != @BasketStatus) && (@DeliveryType == -1 || DeliveryType.ID == @DeliveryType) && (@Status == -1 || Int32(Status) == @Status)">
+	<zeus:ContentDataSource runat="server" ID="cdsChildren" Axis="Descendant" Query="RootItem" OfType="Bermedia.Gibbons.Web.Items.Order" Where="(Status != @BasketStatus) && (@DeliveryType == -1 || DeliveryType.ID == @DeliveryType) && (@Status == -1 || Int32(Status) == @Status)" OrderBy="DatePlaced descending">
 		<WhereParameters>
 			<isis:ExtendedParameter Name="BasketStatus" EnumType="Bermedia.Gibbons.Web.Items.OrderStatus" Value="Basket" />
 			<asp:ControlParameter ControlID="ddlFilterByDeliveryType" Name="DeliveryType" Type="Int32" PropertyName="SelectedValue" />

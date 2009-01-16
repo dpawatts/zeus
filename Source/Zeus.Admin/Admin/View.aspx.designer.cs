@@ -20,6 +20,7 @@ namespace Zeus.Admin {
 			/// To modify move field declaration from designer file to code-behind file.
 			/// </remarks>
 			protected global::Zeus.Web.UI.WebControls.ItemGridView zeusItemGridView;
+			protected global::Zeus.Web.UI.WebControls.ContentDataSource cdsChildren;
 
 			protected global::System.Web.UI.WebControls.Literal ltlDiscriminator;
     }

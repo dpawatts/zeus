@@ -15,8 +15,10 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		{
 			string searchText = Request.GetRequiredString("q").ToLower();
 			rptSearchResults.DataSource = Zeus.Context.Current.Finder.Elements<Items.StandardProduct>()
+				.OrderBy(p => p.Title)
+				.ToList()
+				.OrderBy(p => p.Brand.Title)
 				.Where(p => p.Brand.Title.ToLower().Contains(searchText) || p.Title.ToLower().Contains(searchText) || p.Description.ToLower().Contains(searchText))
-				.OrderBy(p => p.Title).OrderBy(p => p.Brand.Title)
 				.GroupBy(p => p.Department)
 				.OrderBy(d => d.Key.Title);
 			rptSearchResults.DataBind();

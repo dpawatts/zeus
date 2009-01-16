@@ -92,6 +92,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			}
 
 			ClearShoppingCart();
+			ClearCheckoutData();
 		}
 
 		private void SendOrderPlacementConfirmation(Order order, string customerEmail)

@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 
 namespace Bermedia.Gibbons.Web.Items
 {
-	[ContentType(Description = "Product Scent")]
+	[ContentType(Title = "Product Scent")]
 	public class ProductScent : ProductColour
 	{
 		[TextBoxEditor("Description", 20, TextMode = TextBoxMode.MultiLine)]

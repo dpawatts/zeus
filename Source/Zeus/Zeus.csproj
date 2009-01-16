@@ -138,6 +138,7 @@
     <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\ColourDisplayerAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\LinkedItemListEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DateDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DateEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
@@ -166,7 +167,7 @@
     <Compile Include="ContentTypes\Properties\DoubleDetail.cs" />
     <Compile Include="ContentTypes\Properties\EditableAttribute.cs" />
     <Compile Include="ContentTypes\Properties\CheckBoxEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\EditableFreeTextAreaAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\HtmlTextBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\TextBoxEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\IntegerDetail.cs" />
     <Compile Include="ContentTypes\Properties\LinkDetail.cs" />
@@ -273,6 +274,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\DateEditorTextBox.cs" />
+    <Compile Include="Web\UI\WebControls\LinkedItemList.cs" />
     <Compile Include="Web\UI\WebControls\FileEditor.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />

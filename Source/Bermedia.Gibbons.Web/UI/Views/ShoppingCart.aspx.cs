@@ -44,6 +44,9 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		private void ReBind()
 		{
 			// Get ShoppingCart for current user.
+			lsvShoppingCartItems.DataSource = null;
+			lsvShoppingCartItems.DataBind();
+
 			lsvShoppingCartItems.DataSource = this.ShoppingCart.GetChildren();
 			lsvShoppingCartItems.DataBind();
 		}
@@ -51,8 +54,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 		protected void btnUpdateQuantities_Click(object sender, EventArgs e)
 		{
 			List<ListViewDataItem> itemsToRemove = UpdateQuantities();
-			if (itemsToRemove.Any())
-				ReBind();
+			ReBind();
 		}
 
 		private List<ListViewDataItem> UpdateQuantities()

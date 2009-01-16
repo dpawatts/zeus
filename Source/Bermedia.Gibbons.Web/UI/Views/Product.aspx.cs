@@ -5,8 +5,17 @@ namespace Bermedia.Gibbons.Web.UI.Views
 {
 	public partial class Product : OnlineShopPage<Bermedia.Gibbons.Web.Items.StandardProduct>
 	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
+			rfvSizes.Enabled = ddlSizes.Visible;
+			rfvColours.Enabled = ddlColours.Visible;
+		}
+
 		protected void btnAddToCart_Click(object sender, EventArgs e)
 		{
+			if (!IsValid)
+				return;
+
 			Web.Items.ShoppingCartItem shoppingCartItem = new Web.Items.ShoppingCartItem();
 			shoppingCartItem.Product = this.CurrentItem;
 			shoppingCartItem.Quantity = Convert.ToInt32(txtQuantity.Text);

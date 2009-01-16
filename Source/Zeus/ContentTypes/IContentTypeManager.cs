@@ -22,6 +22,7 @@ namespace Zeus.ContentTypes
 
 		ICollection<ContentType> GetContentTypes();
 		ContentType GetContentType(Type type);
+		ContentType GetContentType(string discriminator);
 		IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user);
 	}
 }

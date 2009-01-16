@@ -37,7 +37,7 @@
 					</ul>
 				</td>
 				<td valign="top"><%# Container.DataItem.TotalPrice.ToString("C2") %></td>
-				<td valign="top"><%# Container.DataItem.TrackingNumber %></td>
+				<td valign="top"><%# Container.DataItem.TrackingNumber %>&nbsp;</td>
 				<td valign="top"><%# Container.DataItem.StatusDescription %></td>
 				<td valign="top"><a href="<%# new Zeus.Web.Url(this.CurrentItem.Url).AppendSegment("view-order").AppendQuery("page", Container.DataItem.ID) %>".aspx">View Order</a></td>
 			</tr>

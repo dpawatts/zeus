@@ -37,7 +37,7 @@
 		<div id="toolbar">
 			<a href="/admin/view.aspx?selected=/Brands/&page=9" target="preview" title="Brands"><img src="/assets/images/icons/ipod_cast.png" /> Brands</a>
 			<a href="/admin/view.aspx?selected=/ProductSizes/&page=52" target="preview" title="Product Sizes"><img src="/assets/images/icons/arrow_out.png" /> Sizes</a>
-			<a href="/admin/view.aspx?selected=/ProductColours/&page=49" target="preview" title="Product Colors"><img src="/assets/images/icons/color_swatch.png" /> Colors</a>
+			<a href="/admin/view.aspx?selected=/ProductColours/&page=49&discriminator=ProductColour" target="preview" title="Product Colors"><img src="/assets/images/icons/color_swatch.png" /> Colors</a>
 			<a href="/admin/view.aspx?selected=/GiftWrapTypes/&page=54" target="preview" title="Gift Wrap Types"><img src="/assets/images/icons/package_green.png" /> Gift Wraps</a>
 			<div class="separator">&nbsp;</div>
 			<a href="/admin/view.aspx?selected=/Newsletter Subscriptions/&page=194" target="preview" title="Newsletter Subscriptions"><img src="/assets/images/icons/email.png" /> Subscriptions</a>

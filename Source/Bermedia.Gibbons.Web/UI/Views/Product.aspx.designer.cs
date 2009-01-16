@@ -23,6 +23,15 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         protected global::Isis.Web.UI.WebControls.DropDownList ddlSizes;
         
         /// <summary>
+        /// rfvSizes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSizes;
+        
+        /// <summary>
         /// ddlColours control.
         /// </summary>
         /// <remarks>
@@ -30,6 +39,15 @@ namespace Bermedia.Gibbons.Web.UI.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Isis.Web.UI.WebControls.DropDownList ddlColours;
+        
+        /// <summary>
+        /// rfvColours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvColours;
         
         /// <summary>
         /// txtQuantity control.

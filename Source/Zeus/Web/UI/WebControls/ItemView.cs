@@ -97,6 +97,11 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["Discriminator"] = value; }
 		}
 
+		protected override HtmlTextWriterTag TagKey
+		{
+			get { return HtmlTextWriterTag.Div; }
+		}
+
 		#endregion
 
 		#region Methods

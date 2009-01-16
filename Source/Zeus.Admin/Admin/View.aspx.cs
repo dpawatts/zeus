@@ -9,8 +9,16 @@ namespace Zeus.Admin
 		{
 			zeusItemGridView.CurrentItem = this.SelectedItem;
 
-			ContentType contentType = Zeus.Context.ContentTypes.GetContentType(this.SelectedItem.GetType());
-			ltlDiscriminator.Text = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, this.User)[0].Discriminator;
+			if (!string.IsNullOrEmpty(Request.QueryString["discriminator"]))
+			{
+				cdsChildren.OfTypeExact = Zeus.Context.ContentTypes.GetContentType(Request.QueryString["discriminator"]).ItemType.FullName;
+				ltlDiscriminator.Text = Request.QueryString["discriminator"];
+			}
+			else
+			{
+				ContentType contentType = Zeus.Context.ContentTypes.GetContentType(this.SelectedItem.GetType());
+				ltlDiscriminator.Text = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, this.User)[0].Discriminator;
+			}
 
 			base.OnInit(e);
 		}

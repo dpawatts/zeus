@@ -33,7 +33,7 @@
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<h2><asp:Literal runat="server" Text="<%$ CurrentPage:Title %>" /></h2>
 	
-	<p><span class="add"><a class="thickbox" href="ViewDetail.aspx?selected=<asp:Literal runat="server" Text="<%$ Code:HttpUtility.UrlEncode(SelectedItem.Path) %>" />&discriminator=<asp:Literal runat="server" ID="ltlDiscriminator" />&TB_iframe=true&height=400&width=700">Add</a></span></p>
+	<p><span class="add"><a class="thickbox" href="ViewDetail.aspx?selected=<asp:Literal runat="server" Text="<%$ Code:HttpUtility.UrlEncode(SelectedItem.Path) %>" />&discriminator=<asp:Literal runat="server" ID="ltlDiscriminator" />&TB_iframe=true&height=400&width=750">Add</a></span></p>
 	<br />
 	
 	<asp:UpdatePanel runat="server" ID="updUpdatePanel">

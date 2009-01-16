@@ -15,10 +15,12 @@ namespace Zeus.Web.UI.WebControls
 		{
 			base.OnPreRender(e);
 
-			this.Page.ClientScript.RegisterClientScriptInclude("ColourPicker", "/admin/assets/js/plugins/jquery.colorpicker.js");
-			this.Page.RegisterCssInclude("~/admin/assets/css/colorpicker.css");
+			if (!Page.Request.Browser.IsBrowser("IE"))
+			{
+				this.Page.ClientScript.RegisterClientScriptInclude("ColourPicker", "/admin/assets/js/plugins/jquery.colorpicker.js");
+				this.Page.RegisterCssInclude("~/admin/assets/css/colorpicker.css");
 
-			string script = @"$('#" + this.ClientID + @"').ColorPicker({
+				string script = @"$('#" + this.ClientID + @"').ColorPicker({
 	onSubmit: function(hsb, hex, rgb) {
 		$('#" + this.ClientID + @"').val(hex);
 	},
@@ -29,7 +31,8 @@ namespace Zeus.Web.UI.WebControls
 .bind('keyup', function() {
 	$(this).ColorPickerSetColor(this.value);
 });";
-			this.Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), this.ClientID, script, true);
+				this.Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), this.ClientID, script, true);
+			}
 		}
 	}
 }

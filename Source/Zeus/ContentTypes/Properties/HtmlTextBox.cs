@@ -8,6 +8,13 @@ namespace Zeus.ContentTypes.Properties
 		public HtmlTextBox()
 		{
 			this.TextMode = TextBoxMode.MultiLine;
+			this.DomainAbsoluteUrls = false;
+		}
+
+		public bool DomainAbsoluteUrls
+		{
+			get;
+			set;
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -20,10 +27,12 @@ namespace Zeus.ContentTypes.Properties
 				"InitHtmlTextBox" + this.UniqueID,
 				string.Format(@"htmlEditor_init('/Admin/FileManager/default.aspx',
 					{{
-						elements: '{0}',
-						'content_css': '/Assets/Css/Core.css'
+						elements : '{0}',
+						content_css : '/Assets/Css/Core.css',
+						remove_script_host : {1},
+						document_base_url: '{2}'
 					}}
-					);", this.ClientID), true);
+					);", this.ClientID, (!this.DomainAbsoluteUrls).ToString().ToLower(), Page.Request.Url.GetLeftPart(UriPartial.Authority)), true);
 		}
 	}
 }

@@ -32,7 +32,8 @@ namespace Bermedia.Gibbons.Web.UI.Views
 
 			if (this.ShoppingCart.BillingAddress != null)
 				order.BillingAddress = (Address) Zeus.Context.Persister.Copy(this.ShoppingCart.BillingAddress, order);
-			order.ShippingAddress = (Address) Zeus.Context.Persister.Copy(this.ShoppingCart.ShippingAddress, order);
+			if (this.ShoppingCart.ShippingAddress != null)
+				order.ShippingAddress = (Address) Zeus.Context.Persister.Copy(this.ShoppingCart.ShippingAddress, order);
 			order.DeliveryType = this.ShoppingCart.DeliveryType;
 			order.DeliveryPrice = this.ShoppingCart.DeliveryType.GetPrice(this.ShoppingCart);
 			order.PaymentMethod = this.ShoppingCart.PaymentMethod;

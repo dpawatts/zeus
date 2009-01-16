@@ -31,7 +31,7 @@ namespace Bermedia.Gibbons.Web.Items
 			set { base.Created = value; }
 		}
 
-		[HtmlTextBoxEditor("Mail Body (HTML)", 30, ContainerName = Tabs.General)]
+		[HtmlTextBoxEditor("Mail Body (HTML)", 30, DomainAbsoluteUrls = true, ContainerName = Tabs.General)]
 		public string MailBodyHtml
 		{
 			get { return GetDetail<string>("MailBodyHtml", string.Empty); }

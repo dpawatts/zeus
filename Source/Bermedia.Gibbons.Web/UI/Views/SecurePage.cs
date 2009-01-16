@@ -23,6 +23,11 @@ namespace Bermedia.Gibbons.Web.UI.Views
 			}
 		}
 
+		protected void ClearCheckoutData()
+		{
+			Session["CheckoutData"] = null;
+		}
+
 		public Web.Items.Customer Customer
 		{
 			get { return Zeus.Context.Persister.Get<Web.Items.Customer>((int) Membership.GetUser().ProviderUserKey); }

@@ -69,7 +69,7 @@ input[type="text"].required, textarea.required, select.required {
 	border: 1px solid #E6ACAC;
 }
 
-.checkBoxList {
+.checkBoxList, .linkedItemList {
 	display: block;
 	float: left;
 }

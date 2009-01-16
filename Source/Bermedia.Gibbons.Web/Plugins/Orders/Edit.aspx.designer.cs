@@ -21,7 +21,15 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCollect;
-				protected global::System.Web.UI.WebControls.Button btnCollectCorporate;
+        
+        /// <summary>
+        /// btnCollectCorporate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCollectCorporate;
         
         /// <summary>
         /// btnShip control.
@@ -31,7 +39,15 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnShip;
-				protected global::System.Web.UI.WebControls.Button btnShipCorporate;
+        
+        /// <summary>
+        /// btnShipCorporate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShipCorporate;
         
         /// <summary>
         /// btnDeleteRefund control.
@@ -41,7 +57,6 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteRefund;
-				protected global::System.Web.UI.WebControls.Button btnDelete;
         
         /// <summary>
         /// btnDeleteCancel control.
@@ -51,6 +66,15 @@ namespace Bermedia.Gibbons.Web.Plugins.Orders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteCancel;
+        
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
         
         /// <summary>
         /// btnRefundSelected control.
