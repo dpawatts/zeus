@@ -10,7 +10,7 @@ namespace Bermedia.Gibbons.Web.Items
 		public override string Email
 		{
 			get { return base.Name; }
-			set { base.Name = value; }
+			set { }
 		}
 
 		public string FirstName

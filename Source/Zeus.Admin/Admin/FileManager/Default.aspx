@@ -58,10 +58,17 @@
 		}
 		
 		function selectFile(href) {
+			<% if (Request.QueryString["direct"] == "true") { %>
+			if (window.opener && window.opener.onQuickImageSelected) {
+				window.opener.onQuickImageSelected(href);
+				window.close();
+			}
+			<% } else { %>
 			if (window.opener && window.opener.onFileSelected) {
 				window.opener.onFileSelected(href);
 				window.close();
 			}
+			<% } %>
 		}
 	
 		$(document).ready(function() {

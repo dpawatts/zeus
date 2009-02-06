@@ -50,6 +50,11 @@ body, th, td {
 	font-size: x-small;
 }
 
+td 
+{
+	vertical-align: top;
+}
+
 p
 {
 	margin-bottom: 10px;
@@ -350,4 +355,18 @@ a img
 .refunded
 {
 	color: #CCCCCC;
+}
+
+.alignImageLeft
+{
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 5px;
+}
+
+.alignImageRight
+{
+	float: right;
+	margin-left: 15px;
+	margin-bottom: 5px;
 }

@@ -66,7 +66,7 @@
 		<% if (this.CurrentItem.SalePrice == null) { %>
 			<h2><%= this.CurrentItem.RegularPrice.ToString("C2") %></h2>
 		<% } else { %>
-			<h2><%= this.CurrentItem.SalePrice.Value.ToString("C2")%> SALE</h2>
+			<h2 class="sale"><%= this.CurrentItem.SalePrice.Value.ToString("C2")%> SALE</h2>
 			<h2 class="oldPrice">was <%= this.CurrentItem.RegularPrice.ToString("C2")%></h2><br />
 		<% } %>
 		

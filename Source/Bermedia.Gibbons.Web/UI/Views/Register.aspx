@@ -1,9 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.Register" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="cphStyle" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphSubNavigation" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="cphContent" runat="server">
+﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Bermedia.Gibbons.Web.UI.Views.Register" %>
+<asp:Content ContentPlaceHolderID="cphContent" runat="server">
 	<h1>Create a Gibbons Online account</h1>
 	
 	<asp:Panel runat="server" DefaultButton="cuwRegister$__CustomNav0$btnCreateAccount">
@@ -35,8 +31,8 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-									<asp:CheckBox runat="server" ID="chkReceiveOffers" TextAlign="Left" Text="Would you like to sign-up for Gibbons exclusive e-mail? Be the first to know about events, web only offers, the latest trends and news, as well as store events. Sign up here:" />
-									<a href="#">Privacy Policy</a>
+									<asp:CheckBox runat="server" ID="chkReceiveOffers" Text="Sign-up for Gibbons exclusive e-mail. Be the first to know about events, web only offers, the latest trends and news, as well as store events." /><br />
+									<a href="#">Our privacy Policy</a>
 								</td>
 							</tr>
 							<tr>

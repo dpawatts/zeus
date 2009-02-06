@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Bermedia.Gibbons.Web.UI.UserControls
 {
@@ -11,7 +12,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			lsvSubNavigation.DataSource = this.StartPage.GetChildren<Web.Items.Page>();
+			lsvSubNavigation.DataSource = this.StartPage.GetChildren<Web.Items.Page>().Where(p => p.Visible);
 			lsvSubNavigation.DataBind();
 		}
 	}

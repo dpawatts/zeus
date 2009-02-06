@@ -25,6 +25,9 @@
 							<Source>
 								<zeus:ZeusImageSource ContentID='<%# (Container.DataItem.Image != null) ? Container.DataItem.Image.ID : 0 %>' />
 							</Source>
+							<Filters>
+								<sitdap:ResizeFilter Width="145" Height="100" />
+							</Filters>
 						</sitdap:ImageLayer>
 					</Layers>
 				</sitdap:DynamicImage>

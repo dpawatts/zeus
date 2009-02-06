@@ -319,12 +319,6 @@
     <EmbeddedResource Include="ContentTypes\contentTypes.castle.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +344,12 @@
     <EmbeddedResource Include="Web\UI\WebControls\ItemGridView.LayoutTemplate.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
