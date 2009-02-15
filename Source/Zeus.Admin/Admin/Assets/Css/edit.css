@@ -164,3 +164,10 @@ span.edit a {
 span.edit a:hover {
 	background-position: bottom left;
 }
+
+.linkedItem
+{
+	margin-top: 5px;
+	margin-left: 5px;
+	width: 465px;
+}

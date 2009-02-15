@@ -147,6 +147,7 @@
     <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
     <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
     <Compile Include="ContentTypes\Properties\LinkedItemDropDownListEditorAttribute.cs" />
+    <Compile Include="ContentTypes\Properties\LinkedItemsEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
     <Compile Include="ContentTypes\Properties\NameEditorAttribute.cs" />
     <Compile Include="ContentTypes\Properties\Property.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="Web\UI\WebControls\DateEditorTextBox.cs" />
     <Compile Include="Web\UI\WebControls\LinkedItemList.cs" />
     <Compile Include="Web\UI\WebControls\FileEditor.cs" />
+    <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
@@ -346,7 +348,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+    <ProjectReference Include="..\..\..\..\..\..\..\..\..\..\Projects\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
     </ProjectReference>

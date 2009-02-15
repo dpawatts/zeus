@@ -89,7 +89,7 @@ namespace Bermedia.Gibbons.Web.Items
 			get { return GetChildren<ProductSizeLink>(); }
 		}
 
-		[ProductRecommendationsEditor("Recommendations", 500, ContainerName = Tabs.Recommendations)]
+		[LinkedItemsEditor("Recommendations", 500, typeof(StandardProduct), ContainerName = Tabs.Recommendations)]
 		public DetailCollection Recommendations
 		{
 			get { return GetDetailCollection("Recommendations", true); }

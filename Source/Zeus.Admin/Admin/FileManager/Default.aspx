@@ -75,6 +75,10 @@
 			$("span[data-type='File'] a").click(function() {
 				return file_onClick(this);
 			});
+			
+			<% if (Request.QueryString["direct"] == "true") { %>
+			tb_show("Upload Image", "Upload.aspx?ParentPath=/home/Upload/&TB_iframe=true&height=50&width=200", false);
+			<% } %>
 		});
 	</script>
 </asp:Content>

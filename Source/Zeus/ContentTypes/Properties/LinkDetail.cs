@@ -34,7 +34,7 @@ namespace Zeus.ContentTypes.Properties
 			}
 		}
 
-		protected virtual int? LinkValue
+		protected internal virtual int? LinkValue
 		{
 			get;
 			set;

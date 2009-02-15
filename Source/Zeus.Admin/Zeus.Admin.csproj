@@ -174,7 +174,7 @@
     <Compile Include="Admin\Web\UI\WebControls\Tree.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+    <ProjectReference Include="..\..\..\..\..\..\..\..\..\..\Projects\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
     </ProjectReference>
