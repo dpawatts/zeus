@@ -19,7 +19,7 @@ namespace Bermedia.Gibbons.Web.UI.Views
 				uscProductListing.ImageControl = itemDetailView;
 			}
 			uscProductListing.DataSource = this.CurrentItem.GetChildren<Items.StandardProduct>()
-				.OrderBy(p => p.Title).OrderBy(p => p.Brand.Title);
+				.OrderBy(p => p.Title).OrderBy(p => (p.Brand != null) ? p.Brand.Title : null);
 		}
 	}
 }

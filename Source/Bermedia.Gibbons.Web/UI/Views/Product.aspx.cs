@@ -1,14 +1,61 @@
 ﻿using System;
-using Zeus.Web.UI;
 
 namespace Bermedia.Gibbons.Web.UI.Views
 {
-	public partial class Product : OnlineShopPage<Bermedia.Gibbons.Web.Items.StandardProduct>
+	public partial class Product : OnlineShopPage<Items.StandardProduct>
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			rfvSizes.Enabled = ddlSizes.Visible;
 			rfvColours.Enabled = ddlColours.Visible;
+
+			if (!IsPostBack)
+			{
+				decimal? salePrice; decimal regularPrice;
+				if (CurrentItem.AssociatedSizes.Count == 1 && !(CurrentItem is Items.FragranceBeautyProduct) && CurrentItem.AssociatedSizes[0].CurrentPrice != null)
+				{
+					salePrice = CurrentItem.AssociatedSizes[0].SalePrice;
+					regularPrice = CurrentItem.AssociatedSizes[0].RegularPrice.Value;
+				}
+				else
+				{
+					salePrice = CurrentItem.SalePrice;
+					regularPrice = CurrentItem.RegularPrice;
+				}
+				UpdatePrice(salePrice, regularPrice);
+			}
+		}
+
+		private void UpdatePrice(decimal? salePrice, decimal? regularPrice)
+		{
+			plcRegularPriceOnly.Visible = plcSalePrice.Visible = false;
+
+			decimal newRegularPrice = regularPrice ?? CurrentItem.RegularPrice;
+			decimal? newSalePrice = salePrice ?? ((regularPrice != null) ? null : CurrentItem.SalePrice);
+			if (newSalePrice != null)
+			{
+				ltlSalePrice.Text = newSalePrice.Value.ToString("C2");
+				ltlOldPrice.Text = newRegularPrice.ToString("C2");
+				plcSalePrice.Visible = true;
+			}
+			else
+			{
+				h2Price.InnerText = newRegularPrice.ToString("C2");
+				plcRegularPriceOnly.Visible = true;
+			}
+		}
+
+		protected void ddlSizes_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!string.IsNullOrEmpty(ddlSizes.SelectedValue))
+			{
+				Items.ProductSizeLink productSizeLink = Zeus.Context.Persister.Get<Items.ProductSizeLink>(Convert.ToInt32(ddlSizes.SelectedValue));
+				UpdatePrice(productSizeLink.SalePrice, productSizeLink.RegularPrice);
+			}
+			else
+			{
+				UpdatePrice(CurrentItem.SalePrice, CurrentItem.RegularPrice);
+			}
 		}
 
 		protected void btnAddToCart_Click(object sender, EventArgs e)

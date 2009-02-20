@@ -14,7 +14,7 @@ namespace Bermedia.Gibbons.Web.Items
 	{
 		#region Public properties
 
-		[LinkedItemDropDownListEditor("Brand", 205, TypeFilter = typeof(Brand), ContainerName = Tabs.General, Required = true)]
+		[LinkedItemDropDownListEditor("Brand", 205, TypeFilter = typeof(Brand), ContainerName = Tabs.General)]
 		public override Brand Brand
 		{
 			get { return GetDetail<Brand>("Brand", null); }

@@ -28,7 +28,7 @@ namespace Bermedia.Gibbons.Web.Items
 
 		public string DisplayTitle
 		{
-			get { return this.Brand.Title + " " + this.Title; }
+			get { return ((Brand != null) ? Brand.Title + " " : string.Empty) + Title; }
 		}
 
 		public virtual string SubTitle
