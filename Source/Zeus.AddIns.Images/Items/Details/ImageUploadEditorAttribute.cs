@@ -19,14 +19,14 @@ namespace Zeus.AddIns.Images.Items.Details
 			
 		}
 
-		protected override Zeus.FileSystem.File CreateNewItem()
+		protected override FileSystem.File CreateNewItem()
 		{
 			return new Image();
 		}
 
 		public override void UpdateEditor(ContentItem item, Control editor)
 		{
-			Image file = item[this.Name] as Image;
+			Image file = item[Name] as Image;
 			if (file != null)
 			{
 				ImageEditor fileUpload = editor as ImageEditor;

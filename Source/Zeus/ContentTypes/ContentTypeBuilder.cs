@@ -35,7 +35,12 @@ namespace Zeus.ContentTypes
 			{
 				ContentType itemDefinition = new ContentType(type);
 				itemDefinition.Properties = itemDefinition.ItemType.GetProperties().Select(pi => new Property(pi)).ToArray();
+
 				itemDefinition.Editors = GetAttributes<IEditor>(itemDefinition.ItemType).OrderBy(e => e.SortOrder);
+				foreach (IEditor editor in itemDefinition.Editors)
+					if (editor is IEditorRefiner)
+						((IEditorRefiner) editor).Refine(itemDefinition.Properties.Single(p => p.Name == editor.Name).UnderlyingProperty.PropertyType);
+
 				itemDefinition.Displayers = GetAttributes<IDisplayer>(itemDefinition.ItemType);
 				itemDefinition.Containers = itemDefinition.ItemType.GetCustomAttributes<IEditorContainer>(true, false).OrderBy(c => c.SortOrder);
 				itemDefinition.RootContainer = BuildContainerHierarchy(itemDefinition, itemDefinition.Containers, itemDefinition.Editors);

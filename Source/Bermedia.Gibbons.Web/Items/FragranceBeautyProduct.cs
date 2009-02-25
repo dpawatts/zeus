@@ -10,7 +10,7 @@ using Bermedia.Gibbons.Web.Items.Details;
 namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Product", Description = "e.g. Calvin Klein Striped Socks, Must de Cartier Eau de Toilette")]
-	[RestrictParents(typeof(FragranceBeautyCategory))]
+	[RestrictParents(typeof(FragranceBeautyCollection))]
 	public class FragranceBeautyProduct : StandardProduct
 	{
 		[ProductScentsEditor("Associated Scents", 300, ContainerName = Tabs.Colours)]

@@ -49,7 +49,7 @@ namespace Zeus.ContentTypes.Properties
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
 			FileUpload fileUpload = editor as FileUpload;
-			File existingImage = item[this.Name] as File;
+			File existingImage = item[Name] as File;
 
 			bool result = false;
 			if (fileUpload.HasFile)
@@ -68,6 +68,8 @@ namespace Zeus.ContentTypes.Properties
 				newImage.Data = fileUpload.FileBytes;
 				newImage.ContentType = fileUpload.PostedFile.ContentType;
 				newImage.Size = fileUpload.PostedFile.ContentLength;
+
+				Context.Persister.Save(newImage);
 
 				item[this.Name] = newImage;
 

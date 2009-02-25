@@ -4,6 +4,7 @@ using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Sources;
 using SoundInTheory.DynamicImage.Filters;
 using System.Web.UI;
+using Unit=SoundInTheory.DynamicImage.Unit;
 
 namespace Zeus.AddIns.Images.UI.WebControls
 {
@@ -55,20 +56,20 @@ namespace Zeus.AddIns.Images.UI.WebControls
 					{
 						Source = new ImageSourceCollection
 						{
-							new ZeusImageSource { ContentID = this.ContentID }
+							new ZeusImageSource { ContentID = ContentID }
 						},
 						Filters = new FilterCollection
 						{
-							new ResizeFilter { Width = 200, Height = 200 }
+							new ResizeFilter { Width = Unit.Pixel(200), Height = Unit.Pixel(200) }
 						}
 					}
 				}
 				});
 
-				this.Controls.Add(new LiteralControl("<br />"));
+				Controls.Add(new LiteralControl("<br />"));
 
 				chkClearImage = new CheckBox { ID = "chkClearImage", Text = "Clear", CssClass = "clearFile" };
-				this.Controls.Add(chkClearImage);
+				Controls.Add(chkClearImage);
 			}
 		}
 	}

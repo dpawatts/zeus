@@ -10,8 +10,8 @@ namespace Zeus.AddIns.Images.Items
 	{
 		static Image()
 		{
-			Zeus.Context.Persister.ItemDeleted += new EventHandler<ItemEventArgs>(Persister_ItemDeleted);
-			Zeus.Context.Persister.ItemSaved += new EventHandler<ItemEventArgs>(Persister_ItemSaved);
+			Context.Persister.ItemDeleted += Persister_ItemDeleted;
+			Context.Persister.ItemSaved += Persister_ItemSaved;
 		}
 
 		private static void Persister_ItemDeleted(object sender, ItemEventArgs e)
@@ -28,8 +28,7 @@ namespace Zeus.AddIns.Images.Items
 		{
 			if (contentItem is Image)
 			{
-				ZeusImageSource source = new ZeusImageSource();
-				source.ContentID = contentItem.ID;
+				ZeusImageSource source = new ZeusImageSource { ContentID = contentItem.ID };
 				DynamicImageCacheManager.Remove(source);
 			}
 		}

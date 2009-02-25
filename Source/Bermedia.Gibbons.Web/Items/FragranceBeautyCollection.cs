@@ -1,9 +1,6 @@
-﻿using System;
-using Zeus;
+﻿using Zeus;
 using Zeus.Integrity;
 using Zeus.ContentTypes.Properties;
-using Zeus.AddIns.Images.Items.Details;
-using SoundInTheory.DynamicImage.Filters;
 
 namespace Bermedia.Gibbons.Web.Items
 {

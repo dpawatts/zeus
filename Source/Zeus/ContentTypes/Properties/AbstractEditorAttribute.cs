@@ -6,9 +6,10 @@ using Zeus.Web.UI.WebControls;
 
 namespace Zeus.ContentTypes.Properties
 {
-	public abstract class AbstractEditorAttribute : Attribute, IEditor
+	public abstract class AbstractEditorAttribute : Attribute, IEditor, IEditorRefiner
 	{
 		private string _requiredText, _requiredErrorMessage;
+		private string _validationText, _validationErrorMessage;
 
 		#region Properties
 
@@ -69,6 +70,46 @@ namespace Zeus.ContentTypes.Properties
 			set { _requiredErrorMessage = value; }
 		}
 
+		/// <summary>Gets or sets whether a regular expression validator should be added.</summary>
+		public bool ValidateRegularExpression
+		{
+			get;
+			set;
+		}
+
+		/// <summary>Gets or sets the validation expression for a regular expression validator.</summary>
+		public string ValidationExpression
+		{
+			get;
+			set;
+		}
+
+		/// <summary>Gets or sets the message for the regular expression validator.</summary>
+		public string ValidationMessage
+		{
+			get { return _validationErrorMessage ?? string.Format("{0} is invalid.", Title); }
+			set { _validationErrorMessage = value; }
+		}
+
+		/// <summary>Gets or sets the text for the regular expression validator.</summary>
+		public string ValidationText
+		{
+			get { return _validationText ?? "&nbsp;*"; }
+			set { _validationText = value; }
+		}
+
+		public string EditorPrefixText
+		{
+			get;
+			set;
+		}
+
+		public Type PropertyType
+		{
+			get;
+			private set;
+		}
+
 		#endregion
 
 		#region Constructors
@@ -104,21 +145,35 @@ namespace Zeus.ContentTypes.Properties
 
 		#region Methods
 
+		public void Refine(Type propertyType)
+		{
+			PropertyType = propertyType;
+		}
+
 		public virtual Control AddTo(Control container)
 		{
 			Control panel = AddPanel(container);
 			Label label = AddLabel(panel);
+			if (!string.IsNullOrEmpty(EditorPrefixText))
+				panel.Controls.Add(new LiteralControl("<span class=\"prefix\">" + EditorPrefixText + "</span>"));
 			Control editor = AddEditor(panel);
 			if (label != null && editor != null && !string.IsNullOrEmpty(editor.ID))
 				label.AssociatedControlID = editor.ID;
-			if (this.Required)
-				AddRequiredFieldValidator(panel, editor);
-			if (this.IsLocallyUnique)
-				AddLocallyUniqueValidator(panel, editor);
+			AddValidators(panel, editor);
 			if (!string.IsNullOrEmpty(this.Description))
 				container.Controls.Add(new LiteralControl("<span class=\"description\">" + this.Description + "</span>"));
 
 			return editor;
+		}
+
+		protected virtual void AddValidators(Control panel, Control editor)
+		{
+			if (Required)
+				AddRequiredFieldValidator(panel, editor);
+			if (ValidateRegularExpression)
+				AddRegularExpressionValidator(panel, editor);
+			if (IsLocallyUnique)
+				AddLocallyUniqueValidator(panel, editor);
 		}
 
 		/// <summary>Adds the panel to the container. Creating this panel and adding labels and editors to it will help to avoid web controls from interfering with each other.</summary>
@@ -160,6 +215,23 @@ namespace Zeus.ContentTypes.Properties
 			container.Controls.Add(rfv);
 
 			return rfv;
+		}
+
+		/// <summary>Adds a regular expression validator.</summary>
+		/// <param name="container">The container control for this validator.</param>
+		/// <param name="editor">The editor control to validate.</param>
+		protected virtual Control AddRegularExpressionValidator(Control container, Control editor)
+		{
+			RegularExpressionValidator rev = new RegularExpressionValidator();
+			rev.ID = Name + "_rev";
+			rev.ControlToValidate = editor.ID;
+			rev.ValidationExpression = ValidationExpression;
+			rev.Display = ValidatorDisplay.Dynamic;
+			rev.Text = ValidationText;
+			rev.ErrorMessage = ValidationMessage;
+			container.Controls.Add(rev);
+
+			return rev;
 		}
 
 		protected virtual IValidator AddLocallyUniqueValidator(Control container, Control editor)

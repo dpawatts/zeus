@@ -1,13 +1,6 @@
-﻿using System;
-using Zeus.Persistence;
-using System.Diagnostics;
-using Zeus.Integrity;
-using Zeus.Web;
-using System.Security.Permissions;
-using Microsoft.Win32;
-using System.IO;
+﻿using System.Web;
 using Zeus.FileSystem.Details;
-using System.Web;
+using Zeus.Integrity;
 
 namespace Zeus.FileSystem
 {
@@ -19,22 +12,22 @@ namespace Zeus.FileSystem
 		{
 			get
 			{
-				switch (this.FileExtension)
+				switch (FileExtension)
 				{
-					case ".pdf" :
+					case ".pdf":
 						return "~/Admin/Assets/Images/Icons/page_white_acrobat.png";
-					case ".doc" :
+					case ".doc":
 					case ".docx":
 						return "~/Admin/Assets/Images/Icons/page_white_word.png";
-					default :
+					default:
 						return "~/Admin/Assets/Images/Icons/page_white.png";
-			}
+				}
 			}
 		}
 
 		public override string Url
 		{
-			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(base.Path); }
+			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
 		}
 
 		[UploadEditor(IsLocallyUnique = true)]
@@ -46,7 +39,7 @@ namespace Zeus.FileSystem
 
 		public string FileExtension
 		{
-			get { return System.IO.Path.GetExtension(this.Name); }
+			get { return System.IO.Path.GetExtension(Name); }
 		}
 
 		public byte[] Data

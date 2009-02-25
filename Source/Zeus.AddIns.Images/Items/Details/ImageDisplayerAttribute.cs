@@ -56,7 +56,7 @@ namespace Zeus.AddIns.Images.Items.Details
 							},
 							Filters = new FilterCollection
 							{
-								new ResizeFilter { Width = this.Width, Height = this.Height, Mode = this.ResizeMode }
+								new ResizeFilter { Width = Unit.Pixel(Width), Height = Unit.Pixel(Height), Mode = ResizeMode }
 							}
 						}
 					}

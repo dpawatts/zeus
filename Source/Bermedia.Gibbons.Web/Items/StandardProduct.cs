@@ -36,14 +36,14 @@ namespace Bermedia.Gibbons.Web.Items
 			get { return string.Empty; }
 		}
 
-		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true)]
+		[TextBoxEditor("Regular Price", 210, ContainerName = Tabs.General, Required = true, EditorPrefixText = "$&nbsp;", TextBoxCssClass = "price")]
 		public decimal RegularPrice
 		{
 			get { return GetDetail<decimal>("RegularPrice", 0); }
 			set { SetDetail<decimal>("RegularPrice", value); }
 		}
 
-		[TextBoxEditor("Sale Price", 220, ContainerName = Tabs.General)]
+		[TextBoxEditor("Sale Price", 220, ContainerName = Tabs.General, EditorPrefixText = "$&nbsp;", TextBoxCssClass = "price")]
 		public decimal? SalePrice
 		{
 			get { return GetDetail<decimal?>("SalePrice", null); }

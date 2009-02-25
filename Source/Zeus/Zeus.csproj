@@ -129,6 +129,7 @@
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
+    <Compile Include="ContentTypes\IEditorRefiner.cs" />
     <Compile Include="ContentTypes\IRootItem.cs" />
     <Compile Include="ContentTypes\ISelfPopulator.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />

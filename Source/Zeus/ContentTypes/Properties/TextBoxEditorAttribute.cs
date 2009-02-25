@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Web.UI;
+using Isis.ExtensionMethods;
 
 namespace Zeus.ContentTypes.Properties
 {
@@ -18,6 +19,8 @@ namespace Zeus.ContentTypes.Properties
 	[AttributeUsage(AttributeTargets.Property)]
 	public class TextBoxEditorAttribute : AbstractEditorAttribute
 	{
+		private string _dataTypeText, _dataTypeErrorMessage;
+
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
@@ -33,7 +36,7 @@ namespace Zeus.ContentTypes.Properties
 		public TextBoxEditorAttribute(string title, int sortOrder, int maxLength)
 			: this(title, sortOrder)
 		{
-			this.MaxLength = maxLength;
+			MaxLength = maxLength;
 		}
 
 		#region Properties
@@ -73,7 +76,81 @@ namespace Zeus.ContentTypes.Properties
 			set;
 		}
 
+		public string DataTypeText
+		{
+			get { return _dataTypeText ?? "&nbsp;*"; }
+			set { _dataTypeText = value; }
+		}
+
+		public string DataTypeErrorMessage
+		{
+			get { return _dataTypeErrorMessage ?? string.Format("{0} must be a valid {1}", Title, GetDataTypeName()); }
+			set { _dataTypeErrorMessage = value; }
+		}
+
+		public string TextBoxCssClass
+		{
+			get;
+			set;
+		}
+
 		#endregion
+
+		private Type GetUnderlyingType()
+		{
+			return PropertyType.IsNullable() ? Nullable.GetUnderlyingType(PropertyType) : PropertyType;
+		}
+
+		private string GetDataTypeName()
+		{
+			Type propertyType = GetUnderlyingType();
+			if (propertyType == typeof(int))
+				return "integer";
+			if (propertyType == typeof(decimal) || propertyType == typeof(double) || propertyType == typeof(float))
+				return "number";
+			if (propertyType == typeof(DateTime))
+				return "date";
+			throw new NotSupportedException();
+		}
+
+		protected override void AddValidators(Control panel, Control editor)
+		{
+			base.AddValidators(panel, editor);
+
+			// If data type is not string, we need to add a validator for data type
+			Type propertyType = GetUnderlyingType();
+			if (propertyType == typeof(int) || propertyType == typeof(decimal) || propertyType == typeof(double) || propertyType == typeof(float) || propertyType == typeof(DateTime))
+				AddCompareValidator(panel, editor);
+		}
+
+		protected virtual IValidator AddCompareValidator(Control container, Control editor)
+		{
+			CompareValidator cmv = new CompareValidator
+			{
+				ID = "cmv" + Name,
+				ControlToValidate = editor.ID,
+				Display = ValidatorDisplay.Dynamic,
+				Text = DataTypeText,
+				ErrorMessage = DataTypeErrorMessage,
+				Type = GetValidationDataType(),
+				Operator = ValidationCompareOperator.DataTypeCheck
+			};
+			container.Controls.Add(cmv);
+
+			return cmv;
+		}
+
+		private ValidationDataType GetValidationDataType()
+		{
+			Type propertyType = GetUnderlyingType();
+			if (propertyType == typeof(int))
+				return ValidationDataType.Integer;
+			if (propertyType == typeof(decimal) || propertyType == typeof(double) || propertyType == typeof(float))
+				return ValidationDataType.Double;
+			if (propertyType == typeof(DateTime))
+				return ValidationDataType.Date;
+			throw new NotSupportedException();
+		}
 
 		public override bool UpdateItem(ContentItem item, Control editor)
 		{
@@ -100,8 +177,8 @@ namespace Zeus.ContentTypes.Properties
 		{
 			TextBox tb = CreateEditor();
 			tb.ID = Name;
-			tb.CssClass += " textEditor";
-			if (this.Required)
+			tb.CssClass += " textEditor " + TextBoxCssClass;
+			if (Required)
 				tb.CssClass += " required";
 			ModifyEditor(tb);
 			container.Controls.Add(tb);

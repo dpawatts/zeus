@@ -38,14 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SMTP.Net.dll</HintPath>
     </Reference>
-    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundInTheory.DynamicImage.Caching.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="SoundInTheory.PaymentProcessing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.PaymentProcessing.dll</HintPath>
@@ -607,6 +599,14 @@
     <ProjectReference Include="..\..\..\..\..\..\..\..\..\..\Projects\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SoundInTheory.DynamicImage\Source\DynamicImage.Caching.Linq\DynamicImage.Caching.Linq.csproj">
+      <Project>{899E6FF8-4789-4178-B61C-D3BC5F8D17A9}</Project>
+      <Name>DynamicImage.Caching.Linq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SoundInTheory.DynamicImage\Source\DynamicImage\DynamicImage.csproj">
+      <Project>{15F7FF82-B018-42E0-A94D-2CAAE491C248}</Project>
+      <Name>DynamicImage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.AddIns.Images\Zeus.AddIns.Images.csproj">
       <Project>{E567E87F-E181-4965-9745-483E329CB177}</Project>

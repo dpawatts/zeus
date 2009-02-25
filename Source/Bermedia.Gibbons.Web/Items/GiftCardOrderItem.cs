@@ -69,7 +69,7 @@ namespace Bermedia.Gibbons.Web.Items
 							},
 							Filters = new FilterCollection
 							{
-								new ResizeFilter { Width = width, Mode = ResizeMode.UseWidth }
+								new ResizeFilter { Width = Unit.Pixel(width), Mode = ResizeMode.UseWidth }
 							}
 						}
 					}
