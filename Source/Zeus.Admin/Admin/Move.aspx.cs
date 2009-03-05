@@ -17,10 +17,7 @@ namespace Zeus.Admin
 
 			// Update sort order based on new pos.
 			int pos = Request.GetRequiredInt("pos");
-			IList<ContentItem> siblings = sourceContentItem.Parent.Children;
-			Utility.MoveToIndex(siblings, sourceContentItem, pos);
-			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
-				Zeus.Context.Persister.Save(updatedItem);
+			Zeus.Context.Current.Resolve<ITreeSorter>().MoveTo(sourceContentItem, pos);
 
 			Refresh(sourceContentItem, AdminFrame.Both, false);
 		}

@@ -32,8 +32,8 @@ namespace Zeus.Admin.Web.UI.WebControls
 			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : this.RootNode;
 
 			ItemFilter filter = new AccessFilter(this.Page.User, Zeus.Context.SecurityManager);
-			if (this.Page.User.Identity.Name != "administrator")
-				filter = new CompositeFilter(new PageFilter(), filter);
+			//if (this.Page.User.Identity.Name != "administrator")
+			//	filter = new CompositeFilter(new PageFilter(), filter);
 			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
 				.OpenTo(_selectedItem)
 				.Filters(filter)

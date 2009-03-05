@@ -21,7 +21,7 @@
 	function pageLoad(sender, args) {
 		if (args.get_isPartialLoad()) {
 			//  reapply the thick box stuff
-			tb_init('a.thickbox');
+			tb_init('#grid a.thickbox');
 
 			delButtons();
 		}
@@ -36,11 +36,13 @@
 	<p><span class="add"><a class="thickbox" href="ViewDetail.aspx?selected=<asp:Literal runat="server" Text="<%$ Code:HttpUtility.UrlEncode(SelectedItem.Path) %>" />&discriminator=<asp:Literal runat="server" ID="ltlDiscriminator" />&TB_iframe=true&height=400&width=750">Add</a></span></p>
 	<br />
 	
-	<asp:UpdatePanel runat="server" ID="updUpdatePanel">
-		<ContentTemplate>
-			<zeus:ItemGridView runat="server" ID="zeusItemGridView" DataSourceID="cdsChildren" />
-			<zeus:ContentDataSource runat="server" ID="cdsChildren" OrderBy="Title" />
-			<asp:Button runat="server" ID="btnRefreshGrid" style="display:none" OnClick="btnRefreshGrid_Click" />
-		</ContentTemplate>
-	</asp:UpdatePanel>
+	<div id="grid">
+		<asp:UpdatePanel runat="server" ID="updUpdatePanel">
+			<ContentTemplate>
+				<zeus:ItemGridView runat="server" ID="zeusItemGridView" DataSourceID="cdsChildren" />
+				<zeus:ContentDataSource runat="server" ID="cdsChildren" OrderBy="Title" />
+				<asp:Button runat="server" ID="btnRefreshGrid" style="display:none" OnClick="btnRefreshGrid_Click" />
+			</ContentTemplate>
+		</asp:UpdatePanel>
+	</div>
 </asp:Content>

@@ -17,8 +17,8 @@ namespace Zeus.Admin.Navigation
 			ContentItem selectedItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(path);
 
 			ItemFilter filter = new AccessFilter(context.User, Zeus.Context.SecurityManager);
-			if (context.User.Identity.Name != "administrator")
-				filter = new CompositeFilter(new PageFilter(), filter);
+			//if (context.User.Identity.Name != "administrator")
+			//	filter = new CompositeFilter(new PageFilter(), filter);
 			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
 				.LinkProvider(BuildLink)
 				.Filters(filter)

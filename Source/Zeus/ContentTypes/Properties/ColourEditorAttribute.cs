@@ -10,7 +10,7 @@ namespace Zeus.ContentTypes.Properties
 			: base(title, sortOrder, 6)
 		{
 			ValidateRegularExpression = true;
-			ValidationExpression = "[a-zA-Z]+";
+			ValidationExpression = "[a-zA-Z0-9]+";
 			ValidationMessage = Title + " must contain only letters and numbers and no other characters (such as '#')";
 			EditorPrefixText = "#&nbsp;";
 			TextBoxCssClass = "colour";
