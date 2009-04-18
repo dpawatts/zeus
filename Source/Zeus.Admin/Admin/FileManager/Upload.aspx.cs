@@ -9,12 +9,13 @@ namespace Zeus.Admin.FileManager
 		{
 			if (uplFile.HasFile)
 			{
-				File file = new File();
+				// If file with this name already exists, overwrite existing file.
+				Folder folder = (Folder) Zeus.Context.Current.Resolve<Navigator>().Navigate(Request.QueryString["ParentPath"]);
+				File file = folder.GetChild(uplFile.FileName) as File ?? new File();
 				file.ContentType = uplFile.PostedFile.ContentType;
 				file.Data = uplFile.FileBytes;
 				file.Name = uplFile.FileName;
 
-				Folder folder = (Folder) Zeus.Context.Current.Resolve<Navigator>().Navigate(Request.QueryString["ParentPath"]);
 				file.AddTo(folder);
 
 				Zeus.Context.Persister.Save(file);

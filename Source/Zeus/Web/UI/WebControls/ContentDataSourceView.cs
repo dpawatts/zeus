@@ -215,7 +215,7 @@ namespace Zeus.Web.UI.WebControls
 						children = startingPoint.GetChildren().AsQueryable();
 						break;
 					case ContentDataSourceAxis.Descendant:
-						children = Find.EnumerateAccessibleChildren(startingPoint).AsQueryable();
+						children = Find.EnumerateChildren(startingPoint).AsQueryable();
 						break;
 					default :
 						throw new NotImplementedException();

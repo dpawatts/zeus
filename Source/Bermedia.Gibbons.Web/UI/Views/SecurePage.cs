@@ -30,7 +30,17 @@ namespace Bermedia.Gibbons.Web.UI.Views
 
 		public Web.Items.Customer Customer
 		{
-			get { return Zeus.Context.Persister.Get<Web.Items.Customer>((int) Membership.GetUser().ProviderUserKey); }
+			get
+			{
+				MembershipUser membershipUser = Membership.GetUser();
+				if (membershipUser != null)
+					return Zeus.Context.Persister.Get<Items.Customer>((int) membershipUser.ProviderUserKey);
+				else
+				{
+					Response.Redirect("/");
+					return null;
+				}
+			}
 		}
 	}
 }

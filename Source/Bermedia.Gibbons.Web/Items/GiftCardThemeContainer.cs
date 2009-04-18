@@ -6,7 +6,7 @@ namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType("Gift Card Theme Container", Description = "Container for gift card themes")]
 	[RestrictParents(typeof(RootItem))]
-	public class GiftCardThemeContainer : StructuralPage
+	public class GiftCardThemeContainer : StructuralPage, ITopNavVisible
 	{
 		public GiftCardThemeContainer()
 		{

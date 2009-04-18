@@ -76,7 +76,7 @@ namespace Zeus.Web.UI.WebControls
 		protected override void OnPreRender(EventArgs e)
 		{
 			Page.ClientScript.RegisterClientScriptInclude("McDropDown", "/admin/assets/js/plugins/jquery.mcdropdown.js");
-			Page.RegisterCssInclude("~/admin/assets/css/jquery.mcdropdown.css");
+			Page.ClientScript.RegisterCssInclude("~/admin/assets/css/jquery.mcdropdown.css");
 
 			string script = @"$(document).ready(function (){
 				$('#" + _textBox.ClientID + @"').mcDropdown('#" + _ul.ClientID + @"');

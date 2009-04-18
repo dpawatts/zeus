@@ -9,9 +9,7 @@
 	<p><strong>Welcome back, <%= this.Customer.FirstName %>.</strong><br />
 	Please <a href="/assets/images/hamilton.jpg" target="_blank">view the map of Hamilton</a> to check the city delivery limits.</p>
 	
-	<asp:RadioButtonList runat="server" ID="rblDeliveryMethod" DataSourceID="cdsDeliveryTypes" DataTextField="Description" DataValueField="ID" />
-	<zeus:ContentDataSource runat="server" ID="cdsDeliveryTypes" Axis="Descendant" Query="RootItem" OfType="Bermedia.Gibbons.Web.Items.BaseDeliveryType" />
-
+	<asp:RadioButtonList runat="server" ID="rblDeliveryMethod" DataTextField="Description" DataValueField="ID" />
 	<asp:RequiredFieldValidator runat="server" ControlToValidate="rblDeliveryMethod" ErrorMessage="Please choose a delivery method" CssClass="warning" />
 	
   <p>

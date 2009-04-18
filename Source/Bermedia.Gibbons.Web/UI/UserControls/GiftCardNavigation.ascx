@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="GiftCardNavigation.ascx.cs" Inherits="Bermedia.Gibbons.Web.UI.UserControls.GiftCardNavigation" %>
 <%@ Register TagPrefix="gibbons" TagName="Search" Src="Search.ascx" %>
 
-<h2>Gift Cards & Registries</h2>
+<h2>Gift Cards</h2>
 
 <ul>
 	<li>Shop for gift cards online</li>

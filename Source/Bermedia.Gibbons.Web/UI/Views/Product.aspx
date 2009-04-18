@@ -15,7 +15,7 @@
 		<table width="200" id="productColours">
 			<% foreach (ProductColour productColour in CurrentItem.AssociatedColours) { %>
 			<tr>
-				<td width="30" height="30" style="background-color:#<%= productColour.HexRef %>">&nbsp;</td>
+				<td width="30" height="30" style="border:solid 1px #333333;background-color:#<%= productColour.HexRef %>">&nbsp;</td>
 				<td style="padding-left: 10px"><%= productColour.Title %> </td>
 			</tr>
 			<tr>

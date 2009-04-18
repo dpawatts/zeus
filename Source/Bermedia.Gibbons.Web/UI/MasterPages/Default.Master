@@ -77,9 +77,9 @@
 			</div>
 			
 			<div id="footer">
-				<p><strong><a href="../store/terms.aspx#refunds">Returns Policy </a> |
-				<a href="../store/faqs.aspx">FAQs</a> | 
-				<a href="../store/terms.aspx">Terms and Conditions</a></strong></p>
+				<p><strong><a href="/terms.aspx#refunds">Returns Policy </a> |
+				<a href="/faqs.aspx">FAQs</a> | 
+				<a href="/terms.aspx">Terms and Conditions</a></strong></p>
 			</div>
 		</div>
 	</div>

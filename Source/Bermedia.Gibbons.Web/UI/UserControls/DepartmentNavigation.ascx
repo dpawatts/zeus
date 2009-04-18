@@ -30,7 +30,7 @@
 <ul>
 	<li>Looking for a gift?</li>
 
-	<li><a href="<%= this.Department.GiftsUnder10Url %>">under $10</a></li>
-	<li><a href="<%= this.Department.GiftsUnder20Url %>">under $20</a></li>
+	<li><a href="<%= this.Department.GiftsUnder25Url %>">under $25</a></li>
 	<li><a href="<%= this.Department.GiftsUnder50Url %>">under $50</a></li>
+	<li><a href="<%= this.Department.GiftsUnder100Url %>">under $100</a></li>
 </ul>

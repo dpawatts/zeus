@@ -21,19 +21,19 @@ namespace Bermedia.Gibbons.Web.Items
 			get { return "tag_purple"; }
 		}
 
-		public string GiftsUnder10Url
+		public string GiftsUnder25Url
 		{
-			get { return Zeus.Web.Url.Parse(this.Url).AppendSegment("gifts-under-10").ToString(); }
-		}
-
-		public string GiftsUnder20Url
-		{
-			get { return Zeus.Web.Url.Parse(this.Url).AppendSegment("gifts-under-20").ToString(); }
+			get { return Zeus.Web.Url.Parse(this.Url).AppendSegment("gifts-under-25").ToString(); }
 		}
 
 		public string GiftsUnder50Url
 		{
 			get { return Zeus.Web.Url.Parse(this.Url).AppendSegment("gifts-under-50").ToString(); }
+		}
+
+		public string GiftsUnder100Url
+		{
+			get { return Zeus.Web.Url.Parse(this.Url).AppendSegment("gifts-under-100").ToString(); }
 		}
 
 		public string Action
@@ -56,22 +56,22 @@ namespace Bermedia.Gibbons.Web.Items
 
 		public override ContentItem GetChild(string childName)
 		{
-			if (childName.Equals("gifts-under-10", StringComparison.CurrentCultureIgnoreCase))
+			if (childName.Equals("gifts-under-25", StringComparison.CurrentCultureIgnoreCase))
 			{
 				this.Action = "gifts";
-				this.PriceLimit = 10;
-				return this;
-			}
-			else if (childName.Equals("gifts-under-20", StringComparison.CurrentCultureIgnoreCase))
-			{
-				this.Action = "gifts";
-				this.PriceLimit = 20;
+				this.PriceLimit = 25;
 				return this;
 			}
 			else if (childName.Equals("gifts-under-50", StringComparison.CurrentCultureIgnoreCase))
 			{
 				this.Action = "gifts";
 				this.PriceLimit = 50;
+				return this;
+			}
+			else if (childName.Equals("gifts-under-100", StringComparison.CurrentCultureIgnoreCase))
+			{
+				this.Action = "gifts";
+				this.PriceLimit = 100;
 				return this;
 			}
 			else if (childName.Equals("search", StringComparison.CurrentCultureIgnoreCase))

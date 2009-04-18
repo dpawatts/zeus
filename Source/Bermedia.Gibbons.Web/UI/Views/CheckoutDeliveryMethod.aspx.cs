@@ -13,6 +13,12 @@ namespace Bermedia.Gibbons.Web.UI.Views
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			if (!IsPostBack)
+			{
+				rblDeliveryMethod.DataSource = Zeus.Find.EnumerateChildren(Zeus.Find.RootItem).OfType<DeliveryType>();
+				rblDeliveryMethod.DataBind();
+			}
+
 			IEnumerable<InternationalShippingDeliveryType> deliveryTypes = Zeus.Context.Current.Finder.OfType<InternationalShippingDeliveryType>();
 
 			TableRow tr = new TableRow();

@@ -18,7 +18,7 @@ namespace Zeus.Web.UI.WebControls
 			if (!Page.Request.Browser.IsBrowser("IE"))
 			{
 				this.Page.ClientScript.RegisterClientScriptInclude("ColourPicker", "/admin/assets/js/plugins/jquery.colorpicker.js");
-				this.Page.RegisterCssInclude("~/admin/assets/css/colorpicker.css");
+				this.Page.ClientScript.RegisterCssInclude("~/admin/assets/css/colorpicker.css");
 
 				string script = @"$('#" + this.ClientID + @"').ColorPicker({
 	onSubmit: function(hsb, hex, rgb) {

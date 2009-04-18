@@ -8,7 +8,7 @@ namespace Bermedia.Gibbons.Web.Items
 {
 	[ContentType(Description = "[Internal Use Only]")]
 	[RestrictParents(typeof(GiftCardPage))]
-	public class GiftCardPersonalisePage : StructuralPage
+	public class GiftCardPersonalisePage : StructuralPage, ITopNavVisible
 	{
 		protected override string IconName
 		{
