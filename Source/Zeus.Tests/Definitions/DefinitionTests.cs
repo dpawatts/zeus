@@ -1,5 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using Isis.ComponentModel;
+using MbUnit.Framework;
+using Zeus.Engine;
 using Zeus.Tests.Definitions.Items;
 using Zeus.ContentTypes;
 
@@ -13,8 +14,10 @@ namespace Zeus.Tests.Definitions
 		[SetUp]
 		public void SetUp()
 		{
-			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder();
-			_definitionManager = new ContentTypeManager(contentTypeBuilder);
+			IAssemblyFinder assemblyFinder = new AssemblyFinder();
+			ITypeFinder typeFinder = new TypeFinder(assemblyFinder);
+			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null, null, null);
+			_definitionManager = new ContentTypeManager(contentTypeBuilder, null);
 		}
 
 		[Test]

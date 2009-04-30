@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using Zeus.Design.Editors;
 using Zeus.Engine;
 using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Collections.Generic;
-using Zeus.ContentTypes.Properties;
 using Zeus.Admin;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemView : WebControl, INamingContainer, IItemView
+	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor
 	{
-		private ContentItem _currentItem;
+		private ITypeDefinition _currentTypeDefinition;
+		private IEditableObject _currentItem;
+
+		public event EventHandler<ItemViewEditableObjectEventArgs> ItemCreating;
+		public event EventHandler<ItemViewTypeDefinitionEventArgs> DefinitionCreating;
 
 		#region Properties
 
@@ -22,17 +26,15 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		/// <summary>Gets or sets the item to edit with this form.</summary>
-		public ContentItem CurrentItem
+		public virtual IEditableObject CurrentItem
 		{
 			get
 			{
 				if (_currentItem == null)
 				{
-					if (!string.IsNullOrEmpty(this.Discriminator))
-					{
-						ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(this.ParentPath);
-						_currentItem = Zeus.Context.Current.ContentTypes.CreateInstance(this.CurrentItemType, parentItem);
-					}
+					ItemViewEditableObjectEventArgs args = new ItemViewEditableObjectEventArgs(null);
+					OnItemCreating(args);
+					_currentItem = args.AffectedItem;
 				}
 				return _currentItem;
 			}
@@ -41,15 +43,23 @@ namespace Zeus.Web.UI.WebControls
 				_currentItem = value;
 				if (value != null)
 				{
-					this.Discriminator = Zeus.Context.Current.ContentTypes[value.GetType()].Discriminator;
+					ChildControlsCreated = false;
 					EnsureChildControls();
 					OnCurrentItemChanged(EventArgs.Empty);
 				}
-				else
-				{
-					this.Discriminator = null;
-				}
 			}
+		}
+
+		protected virtual void OnItemCreating(ItemViewEditableObjectEventArgs args)
+		{
+			if (ItemCreating != null)
+				ItemCreating(this, args);
+		}
+
+		protected virtual void OnDefinitionCreating(ItemViewTypeDefinitionEventArgs args)
+		{
+			if (DefinitionCreating != null)
+				DefinitionCreating(this, args);
 		}
 
 		protected virtual void OnCurrentItemChanged(EventArgs eventArgs)
@@ -57,49 +67,22 @@ namespace Zeus.Web.UI.WebControls
 			
 		}
 
-		public string ParentPath
-		{
-			get { return (string) ViewState["ParentPath"] ?? string.Empty; }
-			set { ViewState["ParentPath"] = value; }
-		}
-
-		public ContentType CurrentItemDefinition
+		public ITypeDefinition CurrentItemDefinition
 		{
 			get
 			{
-				if (!string.IsNullOrEmpty(this.Discriminator))
-					return Zeus.Context.Current.ContentTypes[this.Discriminator];
-				else if (this.CurrentItem != null)
-					return Zeus.Context.Current.ContentTypes[this.CurrentItem.GetType()];
-				else
-					return null;
+				if (_currentTypeDefinition == null)
+				{
+					ItemViewTypeDefinitionEventArgs args = new ItemViewTypeDefinitionEventArgs(null);
+					OnDefinitionCreating(args);
+					_currentTypeDefinition = args.TypeDefinition;
+				}
+				return _currentTypeDefinition;
 			}
-		}
-
-		/// <summary>Gets the type defined by <see cref="ItemTypeName"/>.</summary>
-		/// <returns>The item's type.</returns>
-		public Type CurrentItemType
-		{
-			get
+			set
 			{
-				ContentType contentType = this.CurrentItemDefinition;
-				if (contentType != null)
-					return contentType.ItemType;
-				else
-					return null;
+				_currentTypeDefinition = value;
 			}
-		}
-
-		/// <summary>The type of item to edit. ItemEditor will look at <see cref="Zeus.EditableAttribute"/> attributes on this type to render input controls.</summary>
-		public string Discriminator
-		{
-			get { return (string) ViewState["Discriminator"] ?? string.Empty; }
-			set { ViewState["Discriminator"] = value; }
-		}
-
-		protected override HtmlTextWriterTag TagKey
-		{
-			get { return HtmlTextWriterTag.Div; }
 		}
 
 		#endregion
@@ -115,8 +98,7 @@ namespace Zeus.Web.UI.WebControls
 		protected override void CreateChildControls()
 		{
 			// Get ItemDefinition for current type.
-			ContentType itemDefinition = this.CurrentItemDefinition;
-			this.PropertyControls = new Dictionary<string, Control>();
+			PropertyControls = new Dictionary<string, Control>();
 			AddPropertyControls();
 
 			base.CreateChildControls();

@@ -23,7 +23,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private bool _tracking;
 
-		private string _ofType, _ofTypeExact, _where, _orderBy, _select, _query;
+		private string _ofType, _where, _orderBy, _select, _query;
 		private int? _skip, _take;
 		private ContentDataSourceAxis _axis = ContentDataSourceAxis.Child;
 		private ParameterCollection _whereParameters;
@@ -44,22 +44,6 @@ namespace Zeus.Web.UI.WebControls
 				if (this._ofType != value)
 				{
 					this._ofType = value;
-					this.OnDataSourceViewChanged(EventArgs.Empty);
-				}
-			}
-		}
-
-		public string OfTypeExact
-		{
-			get
-			{
-				return (this._ofTypeExact ?? string.Empty);
-			}
-			set
-			{
-				if (this._ofTypeExact != value)
-				{
-					this._ofTypeExact = value;
 					this.OnDataSourceViewChanged(EventArgs.Empty);
 				}
 			}
@@ -215,7 +199,7 @@ namespace Zeus.Web.UI.WebControls
 						children = startingPoint.GetChildren().AsQueryable();
 						break;
 					case ContentDataSourceAxis.Descendant:
-						children = Find.EnumerateChildren(startingPoint).AsQueryable();
+						children = Find.EnumerateAccessibleChildren(startingPoint).AsQueryable();
 						break;
 					default :
 						throw new NotImplementedException();
@@ -226,12 +210,6 @@ namespace Zeus.Web.UI.WebControls
 
 				if (this.Take != null)
 					children = children.Take(this.Take.Value);
-
-				if (!string.IsNullOrEmpty(this.OfTypeExact))
-				{
-					Type typeFilter = BuildManager.GetType(this.OfTypeExact, true);
-					children = children.Where("it.GetType() == @0", typeFilter);
-				}
 
 				if (!string.IsNullOrEmpty(this.OfType))
 				{

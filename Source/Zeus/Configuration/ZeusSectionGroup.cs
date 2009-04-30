@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace Zeus.Configuration
 {
@@ -8,6 +7,16 @@ namespace Zeus.Configuration
 		public AdminSection Admin
 		{
 			get { return (AdminSection) Sections["admin"]; }
+		}
+
+		public DynamicContentSection DynamicContent
+		{
+			get { return (DynamicContentSection) Sections["dynamicContent"]; }
+		}
+
+		public GlobalizationSection Globalization
+		{
+			get { return (GlobalizationSection) Sections["globalization"]; }
 		}
 
 		public HostSection Host

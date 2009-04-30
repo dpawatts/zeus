@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.UI;
 using System.ComponentModel;
 using Zeus.ContentTypes;
-using Zeus.ContentTypes.Properties;
+using Zeus.Design.Displayers;
 
 namespace Zeus.Web.UI.WebControls
 {

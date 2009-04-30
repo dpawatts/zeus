@@ -1,29 +1,25 @@
-﻿using System;
+﻿using System.Collections;
 using System.Security.Principal;
+using Isis.Web;
 
 namespace Zeus.Web
 {
-	public interface IWebContext
+	public interface IWebContext : Isis.Web.IWebContext
 	{
 		/// <summary>A page instance stored in the request context.</summary>
 		ContentItem CurrentPage { get; set; }
 
-		/// <summary>The local part of the requested path, e.g. /path/to/a/page.aspx?some=query.</summary>
-		Url LocalUrl { get; }
+		/// <summary>The template used to serve this request.</summary>
+		PathData CurrentPath { get; set; }
 
-		/// <summary>Gets the current user principal (may be null).</summary>
-		IPrincipal User { get; }
+		/// <summary>The physical path on disk to the requested page.</summary>
+		string PhysicalPath { get; }
 
-		string MapPath(string path);
+		/// <summary>Closes any endable resources at the end of the request.</summary>
+		void Close();
 
-		/// <summary>Converts a virtual path to an an absolute path. E.g. ~/hello.aspx -> /MyVirtualDirectory/hello.aspx.</summary>
-		/// <param name="virtualPath">The virtual url to make absolute.</param>
-		/// <returns>The absolute url.</returns>
-		string ToAbsolute(string virtualPath);
-
-		/// <summary>Converts an absolute url to an app relative path. E.g. /MyVirtualDirectory/hello.aspx -> ~/hello.aspx.</summary>
-		/// <param name="virtualPath">The absolute url to convert.</param>
-		/// <returns>An app relative url.</returns>
-		string ToAppRelative(string virtualPath);
+		/// <summary>Transferes the request to the given path.</summary>
+		/// <param name="path">The path to the template that will handle the request.</param>
+		void TransferRequest(string path);
 	}
 }

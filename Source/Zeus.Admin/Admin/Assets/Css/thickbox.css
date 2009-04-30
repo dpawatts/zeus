@@ -34,7 +34,7 @@
 	width:100%;
 }
 
-.TB_overlayMacFFBGHack {background: url(../images/thickbox/macFFBgHack.png) repeat;}
+.TB_overlayMacFFBGHack {background: url(<%= WebResource("Zeus.Admin.Assets.Images.ThickBox.macFFBgHack.png") %>) repeat;}
 .TB_overlayBG {
 	background-color:#000;
 	filter:alpha(opacity=75);

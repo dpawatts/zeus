@@ -1,10 +1,12 @@
 ﻿using System.Web;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using Isis.ExtensionMethods.Web;
+using Isis.Web.Hosting;
+using Zeus.Persistence.Specifications;
+using Zeus.Security;
 using Zeus.Web.UI.WebControls;
-using Zeus.Linq.Filters;
 
+[assembly: EmbeddedResourceFile("Zeus.Admin.Navigation.TreeLoader.ashx", "Zeus.Admin")]
 namespace Zeus.Admin.Navigation
 {
 	public class TreeLoader : IHttpHandler
@@ -16,15 +18,15 @@ namespace Zeus.Admin.Navigation
 			string path = context.Request.GetRequiredString("selected");
 			ContentItem selectedItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(path);
 
-			ItemFilter filter = new AccessFilter(context.User, Zeus.Context.SecurityManager);
+			ISpecification<ContentItem> filter = new AccessSpecification<ContentItem>(context.User, Context.SecurityManager, Operations.Read);
 			//if (context.User.Identity.Name != "administrator")
-			//	filter = new CompositeFilter(new PageFilter(), filter);
+			//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
 			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
 				.LinkProvider(BuildLink)
 				.Filters(filter)
 				.ToControl();
 
-			Zeus.Admin.Web.UI.WebControls.Tree.AppendExpanderNodeRecursive(tree);
+			Web.UI.WebControls.Tree.AppendExpanderNodeRecursive(tree);
 
 			using (HtmlTextWriter writer = new HtmlTextWriter(context.Response.Output))
 			{
@@ -33,25 +35,9 @@ namespace Zeus.Admin.Navigation
 			}
 		}
 
-		private Control BuildLink(ContentItem node)
+		private static Control BuildLink(ContentItem node)
 		{
-			HtmlAnchor anchor = new HtmlAnchor();
-			anchor.HRef = node.Url;
-			anchor.Target = "preview";
-			anchor.Attributes["data-url"] = Zeus.Web.Url.ToAbsolute(node.Url);
-
-			HtmlImage image = new HtmlImage();
-			image.Src = node.IconUrl;
-			anchor.Controls.Add(image);
-			anchor.Controls.Add(new LiteralControl(node.Title));
-
-			HtmlGenericControl span = new HtmlGenericControl("span");
-			span.ID = "span" + node.ID;
-			span.Attributes["data-path"] = node.Path;
-			span.Attributes["data-type"] = node.GetType().Name;
-			span.Controls.Add(anchor);
-
-			return span;
+			return Web.UI.WebControls.Tree.BuildLink(node, null);
 		}
 
 		public bool IsReusable

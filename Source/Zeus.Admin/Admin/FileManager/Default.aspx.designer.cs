@@ -12,5 +12,14 @@ namespace Zeus.Admin.FileManager {
     
     
     public partial class Default {
+        
+        /// <summary>
+        /// ftrFileTree control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Zeus.Admin.Web.UI.WebControls.FileTree ftrFileTree;
     }
 }

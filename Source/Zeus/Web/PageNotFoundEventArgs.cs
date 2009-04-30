@@ -10,14 +10,19 @@ namespace Zeus.Web
 		public PageNotFoundEventArgs(string url)
 			: base(null)
 		{
-			this.Url = url;
+			Url = url;
 		}
 
 		/// <summary>The url that didn't match any page.</summary>
 		public string Url
 		{
-			get;
-			set;
+			get; set;
+		}
+
+		/// <summary>The template data to associate with the not found url.</summary>
+		public PathData AffectedPath
+		{
+			get; set;
 		}
 	}
 }

@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Resources;
 using System.Data.Objects.DataClasses;
+using Isis.ExtensionMethods;
+using Zeus.Integrity;
 
 namespace Zeus
 {
@@ -26,10 +29,17 @@ namespace Zeus
 				TypeConverter converter = TypeDescriptor.GetConverter(destinationType);
 				if (converter != null && converter.CanConvertFrom(value.GetType()))
 					return converter.ConvertFrom(value);
-				else if (destinationType.IsEnum && value is int)
+				converter = TypeDescriptor.GetConverter(value.GetType());
+				if (converter != null && converter.CanConvertTo(destinationType))
+					return converter.ConvertTo(value, destinationType);
+				if (destinationType.IsEnum && value is int)
 					return Enum.ToObject(destinationType, (int) value);
-				else if (!destinationType.IsAssignableFrom(value.GetType()))
+				if (!destinationType.IsAssignableFrom(value.GetType()))
+				{
+					if (!(value is IConvertible))
+						throw new ZeusException("Cannot convert object of type '{0}' because it does not implement IConvertible", value.GetType());
 					return System.Convert.ChangeType(value, destinationType);
+				}
 			}
 			return value;
 		}
@@ -43,24 +53,14 @@ namespace Zeus
 			return (T) Convert(value, typeof(T));
 		}
 
+		public static Func<DateTime> CurrentTime = () => DateTime.Now;
+
 		/// <summary>Tries to find a property matching the supplied expression, returns null if no property is found with the first part of the expression.</summary>
 		/// <param name="item">The object to query.</param>
 		/// <param name="expression">The expression to evaluate.</param>
 		public static object Evaluate(object item, string expression)
 		{
-			if (item == null) return null;
-
-			PropertyInfo info = item.GetType().GetProperty(expression);
-			if (info != null)
-				return info.GetValue(item, new object[0]);
-			else if (expression.IndexOf('.') > 0)
-			{
-				int dotIndex = expression.IndexOf('.');
-				object obj = Evaluate(item, expression.Substring(0, dotIndex));
-				if (obj != null)
-					return Evaluate(obj, expression.Substring(dotIndex + 1, expression.Length - dotIndex - 1));
-			}
-			return null;
+			return item.GetValue(expression);
 		}
 
 		/// <summary>Evaluates an expression and applies a format string.</summary>
@@ -71,6 +71,66 @@ namespace Zeus
 		public static string Evaluate(object item, string expression, string format)
 		{
 			return string.Format(format, Evaluate(item, expression));
+		}
+
+		public static string GetSafeName(string value)
+		{
+			string result = value.ToLower();
+			result = Regex.Replace(result, "[ ]+", "-");
+			result = Regex.Replace(result, "[^a-zA-Z0-9_-]", string.Empty);
+			return result;
+		}
+
+		/// <summary>Checks that the destination isn't below the source.</summary>
+		private static bool IsDestinationBelowSource(ContentItem source, ContentItem destination)
+		{
+			if (source == destination)
+				return true;
+			foreach (ContentItem ancestor in Find.EnumerateParents(destination))
+				if (ancestor == source)
+					return true;
+			return false;
+		}
+
+		/// <summary>Inserts an item among a parent item's children using a comparer to determine the location.</summary>
+		/// <param name="item">The item to insert.</param>
+		/// <param name="newParent">The parent item.</param>
+		/// <param name="sortExpression">The sort expression to use.</param>
+		/// <returns>The index of the item among it's siblings.</returns>
+		public static int Insert(ContentItem item, ContentItem newParent, string sortExpression)
+		{
+			return Insert(item, newParent, new Collections.ItemComparer(sortExpression));
+		}
+
+		/// <summary>Inserts an item among a parent item's children using a comparer to determine the location.</summary>
+		/// <param name="item">The item to insert.</param>
+		/// <param name="newParent">The parent item.</param>
+		/// <param name="comparer">The comparer to use.</param>
+		/// <returns>The index of the item among it's siblings.</returns>
+		public static int Insert(ContentItem item, ContentItem newParent, IComparer<ContentItem> comparer)
+		{
+			if (item.Parent != null && item.Parent.Children.Contains(item))
+				item.Parent.Children.Remove(item);
+
+			item.Parent = newParent;
+			if (newParent != null)
+			{
+				if (IsDestinationBelowSource(item, newParent))
+					throw new DestinationOnOrBelowItselfException(item, newParent);
+
+				IList<ContentItem> siblings = newParent.Children;
+				for (int i = 0; i < siblings.Count; i++)
+				{
+					if (comparer.Compare(item, siblings[i]) < 0)
+					{
+						siblings.Insert(i, item);
+						return i;
+					}
+				}
+				siblings.Add(item);
+				return siblings.Count - 1;
+			}
+			return -1;
 		}
 
 		/// <summary>Moves an item in a list to a new index.</summary>
@@ -102,6 +162,50 @@ namespace Zeus
 					lastSortOrder = sibling.SortOrder;
 			}
 			return updatedItems;
+		}
+
+		/// <summary>Invokes an event and and executes an action unless the event is cancelled.</summary>
+		/// <param name="handler">The event handler to signal.</param>
+		/// <param name="item">The item affected by this operation.</param>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="finalAction">The default action to execute if the event didn't signal cancel.</param>
+		public static void InvokeEvent(EventHandler<CancelItemEventArgs> handler, ContentItem item, object sender, Action<ContentItem> finalAction)
+		{
+			if (handler != null && item.VersionOf == null)
+			{
+				CancelItemEventArgs args = new CancelItemEventArgs(item, finalAction);
+
+				handler.Invoke(sender, args);
+
+				if (!args.Cancel)
+					args.FinalAction(args.AffectedItem);
+			}
+			else
+				finalAction(item);
+		}
+
+		/// <summary>Invokes an event and and executes an action unless the event is cancelled.</summary>
+		/// <param name="handler">The event handler to signal.</param>
+		/// <param name="source">The item affected by this operation.</param>
+		/// <param name="destination">The destination of this operation.</param>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="finalAction">The default action to execute if the event didn't signal cancel.</param>
+		/// <returns>The result of the action (if any).</returns>
+		public static ContentItem InvokeEvent(EventHandler<CancelDestinationEventArgs> handler, object sender, ContentItem source, ContentItem destination, Func<ContentItem, ContentItem, ContentItem> finalAction)
+		{
+			if (handler != null && source.VersionOf == null)
+			{
+				CancelDestinationEventArgs args = new CancelDestinationEventArgs(source, destination, finalAction);
+
+				handler.Invoke(sender, args);
+
+				if (args.Cancel)
+					return null;
+
+				return args.FinalAction(args.AffectedItem, args.Destination);
+			}
+
+			return finalAction(source, destination);
 		}
 	}
 }

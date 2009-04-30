@@ -11,16 +11,15 @@ namespace Zeus.Web
 		/// <summary>Creates a new instance of the TemplateNotFoundException.</summary>
 		/// <param name="item">The item whose templates wasn't found.</param>
 		public TemplateNotFoundException(ContentItem item)
-			: base("Item template not found, id:{0}, template:{1}", item.ID, item.TemplateUrl)
+			: base("Item template not found, id:{0}", item.ID)
 		{
-			this.item = item;
+			Item = item;
 		}
 
-		private ContentItem item;
 		/// <summary>Gets the content item associated with this exception.</summary>
 		public ContentItem Item
 		{
-			get { return item; }
+			get; private set;
 		}
 	}
 }

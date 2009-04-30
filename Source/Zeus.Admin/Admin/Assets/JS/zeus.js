@@ -1,12 +1,36 @@
-﻿var frameManager = function() { }
+﻿// NAVIGATION
+var zeusnav = new Object();
+
+
+// EDIT
+var zeustoggle = {
+	show: function(btn, bar) {
+		$(btn).addClass("toggled").blur();
+		$(bar).show();
+		cookie.create(bar, "show");
+	},
+	hide: function(btn, bar) {
+		$(btn).removeClass("toggled").blur();
+		$(bar).hide();
+		cookie.erase(bar)
+	}
+};
+
+
+// DEFAULT
+var frameManager = function() { }
 frameManager.prototype = {
+	memorize: function(selected, action) {
+		document.getElementById("memory").value = selected;
+		document.getElementById("action").value = action;
+	},
 	initFrames: function() {
 		///	<summary>
 		///		Initialises the navigation and preview frames, with a splitter in the middle
 		///	</summary>
 		$("#splitter").splitter({
 			type: 'v',
-			initA: true // use width of A (#leftPane) from styles
+			sizeLeft: 200
 		});
 		var t = this;
 		$(document).ready(function() {
@@ -21,7 +45,15 @@ frameManager.prototype = {
 		$("#splitter *").height(this.contentHeight());
 	},
 	contentHeight: function() {
-		return document.documentElement.clientHeight - (jQuery.browser.msie ? 88 : 88);
+		return document.documentElement.clientHeight - (jQuery.browser.msie ? 60 : 60);
+	},
+	getMemory: function() {
+		var m = document.getElementById("memory");
+		return encodeURIComponent(m.value);
+	},
+	getAction: function() {
+		var a = document.getElementById("action");
+		return encodeURIComponent(a.value);
 	},
 	refreshNavigation: function(navigationUrl) {
 		var nav = document.getElementById('navigation');

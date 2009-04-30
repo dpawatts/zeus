@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/UI/MasterPages/Default.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Bermedia.Gibbons.Web.Default" %>

@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.DynamicProxy2, Version=2.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.DynamicProxy2.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Castle.MicroKernel.dll</HintPath>
@@ -59,26 +55,6 @@
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="NHibernate, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\NHibernate.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ProxyGenerators.CastleDynamicProxy, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\NHibernate.ProxyGenerators.CastleDynamicProxy.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundInTheory.NMigration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.NMigration.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -93,6 +69,9 @@
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -106,24 +85,149 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\ActionPluginAttribute.cs" />
     <Compile Include="Admin\AdminFrame.cs" />
+    <Compile Include="Admin\AdminManager.cs" />
     <Compile Include="Admin\AdminTargetFrame.cs" />
+    <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
+    <Compile Include="Admin\CreationPosition.cs" />
     <Compile Include="Admin\GridViewPluginAttribute.cs" />
+    <Compile Include="Admin\IAdminAssemblyManager.cs" />
+    <Compile Include="Admin\IAdminManager.cs" />
     <Compile Include="Admin\ITreeSorter.cs" />
     <Compile Include="Admin\Navigator.cs" />
+    <Compile Include="Admin\NodePosition.cs" />
+    <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
+    <Compile Include="Admin\SecurityInitializer.cs" />
+    <Compile Include="Admin\Targets.cs" />
     <Compile Include="Admin\ToolbarPluginAttribute.cs" />
     <Compile Include="Admin\TreeSorter.cs" />
+    <Compile Include="CancelDestinationEventArgs.cs" />
+    <Compile Include="CancelItemEventArgs.cs" />
+    <Compile Include="Collections\ItemComparer.cs" />
+    <Compile Include="Collections\ItemComparer.generic.cs" />
     <Compile Include="Collections\TreeHierarchyBuilder.cs" />
     <Compile Include="Collections\ItemHierarchyNavigator.cs" />
     <Compile Include="Collections\IHierarchyNavigator.cs" />
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\TreeElement.cs" />
+    <Compile Include="Configuration\GlobalizationSection.cs" />
+    <Compile Include="Configuration\DynamicContentControl.cs" />
+    <Compile Include="Configuration\DynamicContentControlCollection.cs" />
+    <Compile Include="Configuration\DynamicContentSection.cs" />
+    <Compile Include="Configuration\HostNameCollection.cs" />
+    <Compile Include="Configuration\HostNameElement.cs" />
+    <Compile Include="Configuration\InstallationMode.cs" />
+    <Compile Include="Configuration\InstallerElement.cs" />
+    <Compile Include="Configuration\SiteElement.cs" />
+    <Compile Include="Configuration\SiteElementCollection.cs" />
+    <Compile Include="ContentProperties\ContentPropertyManager.cs" />
+    <Compile Include="ContentProperties\PropertyCollection.cs" />
+    <Compile Include="ContentProperties\PropertyAuthorizedRolesAttribute.cs" />
+    <Compile Include="ContentProperties\ObjectProperty.cs" />
+    <Compile Include="ContentProperties\LinkProperty.cs" />
+    <Compile Include="ContentProperties\IntegerProperty.cs" />
+    <Compile Include="ContentProperties\DoubleProperty.cs" />
+    <Compile Include="ContentProperties\DateTimeProperty.cs" />
+    <Compile Include="ContentProperties\SimpleProperty.cs" />
+    <Compile Include="ContentProperties\XhtmlStringContentPropertyAttribute.cs" />
+    <Compile Include="ContentProperties\XhtmlStringProperty.cs" />
+    <Compile Include="ContentProperties\StringProperty.cs" />
+    <Compile Include="ContentProperties\IContentPropertyManager.cs" />
+    <Compile Include="ContentTypes\AbstractContentTypeRefiner.cs" />
+    <Compile Include="ContentTypes\AttributeExplorer.cs" />
+    <Compile Include="ContentTypes\DisableAttribute.cs" />
+    <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
+    <Compile Include="ContentTypes\IEditableHierarchyBuilder.cs" />
+    <Compile Include="ContentProperties\BaseContentPropertyAttribute.cs" />
+    <Compile Include="ContentProperties\BooleanProperty.cs" />
+    <Compile Include="ContentProperties\IContentProperty.cs" />
+    <Compile Include="ContentPropertyAttribute.cs" />
+    <Compile Include="ContentProperties\PropertyData.cs" />
+    <Compile Include="ContentProperties\PropertyDataType.cs" />
+    <Compile Include="ContentTypes\IPropertyAwareAttribute.cs" />
+    <Compile Include="ContentTypes\ISortableRefiner.cs" />
+    <Compile Include="ContentTypes\RefineOrder.cs" />
+    <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
+    <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
+    <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
+    <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
+    <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
+    <Compile Include="DynamicContent\DateTimeDynamicContent.cs" />
+    <Compile Include="DynamicContent\SimpleEditableObject.cs" />
+    <Compile Include="DynamicContent\SimpleTypeDefinition.cs" />
+    <Compile Include="Design\Editors\ImageDataUploadEditorAttribute.cs" />
+    <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
+    <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
+    <Compile Include="Design\Editors\MultiImageDataUploadEditorAttribute.cs" />
+    <Compile Include="FileSystem\Images\ContentItem.extensions.cs" />
+    <Compile Include="FileSystem\Images\Image.cs" />
+    <Compile Include="FileSystem\Images\ImageData.cs" />
+    <Compile Include="FileSystem\Images\ZeusImageDataInCollectionSource.cs" />
+    <Compile Include="FileSystem\Images\ZeusImageDataSource.cs" />
+    <Compile Include="FileSystem\Images\ZeusImageSource.cs" />
+    <Compile Include="Globalization\ContentLanguage.cs" />
+    <Compile Include="Globalization\LanguagePreferenceList.cs" />
+    <Compile Include="Globalization\LanguageSelection.cs" />
+    <Compile Include="Globalization\LanguageSetting.cs" />
+    <Compile Include="Globalization\ContentTypes\LanguageContainer.cs" />
+    <Compile Include="Globalization\ContentTypes\Language.cs" />
+    <Compile Include="Globalization\ILanguageManager.cs" />
+    <Compile Include="Globalization\LanguageManager.cs" />
+    <Compile Include="Installation\DatabaseStatus.cs" />
+    <Compile Include="Installation\InstallerHints.cs" />
+    <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
+    <Compile Include="Persistence\CopyAttribute.cs" />
+    <Compile Include="Persistence\IVersionManager.cs" />
+    <Compile Include="Persistence\NotVersionableAttribute.cs" />
+    <Compile Include="Persistence\VersionManager.cs" />
+    <Compile Include="Plugin\AutoInitializeAttribute.cs" />
+    <Compile Include="Plugin\InitializerCreatingAttribute.cs" />
+    <Compile Include="Plugin\IPluginBootstrapper.cs" />
+    <Compile Include="Plugin\IPluginDefinition.cs" />
+    <Compile Include="Plugin\IPluginInitializer.cs" />
+    <Compile Include="Plugin\PluginBootstrapper.cs" />
+    <Compile Include="Plugin\PluginInitializationException.cs" />
+    <Compile Include="Security\PermissionDeniedException.cs" />
+    <Compile Include="Security\RoleNames.cs" />
+    <Compile Include="Web\Global.cs" />
+    <Compile Include="Web\HttpRequestSupport.cs" />
+    <Compile Include="Web\IHost.cs" />
+    <Compile Include="Web\IPermanentLinkManager.cs" />
+    <Compile Include="Web\MultipleSitesUrlParser.cs" />
+    <Compile Include="Web\PermanentLinkManager.cs" />
+    <Compile Include="Web\Resources\TinyMCE\Resources.cs" />
+    <Compile Include="Web\Security\Items\Role.cs" />
+    <Compile Include="Web\Security\Items\SecurityContainer.cs" />
+    <Compile Include="Web\Security\Items\RoleContainer.cs" />
+    <Compile Include="Web\Security\IWebSecurityManager.cs" />
+    <Compile Include="Web\Site.cs" />
+    <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
+    <Compile Include="Web\UI\WebControls\ImageDataEditor.cs" />
+    <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
+    <Compile Include="Web\UI\WebControls\MultiImageDataUploadEditor.cs" />
+    <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
+    <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
+    <Compile Include="Web\UI\WebControls\TabControl.cs" />
+    <Compile Include="Web\UI\WebControls\FileEditor.cs" />
+    <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />
+    <Compile Include="Web\UI\WebControls\ItemViewTypeDefinitionEventArgs.cs" />
+    <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
+    <Compile Include="ContentTypes\IEditableObject.cs" />
+    <Compile Include="ContentTypes\ITypeDefinition.cs" />
+    <Compile Include="DynamicContent\DynamicContentManager.cs" />
+    <Compile Include="DynamicContent\IDynamicContent.cs" />
+    <Compile Include="DynamicContent\DynamicPageProperty.cs" />
+    <Compile Include="DynamicContent\IDynamicContentManager.cs" />
     <Compile Include="Configuration\AdminSection.cs" />
     <Compile Include="Configuration\MembershipSection.cs" />
     <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\HostSection.cs" />
+    <Compile Include="Configuration\RewriteMethod.cs" />
+    <Compile Include="Configuration\WebElement.cs" />
     <Compile Include="Configuration\ZeusSectionGroup.cs" />
     <Compile Include="ContentItem.cs" />
     <Compile Include="ContentTypes\ContentTypeAuthorizedRolesAttribute.cs" />
@@ -131,29 +235,91 @@
     <Compile Include="ContentTypes\EditorContainerAttribute.cs" />
     <Compile Include="ContentTypes\IContentTypeBuilder.cs" />
     <Compile Include="ContentTypes\IEditorContainer.cs" />
-    <Compile Include="ContentTypes\IEditorRefiner.cs" />
     <Compile Include="ContentTypes\IRootItem.cs" />
     <Compile Include="ContentTypes\ISelfPopulator.cs" />
     <Compile Include="ContentTypes\IUniquelyNamed.cs" />
-    <Compile Include="ContentTypes\Properties\ChildrenEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\ColourEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\ComboBoxEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\ContentDetail.generic.cs" />
-    <Compile Include="ContentTypes\Properties\CheckBoxListEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\ColourDisplayerAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\LinkedItemListEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\DateDisplayerAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\DateEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\DropDownListEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\FileUploadEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\DisplayerAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\HtmlTextBox.cs" />
-    <Compile Include="ContentTypes\Properties\IDisplayer.cs" />
-    <Compile Include="ContentTypes\Properties\LinkedItemDropDownListEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\LinkedItemsEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\LiteralDisplayerAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\NameEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\Property.cs" />
+    <Compile Include="ContentTypes\NotAllowedParentException.cs" />
+    <Compile Include="ContentTypes\Property.cs" />
+    <Compile Include="Design\Editors\ChildrenEditorAttribute.cs" />
+    <Compile Include="Design\Editors\ColourEditorAttribute.cs" />
+    <Compile Include="Design\Editors\CheckBoxListEditorAttribute.cs" />
+    <Compile Include="Design\Displayers\ColourDisplayerAttribute.cs" />
+    <Compile Include="Design\Editors\BaseDetailCollectionEditorAttribute.cs" />
+    <Compile Include="Design\Editors\MultiFileUploadEditorAttribute.cs" />
+    <Compile Include="Design\Editors\TimeEditorAttribute.cs" />
+    <Compile Include="Design\Editors\ListBoxEditorAttribute.cs" />
+    <Compile Include="Design\Editors\ListEditorAttribute.cs" />
+    <Compile Include="Design\Editors\EnumEditorAttribute.cs" />
+    <Compile Include="Design\Editors\SortableLinkedItemsCheckBoxListEditorAttribute.cs" />
+    <Compile Include="Design\Displayers\DateDisplayerAttribute.cs" />
+    <Compile Include="Design\Editors\DateEditorAttribute.cs" />
+    <Compile Include="DestinationEventArgs.cs" />
+    <Compile Include="Design\Editors\DropDownListEditorAttribute.cs" />
+    <Compile Include="Design\Editors\FileDataUploadEditorAttribute.cs" />
+    <Compile Include="Design\Displayers\DisplayerAttribute.cs" />
+    <Compile Include="Design\Editors\LinkedItemsEditorAttribute.cs" />
+    <Compile Include="Engine\AbstractAspectController.cs" />
+    <Compile Include="Engine\AspectControllerProvider.cs" />
+    <Compile Include="Engine\EventBroker.cs" />
+    <Compile Include="Engine\IAspectController.cs" />
+    <Compile Include="Engine\IAspectControllerProvider.cs" />
+    <Compile Include="Engine\IPluginFinder.cs" />
+    <Compile Include="Engine\PluginFinder.cs" />
+    <Compile Include="FileSystem\FileData.cs" />
+    <Compile Include="Integrity\AllowedZones.cs" />
+    <Compile Include="Integrity\CannotDeleteRootException.cs" />
+    <Compile Include="Integrity\DestinationOnOrBelowItselfException.cs" />
+    <Compile Include="Integrity\IIntegrityEnforcer.cs" />
+    <Compile Include="Integrity\IntegrityEnforcer.cs" />
+    <Compile Include="Security\AvailableOperationAttribute.cs" />
+    <Compile Include="Security\ISecurable.cs" />
+    <Compile Include="Security\Operations.cs" />
+    <Compile Include="Web\ControlsAttribute.cs" />
+    <Compile Include="Web\ErrorHandler.cs" />
+    <Compile Include="Web\Handlers\FileDataHandler.cs" />
+    <Compile Include="Web\Handlers\FileUploadHandler.cs" />
+    <Compile Include="Web\HttpRequestContextAccessor.cs" />
+    <Compile Include="Web\IClosable.cs" />
+    <Compile Include="Web\IControllerDescriptor.cs" />
+    <Compile Include="Web\IErrorHandler.cs" />
+    <Compile Include="Web\InitializerModule.cs" />
+    <Compile Include="Web\IPathFinder.cs" />
+    <Compile Include="Web\IRequestContextAccessor.cs" />
+    <Compile Include="Web\IRequestDispatcher.cs" />
+    <Compile Include="Web\IRequestLifecycleHandler.cs" />
+    <Compile Include="Web\PathData.cs" />
+    <Compile Include="Web\RequestAspectController.cs" />
+    <Compile Include="Web\RequestDispatcher.cs" />
+    <Compile Include="Web\RequestItem.cs" />
+    <Compile Include="Web\RequestLifecycleHandler.cs" />
+    <Compile Include="Web\Resources\Resources.cs" />
+    <Compile Include="Web\Security\CredentialRepository.cs" />
+    <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
+    <Compile Include="Web\TemplateAttribute.cs" />
+    <Compile Include="Web\UI\ContentUserControl.generic.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\ContentUserControl.generic2.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\FieldSetAttribute.cs" />
+    <Compile Include="Web\UI\WebControls\Breadcrumbs.cs" />
+    <Compile Include="Web\UI\WebControls\BreadcrumbItem.cs" />
+    <Compile Include="Web\UI\WebControls\BaseDetailCollectionEditor.cs" />
+    <Compile Include="Web\UI\WebControls\MultiFileDataUploadEditor.cs" />
+    <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
+    <Compile Include="Web\ILink.cs" />
+    <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
+    <Compile Include="Web\UI\WebControls\MenuItem.cs" />
+    <Compile Include="Web\UI\WebControls\SortableCheckBoxList.cs" />
+    <Compile Include="Web\UI\WebControls\TimePicker.cs" />
+    <Compile Include="Web\UI\WebControls\HtmlTextBox.cs" />
+    <Compile Include="Design\Displayers\IDisplayer.cs" />
+    <Compile Include="Design\Editors\LinkedItemDropDownListEditorAttribute.cs" />
+    <Compile Include="Design\Editors\LinkedItemsCheckBoxListEditorAttribute.cs" />
+    <Compile Include="Design\Displayers\LiteralDisplayerAttribute.cs" />
+    <Compile Include="Design\Editors\NameEditorAttribute.cs" />
+    <Compile Include="Design\Editors\TimeRangeEditorAttribute.cs" />
     <Compile Include="ContentTypes\RootEditorContainer.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContentTypeAttribute.cs" />
@@ -163,21 +329,12 @@
     <Compile Include="ContentTypes\IDefinitionRefiner.cs" />
     <Compile Include="ContentTypes\IInheritableDefinitionRefiner.cs" />
     <Compile Include="ContentTypes\ContentType.cs" />
-    <Compile Include="ContentTypes\Properties\AbstractEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\BooleanDetail.cs" />
-    <Compile Include="ContentTypes\Properties\ContentDetail.cs" />
-    <Compile Include="ContentTypes\Properties\DateTimeDetail.cs" />
-    <Compile Include="ContentTypes\Properties\DetailCollection.cs" />
-    <Compile Include="ContentTypes\Properties\DoubleDetail.cs" />
-    <Compile Include="ContentTypes\Properties\EditableAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\CheckBoxEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\HtmlTextBoxEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\TextBoxEditorAttribute.cs" />
-    <Compile Include="ContentTypes\Properties\IntegerDetail.cs" />
-    <Compile Include="ContentTypes\Properties\LinkDetail.cs" />
-    <Compile Include="ContentTypes\Properties\ObjectDetail.cs" />
-    <Compile Include="ContentTypes\Properties\StringDetail.cs" />
-    <Compile Include="ContentTypes\Properties\IEditor.cs" />
+    <Compile Include="Design\Editors\AbstractEditorAttribute.cs" />
+    <Compile Include="Design\Editors\EditableAttribute.cs" />
+    <Compile Include="Design\Editors\CheckBoxEditorAttribute.cs" />
+    <Compile Include="Design\Editors\HtmlTextBoxEditorAttribute.cs" />
+    <Compile Include="Design\Editors\TextBoxEditorAttribute.cs" />
+    <Compile Include="Design\Editors\IEditor.cs" />
     <Compile Include="Engine\ContentEngine.cs" />
     <Compile Include="FileSystem\Details\UploadEditorAttribute.cs" />
     <Compile Include="FileSystem\File.cs" />
@@ -185,47 +342,48 @@
     <Compile Include="FileSystem\Folder.cs" />
     <Compile Include="FileSystem\IFileSystemContainer.cs" />
     <Compile Include="Find.cs" />
+    <Compile Include="INode.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
     <Compile Include="Installation\Migrations\Migration001.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
+    <Compile Include="Integrity\AllowedZonesAttribute.cs" />
+    <Compile Include="Integrity\AvailableZoneAttribute.cs" />
     <Compile Include="Integrity\IIntegrityManager.cs" />
     <Compile Include="Integrity\IntegrityManager.cs" />
     <Compile Include="Integrity\NameOccupiedException.cs" />
     <Compile Include="Integrity\RestrictParentsAttribute.cs" />
     <Compile Include="Integrity\TypeIntegrityAttribute.cs" />
     <Compile Include="ItemEventArgs.cs" />
-    <Compile Include="Linq\ContentItemFilters.cs" />
-    <Compile Include="Linq\DetailPropertyVisitor.cs" />
-    <Compile Include="Linq\Filters\NullFilter.cs" />
-    <Compile Include="Linq\Filters\PageFilter.cs" />
-    <Compile Include="Linq\ItemFinder.cs" />
-    <Compile Include="Linq\Filters\AccessFilter.cs" />
-    <Compile Include="Linq\Filters\CompositeFilter.cs" />
-    <Compile Include="Linq\Filters\CountFilter.cs" />
-    <Compile Include="Linq\Filters\ItemFilter.cs" />
-    <Compile Include="Linq\Filters\NavigationFilter.cs" />
-    <Compile Include="Linq\Filters\PublishedFilter.cs" />
-    <Compile Include="Linq\Filters\TypeFilter.cs" />
-    <Compile Include="Linq\Filters\VisibleFilter.cs" />
-    <Compile Include="Linq\NHibernateExtensions.cs" />
-    <Compile Include="Linq\ZeusQueryProvider.cs" />
-    <Compile Include="Persistence\ConfigurationBuilder.cs" />
     <Compile Include="Persistence\ContentPersister.cs" />
+    <Compile Include="Persistence\IFinder.cs" />
+    <Compile Include="Persistence\ITransaction.cs" />
+    <Compile Include="Persistence\Specifications\CompositeSpecification.cs" />
+    <Compile Include="Persistence\Specifications\NullSpecification.cs" />
+    <Compile Include="Persistence\Specifications\TypeSpecification.cs" />
+    <Compile Include="Persistence\Specifications\ZoneSpecification.cs" />
+    <Compile Include="Web\UI\ItemAwareControl.cs" />
+    <Compile Include="Web\UI\ItemUtility.cs" />
+    <Compile Include="Web\UI\MasterPage.generic.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\UI\WebControls\TimeRange.cs" />
+    <Compile Include="Web\UI\WebControls\Zone.cs" />
+    <Compile Include="Web\ThreadContext.cs" />
+    <Compile Include="Persistence\Specifications\AccessSpecification.cs" />
+    <Compile Include="Persistence\Specifications\PageSpecification.cs" />
+    <Compile Include="Persistence\Specifications\NavigationSpecification.cs" />
+    <Compile Include="Persistence\Specifications\PublishedSpecification.cs" />
+    <Compile Include="Persistence\Specifications\Specification.cs" />
+    <Compile Include="Persistence\Specifications\ISpecification.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
-    <Compile Include="Persistence\IConfigurationBuilder.cs" />
-    <Compile Include="Linq\IItemFinder.cs" />
     <Compile Include="Persistence\IItemNotifier.cs" />
     <Compile Include="Persistence\IPersister.cs" />
     <Compile Include="Persistence\IRepository.cs" />
     <Compile Include="Persistence\ISelfPersister.cs" />
-    <Compile Include="Persistence\ISessionProvider.cs" />
     <Compile Include="Persistence\ItemNotifier.cs" />
-    <Compile Include="Persistence\NotifyingInterceptor.cs" />
-    <Compile Include="Persistence\Repository.cs" />
-    <Compile Include="Persistence\SessionProvider.cs" />
+    <Compile Include="Persistence\Specifications\VisibleSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AuthorizedRole.cs" />
-    <Compile Include="Security\AuthorizedRolesAttribute.cs" />
+    <Compile Include="Security\AuthorizationRule.cs" />
     <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\SecurityEnforcer.cs" />
     <Compile Include="Security\SecurityManager.cs" />
@@ -233,12 +391,8 @@
     <Compile Include="Web\Compilation\CodeExpressionBuilder.cs" />
     <Compile Include="Web\Compilation\HasItemsExpressionBuilder.cs" />
     <Compile Include="Web\Compilation\HasValueExpressionBuilder.cs" />
-    <Compile Include="Web\Security\ContentMembershipProvider.cs" />
-    <Compile Include="Web\Security\ContentProfileProvider.cs" />
-    <Compile Include="Web\Security\ContentRoleProvider.cs" />
     <Compile Include="Web\Security\Details\RolesEditorAttribute.cs" />
     <Compile Include="Security\ISecurityEnforcer.cs" />
-    <Compile Include="Web\Security\ItemBridge.cs" />
     <Compile Include="Web\Security\Items\User.cs" />
     <Compile Include="Web\Security\Items\UserContainer.cs" />
     <Compile Include="Utility.cs" />
@@ -246,7 +400,6 @@
     <Compile Include="Web\Compilation\ZeusExpressionBuilder.cs" />
     <Compile Include="Web\Handlers\FileHandler.cs" />
     <Compile Include="Web\IWebContext.cs" />
-    <Compile Include="Web\Modules\ContentModule.cs" />
     <Compile Include="Web\ExtensionMethods.cs" />
     <Compile Include="Web\Host.cs" />
     <Compile Include="Web\IUrlParser.cs" />
@@ -277,10 +430,8 @@
     <Compile Include="Web\UI\WebControls\BaseContentDataSourceView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\DateEditorTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\LinkedItemList.cs" />
-    <Compile Include="Web\UI\WebControls\FileEditor.cs" />
-    <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
+    <Compile Include="Web\UI\WebControls\DatePicker.cs" />
+    <Compile Include="Web\UI\WebControls\FileDataEditor.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
@@ -302,26 +453,13 @@
     <Compile Include="Web\UI\WebControls\Menu.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
     <Compile Include="Web\UI\WebControls\P.cs" />
-    <Compile Include="Web\UI\WebControls\TabPanel.cs" />
+    <Compile Include="Web\UI\WebControls\TabItem.cs" />
     <Compile Include="Web\UI\WebControls\TreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\Url.cs" />
     <Compile Include="Web\UrlParser.cs" />
     <Compile Include="Web\WebRequestContext.cs" />
     <Compile Include="ZeusException.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mappings\Default.hbm.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Persistence\persistence.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Configuration\castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ContentTypes\contentTypes.castle.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
@@ -331,30 +469,400 @@
     <EmbeddedResource Include="Web\UI\WebControls\Images\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\web.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Admin\admin.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Linq\linq.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Security\security.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Integrity\integrity.castle.config" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\ItemGridView.LayoutTemplate.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\..\..\..\Projects\Isis\Source\Isis\Isis.csproj">
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\TimePicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\DatePicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\ui.core.js" />
+    <EmbeddedResource Include="Web\Resources\jQuery\ui.datepicker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\ui.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\ui.sortable.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\ApplicationBlocks\DataMigrations\Isis.ApplicationBlocks.DataMigrations.csproj">
+      <Project>{53264600-A2A8-499B-A32F-9E9EB45CEF86}</Project>
+      <Name>Isis.ApplicationBlocks.DataMigrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Isis\Source\FrameworkBlocks\WebAuthentication\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\SoundInTheory.DynamicImage\Source\DynamicImage\DynamicImage.csproj">
+      <Project>{15F7FF82-B018-42E0-A94D-2CAAE491C248}</Project>
+      <Name>DynamicImage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\FileDataEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Silverlight.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\ColorPicker\blank.gif" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_background.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hex.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_b.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_h.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_hsb_s.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_indic.gif" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_overlay.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_b.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_g.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_rgb_r.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_select.gif" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\colorpicker_submit.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_background.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hex.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_b.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_h.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_hsb_s.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_indic.gif" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_b.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_g.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_rgb_r.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\custom_submit.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\select.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\select2.png" />
+    <EmbeddedResource Include="Web\Resources\ColorPicker\slider.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\jQuery\ui.tabs.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\TinyMCE\langs\en.js" />
+    <EmbeddedResource Include="Web\Resources\tinymce.js" />
+    <EmbeddedResource Include="Web\Resources\Icons\folder.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_acrobat.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_word.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_compressed.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_excel.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_picture.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\page_white_powerpoint.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\jquery.js" />
+    <EmbeddedResource Include="Web\Resources\jQuery\calendar.gif" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_75_dadada_1x400.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_222222_256x240.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_2e83ff_256x240.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_454545_256x240.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_888888_256x240.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_cd0a0a_256x240.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\group.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\user.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\group_key.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\bullet_key.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\folder_key.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\world.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\world_link.png" />
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.js" />
+    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
+    <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\bin.png" />
+    <EmbeddedResource Include="Web\Resources\Icons\bin_closed.png" />
+    <Content Include="Web\Resources\TinyMCE\license.txt" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advlink.css" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advlink.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\en.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\en_dlg.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\image.htm" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\image.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\rule.htm" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\rule.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\sample.gif" />
+    <Content Include="Web\Resources\TinyMCE\plugins\style\advhr.css" />
+    <Content Include="Web\Resources\TinyMCE\plugins\style\en.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\style\en_dlg.js" />
+    <Content Include="Web\Resources\TinyMCE\plugins\style\rule.js" />
+    <EmbeddedResource Include="Web\UI\WebControls\ReactiveTextBox.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\tabfocus\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\tabfocus\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\css\advhr.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\js\rule.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advhr\rule.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\css\advimage.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\image.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\img\sample.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\js\image.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advimage\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\css\advlink.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\js\advlink.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlink\link.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autosave\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autosave\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\bbcode\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\bbcode\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\compat2x\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\compat2x\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\contextmenu\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\contextmenu\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\directionality\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\directionality\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamiccontent\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamiccontent\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamicimage\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\dynamicimage\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\emotions.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-cool.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-cry.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-embarassed.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-frown.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-innocent.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-kiss.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-laughing.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-money-mouth.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-sealed.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-smile.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-surprised.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-tongue-out.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-undecided.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-wink.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\img\smiley-yell.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\js\emotions.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\emotions\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\dialog.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\img\example.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\js\dialog.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\langs\en.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\example\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\css\fullpage.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\fullpage.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\js\fullpage.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullpage\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullscreen\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullscreen\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\fullscreen\fullscreen.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\iespell\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\iespell\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\inlinepopups\template.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\insertdatetime\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\insertdatetime\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\layer\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\layer\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\css\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\css\media.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\flash.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\flv_player.swf" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\quicktime.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\realmedia.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\shockwave.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\trans.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\img\windowsmedia.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\js\embed.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\js\media.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\media\media.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\nonbreaking\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\nonbreaking\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\noneditable\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\noneditable\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\pagebreak\css\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\pagebreak\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\pagebreak\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\pagebreak\img\pagebreak.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\pagebreak\img\trans.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\blank.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\css\blank.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\css\pasteword.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\js\pastetext.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\js\pasteword.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\pastetext.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\paste\pasteword.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\preview\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\preview\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\preview\example.html" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\preview\jscripts\embed.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\preview\preview.html" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\print\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\print\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\safari\blank.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\safari\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\safari\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\save\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\save\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\css\searchreplace.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\js\searchreplace.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\searchreplace\searchreplace.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\spellchecker\css\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\spellchecker\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\spellchecker\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\spellchecker\img\wline.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\css\props.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\js\props.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\style\props.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\cell.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\css\cell.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\css\row.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\css\table.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\js\cell.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\js\merge_cells.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\js\row.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\js\table.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\merge_cells.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\row.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\table\table.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\blank.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\css\template.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\js\template.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\template\template.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\visualchars\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\visualchars\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\abbr.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\acronym.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\attributes.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\cite.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\css\attributes.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\css\popup.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\del.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\ins.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\abbr.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\acronym.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\attributes.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\cite.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\del.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\element_common.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\js\ins.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\about.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\anchor.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\charmap.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\color_picker.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\editor_template.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\editor_template_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\image.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\img\colorpicker.jpg" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\img\icons.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\about.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\anchor.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\charmap.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\color_picker.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\image.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\link.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\js\source_editor.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\langs\en.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\langs\en_dlg.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\link.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\dialog.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\buttons.png" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\items.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\menu_check.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\progress.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\img\tabs.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\default\ui.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\dialog.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\ui.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\ui_black.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\skins\o2k7\ui_silver.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\advanced\source_editor.htm" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\editor_template.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\editor_template_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\img\icons.gif" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\langs\en.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\skins\default\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\skins\default\ui.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\skins\o2k7\content.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\skins\o2k7\img\button_bg.png" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\themes\simple\skins\o2k7\ui.css" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\tiny_mce.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\tiny_mce_popup.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\tiny_mce_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\utils\editable_selects.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\utils\form_utils.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\utils\mctabs.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\utils\validate.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

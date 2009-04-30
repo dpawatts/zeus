@@ -6,13 +6,13 @@ namespace Zeus.Admin
 {
 	public class Navigator
 	{
-		private readonly IPersister persister;
-		private readonly Host host;
+		private readonly IPersister _persister;
+		private readonly IHost _host;
 
-		public Navigator(IPersister persister, Host host)
+		public Navigator(IPersister persister, IHost host)
 		{
-			this.persister = persister;
-			this.host = host;
+			_persister = persister;
+			_host = host;
 		}
 
 		public ContentItem Navigate(ContentItem startingPoint, string path)
@@ -26,11 +26,11 @@ namespace Zeus.Admin
 			if (!path.StartsWith("/"))
 			{
 				if (path.StartsWith("~"))
-					return Navigate(persister.Get(host.StartPageID), path.Substring(1));
+					return Navigate(_persister.Get(_host.CurrentSite.StartPageID), path.Substring(1));
 				throw new ArgumentException("The path must start with a slash '/', was '" + path + "'", "path");
 			}
 
-			return Navigate(persister.Get(host.RootItemID), path);
+			return Navigate(_persister.Get(_host.CurrentSite.RootItemID), path);
 		}
 	}
 }

@@ -1,58 +1,60 @@
 ﻿using System;
+using System.Text;
+using Isis.Collections;
+using Zeus.Admin;
+using Zeus.ContentProperties;
+using Zeus.ContentTypes;
+using Zeus.Globalization;
 using Zeus.Integrity;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web;
 using System.Linq;
+using Zeus.Persistence;
+using Zeus.Persistence.Specifications;
 using Zeus.Web;
 using Zeus.Security;
-using Zeus.Linq.Filters;
 using System.Security.Principal;
-using Zeus.ContentTypes;
 
 namespace Zeus
 {
 	[RestrictParents(typeof(ContentItem))]
-	public abstract class ContentItem : IUrlParserDependency
+	public abstract class ContentItem : IUrlParserDependency, INode, IEditableObject
 	{
 		#region Private Fields
 
-		private IList<AuthorizedRole> _authorizedRoles;
+		private IList<AuthorizationRule> _authorizationRules;
+		private IList<LanguageSetting> _languageSettings;
 		private string _name;
-		private string _url;
-		private DateTime? _published = DateTime.Now;
-		private DateTime? _expires = null;
+		private DateTime? _expires;
 		private IList<ContentItem> _children = new List<ContentItem>();
-		private IDictionary<string, ContentTypes.Properties.ContentDetail> _details = new Dictionary<string, ContentTypes.Properties.ContentDetail>();
-		private IDictionary<string, ContentTypes.Properties.DetailCollection> _detailCollections = new Dictionary<string, ContentTypes.Properties.DetailCollection>();
+		private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
+		private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
+		private string _url;
+		[Copy]
 		private IUrlParser _urlParser;
 
 		#endregion
 
 		#region Public Properties (persisted)
 
+		/// <summary>Gets or sets zone name which is associated with data items and their placement on a page.</summary>
+		// TODO: Remove this and put it in WidgetContentItem
+		[Copy]
+		public virtual string ZoneName { get; set; }
+
 		/// <summary>Gets or sets item ID.</summary>
-		public virtual int ID
-		{
-			get;
-			set;
-		}
+		public virtual int ID { get; set; }
 
 		/// <summary>Gets or sets this item's parent. This can be null for root items and previous versions but should be another page in other situations.</summary>
-		public virtual ContentItem Parent
-		{
-			get;
-			set;
-		}
+		public virtual ContentItem Parent { get; set; }
 
 		/// <summary>Gets or sets the item's title. This is used in edit mode and probably in a custom implementation.</summary>
-		public virtual string Title
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual string Title { get; set; }
 
 		/// <summary>Gets or sets the item's name. This is used to compute the item's url and can be used to uniquely identify the item among other items on the same level.</summary>
+		[Copy]
 		public virtual string Name
 		{
 			get
@@ -69,33 +71,16 @@ namespace Zeus
 			}
 		}
 
-		/// <summary>Gets or sets zone name which is associated with data items and their placement on a page.</summary>
-		public virtual string ZoneName
-		{
-			get;
-			set;
-		}
-
 		/// <summary>Gets or sets when this item was initially created.</summary>
-		public virtual DateTime Created
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual DateTime Created { get; set; }
 
 		/// <summary>Gets or sets the date this item was updated.</summary>
-		public virtual DateTime Updated
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual DateTime Updated { get; set; }
 
 		/// <summary>Gets or sets the publish date of this item.</summary>
-		public virtual DateTime? Published
-		{
-			get { return _published; }
-			set { _published = value; }
-		}
+		public virtual DateTime? Published { get; set; }
 
 		/// <summary>Gets or sets the expiration date of this item.</summary>
 		public virtual DateTime? Expires
@@ -105,42 +90,44 @@ namespace Zeus
 		}
 
 		/// <summary>Gets or sets the sort order of this item.</summary>
-		public virtual int SortOrder
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual int SortOrder { get; set; }
 
 		/// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
-		public virtual bool Visible
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual bool Visible { get; set; }
 
 		/// <summary>Gets or sets the published version of this item. If this value is not null then this item is a previous version of the item specified by VersionOf.</summary>
-		public virtual ContentItem VersionOf
-		{
-			get;
-			set;
-		}
+		public virtual ContentItem VersionOf { get; set; }
+
+		/// <summary>
+		/// Gets or sets the version number of this item. This starts at 1, and increases for later versions.
+		/// </summary>
+		[Copy]
+		public virtual int Version { get; set; }
+
+		/// <summary>Gets or sets the original language version of this item. If this value is not null then this item is a translated version of the item specified by TranslationOf.</summary>
+		public virtual ContentItem TranslationOf { get; set; }
+
+		/// <summary>
+		/// Gets or sets the language code of this item.
+		/// </summary>
+		[Copy]
+		public virtual string Language { get; set; }
 
 		/// <summary>Gets or sets the name of the identity who saved this item.</summary>
-		public virtual string SavedBy
-		{
-			get;
-			set;
-		}
+		[Copy]
+		public virtual string SavedBy { get; set; }
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		public virtual IDictionary<string, ContentTypes.Properties.ContentDetail> Details
+		public virtual IDictionary<string, PropertyData> Details
 		{
 			get { return _details; }
 			set { _details = value; }
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		public virtual IDictionary<string, ContentTypes.Properties.DetailCollection> DetailCollections
+		public virtual IDictionary<string, PropertyCollection> DetailCollections
 		{
 			get { return _detailCollections; }
 			set { _detailCollections = value; }
@@ -157,58 +144,16 @@ namespace Zeus
 
 		#region Public Properties (generated)
 
-		public string HierarchicalTitle
-		{
-			get
-			{
-				string result = this.Title;
-				if (this.Parent != null)
-					result = this.Parent.HierarchicalTitle + " - " + result;
-				return result;
-			}
-		}
-
 		/// <summary>The default file extension for this content item, e.g. ".aspx".</summary>
 		public virtual string Extension
 		{
-			get { return ".aspx"; }
+			get { return Isis.Web.Url.DefaultExtension; }
 		}
 
-		/// <summary>Gets whether this item is a page. This is used for and site map purposes.</summary>
+		/// <summary>Gets whether this item is a page. This is used for site map purposes.</summary>
 		public virtual bool IsPage
 		{
 			get { return true; }
-		}
-
-		/// <summary>Gets the template that handle the presentation of this content item. For non page items (IsPage) this can be a user control (ascx).</summary>
-		public virtual string TemplateUrl
-		{
-			get { return "~/default.aspx"; }
-		}
-
-		/// <summary>Gets the icon of this item. This can be used to distinguish item types in edit mode.</summary>
-		public virtual string IconUrl
-		{
-			get { return Web.Url.ToAbsolute("~/admin/assets/images/icons/" + (IsPage ? "page.png" : "page_white.png")); }
-		}
-
-		/// <summary>Gets the non-friendly url to this item (e.g. "/default.aspx?page=1"). This is used to uniquely identify this item when rewriting to the template page. Non-page items have two query string properties; page and item (e.g. "/default.aspx?page=1&amp;item&#61;27").</summary>
-		public virtual string RewrittenUrl
-		{
-			get
-			{
-				if (IsPage)
-					return Zeus.Web.Url.Parse(this.TemplateUrl).AppendQuery("page", ID).ToString();
-
-				for (ContentItem ancestorItem = this.Parent; ancestorItem != null; ancestorItem = ancestorItem.Parent)
-					if (ancestorItem.IsPage)
-						return new Url(Web.Url.ToAbsolute(ancestorItem.TemplateUrl)).AppendQuery("page", ancestorItem.ID).AppendQuery("item", ID).ToString();
-
-				if (VersionOf != null)
-					return VersionOf.TemplateUrl;
-
-				throw new TemplateNotFoundException(this);
-			}
 		}
 
 		/// <summary>
@@ -219,10 +164,50 @@ namespace Zeus
 		{
 			get
 			{
-				return _url ?? (_url =
-					(_urlParser != null && VersionOf == null)
-						? _urlParser.BuildUrl(this)
-						: RewrittenUrl);
+				if (_url == null)
+				{
+					if (_urlParser != null)
+						_url = _urlParser.BuildUrl(this);
+					else
+						_url = FindPath(PathData.DefaultAction).RewrittenUrl;
+				}
+				return _url;
+			}
+		}
+
+		/// <summary>
+		/// Allows the default language code to be overridden for the purposes of generating a URL.
+		/// This is used by NameEditorAttribute to get the URL for a parent item using the new child's
+		/// language.
+		/// </summary>
+		/// <param name="languageCode"></param>
+		/// <returns></returns>
+		public virtual string GetUrl(string languageCode)
+		{
+			if (_urlParser != null)
+				return _urlParser.BuildUrl(this, languageCode);
+			return FindPath(PathData.DefaultAction).RewrittenUrl;
+		}
+
+		public string HierarchicalTitle
+		{
+			get
+			{
+				string result = this.Title;
+				if (Parent != null)
+					result = Parent.HierarchicalTitle + " - " + result;
+				return result;
+			}
+		}
+
+		/// <summary>Gets the icon of this item. This can be used to distinguish item types in edit mode.</summary>
+		public virtual string IconUrl
+		{
+			get
+			{
+				if (IsPage)
+					return Isis.Web.Url.ToAbsolute("~/admin/assets/images/icons/page.png");
+				return Isis.Web.Url.ToAbsolute("~/admin/assets/images/icons/page_white.png");
 			}
 		}
 
@@ -232,7 +217,10 @@ namespace Zeus
 			get
 			{
 				string path = "/";
-				for (ContentItem item = this; item.Parent != null; item = item.Parent)
+				ContentItem startingParent = (TranslationOf != null) ? TranslationOf.Parent : Parent;
+				if (startingParent != null)
+					path += Name;
+				for (ContentItem item = startingParent; item != null && item.Parent != null; item = item.Parent)
 					path = "/" + item.Name + path;
 				return path;
 			}
@@ -241,15 +229,27 @@ namespace Zeus
 		#endregion
 
 		/// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
-		public virtual IList<AuthorizedRole> AuthorizedRoles
+		public virtual IList<AuthorizationRule> AuthorizationRules
 		{
 			get
 			{
-				if (_authorizedRoles == null)
-					_authorizedRoles = new List<Security.AuthorizedRole>();
-				return _authorizedRoles;
+				if (_authorizationRules == null)
+					_authorizationRules = new List<AuthorizationRule>();
+				return _authorizationRules;
 			}
-			set { _authorizedRoles = value; }
+			set { _authorizationRules = value; }
+		}
+
+		/// <summary>Gets an array of language settings for this item. Null or empty list is interpreted as this item inheriting its settings from its parent.</summary>
+		public virtual IList<LanguageSetting> LanguageSettings
+		{
+			get
+			{
+				if (_languageSettings == null)
+					_languageSettings = new List<LanguageSetting>();
+				return _languageSettings;
+			}
+			set { _languageSettings = value; }
 		}
 
 		#region this[]
@@ -274,8 +274,6 @@ namespace Zeus
 						return Name;
 					case "Url":
 						return Url;
-					case "TemplateUrl":
-						return TemplateUrl;
 					default:
 						return Utility.Evaluate(this, detailName)
 							?? GetDetail(detailName)
@@ -285,7 +283,7 @@ namespace Zeus
 			set
 			{
 				if (string.IsNullOrEmpty(detailName))
-					throw new ArgumentNullException("Parameter 'detailName' cannot be null or empty.", "detailName");
+					throw new ArgumentNullException("detailName", "Parameter 'detailName' cannot be null or empty.");
 
 				PropertyInfo info = GetType().GetProperty(detailName);
 				if (info != null && info.CanWrite)
@@ -294,8 +292,11 @@ namespace Zeus
 						value = Utility.Convert(value, info.PropertyType);
 					info.SetValue(this, value, null);
 				}
-				else if (value is ContentTypes.Properties.DetailCollection)
-					throw new ZeusException("Cannot set a detail collection this way, add it to the DetailCollections collection instead.");
+				else if (value is PropertyCollection)
+				{
+					DetailCollections[detailName] = (PropertyCollection) value;
+					//throw new ZeusException("Cannot set a detail collection this way, add it to the DetailCollections collection instead.");
+				}
 				else
 				{
 					SetDetail(detailName, value);
@@ -304,12 +305,13 @@ namespace Zeus
 		}
 		#endregion
 
-		public ContentItem()
+		protected ContentItem()
 		{
-			this.Created = DateTime.Now;
-			this.Updated = DateTime.Now;
-			this.Published = DateTime.Now;
-			this.Visible = true;
+			Created = DateTime.Now;
+			Updated = DateTime.Now;
+			Published = DateTime.Now;
+			Visible = true;
+			Version = 1;
 		}
 
 		#region GetDetail & SetDetail<T> Methods
@@ -319,8 +321,9 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual object GetDetail(string detailName)
 		{
-			return Details.ContainsKey(detailName)
-				? Details[detailName].Value
+			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
+			return details.ContainsKey(detailName)
+				? details[detailName].Value
 				: null;
 		}
 
@@ -330,35 +333,38 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual T GetDetail<T>(string detailName, T defaultValue)
 		{
-			return Details.ContainsKey(detailName)
-				? (T) Details[detailName].Value
-				: defaultValue;
+			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
+			if (details.ContainsKey(detailName))
+			{
+				if (typeof(T).IsAssignableFrom(details[detailName].Value.GetType()))
+					return (T) details[detailName].Value;
+				throw new ZeusException("Cannot cast detail name '{0}' to type '{1}'", detailName, typeof(T).Name);
+			}
+			return defaultValue;
 		}
 
-		/// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten. If the value equals the default value it will be removed from the details bag.</summary>
-		/// <param name="detailName">The name of the item to set.</param>
-		/// <param name="value">The value to set. If this parameter is null or equal to defaultValue the detail is removed.</param>
-		/// <param name="defaultValue">The default value. If the value is equal to this value the detail will be removed.</param>
-		protected virtual void SetDetail<T>(string detailName, T value, T defaultValue)
+		private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
 		{
-			if (value == null || !value.Equals(defaultValue))
+			// Look up content property matching this name.
+			if (Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName).Shared)
 			{
-				SetDetail<T>(detailName, value);
+				ContentItem currentItem = VersionOf ?? this;
+				if (currentItem.TranslationOf != null)
+					return currentItem.TranslationOf.Details;
 			}
-			else if (Details.ContainsKey(detailName))
-			{
-				_details.Remove(detailName);
-			}
+			return Details;
 		}
 
-		/// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten.</summary>
-		/// <param name="detailName">The name of the item to set.</param>
-		/// <param name="value">The value to set. If this parameter is null the detail is removed.</param>
-		protected virtual void SetDetail<T>(string detailName, T value)
+		public virtual void SetDetail(string detailName, object value)
 		{
-			ContentTypes.Properties.ContentDetail detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
+			// TODO: Throw exception if this is a shared property and this is not the master language version.
 
-			if (detail != null && value != null && typeof(T).IsAssignableFrom(detail.ValueType))
+			if (string.IsNullOrEmpty(detailName))
+				throw new ArgumentNullException("detailName");
+
+			PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
+
+			if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
 			{
 				// update an existing detail
 				detail.Value = value;
@@ -369,9 +375,32 @@ namespace Zeus
 					// delete detail or remove detail of wrong type
 					Details.Remove(detailName);
 				if (value != null)
+				{
 					// add new detail
-					Details.Add(detailName, Zeus.ContentTypes.Properties.ContentDetail.New(this, detailName, value));
+					PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
+					Details.Add(detailName, propertyData);
+				}
 			}
+		}
+
+		/// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten. If the value equals the default value it will be removed from the details bag.</summary>
+		/// <param name="detailName">The name of the item to set.</param>
+		/// <param name="value">The value to set. If this parameter is null or equal to defaultValue the detail is removed.</param>
+		/// <param name="defaultValue">The default value. If the value is equal to this value the detail will be removed.</param>
+		protected virtual void SetDetail<T>(string detailName, T value, T defaultValue)
+		{
+			if (value == null || !value.Equals(defaultValue))
+				SetDetail(detailName, value);
+			else if (Details.ContainsKey(detailName))
+				_details.Remove(detailName);
+		}
+
+		/// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten.</summary>
+		/// <param name="detailName">The name of the item to set.</param>
+		/// <param name="value">The value to set. If this parameter is null the detail is removed.</param>
+		protected virtual void SetDetail<T>(string detailName, T value)
+		{
+			SetDetail(detailName, (object) value);
 		}
 
 		#endregion
@@ -382,13 +411,13 @@ namespace Zeus
 		/// <param name="collectionName">The name of the detail collection to get.</param>
 		/// <param name="createWhenEmpty">Wether a new collection should be created if none exists. Setting this to false means null will be returned if no collection exists.</param>
 		/// <returns>A new or existing detail collection or null if the createWhenEmpty parameter is false and no collection with the given name exists..</returns>
-		public virtual ContentTypes.Properties.DetailCollection GetDetailCollection(string collectionName, bool createWhenEmpty)
+		public virtual PropertyCollection GetDetailCollection(string collectionName, bool createWhenEmpty)
 		{
 			if (DetailCollections.ContainsKey(collectionName))
 				return DetailCollections[collectionName];
 			else if (createWhenEmpty)
 			{
-				ContentTypes.Properties.DetailCollection collection = new ContentTypes.Properties.DetailCollection(this, collectionName);
+				PropertyCollection collection = new PropertyCollection(this, collectionName);
 				DetailCollections.Add(collectionName, collection);
 				return collection;
 			}
@@ -439,8 +468,8 @@ namespace Zeus
 			}
 		}
 
-		/// <summary>Creats a copy of this item including details and authorized roles resetting ID.</summary>
-		/// <param name="includeChildren">Wether this item's child items also should be cloned.</param>
+		/// <summary>Creats a copy of this item including details, authorization rules, and language settings, while resetting ID.</summary>
+		/// <param name="includeChildren">Specifies whether this item's child items also should be cloned.</param>
 		/// <returns>The cloned item with or without cloned child items.</returns>
 		public virtual ContentItem Clone(bool includeChildren)
 		{
@@ -450,22 +479,38 @@ namespace Zeus
 
 			CloneDetails(cloned);
 			CloneChildren(includeChildren, cloned);
-			CloneAuthorizedRoles(cloned);
+			CloneAuthorizationRules(cloned);
+			CloneLanguageSettings(cloned);
 
 			return cloned;
 		}
 
 		#region Clone Helper Methods
-		private void CloneAuthorizedRoles(ContentItem cloned)
+
+		private void CloneAuthorizationRules(ContentItem cloned)
 		{
-			if (AuthorizedRoles != null)
+			if (AuthorizationRules != null)
 			{
-				cloned.AuthorizedRoles = new List<Security.AuthorizedRole>();
-				foreach (Security.AuthorizedRole role in AuthorizedRoles)
+				cloned.AuthorizationRules = new List<AuthorizationRule>();
+				foreach (AuthorizationRule rule in AuthorizationRules)
 				{
-					Security.AuthorizedRole clonedRole = role.Clone();
-					clonedRole.EnclosingItem = cloned;
-					cloned.AuthorizedRoles.Add(clonedRole);
+					AuthorizationRule clonedRule = rule.Clone();
+					clonedRule.EnclosingItem = cloned;
+					cloned.AuthorizationRules.Add(clonedRule);
+				}
+			}
+		}
+
+		private void CloneLanguageSettings(ContentItem cloned)
+		{
+			if (LanguageSettings != null)
+			{
+				cloned.LanguageSettings = new List<LanguageSetting>();
+				foreach (LanguageSetting languageSetting in LanguageSettings)
+				{
+					LanguageSetting clonedLanguageSetting = languageSetting.Clone();
+					clonedLanguageSetting.EnclosingItem = cloned;
+					cloned.LanguageSettings.Add(clonedLanguageSetting);
 				}
 			}
 		}
@@ -474,29 +519,28 @@ namespace Zeus
 		{
 			cloned.Children = new List<ContentItem>();
 			if (includeChildren)
-			{
 				foreach (ContentItem child in Children)
 				{
 					ContentItem clonedChild = child.Clone(true);
 					clonedChild.AddTo(cloned);
 				}
-			}
 		}
 
 		private void CloneDetails(ContentItem cloned)
 		{
-			cloned.Details = new Dictionary<string, Zeus.ContentTypes.Properties.ContentDetail>();
-			foreach (Zeus.ContentTypes.Properties.ContentDetail detail in Details.Values)
+			cloned.Details = new Dictionary<string, PropertyData>();
+			foreach (var detail in Details.Values)
 				cloned[detail.Name] = detail.Value;
 
-			cloned.DetailCollections = new Dictionary<string, Zeus.ContentTypes.Properties.DetailCollection>();
-			foreach (Zeus.ContentTypes.Properties.DetailCollection collection in DetailCollections.Values)
+			cloned.DetailCollections = new Dictionary<string, PropertyCollection>();
+			foreach (PropertyCollection collection in DetailCollections.Values)
 			{
-				Zeus.ContentTypes.Properties.DetailCollection clonedCollection = collection.Clone();
+				PropertyCollection clonedCollection = collection.Clone();
 				clonedCollection.EnclosingItem = cloned;
 				cloned.DetailCollections[collection.Name] = clonedCollection;
 			}
 		}
+
 		#endregion
 
 		public TAncestor FindFirstAncestor<TAncestor>()
@@ -517,6 +561,18 @@ namespace Zeus
 			return FindFirstAncestorRecursive<TAncestor>(contentItem.Parent);
 		}
 
+		/// <summary>Gets children the current user is allowed to access belonging to a certain zone, i.e. get only children with a certain zone name. </summary>
+		/// <param name="childZoneName">The name of the zone.</param>
+		/// <returns>A list of items that have the specified zone name.</returns>
+		/// <remarks>This method is used by Zeus when when non-page items are added to a zone on a page and in edit mode when displaying which items are placed in a certain zone. Keep this in mind when overriding this method.</remarks>
+		public virtual IList<ContentItem> GetChildren(string childZoneName)
+		{
+			return GetChildren(
+				new CompositeSpecification<ContentItem>(
+					new ZoneSpecification<ContentItem>(childZoneName),
+					new AccessSpecification<ContentItem>(Operations.Read)));
+		}
+
 		/// <summary>
 		/// Gets child items that the user is allowed to access.
 		/// It doesn't have to return the same collection as
@@ -525,29 +581,122 @@ namespace Zeus
 		/// <returns></returns>
 		public virtual IList<ContentItem> GetChildren()
 		{
-			return GetChildren(new AccessFilter());
+			return GetChildren(new AccessSpecification<ContentItem>(HttpContext.Current.User, Context.SecurityManager, Operations.Read));
 		}
 
 		/// <summary>Gets children applying filters.</summary>
-		/// <param name="filters">The filters to apply on the children.</param>
+		/// <param name="specifications">The filters to apply on the children.</param>
 		/// <returns>A list of filtered child items.</returns>
-		public virtual IList<ContentItem> GetChildren(params ItemFilter[] filters)
+		public virtual IList<T> GetChildren<T>(params ISpecification<T>[] specifications)
+			where T : ContentItem
 		{
-			return GetChildren(new CompositeFilter(filters));
+			return GetChildren(new CompositeSpecification<T>(specifications));
 		}
 
 		/// <summary>Gets children applying filters.</summary>
-		/// <param name="filter">The filters to apply on the children.</param>
+		/// <param name="specification">The filters to apply on the children.</param>
 		/// <returns>A list of filtered child items.</returns>
-		public virtual IList<ContentItem> GetChildren(ItemFilter filter)
+		public virtual IList<T> GetChildren<T>(ISpecification<T> specification)
+			where T : ContentItem
 		{
-			IEnumerable<ContentItem> items = this.VersionOf == null ? this.Children : this.VersionOf.Children;
-			return filter.Filter(items.AsQueryable()).ToList();
+			return GetChildrenInternal().AsQueryable().OfType<T>().Where(specification.Predicate).ToList();
 		}
 
 		public virtual IList<T> GetChildren<T>()
 		{
-			return this.Children.OfType<T>().ToList();
+			return GetChildrenInternal().OfType<T>().ToList();
+		}
+
+		private IList<ContentItem> GetChildrenInternal()
+		{
+			ContentItem realItem = this;
+			if (VersionOf != null)
+				realItem = realItem.VersionOf;
+			if (TranslationOf != null)
+				realItem = realItem.TranslationOf;
+			return realItem.Children;
+		}
+
+		/// <summary>Finds children based on the given url segments. The method supports convering the last segments into action and parameter.</summary>
+		/// <param name="remainingUrl">The remaining url segments.</param>
+		/// <returns>A path data object which can be empty (check using data.IsEmpty()).</returns>
+		public virtual PathData FindPath(string remainingUrl)
+		{
+			return FindPath(remainingUrl, Context.Current.LanguageManager.GetDefaultLanguage());
+		}
+		
+		public virtual PathData FindPath(string remainingUrl, string languageCode)
+		{
+			// Get correct translation.
+			ContentItem translation = Context.Current.LanguageManager.GetTranslation(this, languageCode) ?? this;
+
+			if (remainingUrl == null)
+				return translation.GetTemplate(string.Empty);
+
+			remainingUrl = remainingUrl.TrimStart('/');
+
+			if (remainingUrl.Length == 0)
+				return translation.GetTemplate(string.Empty);
+
+			int slashIndex = remainingUrl.IndexOf('/');
+			string nameSegment = slashIndex < 0 ? remainingUrl : remainingUrl.Substring(0, slashIndex);
+			foreach (ContentItem child in translation.GetChildren(new NullSpecification<ContentItem>()))
+			{
+				// Get correct translation.
+				ContentItem childTranslation = Context.Current.LanguageManager.GetTranslation(child, languageCode);
+				if (childTranslation != null && childTranslation.Equals(nameSegment))
+				{
+					remainingUrl = slashIndex < 0 ? null : remainingUrl.Substring(slashIndex + 1);
+					return childTranslation.FindPath(remainingUrl, languageCode);
+				}
+			}
+
+			return GetTemplate(remainingUrl);
+		}
+
+		private PathData GetTemplate(string remainingUrl)
+		{
+			var finderDictionary = SingletonDictionary<Type, IList<IPathFinder>>.Instance;
+			var itemType = GetType();
+			if (!finderDictionary.ContainsKey(itemType))
+			{
+				finderDictionary[itemType] = GetPathFinders(itemType);
+			}
+
+			foreach (IPathFinder finder in finderDictionary[itemType])
+			{
+				PathData data = finder.GetPath(this, remainingUrl);
+				if (data != null)
+					return data;
+			}
+
+			return PathData.EmptyTemplate();
+		}
+
+		/// <summary>Looks up path finders for a certain type using reflection.</summary>
+		/// <param name="itemType">The type of item whose path finders to get.</param>
+		/// <returns>A list of path finders that decorates the item class and it's base types.</returns>
+		public static List<IPathFinder> GetPathFinders(Type itemType)
+		{
+			object[] attributes = itemType.GetCustomAttributes(typeof(IPathFinder), true);
+			List<IPathFinder> pathFinders = new List<IPathFinder>(attributes.Length);
+			foreach (IPathFinder finder in attributes)
+			{
+				pathFinders.Add(finder);
+			}
+			return pathFinders;
+		}
+
+		/// <summary>
+		/// Translations don't have their Parent object set, so this is an abstraction to allow
+		/// translations to act as normal content items.
+		/// </summary>
+		/// <returns></returns>
+		public virtual ContentItem GetParent()
+		{
+			if (TranslationOf != null)
+				return TranslationOf.Parent;
+			return Parent;
 		}
 
 		/// <summary>
@@ -574,16 +723,18 @@ namespace Zeus
 			else if (slashIndex > 0) // contains a slash further down
 			{
 				string nameSegment = childName.Substring(0, slashIndex);
-				foreach (ContentItem child in GetChildren(new NullFilter()))
-					if (child.Equals(nameSegment))
-						return child.GetChild(childName.Substring(slashIndex));
+				foreach (ContentItem child in GetChildren(new NullSpecification<ContentItem>()))
+					foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
+						if (translation.Equals(nameSegment))
+							return translation.GetChild(childName.Substring(slashIndex));
 				return null;
 			}
 			else // no slash, only a name
 			{
-				foreach (ContentItem child in GetChildren(new NullFilter()))
-					if (child.Equals(childName))
-						return child;
+				foreach (ContentItem child in GetChildren(new NullSpecification<ContentItem>()))
+					foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
+						if (translation.Equals(childName))
+							return translation;
 				return null;
 			}
 		}
@@ -608,23 +759,24 @@ namespace Zeus
 
 		protected virtual bool Equals(string name)
 		{
-			return this.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+			return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		/// <summary>Gets wether a certain user is authorized to view this item.</summary>
 		/// <param name="user">The user to check.</param>
+		/// <param name="operation"></param>
 		/// <returns>True if the item is open for all or the user has the required permissions.</returns>
-		public virtual bool IsAuthorised(IPrincipal user)
+		public virtual bool IsAuthorized(IPrincipal user, string operation)
 		{
-			if (AuthorizedRoles == null || AuthorizedRoles.Count == 0)
+			if (AuthorizationRules == null || AuthorizationRules.Count == 0)
 				return true;
 
-			// Iterate allowed roles to find an allowed role
-			foreach (Security.AuthorizedRole auth in this.AuthorizedRoles)
-				if (auth.IsAuthorized(user))
+			// Iterate rules to find a rule that matches
+			foreach (AuthorizationRule auth in AuthorizationRules)
+				if (auth.IsAuthorized(user, operation))
 					return true;
-			return false;
 
+			return false;
 		}
 
 		#endregion
@@ -633,5 +785,66 @@ namespace Zeus
 		{
 			_urlParser = parser;
 		}
+
+		#region INode Members
+
+		string INode.PreviewUrl
+		{
+			get
+			{
+				if (IsPage)
+					return Url;
+				return Context.Current.Resolve<IAdminManager>().GetEmbeddedResourceUrl(Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.View.aspx") + "?selected=" + Path;
+			}
+		}
+
+		string INode.ClassNames
+		{
+			get
+			{
+				StringBuilder className = new StringBuilder();
+
+				if (!Published.HasValue || Published > DateTime.Now)
+					className.Append("unpublished ");
+				else if (Published > DateTime.Now.AddDays(-1))
+					className.Append("day ");
+				else if (Published > DateTime.Now.AddDays(-7))
+					className.Append("week ");
+				else if (Published > DateTime.Now.AddMonths(-1))
+					className.Append("month ");
+
+				if (Expires.HasValue && Expires <= DateTime.Now)
+					className.Append("expired ");
+
+				if (!Visible)
+					className.Append("invisible ");
+
+				if (AuthorizationRules != null && AuthorizationRules.Count > 0)
+					className.Append("locked ");
+
+				return className.ToString();
+			}
+		}
+
+		#endregion
+
+		#region ILink Members
+
+		string ILink.Contents
+		{
+			get { return Title; }
+		}
+
+		string ILink.ToolTip
+		{
+			get { return string.Empty; }
+		}
+
+		string ILink.Target
+		{
+			get { return string.Empty; }
+		}
+
+		#endregion
 	}
 }

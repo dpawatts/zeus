@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using Isis.Collections;
 using Zeus.Persistence;
 using Zeus.Engine;
 using System.Web;
@@ -8,16 +11,19 @@ namespace Zeus
 {
 	public static class Context
 	{
-		private static ContentEngine _engine;
-
 		public static ContentEngine Current
 		{
 			get
 			{
-				if (_engine == null)
-					_engine = new ContentEngine();
-				return _engine;
+				if (Singleton<ContentEngine>.Instance == null)
+					Initialize(false);
+				return Singleton<ContentEngine>.Instance;
 			}
+		}
+
+		public static Admin.IAdminManager AdminManager
+		{
+			get { return Current.AdminManager; }
 		}
 
 		public static ContentTypes.IContentTypeManager ContentTypes
@@ -31,6 +37,11 @@ namespace Zeus
 		public static ContentItem CurrentPage
 		{
 			get { return Current.UrlParser.CurrentPage; }
+		}
+
+		public static IFinder<ContentItem> Finder
+		{
+			get { return Current.Finder; }
 		}
 
 		/// <summary>
@@ -49,6 +60,26 @@ namespace Zeus
 		public static IUrlParser UrlParser
 		{
 			get { return Current.UrlParser; }
+		}
+
+		/// <summary>Initializes a static instance of the Zeus context.</summary>
+		/// <param name="forceRecreate">Creates a new context instance even though the context has been previously initialized.</param>
+		[MethodImpl(MethodImplOptions.Synchronized)]
+		public static ContentEngine Initialize(bool forceRecreate)
+		{
+			if (Singleton<ContentEngine>.Instance == null || forceRecreate)
+			{
+				Debug.WriteLine("Constructing engine " + DateTime.Now);
+				Singleton<ContentEngine>.Instance = CreateEngineInstance();
+				Debug.WriteLine("Initializing engine " + DateTime.Now);
+				Singleton<ContentEngine>.Instance.Initialize();
+			}
+			return Singleton<ContentEngine>.Instance;
+		}
+
+		private static ContentEngine CreateEngineInstance()
+		{
+			return new ContentEngine(EventBroker.Instance);
 		}
 	}
 }

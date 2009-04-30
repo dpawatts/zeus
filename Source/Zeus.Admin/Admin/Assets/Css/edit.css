@@ -4,6 +4,11 @@ div.editDetail
 	clear: both;
 }
 
+div.editDetail label 
+{
+	color: #808285;
+}
+
 .editorLabel {
 	width: 150px;
 	float: left;
@@ -26,8 +31,14 @@ input[type="text"], textarea, div.editDetail > select
 input[type="text"], textarea
 {
 	font-size: 13px;
-	background: #FFF url(../images/edit/inputGradient.png) repeat-x top left;
+	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png") %>) repeat-x top left;
 }
+
+input[disabled], input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly]
+{
+ background: #dcdcdc;
+ cursor: default;
+} 
 
 textarea
 {
@@ -59,12 +70,6 @@ span.fileName
 	margin-left: 165px;
 }
 
-div.validationSummary {
-	border: 1px dashed #FF0000;
-	padding: 10px;
-	background-color: #FDE1E2;
-}
-
 input[type="text"].required, textarea.required, select.required {
 	border: 1px solid #E6ACAC;
 }
@@ -79,7 +84,7 @@ input[type="text"].price
 	width: 60px;
 }
 
-.checkBoxList, .linkedItemList {
+.checkBoxList {
 	display: block;
 	float: left;
 }
@@ -90,7 +95,7 @@ input[type="text"].price
 
 fieldset
 {
-	background: #FFF url(../images/edit/fieldsetGradient.png) repeat-x bottom left;
+	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.FieldsetGradient.png") %>) repeat-x bottom left;
 	border: solid 1px #CECECE;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
@@ -129,7 +134,7 @@ fieldset legend
 	width: auto;
 }
 
-.prefix
+.prefix, .postfix
 {
 	color: #808285;
 	font-size: 14px;
@@ -153,8 +158,11 @@ span.nameLabel
 {
 	font-size: 14px;
 	color: #808285;
-	display: block;
-	float: left;
+}
+
+input.nameEditor
+{
+	width: 300px;
 }
 
 span.edit {
@@ -175,16 +183,74 @@ span.edit a {
 }
 
 span.edit a {
-	background: url('../images/view/edit.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.edit.gif") %>) top left no-repeat;
 }
 
 span.edit a:hover {
 	background-position: bottom left;
 }
 
+.right
+{
+	position: absolute;
+	top: 40px;
+	right: 10px;
+	width: 220px;
+	background-color: White;
+	z-index: 10;
+}
+
+.right fieldset
+{
+	margin-right: 0;
+}
+
+/* Zones */
+.zonesBox a
+{
+	color:#333;
+	font-weight:normal;
+	text-decoration:none;
+}
+.zonesBox dl
+{
+	margin:0;
+}
+.zonesBox dt
+{
+	padding:5px 0;
+	font-size:1.1em;
+	font-weight:bold;
+	display:block;
+}
+.zonesBox dt a
+{
+	float:right;
+	padding:2px;
+}
+.zonesBox dd
+{
+	margin:0;
+	padding:0 0 5px 5px;
+}
+
+.linkedItemsEditor
+{
+	float: left;
+	width: 500px;
+}
+
+.linkedItemsEditor fieldset
+{
+	padding: 10px;
+}
+
+.linkedItemsEditor legend
+{
+	margin-left: -5px;
+}
+
 .linkedItem
 {
-	margin-top: 5px;
-	margin-left: 5px;
 	width: 465px;
 }

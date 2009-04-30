@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4F45064D-15DC-4DE2-9E0F-FD38E241CF4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zeus.AddIns.Forums.Mvc</RootNamespace>
+    <AssemblyName>Zeus.AddIns.Forums.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Isis\Libraries\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcValidatorToolkit, Version=1.0.0.24722, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MvcValidatorToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\BaseForumController.cs" />
+    <Compile Include="Controllers\PostingController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
+    <Compile Include="Controllers\MessageBoardController.cs" />
+    <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\FrameworkBlocks\WebAuthentication\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.AddIns.Forums\Zeus.AddIns.Forums.csproj">
+      <Project>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</Project>
+      <Name>Zeus.AddIns.Forums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates.Mvc\Zeus.Templates.Mvc.csproj">
+      <Project>{0ADE208D-2C8D-46AE-A433-2F21505B628C}</Project>
+      <Name>Zeus.Templates.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
+      <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
+      <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus\Zeus.csproj">
+      <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
+      <Name>Zeus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

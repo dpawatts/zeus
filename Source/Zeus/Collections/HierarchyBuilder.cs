@@ -1,12 +1,11 @@
-﻿using System;
-using Zeus.Linq.Filters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Zeus.Persistence.Specifications;
 
 namespace Zeus.Collections
 {
 	public abstract class HierarchyBuilder
 	{
-		public ItemFilter[] Filters
+		public ISpecification<ContentItem>[] Filters
 		{
 			get;
 			set;
@@ -14,17 +13,17 @@ namespace Zeus.Collections
 
 		public abstract HierarchyNode<ContentItem> Build();
 
-		public HierarchyNode<ContentItem> Build(ItemFilter[] filters)
+		public HierarchyNode<ContentItem> Build(ISpecification<ContentItem>[] filters)
 		{
-			this.Filters = filters;
+			Filters = filters;
 			return Build();
 		}
 
 		protected virtual IList<ContentItem> GetChildren(ContentItem currentItem)
 		{
-			return this.Filters == null
+			return Filters == null
 				? currentItem.GetChildren()
-				: currentItem.GetChildren(this.Filters);
+				: currentItem.GetChildren(Filters);
 		}
 	}
 }

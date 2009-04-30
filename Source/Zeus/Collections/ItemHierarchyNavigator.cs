@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Zeus.Linq.Filters;
+﻿using System.Collections.Generic;
+using Zeus.Persistence.Specifications;
 
 namespace Zeus.Collections
 {
@@ -9,14 +8,20 @@ namespace Zeus.Collections
 	/// </summary>
 	public class ItemHierarchyNavigator : IHierarchyNavigator<ContentItem>
 	{
-		private readonly HierarchyNode<ContentItem> _currentNode = null;
+		#region Fields
+
+		private readonly HierarchyNode<ContentItem> _currentNode;
+
+		#endregion
+
+		#region Constructors
 
 		public ItemHierarchyNavigator(HierarchyNode<ContentItem> currentNode)
 		{
 			_currentNode = currentNode;
 		}
 
-		public ItemHierarchyNavigator(HierarchyBuilder builder, params ItemFilter[] filters)
+		public ItemHierarchyNavigator(HierarchyBuilder builder, params ISpecification<ContentItem>[] filters)
 		{
 			_currentNode = builder.Build(filters);
 		}
@@ -26,10 +31,47 @@ namespace Zeus.Collections
 			_currentNode = builder.Build();
 		}
 
+		#endregion
+
+		#region Properties
+
 		public HierarchyNode<ContentItem> CurrentNode
 		{
 			get { return _currentNode; }
 		}
+
+		public IHierarchyNavigator<ContentItem> Parent
+		{
+			get
+			{
+				if (_currentNode.Parent != null)
+					return new ItemHierarchyNavigator(_currentNode.Parent);
+				return null;
+			}
+		}
+
+		public IEnumerable<IHierarchyNavigator<ContentItem>> Children
+		{
+			get
+			{
+				foreach (HierarchyNode<ContentItem> childNode in _currentNode.Children)
+					yield return new ItemHierarchyNavigator(childNode);
+			}
+		}
+
+		public ContentItem Current
+		{
+			get { return _currentNode.Current; }
+		}
+
+		public bool HasChildren
+		{
+			get { return _currentNode.Children.Count > 0; }
+		}
+
+		#endregion
+
+		#region Methods
 
 		public ItemHierarchyNavigator GetRootHierarchy()
 		{
@@ -63,34 +105,6 @@ namespace Zeus.Collections
 					yield return childItem;
 		}
 
-		public IHierarchyNavigator<ContentItem> Parent
-		{
-			get
-			{
-				if (_currentNode.Parent != null)
-					return new ItemHierarchyNavigator(_currentNode.Parent);
-				else
-					return null;
-			}
-		}
-
-		public IEnumerable<IHierarchyNavigator<ContentItem>> Children
-		{
-			get
-			{
-				foreach (HierarchyNode<ContentItem> childNode in _currentNode.Children)
-					yield return new ItemHierarchyNavigator(childNode);
-			}
-		}
-
-		public ContentItem Current
-		{
-			get { return _currentNode.Current; }
-		}
-
-		public bool HasChildren
-		{
-			get { return _currentNode.Children.Count > 0; }
-		}
+		#endregion
 	}
 }

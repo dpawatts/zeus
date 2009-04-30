@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.UI;
+﻿using System.Web.UI;
 
 namespace Zeus.ContentTypes
 {
@@ -8,7 +7,6 @@ namespace Zeus.ContentTypes
 		public RootEditorContainer()
 			: base("Root", 0)
 		{
-
 		}
 
 		public override Control AddTo(Control container)

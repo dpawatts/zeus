@@ -1,9 +1,13 @@
 using System;
-using System.Web.UI.WebControls;
-using System.Web.Security;
 using System.Configuration;
+using Isis.ComponentModel;
+using Isis.ExtensionMethods.Web.UI;
+using Isis.Web.Hosting;
+using Isis.Web.Security;
 using Zeus.Configuration;
+using Zeus.Web.UI;
 
+[assembly: EmbeddedResourceFile("Zeus.Admin.Login.aspx", "Zeus.Admin")]
 namespace Zeus.Admin
 {
 	public partial class Login : System.Web.UI.Page
@@ -13,28 +17,34 @@ namespace Zeus.Admin
 			ltlAdminName.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
 		}
 
-		protected void lgnLogin_Authenticate(object sender, AuthenticateEventArgs e)
+		protected void loginButton_Click(object sender, EventArgs e)
 		{
+			if (!IsValid)
+				return;
+
 			try
 			{
-				TextBox txtUserName = (TextBox) lgnLogin.FindControl("UserName");
-				TextBox txtPassword = (TextBox) lgnLogin.FindControl("Password");
-				if (FormsAuthentication.Authenticate(txtUserName.Text, txtPassword.Text))
+				if (IoC.Resolve<ICredentialService>().ValidateUser(UserName.Text, Password.Text))
 				{
-					e.Authenticated = true;
-					FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, lgnLogin.RememberMeSet);
+					string username = IoC.Resolve<ICredentialService>().GetUser(UserName.Text).Username;
+					IoC.Resolve<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
 				}
-				else if (System.Web.Security.Membership.ValidateUser(txtUserName.Text, txtPassword.Text))
-				{
-					e.Authenticated = true;
-					FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, lgnLogin.RememberMeSet);
-				}
+				else
+					FailureText.Text = "Invalid username or password";
 			}
 			catch (Exception ex)
 			{
 				Trace.Warn(ex.ToString());
-				e.Authenticated = false;
+				FailureText.Text = "Error logging in: " + ex;
 			}
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			Page.ClientScript.RegisterJQuery();
+			Page.ClientScript.RegisterCssResource(typeof(Login), "Zeus.Admin.Assets.Css.reset.css");
+			Page.ClientScript.RegisterCssResource(typeof(Login), "Zeus.Admin.Assets.Css.login.css");
+			base.OnPreRender(e);
 		}
 	}
 }

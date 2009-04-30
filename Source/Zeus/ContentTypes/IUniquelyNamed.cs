@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Zeus.ContentTypes
+﻿namespace Zeus.ContentTypes
 {
 	public interface IUniquelyNamed
 	{

@@ -8,19 +8,17 @@ namespace Zeus.Web.UI.WebControls
 	{
 		public ColourPickerTextBox()
 		{
-			this.CssClass = "colourPicker";
+			CssClass = "colourPicker";
 		}
 
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
 
-			if (!Page.Request.Browser.IsBrowser("IE"))
-			{
-				this.Page.ClientScript.RegisterClientScriptInclude("ColourPicker", "/admin/assets/js/plugins/jquery.colorpicker.js");
-				this.Page.ClientScript.RegisterCssInclude("~/admin/assets/css/colorpicker.css");
+			Page.ClientScript.RegisterJavascriptResource(typeof(ColourPickerTextBox), "Zeus.Web.Resources.jQuery.Plugins.jquery.colorpicker.js");
+			Page.ClientScript.RegisterCssResource(GetType(), "Zeus.Web.Resources.jQuery.Plugins.jquery.colorpicker.css");
 
-				string script = @"$('#" + this.ClientID + @"').ColorPicker({
+			string script = @"$('#" + this.ClientID + @"').ColorPicker({
 	onSubmit: function(hsb, hex, rgb) {
 		$('#" + this.ClientID + @"').val(hex);
 	},
@@ -31,8 +29,7 @@ namespace Zeus.Web.UI.WebControls
 .bind('keyup', function() {
 	$(this).ColorPickerSetColor(this.value);
 });";
-				this.Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), this.ClientID, script, true);
-			}
+			Page.ClientScript.RegisterStartupScript(typeof(ColourPickerTextBox), ClientID, script, true);
 		}
 	}
 }

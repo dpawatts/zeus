@@ -1,42 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using Zeus.ContentTypes;
+using Zeus.Installation;
 
 namespace Zeus
 {
+	/// <summary>
+	/// Decoration for Zeus content items. Provides information needed in edit 
+	/// mode and for data integrity.
+	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
-	public class ContentTypeAttribute : Attribute, IDefinitionRefiner
+	public class ContentTypeAttribute : AbstractContentTypeRefiner, IDefinitionRefiner
 	{
 		#region Public properties
 
-		public string Title
-		{
-			get;
-			set;
-		}
+		/// <summary>
+		/// Gets or sets the name used when presenting this item type to editors.
+		/// </summary>
+		public string Title { get; set; }
 
-		public string Name
-		{
-			get;
-			set;
-		}
+		/// <summary>
+		/// Gets or sets the name/discriminator needed to map the appropriate type with content data 
+		/// when retrieving from persistence. When this is null the type's full name is used.
+		/// </summary>
+		public string Name { get; set; }
 
-		public string Description
-		{
-			get;
-			set;
-		}
+		/// <summary>
+		/// Gets or sets the description of this item.
+		/// </summary>
+		public string Description { get; set; }
 
-		public int SortOrder
-		{
-			get;
-			set;
-		}
+		/// <summary>
+		/// Gets or sets the order of this item type when selecting new item in edit mode.
+		/// </summary>
+		public int SortOrder { get; set; }
 
-		public string ToolTip
-		{
-			get;
-			set;
-		}
+		/// <summary>
+		/// Gets or sets the tooltip used when presenting this item type to editors.
+		/// </summary>
+		public string ToolTip { get; set; }
+
+		/// <summary>
+		/// Gets or sets how to treat this definition during installation.
+		/// </summary>
+		public InstallerHints Installer { get; set; }
 
 		#endregion
 
@@ -44,48 +51,52 @@ namespace Zeus
 
 		public ContentTypeAttribute()
 		{
+			RefinementOrder = RefineOrder.First;
 		}
 
-		/// <summary>Initializes a new instance of ItemAttribute class.</summary>
+		/// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
 		/// <param name="title">The title used when presenting this item type to editors.</param>
 		public ContentTypeAttribute(string title)
+			: this()
 		{
-			this.Title = title;
+			Title = title;
 		}
 
-		/// <summary>Initializes a new instance of ItemAttribute class.</summary>
+		/// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
 		/// <param name="title">The title used when presenting this item type to editors.</param>
 		/// <param name="name">The name/discriminator needed to map the appropriate type with content data when retrieving from persistence. When this is null the type's full name is used.</param>
 		public ContentTypeAttribute(string title, string name)
+			: this()
 		{
-			this.Title = title;
-			this.Name = name;
+			Title = title;
+			Name = name;
 		}
 
-		/// <summary>Initializes a new instance of ItemAttribute class.</summary>
+		/// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
 		/// <param name="title">The title used when presenting this item type to editors.</param>
 		/// <param name="name">The name/discriminator needed to map the appropriate type with content data when retrieving from persistence. When this is null the type's name is used.</param>
 		/// <param name="description">The description of this item.</param>
 		/// <param name="toolTip">The tool tip displayed when hovering over this item type.</param>
 		/// <param name="sortOrder">The order of this type compared to other items types.</param>
 		public ContentTypeAttribute(string title, string name, string description, string toolTip, int sortOrder)
+			: this()
 		{
-			this.Title = title;
-			this.Name = name;
-			this.Description = description;
-			this.ToolTip = toolTip;
-			this.SortOrder = sortOrder;
+			Title = title;
+			Name = name;
+			Description = description;
+			ToolTip = toolTip;
+			SortOrder = sortOrder;
 		}
 
 		#endregion
 
-		void IDefinitionRefiner.Refine(ContentType currentDefinition)
+		public override void Refine(ContentType currentContentType, IList<ContentType> allContentTypes)
 		{
 			if (string.IsNullOrEmpty(this.Title))
-				Title = currentDefinition.ItemType.Name;
+				Title = currentContentType.ItemType.Name;
 
-			currentDefinition.ContentTypeAttribute = this;
-			currentDefinition.IsDefined = true;
+			currentContentType.ContentTypeAttribute = this;
+			currentContentType.IsDefined = true;
 		}
 	}
 }

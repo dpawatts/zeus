@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Isis.ExtensionMethods.Web;
 using Isis.Linq;
 using System.Linq.Dynamic;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using Zeus.ContentTypes;
-using Zeus.ContentTypes.Properties;
 using System.Web.UI.HtmlControls;
 using System.Web;
 using System.Collections.Generic;
@@ -19,6 +17,7 @@ using Isis.Web.UI.HtmlControls;
 using Zeus.Admin;
 using System.IO;
 using System.Text.RegularExpressions;
+using Zeus.Design.Displayers;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -45,9 +44,7 @@ namespace Zeus.Web.UI.WebControls
 				if (_contentType == null)
 				{
 					IContentTypeManager contentTypeManager = Zeus.Context.Current.ContentTypes;
-					if (!string.IsNullOrEmpty(Page.Request.GetOptionalString("discriminator")))
-						_contentType = contentTypeManager.GetContentType(Page.Request.GetRequiredString("discriminator"));
-					else if (this.CurrentItem.Children.Any())
+					if (this.CurrentItem.Children.Any())
 						_contentType = contentTypeManager.GetContentType(this.CurrentItem.Children[0].GetType());
 				}
 				return _contentType;
@@ -276,7 +273,7 @@ namespace Zeus.Web.UI.WebControls
 				HyperLink link = (HyperLink) sender;
 				ListViewDataItem listViewDataItem = (ListViewDataItem) link.NamingContainer;
 				link.ToolTip = string.Format("Details for {0}", DataBinder.Eval(listViewDataItem.DataItem, "Title"));
-				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&amp;TB_iframe=true&amp;height=400&amp;width=750",
+				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=700",
 					HttpUtility.UrlEncode(DataBinder.Eval(listViewDataItem.DataItem, "Path").ToString()));
 			}
 		}
@@ -286,7 +283,7 @@ namespace Zeus.Web.UI.WebControls
 		private IEnumerable<GridViewPluginAttribute> GetPlugins()
 		{
 			ContentType contentType = Zeus.Context.ContentTypes.GetContentType(this.CurrentItem.GetType());
-			Type childType = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, this.Page.User)[0].ItemType;
+			Type childType = Zeus.Context.ContentTypes.GetAllowedChildren(contentType, null, this.Page.User)[0].ItemType;
 			List<GridViewPluginAttribute> plugins = new List<GridViewPluginAttribute>();
 			foreach (Assembly assembly in GetAssemblies())
 				foreach (GridViewPluginAttribute plugin in FindPluginsIn(assembly))

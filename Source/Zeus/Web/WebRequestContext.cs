@@ -1,41 +1,61 @@
 ﻿using System;
-using System.Web;
-using System.Security.Principal;
+using Isis.Web;
 
 namespace Zeus.Web
 {
-	public class WebRequestContext : IWebContext
+	public class WebRequestContext : WebContext, IWebContext, IDisposable
 	{
 		public ContentItem CurrentPage
 		{
-			get { return HttpContext.Current.Items["CurrentPage"] as ContentItem; }
-			set { HttpContext.Current.Items["CurrentPage"] = value; }
+			get { return CurrentHttpContext.Items["CurrentPage"] as ContentItem; }
+			set { CurrentHttpContext.Items["CurrentPage"] = value; }
 		}
 
-		public Url LocalUrl
+		public PathData CurrentPath
 		{
-			get { return Url.Parse(HttpContext.Current.Request.RawUrl); }
+			get { return RequestItems["CurrentTemplate"] as PathData; }
+			set
+			{
+				RequestItems["CurrentTemplate"] = value;
+				if (value != null)
+					CurrentPage = value.CurrentItem as ContentItem;
+				else
+					CurrentPage = null;
+			}
 		}
 
-		/// <summary>Gets the current user in the web execution context.</summary>
-		public IPrincipal User
+		/// <summary>The physical path on disk to the requested resource.</summary>
+		public virtual string PhysicalPath
 		{
-			get { return HttpContext.Current.User; }
+			get { return Request.PhysicalPath; }
 		}
 
-		public string MapPath(string path)
+		public virtual void Close()
 		{
-			return HttpContext.Current.Server.MapPath(path);
+			object[] keys = new object[RequestItems.Keys.Count];
+			RequestItems.Keys.CopyTo(keys, 0);
+
+			foreach (object key in keys)
+			{
+				IClosable value = RequestItems[key] as IClosable;
+				if (value != null)
+					value.Dispose();
+			}
 		}
 
-		public string ToAbsolute(string virtualPath)
+		public void TransferRequest(string path)
 		{
-			return Url.ToAbsolute(virtualPath);
+			string url = Url.Parse(path).AppendQuery("postback", Url.LocalUrl);
+			CurrentHttpContext.Server.TransferRequest(url, true);
 		}
 
-		public string ToAppRelative(string virtualPath)
+		#region IDisposable Members
+
+		void IDisposable.Dispose()
 		{
-			return VirtualPathUtility.ToAppRelative(virtualPath);
+			Close();
 		}
+
+		#endregion
 	}
 }

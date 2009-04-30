@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zeus.AddIns.Forums</RootNamespace>
+    <AssemblyName>Zeus.AddIns.Forums</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BBCodeHelper.cs" />
+    <Compile Include="ContentTypes\IMessageBoardContainer.cs" />
+    <Compile Include="ContentTypes\NewPost.cs" />
+    <Compile Include="ContentTypes\MemberContainer.cs" />
+    <Compile Include="ContentTypes\Forum.cs" />
+    <Compile Include="ContentTypes\Member.cs" />
+    <Compile Include="ContentTypes\MessageBoard.cs" />
+    <Compile Include="ContentTypes\Post.cs" />
+    <Compile Include="ContentTypes\Topic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ForumService.cs" />
+    <Compile Include="Services\IForumService.cs" />
+    <Compile Include="Web\Resources\Resources.cs" />
+    <Compile Include="Web\UI\WebControls\BBCodeEditor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\FrameworkBlocks\WebAuthentication\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
+      <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
+      <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus\Zeus.csproj">
+      <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
+      <Name>Zeus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\BBCodeEditor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_arrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_twisted.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_cool.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_cry.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_biggrin.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_confused.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_geek.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_sad.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_smile.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_surprised.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_ugeek.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_e_wink.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_eek.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_evil.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_exclaim.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_idea.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_lol.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_mad.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_mrgreen.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_neutral.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_question.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_razz.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_redface.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\Smilies\icon_rolleyes.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\spacer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\comments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\Resources\comment.png" />
+    <EmbeddedResource Include="Web\Resources\comment_edit.png" />
+    <EmbeddedResource Include="Web\Resources\user_comment.png" />
+    <EmbeddedResource Include="Web\Resources\user_green.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

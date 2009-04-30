@@ -1,11 +1,12 @@
 ﻿using System;
+using Zeus.ContentTypes;
 
 namespace Zeus.Integrity
 {
 	/// <summary>
 	/// Base class for attributes used to restrict which types can be created below which.
 	/// </summary>
-	public abstract class TypeIntegrityAttribute : Attribute
+	public abstract class TypeIntegrityAttribute : AbstractContentTypeRefiner
 	{
 		private Type[] types = new Type[0];
 

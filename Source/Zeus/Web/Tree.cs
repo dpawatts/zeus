@@ -3,8 +3,8 @@ using System.Linq;
 using Zeus.Collections;
 using System.Web.UI;
 using System.Collections.Generic;
+using Zeus.Persistence.Specifications;
 using Zeus.Web.UI.WebControls;
-using Zeus.Linq.Filters;
 
 namespace Zeus.Web
 {
@@ -13,9 +13,9 @@ namespace Zeus.Web
 		public delegate string ClassProviderDelegate(ContentItem currentItem);
 		public delegate Control LinkProviderDelegate(ContentItem currentItem);
 
-		private HierarchyBuilder _treeBuilder;
+		private readonly HierarchyBuilder _treeBuilder;
 		private ClassProviderDelegate _classProvider = delegate { return string.Empty; };
-		private ItemFilter[] _filters;
+		private ISpecification<ContentItem>[] _filters;
 		private LinkProviderDelegate _linkProvider;
 		private bool _excludeRoot;
 
@@ -51,7 +51,7 @@ namespace Zeus.Web
 			return this;
 		}
 
-		public Tree Filters(params ItemFilter[] filters)
+		public Tree Filters(params ISpecification<ContentItem>[] filters)
 		{
 			_filters = filters;
 			return this;

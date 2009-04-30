@@ -4,6 +4,11 @@ namespace Zeus.Integrity
 {
 	public interface IIntegrityManager
 	{
+		ZeusException GetMoveException(ContentItem source, ContentItem destination);
+		ZeusException GetCopyException(ContentItem source, ContentItem destination);
+		ZeusException GetDeleteException(ContentItem item);
+		ZeusException GetSaveException(ContentItem item);
+
 		/// <summary>Checks wether an item's name is locally unique, i.e. no other sibling has the same name.</summary>
 		/// <param name="name">The name we're proposing for the item.</param>
 		/// <param name="item">The item whose siblings to check.</param>

@@ -8,10 +8,10 @@ namespace Zeus.Admin
 	{
 		public ToolbarPluginAttribute(string url, string target, string imageUrl, int sortOrder)
 		{
-			this.Url = url;
-			this.Target = target;
-			this.ImageUrl = imageUrl;
-			this.SortOrder = sortOrder;
+			Url = url;
+			Target = target;
+			ImageUrl = imageUrl;
+			SortOrder = sortOrder;
 		}
 
 		public string Url
@@ -61,7 +61,7 @@ namespace Zeus.Admin
 			image.ImageUrl = this.ImageUrl;
 			link.Controls.Add(image);
 
-			if (!string.IsNullOrEmpty(this.Text))
+			if (!string.IsNullOrEmpty(Text))
 				link.Controls.Add(new LiteralControl(this.Text));
 
 			container.Controls.Add(link);

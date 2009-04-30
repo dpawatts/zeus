@@ -11,6 +11,7 @@
     <RootNamespace>Zeus</RootNamespace>
     <AssemblyName>Zeus.Admin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SilverlightApplicationList>{C6EB711C-E1D9-4021-8976-80DF5D64D878}|..\Zeus.SilverlightUpload\Zeus.SilverlightUpload.csproj|Admin\ClientBin|False</SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SoundInTheory.DynamicImage.Caching.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
@@ -61,12 +66,110 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Default.aspx" />
-    <Content Include="Admin\Navigation\Tree.aspx" />
-    <Content Include="Admin\New.aspx" />
+    <EmbeddedResource Include="Admin\Default.aspx" />
+    <EmbeddedResource Include="Admin\Navigation\Tree.aspx" />
+    <EmbeddedResource Include="Admin\New.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminAssemblyManager.cs" />
     <Compile Include="Admin\AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Assets\Css\Resources.cs" />
+    <Compile Include="Admin\Assets\Images\Resources.cs" />
+    <Compile Include="Admin\Assets\JS\Resources.cs" />
+    <Compile Include="Admin\AvailableZones.ascx.cs">
+      <DependentUpon>AvailableZones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AvailableZones.ascx.designer.cs">
+      <DependentUpon>AvailableZones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AffectedItems.ascx.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AffectedItems.ascx.designer.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\DynamicContent\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DynamicContent\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Globalization\LanguageActionPluginAttribute.cs" />
+    <Compile Include="Admin\Globalization\LanguageSettings.aspx.cs">
+      <DependentUpon>LanguageSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Globalization\LanguageSettings.aspx.designer.cs">
+      <DependentUpon>LanguageSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Globalization\DeleteLanguage.aspx.cs">
+      <DependentUpon>DeleteLanguage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Globalization\DeleteLanguage.aspx.designer.cs">
+      <DependentUpon>DeleteLanguage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Globalization\LanguageOverview.aspx.cs">
+      <DependentUpon>LanguageOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Globalization\LanguageOverview.aspx.designer.cs">
+      <DependentUpon>LanguageOverview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RecycleBin\DeleteInterceptor.cs" />
+    <Compile Include="Admin\RecycleBin\IRecycleBin.cs" />
+    <Compile Include="Admin\RecycleBin\IRecycleBinHandler.cs" />
+    <Compile Include="Admin\RecycleBin\RecycleBinContainer.cs" />
+    <Compile Include="Admin\RecycleBin\RecycleBinHandler.cs" />
+    <Compile Include="Admin\RecycleBin\RecycleBinInitializer.cs" />
+    <Compile Include="Admin\Security\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Security\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Versions\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Versions\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ReferencingItems.ascx.cs">
+      <DependentUpon>ReferencingItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ReferencingItems.ascx.designer.cs">
+      <DependentUpon>ReferencingItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Copy.aspx.cs">
+      <DependentUpon>Copy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Copy.aspx.designer.cs">
+      <DependentUpon>Copy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Paste.aspx.cs">
+      <DependentUpon>Paste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Paste.aspx.designer.cs">
+      <DependentUpon>Paste.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PreviewFrameAdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\ViewDetail.aspx.cs">
@@ -149,32 +252,40 @@
     <Compile Include="Admin\New.aspx.designer.cs">
       <DependentUpon>New.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Popup.Master.cs">
-      <DependentUpon>Popup.Master</DependentUpon>
+    <Compile Include="Admin\Popup.master.cs">
+      <DependentUpon>Popup.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Popup.Master.designer.cs">
-      <DependentUpon>Popup.Master</DependentUpon>
+    <Compile Include="Admin\Popup.master.designer.cs">
+      <DependentUpon>Popup.master</DependentUpon>
     </Compile>
-    <Compile Include="Admin\PreviewFrame.Master.cs">
-      <DependentUpon>PreviewFrame.Master</DependentUpon>
+    <Compile Include="Admin\PreviewFrame.master.cs">
+      <DependentUpon>PreviewFrame.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\PreviewFrame.Master.designer.cs">
-      <DependentUpon>PreviewFrame.Master</DependentUpon>
+    <Compile Include="Admin\PreviewFrame.master.designer.cs">
+      <DependentUpon>PreviewFrame.master</DependentUpon>
     </Compile>
-    <Compile Include="Admin\View.aspx.cs">
-      <DependentUpon>View.aspx</DependentUpon>
+    <Compile Include="Admin\ViewChildren.aspx.cs">
+      <DependentUpon>ViewChildren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\View.aspx.designer.cs">
-      <DependentUpon>View.aspx</DependentUpon>
+    <Compile Include="Admin\ViewChildren.aspx.designer.cs">
+      <DependentUpon>ViewChildren.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Web\UI\WebControls\LanguageDropDownList.cs" />
+    <Compile Include="Admin\Web\UI\WebControls\ToolbarHyperLink.cs" />
     <Compile Include="Admin\Web\UI\WebControls\FileTree.cs" />
+    <Compile Include="Admin\Web\UI\WebControls\ToolbarButton.cs" />
     <Compile Include="Admin\Web\UI\WebControls\Tree.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\..\..\..\Projects\Isis\Source\Isis\Isis.csproj">
+    <ProjectReference Include="..\..\..\Isis\Source\FrameworkBlocks\WebAuthentication\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
     </ProjectReference>
@@ -184,141 +295,144 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Edit.aspx" />
-    <Content Include="Admin\PreviewFrame.Master" />
+    <EmbeddedResource Include="Admin\Edit.aspx" />
+    <EmbeddedResource Include="Admin\PreviewFrame.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Assets\Css\edit.css" />
-    <Content Include="Admin\Assets\Css\preview.css" />
-    <Content Include="Admin\Assets\Css\shared.css" />
-    <Content Include="Admin\Assets\Css\tree.css" />
-    <Content Include="Admin\Assets\Css\default.css" />
-    <Content Include="Admin\Assets\Css\iepngfix.htc" />
-    <Content Include="Admin\Assets\Css\reset.css" />
-    <Content Include="Admin\Assets\Images\Edit\inputGradient.png" />
-    <Content Include="Admin\Assets\Images\Edit\inputText.gif" />
-    <Content Include="Admin\Assets\Images\Icons\page.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_add.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_delete.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_edit.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_save.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_white.png" />
-    <Content Include="Admin\Assets\Images\Theme\bannerBg.gif" />
-    <Content Include="Admin\Assets\Images\blank.gif" />
-    <Content Include="Admin\Assets\Images\Theme\bannerRight.gif" />
-    <Content Include="Admin\Assets\Images\Theme\logo.gif" />
-    <Content Include="Admin\Assets\Images\Theme\logOut.gif" />
-    <Content Include="Admin\Assets\Images\Tree\arrow_refresh.png" />
-    <Content Include="Admin\Assets\Images\Tree\collapsable-last.gif" />
-    <Content Include="Admin\Assets\Images\Tree\collapsable.gif" />
-    <Content Include="Admin\Assets\Images\Tree\expandable-last.gif" />
-    <Content Include="Admin\Assets\Images\Tree\expandable.gif" />
-    <Content Include="Admin\Assets\Images\Tree\leaf-last.gif" />
-    <Content Include="Admin\Assets\Images\Tree\leaf.gif" />
-    <Content Include="Admin\Assets\Images\Tree\line_bg.gif" />
-    <Content Include="Admin\Assets\Images\Tree\line_bg_over.gif" />
-    <Content Include="Admin\Assets\Images\Tree\line_bg_over_last.gif" />
-    <Content Include="Admin\Assets\Images\Tree\spacer.gif" />
-    <Content Include="Admin\Assets\Images\Tree\spinner.gif" />
-    <Content Include="Admin\Assets\Images\Tree\tree_line.gif" />
-    <Content Include="Admin\Assets\Images\vgrabber.gif" />
-    <Content Include="Admin\Assets\JS\tinymce.js" />
-    <Content Include="Admin\Assets\JS\jquery-vsdoc.js" />
-    <Content Include="Admin\Assets\JS\jquery.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.contextMenu.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.dimensions.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.easing.compatibility.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.easing.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.simpleTree.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.splitter.js" />
-    <Content Include="Admin\Assets\JS\zeus.js" />
-    <Content Include="Admin\Install\Default.aspx" />
-    <Content Include="Admin\Web.config" />
+    <EmbeddedResource Include="Admin\Assets\Css\edit.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\preview.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\shared.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\tree.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\default.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\reset.css" />
+    <EmbeddedResource Include="Admin\Assets\Images\Edit\inputGradient.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_add.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_delete.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_edit.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_save.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\blank.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\logo.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\logOut.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\arrow_refresh.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\collapsable-last.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\collapsable.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\expandable-last.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\expandable.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\leaf-last.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\leaf.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\line_bg.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\line_bg_over.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\line_bg_over_last.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\spacer.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\spinner.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Tree\tree_line.gif" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.contextMenu.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.dimensions.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.easing.compatibility.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.easing.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.simpleTree.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\zeus.js" />
+    <EmbeddedResource Include="Admin\Install\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Assets\Css\colorpicker.css" />
-    <Content Include="Admin\Assets\Css\tabPanel.css" />
-    <Content Include="Admin\Assets\Images\ColorPicker\blank.gif" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_background.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hex.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_b.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_h.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_hsb_s.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_indic.gif" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_overlay.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_b.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_g.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_rgb_r.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_select.gif" />
-    <Content Include="Admin\Assets\Images\ColorPicker\colorpicker_submit.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_background.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_hex.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_b.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_h.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_hsb_s.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_indic.gif" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_b.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_g.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_rgb_r.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\custom_submit.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\select.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\select2.png" />
-    <Content Include="Admin\Assets\Images\ColorPicker\slider.png" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.colorpicker.js" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.tabPanel.js" />
-    <Content Include="Admin\Assets\JS\Plugins\ui.core.js" />
-    <Content Include="Admin\Assets\JS\Plugins\ui.tabs.js" />
-    <Content Include="Admin\FileManager\Default.aspx" />
-    <Content Include="Admin\Move.aspx" />
-    <Content Include="Admin\Delete.aspx" />
-    <Content Include="Admin\Navigation\TreeLoader.ashx" />
+    <EmbeddedResource Include="Admin\FileManager\Default.aspx" />
+    <EmbeddedResource Include="Admin\Move.aspx" />
+    <EmbeddedResource Include="Admin\Delete.aspx" />
+    <EmbeddedResource Include="Admin\Navigation\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Admin\Assets\Images\ColorPicker\Thumbs.db" />
-    <Content Include="Admin\Assets\Css\jquery.mcdropdown.css" />
-    <Content Include="Admin\Assets\Css\ui.datepicker.css" />
-    <Content Include="Admin\Assets\Css\view.css" />
-    <Content Include="Admin\Assets\Css\login.css" />
-    <Content Include="Admin\Assets\Css\thickbox.css" />
-    <Content Include="Admin\Assets\Images\DatePicker\calendar.gif" />
-    <Content Include="Admin\Assets\Images\Icons\folder.png" />
-    <Content Include="Admin\Assets\Images\Icons\group.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_white_acrobat.png" />
-    <Content Include="Admin\Assets\Images\Icons\page_white_word.png" />
-    <Content Include="Admin\Assets\Images\Icons\user.png" />
-    <Content Include="Admin\Assets\Images\Login\button.gif" />
-    <Content Include="Admin\Assets\Images\Login\mainBox.gif" />
-    <Content Include="Admin\Assets\Images\Login\textBox.gif" />
+    <EmbeddedResource Include="Admin\Assets\Css\permissions.css" />
+    <EmbeddedResource Include="Admin\Assets\Images\Edit\FieldsetGradient.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\arrow_up.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_white_code.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Theme\bannerBg.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\cross.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\tick.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\delete.png" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.cookie.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.splitter.js" />
+    <EmbeddedResource Include="Admin\Assets\Images\Splitter\hgrabber.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Splitter\vdockbar.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Splitter\vgrabber.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Splitter\vgrabber2-active.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Splitter\vgrabber2-normal.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\page_copy.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\book_next.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\disk.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\zoom.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\information.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\exclamation.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\book_previous.png" />
+    <EmbeddedResource Include="Admin\Assets\Css\globalization.css" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\LanguageMissing.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bullet_arrow_bottom.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bullet_arrow_down.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bullet_key.png" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.qtip.js" />
+    <Content Include="Admin\Assets\Web.config" />
+    <EmbeddedResource Include="Admin\Assets\Css\new.css" />
+    <EmbeddedResource Include="Admin\Paste.aspx" />
+    <EmbeddedResource Include="Admin\Copy.aspx" />
+    <EmbeddedResource Include="Admin\AffectedItems.ascx" />
+    <EmbeddedResource Include="Admin\Resources\page_copy.png" />
+    <EmbeddedResource Include="Admin\Resources\page_paste.png" />
+    <EmbeddedResource Include="Admin\Resources\cut.png" />
+    <EmbeddedResource Include="Admin\ReferencingItems.ascx" />
+    <EmbeddedResource Include="Admin\View.aspx" />
+    <EmbeddedResource Include="Admin\Resources\application_view_detail.png" />
+    <EmbeddedResource Include="Admin\Resources\eye.png" />
+    <EmbeddedResource Include="Admin\Resources\lock.png" />
+    <EmbeddedResource Include="Admin\Security\Default.aspx" />
+    <EmbeddedResource Include="Admin\Resources\group.png" />
+    <EmbeddedResource Include="Admin\Resources\user.png" />
+    <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />
+    <Content Include="Admin\DynamicContent\Default.aspx" />
+    <EmbeddedResource Include="Admin\Versions\Default.aspx" />
+    <EmbeddedResource Include="Admin\Globalization\LanguageOverview.aspx" />
+    <EmbeddedResource Include="Admin\Resources\page_world.png" />
+    <EmbeddedResource Include="Admin\Resources\world_delete.png" />
+    <EmbeddedResource Include="Admin\Resources\world_edit.png" />
+    <EmbeddedResource Include="Admin\Resources\world_go.png" />
+    <EmbeddedResource Include="Admin\Globalization\DeleteLanguage.aspx" />
+    <EmbeddedResource Include="Admin\Globalization\LanguageSettings.aspx" />
+    <Content Include="Web.config" />
+    <EmbeddedResource Include="Admin\Assets\Css\view.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\login.css" />
+    <EmbeddedResource Include="Admin\Assets\Css\thickbox.css" />
+    <EmbeddedResource Include="Admin\Assets\Images\Login\button.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Login\mainBox.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\Login\textBox.gif" />
     <Content Include="Admin\Assets\Images\McDropdown\mcdd_icon_hover.gif" />
     <Content Include="Admin\Assets\Images\McDropdown\mcdd_icon_normal.gif" />
     <Content Include="Admin\Assets\Images\McDropdown\mcdd_select_button_sprite.gif" />
     <Content Include="Admin\Assets\Images\McDropdown\shadow.png" />
-    <Content Include="Admin\Assets\Images\ThickBox\loadingAnimation.gif" />
-    <Content Include="Admin\Assets\Images\ThickBox\macFFBgHack.png" />
-    <Content Include="Admin\Assets\Images\View\add.gif" />
-    <Content Include="Admin\Assets\Images\View\arrowDown.gif" />
-    <Content Include="Admin\Assets\Images\View\arrowSortable.gif" />
-    <Content Include="Admin\Assets\Images\View\arrowUp.gif" />
-    <Content Include="Admin\Assets\Images\View\button_arrow_left.gif" />
-    <Content Include="Admin\Assets\Images\View\button_arrow_right.gif" />
-    <Content Include="Admin\Assets\Images\View\cancel.gif" />
-    <Content Include="Admin\Assets\Images\View\confirm.gif" />
-    <Content Include="Admin\Assets\Images\View\edit.gif" />
-    <Content Include="Admin\Assets\Images\View\littleTick.gif" />
-    <Content Include="Admin\Assets\Images\View\trash.gif" />
-    <Content Include="Admin\Assets\Images\View\trashOpen.gif" />
-    <Content Include="Admin\Assets\JS\Plugins\jquery.mcdropdown.js" />
-    <Content Include="Admin\Assets\JS\Plugins\thickbox.js" />
-    <Content Include="Admin\Assets\JS\Plugins\ui.datepicker.js" />
-    <Content Include="Admin\Assets\JS\view.js" />
-    <Content Include="Admin\ViewDetail.aspx" />
-    <Content Include="Admin\FileManager\Upload.aspx" />
-    <Content Include="Admin\Login.aspx" />
-    <Content Include="Admin\Popup.Master" />
-    <Content Include="Admin\View.aspx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <EmbeddedResource Include="Admin\Assets\Images\ThickBox\loadingAnimation.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\ThickBox\macFFBgHack.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\add.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowDown.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowSortable.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\arrowUp.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\button_arrow_left.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\button_arrow_right.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\cancel.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\confirm.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\edit.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\littleTick.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\trash.gif" />
+    <EmbeddedResource Include="Admin\Assets\Images\View\trashOpen.gif" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.cookies.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\Plugins\thickbox.js" />
+    <EmbeddedResource Include="Admin\Assets\JS\view.js" />
+    <EmbeddedResource Include="Admin\AvailableZones.ascx" />
+    <EmbeddedResource Include="Admin\ViewDetail.aspx" />
+    <EmbeddedResource Include="Admin\FileManager\Upload.aspx" />
+    <EmbeddedResource Include="Admin\Login.aspx" />
+    <EmbeddedResource Include="Admin\Popup.master" />
+    <EmbeddedResource Include="Admin\ViewChildren.aspx" />
+    <EmbeddedResource Include="Admin\Resources\page_add.png" />
+    <EmbeddedResource Include="Admin\Resources\page_delete.png" />
+    <EmbeddedResource Include="Admin\Resources\page_edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -337,12 +451,12 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54347</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://moretonhampstead.local/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://moretonhampstead.local/admin</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://moretonhampstead.local/admin</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

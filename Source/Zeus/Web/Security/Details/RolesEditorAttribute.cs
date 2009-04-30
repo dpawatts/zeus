@@ -1,44 +1,47 @@
-﻿using System;
-using Zeus.ContentTypes.Properties;
-using System.Web.UI.WebControls;
-using System.Collections.Generic;
-using System.Web.Security;
+﻿using System.Collections.Generic;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using Zeus.ContentProperties;
+using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 
 namespace Zeus.Web.Security.Details
 {
 	public class RolesEditorAttribute : AbstractEditorAttribute
 	{
-		public override bool UpdateItem(ContentItem item, Control editor)
+		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
-			List<string> roles = new List<string>();
+			List<Items.Role> roles = new List<Items.Role>();
 			foreach (ListItem li in cbl.Items)
 				if (li.Selected)
-					roles.Add(li.Value);
+				{
+					Items.Role role = Context.Current.Resolve<IWebSecurityManager>().GetRole(li.Value);
+					roles.Add(role);
+				}
 
-			DetailCollection dc = item.GetDetailCollection(Name, true);
+			PropertyCollection dc = item.GetDetailCollection(Name, true);
 			dc.Replace(roles);
 
 			return true;
 		}
 
-		public override void UpdateEditor(ContentItem item, Control editor)
+		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			CheckBoxList cbl = editor as CheckBoxList;
-			DetailCollection dc = item.GetDetailCollection(Name, false);
+			PropertyCollection dc = item.GetDetailCollection(Name, false);
 			if (dc != null)
 			{
-				foreach (string role in dc)
+				foreach (Items.Role role in dc)
 				{
-					ListItem li = cbl.Items.FindByValue(role);
+					ListItem li = cbl.Items.FindByValue(role.Name);
 					if (li != null)
 					{
 						li.Selected = true;
 					}
 					else
 					{
-						li = new ListItem(role);
+						li = new ListItem(role.Name);
 						li.Selected = true;
 						li.Attributes["style"] = "color:silver";
 						cbl.Items.Add(li);
@@ -50,10 +53,15 @@ namespace Zeus.Web.Security.Details
 		protected override Control AddEditor(Control container)
 		{
 			CheckBoxList cbl = new CheckBoxList();
-			foreach (string role in Roles.GetAllRoles())
-				cbl.Items.Add(role);
+			foreach (Items.Role role in Context.Current.Resolve<IWebSecurityManager>().GetRoles(container.Page.User))
+				cbl.Items.Add(role.Name);
 			container.Controls.Add(cbl);
 			return cbl;
+		}
+
+		protected override void DisableEditor(Control editor)
+		{
+			((CheckBoxList) editor).Enabled = false;
 		}
 	}
 }

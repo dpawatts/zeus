@@ -1,5 +1,5 @@
 ﻿using System;
-using Zeus.ContentTypes.Properties;
+using Zeus.Design.Displayers;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -10,7 +10,7 @@ namespace Zeus.Web.UI.WebControls
 			foreach (IDisplayer displayer in this.CurrentItemDefinition.Displayers)
 			{
 				displayer.InstantiateIn(this);
-				displayer.SetValue(this, this.CurrentItem, displayer.Name);
+				displayer.SetValue(this, (ContentItem) CurrentItem, displayer.Name);
 				//this.PropertyControls.Add(displayer.Name, displayer.AddTo(this, this.CurrentItem, displayer.Name));
 			}
 		}

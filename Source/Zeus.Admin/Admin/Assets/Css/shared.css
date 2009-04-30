@@ -5,3 +5,71 @@ body {
 body, p, input {
 	font-size: 12px;
 }
+
+#toolbar .rightAligned
+{
+	float:right;
+}
+
+a 
+{
+	color: Blue;
+}
+
+b
+{
+	font-weight: bold;
+}
+
+fieldset.affectedItems, fieldset.referencingItems
+{
+	border: solid 1px #CCCCCC;
+	padding: 10px;
+	margin-right: 10px;
+}
+
+.affectedItems ul li, .referencingItems ul li
+{
+	margin: 0 0 3px 15px;
+	vertical-align: baseline;
+	list-style-type: circle;
+}
+
+.affectedItems ul li img, .referencingItems ul li img
+{
+	margin-right: 2px;
+}
+
+.info
+{
+	background-position: 5px 50%;
+	border: 1px dashed #529214;
+	padding: 10px;
+	background: #FFFFCC none no-repeat 5px 50%;
+	display: block;
+	padding-left: 24px;
+}
+
+.info
+{
+	background-image: url(<%= WebResource("Zeus.Admin.Assets.Images.Icons.information.png") %>);
+}
+
+/* validation */
+.validator
+{
+	border: 1px dashed #FF0000;
+	background-image: url(<%= WebResource("Zeus.Admin.Assets.Images.Icons.exclamation.png") %>);
+}
+
+.validator ul
+{
+	margin-left:20px;
+}
+
+hr
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: solid 1px #CCCCCC;
+}

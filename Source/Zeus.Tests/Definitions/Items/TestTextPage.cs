@@ -1,9 +1,8 @@
-﻿using System;
-using Zeus.ContentTypes.Properties;
+﻿using Zeus.Design.Editors;
 
 namespace Zeus.Tests.Definitions.Items
 {
-	[ContentType("Text page")]
+	[ContentType("Text page", "StartPage")]
 	public class TestTextPage : ContentItem
 	{
 		[HtmlTextBoxEditor("Text", 100)]

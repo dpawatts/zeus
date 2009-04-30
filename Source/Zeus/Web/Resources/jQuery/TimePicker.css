@@ -1,0 +1,9 @@
+﻿input[type="text"].timePicker
+{
+	width: 50px;
+}
+
+div.time-picker
+{
+	margin-top: 2em;
+}

@@ -64,24 +64,24 @@ namespace Zeus.Web.UI.WebControls
 	<li rel=""10"">
 		Health
 	</li>";
-			this.Controls.Add(_ul);
+			Controls.Add(_ul);
 
 			_textBox = new TextBox();
 			_textBox.ID = "txtTextBox";
-			this.Controls.Add(_textBox);
+			Controls.Add(_textBox);
 
 			base.CreateChildControls();
 		}
 
 		protected override void OnPreRender(EventArgs e)
 		{
-			Page.ClientScript.RegisterClientScriptInclude("McDropDown", "/admin/assets/js/plugins/jquery.mcdropdown.js");
-			Page.ClientScript.RegisterCssInclude("~/admin/assets/css/jquery.mcdropdown.css");
+			Page.ClientScript.RegisterJavascriptResource(typeof(ComboBox), "Zeus.Web.Resources.jQuery.Plugins.jquery.mcdropdown.js");
+			Page.ClientScript.RegisterCssResource(GetType(), "Zeus.Web.Resources.jQuery.Plugins.jquery.mcdropdown.css");
 
 			string script = @"$(document).ready(function (){
 				$('#" + _textBox.ClientID + @"').mcDropdown('#" + _ul.ClientID + @"');
 			});";
-			Page.ClientScript.RegisterStartupScript(typeof(ComboBox), "McDropDown", script, true);
+			Page.ClientScript.RegisterStartupScript(typeof(ComboBox), ClientID, script, true);
 
 			base.OnPreRender(e);
 		}

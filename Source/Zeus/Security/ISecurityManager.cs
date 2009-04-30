@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Principal;
 
 namespace Zeus.Security
@@ -9,10 +10,16 @@ namespace Zeus.Security
 	/// </summary>
 	public interface ISecurityManager
 	{
-		/// <summary>Checks wether a user is authorized to access a certain item.</summary>
+		IEnumerable<string> GetAuthorizedRoles(ContentItem item);
+		IEnumerable<string> GetAuthorizedUsers(ContentItem item);
+
+		IEnumerable<string> GetAvailableOperations();
+
+		/// <summary>Checks whether a user is authorized to access a certain item.</summary>
 		/// <param name="item">The item to check for access.</param>
 		/// <param name="principal">The user whose permissions to check.</param>
+		/// <param name="operation"></param>
 		/// <returns>True if the user is authorized.</returns>
-		bool IsAuthorized(ContentItem item, IPrincipal principal);
+		bool IsAuthorized(ContentItem item, IPrincipal principal, string operation);
 	}
 }

@@ -1,18 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
-using Zeus.Linq.Filters;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 using Zeus.Collections;
 using System.Web.Compilation;
+using Zeus.Persistence.Specifications;
 
 namespace Zeus.Web.UI.WebControls
 {
 	/// <summary>
 	/// A web control that emits a nested list of ul's and li's.
 	/// </summary>
+	[PersistChildren(false), ParseChildren(true)]
 	public class Menu : WebControl, IContentTemplate
 	{
 		public event EventHandler<MenuItemCreatingEventArgs> MenuItemCreating;
@@ -22,8 +24,10 @@ namespace Zeus.Web.UI.WebControls
 
 		public Menu()
 		{
-			this.Filters = new List<ItemFilter>(new ItemFilter[] { new NavigationFilter() });
+			this.Filters = new List<ISpecification<ContentItem>>(new ISpecification<ContentItem>[] { new NavigationSpecification<ContentItem>() });
 		}
+
+		#region Properties
 
 		public virtual ContentItem CurrentItem
 		{
@@ -64,6 +68,13 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["SelectedCssClass"] = value; }
 		}
 
+		[Themeable(true)]
+		public string TrailCssClass
+		{
+			get { return ViewState["TrailCssClass"] as string ?? "trail"; }
+			set { ViewState["TrailCssClass"] = value; }
+		}
+
 		public string OfType
 		{
 			get { return ViewState["OfType"] as string ?? string.Empty; }
@@ -75,11 +86,20 @@ namespace Zeus.Web.UI.WebControls
 			get { return HtmlTextWriterTag.Ul; }
 		}
 
-		private IList<ItemFilter> Filters
+		private IList<ISpecification<ContentItem>> Filters
 		{
 			get;
 			set;
 		}
+
+		[PersistenceMode(PersistenceMode.InnerProperty), Browsable(false), TemplateContainer(typeof(MenuItem)), DefaultValue((string) null)]
+		public ITemplate ListItemTemplate
+		{
+			get;
+			set;
+		}
+
+		#endregion
 
 		#region Methods
 
@@ -103,9 +123,10 @@ namespace Zeus.Web.UI.WebControls
 		private void BuildControlHierarchy(ContentItem currentItem, ContentItem startPage)
 		{
 			if (!string.IsNullOrEmpty(this.OfType))
-				this.Filters.Add(new TypeFilter(BuildManager.GetType(this.OfType, true)));
+				this.Filters.Add(new TypeSpecification<ContentItem>());
+			//this.Filters.Add(new TypeSpecification<ContentItem>(BuildManager.GetType(this.OfType, true)));
 
-			this.Filters.Add(new VisibleFilter());
+			this.Filters.Add(new VisibleSpecification<ContentItem>());
 
 			if (currentItem == null)
 				currentItem = startPage;
@@ -123,7 +144,7 @@ namespace Zeus.Web.UI.WebControls
 				else
 					navigator = new ItemHierarchyNavigator(new TreeHierarchyBuilder(startingPoint, MaxLevels), this.Filters.ToArray());
 				if (navigator.Current != null)
-					AddControlsRecursive(this, navigator, this.CurrentPage, ancestors);
+					AddControlsRecursive(this, navigator, CurrentPage, ancestors);
 			}
 		}
 
@@ -131,12 +152,34 @@ namespace Zeus.Web.UI.WebControls
 		{
 			foreach (ItemHierarchyNavigator childHierarchy in ih.Children)
 			{
-				if (!childHierarchy.Current.IsPage)
+				if (!(childHierarchy.Current is ContentItem))
 					continue;
 
-				HtmlGenericControl li = CreateAndAdd(container, "li", null);
+				ContentItem current = (ContentItem) childHierarchy.Current;
 
-				ContentItem current = childHierarchy.Current;
+				string cssClass = string.Empty;
+				if (current == selectedPage || current.Url == selectedPage.Url)
+					cssClass = this.SelectedCssClass;
+				else if (ancestors.Contains(current))
+					cssClass = TrailCssClass;
+
+				Control itemPlaceholder;
+				if (ListItemTemplate != null)
+				{
+					MenuItem control = new MenuItem();
+					control.DataItem = current;
+					control.DataItemCssClass = cssClass;
+					ListItemTemplate.InstantiateIn(control);
+					container.Controls.Add(control);
+					control.DataBind();
+					itemPlaceholder = control.FindControl("itemPlaceholder");
+				}
+				else
+				{
+					itemPlaceholder = CreateAndAdd(container, "li", null);
+					((HtmlGenericControl) itemPlaceholder).Attributes["class"] = cssClass;
+				}
+
 				string url = current.Url;
 				if (MenuItemCreating != null)
 				{
@@ -147,17 +190,12 @@ namespace Zeus.Web.UI.WebControls
 				HtmlAnchor anchor = new HtmlAnchor();
 				anchor.HRef = url;
 				anchor.InnerText = current.Title;
-				li.Controls.Add(anchor);
-
-				if (current == selectedPage || current.Url == selectedPage.Url)
-					li.Attributes["class"] = this.SelectedCssClass;
-				else if (ancestors.Contains(current))
-					li.Attributes["class"] = "trail";
+				itemPlaceholder.Controls.Add(anchor);
 
 				HtmlGenericControl ul = new HtmlGenericControl("ul");
 				AddControlsRecursive(ul, childHierarchy, selectedPage, ancestors);
 				if (ul.Controls.Count > 0)
-					li.Controls.Add(ul);
+					itemPlaceholder.Controls.Add(ul);
 			}
 		}
 

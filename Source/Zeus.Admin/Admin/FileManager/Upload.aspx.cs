@@ -1,6 +1,10 @@
 ﻿using System;
+using Isis.ExtensionMethods.Web.UI;
+using Isis.Web;
+using Isis.Web.Hosting;
 using Zeus.FileSystem;
 
+[assembly: EmbeddedResourceFile("Zeus.Admin.FileManager.Upload.aspx", "Zeus.Admin")]
 namespace Zeus.Admin.FileManager
 {
 	public partial class Upload : System.Web.UI.Page
@@ -9,19 +13,24 @@ namespace Zeus.Admin.FileManager
 		{
 			if (uplFile.HasFile)
 			{
-				// If file with this name already exists, overwrite existing file.
-				Folder folder = (Folder) Zeus.Context.Current.Resolve<Navigator>().Navigate(Request.QueryString["ParentPath"]);
-				File file = folder.GetChild(uplFile.FileName) as File ?? new File();
+				File file = new File();
 				file.ContentType = uplFile.PostedFile.ContentType;
 				file.Data = uplFile.FileBytes;
 				file.Name = uplFile.FileName;
 
+				Folder folder = (Folder) Zeus.Context.Current.Resolve<Navigator>().Navigate(Request.QueryString["ParentPath"]);
 				file.AddTo(folder);
 
 				Zeus.Context.Persister.Save(file);
 
-				this.Page.ClientScript.RegisterStartupScript(typeof(Upload), "CloseThickBox", "self.parent.selectFile('" + Zeus.Web.Url.ToAbsolute(file.Url) + "');", true);
+				Page.ClientScript.RegisterStartupScript(typeof(Upload), "CloseThickBox", "self.parent.selectFile('" + Url.ToAbsolute(file.Url) + "');", true);
 			}
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			Page.ClientScript.RegisterCssResource(GetType(), "Zeus.Admin.Assets.Css.shared.css");
+			base.OnPreRender(e);
 		}
 	}
 }

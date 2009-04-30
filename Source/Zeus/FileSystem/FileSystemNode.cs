@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Zeus.Web;
 
 namespace Zeus.FileSystem
 {
@@ -11,8 +11,8 @@ namespace Zeus.FileSystem
 
 		public override string Title
 		{
-			get { return this.Name; }
-			set { this.Name = value; }
+			get { return Name; }
+			set { Name = value; }
 		}
 	}
 }

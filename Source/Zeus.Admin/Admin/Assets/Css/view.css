@@ -1,17 +1,16 @@
 table.tb {
 	margin: 0 0 10px 0;
-	width: 100%;
 }
 
 table.tb th  {
 	color: #fff;
-	padding: 3px;
+	padding: 5px;
 	font-size: 14px;
 	background-color: #C9C9C9;
 }
 
 table.tb th.data {
-	background: #C9C9C9 url(../images/view/arrowSortable.gif) no-repeat 2px 3px;
+	background: #C9C9C9 url(<%= WebResource("Zeus.Admin.Assets.Images.View.arrowSortable.gif") %>) no-repeat 2px 3px;
 	padding-left: 16px;
 }
 
@@ -26,12 +25,12 @@ table.tb td:hover {
 table.tb tr > th.asc
 {
 	/* override the sorting icon */
-	background: #C9C9C9 url(../images/view/arrowUp.gif) no-repeat 2px 3px;
+	background: #C9C9C9 url(<%= WebResource("Zeus.Admin.Assets.Images.View.arrowUp.gif") %>) no-repeat 2px 3px;
 }
 table.tb tr > th.desc
 {
 	/* override the sorting icon */
-	background: #C9C9C9 url(../images/view/arrowDown.gif) no-repeat 2px 3px;
+	background: #C9C9C9 url(<%= WebResource("Zeus.Admin.Assets.Images.View.arrowDown.gif") %>) no-repeat 2px 3px;
 }
 
 table.tb td {
@@ -39,7 +38,7 @@ table.tb td {
 	font-size: 11px;
 	color: #808285;
 	vertical-align: middle;
-	padding: 3px;
+	padding: 5px;
 }
 
 table.tb td.sort {
@@ -49,6 +48,7 @@ table.tb td.sort {
 table.tb td, table.tb th {
 	border: 1px solid #fff;
 	vertical-align: center;
+	padding: 5px;
 }
 
 table.tb .check {
@@ -69,11 +69,11 @@ table.tb .edit a, .add a {
 }
 
 table.tb .edit a {
-	background: url('../images/view/edit.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.edit.gif") %>) top left no-repeat;
 }
 
 .add a {
-	background: url('../images/view/add.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.add.gif") %>) top left no-repeat;
 }
 
 table.tb .edit a:hover, .add a:hover {
@@ -87,7 +87,7 @@ table.tb .edit a:hover, .add a:hover {
 	display: block;
 	height: 22px;
 	color: #a7a9ac;
-	background: url('../images/view/trash.gif') bottom left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.trash.gif") %>) bottom left no-repeat;
 	padding: 7px 0 0px 20px;
 	line-height: 25px;
 	float: left;
@@ -101,7 +101,7 @@ table.tb .edit a:hover, .add a:hover {
 	display: block;
 	height: 22px;
 	color: #a7a9ac;
-	background: url('../images/view/trashOpen.gif') bottom left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.trashOpen.gif") %>) bottom left no-repeat;
 	padding: 7px 0 0px 20px;
 	line-height: 25px;
 	float: left;
@@ -111,13 +111,13 @@ table.tb .edit a:hover, .add a:hover {
 }
 
 .delete:hover {
-	background: url('../images/view/trashOpen.gif') bottom left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.trashOpen.gif") %>) bottom left no-repeat;
 	color: #8b8c8d;
 }
 
 .confirm {
 	display: block;
-	background: url('../images/view/confirm.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.confirm.gif") %>) top left no-repeat;
 	height: 12px;
 	width: 48px;
 	float: left;
@@ -127,7 +127,7 @@ table.tb .edit a:hover, .add a:hover {
 
 .cancel {
 	display: block;
-	background: url('../images/view/cancel.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.cancel.gif") %>) top left no-repeat;
 	height: 12px;
 	width: 46px;
 	float: left;

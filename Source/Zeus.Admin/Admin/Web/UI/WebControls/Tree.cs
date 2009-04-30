@@ -1,10 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
-using Zeus.Web.UI.WebControls;
+using System.Web.UI.WebControls;
+using Isis.Web;
+using Isis.Web.UI;
+using Zeus.Engine;
+using Zeus.Globalization.ContentTypes;
+using Zeus.Persistence.Specifications;
+using Zeus.Security;
 using System.Web.UI.HtmlControls;
 using System.Web;
 using Isis.ExtensionMethods.Web;
-using Zeus.Linq.Filters;
+using Zeus.FileSystem.Images;
+using TreeNode=Zeus.Web.UI.WebControls.TreeNode;
 
 namespace Zeus.Admin.Web.UI.WebControls
 {
@@ -28,13 +37,13 @@ namespace Zeus.Admin.Web.UI.WebControls
 		{
 			base.CreateChildControls();
 
-			string path = this.Page.Request.GetOptionalString("selected");
-			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : this.RootNode;
+			string path = Page.Request.GetOptionalString("selected");
+			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : RootNode;
 
-			ItemFilter filter = new AccessFilter(this.Page.User, Zeus.Context.SecurityManager);
-			//if (this.Page.User.Identity.Name != "administrator")
-			//	filter = new CompositeFilter(new PageFilter(), filter);
-			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, this.RootNode, true)
+			ISpecification<ContentItem> filter = new AccessSpecification<ContentItem>(Page.User, Zeus.Context.SecurityManager, Operations.Read);
+			//if (Page.User.Identity.Name != "administrator")
+			//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
+			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, RootNode, true)
 				.OpenTo(_selectedItem)
 				.Filters(filter)
 				.LinkProvider(BuildLink)
@@ -44,7 +53,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 
 			treeNode.LiClass = "root";
 
-			this.Controls.Add(treeNode);
+			Controls.Add(treeNode);
 		}
 
 		public static void AppendExpanderNodeRecursive(Control tree)
@@ -70,25 +79,133 @@ namespace Zeus.Admin.Web.UI.WebControls
 
 		private Control BuildLink(ContentItem node)
 		{
+			return BuildLink(node, _selectedItem);
+		}
+
+		internal static Control BuildLink(ContentItem node, ContentItem selectedItem)
+		{
+			ContentItem translatedItem;
+			TranslationStatus translationStatus = GetTranslationStatus(node, out translatedItem);
+
 			HtmlAnchor anchor = new HtmlAnchor();
-			anchor.HRef = node.Url;
+			anchor.HRef = ((INode) translatedItem).PreviewUrl;
 			anchor.Target = "preview";
-			anchor.Attributes["data-url"] = Zeus.Web.Url.ToAbsolute(node.Url);
+			anchor.Attributes["data-url"] = Url.ToAbsolute(((INode) translatedItem).PreviewUrl);
+			string cssClass = ((INode) translatedItem).ClassNames;
+			if (translationStatus == TranslationStatus.NotAvailableInSelectedLanguage)
+				cssClass += " notAvailableInSelectedLanguage";
+			anchor.Attributes["class"] = cssClass;
+
+			if (Zeus.Context.AdminManager.TreeTooltipsEnabled)
+			{
+				string tooltip = string.Format("{0}`{1}`{2}`{3}", Zeus.Context.ContentTypes.GetContentType(node.GetType()).Title, node.Created, node.Updated, node.ID);
+				anchor.Attributes["data-title"] = tooltip;
+			}
 
 			HtmlImage image = new HtmlImage();
-			image.Src = node.IconUrl;
+			image.Src = translatedItem.IconUrl;
 			anchor.Controls.Add(image);
-			anchor.Controls.Add(new LiteralControl(node.Title));
+			anchor.Controls.Add(new LiteralControl(((INode) translatedItem).Contents));
 
 			HtmlGenericControl span = new HtmlGenericControl("span");
-			span.ID = "span" + node.ID;
+			span.ID = "span" + translatedItem.ID;
+			span.Attributes["data-id"] = translatedItem.ID.ToString();
+
+			// Loop through all action groups
+			List<string> contextMenuItems = new List<string>();
+			bool first = false;
+			foreach (ActionPluginGroupAttribute actionPluginGroup in Zeus.Context.Current.Resolve<IPluginFinder<ActionPluginGroupAttribute>>().GetPlugins().OrderBy(g => g.SortOrder))
+			{
+				foreach (ActionPluginAttribute actionPlugin in Zeus.Context.Current.Resolve<IPluginFinder<ActionPluginAttribute>>().GetPlugins().Where(p => p.GroupName == actionPluginGroup.Name).OrderBy(p => p.SortOrder))
+				{
+					ActionPluginState state = actionPlugin.GetState(translatedItem, Zeus.Context.Current.WebContext, Zeus.Context.SecurityManager);
+					if (state != ActionPluginState.Hidden)
+					{
+						string javascriptEnableCondition = (state == ActionPluginState.Enabled).ToString().ToLower();
+						contextMenuItems.Add(string.Format("{0}`{1}`{2}",
+							actionPlugin.Name,
+							javascriptEnableCondition,
+							first ? "separator" : string.Empty));
+					}
+					first = false;
+				}
+				first = true;
+			}			
+
+			span.Attributes["data-contextmenuitems"] = string.Join("|", contextMenuItems.ToArray());
 			span.Attributes["data-path"] = node.Path;
 			span.Attributes["data-type"] = node.GetType().Name;
-			if (node.Path == _selectedItem.Path)
+			if (IsSelectedItem(translatedItem, selectedItem))
 				span.Attributes["class"] = "active";
 			span.Controls.Add(anchor);
 
+			if (translationStatus == TranslationStatus.NotAvailableInSelectedLanguage || translationStatus == TranslationStatus.DisplayedInAnotherLanguage)
+			{
+				span.Controls.Add(new LiteralControl("&nbsp;"));
+				System.Web.UI.WebControls.Image translationImage = new System.Web.UI.WebControls.Image();
+				switch (translationStatus)
+				{
+					case TranslationStatus.NotAvailableInSelectedLanguage:
+						translationImage.ImageUrl = WebResourceUtility.GetUrl(typeof(Tree), "Zeus.Admin.Assets.Images.Icons.LanguageMissing.gif");
+						translationImage.ToolTip = "Page is missing for the current language and will not be displayed.";
+						break;
+					case TranslationStatus.DisplayedInAnotherLanguage :
+						Language language = Zeus.Context.Current.LanguageManager.GetLanguage(translatedItem.Language);
+						translationImage.ImageUrl = language.GetImageUrl("FlagIcon");
+						translationImage.ToolTip = "Page is displayed in another language (" + language.Title + ").";
+						break;
+				}
+				span.Controls.Add(translationImage);
+			}
+
 			return span;
+		}
+
+		private static bool IsSelectedItem(ContentItem node, ContentItem selectedItem)
+		{
+			return node == selectedItem;
+		}
+
+		private static TranslationStatus GetTranslationStatus(ContentItem contentItem, out ContentItem translatedItem)
+		{
+			translatedItem = contentItem;
+
+			if (contentItem == null)
+				return TranslationStatus.Available;
+
+			if (string.IsNullOrEmpty(contentItem.Language))
+				return TranslationStatus.Available;
+
+			string languageCode = Zeus.Context.AdminManager.CurrentAdminLanguageBranch;
+			ContentItem testTranslatedItem = Zeus.Context.Current.LanguageManager.GetTranslation(contentItem, languageCode);
+			if (testTranslatedItem != null)
+				translatedItem = testTranslatedItem;
+
+			if (Zeus.Context.Current.LanguageManager.TranslationExists(contentItem, languageCode))
+				return TranslationStatus.Available;
+
+			if (testTranslatedItem == null)
+				return TranslationStatus.NotAvailableInSelectedLanguage;
+
+			if (translatedItem.Language != languageCode)
+				return TranslationStatus.DisplayedInAnotherLanguage;
+
+			return TranslationStatus.Available;
+		}
+
+		private enum TranslationStatus
+		{
+			Available,
+
+			/// <summary>
+			/// Page is missing for the current language and will not be displayed.
+			/// </summary>
+			NotAvailableInSelectedLanguage,
+
+			/// <summary>
+			/// Page is displayed in another language (English).
+			/// </summary>
+			DisplayedInAnotherLanguage
 		}
 	}
 }

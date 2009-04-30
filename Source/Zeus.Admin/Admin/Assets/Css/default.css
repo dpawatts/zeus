@@ -45,7 +45,7 @@ form {
 
 #outerSplitter .vsplitbar, #splitter .vsplitbar {
 	width: 5px;
-	background: #CECECE url(../images/vgrabber.gif) no-repeat 50% 50%;
+	background: #CECECE url(<%= WebResource("Zeus.Admin.Assets.Images.Splitter.vgrabber.gif") %>) no-repeat 50% 50%;
 }
 
 #splitter .vsplitbar.active, #splitter .vsplitbar:hover { 
@@ -59,21 +59,22 @@ form {
 /************************* header *********************/
 
 #header {
-	height: 54px;
-	background: url('../images/theme/bannerBg.gif') top left repeat-x;
+	background:transparent url(<%= WebResource("Zeus.Admin.Assets.Images.Theme.bannerBg.gif") %>) repeat-x scroll left top;
+	height:54px;
 }
 
 #headerRight {
 	height: 54px;
 	float: right;
 	width: 395px;
-	background: url('../images/theme/bannerRight.gif') top right no-repeat;
 }
 
 #header img {
-	float: left;
-	display: block;
-	width: 201px;
+	display:block;
+	float:left;
+	height:39px;
+	margin:8px 0 0 10px;
+	width:38px;
 }
 
 #header p {
@@ -93,7 +94,7 @@ form {
 	float: right;
 	width: 99px;
 	height: 29px;
-	background: url('../images/theme/logOut.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Theme.logOut.gif") %>) top left no-repeat;
 	text-indent: -9999px;
 	margin: 13px 10px 0px 0px; 
 }
@@ -107,7 +108,7 @@ form {
 }
 
 #header #logOut:hover {
-	background: url('../images/theme/logOut.gif') bottom left no-repeat;
+	background: url('<%= WebResource("Zeus.Admin.Assets.Images.Theme.logOut.gif") %>') bottom left no-repeat;
 }
 
 #header #title {
@@ -123,8 +124,8 @@ form {
 {
 	border-bottom: solid 5px #CECECE;
 	background-color: #f1f2f2;
-	padding: 2px;
-	height: 25px;
+	/*padding: 2px;
+	height: 25px;*/
 }
 
 #toolbar input, #toolbar a

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Zeus.Linq.Filters;
-using System.Linq;
-using System.IO;
-using System.Diagnostics;
-using Zeus.ContentTypes.Properties;
+﻿using Isis.Web.UI;
+using Zeus.Design.Editors;
 using Zeus.Integrity;
 
 namespace Zeus.FileSystem
@@ -13,9 +8,15 @@ namespace Zeus.FileSystem
 	[RestrictParents(typeof(IFileSystemContainer), typeof(Folder))]
 	public class Folder : FileSystemNode
 	{
+		public Folder()
+		{
+			SortOrder = int.MaxValue;
+			Visible = false;
+		}
+
 		public override string IconUrl
 		{
-			get { return "~/Admin/Assets/Images/Icons/folder.png"; }
+			get { return WebResourceUtility.GetUrl(typeof(Folder), "Zeus.Web.Resources.Icons.folder.png"); }
 		}
 
 		[TextBoxEditor("Name", 10)]

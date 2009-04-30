@@ -1,5 +1,4 @@
-﻿using System;
-using SoundInTheory.NMigration.Framework;
+﻿using Isis.ApplicationBlocks.DataMigrations.Framework;
 using Smo = Microsoft.SqlServer.Management.Smo;
 
 namespace Zeus.Installation.Migrations
@@ -23,6 +22,9 @@ namespace Zeus.Installation.Migrations
 				new Column("Visible", Smo.DataType.Bit, ColumnProperties.NotNull),
 				new Column("SavedBy", Smo.DataType.NVarChar(50), ColumnProperties.Null),
 				new Column("VersionOfID", Smo.DataType.Int, ColumnProperties.Null),
+				new Column("Version", Smo.DataType.Int, ColumnProperties.NotNull),
+				new Column("TranslationOfID", Smo.DataType.Int, ColumnProperties.Null),
+				new Column("Language", Smo.DataType.NVarChar(50), ColumnProperties.Null),
 				new Column("ParentID", Smo.DataType.Int, ColumnProperties.Null));
 
 			AddTable("zeusDetailCollections",
@@ -30,10 +32,18 @@ namespace Zeus.Installation.Migrations
 				new Column("ItemID", Smo.DataType.Int, ColumnProperties.Null),
 				new Column("Name", Smo.DataType.NVarChar(50), ColumnProperties.NotNull));
 
-			AddTable("zeusAuthorizedRoles",
+			AddTable("zeusAuthorizationRules",
 				new Column("ID", Smo.DataType.Int, ColumnProperties.PrimaryKeyWithIdentity),
 				new Column("ItemID", Smo.DataType.Int, ColumnProperties.NotNull),
-				new Column("Role", Smo.DataType.NVarChar(50), ColumnProperties.NotNull));
+				new Column("Operation", Smo.DataType.NVarChar(50), ColumnProperties.NotNull),
+				new Column("Role", Smo.DataType.NVarChar(50), ColumnProperties.Null),
+				new Column("User", Smo.DataType.NVarChar(50), ColumnProperties.Null));
+
+			AddTable("zeusLanguageSettings",
+				new Column("ID", Smo.DataType.Int, ColumnProperties.PrimaryKeyWithIdentity),
+				new Column("ItemID", Smo.DataType.Int, ColumnProperties.NotNull),
+				new Column("Language", Smo.DataType.NVarChar(50), ColumnProperties.NotNull),
+				new Column("FallbackLanguage", Smo.DataType.NVarChar(50), ColumnProperties.Null));
 
 			AddTable("zeusDetails",
 				new Column("ID", Smo.DataType.Int, ColumnProperties.PrimaryKeyWithIdentity),
@@ -50,15 +60,18 @@ namespace Zeus.Installation.Migrations
 				new Column("Value", Smo.DataType.VarBinaryMax, ColumnProperties.Null));
 
 			AddForeignKey("zeusDetailCollections", "ItemID", "zeusItems", "ID");
-			AddForeignKey("zeusAuthorizedRoles", "ItemID", "zeusItems", "ID");
+			AddForeignKey("zeusAuthorizationRules", "ItemID", "zeusItems", "ID");
+			AddForeignKey("zeusLanguageSettings", "ItemID", "zeusItems", "ID");
 			AddForeignKey("zeusDetails", "ItemID", "zeusItems", "ID");
 			AddForeignKey("zeusDetails", "DetailCollectionID", "zeusDetailCollections", "ID");
+
+			AddUniqueKey("zeusAuthorizationRules", "ItemID", "Language");
 		}
 
 		public override void Down()
 		{
 			RemoveTable("zeusDetails");
-			RemoveTable("zeusAuthorizedRoles");
+			RemoveTable("zeusAuthorizationRules");
 			RemoveTable("zeusDetailCollections");
 			RemoveTable("zeusItems");
 		}

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Web.UI.WebControls;
 using Zeus.FileSystem;
 using System.Web.UI;
+using Image=System.Web.UI.WebControls.Image;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -49,7 +50,7 @@ namespace Zeus.Web.UI.WebControls
 
 				this.Controls.Add(new LiteralControl("<br />"));
 
-				chkClearFile = new CheckBox { ID = "chkClearFile", Text = "Clear", CssClass = "clearFile" };
+				chkClearFile = new CheckBox { ID = ID + "chkClearFile", Text = "Clear", CssClass = "clearFile" };
 				this.Controls.Add(chkClearFile);
 			}
 		}

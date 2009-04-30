@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Zeus.ContentTypes.Properties;
-using System.IO;
-using System.Web;
-using System.Diagnostics;
+using System.Linq;
 using System.Security.Principal;
+using Zeus.Persistence;
+using Zeus.Security;
 
 namespace Zeus.ContentTypes
 {
@@ -15,7 +11,8 @@ namespace Zeus.ContentTypes
 	{
 		#region Fields
 
-		private IDictionary<Type, ContentType> _definitions;
+		private readonly IDictionary<Type, ContentType> _definitions;
+		private readonly IItemNotifier _notifier;
 
 		#endregion
 
@@ -35,10 +32,18 @@ namespace Zeus.ContentTypes
 
 		#region Constructor
 
-		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder)
+		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder, IItemNotifier notifier)
 		{
 			_definitions = contentTypeBuilder.GetDefinitions();
+			_notifier = notifier;
 		}
+
+		#endregion
+
+		#region Events
+
+		/// <summary>Notifies subscriber that an item was created through a <see cref="CreateInstance"/> method.</summary>
+		public event EventHandler<ItemEventArgs> ItemCreated;
 
 		#endregion
 
@@ -63,7 +68,26 @@ namespace Zeus.ContentTypes
 
 		protected virtual void OnItemCreating(ContentItem item, ContentItem parentItem)
 		{
-			item.Parent = parentItem;
+			if (parentItem != null)
+			{
+				ContentType parentDefinition = GetContentType(parentItem.GetType());
+				ContentType itemDefinition = GetContentType(item.GetType());
+
+				if (!parentDefinition.IsChildAllowed(itemDefinition))
+					throw new NotAllowedParentException(itemDefinition, parentItem.GetType());
+
+				item.Parent = parentItem;
+				foreach (AuthorizationRule rule in parentItem.AuthorizationRules)
+					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User));
+			}
+
+			if (item is ISelfPopulator)
+				((ISelfPopulator) item).Populate();
+
+			_notifier.Notify(item);
+
+			if (ItemCreated != null)
+				ItemCreated.Invoke(this, new ItemEventArgs(item));
 		}
 
 		public ICollection<ContentType> GetContentTypes()
@@ -75,19 +99,24 @@ namespace Zeus.ContentTypes
 		{
 			if (_definitions.ContainsKey(type))
 				return _definitions[type];
-			else
-				return null;
+			return null;
 		}
 
-		public IList<ContentType> GetAllowedChildren(ContentType contentType, IPrincipal user)
+		public IList<ContentType> GetAllowedChildren(ContentType contentType, string zone, IPrincipal user)
 		{
-			List<ContentType> allowedChildren = new List<ContentType>();
+			if (!contentType.HasZone(zone))
+				throw new ZeusException("The content type '{0}' does not allow a zone named '{1}'.", contentType.Title, zone);
 
+			List<ContentType> allowedChildren = new List<ContentType>();
 			foreach (ContentType childItem in contentType.AllowedChildren)
 			{
 				if (!childItem.IsDefined)
 					continue;
+				if (!childItem.Enabled)
+					continue;
 				if (!childItem.IsAuthorized(user))
+					continue;
+				if (!contentType.IsAllowedInZone(zone))
 					continue;
 				allowedChildren.Add(childItem);
 			}

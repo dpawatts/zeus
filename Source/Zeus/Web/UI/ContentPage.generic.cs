@@ -1,11 +1,12 @@
 ﻿using System;
+using Isis.Web.Security;
 
 namespace Zeus.Web.UI
 {
-	public abstract class ContentPage<TContentItem> : System.Web.UI.Page, IContentTemplate, IContentItemContainer
-		where TContentItem : ContentItem
+	public abstract class ContentPage<TPage> : System.Web.UI.Page, IContentTemplate, IContentItemContainer
+		where TPage : ContentItem
 	{
-		public TContentItem CurrentItem
+		public TPage CurrentItem
 		{
 			get;
 			set;
@@ -13,13 +14,22 @@ namespace Zeus.Web.UI
 
 		ContentItem IContentTemplate.CurrentItem
 		{
-			get { return this.CurrentItem; }
-			set { this.CurrentItem = (TContentItem) value; }
+			get { return CurrentItem; }
+			set { CurrentItem = (TPage) value; }
 		}
 
 		ContentItem IContentItemContainer.CurrentItem
 		{
-			get { return this.CurrentItem; }
+			get { return CurrentItem; }
+		}
+
+		public IUser CurrentUser
+		{
+			get
+			{
+				WebPrincipal webPrincipal = User as WebPrincipal;
+				return (webPrincipal != null) ? webPrincipal.MembershipUser : null;
+			}
 		}
 	}
 }

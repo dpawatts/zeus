@@ -9,9 +9,9 @@ namespace Zeus.Web.UI.WebControls
 	[ValidationProperty("Text")]
 	public class NameEditor : CompositeControl, IValidator
 	{
-		private Label _label;
+		private Label _label, _prefixLabel, _suffixLabel;
 		private TextBox _textBox;
-		private Panel _labelPanel, _editPanel;
+		private Panel _labelPanel;
 
 		public string Text
 		{
@@ -19,29 +19,44 @@ namespace Zeus.Web.UI.WebControls
 			set { EnsureChildControls(); _textBox.Text = value; }
 		}
 
+		public string Prefix
+		{
+			get { return _prefixLabel.Text; }
+			set { EnsureChildControls(); _prefixLabel.Text = value; }
+		}
+
+		public string Suffix
+		{
+			get { return _suffixLabel.Text; }
+			set { EnsureChildControls(); _suffixLabel.Text = value; }
+		}
+
 		protected override void CreateChildControls()
 		{
 			base.CreateChildControls();
 
 			_labelPanel = new Panel();
-			_labelPanel.ID = this.ID + "labelPanel";
-			this.Controls.Add(_labelPanel);
+			_labelPanel.ID = ID + "labelPanel";
+			Controls.Add(_labelPanel);
+
+			_prefixLabel = new Label();
+			_labelPanel.Controls.Add(_prefixLabel);
 
 			_label = new Label();
-			_label.Text = this.FindCurrentItem().Name;
+			_label.Text = this.FindCurrentEditableObject()["Name"] as string;
 			_label.CssClass = "nameLabel";
 			_label.ID = _labelPanel.ID + "label";
 			_labelPanel.Controls.Add(_label);
 
-			_editPanel = new Panel();
-			_editPanel.ID = this.ID + "editPanel";
-			_editPanel.Style[HtmlTextWriterStyle.Display] = "none";
-			this.Controls.Add(_editPanel);
-
 			_textBox = new TextBox();
+			_textBox.CssClass = "nameEditor";
 			_textBox.MaxLength = 250;
-			_textBox.ID = _editPanel.ID + "textBox";
-			_editPanel.Controls.Add(_textBox);
+			_textBox.ID = _labelPanel.ID + "textBox";
+			_textBox.Style[HtmlTextWriterStyle.Display] = "none";
+			_labelPanel.Controls.Add(_textBox);
+
+			_suffixLabel = new Label();
+			_labelPanel.Controls.Add(_suffixLabel);
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -49,11 +64,11 @@ namespace Zeus.Web.UI.WebControls
 			base.OnPreRender(e);
 
 			// Render javascript for updating name textbox based on title textbox.
-			this.Page.ClientScript.RegisterClientScriptResource(typeof(NameEditor), "Zeus.Web.UI.WebControls.NameEditor.js");
+			Page.ClientScript.RegisterClientScriptResource(typeof(NameEditor), "Zeus.Web.UI.WebControls.NameEditor.js");
 
-			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"$('#" + _labelPanel.ClientID + "').hide();$('#" + _editPanel.ClientID + "').show();return false;\">Edit</a></span>"));
+			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"$('#" + _label.ClientID + "').hide();$('#" + _textBox.ClientID + "').show();return false;\">Edit</a></span>"));
 
-			ItemView itemView = this.Parent.FindParent<ItemView>();
+			ItemView itemView = Parent.FindParent<ItemView>();
 			Control titleEditor = itemView.PropertyControls["Title"];
 			string script = string.Format(@"$(document).ready(function() {{
 					$('#{0}, #{1}').nameEditor({{titleEditorID: '{2}'}});
@@ -96,21 +111,20 @@ namespace Zeus.Web.UI.WebControls
 					}
 
 					// Ensure that the path isn't longer than 260 characters
-					if (currentItem.Parent != null && (currentItem.Parent.Url.Length > 248 || currentItem.Parent.Url.Length + _textBox.Text.Length > 260))
+					if (currentItem.Parent != null && currentItem.Parent is ContentItem)
 					{
-						ErrorMessage = string.Format("Name too long, the full url cannot exceed 260 characters: {0}", _textBox.Text);
-						IsValid = false;
-						return;
+						ContentItem parentDocument = (ContentItem) currentItem.Parent;
+						if (parentDocument.Url.Length > 248 || parentDocument.Url.Length + _textBox.Text.Length > 260)
+						{
+							ErrorMessage = string.Format("Name too long, the full url cannot exceed 260 characters: {0}", _textBox.Text);
+							IsValid = false;
+							return;
+						}
 					}
 				}
 			}
 
 			IsValid = true;
-		}
-
-		public override void RenderBeginTag(HtmlTextWriter writer)
-		{
-			base.RenderBeginTag(writer);
 		}
 
 		/// <summary>Renders an additional asterix when validation didn't pass.</summary>

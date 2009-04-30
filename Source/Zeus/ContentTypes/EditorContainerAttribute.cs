@@ -1,48 +1,76 @@
 ﻿using System;
-using System.Web.UI;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
+using System.Web.UI;
 
 namespace Zeus.ContentTypes
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public abstract class EditorContainerAttribute : Attribute, IEditorContainer
 	{
-		private List<IContainable> _contained = new List<IContainable>();
+		private readonly List<IContainable> _contained = new List<IContainable>();
 
 		public EditorContainerAttribute(string name, int sortOrder)
 		{
-			this.Name = name;
-			this.SortOrder = sortOrder;
+			Name = name;
+			SortOrder = sortOrder;
 		}
 
-		public string Name
-		{
-			get;
-			set;
-		}
+		/// <summary>Gets or sets roles allowed to access this container.</summary>
+		public string[] AuthorizedRoles { get; set; }
 
-		public int SortOrder
-		{
-			get;
-			set;
-		}
+		public string Name { get; set; }
 
-		public string ContainerName
-		{
-			get;
-			set;
-		}
+		public int SortOrder { get; set; }
+
+		public string ContainerName { get; set; }
 
 		public abstract Control AddTo(Control container);
 
-		public IList<IContainable> GetContained()
+		/// <summary>Find out whether a user has permission to view this container.</summary>
+		/// <param name="user">The user to check.</param>
+		/// <returns>True if the user has the required permissions.</returns>
+		public virtual bool IsAuthorized(IPrincipal user)
 		{
-			return _contained;
+			if (AuthorizedRoles == null)
+				return true;
+			if (user == null)
+				return false;
+
+			foreach (string role in AuthorizedRoles)
+				if (user.IsInRole(role))
+					return true;
+			return false;
+		}
+
+		public List<IContainable> Contained
+		{
+			get { return _contained; }
+		}
+
+		public IList<IContainable> GetContained(IPrincipal user)
+		{
+			return _contained.Where(c => c.IsAuthorized(user)).ToList();
 		}
 
 		public void AddContained(IContainable containable)
 		{
 			_contained.Add(containable);
 		}
+
+		#region IComparable x 2 Members
+
+		public int CompareTo(IEditorContainer other)
+		{
+			return SortOrder.CompareTo(other.SortOrder);
+		}
+
+		public int CompareTo(IContainable other)
+		{
+			return SortOrder - other.SortOrder;
+		}
+
+		#endregion
 	}
 }

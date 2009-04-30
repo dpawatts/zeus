@@ -3,22 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
   <title runat="server"></title>
-  
-  <link rel="stylesheet" href="assets/css/reset.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
-  <link rel="stylesheet" href="assets/css/shared.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
-  <link rel="stylesheet" href="assets/css/preview.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
-  
-  <script type="text/javascript" src="assets/js/jquery.js"></script>
-  
   <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
 <body>
 	<form runat="server" id="frmForm" enctype="multipart/form-data">
 	<asp:ScriptManager runat="server" />
 	<div>
-		<div id="toolbar">
+		<div id="toolbar" class="clearfix">
 			<asp:ContentPlaceHolder ID="Toolbar" runat="server" />
 		</div>
+		<asp:ContentPlaceHolder ID="Outside" runat="server" />
 		<div id="content">
 			<h2 runat="server" id="h2Title" />
 			<asp:ContentPlaceHolder ID="Content" runat="server" />

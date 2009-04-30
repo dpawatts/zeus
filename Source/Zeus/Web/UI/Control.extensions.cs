@@ -1,5 +1,6 @@
-﻿using System;
-using System.Web.UI;
+﻿using System.Web.UI;
+using Zeus.ContentTypes;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Web.UI
 {
@@ -11,6 +12,15 @@ namespace Zeus.Web.UI
 			if (container != null)
 				return container.CurrentItem;
 			
+			return null;
+		}
+
+		public static IEditableObject FindCurrentEditableObject(this Control control)
+		{
+			IEditableObjectEditor container = FindParent<IEditableObjectEditor>(control.Parent);
+			if (container != null)
+				return container.CurrentItem;
+
 			return null;
 		}
 

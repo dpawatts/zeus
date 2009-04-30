@@ -48,7 +48,7 @@ body
 	line-height: 3px;
 	height:3px;
 	font-size:3px;
-	background: url(../images/tree/line_bg.gif) 0 0 no-repeat transparent;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.line_bg.gif") %>) 0 0 no-repeat transparent;
 }
 
 .simpleTree .line-last
@@ -58,7 +58,7 @@ body
 	line-height: 3px;
 	height:3px;
 	font-size:3px;
-	background: url(../images/tree/spacer.gif) 0 0 no-repeat transparent;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.spacer.gif") %>) 0 0 no-repeat transparent;
 }
 
 .simpleTree .line-over
@@ -68,7 +68,7 @@ body
 	line-height: 3px;
 	height:3px;
 	font-size:3px;
-	background: url(../images/tree/line_bg_over.gif) 0 0 no-repeat transparent;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.line_bg_over.gif") %>) 0 0 no-repeat transparent;
 }
 
 .simpleTree .line-over-last
@@ -78,48 +78,48 @@ body
 	line-height: 3px;
 	height:3px;
 	font-size:3px;
-	background: url(../images/tree/line_bg_over_last.gif) 0 0 no-repeat transparent;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.line_bg_over_last.gif") %>) 0 0 no-repeat transparent;
 }
 
 .simpleTree .folder-open
 {
 	margin-left:0px;
-	background: url(../images/tree/collapsable.gif) 0 -2px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.collapsable.gif") %>) 0 -2px no-repeat #fff;
 }
 
 .simpleTree .folder-open-last
 {
 	margin-left:0;
-	background: url(../images/tree/collapsable-last.gif) 0 -2px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.collapsable-last.gif") %>) 0 -2px no-repeat #fff;
 }
 
 .simpleTree .folder-close
 {
 	margin-left:0;
-	background: url(../images/tree/expandable.gif) 0 -2px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.expandable.gif") %>) 0 -2px no-repeat #fff;
 }
 
 .simpleTree .folder-close-last
 {
 	margin-left:0;
-	background: url(../images/tree/expandable-last.gif) 0 -2px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.expandable-last.gif") %>) 0 -2px no-repeat #fff;
 }
 
 .simpleTree .doc
 {
 	margin-left:0;
-	background: url(../images/tree/leaf.gif) 0 -1px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.leaf.gif") %>) 0 -1px no-repeat #fff;
 }
 
 .simpleTree .doc-last
 {
 	margin-left:0;
-	background: url(../images/tree/leaf-last.gif) 0 -1px no-repeat #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.leaf-last.gif") %>) 0 -1px no-repeat #fff;
 }
 
 .simpleTree .ajax
 {
-	background: url(../images/tree/spinner.gif) no-repeat 0 0 #ffffff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.spinner.gif") %>) no-repeat 0 0 #ffffff;
 	height: 16px;
 	display:none;
 }
@@ -171,11 +171,6 @@ body
 	vertical-align: middle;
 }
 
-.simpleTree a
-{
-	color: #808285;
-}
-
 #drag_container
 {
 	background:#ffffff;
@@ -208,36 +203,57 @@ body
 
 #drag_container li.doc, #drag_container li.doc-last
 {
-	background: url(../images/tree/leaf.gif) no-repeat -17px 0 #ffffff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.leaf.gif") %>) no-repeat -17px 0 #ffffff;
 }
 #drag_container .folder-close, #drag_container .folder-close-last
 {
-	background: url(../images/tree/expandable.gif) no-repeat -17px 0 #ffffff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.expandable.gif") %>) no-repeat -17px 0 #ffffff;
 }
 
 #drag_container .folder-open, #drag_container .folder-open-last
 {
-	background: url(../images/tree/collapsable.gif) no-repeat -17px 0 #ffffff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Tree.collapsable.gif") %>) no-repeat -17px 0 #ffffff;
+}
+
+div#outerContainer
+{
+	height:auto !important;
+	min-height:100%;
+	width: 100%;
+}
+
+div#container, div#languages
+{
+	margin: 5px;
+	
+}
+
+div#languages
+{
+	bottom:0;
+	position:absolute;
+	
 }
 
 /* Accordion */
 
-#container  {
-	padding: 5px;
-	font-family: verdana;
+div#container
+{
+	padding-bottom: 50px;
 }
 
 /* Context menu */
 
 .contextMenu {
 	position: absolute;
-	width: 80px;
+	width: 135px;
 	z-index: 99999;
 	border: solid 1px #CCC;
 	background: #FFFFFF;
 	padding: 0px;
 	margin: 0px;
 	display: none;
+	font-size: 11px;
 }
 
 .contextMenu LI {
@@ -277,24 +293,18 @@ body
 	border-top: solid 1px #CCC;
 }
 
-/*
-	Adding Icons
-	
-	You can add icons to the context menu by adding
-	classes to the respective LI element(s)
-*/
-
-.contextMenu li.new a 
+.notAvailableInSelectedLanguage
 {
-	background-image: url(../images/icons/page_add.png);
+	font-style: italic;
 }
 
-.contextMenu li.edit a 
-{
-	background-image: url(../images/icons/page_edit.png);
-}
+.day { color:#393; }
+.week { color:#363; }
+.invisible{ color:#999;}
+.unpublished,
+.expired,
+.locked { color:#C66; }
 
-.contextMenu li.delete a 
-{
-	background-image: url(../images/icons/page_delete.png);
-}
+.locked { padding-right:16px; background:transparent url(<%= WebResource("Zeus.Admin.Assets.Images.Icons.bullet_key.png") %>) no-repeat 100% 50%; }
+.unpublished { padding-right:16px; background:transparent url(<%= WebResource("Zeus.Admin.Assets.Images.Icons.bullet_arrow_down.png") %>) no-repeat 100% 50%; }
+.expired { padding-right:16px; background:transparent url(<%= WebResource("Zeus.Admin.Assets.Images.Icons.bullet_arrow_bottom.png") %>) no-repeat 100% 50%; }

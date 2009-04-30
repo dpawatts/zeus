@@ -31,14 +31,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="Gallio, Version=3.0.5.546, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\nunit.framework.dll</HintPath>
+      <HintPath>..\..\Libraries\Gallio.dll</HintPath>
+    </Reference>
+    <Reference Include="MbUnit, Version=3.0.5.546, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MbUnit.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=2.1.0.1001, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache2, Version=2.0.0.1001, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\NHibernate.Caches.SysCache2.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.1337, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -51,13 +69,27 @@
   <ItemGroup>
     <Compile Include="Definitions\DefinitionTests.cs" />
     <Compile Include="Definitions\Items\TestTextPage.cs" />
+    <Compile Include="DynamicContent\DynamicContentManagerTests.cs" />
+    <Compile Include="Persistence\NH\ItemFinderTests.cs" />
+    <Compile Include="Persistence\Specifications\SpecificationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Persistence.NH\Zeus.Persistence.NH.csproj">
+      <Project>{E0C2BF09-ECCD-4EC2-B2AE-D376A4A32498}</Project>
+      <Name>Zeus.Persistence.NH</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

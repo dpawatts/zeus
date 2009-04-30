@@ -6,7 +6,7 @@ body {
 #login {
 	width: 359px;
 	height: 249px;
-	background: url('../images/login/mainBox.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.mainBox.gif") %>) top left no-repeat;
 	margin: 200px auto 0;
 	padding: 1px 0 0;
 	position: relative;
@@ -51,7 +51,7 @@ form input {
 	width: 181px;
 	height: 16px;
 	border: 1px solid #fff;
-	background: url('../images/login/textBox.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.textBox.gif") %>) top left no-repeat;
 	margin: 0 0 12px 0;
 	font-size: 13px;
 	color: #808285;
@@ -71,7 +71,7 @@ form input {
 	color: #ec722a;
 }
 
-#lgnLogin_loginButton {
+#loginButton {
 	display: block;
 	border: none;
 	width: 98px;
@@ -79,11 +79,11 @@ form input {
 	margin: 35px 58px 0 0;
 	height: 28px;
 	text-indent: -9999px;
-	background: url('../images/login/button.gif') top left no-repeat;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.button.gif") %>) top left no-repeat;
 }
 
-#lgnLogin_loginButton:hover {
-	background: url('../images/login/button.gif') bottom left no-repeat;
+#loginButton:hover {
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.button.gif") %>) bottom left no-repeat;
 }
 
 #tryAgain {
@@ -92,5 +92,4 @@ form input {
 	left: 28px;
 	font-size: 12px;
 	color: #ec722a;
-	
 }

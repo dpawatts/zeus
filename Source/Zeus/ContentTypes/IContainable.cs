@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using System.Web.UI;
 
 namespace Zeus.ContentTypes
@@ -7,7 +8,7 @@ namespace Zeus.ContentTypes
 	/// Classes implementing this interface can add a graphical representation to 
 	/// a control hierarchy.
 	/// </summary>
-	public interface IContainable : IUniquelyNamed
+	public interface IContainable : IUniquelyNamed, IComparable<IContainable>
 	{
 		string ContainerName { get; set; }
 
@@ -18,5 +19,10 @@ namespace Zeus.ContentTypes
 		/// <param name="container">The container onto which to add the containable control.</param>
 		/// <returns>The newly added control.</returns>
 		Control AddTo(Control container);
+
+		/// <summary>Find out whether a user has permission to edit this detail.</summary>
+		/// <param name="user">The user to check.</param>
+		/// <returns>True if the user has the required permissions.</returns>
+		bool IsAuthorized(IPrincipal user);
 	}
 }

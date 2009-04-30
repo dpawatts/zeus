@@ -3,13 +3,16 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
+<head runat="server">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="stylesheet" href="assets/css/reset.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+	<title>Login</title>
 	
-	<link rel="stylesheet" href="assets/css/login.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
-	<title>login</title>
-	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			if (window.self != window.top)
+				top.location = self.location.href;
+		});
+	</script>
 </head>
 
 <body>
@@ -21,22 +24,18 @@
 <div id="login">
 	<p id="for">Administration Site For</p>
 	<p id="webName"><asp:Literal runat="server" ID="ltlAdminName" /></p>
-	<form runat="server" defaultbutton="lgnLogin$loginButton">
-		<asp:Login runat="server" ID="lgnLogin" OnAuthenticate="lgnLogin_Authenticate">
-			<LayoutTemplate>
-				<asp:Label runat="server" AssociatedControlID="UserName">Username</asp:Label>
-				<asp:TextBox runat="server" ID="UserName" />
-				<asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" /><br />
-				
-				<asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
-				<asp:TextBox runat="server" ID="Password" TextMode="Password" />
-				<asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" /><br />
-				
-				<div id="tryAgain"><asp:Literal runat="server" ID="FailureText" /></div>
-				
-				<asp:Button runat="server" ID="loginButton" CommandName="Login" />
-			</LayoutTemplate>
-		</asp:Login>
+	<form runat="server" id="lgnLogin" defaultbutton="lgnLogin$loginButton">
+		<asp:Label runat="server" AssociatedControlID="UserName">Username</asp:Label>
+		<asp:TextBox runat="server" ID="UserName" />
+		<asp:RequiredFieldValidator runat="server" ControlToValidate="UserName" Text="*" /><br />
+		
+		<asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
+		<asp:TextBox runat="server" ID="Password" TextMode="Password" />
+		<asp:RequiredFieldValidator runat="server" ControlToValidate="Password" Text="*" /><br />
+		
+		<div id="tryAgain"><asp:Literal runat="server" ID="FailureText" /></div>
+		
+		<asp:Button runat="server" ID="loginButton" OnClick="loginButton_Click" />
 	</form>
 </div>
 

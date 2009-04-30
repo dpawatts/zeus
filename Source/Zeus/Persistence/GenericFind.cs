@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zeus.Collections;
 using Zeus.FileSystem;
+using Zeus.Web;
 
 namespace Zeus.Persistence
 {
@@ -31,7 +32,7 @@ namespace Zeus.Persistence
 		public static TRoot RootItem
 		{
 			//get { return (TStart) Context.Current.UrlParser.RootItem; }
-			get { return (TRoot) Context.Persister.Load(Context.Current.Host.RootItemID); }
+			get { return (TRoot) Context.Persister.Load(Context.Current.Host.CurrentSite.RootItemID); }
 		}
 
 		/// <summary>Gets the current start page (this may vary depending on host url).</summary>
@@ -102,6 +103,14 @@ namespace Zeus.Persistence
 
 		/// <summary>Enumerates parents of the initial item.</summary>
 		/// <param name="initialItem">The page whose parents will be enumerated. The page itself will not appear in the enumeration.</param>
+		/// <returns>An enumeration of the parents of the initial page.</returns>
+		public static IEnumerable<ContentItem> EnumerateParents(ContentItem initialItem)
+		{
+			return EnumerateParents(initialItem, null);
+		}
+
+		/// <summary>Enumerates parents of the initial item.</summary>
+		/// <param name="initialItem">The page whose parents will be enumerated. The page itself will not appear in the enumeration.</param>
 		/// <param name="lastAncestor">The last page of the enumeration. The enumeration will contain this page.</param>
 		/// <returns>An enumeration of the parents of the initial page. If the last page isn't a parent of the inital page all pages until there are no more parents are returned.</returns>
 		public static IEnumerable<ContentItem> EnumerateParents(ContentItem initialItem, ContentItem lastAncestor)
@@ -122,7 +131,7 @@ namespace Zeus.Persistence
 			if (includeSelf)
 				item = initialItem;
 			else if (initialItem != lastAncestor)
-				item = initialItem.Parent;
+				item = initialItem.GetParent();
 			else
 				yield break;
 
@@ -131,8 +140,37 @@ namespace Zeus.Persistence
 				yield return item;
 				if (item == lastAncestor)
 					break;
-				item = item.Parent;
+				item = item.GetParent();
 			}
+		}
+
+		/// <summary>Determines wether an item is below a certain ancestral item or is the ancestral item.</summary>
+		/// <param name="item">The item to check for beeing a child or descendant.</param>
+		/// <param name="ancestor">The item to check for beeing parent or ancestor.</param>
+		/// <returns>True if the item is descendant the ancestor.</returns>
+		public static bool IsDescendantOrSelf(ContentItem item, ContentItem ancestor)
+		{
+			if (item == null) throw new ArgumentNullException("item");
+			if (ancestor == null) throw new ArgumentNullException("ancestor");
+
+			return item == ancestor || In(ancestor, EnumerateParents(item));
+		}
+
+		/// <summary>Determines wether an item is in a enumeration of items.</summary>
+		/// <param name="wantedItem">The item to look for.</param>
+		/// <param name="linedUpItems">The items to look among.</param>
+		/// <returns>True if the item is in the enumeration of items.</returns>
+		public static bool In(ContentItem wantedItem, IEnumerable<ContentItem> linedUpItems)
+		{
+			if (wantedItem == null) throw new ArgumentNullException("wantedItem");
+			if (linedUpItems == null) throw new ArgumentNullException("linedUpItems");
+
+			foreach (ContentItem enumeratedItem in linedUpItems)
+			{
+				if (enumeratedItem == wantedItem)
+					return true;
+			}
+			return false;
 		}
 	}
 }

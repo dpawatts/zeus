@@ -1,20 +1,61 @@
 ﻿using System;
+using Isis.Web.Hosting;
+using Zeus.Security;
 
+[assembly: EmbeddedResourceFile("Zeus.Admin.Delete.aspx", "Zeus.Admin")]
 namespace Zeus.Admin
 {
-	public partial class Delete : AdminPage
+	[ActionPlugin("Delete", "Delete", Operations.Delete, "NewEditDelete", 3, null, "Zeus.Admin.Delete.aspx", "selected={selected}&alert=true", Targets.Preview, "Zeus.Admin.Resources.page_delete.png")]
+	[AvailableOperation(Operations.Delete, "Delete", 40)]
+	public partial class Delete : PreviewFrameAdminPage
 	{
-		protected void Page_Load(object sender, EventArgs e)
+		protected override void OnInit(EventArgs e)
 		{
-			if (Zeus.Context.UrlParser.IsRootOrStartPage(SelectedItem))
-				throw new InvalidOperationException("Cannot delete root item or home page");
+			hlCancel.NavigateUrl = CancelUrl();
 
-			if (SelectedItem.GetType().Name.Contains("Department"))
-				throw new InvalidOperationException("Cannot delete department");
+			uscItemsToDelete.CurrentItem = SelectedItem;
+			uscItemsToDelete.DataBind();
+			uscReferencingItems.Item = SelectedItem;
+			uscReferencingItems.DataBind();
 
-			ContentItem parent = this.SelectedItem.Parent;
-			Zeus.Context.Persister.Delete(this.SelectedItem);
-			Refresh(parent, AdminFrame.Both, false);
+			base.OnInit(e);
+		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			if (SelectedItem is ContentItem && Zeus.Context.UrlParser.IsRootOrStartPage((ContentItem) SelectedItem))
+			{
+				csvDelete.IsValid = false;
+				btnDelete.Enabled = false;
+			}
+			else
+			{
+				//if (!IsPostBack && Request["alert"] != null && Boolean.Parse(Request["alert"]))
+				//	RegisterConfirmAlert();
+			}
+			Title = string.Format("Delete '{0}'", SelectedItem.Title);
+
+			base.OnLoad(e);
+		}
+
+		protected void btnDelete_Click(object sender, EventArgs e)
+		{
+			ContentItem parent = SelectedItem.Parent;
+			try
+			{
+				Zeus.Context.Persister.Delete(SelectedItem);
+
+				if (parent != null)
+					Refresh(parent, AdminFrame.Both, false);
+				else
+					Refresh(Zeus.Context.UrlParser.StartPage, AdminFrame.Both, false);
+			}
+			catch (Exception ex)
+			{
+				//Engine.Resolve<IErrorHandler>().Notify(ex);
+				csvException.IsValid = false;
+				csvException.Text = ex.ToString();
+			}
 		}
 	}
 }
