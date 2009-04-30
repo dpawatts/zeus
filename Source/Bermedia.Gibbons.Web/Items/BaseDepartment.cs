@@ -16,6 +16,13 @@ namespace Bermedia.Gibbons.Web.Items
 			set { SetDetail<string>("Text", value); }
 		}
 
+		[CheckBoxEditor("Show Page If Child Departments Exist", "", 120, ContainerName = Tabs.General)]
+		public bool ShowPageIfChildDepartmentsExist
+		{
+			get { return GetDetail("ShowPageIfChildDepartmentsExist", false); }
+			set { SetDetail("ShowPageIfChildDepartmentsExist", value); }
+		}
+
 		protected override string IconName
 		{
 			get { return "tag_purple"; }

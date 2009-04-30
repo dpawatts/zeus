@@ -8,6 +8,16 @@
 
 <ul>
 	<li><a href="<%= this.Department.Url %>"><%= this.Department.Title %> Homepage</a></li>
+	<isis:TypedListView runat="server" ID="rptChildDepartments" DataSource='<%# Department.GetChildren().OfType<Bermedia.Gibbons.Web.Items.BaseDepartment>() %>' DataItemTypeName="Zeus.ContentItem">
+		<LayoutTemplate>
+			<ul>
+				<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
+			</ul>
+		</LayoutTemplate>
+		<ItemTemplate>
+			<li><a href="<%# Container.DataItem.Url %>"><%# Container.DataItem.Title %> Homepage</a> •</li>
+		</ItemTemplate>
+	</isis:TypedListView>
 	<isis:TypedRepeater runat="server" ID="rptChildPages" DataSource='<%# ((Zeus.ContentItem) this.Department).Children.OfType<Bermedia.Gibbons.Web.Items.Page>().Where(p => p.Visible) %>' DataItemTypeName="Zeus.ContentItem">
 		<ItemTemplate>
 			<li><a href="<%# Container.DataItem.Url %>"><%# Container.DataItem.Title %></a></li>

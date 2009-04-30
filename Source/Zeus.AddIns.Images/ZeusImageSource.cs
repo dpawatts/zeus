@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Isis.Drawing;
+using SoundInTheory.DynamicImage.Util;
 using Zeus;
 using Zeus.FileSystem;
 using SoundInTheory.DynamicImage.Sources;

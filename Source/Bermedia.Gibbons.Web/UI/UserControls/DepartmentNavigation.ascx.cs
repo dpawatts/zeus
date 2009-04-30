@@ -25,6 +25,7 @@ namespace Bermedia.Gibbons.Web.UI.UserControls
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			rptChildDepartments.DataBind();
 			rptChildPages.DataBind();
 			rptCategories.DataBind();
 		}
