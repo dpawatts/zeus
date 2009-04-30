@@ -35,10 +35,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="SoundInTheory.DynamicImage.Caching.Linq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="SoundInTheory.NMigration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.NMigration.dll</HintPath>
@@ -372,6 +368,7 @@
     <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.qtip.js" />
     <Content Include="Admin\Assets\Web.config" />
     <EmbeddedResource Include="Admin\Assets\Css\new.css" />
+    <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />
     <EmbeddedResource Include="Admin\Paste.aspx" />
     <EmbeddedResource Include="Admin\Copy.aspx" />
     <EmbeddedResource Include="Admin\AffectedItems.ascx" />
@@ -386,7 +383,6 @@
     <EmbeddedResource Include="Admin\Security\Default.aspx" />
     <EmbeddedResource Include="Admin\Resources\group.png" />
     <EmbeddedResource Include="Admin\Resources\user.png" />
-    <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />
     <Content Include="Admin\DynamicContent\Default.aspx" />
     <EmbeddedResource Include="Admin\Versions\Default.aspx" />
     <EmbeddedResource Include="Admin\Globalization\LanguageOverview.aspx" />
