@@ -14,7 +14,7 @@ using Zeus.Security;
 [assembly: EmbeddedResourceFile("Zeus.Admin.Versions.Default.aspx", "Zeus.Admin")]
 namespace Zeus.Admin.Versions
 {
-	[ActionPlugin("Versions", "Versions", Operations.Version, "ViewPreview", 4, null, "Zeus.Admin.Versions.Default.aspx", "selected={selected}", Targets.Preview, "Zeus.Admin.Assets.Images.Icons.book_previous.png")]
+	[VersioningActionPlugin("Versions", "Versions", 4, "Zeus.Admin.Assets.Images.Icons.book_previous.png")]
 	[AvailableOperation(Operations.Version, "Version", 45)]
 	public partial class Default : PreviewFrameAdminPage
 	{

@@ -12,6 +12,13 @@ namespace Zeus.Configuration
 			set { base["installer"] = value; }
 		}
 
+		[ConfigurationProperty("versioning")]
+		public VersioningElement Versioning
+		{
+			get { return (VersioningElement) base["versioning"]; }
+			set { base["versioning"] = value; }
+		}
+
 		[ConfigurationProperty("tree")]
 		public TreeElement Tree
 		{

@@ -137,6 +137,7 @@
     <Compile Include="Admin\Versions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Versions\VersioningActionPluginAttribute.cs" />
     <Compile Include="Admin\View.aspx.cs">
       <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

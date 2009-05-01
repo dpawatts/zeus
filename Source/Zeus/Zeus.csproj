@@ -123,6 +123,7 @@
     <Compile Include="Configuration\InstallerElement.cs" />
     <Compile Include="Configuration\SiteElement.cs" />
     <Compile Include="Configuration\SiteElementCollection.cs" />
+    <Compile Include="Configuration\VersioningElement.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
     <Compile Include="ContentProperties\PropertyCollection.cs" />
     <Compile Include="ContentProperties\PropertyAuthorizedRolesAttribute.cs" />

@@ -61,7 +61,7 @@ namespace Zeus.Admin
 			hlCancel.NavigateUrl = CancelUrl();
 			pnlPageView.Visible = GlobalizationEnabled;
 
-			if (!Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
+			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
 			{
 				btnSaveUnpublished.Visible = false;
 				btnPreview.Visible = false;
@@ -97,6 +97,8 @@ namespace Zeus.Admin
 		private void SaveChanges()
 		{
 			ItemEditorVersioningMode mode = (((ContentItem) zeusItemEditView.CurrentItem).VersionOf == null) ? ItemEditorVersioningMode.VersionAndSave : ItemEditorVersioningMode.SaveAsMaster;
+			if (!Engine.Resolve<AdminSection>().Versioning.Enabled)
+				mode = ItemEditorVersioningMode.SaveOnly;
 			ContentItem currentItem = (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem, mode);
 
 			if (Request["before"] != null)
