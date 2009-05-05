@@ -3,6 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
+	[PropertyDataType(typeof(DateTime))]
 	public class DateTimeProperty : PropertyData
 	{
 		#region Constuctors

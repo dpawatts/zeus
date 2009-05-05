@@ -55,7 +55,11 @@ namespace Zeus.ContentTypes
 					if (overrideEditor != null)
 						editors.Add(overrideEditor);
 					else
-						editors.Add(property.GetDefaultEditor());
+					{
+						IEditor editor = property.GetDefaultEditor();
+						if (editor != null)
+							editors.Add(editor);
+					}
 				}
 
 				foreach (IEditor editor in tempEditors.Where(e => !editors.Any(oe => e.Name == oe.Name)))

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Isis.ExtensionMethods;
 using Zeus.Design.Editors;
+using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 
 namespace Zeus.ContentProperties
 {
@@ -9,7 +11,7 @@ namespace Zeus.ContentProperties
 	{
 		#region Private fields
 
-		private static IDictionary<Type, Type> _defaultPropertyDataTypes;
+		private static readonly IDictionary<Type, Type> _defaultPropertyDataTypes;
 		private ContentItem _enclosingItem;
 
 		#endregion
@@ -26,7 +28,9 @@ namespace Zeus.ContentProperties
     		{typeof (int), typeof (IntegerProperty)},
     		{typeof (ContentItem), typeof (LinkProperty)},
     		{typeof (object), typeof (ObjectProperty)},
-    		{typeof (string), typeof (StringProperty)}
+    		{typeof (string), typeof (StringProperty)},
+    		{typeof (FileData), typeof (FileDataProperty)},
+    		{typeof (ImageData), typeof (ImageDataProperty)}
     	};
 		}
 
@@ -95,19 +99,6 @@ namespace Zeus.ContentProperties
 		#endregion
 
 		#region Methods
-
-		public static Type GetDefaultPropertyDataType(Type type)
-		{
-			Type underlyingType = type.GetTypeOrUnderlyingType();
-			return (_defaultPropertyDataTypes.ContainsKey(underlyingType)) ? _defaultPropertyDataTypes[underlyingType] : null;
-		}
-
-		public static PropertyData CreatePropertyDataObject(Type type)
-		{
-			if (!_defaultPropertyDataTypes.ContainsKey(type))
-				throw new ArgumentException("Could not find a default property data type matching type '" + type + "'", "type");
-			return (PropertyData) Activator.CreateInstance(_defaultPropertyDataTypes[type]);
-		}
 
 		public abstract IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType);
 

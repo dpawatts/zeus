@@ -12,13 +12,6 @@ namespace Zeus.Configuration
 			set { base["rootItemID"] = value; }
 		}
 
-		[ConfigurationProperty("startPageID", DefaultValue = 1)]
-		public int StartPageID
-		{
-			get { return (int) base["startPageID"]; }
-			set { base["startPageID"] = value; }
-		}
-
 		/// <summary>Examine content nodes to find items that are site providers.</summary>
 		[ConfigurationProperty("dynamicSites", DefaultValue = true)]
 		public bool DynamicSites

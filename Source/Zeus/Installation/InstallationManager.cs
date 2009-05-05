@@ -30,12 +30,12 @@ namespace Zeus.Installation
 		private readonly IFinder<PropertyCollection> _detailCollectionFinder;
 		private readonly IFinder<AuthorizationRule> _authorizationRuleFinder;
 		private readonly IHost host;
-		private readonly ICredentialService _credentialService;
+		private readonly ICredentialContextService _credentialContextService;
 
 		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer, */IPersister persister,
 			IFinder<ContentItem> contentItemFinder, IFinder<PropertyData> contentDetailFinder,
 			IFinder<PropertyCollection> detailCollectionFinder, IFinder<AuthorizationRule> authorizationRuleFinder,
-			ICredentialService credentialService)
+			ICredentialContextService credentialContextService)
 		{
 			this.host = host;
 			_contentTypeManager = contentTypeManager;
@@ -45,7 +45,7 @@ namespace Zeus.Installation
 			_contentDetailFinder = contentDetailFinder;
 			_detailCollectionFinder = detailCollectionFinder;
 			_authorizationRuleFinder = authorizationRuleFinder;
-			_credentialService = credentialService;
+			_credentialContextService = credentialContextService;
 		}
 
 		/*public static string GetResourceString(string resourceKey)
@@ -90,7 +90,7 @@ namespace Zeus.Installation
 		public void CreateAdministratorUser(string username, string password)
 		{
 			UserCreateStatus createStatus;
-			_credentialService.CreateUser(username, password, new[] { "Administrators" }, out createStatus);
+			_credentialContextService.GetCurrentService().CreateUser(username, password, new[] { "Administrators" }, out createStatus);
 			if (createStatus != UserCreateStatus.Success)
 				throw new ZeusException("Could not create user: " + createStatus);
 		}
@@ -110,7 +110,7 @@ namespace Zeus.Installation
 				status.RootItem = persister.Get(status.RootItemID);
 				status.IsInstalled = status.RootItem != null && status.StartPage != null;
 
-				status.HasUsers = _credentialService.GetUser("administrator") != null;
+				status.HasUsers = _credentialContextService.GetCurrentService().GetUser("administrator") != null;
 			}
 			catch (Exception ex)
 			{

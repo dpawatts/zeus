@@ -107,7 +107,15 @@
 						<textarea rows="4">
 ...
 	<zeus>
-		<host rootItemID="<%# RootId %>" startPageID="<%# StartId %>" />
+		<host rootItemID="<%# RootId %>">
+			<sites>
+				<site id="DefaultSite" description="Default Site" startPageID="<%# StartId %>">
+					<siteHosts>
+						<add name="*" />
+					</siteHosts>
+				</site>
+			</sites>
+		</host>
 		...
 	</zeus>
 ...</textarea>
@@ -120,7 +128,15 @@
 						<textarea rows="4">
 ...
 	<zeus>
-		<host rootItemID="<%# RootId %>" startPageID="<%# StartId %>"/>
+		<host rootItemID="<%# RootId %>">
+			<sites>
+				<site id="DefaultSite" description="Default Site" startPageID="<%# StartId %>">
+					<siteHosts>
+						<add name="*" />
+					</siteHosts>
+				</site>
+			</sites>
+		</host>
 		...
 	</zeus>
 ...</textarea>

@@ -16,22 +16,22 @@ namespace Zeus.Integrity
 
 		#region Event Dispatchers
 
-		private void ItemSavingEvenHandler(object sender, CancelItemEventArgs e)
+		private void ItemSavingEventHandler(object sender, CancelItemEventArgs e)
 		{
 			OnItemSaving(e.AffectedItem);
 		}
 
-		private void ItemMovingEvenHandler(object sender, CancelDestinationEventArgs e)
+		private void ItemMovingEventHandler(object sender, CancelDestinationEventArgs e)
 		{
 			OnItemMoving(e.AffectedItem, e.Destination);
 		}
 
-		private void ItemDeletingEvenHandler(object sender, CancelItemEventArgs e)
+		private void ItemDeletingEventHandler(object sender, CancelItemEventArgs e)
 		{
 			OnItemDeleting(e.AffectedItem);
 		}
 
-		private void ItemCopyingEvenHandler(object sender, CancelDestinationEventArgs e)
+		private void ItemCopyingEventHandler(object sender, CancelDestinationEventArgs e)
 		{
 			OnItemCopying(e.AffectedItem, e.Destination);
 		}
@@ -74,18 +74,18 @@ namespace Zeus.Integrity
 
 		public virtual void Start()
 		{
-			_persister.ItemCopying += ItemCopyingEvenHandler;
-			_persister.ItemDeleting += ItemDeletingEvenHandler;
-			_persister.ItemMoving += ItemMovingEvenHandler;
-			_persister.ItemSaving += ItemSavingEvenHandler;
+			_persister.ItemCopying += ItemCopyingEventHandler;
+			_persister.ItemDeleting += ItemDeletingEventHandler;
+			_persister.ItemMoving += ItemMovingEventHandler;
+			_persister.ItemSaving += ItemSavingEventHandler;
 		}
 
 		public virtual void Stop()
 		{
-			_persister.ItemCopying -= ItemCopyingEvenHandler;
-			_persister.ItemDeleting -= ItemDeletingEvenHandler;
-			_persister.ItemMoving -= ItemMovingEvenHandler;
-			_persister.ItemSaving -= ItemSavingEvenHandler;
+			_persister.ItemCopying -= ItemCopyingEventHandler;
+			_persister.ItemDeleting -= ItemDeletingEventHandler;
+			_persister.ItemMoving -= ItemMovingEventHandler;
+			_persister.ItemSaving -= ItemSavingEventHandler;
 		}
 
 		#endregion

@@ -54,7 +54,7 @@ namespace Zeus
 				return _propertyDataType;
 
 			// For underlying property type "string", return typeof(StringProperty), etc.
-			Type propertyDataType = PropertyData.GetDefaultPropertyDataType(UnderlyingProperty.PropertyType);
+			Type propertyDataType = Context.Current.Resolve<IContentPropertyManager>().GetDefaultPropertyDataType(UnderlyingProperty.PropertyType);
 			if (propertyDataType != null)
 				return propertyDataType;
 

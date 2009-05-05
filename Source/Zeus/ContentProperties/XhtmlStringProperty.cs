@@ -4,6 +4,7 @@ using Zeus.Web;
 
 namespace Zeus.ContentProperties
 {
+	[PropertyDataType]
 	public class XhtmlStringProperty : StringProperty
 	{
 		#region Constuctors

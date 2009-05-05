@@ -100,7 +100,7 @@ namespace Zeus.Engine
 			// Isis web security
 			IoC.SetupService<Isis.Web.IWebContext, WebContext>();
 			IoC.SetupService<IAuthorizationService, AuthorizationService>();
-			IoC.SetupService<ICredentialService, CredentialService>();
+			IoC.SetupService<ICredentialContextService, CredentialContextService>();
 			IoC.SetupService<IAuthenticationContextService, AuthenticationContextService>();
 
 			// Admin
@@ -190,6 +190,12 @@ namespace Zeus.Engine
 
 			IoC.SetupPlugins();
 			IoC.StartComponents();
+
+			CredentialLocation rootCredentialLocation = new CredentialLocation
+    	{
+    		Repository = Resolve<ICredentialRepository>()
+    	};
+			Resolve<ICredentialContextService>().SetRootLocation(rootCredentialLocation);
 		}
 
 		public T Resolve<T>()

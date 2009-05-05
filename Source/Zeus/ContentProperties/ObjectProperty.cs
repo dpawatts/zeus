@@ -3,6 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
+	[ObjectPropertyDataType]
 	public class ObjectProperty : PropertyData
 	{
 		#region Constuctors
@@ -44,7 +45,7 @@ namespace Zeus.ContentProperties
 
 		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
 		{
-			throw new NotSupportedException();
+			return null;
 		}
 
 		#endregion

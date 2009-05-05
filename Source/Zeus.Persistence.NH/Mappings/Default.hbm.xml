@@ -59,6 +59,12 @@
 		<subclass name="Zeus.ContentProperties.ObjectProperty, Zeus" discriminator-value="Object">
 			<property name="Value" type="Serializable" length="2147483647" />
 		</subclass>
+		<subclass name="Zeus.ContentProperties.FileDataProperty, Zeus" discriminator-value="FileData">
+			<property name="Value" type="Serializable" length="2147483647" />
+		</subclass>
+		<subclass name="Zeus.ContentProperties.ImageDataProperty, Zeus" discriminator-value="ImageData">
+			<property name="Value" type="Serializable" length="2147483647" />
+		</subclass>
 	</class>
 
 

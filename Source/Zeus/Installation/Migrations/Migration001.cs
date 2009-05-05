@@ -65,7 +65,7 @@ namespace Zeus.Installation.Migrations
 			AddForeignKey("zeusDetails", "ItemID", "zeusItems", "ID");
 			AddForeignKey("zeusDetails", "DetailCollectionID", "zeusDetailCollections", "ID");
 
-			AddUniqueKey("zeusAuthorizationRules", "ItemID", "Language");
+			AddUniqueKey("zeusLanguageSettings", "ItemID", "Language");
 		}
 
 		public override void Down()

@@ -5,7 +5,16 @@ namespace Zeus.Configuration
 {
 	public class HostNameCollection : ConfigurationElementCollection
 	{
-		// Methods
+		public void Add(HostNameElement hostname)
+		{
+			BaseAdd(hostname);
+		}
+
+		public void Clear()
+		{
+			BaseClear();
+		}
+
 		protected override ConfigurationElement CreateNewElement()
 		{
 			return new HostNameElement();

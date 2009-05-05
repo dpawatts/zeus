@@ -291,7 +291,17 @@ namespace Zeus.Admin.Install
 
 			HostSection host = (HostSection) cfg.GetSection("zeus/host");
 			host.RootItemID = RootId;
-			host.StartPageID = StartId;
+
+			host.Sites.Clear();
+
+			SiteElement site = new SiteElement
+     	{
+     		ID = "DefaultSite",
+     		Description = "Default Site",
+     		StartPageID = StartId
+     	};
+			site.SiteHosts.Add(new HostNameElement { Name = "*" });
+			host.Sites.Add(site);
 
 			cfg.Save();
 		}

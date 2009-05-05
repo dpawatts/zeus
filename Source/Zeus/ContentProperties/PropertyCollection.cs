@@ -69,16 +69,16 @@ namespace Zeus.ContentProperties
 
 		private PropertyData GetDetail(object val)
 		{
-			/*PropertyData detail;
+			PropertyData detail;
 			if (val is PropertyData)
 				detail = (PropertyData) val;
 			else
-				detail = PropertyData.New(EnclosingItem, null, val);
+				detail = Context.Current.Resolve<IContentPropertyManager>().CreatePropertyDataObject(val.GetType());
 			detail.Name = Name;
 			detail.EnclosingItem = EnclosingItem;
 			detail.EnclosingCollection = this;
-			return detail;*/
-			throw new NotImplementedException();
+			detail.Value = val;
+			return detail;
 		}
 
 		public void Replace(IEnumerable values)

@@ -10,6 +10,16 @@ namespace Zeus.Configuration
 			get { return "site"; }
 		}
 
+		public void Add(SiteElement site)
+		{
+			BaseAdd(site);
+		}
+
+		public void Clear()
+		{
+			BaseClear();
+		}
+
 		protected override ConfigurationElement CreateNewElement()
 		{
 			return new SiteElement();

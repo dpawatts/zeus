@@ -3,6 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
+	[LinkPropertyDataType]
 	public class LinkProperty : PropertyData
 	{
 		private ContentItem _linkedItem;

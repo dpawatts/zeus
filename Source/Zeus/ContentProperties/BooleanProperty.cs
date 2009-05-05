@@ -3,6 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
+	[PropertyDataType(typeof(bool))]
 	public class BooleanProperty : PropertyData
 	{
 		#region Constuctors

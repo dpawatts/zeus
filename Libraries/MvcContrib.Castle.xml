@@ -76,6 +76,41 @@
             The Binder that is used by the CastleBindAttribute to perform parameter binding.
             </summary>
         </member>
+        <member name="T:MvcContrib.Castle.WindsorModelBinder">
+             <summary>
+             An IModelBinder implementation that supports resolving binders via Windsor
+             
+            Configuration is much the same as the WindsorControllerFactory:
+             
+             container.Register(AllTypes.Of&lt;IModelBinder&gt;()
+            		.FromAssembly(typeof(MyModelBinder).Assembly)
+            		.Configure(c => c.LifeStyle.Singleton.Named(c.Implementation.Name.ToLower()))); 
+             </summary>
+        </member>
+        <member name="M:MvcContrib.Castle.WindsorModelBinder.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Creates a new instance of the WindsorModelBinder using the specified IWindsorContainer instance.
+            </summary>
+            <param name="container">The Windsor Container to use</param>
+        </member>
+        <member name="M:MvcContrib.Castle.WindsorModelBinder.#ctor(Castle.Windsor.IWindsorContainer,System.Web.Mvc.IModelBinder)">
+            <summary>
+            Creates a new instance of the WindsorModelBinder using the specified IWindsorContainer instance and the specified default binder
+            </summary>
+            <param name="container">The Windsor container to use</param>
+            <param name="defaultModelBinder">The default model binder to delegate to (if the binder cannot be found in Windsor)</param>
+        </member>
+        <member name="T:MvcContrib.Castle.WindsorControllerFactory">
+            <summary>
+            Controller Factory class for instantiating controllers using the Windsor IoC container.
+            </summary>
+        </member>
+        <member name="M:MvcContrib.Castle.WindsorControllerFactory.#ctor(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Creates a new instance of the <see cref="T:MvcContrib.Castle.WindsorControllerFactory"/> class.
+            </summary>
+            <param name="container">The Windsor container instance to use when creating controllers.</param>
+        </member>
         <member name="T:MvcContrib.Castle.MvcTransactionAttribute">
              <summary>
              Indicates the transaction support for a method.
@@ -143,41 +178,6 @@
             <value>
             <c>true</c> if a distributed transaction should be created; otherwise, <c>false</c>.
             </value>
-        </member>
-        <member name="T:MvcContrib.Castle.WindsorControllerFactory">
-            <summary>
-            Controller Factory class for instantiating controllers using the Windsor IoC container.
-            </summary>
-        </member>
-        <member name="M:MvcContrib.Castle.WindsorControllerFactory.#ctor(Castle.Windsor.IWindsorContainer)">
-            <summary>
-            Creates a new instance of the <see cref="T:MvcContrib.Castle.WindsorControllerFactory"/> class.
-            </summary>
-            <param name="container">The Windsor container instance to use when creating controllers.</param>
-        </member>
-        <member name="T:MvcContrib.Castle.WindsorModelBinder">
-             <summary>
-             An IModelBinder implementation that supports resolving binders via Windsor
-             
-            Configuration is much the same as the WindsorControllerFactory:
-             
-             container.Register(AllTypes.Of&lt;IModelBinder&gt;()
-            		.FromAssembly(typeof(MyModelBinder).Assembly)
-            		.Configure(c => c.LifeStyle.Singleton.Named(c.Implementation.Name.ToLower()))); 
-             </summary>
-        </member>
-        <member name="M:MvcContrib.Castle.WindsorModelBinder.#ctor(Castle.Windsor.IWindsorContainer)">
-            <summary>
-            Creates a new instance of the WindsorModelBinder using the specified IWindsorContainer instance.
-            </summary>
-            <param name="container">The Windsor Container to use</param>
-        </member>
-        <member name="M:MvcContrib.Castle.WindsorModelBinder.#ctor(Castle.Windsor.IWindsorContainer,System.Web.Mvc.IModelBinder)">
-            <summary>
-            Creates a new instance of the WindsorModelBinder using the specified IWindsorContainer instance and the specified default binder
-            </summary>
-            <param name="container">The Windsor container to use</param>
-            <param name="defaultModelBinder">The default model binder to delegate to (if the binder cannot be found in Windsor)</param>
         </member>
     </members>
 </doc>
