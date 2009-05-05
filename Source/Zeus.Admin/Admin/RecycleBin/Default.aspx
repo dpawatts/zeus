@@ -9,7 +9,9 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<asp:CustomValidator ID="cvRestore" CssClass="validator" ErrorMessage="An item with the same name already exists at the previous location." runat="server" Display="Dynamic" />
-	<isis:TypedGridView ID="grvRecycleBinItems" DataItemTypeName="Zeus.ContentItem, Zeus" DataKeyNames="ID" runat="server" AutoGenerateColumns="false" OnRowCommand="grvRecycleBinItems_RowCommand" EmptyDataText="No items in recycle bin." CssClass="tb" HeaderStyle-CssClass="titles" AlternatingRowStyle-CssClass="alt">
+	<isis:TypedGridView ID="grvRecycleBinItems" DataItemTypeName="Zeus.ContentItem, Zeus" DataKeyNames="ID" runat="server" AutoGenerateColumns="false"
+		OnRowCommand="grvRecycleBinItems_RowCommand" OnRowDeleting="grvRecycleBinItems_RowDeleting" EmptyDataText="No items in recycle bin." CssClass="tb"
+		HeaderStyle-CssClass="titles" AlternatingRowStyle-CssClass="alt">
 		<Columns>
 			<isis:TypedTemplateField HeaderText="Title">
 				<ItemTemplate>

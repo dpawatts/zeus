@@ -82,5 +82,10 @@ namespace Zeus.Admin.RecycleBin
 		}
 
 		#endregion
+
+		protected void grvRecycleBinItems_RowDeleting(object sender, GridViewDeleteEventArgs e)
+		{
+			
+		}
 	}
 }
