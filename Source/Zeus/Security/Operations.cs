@@ -8,5 +8,6 @@ namespace Zeus.Security
 		public const string Delete = "Delete";
 		public const string Administer = "Administer";
 		public const string Version = "Version";
+		public const string ImportExport = "ImportExport";
 	}
 }

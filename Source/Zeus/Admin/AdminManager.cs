@@ -55,7 +55,7 @@ namespace Zeus.Admin
 			DeleteItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
 			EditItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Edit.aspx");
 			NewItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
-			EnableVersioning = configSection.EnableVersioning;
+			EnableVersioning = configSection.Versioning.Enabled;
 			_authorizationService = authorizationService;
 			_authenticationContextService = authenticationContextService;
 			_persister = persister;

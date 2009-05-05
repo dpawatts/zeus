@@ -15,6 +15,7 @@ using Zeus.Integrity;
 using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
+using Zeus.Serialization;
 using Zeus.Web;
 using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
@@ -146,6 +147,12 @@ namespace Zeus.Engine
 			// Security
 			IoC.SetupService<ISecurityEnforcer, SecurityEnforcer>();
 			IoC.SetupService<ISecurityManager, SecurityManager>();
+
+			// Serialization
+			IoC.SetupService<Exporter, GZipExporter>();
+			IoC.SetupService<ItemXmlWriter, ItemXmlWriter>();
+			IoC.SetupService<Importer, GZipImporter>();
+			IoC.SetupService<ItemXmlReader, ItemXmlReader>();
 
 			// Web
 			IoC.SetupService<IErrorHandler, ErrorHandler>();

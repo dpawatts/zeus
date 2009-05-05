@@ -12,9 +12,16 @@ namespace Zeus.Globalization
 		/// <param name="item">The item this role is associated with.</param>
 		/// <param name="language"></param>
 		public LanguageSetting(ContentItem item, string language)
+			: this(item, language, null)
+		{
+			
+		}
+
+		public LanguageSetting(ContentItem item, string language, string fallbackLanguage)
 		{
 			EnclosingItem = item;
 			Language = language;
+			FallbackLanguage = fallbackLanguage;
 		}
 
 		#endregion

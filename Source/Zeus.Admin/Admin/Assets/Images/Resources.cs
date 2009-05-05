@@ -19,6 +19,7 @@ using System.Web.UI;
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.exclamation.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.information.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.LanguageMissing.gif", "image/gif")]
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.package_come_and_go.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.page.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.page_add.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.page_copy.png", "image/png")]

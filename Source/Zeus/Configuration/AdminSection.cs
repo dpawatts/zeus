@@ -47,11 +47,11 @@ namespace Zeus.Configuration
 			set { base["editItemUrl"] = value; }
 		}
 
-		[ConfigurationProperty("enableVersioning", DefaultValue = true)]
-		public bool EnableVersioning
+		[ConfigurationProperty("importExportEnabled", DefaultValue = true)]
+		public bool ImportExportEnabled
 		{
-			get { return (bool) base["enableVersioning"]; }
-			set { base["enableVersioning"] = value; }
+			get { return (bool) base["importExportEnabled"]; }
+			set { base["importExportEnabled"] = value; }
 		}
 
 		[ConfigurationProperty("newItemUrl", DefaultValue = "~/admin/new.aspx")]

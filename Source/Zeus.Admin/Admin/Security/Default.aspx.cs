@@ -209,7 +209,7 @@ namespace Zeus.Admin.Security
 			ddlRoles.Items.Clear();
 			ddlRoles.Items.Add(string.Empty);
 
-			ddlRoles.DataSource = Engine.Resolve<ICredentialService>().GetAllRoles().Where(r => !_displayedRoles.Contains(r));
+			ddlRoles.DataSource = Engine.Resolve<ICredentialContextService>().GetCurrentService().GetAllRoles().Where(r => !_displayedRoles.Contains(r));
 			ddlRoles.DataBind();
 		}
 
@@ -225,7 +225,7 @@ namespace Zeus.Admin.Security
 			ddlUsers.Items.Clear();
 			ddlUsers.Items.Add(string.Empty);
 
-			ddlUsers.DataSource = Engine.Resolve<ICredentialService>().GetAllUsers().Select(u => u.Username).Where(u => !_displayedUsers.Contains(u));
+			ddlUsers.DataSource = Engine.Resolve<ICredentialContextService>().GetCurrentService().GetAllUsers().Select(u => u.Username).Where(u => !_displayedUsers.Contains(u));
 			ddlUsers.DataBind();
 		}
 
