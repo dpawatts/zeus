@@ -30,8 +30,6 @@ using Isis.Web.UI;
 
 [assembly: WebResource("Zeus.Web.Resources.Flags.gb.png", "image/png")]
 
-[assembly: WebResource("Zeus.Web.Resources.Icons.bin.png", "image/png")]
-[assembly: WebResource("Zeus.Web.Resources.Icons.bin_closed.png", "image/png")]
 [assembly: WebResource("Zeus.Web.Resources.Icons.bullet_key.png", "image/png")]
 [assembly: WebResource("Zeus.Web.Resources.Icons.bullet_world_link.png", "image/png")]
 [assembly: WebResource("Zeus.Web.Resources.Icons.folder.png", "image/png")]

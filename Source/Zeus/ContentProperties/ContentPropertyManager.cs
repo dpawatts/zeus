@@ -18,7 +18,7 @@ namespace Zeus.ContentProperties
 
 		public IContentProperty CreateProperty(string name, Type valueType)
 		{
-			return new SimpleProperty { Name = name, Shared = true, PropertyType = valueType };
+			return new DefaultProperty { Name = name, Shared = true, PropertyType = valueType };
 		}
 
 		public Type GetDefaultPropertyDataType(Type type)

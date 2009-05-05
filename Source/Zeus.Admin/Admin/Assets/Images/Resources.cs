@@ -4,6 +4,9 @@ using System.Web.UI;
 [assembly: WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png", "image/png")]
 
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.arrow_up.png", "image/png")]
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bin.png", "image/png")]
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bin_closed.png", "image/png")]
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bin_empty.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.book_next.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.book_previous.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bullet_arrow_bottom.png", "image/png")]

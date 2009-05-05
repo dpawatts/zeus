@@ -11,28 +11,11 @@ namespace Zeus.ContentProperties
 	{
 		#region Private fields
 
-		private static readonly IDictionary<Type, Type> _defaultPropertyDataTypes;
 		private ContentItem _enclosingItem;
 
 		#endregion
 
 		#region Constructors
-
-		static PropertyData()
-		{
-			_defaultPropertyDataTypes = new Dictionary<Type, Type>
-    	{
-    		{typeof (bool), typeof (BooleanProperty)},
-    		{typeof (DateTime), typeof (DateTimeProperty)},
-    		{typeof (double), typeof (DoubleProperty)},
-    		{typeof (int), typeof (IntegerProperty)},
-    		{typeof (ContentItem), typeof (LinkProperty)},
-    		{typeof (object), typeof (ObjectProperty)},
-    		{typeof (string), typeof (StringProperty)},
-    		{typeof (FileData), typeof (FileDataProperty)},
-    		{typeof (ImageData), typeof (ImageDataProperty)}
-    	};
-		}
 
 		protected PropertyData()
 		{
@@ -50,11 +33,6 @@ namespace Zeus.ContentProperties
 		#endregion
 
 		#region Public properties
-
-		public static IDictionary<Type, Type> DefaultPropertyDataTypes
-		{
-			get { return _defaultPropertyDataTypes; }
-		}
 
 		public virtual string ColumnName
 		{

@@ -4,9 +4,9 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
-	public class SimpleProperty : IContentProperty
+	public class DefaultProperty : IContentProperty
 	{
-		public SimpleProperty()
+		public DefaultProperty()
 		{
 			Shared = true;
 		}
@@ -38,8 +38,9 @@ namespace Zeus.ContentProperties
 		public Type GetPropertyDataType()
 		{
 			// For underlying property type "string", return typeof(StringProperty), etc.
-			if (PropertyData.DefaultPropertyDataTypes.ContainsKey(PropertyType))
-				return PropertyData.DefaultPropertyDataTypes[PropertyType];
+			Type propertyDataType = Context.Current.Resolve<IContentPropertyManager>().GetDefaultPropertyDataType(PropertyType);
+			if (propertyDataType != null)
+				return propertyDataType;
 
 			throw new ZeusException("No default PropertyData type is registered for property type '" + PropertyType + "'");
 		}

@@ -12,6 +12,13 @@ namespace Zeus.Configuration
 			set { base["installer"] = value; }
 		}
 
+		[ConfigurationProperty("recycleBin")]
+		public RecycleBinElement RecycleBin
+		{
+			get { return (RecycleBinElement) base["recycleBin"]; }
+			set { base["recycleBin"] = value; }
+		}
+
 		[ConfigurationProperty("versioning")]
 		public VersioningElement Versioning
 		{

@@ -52,7 +52,7 @@ namespace Zeus.ContentProperties
 
 		public abstract Type GetPropertyDataType();
 
-		public virtual PropertyData CreatePropertyData(ContentItem enclosingItem, object value)
+		public PropertyData CreatePropertyData(ContentItem enclosingItem, object value)
 		{
 			PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
 			propertyData.Name = Name;

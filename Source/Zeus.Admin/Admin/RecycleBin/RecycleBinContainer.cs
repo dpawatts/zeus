@@ -36,7 +36,7 @@ namespace Zeus.Admin.RecycleBin
 			get
 			{
 				string iconName = Children.Any() ? "bin" : "bin_closed.png";
-				return WebResourceUtility.GetUrl(typeof (RecycleBinContainer), "Zeus.Web.Resources.Icons." + iconName + ".png");
+				return WebResourceUtility.GetUrl(typeof(RecycleBinContainer), "Zeus.Admin.Assets.Images.Icons." + iconName + ".png");
 			}
 		}
 	}

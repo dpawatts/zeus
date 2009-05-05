@@ -117,6 +117,13 @@
     <Compile Include="Admin\Globalization\LanguageOverview.aspx.designer.cs">
       <DependentUpon>LanguageOverview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\RecycleBin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RecycleBin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\RecycleBin\DeleteInterceptor.cs" />
     <Compile Include="Admin\RecycleBin\IRecycleBin.cs" />
     <Compile Include="Admin\RecycleBin\IRecycleBinHandler.cs" />
@@ -367,6 +374,9 @@
     <EmbeddedResource Include="Admin\Assets\Images\Icons\bullet_arrow_down.png" />
     <EmbeddedResource Include="Admin\Assets\Images\Icons\bullet_key.png" />
     <EmbeddedResource Include="Admin\Assets\JS\Plugins\jquery.qtip.js" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bin_empty.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bin.png" />
+    <EmbeddedResource Include="Admin\Assets\Images\Icons\bin_closed.png" />
     <Content Include="Admin\Assets\Web.config" />
     <EmbeddedResource Include="Admin\Assets\Css\new.css" />
     <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />
@@ -393,6 +403,7 @@
     <EmbeddedResource Include="Admin\Resources\world_go.png" />
     <EmbeddedResource Include="Admin\Globalization\DeleteLanguage.aspx" />
     <EmbeddedResource Include="Admin\Globalization\LanguageSettings.aspx" />
+    <EmbeddedResource Include="Admin\RecycleBin\Default.aspx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Admin\Assets\Css\view.css" />
     <EmbeddedResource Include="Admin\Assets\Css\login.css" />

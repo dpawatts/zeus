@@ -112,6 +112,7 @@
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\RecycleBinElement.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
     <Compile Include="Configuration\GlobalizationSection.cs" />
     <Compile Include="Configuration\DynamicContentControl.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="ContentProperties\DoubleProperty.cs" />
     <Compile Include="ContentProperties\DateTimeProperty.cs" />
     <Compile Include="ContentProperties\PropertyDataTypeAttribute.cs" />
-    <Compile Include="ContentProperties\SimpleProperty.cs" />
+    <Compile Include="ContentProperties\DefaultProperty.cs" />
     <Compile Include="ContentProperties\XhtmlStringContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\XhtmlStringProperty.cs" />
     <Compile Include="ContentProperties\StringProperty.cs" />
@@ -607,8 +608,6 @@
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
     <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
     <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\bin.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\bin_closed.png" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

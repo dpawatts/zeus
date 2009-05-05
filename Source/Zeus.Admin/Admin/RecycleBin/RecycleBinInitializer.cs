@@ -1,3 +1,4 @@
+using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Plugin;
 
@@ -8,8 +9,11 @@ namespace Zeus.Admin.RecycleBin
 	{
 		public void Initialize(ContentEngine engine)
 		{
-			engine.AddComponent("zeus.recycleBin", typeof(IRecycleBinHandler), typeof(RecycleBinHandler));
-			engine.AddComponent("zeus.deleteInterceptor", typeof(DeleteInterceptor));
+			if (engine.Resolve<AdminSection>().RecycleBin.Enabled)
+			{
+				engine.AddComponent("zeus.recycleBin", typeof(IRecycleBinHandler), typeof(RecycleBinHandler));
+				engine.AddComponent("zeus.deleteInterceptor", typeof(DeleteInterceptor));
+			}
 		}
 	}
 }
