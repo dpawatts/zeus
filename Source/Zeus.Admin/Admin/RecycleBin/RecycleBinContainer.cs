@@ -28,14 +28,14 @@ namespace Zeus.Admin.RecycleBin
 
 		string INode.PreviewUrl
 		{
-			get { return Context.AdminManager.GetEmbeddedResourceUrl(typeof(RecycleBinContainer).Assembly, "Zeus.Admin.RecycleBin.Default.aspx"); }
+			get { return Context.AdminManager.GetEmbeddedResourceUrl(typeof(RecycleBinContainer).Assembly, "Zeus.Admin.RecycleBin.Default.aspx") + "?selected=" + Path; }
 		}
 
 		public override string IconUrl
 		{
 			get
 			{
-				string iconName = Children.Any() ? "bin" : "bin_closed.png";
+				string iconName = Children.Any() ? "bin" : "bin_closed";
 				return WebResourceUtility.GetUrl(typeof(RecycleBinContainer), "Zeus.Admin.Assets.Images.Icons." + iconName + ".png");
 			}
 		}

@@ -346,7 +346,8 @@ namespace Zeus
 		private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
 		{
 			// Look up content property matching this name.
-			if (Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName).Shared)
+			IContentProperty property = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName);
+			if (property == null || property.Shared)
 			{
 				ContentItem currentItem = VersionOf ?? this;
 				if (currentItem.TranslationOf != null)

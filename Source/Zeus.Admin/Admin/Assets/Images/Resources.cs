@@ -3,6 +3,7 @@ using System.Web.UI;
 [assembly: WebResource("Zeus.Admin.Assets.Images.Edit.FieldsetGradient.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png", "image/png")]
 
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.arrow_redo.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.arrow_up.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bin.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.bin_closed.png", "image/png")]

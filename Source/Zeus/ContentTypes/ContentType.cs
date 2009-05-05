@@ -107,12 +107,12 @@ namespace Zeus.ContentTypes
 
 		public IContentProperty GetProperty(string name)
 		{
-			return GetProperty(name, null);
+			return Properties.SingleOrDefault(p => p.Name == name);
 		}
 
 		public IContentProperty GetProperty(string name, object value)
 		{
-			IContentProperty property = Properties.SingleOrDefault(p => p.Name == name);
+			IContentProperty property = GetProperty(name);
 			if (property == null)
 			{
 				// Create a property, based on the type of value.
