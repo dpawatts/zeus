@@ -3,7 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
-	[PropertyDataType(typeof(int))]
+	[IntegerPropertyDataType]
 	public class IntegerProperty : PropertyData
 	{
 		#region Constuctors

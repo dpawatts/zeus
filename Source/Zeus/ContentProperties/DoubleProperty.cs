@@ -3,6 +3,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.ContentProperties
 {
+	[DoublePropertyDataType]
 	public class DoubleProperty : PropertyData
 	{
 		#region Constuctors
