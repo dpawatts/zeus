@@ -88,7 +88,7 @@ namespace Zeus.Globalization
 
 		public ContentItem GetTranslationDirect(ContentItem contentItem, string languageCode)
 		{
-			return GetTranslationsOf(contentItem, true).SingleOrDefault(ci => ci.Language == languageCode);
+			return GetTranslationsOf(contentItem, true).SingleOrDefault(ci => ci.Language == null || ci.Language == languageCode);
 		}
 
 		public Language GetLanguage(string languageCode)

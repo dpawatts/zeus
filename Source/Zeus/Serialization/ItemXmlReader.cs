@@ -27,9 +27,9 @@ namespace Zeus.Serialization
 		private static IDictionary<string, IXmlReader> DefaultReaders()
 		{
 			IDictionary<string, IXmlReader> readers = new Dictionary<string, IXmlReader>();
-			readers["details"] = new PropertyXmlReader();
-			readers["detailCollections"] = new PropertyCollectionXmlReader();
-			readers["authorizations"] = new AuthorizationRuleXmlReader();
+			readers["properties"] = new PropertyXmlReader();
+			readers["propertyCollections"] = new PropertyCollectionXmlReader();
+			readers["authorizationRules"] = new AuthorizationRuleXmlReader();
 			readers["languageSettings"] = new LanguageSettingXmlReader();
 			return readers;
 		}

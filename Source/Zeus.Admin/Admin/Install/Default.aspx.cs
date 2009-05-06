@@ -467,5 +467,20 @@ namespace Zeus.Admin.Install
 				ltlInstallationMode.Text = string.Format("<span class='warning'>{0}</span><!--\n{1}\n-->", ex.Message, ex);
 			}
 		}
+
+		protected void btnUpload_Click(object sender, EventArgs e)
+		{
+			rfvUpload.IsValid = fileUpload.PostedFile != null && fileUpload.PostedFile.FileName.Length > 0;
+			if (!rfvUpload.IsValid)
+				return;
+
+			ExecuteWithErrorHandling(InstallFromUpload);
+		}
+
+		private void InstallFromUpload()
+		{
+			ContentItem root = CurrentInstallationManager.InsertExportFile(fileUpload.FileContent, fileUpload.FileName);
+			InsertRoot(root);
+		}
 	}
 }

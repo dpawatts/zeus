@@ -7,7 +7,7 @@ namespace Zeus.Serialization
 	{
 		public override void Write(ContentItem item, XmlTextWriter writer)
 		{
-			using (new ElementWriter("detailCollections", writer))
+			using (new ElementWriter("propertyCollections", writer))
 			{
 				foreach (PropertyCollection collection in item.DetailCollections.Values)
 					WriteDetailCollection(writer, collection);

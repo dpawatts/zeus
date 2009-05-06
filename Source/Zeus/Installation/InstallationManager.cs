@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using Isis.ApplicationBlocks.DataMigrations;
 using Isis.Web.Security;
@@ -10,6 +11,7 @@ using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Installation.Migrations;
 using Zeus.Persistence;
+using Zeus.Serialization;
 using Zeus.Web;
 using AuthorizationRule=Zeus.Security.AuthorizationRule;
 using PropertyCollection=System.Data.PropertyCollection;
@@ -22,25 +24,31 @@ namespace Zeus.Installation
 	/// </summary>
 	public class InstallationManager
 	{
+		#region Fields
+
 		private readonly IContentTypeManager _contentTypeManager;
-		//Importer importer;
-		private readonly IPersister persister;
+		private readonly Importer _importer;
+		private readonly IPersister _persister;
 		private readonly IFinder<ContentItem> _contentItemFinder;
 		private readonly IFinder<PropertyData> _contentDetailFinder;
 		private readonly IFinder<PropertyCollection> _detailCollectionFinder;
 		private readonly IFinder<AuthorizationRule> _authorizationRuleFinder;
-		private readonly IHost host;
-		private readonly ICredentialContextService _credentialContextService;
+		private readonly IHost _host;
+		private readonly ICredentialContextService _credentialContextService; 
 
-		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, /*Importer importer, */IPersister persister,
+		#endregion
+
+		#region Constructor
+
+		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, Importer importer, IPersister persister,
 			IFinder<ContentItem> contentItemFinder, IFinder<PropertyData> contentDetailFinder,
 			IFinder<PropertyCollection> detailCollectionFinder, IFinder<AuthorizationRule> authorizationRuleFinder,
 			ICredentialContextService credentialContextService)
 		{
-			this.host = host;
+			_host = host;
 			_contentTypeManager = contentTypeManager;
-			//this.importer = importer;
-			this.persister = persister;
+			_importer = importer;
+			_persister = persister;
 			_contentItemFinder = contentItemFinder;
 			_contentDetailFinder = contentDetailFinder;
 			_detailCollectionFinder = detailCollectionFinder;
@@ -48,33 +56,15 @@ namespace Zeus.Installation
 			_credentialContextService = credentialContextService;
 		}
 
-		/*public static string GetResourceString(string resourceKey)
-		{
-			Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceKey);
-			StreamReader sr = new StreamReader(s);
-			return sr.ReadToEnd();
-		}*/
+		#endregion
 
-		const bool ConsoleOutput = false;
-		const bool DatabaseExport = true;
+		#region Methods
 
 		/// <summary>Executes sql create database scripts.</summary>
 		public void Install()
 		{
 			MigrationManager.Migrate(GetConnectionString(), typeof(Migration001).Assembly, "Zeus.Installation.Migrations");
 		}
-
-		/*public void ExportSchema(TextWriter output)
-		{
-			SchemaExport exporter = new SchemaExport(Cfg);
-			exporter.Execute(ConsoleOutput, DatabaseExport, false, true, null, output);
-		}
-
-		public void DropDatabaseTables()
-		{
-			SchemaExport exporter = new SchemaExport(Cfg);
-			exporter.Drop(ConsoleOutput, DatabaseExport);
-		}*/
 
 		public DatabaseStatus GetStatus()
 		{
@@ -104,10 +94,10 @@ namespace Zeus.Installation
 		{
 			try
 			{
-				status.StartPageID = host.CurrentSite.StartPageID;
-				status.RootItemID = host.CurrentSite.RootItemID;
-				status.StartPage = persister.Get(status.StartPageID);
-				status.RootItem = persister.Get(status.RootItemID);
+				status.StartPageID = _host.CurrentSite.StartPageID;
+				status.RootItemID = _host.CurrentSite.RootItemID;
+				status.StartPage = _persister.Get(status.StartPageID);
+				status.RootItem = _persister.Get(status.RootItemID);
 				status.IsInstalled = status.RootItem != null && status.StartPage != null;
 
 				status.HasUsers = _credentialContextService.GetCurrentService().GetUser("administrator") != null;
@@ -175,8 +165,8 @@ namespace Zeus.Installation
 		/// <returns>A diagnostic string about the root node.</returns>
 		public string CheckRootItem()
 		{
-			int rootID = host.CurrentSite.RootItemID;
-			ContentItem rootItem = persister.Get(rootID);
+			int rootID = _host.CurrentSite.RootItemID;
+			ContentItem rootItem = _persister.Get(rootID);
 			if (rootItem != null)
 				return string.Format("Root node OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					rootItem.ID, rootItem.Name, rootItem.GetType(),
@@ -188,8 +178,8 @@ namespace Zeus.Installation
 		/// <returns>A diagnostic string about the root node.</returns>
 		public string CheckStartPage()
 		{
-			int startID = host.CurrentSite.StartPageID;
-			ContentItem startPage = persister.Get(startID);
+			int startID = _host.CurrentSite.StartPageID;
+			ContentItem startPage = _persister.Get(startID);
 			if (startPage != null)
 				return string.Format("Start page OK, id: {0}, name: {1}, type: {2}, discriminator: {3}, published: {4} - {5}",
 					startPage.ID, startPage.Name, startPage.GetType(),
@@ -202,7 +192,7 @@ namespace Zeus.Installation
 			ContentItem item = _contentTypeManager.CreateInstance(type, null);
 			item.Name = name;
 			item.Title = title;
-			persister.Save(item);
+			_persister.Save(item);
 			return item;
 		}
 
@@ -212,7 +202,7 @@ namespace Zeus.Installation
 			item.Name = name;
 			item.Title = title;
 			item.Language = languageCode;
-			persister.Save(item);
+			_persister.Save(item);
 			return item;
 		}
 
@@ -268,12 +258,14 @@ namespace Zeus.Installation
 
 		#endregion
 
-		/*public ContentItem InsertExportFile(Stream stream, string filename)
+		public ContentItem InsertExportFile(Stream stream, string filename)
 		{
-			IImportRecord record = importer.Read(stream, filename);
-			importer.Import(record, null, ImportOption.All);
+			IImportRecord record = _importer.Read(stream, filename);
+			_importer.Import(record, null, ImportOptions.AllItems);
 
 			return record.RootItem;
-		}*/
+		}
+
+		#endregion
 	}
 }

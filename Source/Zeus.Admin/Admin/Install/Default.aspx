@@ -89,14 +89,20 @@
 						as <b>two different</b> nodes.
 				    <asp:CustomValidator ID="cvRootAndStart" runat="server" ErrorMessage="Root and start type required" Display="Dynamic" />
 					</li>
-					<li>
+					<!--li>
 						Or, use the <b>one node</b> for both
 						<asp:DropDownList ID="ddlRootAndStart" runat="server" EnableViewState="false" />
 						to
 						<asp:Button ID="btnInsertRootOnly" runat="server" OnClick="btnInsertRootOnly_Click" Text="insert" ToolTip="Insert one node as root and start" CausesValidation="false" />.
 						<asp:CustomValidator ID="cvRoot" runat="server" ErrorMessage="Root type required" Display="Dynamic" />
+					</li-->
+					<li>
+						Or, select an export file 
+						<asp:FileUpload ID="fileUpload" runat="server" />
+						(*.zeus.xml or *.zeus.xml.gz) to
+						<asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_Click" Text="upload and insert" ToolTip="Upload root node." CausesValidation="false" />
+						<asp:RequiredFieldValidator ID="rfvUpload" ControlToValidate="fileUpload" runat="server" Text="Select import file" Display="Dynamic" EnableClientScript="false" />
 					</li>
-					<!-- TODO: Select or upload export file -->
 				</ul>
 				
 				<p><asp:Literal ID="ltRootNode" runat="server" /></p>

@@ -47,6 +47,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Isis.ApplicationBlocks.DataMigrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Isis.ApplicationBlocks.DataMigrations.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\log4net.dll</HintPath>
@@ -55,6 +59,10 @@
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -534,10 +542,6 @@
     <EmbeddedResource Include="Web\Resources\jQuery\ui.sortable.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Isis\Source\ApplicationBlocks\DataMigrations\Isis.ApplicationBlocks.DataMigrations.csproj">
-      <Project>{53264600-A2A8-499B-A32F-9E9EB45CEF86}</Project>
-      <Name>Isis.ApplicationBlocks.DataMigrations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Isis\Source\FrameworkBlocks\WebAuthentication\Isis.FrameworkBlocks.WebSecurity.csproj">
       <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
       <Name>Isis.FrameworkBlocks.WebSecurity</Name>
@@ -545,10 +549,6 @@
     <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\SoundInTheory.DynamicImage\Source\DynamicImage\DynamicImage.csproj">
-      <Project>{15F7FF82-B018-42E0-A94D-2CAAE491C248}</Project>
-      <Name>DynamicImage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

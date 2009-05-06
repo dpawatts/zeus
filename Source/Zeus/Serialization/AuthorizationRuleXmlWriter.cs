@@ -7,7 +7,7 @@ namespace Zeus.Serialization
 	{
 		public virtual void Write(ContentItem item, XmlTextWriter writer)
 		{
-			using (new ElementWriter("authorizations", writer))
+			using (new ElementWriter("authorizationRules", writer))
 			{
 				if (item.AuthorizationRules != null)
 					foreach (AuthorizationRule ar in item.AuthorizationRules)
