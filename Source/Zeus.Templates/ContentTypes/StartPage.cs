@@ -3,7 +3,7 @@ using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes
 {
-	[ContentType("Start Page", "BaseStartPage")]
+	[ContentType("Start Page", "BaseStartPage", Installer = Installation.InstallerHints.PreferredStartPage)]
 	[RestrictParents(typeof(RootItem))]
 	public class StartPage : BasePage, IFileSystemContainer
 	{

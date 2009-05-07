@@ -10,12 +10,18 @@ namespace Zeus.ContentTypes
 {
 	public class ContentTypeBuilder : IContentTypeBuilder
 	{
+		#region Fields
+
 		private readonly ITypeFinder _typeFinder;
 		private readonly IEditableHierarchyBuilder<IEditor> _hierarchyBuilder;
 		private readonly AttributeExplorer<IEditor> _editableExplorer;
 		private readonly AttributeExplorer<IDisplayer> _displayableExplorer;
 		private readonly AttributeExplorer<IContentProperty> _propertyExplorer;
 		private readonly AttributeExplorer<IEditorContainer> _containableExplorer;
+
+		#endregion
+
+		#region Constructor
 
 		public ContentTypeBuilder(ITypeFinder typeFinder, IEditableHierarchyBuilder<IEditor> hierarchyBuilder,
 			AttributeExplorer<IDisplayer> displayableExplorer, AttributeExplorer<IEditor> editableExplorer,
@@ -28,6 +34,10 @@ namespace Zeus.ContentTypes
 			_propertyExplorer = propertyExplorer;
 			_containableExplorer = containableExplorer;
 		}
+
+		#endregion
+
+		#region Methods
 
 		public IDictionary<Type, ContentType> GetDefinitions()
 		{
@@ -53,7 +63,11 @@ namespace Zeus.ContentTypes
 				{
 					IEditor overrideEditor = tempEditors.SingleOrDefault(e => e.Name == property.Name);
 					if (overrideEditor != null)
+					{
+						overrideEditor.Title = property.Title;
+						overrideEditor.SortOrder = property.SortOrder;
 						editors.Add(overrideEditor);
+					}
 					else
 					{
 						IEditor editor = property.GetDefaultEditor();
@@ -93,5 +107,7 @@ namespace Zeus.ContentTypes
 		{
 			return _typeFinder.Find(typeof (ContentItem)).Where(t => !t.IsAbstract);
 		}
+
+		#endregion
 	}
 }

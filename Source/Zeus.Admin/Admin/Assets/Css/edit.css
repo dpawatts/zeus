@@ -237,11 +237,16 @@ span.edit a:hover {
 .linkedItemsEditor
 {
 	float: left;
-	width: 500px;
+	width: 480px;
+	border: 1px solid #CECECE;
+	padding: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 0;
 }
 
 .linkedItemsEditor fieldset
 {
+	width: 435px;
 	padding: 10px;
 }
 
@@ -250,7 +255,7 @@ span.edit a:hover {
 	margin-left: -5px;
 }
 
-.linkedItem
+input[type="text"].linkedItem, textarea.linkedItem, div.editDetail > select.linkedItem
 {
-	width: 465px;
+	width: 435px;
 }

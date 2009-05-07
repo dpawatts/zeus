@@ -335,11 +335,7 @@ namespace Zeus
 		{
 			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
 			if (details.ContainsKey(detailName))
-			{
-				if (typeof(T).IsAssignableFrom(details[detailName].Value.GetType()))
-					return (T) details[detailName].Value;
-				throw new ZeusException("Cannot cast detail name '{0}' to type '{1}'", detailName, typeof(T).Name);
-			}
+				return Utility.Convert<T>(details[detailName].Value);
 			return defaultValue;
 		}
 

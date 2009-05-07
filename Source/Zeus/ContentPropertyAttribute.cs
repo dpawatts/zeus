@@ -61,6 +61,11 @@ namespace Zeus
 			throw new ZeusException("No default PropertyData type is registered for property type '" + UnderlyingProperty.PropertyType + "'");
 		}
 
+		protected override Type GetPropertyType()
+		{
+			return UnderlyingProperty.PropertyType;
+		}
+
 		#endregion
 	}
 }

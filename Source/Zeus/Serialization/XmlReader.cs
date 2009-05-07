@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
 using Isis.ExtensionMethods;
+using Zeus.ContentProperties;
 
 namespace Zeus.Serialization
 {
@@ -25,7 +26,7 @@ namespace Zeus.Serialization
 
 		public static object Parse(string value, Type type)
 		{
-			if (type == typeof(object))
+			if (Context.Current.Resolve<IContentPropertyManager>().CreatePropertyDataObject(type) is ObjectProperty)
 				return value.Deserialize(type);
 			
 			if (type == typeof(DateTime))

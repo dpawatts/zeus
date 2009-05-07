@@ -22,6 +22,10 @@ namespace Zeus.Design.Editors
 	{
 		private string _dataTypeText, _dataTypeErrorMessage;
 
+		public TextBoxEditorAttribute()
+		{
+		}
+
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>

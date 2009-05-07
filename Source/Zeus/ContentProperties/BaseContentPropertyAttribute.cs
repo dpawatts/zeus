@@ -35,7 +35,7 @@ namespace Zeus.ContentProperties
 		public virtual IEditor GetDefaultEditor()
 		{
 			PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
-			Type propertyType = propertyData.ValueType;
+			Type propertyType = GetPropertyType();
 			IEditor editor = GetDefaultEditorInternal(propertyType);
 			editor.Name = Name;
 			editor.PropertyType = propertyType;
@@ -51,6 +51,7 @@ namespace Zeus.ContentProperties
 		protected abstract IEditor GetDefaultEditorInternal(Type propertyType);
 
 		public abstract Type GetPropertyDataType();
+		protected abstract Type GetPropertyType();
 
 		public PropertyData CreatePropertyData(ContentItem enclosingItem, object value)
 		{

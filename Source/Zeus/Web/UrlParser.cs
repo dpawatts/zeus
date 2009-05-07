@@ -292,7 +292,11 @@ namespace Zeus.Web
 						PageNotFoundEventArgs args = new PageNotFoundEventArgs(requestedUrl);
 						args.AffectedPath = data;
 						PageNotFound(this, args);
-						data = args.AffectedPath;
+
+						if (args.AffectedItem != null)
+							data = args.AffectedItem.FindPath(PathData.DefaultAction);
+						else
+							data = args.AffectedPath;
 					}
 				}
 			}

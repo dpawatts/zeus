@@ -21,5 +21,10 @@ namespace Zeus.ContentProperties
 		{
 			return typeof(XhtmlStringProperty);
 		}
+
+		protected override Type GetPropertyType()
+		{
+			return typeof(string);
+		}
 	}
 }

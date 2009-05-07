@@ -53,7 +53,7 @@ namespace Zeus.Design.Editors
 
 		protected virtual void SetValue(ListControl editor, object value)
 		{
-			editor.SelectedValue = value as string;
+			editor.SelectedValue = value.ToString();
 		}
 
 		/// <summary>Gets a string value from the drop down list editor from the content item.</summary>

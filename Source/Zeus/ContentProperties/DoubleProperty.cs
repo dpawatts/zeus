@@ -30,7 +30,7 @@ namespace Zeus.ContentProperties
 		public override object Value
 		{
 			get { return DoubleValue; }
-			set { DoubleValue = (double) value; }
+			set { DoubleValue = Convert.ToDouble(value); }
 		}
 
 		public override Type ValueType

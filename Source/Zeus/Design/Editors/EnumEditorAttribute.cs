@@ -7,7 +7,7 @@ namespace Zeus.Design.Editors
 {
 	public class EnumEditorAttribute : DropDownListEditorAttribute
 	{
-		private readonly Type enumType;
+		private readonly Type _enumType;
 
 		public EnumEditorAttribute(string title, int sortOrder, Type enumType)
 			: base(title, sortOrder)
@@ -16,17 +16,26 @@ namespace Zeus.Design.Editors
 			if (!enumType.IsEnum) throw new ArgumentException("The parameter 'enumType' is not a type of enum.", "enumType");
 
 			Required = true;
-			this.enumType = enumType;
+			_enumType = enumType;
+		}
+
+		public EnumEditorAttribute(Type enumType)
+		{
+			if (enumType == null) throw new ArgumentNullException("enumType");
+			if (!enumType.IsEnum) throw new ArgumentException("The parameter 'enumType' is not a type of enum.", "enumType");
+
+			Required = true;
+			_enumType = enumType;
 		}
 
 		protected override ListItem[] GetListItems(IEditableObject contentItem)
 		{
-			Array values = Enum.GetValues(enumType);
+			Array values = Enum.GetValues(_enumType);
 			ListItem[] items = new ListItem[values.Length];
 			for (int i = 0; i < values.Length; i++)
 			{
 				int value = (int) values.GetValue(i);
-				string name = EnumHelper.GetEnumValueDescription(enumType, Enum.GetName(enumType, value));
+				string name = EnumHelper.GetEnumValueDescription(_enumType, Enum.GetName(_enumType, value));
 				items[i] = new ListItem(name, value.ToString());
 			}
 			return items;
@@ -41,7 +50,7 @@ namespace Zeus.Design.Editors
 
 			if (value is string)
 				// an enum as string we assume
-				return ((int) Enum.Parse(enumType, (string) value)).ToString();
+				return ((int) Enum.Parse(_enumType, (string) value)).ToString();
 
 			if (value is int)
 				// an enum as int we hope
@@ -60,7 +69,7 @@ namespace Zeus.Design.Editors
 
 		private object GetEnumValue(int value)
 		{
-			foreach (object e in Enum.GetValues(enumType))
+			foreach (object e in Enum.GetValues(_enumType))
 				if ((int) e == value)
 					return e;
 			return null;
