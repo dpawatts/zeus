@@ -199,6 +199,7 @@
     <Compile Include="Installation\DatabaseStatus.cs" />
     <Compile Include="Installation\InstallerHints.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
+    <Compile Include="ObjectEditor\Editors\PropertyEditor.cs" />
     <Compile Include="Persistence\CopyAttribute.cs" />
     <Compile Include="Persistence\IVersionManager.cs" />
     <Compile Include="Persistence\NotVersionableAttribute.cs" />
@@ -551,6 +552,10 @@
     <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
+      <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>
+      <Name>Zeus.ObjectEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

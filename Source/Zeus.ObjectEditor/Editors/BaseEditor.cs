@@ -1,34 +1,33 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Isis.Web.UI;
-using Zeus.ContentTypes;
-using Zeus.Security;
-using Zeus.Web.UI.WebControls;
 
-namespace Zeus.Design.Editors
+namespace Zeus.ObjectEditor.Editors
 {
-	public abstract class AbstractEditorAttribute : Attribute, IEditor, ISecurable, IPropertyAwareAttribute
+	public abstract class BaseEditor : IEditor, ISecurable
 	{
+		#region Fields
+
 		private Label _label;
 		private string _requiredText, _requiredErrorMessage;
 		private string _validationText, _validationErrorMessage;
-		private Type _propertyType;
+
+		#endregion
 
 		#region Constructors
 
 		/// <summary>Default/empty constructor.</summary>
-		protected AbstractEditorAttribute()
+		protected BaseEditor()
 		{
 		}
 
 		/// <summary>Initializes a new instance of the AbstractEditableAttribute.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		protected AbstractEditorAttribute(string title, int sortOrder)
+		protected BaseEditor(string title, int sortOrder)
 		{
 			Title = title;
 			SortOrder = sortOrder;
@@ -38,7 +37,7 @@ namespace Zeus.Design.Editors
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="name">The name used for equality comparison and reference.</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		protected AbstractEditorAttribute(string title, string name, int sortOrder)
+		protected BaseEditor(string title, string name, int sortOrder)
 		{
 			Title = title;
 			Name = name;
@@ -68,8 +67,6 @@ namespace Zeus.Design.Editors
 		public bool Required { get; set; }
 
 		public string Description { get; set; }
-
-		public bool IsLocallyUnique { get; set; }
 
 		public string RequiredText
 		{
@@ -106,13 +103,7 @@ namespace Zeus.Design.Editors
 		public string EditorPrefixText { get; set; }
 		public string EditorPostfixText { get; set; }
 
-		public PropertyInfo UnderlyingProperty { get; set; }
-
-		public Type PropertyType
-		{
-			get { return (UnderlyingProperty != null) ? UnderlyingProperty.PropertyType : _propertyType; }
-			set { _propertyType = value; }
-		}
+		public Type PropertyType { get; set; }
 
 		#endregion
 
@@ -131,6 +122,7 @@ namespace Zeus.Design.Editors
 			foreach (string role in AuthorizedRoles)
 				if (string.Equals(user.Identity.Name, role, StringComparison.OrdinalIgnoreCase) || user.IsInRole(role))
 					return true;
+
 			return false;
 		}
 
@@ -160,8 +152,6 @@ namespace Zeus.Design.Editors
 				AddRequiredFieldValidator(panel, editor);
 			if (ValidateRegularExpression)
 				AddRegularExpressionValidator(panel, editor);
-			if (IsLocallyUnique)
-				AddLocallyUniqueValidator(panel, editor);
 		}
 
 		/// <summary>Adds the panel to the container. Creating this panel and adding labels and editors to it will help to avoid web controls from interfering with each other.</summary>
@@ -187,17 +177,19 @@ namespace Zeus.Design.Editors
 		/// <summary>Adds the editor control to the edit panel. This method is invoked by <see cref="AddTo"/> and the editor is prepended a label and wrapped in a panel. To remove these controls also override the <see cref="AddTo"/> method.</summary>
 		/// <param name="container">The container onto which to add the editor.</param>
 		/// <returns>A reference to the added editor.</returns>
-		protected abstract Control AddEditor(Control container);
+		protected abstract Control AddEditor(Control panel);
 
-		protected virtual IValidator AddRequiredFieldValidator(Control container, Control editor)
+		protected virtual IValidator AddRequiredFieldValidator(Control panel, Control editor)
 		{
-			RequiredFieldValidator rfv = new RequiredFieldValidator();
-			rfv.ID = "rfv" + Name;
-			rfv.ControlToValidate = editor.ID;
-			rfv.Display = ValidatorDisplay.Dynamic;
-			rfv.Text = RequiredText;
-			rfv.ErrorMessage = RequiredErrorMessage;
-			container.Controls.Add(rfv);
+			RequiredFieldValidator rfv = new RequiredFieldValidator
+			{
+				ID = "rfv" + Name,
+				ControlToValidate = editor.ID,
+				Display = ValidatorDisplay.Dynamic,
+				Text = RequiredText,
+				ErrorMessage = RequiredErrorMessage
+			};
+			panel.Controls.Add(rfv);
 
 			return rfv;
 		}
@@ -205,33 +197,20 @@ namespace Zeus.Design.Editors
 		/// <summary>Adds a regular expression validator.</summary>
 		/// <param name="container">The container control for this validator.</param>
 		/// <param name="editor">The editor control to validate.</param>
-		protected virtual Control AddRegularExpressionValidator(Control container, Control editor)
+		protected virtual Control AddRegularExpressionValidator(Control panel, Control editor)
 		{
-			RegularExpressionValidator rev = new RegularExpressionValidator();
-			rev.ID = Name + "_rev";
-			rev.ControlToValidate = editor.ID;
-			rev.ValidationExpression = ValidationExpression;
-			rev.Display = ValidatorDisplay.Dynamic;
-			rev.Text = ValidationText;
-			rev.ErrorMessage = ValidationMessage;
-			container.Controls.Add(rev);
+			RegularExpressionValidator rev = new RegularExpressionValidator
+     	{
+     		ID = Name + "_rev",
+     		ControlToValidate = editor.ID,
+     		ValidationExpression = ValidationExpression,
+     		Display = ValidatorDisplay.Dynamic,
+     		Text = ValidationText,
+     		ErrorMessage = ValidationMessage
+     	};
+			panel.Controls.Add(rev);
 
 			return rev;
-		}
-
-		protected virtual IValidator AddLocallyUniqueValidator(Control container, Control editor)
-		{
-			LocallyUniqueValidator rfv = new LocallyUniqueValidator();
-			rfv.ID = "luv" + Name;
-			rfv.ControlToValidate = editor.ID;
-			rfv.Display = ValidatorDisplay.Dynamic;
-			rfv.DisplayName = Title;
-			rfv.PropertyName = Name;
-			rfv.Text = "*";
-			rfv.ErrorMessage = "*";
-			container.Controls.Add(rfv);
-
-			return rfv;
 		}
 
 		/// <summary>Compares two values regarding null values as equal.</summary>
@@ -243,10 +222,10 @@ namespace Zeus.Design.Editors
 		}
 
 		/// <summary>Updates the object with the values from the editor.</summary>
-		/// <param name="item">The object to update.</param>
-		/// <param name="editor">The editor contorl whose values to update the object with.</param>
+		/// <param name="object">The object to update.</param>
+		/// <param name="editor">The editor control which contains values to update the object with.</param>
 		/// <returns>True if the item was changed (and needs to be saved).</returns>
-		public abstract bool UpdateItem(IEditableObject item, Control editor);
+		public abstract bool UpdateObject(IEditableObject @object, Control editor);
 
 		/// <summary>Updates the editor with the values from the item.</summary>
 		/// <param name="item">The item that contains values to assign to the editor.</param>
@@ -254,25 +233,6 @@ namespace Zeus.Design.Editors
 		public void UpdateEditor(IEditableObject item, Control editor)
 		{
 			UpdateEditorInternal(item, editor);
-
-			if (Context.Current.LanguageManager.Enabled && !editor.Page.IsPostBack)
-			{
-				bool enabled = !Shared || ((ContentItem) item).TranslationOf == null;
-				string globeTooltip = null;
-				if (!enabled)
-				{
-					globeTooltip =
-						"This property is shared between all language variations of this page and must be edited in the master language.";
-					DisableEditor(editor);
-				}
-				else if (Shared)
-				{
-					globeTooltip = "This property is shared between all language variations of this page.";
-				}
-
-				if (_label != null && globeTooltip != null)
-					_label.Text += " <img src=\"" + WebResourceUtility.GetUrl(typeof (AbstractEditorAttribute), "Zeus.Web.Resources.Icons.bullet_world_link.png") + "\" title=\"" + globeTooltip + "\" />";
-			}
 		}
 
 		protected abstract void UpdateEditorInternal(IEditableObject item, Control editor);
