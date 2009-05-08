@@ -1,12 +1,31 @@
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Isis.Web.Security;
+using Zeus.AddIns.Forums.Configuration;
 using Zeus.AddIns.Forums.ContentTypes;
 
 namespace Zeus.AddIns.Forums.Services
 {
 	public class ForumService : IForumService
 	{
+		private readonly Dictionary<string, string> _badWordReplacements;
+
+		public ForumService()
+		{
+			_badWordReplacements = new Dictionary<string, string>();
+
+			ForumSection forumConfig = ConfigurationManager.GetSection("zeus.addIns/forums") as ForumSection;
+			if (forumConfig != null)
+				foreach (BadWordElement badWord in forumConfig.BadWords)
+				{
+					string replacement = (!string.IsNullOrEmpty(badWord.Replacement)) ? badWord.Replacement : forumConfig.BadWords.DefaultReplacement;
+					_badWordReplacements.Add(badWord.Word, replacement);
+				}
+		}
+
 		public Member GetMember(MessageBoard messageBoard, IUser user, bool create)
 		{
 			Member member = Find.EnumerateChildren(messageBoard).OfType<Member>().SingleOrDefault(m => m.User == user);
@@ -17,6 +36,11 @@ namespace Zeus.AddIns.Forums.Services
 				Context.Persister.Save(member);
 			}
 			return member;
+		}
+
+		public string GetPostPreview(string message)
+		{
+			return BBCodeHelper.ConvertToHtml(CleanBadWords(message));
 		}
 
 		public void ToggleTopicStickiness(Topic topic, Member member)
@@ -41,7 +65,7 @@ namespace Zeus.AddIns.Forums.Services
 		public Post CreateReply(Topic topic, Member member, string subject, string message)
 		{
 			// Create post.
-			Post post = new Post { Author = member, Title = subject, Message = message };
+			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
 			post.AddTo(topic);
 
 			// Save post.
@@ -53,11 +77,11 @@ namespace Zeus.AddIns.Forums.Services
 		public Topic CreateTopic(Forum forum, Member member, string subject, string message)
 		{
 			// Create topic first.
-			Topic topic = new Topic { Title = subject, Author = member };
+			Topic topic = new Topic { Title = CleanBadWords(subject), Author = member };
 			topic.AddTo(forum);
 
 			// Then create post.
-			Post post = new Post { Author = member, Title = subject, Message = message };
+			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
 			post.AddTo(topic);
 
 			// Save topic, which will also save post.
@@ -73,8 +97,8 @@ namespace Zeus.AddIns.Forums.Services
 				throw new ZeusException("Post can only be edited by original author.");
 
 			// Update properties
-			post.Title = newSubject;
-			post.Message = newMessage;
+			post.Title = CleanBadWords(newSubject);
+			post.Message = CleanBadWords(newMessage);
 
 			post.Topic.Updated = DateTime.Now;
 
@@ -84,6 +108,17 @@ namespace Zeus.AddIns.Forums.Services
 			return post;
 		}
 
+		private string CleanBadWords(string text)
+		{
+			if (string.IsNullOrEmpty(text))
+				return text;
+
+			foreach (var badWordReplacement in _badWordReplacements)
+				text = Regex.Replace(text, Regex.Escape(badWordReplacement.Key), badWordReplacement.Value, RegexOptions.IgnoreCase);
+
+			return text;
+		}
+
 		public void Start()
 		{
 			Context.Persister.ItemSaved += OnItemSaved;
@@ -91,7 +126,7 @@ namespace Zeus.AddIns.Forums.Services
 
 		public void Stop()
 		{
-			throw new System.NotImplementedException();
+			
 		}
 
 		protected virtual void OnItemSaved(object sender, ItemEventArgs e)

@@ -36,6 +36,7 @@
       <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -51,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BBCodeHelper.cs" />
+    <Compile Include="Configuration\BadWordCollection.cs" />
+    <Compile Include="Configuration\BadWordElement.cs" />
+    <Compile Include="Configuration\ForumSection.cs" />
     <Compile Include="ContentTypes\IMessageBoardContainer.cs" />
     <Compile Include="ContentTypes\NewPost.cs" />
     <Compile Include="ContentTypes\MemberContainer.cs" />
