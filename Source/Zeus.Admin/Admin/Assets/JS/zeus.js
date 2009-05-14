@@ -5,13 +5,13 @@ var zeusnav = new Object();
 // EDIT
 var zeustoggle = {
 	show: function(btn, bar) {
-		$(btn).addClass("toggled").blur();
-		$(bar).show();
+		jQuery(btn).addClass("toggled").blur();
+		jQuery(bar).show();
 		cookie.create(bar, "show");
 	},
 	hide: function(btn, bar) {
-		$(btn).removeClass("toggled").blur();
-		$(bar).hide();
+		jQuery(btn).removeClass("toggled").blur();
+		jQuery(bar).hide();
 		cookie.erase(bar)
 	}
 };
@@ -24,29 +24,29 @@ frameManager.prototype = {
 		document.getElementById("memory").value = selected;
 		document.getElementById("action").value = action;
 	},
-	initFrames: function() {
-		///	<summary>
-		///		Initialises the navigation and preview frames, with a splitter in the middle
-		///	</summary>
-		$("#splitter").splitter({
-			type: 'v',
-			sizeLeft: 200
-		});
-		var t = this;
-		$(document).ready(function() {
-			$(window).bind("resize", function() {
-				t.repaint();
-			}).trigger("resize");
-		});
+	/*initFrames: function() {
+	///	<summary>
+	///		Initialises the navigation and preview frames, with a splitter in the middle
+	///	</summary>
+	jQuery("#splitter").splitter({
+	type: 'v',
+	sizeLeft: 200
+	});
+	var t = this;
+	jQuery(document).ready(function() {
+	jQuery(window).bind("resize", function() {
+	t.repaint();
+	}).trigger("resize");
+	});
 	},
 	repaint: function() {
-		$("#splitter").trigger("resize");
-		$("#splitter").height(this.contentHeight());
-		$("#splitter *").height(this.contentHeight());
+	jQuery("#splitter").trigger("resize");
+	jQuery("#splitter").height(this.contentHeight());
+	jQuery("#splitter *").height(this.contentHeight());
 	},
 	contentHeight: function() {
-		return document.documentElement.clientHeight - (jQuery.browser.msie ? 60 : 60);
-	},
+	return document.documentElement.clientHeight - (jQuery.browser.msie ? 60 : 60);
+	},*/
 	getMemory: function() {
 		var m = document.getElementById("memory");
 		return encodeURIComponent(m.value);
@@ -56,12 +56,22 @@ frameManager.prototype = {
 		return encodeURIComponent(a.value);
 	},
 	refreshNavigation: function(navigationUrl) {
-		var nav = document.getElementById('navigation');
-		nav.src = navigationUrl;
+		top.MUI.updateContent({
+			element: top.$('sidePanel1'),
+			loadMethod: 'iframe',
+			url: navigationUrl,
+			title: "Content Tree",
+			padding: { top: 0, right: 0, bottom: 0, left: 0 }
+		});
 	},
 	refreshPreview: function(previewUrl) {
-		var prev = document.getElementById('preview');
-		prev.src = previewUrl;
+		top.MUI.updateContent({
+			element: top.$('mainPanel'),
+			loadMethod: 'iframe',
+			url: previewUrl,
+			title: "Preview",
+			padding: { top: 0, right: 0, bottom: 0, left: 0 }
+		});
 	},
 	refresh: function(navigationUrl, previewUrl) {
 		this.refreshNavigation(navigationUrl);

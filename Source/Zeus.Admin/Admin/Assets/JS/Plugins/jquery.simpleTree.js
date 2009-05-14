@@ -138,7 +138,7 @@ $.fn.simpleTree = function(opt) {
 				if (typeof TREE.option.afterClick == 'function') {
 					TREE.option.afterClick($(this).parent());
 				}
-				//return false;
+				return false;
 			}).dblclick(function() {
 				mousePressed = false;
 				TREE.nodeToggle($(this).parent().get(0));
@@ -210,7 +210,7 @@ $.fn.simpleTree = function(opt) {
 			TREE.setEventLine($('.line, .line-last', obj));
 		};
 		TREE.setTrigger = function(node) {
-			$('>span', node).before('<img class="trigger" src="/admin/assets/images/tree/spacer.gif" border=0>');
+			$('>span', node).before('<img class="trigger" src="/webResources/zeus/admin/assets/images/tree/spacer.gif" border=0>');
 			var trigger = $('>.trigger', node);
 			trigger.click(function(event) {
 				TREE.nodeToggle(node);

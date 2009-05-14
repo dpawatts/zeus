@@ -3,13 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 	<title><asp:Literal runat="server" ID="ltlAdminName1" /> Administration</title>
 	
 	<script type="text/javascript">
-	
 	$(document).ready(function() {
 		window.zeus = new frameManager();
-		zeus.initFrames();
 	});
 	</script>
 </head>
@@ -19,6 +19,7 @@
 	</div></noscript>
 	
 	<form runat="server">
+	<div id="desktop">
 		<div id="header" class="clearfix">
 			<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
 			<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
@@ -32,14 +33,25 @@
 			<asp:PlaceHolder runat="server" ID="plcToolbar" />
 		</div>
 		
-		<div id="splitter">
+		<div id="dockWrapper">
+			<div id="dock">
+				<div id="dockPlacement"></div>
+				<div id="dockAutoHide"></div>
+				<div id="dockSort"><div id="dockClear" class="clear"></div></div>
+			</div>
+		</div>
+		
+		<div id="pageWrapper"></div>
+		
+		<!--div id="splitter">
 			<div id="LeftPane">
 				<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
 			</div>
 			<div id="RightPane">
 				<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
 			</div>
-		</div>
+		</div-->
+	</div>
 	</form>
 </body>
 </html>

@@ -31,7 +31,7 @@ namespace Zeus.Admin.Navigation
 			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.zeus.js", ResourceInsertPosition.HeaderTop);
 
 			Page.ClientScript.RegisterCssResource(typeof(Tree), "Zeus.Admin.Assets.Css.shared.css");
-			Page.ClientScript.RegisterCssResource(typeof(Tree), "Zeus.Admin.Assets.Css.tree.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Tree), "Zeus.Admin.Assets.Css.tree.css");
 
 			// As an optimisation, register all action plugins here.
 			RegisterActionPlugins();

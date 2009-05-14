@@ -36,11 +36,33 @@ namespace Zeus.Admin
 		protected override void OnPreRender(EventArgs e)
 		{
 			Page.ClientScript.RegisterJQuery();
-			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.splitter.js");
+			//Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.splitter.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.zeus.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.reset.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.shared.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.default.css");
+
+			// Mocha UI Theme
+			const string MOCHA_UI_THEME = "default";
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Content.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Core.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Layout.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Dock.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Window.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Themes." + MOCHA_UI_THEME + ".css.Tabs.css");
+
+			// Mocha UI Scripts
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.excanvas_r43.js", "<!--[if IE]>" + Environment.NewLine, Environment.NewLine + "<![endif]-->");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.mootools-1.2-core.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.mootools-1.2-more.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Core.Core.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Layout.Layout.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Layout.Dock.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Window.Window.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Window.Modal.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.MochaUI.Scripts.Source.Components.Tabs.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.mocha-init.js");
+
 			base.OnPreRender(e);
 		}
 	}

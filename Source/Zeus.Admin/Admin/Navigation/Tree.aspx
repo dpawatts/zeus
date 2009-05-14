@@ -45,6 +45,16 @@
 						.replace("{memory}", memory)
 						.replace("{action}", action);
 					a = a.attr("href", clickAction);
+					a.click(function() {
+						top.MUI.updateContent({
+							element: top.$('mainPanel'),
+							loadMethod: 'iframe',
+							url: $(this).attr("href"),
+							title: $(this).text(),
+							padding: { top: 0, right: 0, bottom: 0, left: 0 }
+						});
+						return false;
+					});
 				}
 				else {
 					li = li.addClass("disabled");
@@ -99,7 +109,14 @@
 			simpleTreeCollection = $('.simpleTree').simpleTree({
 				autoclose: false,
 				afterClick: function(node) {
-					top.preview.location.href = $("a:first", node).attr("href");
+					//top.preview.location.href = $("a:first", node).attr("href");
+					top.MUI.updateContent({
+						element: top.$('mainPanel'),
+						loadMethod: 'iframe',
+						url: $("a:first", node).attr("href"),
+						title: 'Preview',
+						padding: { top: 0, right: 0, bottom: 0, left: 0 }
+					});	
 					//alert("text-"+$('span:first',node).text());
 				},
 				afterDblClick: function(node) {
