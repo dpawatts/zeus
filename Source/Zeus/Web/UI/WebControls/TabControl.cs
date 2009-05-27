@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -8,6 +9,38 @@ namespace Zeus.Web.UI.WebControls
 {
 	public class TabControl : Panel
 	{
+		private Dictionary<TabItem, HtmlAnchor> _tabItemAnchorDictionary;
+		private HtmlGenericControl _ul;
+
+		protected override void AddedControl(System.Web.UI.Control control, int index)
+		{
+			base.AddedControl(control, index);
+
+			if (control is TabItem)
+			{
+				if (_ul == null)
+				{
+					_ul = new HtmlGenericControl("ul") { EnableViewState = false };
+					Controls.AddAt(0, _ul);
+
+					_tabItemAnchorDictionary = new Dictionary<TabItem, HtmlAnchor>();
+				}
+
+				TabItem tabItem = (TabItem) control;
+
+				HtmlGenericControl li = new HtmlGenericControl("li");
+				_ul.Controls.Add(li);
+
+				HtmlAnchor a = new HtmlAnchor();
+				li.Controls.Add(a);
+
+				a.HRef = "#" + tabItem.ClientID;
+				a.InnerText = tabItem.ToolTip;
+
+				_tabItemAnchorDictionary.Add(tabItem, a);
+			}
+		}
+
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
@@ -38,19 +71,10 @@ namespace Zeus.Web.UI.WebControls
 				}});", ClientID);
 			Page.ClientScript.RegisterStartupScript(typeof(TabControl), ClientID, script, true);
 
-			HtmlGenericControl ul = new HtmlGenericControl("ul");
 			foreach (TabItem tabItem in Controls.OfType<TabItem>())
-			{
-				HtmlGenericControl li = new HtmlGenericControl("li");
-				ul.Controls.Add(li);
+				_tabItemAnchorDictionary[tabItem].HRef = "#" + tabItem.ClientID;
 
-				HtmlAnchor a = new HtmlAnchor();
-				li.Controls.Add(a);
-
-				a.HRef = "#" + tabItem.ClientID;
-				a.InnerText = tabItem.ToolTip;
-			}
-			Controls.AddAt(0, ul);
+			Visible = Controls.OfType<TabItem>().Any(ti => ti.Controls.Count > 0);
 		}
 	}
 }

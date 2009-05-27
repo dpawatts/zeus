@@ -46,9 +46,14 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		protected override void OnLoad(EventArgs e)
+		protected override void OnInit(EventArgs e)
 		{
-			base.OnLoad(e);
+			Page.InitComplete += OnPageInitComplete;
+			base.OnInit(e);
+		}
+
+		private void OnPageInitComplete(object sender, EventArgs e)
+		{
 			if (_postedBack)
 				EnsureChildControls();
 		}
@@ -94,6 +99,12 @@ namespace Zeus.Web.UI.WebControls
 		{
 			CurrentItem = Save((ContentItem) CurrentItem, VersioningMode);
 			return CurrentItem;
+		}
+
+		/// <summary>Updates the <see cref="CurrentItem"/> with the values entered in the form without saving it.</summary>
+		public void Update()
+		{
+			Zeus.Context.AdminManager.UpdateItem((ContentItem) CurrentItem, PropertyControls, Page.User);
 		}
 
 		protected virtual void OnSaving(ItemViewEditableObjectEventArgs args)

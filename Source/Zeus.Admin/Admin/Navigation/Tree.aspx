@@ -88,7 +88,7 @@
 					style: { 'background-color': '#ffffe1' },
 					position: {
 						corner: { target: 'bottomLeft' },
-						adjust: { x: 20, y: 60 },
+						adjust: { x: 20, y: 90 },
 						container: $(window.top.document.body)
 					}
 				});
@@ -128,7 +128,13 @@
 				afterMove: function(destination, source, pos) {
 					var sourcePath = $("span:first", source).attr('data-path');
 					var destinationPath = $("span:first", destination).attr('data-path');
-					top.preview.location.href = "/admin/move.aspx?selected=" + sourcePath + "&destination=" + destinationPath + "&pos=" + pos;
+					top.MUI.updateContent({
+						element: top.$('mainPanel'),
+						loadMethod: 'iframe',
+						url: "/admin/move.aspx?selected=" + sourcePath + "&destination=" + destinationPath + "&pos=" + pos,
+						title: 'Move',
+						padding: { top: 0, right: 0, bottom: 0, left: 0 }
+					});
 				},
 				afterAjax: function() {
 					initContextMenu();

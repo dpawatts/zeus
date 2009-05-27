@@ -114,9 +114,9 @@ namespace Zeus.Admin.Web.UI.WebControls
 			// Loop through all action groups
 			List<string> contextMenuItems = new List<string>();
 			bool first = false;
-			foreach (ActionPluginGroupAttribute actionPluginGroup in Zeus.Context.Current.Resolve<IPluginFinder<ActionPluginGroupAttribute>>().GetPlugins().OrderBy(g => g.SortOrder))
+			foreach (ActionPluginGroupAttribute actionPluginGroup in Zeus.Context.AdminManager.GetActionPluginGroups())
 			{
-				foreach (ActionPluginAttribute actionPlugin in Zeus.Context.Current.Resolve<IPluginFinder<ActionPluginAttribute>>().GetPlugins().Where(p => p.GroupName == actionPluginGroup.Name).OrderBy(p => p.SortOrder))
+				foreach (ActionPluginAttribute actionPlugin in Zeus.Context.AdminManager.GetActionPlugins(actionPluginGroup.Name))
 				{
 					ActionPluginState state = actionPlugin.GetState(translatedItem, Zeus.Context.Current.WebContext, Zeus.Context.SecurityManager);
 					if (state != ActionPluginState.Hidden)

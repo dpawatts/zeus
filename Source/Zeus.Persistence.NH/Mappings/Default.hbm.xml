@@ -94,6 +94,11 @@
 		<property name="Version" access="property" not-null="true" />
 
 		<many-to-one name="TranslationOf"	column="TranslationOfID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select"/>
+		<bag name="Translations" cascade="all" generic="true" inverse="true" lazy="true" batch-size="10">
+			<cache usage="read-write" />
+			<key column="TranslationOfID" />
+			<one-to-many class="Zeus.ContentItem, Zeus"/>
+		</bag>
 		<property name="Language" access="property" length="50" />
 
 		<many-to-one name="Parent" column="ParentID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select" />
@@ -118,13 +123,13 @@
 			<one-to-many class="Zeus.ContentProperties.PropertyCollection, Zeus"/>
 		</map>
 
-		<bag name="AuthorizationRules" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
+		<bag name="AuthorizationRules" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true" batch-size="10">
 			<cache usage="read-write" />
 			<key column="ItemID"/>
 			<one-to-many class="Zeus.Security.AuthorizationRule, Zeus"/>
 		</bag>
 
-		<bag name="LanguageSettings" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
+		<bag name="LanguageSettings" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true" batch-size="10">
 			<cache usage="read-write" />
 			<key column="ItemID"/>
 			<one-to-many class="Zeus.Globalization.LanguageSetting, Zeus"/>

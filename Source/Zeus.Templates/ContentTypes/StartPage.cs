@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Zeus.Design.Editors;
 using Zeus.FileSystem;
 using Zeus.Integrity;
 

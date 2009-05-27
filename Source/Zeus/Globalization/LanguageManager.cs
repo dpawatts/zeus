@@ -102,12 +102,15 @@ namespace Zeus.Globalization
 		/// <returns>A list of translations of the item.</returns>
 		public IList<ContentItem> GetTranslationsOf(ContentItem originalLanguageItem, bool includeOriginal)
 		{
+			List<ContentItem> result = new List<ContentItem>();
 			if (originalLanguageItem.ID == 0)
-				return new List<ContentItem>();
+				return result;
 
-			return _finder.FindAll<ContentItem>()
-				.Where(ci => (includeOriginal && ci.ID == originalLanguageItem.ID) || ci.TranslationOf == originalLanguageItem)
-				.ToList();
+			if (includeOriginal)
+				result.Add(originalLanguageItem);
+
+			result.AddRange(originalLanguageItem.Translations);
+			return result;
 		}
 
 		public bool TranslationExists(ContentItem contentItem, string languageCode)

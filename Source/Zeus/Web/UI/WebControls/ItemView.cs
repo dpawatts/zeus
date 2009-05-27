@@ -73,9 +73,16 @@ namespace Zeus.Web.UI.WebControls
 			{
 				if (_currentTypeDefinition == null)
 				{
-					ItemViewTypeDefinitionEventArgs args = new ItemViewTypeDefinitionEventArgs(null);
-					OnDefinitionCreating(args);
-					_currentTypeDefinition = args.TypeDefinition;
+					if (CurrentItem != null && CurrentItem is ContentItem)
+					{
+						_currentTypeDefinition = Zeus.Context.ContentTypes.GetContentType(CurrentItem.GetType());
+					}
+					else
+					{
+						ItemViewTypeDefinitionEventArgs args = new ItemViewTypeDefinitionEventArgs(null);
+						OnDefinitionCreating(args);
+						_currentTypeDefinition = args.TypeDefinition;
+					}
 				}
 				return _currentTypeDefinition;
 			}

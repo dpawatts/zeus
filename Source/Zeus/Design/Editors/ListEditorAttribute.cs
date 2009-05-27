@@ -56,7 +56,7 @@ namespace Zeus.Design.Editors
 			editor.SelectedValue = value.ToString();
 		}
 
-		/// <summary>Gets a string value from the drop down list editor from the content item.</summary>
+		/// <summary>Gets a string value for the drop down list editor from the content item.</summary>
 		/// <param name="item">The item containing the value.</param>
 		/// <returns>A string to use as selected value.</returns>
 		protected virtual object GetValue(IEditableObject item)
@@ -67,13 +67,12 @@ namespace Zeus.Design.Editors
 		protected override Control AddEditor(Control container)
 		{
 			ListControl ddl = CreateEditor();
+			container.Controls.Add(ddl);
 			ddl.ID = Name;
 			if (!Required)
 				ddl.Items.Add(new ListItem());
 
 			ModifyEditor(ddl);
-
-			container.Controls.Add(ddl);
 
 			return ddl;
 		}

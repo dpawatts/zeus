@@ -6,9 +6,10 @@ using Zeus.Integrity;
 
 namespace Zeus.Admin.RecycleBin
 {
-	[ContentType("Trash", "RecycleBinContainer", Installer = InstallerHints.NeverRootOrStartPage)]
+	[ContentType("Recycle Bin", "RecycleBinContainer", Installer = InstallerHints.NeverRootOrStartPage)]
 	[AllowedChildren(typeof(ContentItem))]
 	[ContentTypeAuthorizedRoles(Roles = new string[0])]
+	[RestrictParents(typeof(IRootItem))]
 	[NotThrowable]
 	public class RecycleBinContainer : ContentItem, INode, IRecycleBin
 	{

@@ -61,7 +61,17 @@
     <Compile Include="Configuration\TemplatesSection.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
+    <Compile Include="ContentTypes\BaseWidget.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
+    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\FormPage.cs" />
+    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Form.cs" />
+    <Compile Include="ContentTypes\Forms\Option.cs" />
+    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Question.cs" />
+    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="ContentTypes\News\BaseNewsPage.cs" />
     <Compile Include="ContentTypes\News\NewsContainer.cs" />
     <Compile Include="ContentTypes\News\NewsItem.cs" />
@@ -71,6 +81,7 @@
     <Compile Include="ContentTypes\Redirect.cs" />
     <Compile Include="ContentTypes\RootItem.cs" />
     <Compile Include="ContentTypes\StartPage.cs" />
+    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
@@ -101,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\page_world.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\report.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

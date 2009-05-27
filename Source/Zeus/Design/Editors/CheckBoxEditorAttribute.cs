@@ -6,6 +6,12 @@ namespace Zeus.Design.Editors
 	/// <summary>An editable checkbox attribute. Besides creating a checkbox it also uses the checkbox's text property to display text.</summary>
 	public class CheckBoxEditorAttribute : EditableAttribute
 	{
+		public CheckBoxEditorAttribute()
+			: base(typeof(CheckBox), "Checked")
+		{
+			
+		}
+
 		/// <summary>Creates a new instance of the checkbox editable attribute.</summary>
 		/// <param name="checkBoxText">The text on the checkbox.</param>
 		/// <param name="sortOrder">The order of this editable checkbox.</param>

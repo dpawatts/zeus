@@ -9,6 +9,14 @@ namespace Zeus.Web.UI
 {
 	public static class ItemUtility
 	{
+		public static T FindInParents<T>(Control parentControl)
+			where T : class
+		{
+			if (parentControl == null || parentControl is T)
+				return parentControl as T;
+			return FindInParents<T>(parentControl.Parent);
+		}
+
 		public static Control AddUserControl(Control container, ContentItem item)
 		{
 			using (new ItemStacker(item))

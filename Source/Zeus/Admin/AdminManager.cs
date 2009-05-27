@@ -13,6 +13,7 @@ using Isis.Web.Security;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
+using Zeus.Engine;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
@@ -41,6 +42,9 @@ namespace Zeus.Admin
 		private readonly Web.IWebContext _webContext;
 		private readonly ILanguageManager _languageManager;
 
+		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
+		private readonly IEnumerable<ActionPluginAttribute> _cachedActionPlugins;
+
 		#endregion
 
 		#region Constructor
@@ -48,7 +52,9 @@ namespace Zeus.Admin
 		public AdminManager(AdminSection configSection, ISecurityManager securityManager, IAdminAssemblyManager adminAssembly,
 			IAuthorizationService authorizationService, IAuthenticationContextService authenticationContextService,
 			IPersister persister, IVersionManager versionManager, IContentTypeManager contentTypeManager,
-			Web.IWebContext webContext, ILanguageManager languageManager)
+			Web.IWebContext webContext, ILanguageManager languageManager,
+			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder,
+			IPluginFinder<ActionPluginAttribute> actionPluginFinder)
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
@@ -63,6 +69,9 @@ namespace Zeus.Admin
 			_contentTypeManager = contentTypeManager;
 			_webContext = webContext;
 			_languageManager = languageManager;
+
+			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
+			_cachedActionPlugins = actionPluginFinder.GetPlugins();
 		}
 
 		#endregion
@@ -161,6 +170,16 @@ namespace Zeus.Admin
 			}
 
 			return url.ToString();
+		}
+
+		public IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups()
+		{
+			return _cachedActionPluginGroups;
+		}
+
+		public IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName)
+		{
+			return _cachedActionPlugins.Where(p => p.GroupName == groupName).OrderBy(p => p.SortOrder);
 		}
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>

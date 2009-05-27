@@ -59,10 +59,6 @@
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -171,6 +167,7 @@
     <Compile Include="ContentTypes\RefineOrder.cs" />
     <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
+    <Compile Include="Design\Editors\ChildEditorAttribute.cs" />
     <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
     <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
@@ -552,6 +549,10 @@
     <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SoundInTheory.DynamicImage\Source\DynamicImage\DynamicImage.csproj">
+      <Project>{15F7FF82-B018-42E0-A94D-2CAAE491C248}</Project>
+      <Name>DynamicImage</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
       <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>

@@ -20,6 +20,10 @@ namespace Zeus.Admin
 		/// </summary>
 		string CurrentAdminLanguageBranch { get; set; }
 
+		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
+
+		IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName);
+
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
 		/// <param name="item">The item to edit.</param>
 		/// <returns>The url to the edit page</returns>

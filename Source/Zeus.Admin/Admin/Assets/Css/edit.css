@@ -259,3 +259,5 @@ input[type="text"].linkedItem, textarea.linkedItem, div.editDetail > select.link
 {
 	width: 435px;
 }
+
+.ui-widget { font-size: 100%; }

@@ -73,6 +73,24 @@ namespace Zeus
 			return string.Format(format, Evaluate(item, expression));
 		}
 
+		/// <summary>Gets a value from a property.</summary>
+		/// <param name="instance">The object whose property to get.</param>
+		/// <param name="propertyName">The name of the property to get.</param>
+		/// <returns>The value of the property.</returns>
+		public static object GetProperty(object instance, string propertyName)
+		{
+			if (instance == null) throw new ArgumentNullException("instance");
+			if (propertyName == null) throw new ArgumentNullException("propertyName");
+
+			Type instanceType = instance.GetType();
+			PropertyInfo pi = instanceType.GetProperty(propertyName);
+
+			if (pi == null)
+				throw new ZeusException("No property '{0}' found on the instance of type '{1}'.", propertyName, instanceType);
+
+			return pi.GetValue(instance, null);
+		}
+
 		public static string GetSafeName(string value)
 		{
 			string result = value.ToLower();

@@ -26,7 +26,6 @@ namespace Zeus.FileSystem.Images
 
 		public override void PopulateDependencies(List<Dependency> dependencies)
 		{
-			base.PopulateDependencies(dependencies);
 			dependencies.Add(new Dependency {Text1 = ContentID.ToString(), Text2 = DetailName, Text3 = Index.ToString()});
 		}
 	}

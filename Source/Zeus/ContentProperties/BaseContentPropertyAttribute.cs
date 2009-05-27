@@ -34,7 +34,7 @@ namespace Zeus.ContentProperties
 
 		public virtual IEditor GetDefaultEditor()
 		{
-			PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
+			//PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
 			Type propertyType = GetPropertyType();
 			IEditor editor = GetDefaultEditorInternal(propertyType);
 			editor.Name = Name;
@@ -60,6 +60,19 @@ namespace Zeus.ContentProperties
 			propertyData.EnclosingItem = enclosingItem;
 			propertyData.Value = value;
 			return propertyData;
+		}
+
+		public override bool Equals(object obj)
+		{
+			BaseContentPropertyAttribute other = obj as BaseContentPropertyAttribute;
+			if (other == null)
+				return false;
+
+			return Title == other.Title
+				&& SortOrder == other.SortOrder
+				&& Description == other.Description
+				&& Name == other.Name
+				&& Shared == other.Shared;
 		}
 	}
 }

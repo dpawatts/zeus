@@ -73,3 +73,5 @@ hr
 	margin-bottom: 10px;
 	border: solid 1px #CCCCCC;
 }
+
+.ui-widget { font-size: 100%; }

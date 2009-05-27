@@ -48,13 +48,13 @@ namespace Zeus.Engine
 			Interlocked.Decrement(ref observedApplications);
 			Trace.WriteLine("EventBroker: Disposing " + sender + " - " + observedApplications);
 
-			HttpApplication application = sender as HttpApplication;
+			/*HttpApplication application = sender as HttpApplication;
 
 			application.BeginRequest -= Application_BeginRequest;
 			application.AuthorizeRequest -= Application_AuthorizeRequest;
 			application.AcquireRequestState -= Application_AcquireRequestState;
 			application.Error -= Application_Error;
-			application.EndRequest -= Application_EndRequest;
+			application.EndRequest -= Application_EndRequest;*/
 		}
 
 		public EventHandler<EventArgs> BeginRequest;

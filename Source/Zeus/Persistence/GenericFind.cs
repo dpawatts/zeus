@@ -96,6 +96,11 @@ namespace Zeus.Persistence
 			}
 		}
 
+		public static bool IsAccessibleChildOrSelf(ContentItem item, ContentItem wantedItem)
+		{
+			return (item == wantedItem) || In(wantedItem, EnumerateAccessibleChildren(item));
+		}
+
 		public static IList<ContentItem> ListParents(ContentItem initialItem)
 		{
 			return new List<ContentItem>(EnumerateParents(initialItem, null, false));

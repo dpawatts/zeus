@@ -36,6 +36,19 @@ namespace Zeus.Design.Editors
 			ControlPropertyName = editorPropertyName;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the EditableAttribute class set to use a server control.
+		/// </summary>
+		/// <param name="title">The label displayed to editors</param>
+		/// <param name="editorType">The type of webcontrol used for editing the unit's property</param>
+		/// <param name="editorPropertyName">The property on the edit control that will update the unit's property</param>
+		/// <param name="sortOrder">The order of this editor</param>
+		public EditableAttribute(Type editorType, string editorPropertyName)
+		{
+			ControlType = editorType;
+			ControlPropertyName = editorPropertyName;
+		}
+
 		#endregion
 
 		#region Methods

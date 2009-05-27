@@ -28,6 +28,7 @@ namespace Zeus
 		private string _name;
 		private DateTime? _expires;
 		private IList<ContentItem> _children = new List<ContentItem>();
+		private IList<ContentItem> _translations = new List<ContentItem>();
 		private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
 		private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
 		private string _url;
@@ -138,6 +139,13 @@ namespace Zeus
 		{
 			get { return _children; }
 			set { _children = value; }
+		}
+
+		/// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
+		public virtual IList<ContentItem> Translations
+		{
+			get { return _translations; }
+			set { _translations = value; }
 		}
 
 		#endregion

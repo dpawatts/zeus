@@ -12,6 +12,10 @@ namespace Zeus.Design.Editors
 		{
 		}
 
+		public HtmlTextBoxEditorAttribute()
+		{
+		}
+
 		public bool DomainAbsoluteUrls { get; set; }
 		public string RootHtmlElementID { get; set; }
 

@@ -170,6 +170,7 @@ namespace Zeus.Design.Editors
 		protected virtual Control AddPanel(Control container)
 		{
 			HtmlGenericControl detailContainer = new HtmlGenericControl("div");
+			detailContainer.ID = "editDetail" + Name;
 			detailContainer.Attributes["class"] = "editDetail";
 			container.Controls.Add(detailContainer);
 			return detailContainer;
