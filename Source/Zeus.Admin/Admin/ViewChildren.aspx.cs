@@ -19,6 +19,17 @@ namespace Zeus.Admin
 			base.OnInit(e);
 		}
 
+		protected override void OnLoad(EventArgs e)
+		{
+			if (!IsPostBack)
+			{
+				zeusItemGridView.DataSource = SelectedItem.GetChildren();
+				zeusItemGridView.DataBind();
+			}
+
+			base.OnLoad(e);
+		}
+
 		protected void btnRefreshGrid_Click(object sender, EventArgs e)
 		{
 			zeusItemGridView.DataBind();

@@ -10,20 +10,55 @@ namespace Zeus.Admin
 {
 	public partial class ViewDetail : AdminPage
 	{
+		private string Discriminator
+		{
+			get { return Request.QueryString["discriminator"]; }
+		}
+
+		private ContentType TypeDefinition
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(Discriminator))
+					return Zeus.Context.Current.ContentTypes[Discriminator];
+				if (SelectedItem != null)
+					return Zeus.Context.Current.ContentTypes[SelectedItem.GetType()];
+				return null;
+			}
+		}
+
 		protected override void OnInit(EventArgs e)
 		{
-			/*if (Request.QueryString["discriminator"] != null)
+			if (Discriminator != null)
 			{
-				string discriminator = Request.QueryString["discriminator"];
-				zeusItemEditView.Discriminator = discriminator;
-				zeusItemEditView.ParentPath = this.SelectedItem.Path;
-				this.Title = "New " + zeusItemEditView.CurrentItemDefinition.ContentTypeAttribute.Title;
+				Title = "New " + TypeDefinition.Title;
 			}
 			else
 			{
-				zeusItemEditView.CurrentItem = this.SelectedItem;
-				this.Title = "Edit \"" + zeusItemEditView.CurrentItem.Title + "\"";
-			}*/
+				if (SelectedLanguageCode != null)
+				{
+					ContentItem translatedItem = Engine.LanguageManager.GetTranslationDirect(SelectedItem, SelectedLanguageCode);
+					if (translatedItem == null)
+					{
+						Title = string.Format("New Translation of '{0}'", SelectedItem.Title);
+						ContentItem selectedItem = Engine.ContentTypes.CreateInstance(SelectedItem.GetType(), SelectedItem.Parent);
+						selectedItem.Language = SelectedLanguageCode;
+						selectedItem.TranslationOf = SelectedItem;
+						selectedItem.Parent = null;
+						zeusItemEditView.CurrentItem = selectedItem;
+					}
+					else
+					{
+						zeusItemEditView.CurrentItem = translatedItem;
+						Title = "Edit \"" + translatedItem.Title + "\"";
+					}
+				}
+				else
+				{
+					zeusItemEditView.CurrentItem = SelectedItem;
+					Title = "Edit \"" + SelectedItem.Title + "\"";
+				}
+			}
 
 			base.OnInit(e);
 		}

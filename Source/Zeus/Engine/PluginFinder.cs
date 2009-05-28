@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Isis;
 using Isis.ComponentModel;
@@ -20,7 +22,23 @@ namespace Zeus.Engine
 		{
 			List<TPlugin> plugins = new List<TPlugin>();
 			foreach (Assembly assembly in _assemblyFinder.GetAssemblies())
-				plugins.AddRange(FindPluginsIn(assembly));
+			{
+				try
+				{
+					plugins.AddRange(FindPluginsIn(assembly));
+				}
+				catch (ReflectionTypeLoadException ex)
+				{
+					string loaderErrors = string.Empty;
+					foreach (Exception loaderEx in ex.LoaderExceptions)
+					{
+						Trace.TraceError(loaderEx.ToString());
+						loaderErrors += ", " + loaderEx.Message;
+					}
+
+					throw new ZeusException("Error getting types from assembly " + assembly.FullName + loaderErrors, ex);
+				}
+			}
 			return plugins;
 		}
 

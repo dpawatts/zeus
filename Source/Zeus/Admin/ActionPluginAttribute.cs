@@ -68,9 +68,14 @@ namespace Zeus.Admin
 
 		#region Generated properties
 
+		private Assembly ContextAssembly
+		{
+			get { return (string.IsNullOrEmpty(PageResourceAssembly)) ? ContextType.Assembly : Assembly.Load(PageResourceAssembly); }
+		}
+
 		public string ImageUrl
 		{
-			get { return WebResourceUtility.GetUrl(ContextType, ImageResourceName); }
+			get { return WebResourceUtility.GetUrl(ContextAssembly.GetTypes()[0], ImageResourceName); }
 		}
 
 		public string PageUrl
@@ -81,7 +86,7 @@ namespace Zeus.Admin
 				switch (Type)
 				{
 					case UrlType.Path :
-						result = Context.Current.Resolve<IAdminManager>().GetEmbeddedResourceUrl(ContextType.Assembly, PageResourcePath);
+						result = Context.Current.Resolve<IAdminManager>().GetEmbeddedResourceUrl(ContextAssembly, PageResourcePath);
 						result = new Url(result).AppendQuery(QueryString).ToString();
 						break;
 					case UrlType.Javascript :

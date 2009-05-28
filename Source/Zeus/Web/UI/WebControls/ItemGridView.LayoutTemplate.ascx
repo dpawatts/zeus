@@ -7,8 +7,8 @@
 	<div class="pageNo">
 		<asp:DataPager runat="server" ID="dpgEntities1" PageSize="25">
 			<Fields>
-				<isis:GooglePagerField NextPageImageUrl="~/Admin/Assets/Images/View/button_arrow_right.gif"
-					PreviousPageImageUrl="~/Admin/Assets/Images/View/button_arrow_left.gif" />
+				<isis:GooglePagerField NextPageImageUrl="/webResources/zeus/admin/Assets/Images/View/button_arrow_right.gif"
+					PreviousPageImageUrl="/webResources/zeus/admin/Assets/Images/View/button_arrow_left.gif" />
 			</Fields>
 		</asp:DataPager>
 	</div>
@@ -17,7 +17,7 @@
 </div>
 <table runat="server" id="dataTable" class="tb">
 	<tr class="titles">
-		<th class="check"><img src="/admin/assets/images/view/littleTick.gif" border="0" alt="Tick" /></th>
+		<th class="check"><img src="/webResources/zeus/admin/assets/images/view/littleTick.gif" border="0" alt="Tick" /></th>
 		<th class="edit"><!-- --></th>
 	</tr>
 	<tr runat="server" ID="itemPlaceholder" />
@@ -33,8 +33,8 @@
 	<div class="pageNo">
 		<asp:DataPager runat="server" ID="dpgEntities2" PageSize="25">
 			<Fields>
-				<isis:GooglePagerField NextPageImageUrl="~/Admin/Assets/Images/View/button_arrow_right.gif"
-					PreviousPageImageUrl="~/Admin/Assets/Images/View/button_arrow_left.gif" />
+				<isis:GooglePagerField NextPageImageUrl="/webResources/zeus/admin/Assets/Images/View/button_arrow_right.gif"
+					PreviousPageImageUrl="/webResources/zeus/admin/Assets/Images/View/button_arrow_left.gif" />
 			</Fields>
 		</asp:DataPager>
 	</div>

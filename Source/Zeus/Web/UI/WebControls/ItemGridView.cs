@@ -273,7 +273,7 @@ namespace Zeus.Web.UI.WebControls
 				HyperLink link = (HyperLink) sender;
 				ListViewDataItem listViewDataItem = (ListViewDataItem) link.NamingContainer;
 				link.ToolTip = string.Format("Details for {0}", DataBinder.Eval(listViewDataItem.DataItem, "Title"));
-				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=700",
+				link.NavigateUrl = string.Format("ViewDetail.aspx?selected={0}&TB_iframe=true&height=400&width=800",
 					HttpUtility.UrlEncode(DataBinder.Eval(listViewDataItem.DataItem, "Path").ToString()));
 			}
 		}
