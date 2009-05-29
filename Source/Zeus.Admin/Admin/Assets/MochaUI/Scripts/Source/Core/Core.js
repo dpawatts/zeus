@@ -46,89 +46,89 @@ var MUI = MochaUI = new Hash({
 MUI.files[MUI.path.source + 'Core/Core.js'] = 'loaded';
 
 MUI.extend({
-	
+
 	Windows: {
 		instances: new Hash()
 	},
 
 	ieSupport: 'excanvas',  // Makes it easier to switch between Excanvas and Moocanvas for testing	
-	
+
 	/*
 	
 	Function: updateContent
-		Replace the content of a window or panel.
+	Replace the content of a window or panel.
 		
 	Arguments:
-		updateOptions - (object)
+	updateOptions - (object)
 	
 	updateOptions:
-		element - The parent window or panel.
-		childElement - The child element of the window or panel recieving the content.
-		method - ('get', or 'post') The way data is transmitted.
-		data - (hash) Data to be transmitted
-		title - (string) Change this if you want to change the title of the window or panel.
-		content - (string or element) An html loadMethod option.
-		loadMethod - ('html', 'xhr', or 'iframe')
-		url - Used if loadMethod is set to 'xhr' or 'iframe'.
-		scrollbars - (boolean)		
-		padding - (object)
-		onContentLoaded - (function)
+	element - The parent window or panel.
+	childElement - The child element of the window or panel recieving the content.
+	method - ('get', or 'post') The way data is transmitted.
+	data - (hash) Data to be transmitted
+	title - (string) Change this if you want to change the title of the window or panel.
+	content - (string or element) An html loadMethod option.
+	loadMethod - ('html', 'xhr', or 'iframe')
+	url - Used if loadMethod is set to 'xhr' or 'iframe'.
+	scrollbars - (boolean)		
+	padding - (object)
+	onContentLoaded - (function)
 
-	*/	
-	updateContent: function(options){
+	*/
+	updateContent: function(options) {
 
 		var options = $extend({
-			element:      null,
+			element: null,
 			childElement: null,
-			method:       null,
-			data:         null,
-			title:        null,
-			content:      null,
-			loadMethod:   null,
-			url:          null,
-			scrollbars:   null,			
-			padding:      null,
-			require:      {},
+			method: null,
+			data: null,
+			title: null,
+			content: null,
+			loadMethod: null,
+			url: null,
+			scrollbars: null,
+			padding: null,
+			require: {},
 			onContentLoaded: $empty
-		}, options);		
-	
+		}, options);
+
 		options.require = $extend({
 			css: [], images: [], js: [], onload: null
-		}, options.require);		
-		
-		var args = {};
-				
-		if (!options.element) return;
-		var element = options.element;		
+		}, options.require);
 
-		if (MUI.Windows.instances.get(element.id)){
-			args.recipient = 'window';		
+		var args = {};
+
+		if (!options.element) return;
+		var element = options.element;
+
+		if (MUI.Windows.instances.get(element.id)) {
+			args.recipient = 'window';
 		}
 		else {
-			args.recipient = 'panel';		
+			args.recipient = 'panel';
 		}
 
 		var instance = element.retrieve('instance');
-		if (options.title) instance.titleEl.set('html', options.title);			
+		if (options.title) instance.titleEl.set('html', options.title);
 
 		var contentEl = instance.contentEl;
-		args.contentContainer = options.childElement != null ? options.childElement : instance.contentEl;		
+		args.contentContainer = options.childElement != null ? options.childElement : instance.contentEl;
 		var contentWrapperEl = instance.contentWrapperEl;
 
-		if (!options.loadMethod){
-			if (!instance.options.loadMethod){
-				if (!options.url){
+		if (!options.loadMethod) {
+			if (!instance.options.loadMethod) {
+				if (!options.url) {
 					options.loadMethod = 'html';
 				}
 				else {
 					options.loadMethod = 'xhr';
 				}
 			}
-			else {	
+			else {
 				options.loadMethod = instance.options.loadMethod;
 			}
-		}	
-				
+		}
+
 		// Set scrollbars if loading content in main content container.
 		// Always use 'hidden' for iframe windows
 		var scrollbars = options.scrollbars || instance.options.scrollbars;
@@ -136,7 +136,7 @@ MUI.extend({
 			contentWrapperEl.setStyles({
 				'overflow': scrollbars != false && options.loadMethod != 'iframe' ? 'auto' : 'hidden'
 			});
-		}		
+		}
 
 		if (options.padding != null) {
 			contentEl.setStyles({
@@ -149,57 +149,57 @@ MUI.extend({
 
 		// Remove old content.
 		if (args.contentContainer == contentEl) {
-			contentEl.empty().show();			
+			contentEl.empty().show();
 			// Panels are not loaded into the padding div, so we remove them separately.
 			contentEl.getAllNext('.column').destroy();
 			contentEl.getAllNext('.columnHandle').destroy();
 		}
-		
-		args.onContentLoaded = function(){
-			
-			if (options.require.js.length || typeof options.require.onload == 'function'){
+
+		args.onContentLoaded = function() {
+
+			if (options.require.js.length || typeof options.require.onload == 'function') {
 				new MUI.Require({
 					js: options.require.js,
-					onload: function(){
-						if (Browser.Engine.presto){
+					onload: function() {
+						if (Browser.Engine.presto) {
 							options.require.onload.delay(100);
 						}
 						else {
 							options.require.onload();
 						}
 						options.onContentLoaded ? options.onContentLoaded() : instance.fireEvent('onContentLoaded', element);
-					}.bind(this)		
+					} .bind(this)
 				});
-			}		
+			}
 			else {
 				options.onContentLoaded ? options.onContentLoaded() : instance.fireEvent('onContentLoaded', element);
-			}			
-		
+			}
+
 		};
-		
-		if (options.require.css.length || options.require.images.length){
+
+		if (options.require.css.length || options.require.images.length) {
 			new MUI.Require({
 				css: options.require.css,
 				images: options.require.images,
-				onload: function(){
+				onload: function() {
 					this.loadSelect(instance, options, args);
-				}.bind(this)		
+				} .bind(this)
 			});
-		}		
+		}
 		else {
 			this.loadSelect(instance, options, args);
 		}
 	},
-	
-	loadSelect: function(instance, options, args){					
-				
+
+	loadSelect: function(instance, options, args) {
+
 		// Load new content.
-		switch(options.loadMethod){
-			case 'xhr':			
+		switch (options.loadMethod) {
+			case 'xhr':
 				this.updateContentXHR(instance, options, args);
 				break;
 			case 'iframe':
-				this.updateContentIframe(instance, options, args);				
+				this.updateContentIframe(instance, options, args);
 				break;
 			case 'html':
 			default:
@@ -208,8 +208,8 @@ MUI.extend({
 		}
 
 	},
-	
-	updateContentXHR: function(instance, options, args){
+
+	updateContentXHR: function(instance, options, args) {
 		var contentEl = instance.contentEl;
 		var contentContainer = args.contentContainer;
 		var onContentLoaded = args.onContentLoaded;
@@ -217,48 +217,48 @@ MUI.extend({
 			url: options.url,
 			update: contentContainer,
 			method: options.method != null ? options.method : 'get',
-			data: options.data != null ? new Hash(options.data).toQueryString() : '', 
+			data: options.data != null ? new Hash(options.data).toQueryString() : '',
 			evalScripts: instance.options.evalScripts,
-			evalResponse: instance.options.evalResponse,				
-			onRequest: function(){
-				if (args.recipient == 'window' && contentContainer == contentEl){
+			evalResponse: instance.options.evalResponse,
+			onRequest: function() {
+				if (args.recipient == 'window' && contentContainer == contentEl) {
 					instance.showSpinner();
 				}
-				else if (args.recipient == 'panel' && contentContainer == contentEl && $('spinner')){
-					$('spinner').show();	
+				else if (args.recipient == 'panel' && contentContainer == contentEl && $('spinner')) {
+					$('spinner').show();
 				}
-			}.bind(this),
-			onFailure: function(response){
-				if (contentContainer == contentEl){
+			} .bind(this),
+			onFailure: function(response) {
+				if (contentContainer == contentEl) {
 					var getTitle = new RegExp("<title>[\n\r\s]*(.*)[\n\r\s]*</title>", "gmi");
 					var error = getTitle.exec(response.responseText);
-					if (!error) error = 'Unknown';							 
+					if (!error) error = 'Unknown';
 					contentContainer.set('html', '<h3>Error: ' + error[1] + '</h3>');
-					if (args.recipient == 'window'){
+					if (args.recipient == 'window') {
 						instance.hideSpinner();
-					}							
-					else if (args.recipient == 'panel' && $('spinner')){
+					}
+					else if (args.recipient == 'panel' && $('spinner')) {
 						$('spinner').hide();
-					}						
+					}
 				}
-			}.bind(this),
-			onSuccess: function(){
-				if (contentContainer == contentEl){
-					if (args.recipient == 'window') instance.hideSpinner();							
-					else if (args.recipient == 'panel' && $('spinner')) $('spinner').hide();							
+			} .bind(this),
+			onSuccess: function() {
+				if (contentContainer == contentEl) {
+					if (args.recipient == 'window') instance.hideSpinner();
+					else if (args.recipient == 'panel' && $('spinner')) $('spinner').hide();
 				}
 				Browser.Engine.trident4 ? onContentLoaded.delay(750) : onContentLoaded();
-			}.bind(this),
-			onComplete: function(){}.bind(this)
+			} .bind(this),
+			onComplete: function() { } .bind(this)
 		}).send();
 	},
-	
-	updateContentIframe: function(instance, options, args){
+
+	updateContentIframe: function(instance, options, args) {
 		var contentEl = instance.contentEl;
 		var contentContainer = args.contentContainer;
 		var contentWrapperEl = instance.contentWrapperEl;
-		var onContentLoaded = args.onContentLoaded;			
-		if ( instance.options.contentURL == '' || contentContainer != contentEl) {
+		var onContentLoaded = args.onContentLoaded;
+		if (instance.options.contentURL == '' || contentContainer != contentEl) {
 			return;
 		}
 		instance.iframeEl = new Element('iframe', {
@@ -272,63 +272,63 @@ MUI.extend({
 			'scrolling': 'auto',
 			'styles': {
 				'height': contentWrapperEl.offsetHeight - contentWrapperEl.getStyle('border-top').toInt() - contentWrapperEl.getStyle('border-bottom').toInt(),
-				'width': instance.panelEl ? contentWrapperEl.offsetWidth - contentWrapperEl.getStyle('border-left').toInt() - contentWrapperEl.getStyle('border-right').toInt() : '100%'	
+				'width': instance.panelEl ? contentWrapperEl.offsetWidth - contentWrapperEl.getStyle('border-left').toInt() - contentWrapperEl.getStyle('border-right').toInt() : '100%'
 			}
 		}).injectInside(contentEl);
 
 		// Add onload event to iframe so we can hide the spinner and run onContentLoaded()
 		instance.iframeEl.addEvent('load', function(e) {
-			if (args.recipient == 'window') instance.hideSpinner();					
+			if (args.recipient == 'window') instance.hideSpinner();
 			else if (args.recipient == 'panel' && contentContainer == contentEl && $('spinner')) $('spinner').hide();
 			Browser.Engine.trident4 ? onContentLoaded.delay(50) : onContentLoaded();
-		}.bind(this));
-		if (args.recipient == 'window') instance.showSpinner();				
+		} .bind(this));
+		if (args.recipient == 'window') instance.showSpinner();
 		else if (args.recipient == 'panel' && contentContainer == contentEl && $('spinner')) $('spinner').show();
 	},
-	
-	updateContentHTML: function(instance, options, args){
+
+	updateContentHTML: function(instance, options, args) {
 		var contentEl = instance.contentEl;
 		var contentContainer = args.contentContainer;
-		var onContentLoaded = args.onContentLoaded;			
+		var onContentLoaded = args.onContentLoaded;
 		var elementTypes = new Array('element', 'textnode', 'whitespace', 'collection');
-				
-		if (elementTypes.contains($type(options.content))){
+
+		if (elementTypes.contains($type(options.content))) {
 			options.content.inject(contentContainer);
 		} else {
 			contentContainer.set('html', options.content);
-		}				
-		if (contentContainer == contentEl){
-			if (args.recipient == 'window') instance.hideSpinner();					
-			else if (args.recipient == 'panel' && $('spinner')) $('spinner').hide();									
+		}
+		if (contentContainer == contentEl) {
+			if (args.recipient == 'window') instance.hideSpinner();
+			else if (args.recipient == 'panel' && $('spinner')) $('spinner').hide();
 		}
 		Browser.Engine.trident4 ? onContentLoaded.delay(50) : onContentLoaded();
 	},
-	
+
 	/*
 	
 	Function: reloadIframe
-		Reload an iframe. Fixes an issue in Firefox when trying to use location.reload on an iframe that has been destroyed and recreated.
+	Reload an iframe. Fixes an issue in Firefox when trying to use location.reload on an iframe that has been destroyed and recreated.
 
 	Arguments:
-		iframe - This should be both the name and the id of the iframe.
+	iframe - This should be both the name and the id of the iframe.
 
 	Syntax:
-		(start code)
-		MUI.reloadIframe(element);
-		(end)
+	(start code)
+	MUI.reloadIframe(element);
+	(end)
 
 	Example:
-		To reload an iframe from within another iframe:
-		(start code)
-		parent.MUI.reloadIframe('myIframeName');
-		(end)
+	To reload an iframe from within another iframe:
+	(start code)
+	parent.MUI.reloadIframe('myIframeName');
+	(end)
 
 	*/
-	reloadIframe: function(iframe){
-		Browser.Engine.gecko ? $(iframe).src = $(iframe).src : top.frames[iframe].location.reload(true);		
+	reloadIframe: function(iframe) {
+		Browser.Engine.gecko ? $(iframe).src = $(iframe).src : top.frames[iframe].location.reload(true);
 	},
-	
-	roundedRect: function(ctx, x, y, width, height, radius, rgb, a){
+
+	roundedRect: function(ctx, x, y, width, height, radius, rgb, a) {
 		ctx.fillStyle = 'rgba(' + rgb.join(',') + ',' + a + ')';
 		ctx.beginPath();
 		ctx.moveTo(x, y + radius);
@@ -340,10 +340,10 @@ MUI.extend({
 		ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
 		ctx.lineTo(x + radius, y);
 		ctx.quadraticCurveTo(x, y, x, y + radius);
-		ctx.fill(); 
+		ctx.fill();
 	},
-	
-	triangle: function(ctx, x, y, width, height, rgb, a){
+
+	triangle: function(ctx, x, y, width, height, rgb, a) {
 		ctx.beginPath();
 		ctx.moveTo(x + width, y);
 		ctx.lineTo(x, y + height);
@@ -352,76 +352,76 @@ MUI.extend({
 		ctx.fillStyle = 'rgba(' + rgb.join(',') + ',' + a + ')';
 		ctx.fill();
 	},
-	
-	circle: function(ctx, x, y, diameter, rgb, a){
+
+	circle: function(ctx, x, y, diameter, rgb, a) {
 		ctx.beginPath();
-		ctx.arc(x, y, diameter, 0, Math.PI*2, true);
+		ctx.arc(x, y, diameter, 0, Math.PI * 2, true);
 		ctx.fillStyle = 'rgba(' + rgb.join(',') + ',' + a + ')';
 		ctx.fill();
 	},
-	
-	notification: function(message){
-			new MUI.Window({
-				loadMethod: 'html',
-				closeAfter: 1500,
-				type: 'notification',
-				addClass: 'notification',
-				content: message,
-				width: 220,
-				height: 40,
-				y: 53,
-				padding:  { top: 10, right: 12, bottom: 10, left: 12 },
-				shadowBlur: 5	
-			});
+
+	notification: function(message) {
+		new MUI.Window({
+			loadMethod: 'html',
+			closeAfter: 1500,
+			type: 'notification',
+			addClass: 'notification',
+			content: message,
+			width: 220,
+			height: 40,
+			y: 53,
+			padding: { top: 10, right: 12, bottom: 10, left: 12 },
+			shadowBlur: 5
+		});
 	},
-	
+
 	/*
 	  	
 	Function: toggleEffects
-		Turn effects on and off
+	Turn effects on and off
 
 	*/
-	toggleAdvancedEffects: function(link){
+	toggleAdvancedEffects: function(link) {
 		if (MUI.options.advancedEffects == false) {
 			MUI.options.advancedEffects = true;
-			if (link){
+			if (link) {
 				this.toggleAdvancedEffectsLink = new Element('div', {
 					'class': 'check',
 					'id': 'toggleAdvancedEffects_check'
 				}).inject(link);
-			}			
+			}
 		}
 		else {
 			MUI.options.advancedEffects = false;
 			if (this.toggleAdvancedEffectsLink) {
 				this.toggleAdvancedEffectsLink.destroy();
-			}		
+			}
 		}
 	},
 	/*
 	  	
 	Function: toggleStandardEffects
-		Turn standard effects on and off
+	Turn standard effects on and off
 
 	*/
-	toggleStandardEffects: function(link){
+	toggleStandardEffects: function(link) {
 		if (MUI.options.standardEffects == false) {
 			MUI.options.standardEffects = true;
-			if (link){
+			if (link) {
 				this.toggleStandardEffectsLink = new Element('div', {
 					'class': 'check',
 					'id': 'toggleStandardEffects_check'
 				}).inject(link);
-			}			
+			}
 		}
 		else {
 			MUI.options.standardEffects = false;
 			if (this.toggleStandardEffectsLink) {
 				this.toggleStandardEffectsLink.destroy();
-			}		
+			}
 		}
-	},			
-	
+	},
+
 	/*
 	
 	The underlay is inserted directly under windows when they are being dragged or resized
@@ -429,7 +429,7 @@ MUI.extend({
 	underneath the window.
 	
 	*/
-	underlayInitialize: function(){
+	underlayInitialize: function() {
 		var windowUnderlay = new Element('div', {
 			'id': 'windowUnderlay',
 			'styles': {
@@ -439,7 +439,7 @@ MUI.extend({
 			}
 		}).inject(document.body);
 	},
-	setUnderlaySize: function(){
+	setUnderlaySize: function() {
 		$('windowUnderlay').setStyle('height', parent.getCoordinates().height);
 	}
 });

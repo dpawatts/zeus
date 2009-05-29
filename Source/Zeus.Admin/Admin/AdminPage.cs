@@ -12,21 +12,27 @@ namespace Zeus.Admin
 	{
 		#region Fields
 
-		private const string RefreshNavigationFormat = @"
-if (window.top.zeus)
-	window.top.zeus.refreshNavigation('{0}');
-else
-	window.location = '{1}';";
-		private const string RefreshPreviewFormat = @"
-if (window.top.zeus)
-	window.top.zeus.refreshPreview('{1}');
-else
-	window.location = '{1}';";
-		private const string RefreshBothFormat = @"
-if (window.top.zeus)
-	window.top.zeus.refresh('{0}', '{1}');
-else
-	window.location = '{1}';";
+		private const string REFRESH_NAVIGATION_FORMAT = @"
+$(document).ready(function() {{
+	if (window.top.zeus)
+		window.top.zeus.refreshNavigation('{0}');
+	else
+		window.location = '{1}';
+}});";
+		private const string REFRESH_PREVIEW_FORMAT = @"
+$(document).ready(function() {{
+	if (window.top.zeus)
+		window.top.zeus.refreshPreview('{1}');
+	else
+		window.location = '{1}';
+}});";
+		private const string REFRESH_BOTH_FORMAT = @"
+$(document).ready(function() {{
+	if (window.top.zeus)
+		window.top.zeus.refresh('{0}', '{1}');
+	else
+		window.location = '{1}';
+}});";
 
 		#endregion
 
@@ -102,13 +108,13 @@ else
 			switch (frame)
 			{
 				case AdminFrame.Preview:
-					script = RefreshPreviewFormat;
+					script = REFRESH_PREVIEW_FORMAT;
 					break;
 				case AdminFrame.Navigation:
-					script = RefreshNavigationFormat;
+					script = REFRESH_NAVIGATION_FORMAT;
 					break;
 				case AdminFrame.Both:
-					script = RefreshBothFormat;
+					script = REFRESH_BOTH_FORMAT;
 					break;
 			}
 			script = string.Format(script,

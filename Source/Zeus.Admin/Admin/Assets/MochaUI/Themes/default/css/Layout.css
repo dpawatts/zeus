@@ -35,7 +35,7 @@ body {
 	cursor: default; /* Fix for issue in IE7. IE7 wants to use the I-bar text cursor */
 }
 
-#desktopHeader {
+/*#desktopHeader {
 	background: #f2f2f2;
 }
 
@@ -96,7 +96,7 @@ body {
 
 #topNav a:hover {
 	text-decoration: none;
-}
+}*/
 
 /* Navbar */
 

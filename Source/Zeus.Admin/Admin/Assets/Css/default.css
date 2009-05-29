@@ -58,7 +58,7 @@ form {
 
 /************************* header *********************/
 
-#header {
+#desktopTitlebar {
 	background:transparent url(<%= WebResource("Zeus.Admin.Assets.Images.Theme.bannerBg.gif") %>) repeat-x scroll left top;
 	height:54px;
 }
@@ -69,7 +69,7 @@ form {
 	width: 395px;
 }
 
-#header img {
+#desktopTitlebar img {
 	display:block;
 	float:left;
 	height:39px;
@@ -77,19 +77,19 @@ form {
 	width:38px;
 }
 
-#header p {
+#desktopTitlebar p {
 	font-family: arial;
 	color: #fff;
 	font-size: 14px;
 	letter-spacing: 0px;
 }
 
-#header p span {
+#desktopTitlebar p span {
 	font-size: 16px;
 	font-weight: bold;
 }
 
-#header #logOut {
+#desktopTitlebar #logOut {
 	display: block;
 	float: right;
 	width: 99px;
@@ -99,7 +99,7 @@ form {
 	margin: 13px 10px 0px 0px; 
 }
 
-#header #loggedAs {
+#desktopTitlebar #loggedAs {
 	margin: 20px 10px 0 0;
 	display: block;
 	float: right;
@@ -107,11 +107,11 @@ form {
 	width: 272px;
 }
 
-#header #logOut:hover {
+#desktopTitlebar #logOut:hover {
 	background: url('<%= WebResource("Zeus.Admin.Assets.Images.Theme.logOut.gif") %>') bottom left no-repeat;
 }
 
-#header #title {
+#desktopTitlebar #title {
 	float: left;
 	display: block;
 	width: 322px;

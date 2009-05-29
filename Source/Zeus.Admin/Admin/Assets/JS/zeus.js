@@ -57,7 +57,7 @@ frameManager.prototype = {
 	},
 	refreshNavigation: function(navigationUrl) {
 		top.MUI.updateContent({
-			element: top.$('sidePanel1'),
+			element: top.$('treePanel'),
 			loadMethod: 'iframe',
 			url: navigationUrl,
 			title: "Content Tree",

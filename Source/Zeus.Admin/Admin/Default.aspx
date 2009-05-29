@@ -20,17 +20,24 @@
 	
 	<form runat="server">
 	<div id="desktop">
-		<div id="header" class="clearfix">
-			<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
-			<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
-			<div id="headerRight">
-				<isis:LoginStatus runat="server" ID="logOut" />
-				<p id="loggedAs">You are logged in as <isis:LoginName runat="server" /></p>
+		<div id="desktopHeader">
+			<div id="desktopTitlebarWrapper">
+				<div id="desktopTitlebar">
+					<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
+					<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
+					<div id="headerRight">
+						<isis:LoginStatus runat="server" ID="logOut" />
+						<p id="loggedAs">You are logged in as <isis:LoginName runat="server" /></p>
+					</div>
+				</div>
 			</div>
-		</div>
 		
-		<div id="toolbar">
-			<asp:PlaceHolder runat="server" ID="plcToolbar" />
+			<div id="desktopNavbar">	
+				<asp:PlaceHolder runat="server" ID="plcToolbar" />
+				<div class="toolbox divider">
+					<div id="spinnerWrapper"><!--div id="spinner" style="display: none;"/--></div>
+				</div>
+			</div><!-- desktopNavbar end -->
 		</div>
 		
 		<div id="dockWrapper">
@@ -43,14 +50,11 @@
 		
 		<div id="pageWrapper"></div>
 		
-		<!--div id="splitter">
-			<div id="LeftPane">
-				<iframe id="navigation" src="navigation/tree.aspx" frameborder="0" name="navigation" width="25%" height="500"></iframe>
+		<div id="desktopFooterWrapper">
+			<div id="desktopFooter">			
+				© 2009 <a href="http://www.sitdap.com/" target="_blank">Sound in Theory Ltd</a></a>
 			</div>
-			<div id="RightPane">
-				<iframe id="preview" src="/default.aspx" frameborder="0" name="preview" width="75%" height="500"></iframe>
-			</div>
-		</div-->
+		</div>
 	</div>
 	</form>
 </body>

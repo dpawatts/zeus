@@ -94,7 +94,7 @@ initializeColumns = function() {
 	
 	// Add panels to first side column
 	new MUI.Panel({
-		id: 'tree-panel',
+		id: 'treePanel',
 		title: 'Content Tree',
 		column: 'sideColumn1',
 		loadMethod: 'iframe',
