@@ -181,6 +181,8 @@
     <Compile Include="Design\Editors\MultiImageDataUploadEditorAttribute.cs" />
     <Compile Include="FileSystem\Images\ContentItem.extensions.cs" />
     <Compile Include="FileSystem\Images\Image.cs" />
+    <Compile Include="FileSystem\Images\ImageCachingService.cs" />
+    <Compile Include="FileSystem\Images\ImageCachingServiceInitializer.cs" />
     <Compile Include="FileSystem\Images\ImageData.cs" />
     <Compile Include="FileSystem\Images\ZeusImageDataInCollectionSource.cs" />
     <Compile Include="FileSystem\Images\ZeusImageDataSource.cs" />

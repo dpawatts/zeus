@@ -23,12 +23,12 @@ namespace Zeus.Design.Editors
 			{
 				if (!detailCollectionEditor.DeletedIndexes.Contains(i))
 				{
-					object existingDetail = (detailCollection.Count > i) ? detailCollection[i] : null;
+					PropertyData existingDetail = (detailCollection.Count > i) ? detailCollection.Details[i] : null;
 					object newDetail;
 					CreateOrUpdateDetailCollectionItem(existingDetail, detailCollectionEditor.Editors[i], out newDetail);
 					if (newDetail != null)
 						if (existingDetail != null)
-							detailCollection[i] = newDetail;
+							existingDetail.Value = newDetail;
 						else
 							detailCollection.Add(newDetail);
 				}
