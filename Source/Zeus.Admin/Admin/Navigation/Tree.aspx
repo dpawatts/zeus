@@ -46,13 +46,7 @@
 						.replace("{action}", action);
 					a = a.attr("href", clickAction);
 					a.click(function() {
-						top.MUI.updateContent({
-							element: top.$('mainPanel'),
-							loadMethod: 'iframe',
-							url: $(this).attr("href"),
-							title: $(this).text(),
-							padding: { top: 0, right: 0, bottom: 0, left: 0 }
-						});
+						top.zeus.reloadContentPanel($(this).text(), $(this).attr("href"));
 						return false;
 					});
 				}
@@ -110,13 +104,7 @@
 				autoclose: false,
 				afterClick: function(node) {
 					//top.preview.location.href = $("a:first", node).attr("href");
-					top.MUI.updateContent({
-						element: top.$('mainPanel'),
-						loadMethod: 'iframe',
-						url: $("a:first", node).attr("href"),
-						title: 'Preview',
-						padding: { top: 0, right: 0, bottom: 0, left: 0 }
-					});	
+					top.zeus.reloadContentPanel('Preview', $("a:first", node).attr("href"));
 					//alert("text-"+$('span:first',node).text());
 				},
 				afterDblClick: function(node) {
@@ -128,13 +116,7 @@
 				afterMove: function(destination, source, pos) {
 					var sourcePath = $("span:first", source).attr('data-path');
 					var destinationPath = $("span:first", destination).attr('data-path');
-					top.MUI.updateContent({
-						element: top.$('mainPanel'),
-						loadMethod: 'iframe',
-						url: "/admin/move.aspx?selected=" + sourcePath + "&destination=" + destinationPath + "&pos=" + pos,
-						title: 'Move',
-						padding: { top: 0, right: 0, bottom: 0, left: 0 }
-					});
+					top.zeus.reloadContentPanel('Move', "/admin/move.aspx?selected=" + sourcePath + "&destination=" + destinationPath + "&pos=" + pos);
 				},
 				afterAjax: function() {
 					initContextMenu();

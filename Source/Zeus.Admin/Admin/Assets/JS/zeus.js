@@ -20,61 +20,31 @@ var zeustoggle = {
 // DEFAULT
 var frameManager = function() { }
 frameManager.prototype = {
-	memorize: function(selected, action) {
-		document.getElementById("memory").value = selected;
-		document.getElementById("action").value = action;
-	},
-	/*initFrames: function() {
-	///	<summary>
-	///		Initialises the navigation and preview frames, with a splitter in the middle
-	///	</summary>
-	jQuery("#splitter").splitter({
-	type: 'v',
-	sizeLeft: 200
-	});
-	var t = this;
-	jQuery(document).ready(function() {
-	jQuery(window).bind("resize", function() {
-	t.repaint();
-	}).trigger("resize");
-	});
-	},
-	repaint: function() {
-	jQuery("#splitter").trigger("resize");
-	jQuery("#splitter").height(this.contentHeight());
-	jQuery("#splitter *").height(this.contentHeight());
-	},
-	contentHeight: function() {
-	return document.documentElement.clientHeight - (jQuery.browser.msie ? 60 : 60);
-	},*/
-	getMemory: function() {
-		var m = document.getElementById("memory");
-		return encodeURIComponent(m.value);
-	},
-	getAction: function() {
-		var a = document.getElementById("action");
-		return encodeURIComponent(a.value);
-	},
-	refreshNavigation: function(navigationUrl) {
-		top.MUI.updateContent({
-			element: top.$('treePanel'),
-			loadMethod: 'iframe',
-			url: navigationUrl,
-			title: "Content Tree",
-			padding: { top: 0, right: 0, bottom: 0, left: 0 }
-		});
-	},
-	refreshPreview: function(previewUrl) {
-		top.MUI.updateContent({
-			element: top.$('mainPanel'),
-			loadMethod: 'iframe',
-			url: previewUrl,
-			title: "Preview",
-			padding: { top: 0, right: 0, bottom: 0, left: 0 }
-		});
-	},
-	refresh: function(navigationUrl, previewUrl) {
-		this.refreshNavigation(navigationUrl);
-		this.refreshPreview(previewUrl);
-	}
+    memorize: function(selected, action) {
+        document.getElementById("memory").value = selected;
+        document.getElementById("action").value = action;
+    },
+    getMemory: function() {
+        var m = document.getElementById("memory");
+        return encodeURIComponent(m.value);
+    },
+    getAction: function() {
+        var a = document.getElementById("action");
+        return encodeURIComponent(a.value);
+    },
+    refreshNavigation: function(navigationUrl) {
+        var nav = document.getElementById('navigation');
+        nav.src = navigationUrl;
+    },
+    refreshPreview: function(previewUrl) {
+        this.reloadContentPanel('Preview', previewUrl);
+    },
+    refresh: function(navigationUrl, previewUrl) {
+        this.refreshNavigation(navigationUrl);
+        this.refreshPreview(previewUrl);
+    },
+    reloadContentPanel: function(title, url) {
+        var contentIframe = document.getElementById('content');
+        contentIframe.src = url;
+    }
 };

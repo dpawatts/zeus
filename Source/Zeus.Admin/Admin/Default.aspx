@@ -10,7 +10,38 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		window.zeus = new frameManager();
-	});
+});
+
+Ext.onReady(function() {
+
+    // NOTE: This is an example showing simple state management. During development,
+    // it is generally best to disable state management as dynamically-generated ids
+    // can change across page loads, leading to unpredictable results.  The developer
+    // should ensure that stable state ids are set for stateful components in real apps.
+    Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+
+    var viewport = new Ext.Viewport({
+        layout: 'border',
+        items: [
+                new Ext.BoxComponent({ // raw
+                    region: 'north',
+                    el: 'north',
+                    height: 59
+                }), {
+                    region: 'west',
+                    contentEl: 'west',
+                    split: true,
+                    width: 200,
+                    minSize: 175,
+                    maxSize: 400,
+                    collapsible: true
+                }, {
+                    region: 'center',
+                    contentEl: 'center'
+                }
+             ]
+    });
+});
 	</script>
 </head>
 <body>
@@ -19,43 +50,28 @@
 	</div></noscript>
 	
 	<form runat="server">
-	<div id="desktop">
-		<div id="desktopHeader">
-			<div id="desktopTitlebarWrapper">
-				<div id="desktopTitlebar">
-					<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
-					<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
-					<div id="headerRight">
-						<isis:LoginStatus runat="server" ID="logOut" />
-						<p id="loggedAs">You are logged in as <isis:LoginName runat="server" /></p>
-					</div>
-				</div>
-			</div>
+	    <div id="north">
+            <div id="header">
+			    <img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
+			    <p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
+			    <div id="headerRight">
+				    <isis:LoginStatus runat="server" ID="logOut" />
+				    <p id="loggedAs">You are logged in as <isis:LoginName runat="server" /></p>
+			    </div>
+            </div>
 		
-			<div id="desktopNavbar">	
+			<div id="toolbar">	
 				<asp:PlaceHolder runat="server" ID="plcToolbar" />
-				<div class="toolbox divider">
-					<div id="spinnerWrapper"><!--div id="spinner" style="display: none;"/--></div>
-				</div>
-			</div><!-- desktopNavbar end -->
-		</div>
-		
-		<div id="dockWrapper">
-			<div id="dock">
-				<div id="dockPlacement"></div>
-				<div id="dockAutoHide"></div>
-				<div id="dockSort"><div id="dockClear" class="clear"></div></div>
 			</div>
 		</div>
 		
-		<div id="pageWrapper"></div>
-		
-		<div id="desktopFooterWrapper">
-			<div id="desktopFooter">			
-				© 2009 <a href="http://www.sitdap.com/" target="_blank">Sound in Theory Ltd</a></a>
-			</div>
+		<div id="west" style="height:100%">
+		    <iframe id="navigation" src="navigation/tree.aspx" frameborder="0" width="100%" height="100%"></iframe>
 		</div>
-	</div>
+		
+		<div id="center" style="height:100%">
+			<iframe id="content" src="/" frameborder="0" width="100%" height="100%"></iframe>
+		</div>
 	</form>
 </body>
 </html>
