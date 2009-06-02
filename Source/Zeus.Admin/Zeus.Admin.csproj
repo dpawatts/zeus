@@ -63,6 +63,9 @@
     <EmbeddedResource Include="Admin\New.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Admin\AdminAssemblyManager.cs" />
     <Compile Include="Admin\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
