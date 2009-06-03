@@ -1,12 +1,13 @@
 using System;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Month Page")]
 	[RestrictParents(typeof(NewsYear))]
-	public class NewsMonth : BaseNewsPage
+	public class NewsMonth : BaseNewsPage, IBreadcrumbAppearance
 	{
 		public override NewsContainer CurrentNewsContainer
 		{
@@ -40,5 +41,14 @@ namespace Zeus.Templates.ContentTypes.News
 		{
 			Utility.Insert(this, newParent, "Year DESC");
 		}
+
+		#region IBreadcrumbAppearance Members
+
+		bool IBreadcrumbAppearance.VisibleInBreadcrumb
+		{
+			get { return false; }
+		}
+
+		#endregion
 	}
 }

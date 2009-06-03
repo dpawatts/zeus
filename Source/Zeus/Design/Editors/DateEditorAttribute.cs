@@ -13,6 +13,11 @@ namespace Zeus.Design.Editors
 		{
 		}
 
+		public DateEditorAttribute()
+		{
+			
+		}
+
 		protected override TextBox CreateEditor()
 		{
 			return new DatePicker();

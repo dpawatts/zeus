@@ -20,7 +20,8 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return (Parent is NewsMonth) ? ((NewsMonth) Parent).CurrentNewsContainer : (NewsContainer) Parent; }
 		}
 
-		[DateEditor("Date", 30, Required = true)]
+		[ContentProperty("Date", 30)]
+		[DateEditor(Required = true, ContainerName = "Content")]
 		public virtual DateTime Date
 		{
 			get { return GetDetail("Date", DateTime.Today); }
@@ -32,14 +33,15 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return Date.ToLongDateString(); }
 		}
 
-		[HtmlTextBoxEditor("Content", 40)]
+		[ContentProperty("Content", 40)]
+		[HtmlTextBoxEditor(ContainerName = "Content")]
 		public virtual string Content
 		{
 			get { return GetDetail("Content", string.Empty); }
 			set { SetDetail("Content", value); }
 		}
 
-		[MultiImageDataUploadEditor("Images", 50)]
+		[MultiImageDataUploadEditor("Images", 50, ContainerName = "Content")]
 		public virtual PropertyCollection Images
 		{
 			get { return GetDetailCollection("Images", true); }

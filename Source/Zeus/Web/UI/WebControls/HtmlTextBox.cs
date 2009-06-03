@@ -46,7 +46,7 @@ namespace Zeus.Web.UI.WebControls
 				string.Format(@"htmlEditor_init('/Admin/FileManager/default.aspx?rootPath={4}',
 					{{
 						elements: '{0}',
-						content_css: '/Assets/Css/Core.css',
+						content_css: '/Assets/Css/Editor.css',
 						remove_script_host: {1},
 						document_base_url: '{2}',
 						convert_urls : false,
