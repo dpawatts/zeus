@@ -147,18 +147,18 @@ namespace Zeus.Admin.Security
 			}
 		}
 
-		private void ApplyRulesRecursive(ContentItem item)
+		private void ApplyRulesRecursive(ContentItem item, IEnumerable<string> allowedOperations)
 		{
 			// Only apply the rules if the current user has permission to administer this item.
 			if (Engine.SecurityManager.IsAuthorized(item, User, Operations.Administer))
-				ApplyRules(item);
+				ApplyRules(item, allowedOperations);
 
 			// Apply recursively.
 			foreach (ContentItem child in item.GetChildren())
-				ApplyRulesRecursive(child);
+				ApplyRulesRecursive(child, allowedOperations);
 		}
 
-		private void ApplyRules(ContentItem item)
+		private void ApplyRules(ContentItem item, IEnumerable<string> allowedOperations)
 		{
 			// Clear existing rules.
 			item.AuthorizationRules.Clear();
@@ -173,7 +173,7 @@ namespace Zeus.Admin.Security
 				AuthorizationType type = ((HiddenField) row.FindControl("hdn" + i + "Type")).Value.ToEnum<AuthorizationType>();
 
 				// Loop through operations, creating an authorization rule for each one.
-				foreach (string operation in Engine.SecurityManager.GetAvailableOperations())
+				foreach (string operation in allowedOperations)
 				{
 					CheckBox checkBox = (CheckBox) row.FindControl("chk" + i + operation);
 					if (checkBox.Checked)
@@ -187,13 +187,13 @@ namespace Zeus.Admin.Security
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			ApplyRules(SelectedItem);
+			ApplyRules(SelectedItem, GetAllowedOperations());
 			Refresh(SelectedItem, AdminFrame.Navigation, false);
 		}
 
 		protected void btnSaveRecursive_Click(object sender, EventArgs e)
 		{
-			ApplyRulesRecursive(SelectedItem);
+			ApplyRulesRecursive(SelectedItem, GetAllowedOperations());
 			Refresh(SelectedItem, AdminFrame.Navigation, false);
 		}
 
