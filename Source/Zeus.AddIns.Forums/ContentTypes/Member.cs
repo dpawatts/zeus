@@ -71,22 +71,22 @@ namespace Zeus.AddIns.Forums.ContentTypes
 
 		public virtual int PostCount
 		{
-			get { return Context.Finder.Find<Post>(p => p.Author == this).Count(); }
+			get { return Context.Finder.Items<Post>().Count(p => p.Author == this); }
 		}
 
 		public virtual IEnumerable<Forum> ModeratedForums
 		{
-			get { return Context.Finder.Find<Forum>(f => f.Moderator == this); }
+			get { return Context.Finder.Items<Forum>().Where(f => f.Moderator == this); }
 		}
 
 		public virtual IEnumerable<Topic> RecentTopics
 		{
-			get { return Context.Finder.Find<Topic>(t => t.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
+			get { return Context.Finder.Items<Topic>().Where(t => t.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
 		}
 
 		public virtual IEnumerable<Post> RecentReplies
 		{
-			get { return Context.Finder.Find<Post>(p => p.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
+			get { return Context.Finder.Items<Post>().Where(p => p.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
 		}
 	}
 }

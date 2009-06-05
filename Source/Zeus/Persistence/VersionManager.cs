@@ -181,7 +181,7 @@ namespace Zeus.Persistence
 
 		private IEnumerable<ContentItem> GetVersionsQuery(ContentItem publishedItem)
 		{
-			return finder.FindAll<ContentItem>()
+			return finder.Items()
 				.Where(ci => ci.VersionOf == publishedItem || ci.ID == publishedItem.ID)
 				.OrderBy(ci => ci.Version);
 		}

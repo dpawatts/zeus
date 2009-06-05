@@ -26,7 +26,7 @@ namespace Zeus.Admin
 
 		protected void AddReferencesRecursive(ContentItem current, List<ContentItem> referrers)
 		{
-			referrers.AddRange(Zeus.Context.Finder.Find<ContentItem>(ci => ci.Details.OfType<LinkProperty>().Any(ld => ld.LinkedItem == current)));
+			referrers.AddRange(Zeus.Context.Finder.Items().Where(ci => ci.Details.OfType<LinkProperty>().Any(ld => ld.LinkedItem == current)));
 			foreach (ContentItem child in current.GetChildren())
 				AddReferencesRecursive(child, referrers);
 		}

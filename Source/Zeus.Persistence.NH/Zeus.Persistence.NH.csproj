@@ -75,6 +75,9 @@
     <Compile Include="INotifyingInterceptor.cs" />
     <Compile Include="ISessionProvider.cs" />
     <Compile Include="ItemFinder.cs" />
+    <Compile Include="Linq\ContentPropertyVisitor.cs" />
+    <Compile Include="Linq\ZeusExtensions.cs" />
+    <Compile Include="Linq\ZeusQueryProvider.cs" />
     <Compile Include="Mappings\ContentItemMap.cs" />
     <Compile Include="Mappings\AuthorizedRoleMap.cs" />
     <Compile Include="Mappings\ContentDetailMap.cs" />

@@ -43,7 +43,7 @@ namespace Zeus.Design.Editors
 
 		protected override ListItem[] GetListItems(IEditableObject item)
 		{
-			IEnumerable<ContentItem> items = Context.Current.Finder.FindAll<ContentItem>().Distinct(ci => ci.ID);
+			IEnumerable<ContentItem> items = Context.Current.Finder.Items().Distinct(ci => ci.ID);
 			if (TypeFilter != null)
 				items = items.OfType(TypeFilter);
 			if (ExcludeSelf)

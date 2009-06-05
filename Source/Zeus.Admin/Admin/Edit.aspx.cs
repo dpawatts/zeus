@@ -175,7 +175,7 @@ namespace Zeus.Admin
 			}
 			else if (item.ID > 0)
 			{
-				var unpublishedVersions = Zeus.Context.Finder.Find<ContentItem>(ci => ci.VersionOf == item && ci.Updated > item.Updated)
+				var unpublishedVersions = Zeus.Context.Finder.Items().Where(ci => ci.VersionOf == item && ci.Updated > item.Updated)
 					.ToList()
 					.OrderByDescending(ci => ci.Updated)
 					.Take(1);

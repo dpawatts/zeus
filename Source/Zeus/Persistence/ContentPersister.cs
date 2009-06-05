@@ -138,7 +138,7 @@ namespace Zeus.Persistence
 
 		private void DeleteInboundLinks(ContentItem itemNoMore)
 		{
-			foreach (LinkProperty detail in _linkFinder.FindBySpecification(new Specification<LinkProperty>(ld => ld.LinkedItem == itemNoMore)))
+			foreach (LinkProperty detail in _linkFinder.Items().Where(ld => ld.LinkedItem == itemNoMore))
 			{
 				if (detail.EnclosingCollection != null)
 					detail.EnclosingCollection.Remove(detail);

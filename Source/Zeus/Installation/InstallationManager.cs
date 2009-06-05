@@ -113,10 +113,10 @@ namespace Zeus.Installation
 		{
 			try
 			{
-				status.Items = _contentItemFinder.FindAll<ContentItem>().Count();
-				status.Details = _contentDetailFinder.FindAll<PropertyData>().Count();
-				status.DetailCollections = _detailCollectionFinder.FindAll<PropertyCollection>().Count();
-				status.AuthorizedRoles = _authorizationRuleFinder.FindAll<AuthorizationRule>().Count();
+				status.Items = _contentItemFinder.Items().Count();
+				status.Details = _contentDetailFinder.Items().Count();
+				status.DetailCollections = _detailCollectionFinder.Items().Count();
+				status.AuthorizedRoles = _authorizationRuleFinder.Items().Count();
 				status.HasSchema = true;
 			}
 			catch (Exception ex)
@@ -152,10 +152,10 @@ namespace Zeus.Installation
 		/// <returns>A string with diagnostic information about the database.</returns>
 		public string CheckDatabase()
 		{
-			int itemCount = _contentItemFinder.FindAll<ContentItem>().Count();
-			int detailCount = _contentDetailFinder.FindAll<PropertyData>().Count();
-			int detailCollectionCount = _detailCollectionFinder.FindAll<PropertyCollection>().Count();
-			int authorizationRuleCount = _authorizationRuleFinder.FindAll<AuthorizationRule>().Count();
+			int itemCount = _contentItemFinder.Items().Count();
+			int detailCount = _contentDetailFinder.Items().Count();
+			int detailCollectionCount = _detailCollectionFinder.Items().Count();
+			int authorizationRuleCount = _authorizationRuleFinder.Items().Count();
 
 			return string.Format("Database OK, items: {0}, details: {1}, authorization rules: {2}, detail collections: {3}",
 													 itemCount, detailCount, authorizationRuleCount, detailCollectionCount);
