@@ -199,6 +199,23 @@ namespace Zeus.ContentTypes
 			return AllowedChildren.Contains(child);
 		}
 
+		public void AddContainer(string name, IEditorContainer newContainer)
+		{
+			IEditorContainer container = Containers.SingleOrDefault(e => e.Name == name);
+			if (container != null)
+				throw new ArgumentException("A container with this name already exists. Please use ReplaceContainer() instead.", "name");
+
+			newContainer.Name = name;
+
+			// FUDGE - should run EditableHierarchyBuilder again.
+			RootContainer.Contained.Add(newContainer);
+
+			List<IEditorContainer> newContainers = new List<IEditorContainer>(Containers);
+			newContainers.Add(newContainer);
+			newContainers.Sort();
+			Containers = newContainers;
+		}
+
 		public void AddEditor(string name, Type propertyType, IEditor newEditor)
 		{
 			IEditor editor = Editors.SingleOrDefault(e => e.Name == name);

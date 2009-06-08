@@ -26,10 +26,9 @@ namespace Zeus.Admin.FileManager
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.easing.compatibility.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.dimensions.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.contextMenu.js");
-			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.jquery.contextMenu.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.thickbox.js");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.shared.css");
-			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.tree.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.Css.tree.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.thickbox.css");
 			base.OnPreRender(e);
 		}

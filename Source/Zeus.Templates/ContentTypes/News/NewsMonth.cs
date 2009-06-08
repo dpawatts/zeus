@@ -37,6 +37,14 @@ namespace Zeus.Templates.ContentTypes.News
 			set { SetDetail("Month", value); }
 		}
 
+		/// <summary>
+		/// Date represented by this month and its parent year. Day is set to 1.
+		/// </summary>
+		public DateTime Date
+		{
+			get { return new DateTime(((NewsYear) Parent).Year, Month, 1); }
+		}
+
 		public override void AddTo(ContentItem newParent)
 		{
 			Utility.Insert(this, newParent, "Year DESC");
