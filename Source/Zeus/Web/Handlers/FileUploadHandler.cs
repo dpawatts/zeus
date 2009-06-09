@@ -7,7 +7,7 @@ namespace Zeus.Web.Handlers
 {
 	public class FileUploadHandler : IHttpHandler
 	{
-		private const string UploadRootFolder = "_Zeus.SilverlightUpload";
+		private const string UploadRootFolder = "_Zeus.FileUpload";
 		private const string TempExtension = "_temp";
 
 		public void ProcessRequest(HttpContext context)

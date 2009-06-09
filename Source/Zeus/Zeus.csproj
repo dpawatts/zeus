@@ -255,11 +255,13 @@
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
+    <Compile Include="Web\UI\WebControls\FileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\ImageDataEditor.cs" />
     <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
     <Compile Include="Web\UI\WebControls\MultiImageDataUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
+    <Compile Include="Web\UI\WebControls\SilverlightFileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabControl.cs" />
     <Compile Include="Web\UI\WebControls\FileEditor.cs" />
@@ -650,6 +652,7 @@
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
     <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
     <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
+    <EmbeddedResource Include="Web\Resources\SilverlightFileDataEditor.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

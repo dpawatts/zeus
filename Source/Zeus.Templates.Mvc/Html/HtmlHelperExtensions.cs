@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Microsoft.Web.Mvc;
 using Zeus.Templates.ContentTypes.Forms;
 using System.IO;
 
@@ -37,9 +38,11 @@ namespace Zeus.Templates.Mvc.Html
 				string result = string.Empty;
 				foreach (Option option in question.Options)
 				{
-					result += html.RadioButton(question.Name, option.Title) + " ";
+					result += html.RadioButton(question.Name, option.Name, new { id = option.Name }) + " "
+						+ html.Label(option.Name, option.Title);
 					if (question.Vertical)
 						result += "<br />";
+					result += Environment.NewLine;
 				}
 				return result;
 			};
@@ -58,17 +61,27 @@ namespace Zeus.Templates.Mvc.Html
 			};
 		}
 
-		public static string RenderDynamicForm(this HtmlHelper html, Form form)
+		public static string Label(this HtmlHelper html, string @for, string text)
+		{
+			return string.Format(@"<label for=""{0}"">{1}</label>", @for, text);
+		}
+
+		public static string Form(this HtmlHelper html, Form form)
 		{
 			StringWriter stringWriter = new StringWriter();
 
 			stringWriter.WriteLine(form.IntroText);
 
+			stringWriter.WriteLine(string.Format(@"<form action=""{0}"" method=""post"">", html.ViewContext.HttpContext.Request.RawUrl + "/submit"));
 			foreach (Question question in form.FormFields)
 			{
-				stringWriter.WriteLine(string.Format(@"<label for=""{0}"">{1}</label>", question.Name, question.Title));
+				stringWriter.WriteLine(html.Label(question.Name, question.Title));
 				stringWriter.WriteLine(_fieldRenderers[question.GetType()].Invoke(html, question));
+				stringWriter.WriteLine("<br />");
 			}
+
+			stringWriter.WriteLine(html.SubmitButton());
+			stringWriter.WriteLine(@"</form>");
 
 			return stringWriter.ToString();
 		}

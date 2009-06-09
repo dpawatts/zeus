@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.IO;
@@ -27,6 +28,8 @@ namespace Zeus.Design.Editors
 		{
 			return new FileData();
 		}
+
+		public UploadMethod UploadMethod { get; set; }
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
@@ -82,8 +85,9 @@ namespace Zeus.Design.Editors
 		/// <returns>A text box control.</returns>
 		protected override Control AddEditor(Control container)
 		{
-			Control fileUpload = CreateEditor();
+			FileDataEditor fileUpload = CreateEditor();
 			fileUpload.ID = Name;
+			fileUpload.FileUploadImplementation = CreateUpload(fileUpload);
 			container.Controls.Add(fileUpload);
 
 			return fileUpload;
@@ -108,5 +112,21 @@ namespace Zeus.Design.Editors
 		{
 			return new FileDataEditor();
 		}
+
+		protected FileUploadImplementation CreateUpload(FileDataEditor fileUpload)
+		{
+			switch (UploadMethod)
+			{
+				case UploadMethod.Silverlight :
+					return new SilverlightFileUploadImplementation(fileUpload);
+				default :
+					throw new NotSupportedException();
+			}
+		}
+	}
+
+	public enum UploadMethod
+	{
+		Silverlight
 	}
 }

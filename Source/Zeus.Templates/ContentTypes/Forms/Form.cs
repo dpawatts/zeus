@@ -30,10 +30,10 @@ namespace Zeus.Templates.ContentTypes.Forms
 			set { SetDetail("IntroText", value); }
 		}
 
-		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields")]
-		public virtual IList<ContentItem> FormFields
+		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields", TypeFilter = typeof(Question))]
+		public virtual IList<Question> FormFields
 		{
-			get { return GetChildren(); }
+			get { return GetChildren<Question>(); }
 		}
 
 		[ContentProperty("Mail From", 120)]

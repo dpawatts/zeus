@@ -65,6 +65,8 @@
     <Content Include="Global.asax" />
     <Content Include="Views\CustomPage\Index.aspx" />
     <Content Include="Views\FallbackContent\Index.aspx" />
+    <Content Include="Views\FormPage\Submit.aspx" />
+    <Content Include="Views\FormPage\Index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

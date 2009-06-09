@@ -1,6 +1,7 @@
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
+using Zeus.FileSystem.Images;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
@@ -14,6 +15,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		{
 			get { return base.Content; }
 			set { base.Content = value; }
+		}
+
+		[ContentProperty("Image", 100, Shared = false)]
+		public ImageData Image
+		{
+			get { return GetDetail<ImageData>("Image", null); }
+			set { SetDetail("Image", value); }
 		}
 	}
 }
