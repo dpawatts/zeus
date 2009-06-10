@@ -35,6 +35,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Gallio.dll</HintPath>
     </Reference>
+    <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Isis.dll</HintPath>
+    </Reference>
     <Reference Include="MbUnit, Version=3.0.5.546, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MbUnit.dll</HintPath>
@@ -78,10 +82,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Isis\Source\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.Persistence.NH\Zeus.Persistence.NH.csproj">
       <Project>{E0C2BF09-ECCD-4EC2-B2AE-D376A4A32498}</Project>
       <Name>Zeus.Persistence.NH</Name>

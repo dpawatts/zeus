@@ -23,7 +23,7 @@ namespace Zeus.Admin.Navigation
 			Page.ClientScript.RegisterJQuery();
 			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.simpleTree.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.easing.js");
-			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.easing.compatilibity.js");
+			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.easing.compatibility.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.dimensions.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(Tree), "Zeus.Admin.Assets.JS.Plugins.jquery.contextMenu.js");
 			if (Zeus.Context.AdminManager.TreeTooltipsEnabled)
