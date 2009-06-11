@@ -20,6 +20,12 @@ namespace Zeus.Design.Editors
 			
 		}
 
+		public ImageDataUploadEditorAttribute()
+			: base()
+		{
+
+		}
+
 		protected override FileData CreateNewItem()
 		{
 			return new ImageData();

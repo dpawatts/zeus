@@ -80,6 +80,10 @@ using Isis.Web.UI;
 [assembly: WebResource("Zeus.Web.Resources.jQuery.ui.sortable.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.jQuery.ui.tabs.js", "text/javascript")]
 
-[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.Silverlight.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.FileDataEditor.js", "text/javascript")]
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FileDataEditor.FileDataUploader.swf", "Zeus.Web.Resources", "application/x-shockwave-flash")]
+[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.Silverlight.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.SilverlightFileDataEditor.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.swfobject.js", "text/javascript")]
+
 [assembly: WebResource("Zeus.Web.Resources.tinymce.js", "text/javascript")]

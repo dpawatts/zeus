@@ -18,6 +18,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		}
 
 		[ContentProperty("Image", 100, Shared = false)]
+		[ImageDataUploadEditor(UploadMethod = UploadMethod.Flash)]
 		public ImageData Image
 		{
 			get { return GetDetail<ImageData>("Image", null); }

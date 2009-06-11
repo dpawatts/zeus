@@ -256,6 +256,8 @@
     <Compile Include="Serialization\ItemXmlReader.cs" />
     <Compile Include="Serialization\WrongVersionException.cs" />
     <Compile Include="Web\Global.cs" />
+    <Compile Include="Web\Handlers\BaseFileUploadHandler.cs" />
+    <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />
     <Compile Include="Web\HttpRequestSupport.cs" />
     <Compile Include="Web\IHost.cs" />
     <Compile Include="Web\IPermanentLinkManager.cs" />
@@ -268,6 +270,7 @@
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
+    <Compile Include="Web\UI\WebControls\FlashFileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\FileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\ImageDataEditor.cs" />
     <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
@@ -343,7 +346,7 @@
     <Compile Include="Web\ControlsAttribute.cs" />
     <Compile Include="Web\ErrorHandler.cs" />
     <Compile Include="Web\Handlers\FileDataHandler.cs" />
-    <Compile Include="Web\Handlers\FileUploadHandler.cs" />
+    <Compile Include="Web\Handlers\ChunkedFileUploadHandler.cs" />
     <Compile Include="Web\HttpRequestContextAccessor.cs" />
     <Compile Include="Web\IClosable.cs" />
     <Compile Include="Web\IControllerDescriptor.cs" />
@@ -557,10 +560,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\FileDataEditor.js" />
+    <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataEditor.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\Silverlight.js" />
+    <EmbeddedResource Include="Web\Resources\FileDataEditor\Silverlight.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.css" />
@@ -642,7 +645,9 @@
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
     <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
     <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
-    <EmbeddedResource Include="Web\Resources\SilverlightFileDataEditor.js" />
+    <EmbeddedResource Include="Web\Resources\FileDataEditor\SilverlightFileDataEditor.js" />
+    <EmbeddedResource Include="Web\Resources\FileDataEditor\swfobject.js" />
+    <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataUploader.swf" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

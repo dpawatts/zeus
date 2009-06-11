@@ -126,7 +126,7 @@ namespace Zeus.Web.UI.WebControls
 
 			_beforeUploadAnchor.Attributes["onclick"] = FileUploadImplementation.StartUploadJavascriptFunction + "; return false;";
 
-			ScriptManager.RegisterClientScriptResource(this, typeof(FileDataEditor), "Zeus.Web.Resources.FileDataEditor.js");
+			ScriptManager.RegisterClientScriptResource(this, typeof(FileDataEditor), "Zeus.Web.Resources.FileDataEditor.FileDataEditor.js");
 
 			string script = string.Format(@"$('#{0}').fileDataEditor(
 				{{

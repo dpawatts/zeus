@@ -1,16 +1,14 @@
 using System;
 using System.IO;
-using System.Threading;
 using System.Web;
 
 namespace Zeus.Web.Handlers
 {
-	public class FileUploadHandler : IHttpHandler
+	public class ChunkedFileUploadHandler : BaseFileUploadHandler
 	{
-		private const string UploadRootFolder = "_Zeus.FileUpload";
-		private const string TempExtension = "_temp";
+		private const string TEMP_EXTENSION = "_temp";
 
-		public void ProcessRequest(HttpContext context)
+		public override void ProcessRequest(HttpContext context)
 		{
 			if (context.Request.InputStream.Length == 0)
 				throw new ArgumentException("No file input");
@@ -24,7 +22,7 @@ namespace Zeus.Web.Handlers
 
 			// Work out (and create if necessary) the path to upload to.
 			string uploadFolder = GetUploadFolder(identifier, firstChunk);
-			string tempUploadPath = Path.Combine(uploadFolder, fileName + TempExtension);
+			string tempUploadPath = Path.Combine(uploadFolder, fileName + TEMP_EXTENSION);
 
 			// Save this chunk of the file.
 			using (FileStream fs = File.Open(tempUploadPath, FileMode.Append))
@@ -42,28 +40,6 @@ namespace Zeus.Web.Handlers
 			}
 		}
 
-		private static string GetUploadFolder(Guid identifier, bool firstChunk)
-		{
-			string uploadFolderPath = GetUploadFolder(identifier.ToString());
-			if (firstChunk)
-				Directory.CreateDirectory(uploadFolderPath);
-
-			return uploadFolderPath;
-		}
-
-		public static string GetUploadFolder(string identifier)
-		{
-			string tempFolderPath = HttpRuntime.AppDomainAppPath;
-
-			string uploadRootFolderPath = Path.Combine(tempFolderPath, UploadRootFolder);
-			if (!Directory.Exists(uploadRootFolderPath))
-				Directory.CreateDirectory(uploadRootFolderPath);
-
-			string uploadFolderPath = Path.Combine(uploadRootFolderPath, identifier);
-
-			return uploadFolderPath;
-		}
-
 		/// <summary>
 		/// Save the contents of the Stream to a file
 		/// </summary>
@@ -77,11 +53,6 @@ namespace Zeus.Web.Handlers
 			{
 				fs.Write(buffer, 0, bytesRead);
 			}
-		}
-
-		public bool IsReusable
-		{
-			get { return false; }
 		}
 	}
 }

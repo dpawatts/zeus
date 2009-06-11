@@ -24,6 +24,12 @@ namespace Zeus.Design.Editors
 			
 		}
 
+		public FileDataUploadEditorAttribute()
+			: base()
+		{
+
+		}
+
 		protected virtual FileData CreateNewItem()
 		{
 			return new FileData();
@@ -44,7 +50,7 @@ namespace Zeus.Design.Editors
 
 				// Populate FileData object.
 				newFile.FileName = fileEditor.FileName;
-				string uploadFolder = FileUploadHandler.GetUploadFolder(fileEditor.Identifier);
+				string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileEditor.Identifier);
 				string uploadedFile = Path.Combine(uploadFolder, fileEditor.FileName);
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
@@ -119,6 +125,8 @@ namespace Zeus.Design.Editors
 			{
 				case UploadMethod.Silverlight :
 					return new SilverlightFileUploadImplementation(fileUpload);
+				case UploadMethod.Flash:
+					return new FlashFileUploadImplementation(fileUpload);
 				default :
 					throw new NotSupportedException();
 			}
@@ -127,6 +135,7 @@ namespace Zeus.Design.Editors
 
 	public enum UploadMethod
 	{
-		Silverlight
+		Silverlight,
+		Flash
 	}
 }

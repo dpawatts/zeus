@@ -30,7 +30,7 @@ namespace Zeus.SilverlightUpload.Classes
 			_dataSent = 0;
 
 			if(string.IsNullOrEmpty(httpHandlerName))
-				httpHandlerName = "/FileUpload.axd";
+				httpHandlerName = "/ChunkedFileUpload.axd";
 
 			UploadUrl = new CustomUri(httpHandlerName).ToString();
 		}

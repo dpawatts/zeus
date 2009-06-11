@@ -59,8 +59,8 @@ namespace Zeus.Web.UI.WebControls
 		{
 			AddParam(_silverlightControl, "onload", _silverlightControl.ClientID + "pluginLoaded");
 
-			ScriptManager.RegisterClientScriptResource(OwnerControl, 
-				OwnerControl.GetType(),  "Zeus.Web.Resources.Silverlight.js");
+			ScriptManager.RegisterClientScriptResource(OwnerControl, OwnerControl.GetType(), "Zeus.Web.Resources.FileDataEditor.Silverlight.js");
+			ScriptManager.RegisterClientScriptResource(OwnerControl, OwnerControl.GetType(), "Zeus.Web.Resources.FileDataEditor.SilverlightFileDataEditor.js");
 
 			string script = string.Format(@"
     	function {0}pluginLoaded(sender) {{
