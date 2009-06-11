@@ -7,7 +7,6 @@ using Isis.ExtensionMethods;
 using Isis.Linq;
 using NHibernate.Linq;
 using Zeus.ContentProperties;
-using Zeus.Persistence.Specifications;
 
 namespace Zeus.Persistence.NH
 {

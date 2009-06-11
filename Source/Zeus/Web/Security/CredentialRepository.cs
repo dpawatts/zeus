@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Isis.Web.Security;
+using Zeus.Linq;
 using Zeus.Persistence;
-using Zeus.Persistence.Specifications;
 using Zeus.Security;
 using Zeus.Web.Security.Items;
 
@@ -52,7 +52,7 @@ namespace Zeus.Web.Security
 		public IEnumerable<Role> GetRoles(IPrincipal user)
 		{
 			RoleContainer roleContainer = GetRoleContainer(true);
-			return roleContainer.GetChildren(new AccessSpecification<ContentItem>(user, Context.SecurityManager, Operations.Read)).Cast<Role>();
+			return roleContainer.GetChildren().Authorized(user, Context.SecurityManager, Operations.Read).Cast<Role>();
 		}
 
 		void ICredentialRepository.CreateUser(string username, string password, string[] roles)

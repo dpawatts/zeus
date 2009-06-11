@@ -45,13 +45,10 @@ namespace Zeus.Admin
 			return Zeus.Context.Current.AdminManager.GetEditExistingItemUrl((ContentItem) dataItem);
 		}
 
-		protected IList<ContentItem> GetItemsInZone(object dataItem)
+		protected IEnumerable<ContentItem> GetItemsInZone(object dataItem)
 		{
-			Zeus.Integrity.AvailableZoneAttribute a = (Integrity.AvailableZoneAttribute) dataItem;
-			if (CurrentItem is ContentItem)
-				return ((ContentItem) CurrentItem).GetChildren(a.ZoneName);
-			else
-				return null;
+			Integrity.AvailableZoneAttribute a = (Integrity.AvailableZoneAttribute) dataItem;
+			return CurrentItem.GetChildren(a.ZoneName);
 		}
 
 		protected string GetZoneString(string key)

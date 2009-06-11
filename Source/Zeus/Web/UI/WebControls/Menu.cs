@@ -6,8 +6,8 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 using Zeus.Collections;
+using Zeus.Linq;
 using System.Web.Compilation;
-using Zeus.Persistence.Specifications;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -24,7 +24,7 @@ namespace Zeus.Web.UI.WebControls
 
 		public Menu()
 		{
-			this.Filters = new List<ISpecification<ContentItem>>(new ISpecification<ContentItem>[] { new NavigationSpecification<ContentItem>() });
+			Filter = items => items.Navigable();
 		}
 
 		#region Properties
@@ -86,18 +86,10 @@ namespace Zeus.Web.UI.WebControls
 			get { return HtmlTextWriterTag.Ul; }
 		}
 
-		private IList<ISpecification<ContentItem>> Filters
-		{
-			get;
-			set;
-		}
+		private Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> Filter { get; set; }
 
 		[PersistenceMode(PersistenceMode.InnerProperty), Browsable(false), TemplateContainer(typeof(MenuItem)), DefaultValue((string) null)]
-		public ITemplate ListItemTemplate
-		{
-			get;
-			set;
-		}
+		public ITemplate ListItemTemplate { get; set; }
 
 		#endregion
 
@@ -122,27 +114,27 @@ namespace Zeus.Web.UI.WebControls
 
 		private void BuildControlHierarchy(ContentItem currentItem, ContentItem startPage)
 		{
-			if (!string.IsNullOrEmpty(this.OfType))
-				this.Filters.Add(new TypeSpecification<ContentItem>());
+			//if (!string.IsNullOrEmpty(this.OfType))
 			//this.Filters.Add(new TypeSpecification<ContentItem>(BuildManager.GetType(this.OfType, true)));
 
-			this.Filters.Add(new VisibleSpecification<ContentItem>());
+			throw new NotImplementedException();
+			//this.Filters.Add(new VisibleSpecification<ContentItem>());
 
 			if (currentItem == null)
 				currentItem = startPage;
 
-			IList<ContentItem> children = currentItem.GetChildren();
-			if (children.Count > 0)
-				currentItem = children[0];
+			IEnumerable<ContentItem> children = currentItem.GetChildren();
+			if (children.Any())
+				currentItem = children.First();
 			IEnumerable<ContentItem> ancestors = GetAncestors(currentItem, startPage);
 			ContentItem startingPoint = GetStartingPoint();
 			if (startingPoint != null)
 			{
 				ItemHierarchyNavigator navigator;
 				if (BranchMode)
-					navigator = new ItemHierarchyNavigator(new BranchHierarchyBuilder(currentItem, startingPoint), this.Filters.ToArray());
+					navigator = new ItemHierarchyNavigator(new BranchHierarchyBuilder(currentItem, startingPoint), Filter);
 				else
-					navigator = new ItemHierarchyNavigator(new TreeHierarchyBuilder(startingPoint, MaxLevels), this.Filters.ToArray());
+					navigator = new ItemHierarchyNavigator(new TreeHierarchyBuilder(startingPoint, MaxLevels), Filter);
 				if (navigator.Current != null)
 					AddControlsRecursive(this, navigator, CurrentPage, ancestors);
 			}

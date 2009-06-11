@@ -1,29 +1,27 @@
-﻿using System.Collections.Generic;
-using Zeus.Persistence.Specifications;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Zeus.Collections
 {
 	public abstract class HierarchyBuilder
 	{
-		public ISpecification<ContentItem>[] Filters
-		{
-			get;
-			set;
-		}
+		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> Filter { get; set; }
 
 		public abstract HierarchyNode<ContentItem> Build();
 
-		public HierarchyNode<ContentItem> Build(ISpecification<ContentItem>[] filters)
+		public HierarchyNode<ContentItem> Build(Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> filter)
 		{
-			Filters = filters;
+			Filter = filter;
 			return Build();
 		}
 
-		protected virtual IList<ContentItem> GetChildren(ContentItem currentItem)
+		protected virtual IEnumerable<ContentItem> GetChildren(ContentItem currentItem)
 		{
-			return Filters == null
-				? currentItem.GetChildren()
-				: currentItem.GetChildren(Filters);
+			IEnumerable<ContentItem> children = currentItem.GetChildren();
+			if (Filter != null)
+				children = Filter(children);
+			return children;
 		}
 	}
 }

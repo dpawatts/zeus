@@ -28,7 +28,10 @@ namespace Zeus.AddIns.Forums.Services
 
 		public Member GetMember(MessageBoard messageBoard, IUser user, bool create)
 		{
-			Member member = Find.EnumerateChildren(messageBoard).OfType<Member>().SingleOrDefault(m => m.User == user);
+			Member member = null;
+			if (user != null)
+				member = Find.EnumerateChildren(messageBoard).OfType<Member>().SingleOrDefault(m => m.User == user);
+
 			if (member == null && user != null && create)
 			{
 				member = new Member { User = user };

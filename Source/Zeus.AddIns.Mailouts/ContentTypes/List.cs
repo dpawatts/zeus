@@ -65,7 +65,7 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 		}
 
 		[ChildrenEditor("Form Fields", 70, AddNewText = "Add New Form Field", TypeFilter = typeof(FormField), ContainerName = "FormFieldsContainer")]
-		public virtual IList<FormField> FormFields
+		public virtual IEnumerable<FormField> FormFields
 		{
 			get { return GetChildren<FormField>(); }
 		}
@@ -75,7 +75,7 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 			get { return GetDetailCollection("InterestGroups", true); }
 		}
 
-		public virtual IList<IMailoutRecipient> Recipients
+		public virtual IEnumerable<IMailoutRecipient> Recipients
 		{
 			get { return GetChildren<IMailoutRecipient>(); }
 		}

@@ -10,8 +10,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Web;
 using System.Linq;
+using Zeus.Linq;
 using Zeus.Persistence;
-using Zeus.Persistence.Specifications;
 using Zeus.Web;
 using Zeus.Security;
 using System.Security.Principal;
@@ -570,12 +570,9 @@ namespace Zeus
 		/// <param name="childZoneName">The name of the zone.</param>
 		/// <returns>A list of items that have the specified zone name.</returns>
 		/// <remarks>This method is used by Zeus when when non-page items are added to a zone on a page and in edit mode when displaying which items are placed in a certain zone. Keep this in mind when overriding this method.</remarks>
-		public virtual IList<ContentItem> GetChildren(string childZoneName)
+		public virtual IEnumerable<ContentItem> GetChildren(string childZoneName)
 		{
-			return GetChildren(
-				new CompositeSpecification<ContentItem>(
-					new ZoneSpecification<ContentItem>(childZoneName),
-					new AccessSpecification<ContentItem>(Operations.Read)));
+			return GetChildren().Authorized(Operations.Read).InZone(childZoneName);
 		}
 
 		/// <summary>
@@ -584,35 +581,17 @@ namespace Zeus
 		/// the Children property.
 		/// </summary>
 		/// <returns></returns>
-		public virtual IList<ContentItem> GetChildren()
+		public virtual IEnumerable<ContentItem> GetChildren()
 		{
-			return GetChildren(new AccessSpecification<ContentItem>(HttpContext.Current.User, Context.SecurityManager, Operations.Read));
+			return GetChildrenInternal().Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
 		}
 
-		/// <summary>Gets children applying filters.</summary>
-		/// <param name="specifications">The filters to apply on the children.</param>
-		/// <returns>A list of filtered child items.</returns>
-		public virtual IList<T> GetChildren<T>(params ISpecification<T>[] specifications)
-			where T : ContentItem
-		{
-			return GetChildren(new CompositeSpecification<T>(specifications));
-		}
-
-		/// <summary>Gets children applying filters.</summary>
-		/// <param name="specification">The filters to apply on the children.</param>
-		/// <returns>A list of filtered child items.</returns>
-		public virtual IList<T> GetChildren<T>(ISpecification<T> specification)
-			where T : ContentItem
-		{
-			return GetChildrenInternal().AsQueryable().OfType<T>().Where(specification.Predicate).ToList();
-		}
-
-		public virtual IList<T> GetChildren<T>()
+		public virtual IEnumerable<T> GetChildren<T>()
 		{
 			return GetChildrenInternal().OfType<T>().ToList();
 		}
 
-		private IList<ContentItem> GetChildrenInternal()
+		private IEnumerable<ContentItem> GetChildrenInternal()
 		{
 			ContentItem realItem = this;
 			if (VersionOf != null)
@@ -645,7 +624,7 @@ namespace Zeus
 
 			int slashIndex = remainingUrl.IndexOf('/');
 			string nameSegment = slashIndex < 0 ? remainingUrl : remainingUrl.Substring(0, slashIndex);
-			foreach (ContentItem child in translation.GetChildren(new NullSpecification<ContentItem>()))
+			foreach (ContentItem child in translation.GetChildrenInternal())
 			{
 				// Get correct translation.
 				ContentItem childTranslation = Context.Current.LanguageManager.GetTranslation(child, languageCode);
@@ -722,26 +701,25 @@ namespace Zeus
 			{
 				if (childName.Length == 1)
 					return this;
-				else
-					return GetChild(childName.Substring(1));
+				return GetChild(childName.Substring(1));
 			}
-			else if (slashIndex > 0) // contains a slash further down
+
+			if (slashIndex > 0) // contains a slash further down
 			{
 				string nameSegment = childName.Substring(0, slashIndex);
-				foreach (ContentItem child in GetChildren(new NullSpecification<ContentItem>()))
+				foreach (ContentItem child in GetChildrenInternal())
 					foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
 						if (translation.Equals(nameSegment))
 							return translation.GetChild(childName.Substring(slashIndex));
 				return null;
 			}
-			else // no slash, only a name
-			{
-				foreach (ContentItem child in GetChildren(new NullSpecification<ContentItem>()))
-					foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
-						if (translation.Equals(childName))
-							return translation;
-				return null;
-			}
+
+			// no slash, only a name
+			foreach (ContentItem child in GetChildrenInternal())
+				foreach (ContentItem translation in Context.Current.LanguageManager.GetTranslationsOf(child, true))
+					if (translation.Equals(childName))
+						return translation;
+			return null;
 		}
 
 		public override bool Equals(object obj)

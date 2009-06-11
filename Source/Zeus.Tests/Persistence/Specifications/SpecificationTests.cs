@@ -2,7 +2,6 @@
 using MbUnit.Framework;
 using Rhino.Mocks;
 using Zeus.Persistence;
-using Zeus.Persistence.Specifications;
 using Zeus.Tests.Definitions.Items;
 
 namespace Zeus.Tests.Persistence.Specifications

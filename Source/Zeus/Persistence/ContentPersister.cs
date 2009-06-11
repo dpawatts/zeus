@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.ContentProperties;
-using Zeus.Persistence.Specifications;
 
 namespace Zeus.Persistence
 {

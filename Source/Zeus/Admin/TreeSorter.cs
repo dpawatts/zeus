@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.Persistence;
-using Zeus.Persistence.Specifications;
 using Zeus.Web;
 
 namespace Zeus.Admin
@@ -26,15 +25,13 @@ namespace Zeus.Admin
 		{
 			if (item.Parent != null)
 			{
-				ISpecification<ContentItem> filter = editManager.GetEditorFilter(webContext.User);
+				var filter = editManager.GetEditorFilter(webContext.User);
 				IList<ContentItem> siblings = item.Parent.Children;
-				IList<ContentItem> filtered = siblings.AsQueryable().Where(filter.Predicate).ToList();
+				IList<ContentItem> filtered = filter(siblings).ToList();
 
 				int index = filtered.IndexOf(item);
 				if (index > 0)
-				{
 					MoveTo(item, NodePosition.Before, filtered[index - 1]);
-				}
 			}
 		}
 
@@ -42,15 +39,13 @@ namespace Zeus.Admin
 		{
 			if (item.Parent != null)
 			{
-				ISpecification<ContentItem> filter = editManager.GetEditorFilter(webContext.User);
+				var filter = editManager.GetEditorFilter(webContext.User);
 				IList<ContentItem> siblings = item.Parent.Children;
-				IList<ContentItem> filtered = siblings.AsQueryable().Where(filter.Predicate).ToList();
+				IList<ContentItem> filtered = filter(siblings).ToList();
 
 				int index = filtered.IndexOf(item);
 				if (index + 1 < filtered.Count)
-				{
 					MoveTo(item, NodePosition.After, filtered[index + 1]);
-				}
 			}
 		}
 

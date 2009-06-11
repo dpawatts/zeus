@@ -16,8 +16,8 @@ using Zeus.Design.Editors;
 using Zeus.Engine;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
+using Zeus.Linq;
 using Zeus.Persistence;
-using Zeus.Persistence.Specifications;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.UI.WebControls;
@@ -208,13 +208,9 @@ namespace Zeus.Admin
 			return string.Format("{0}?selected={1}&language={2}", EditItemUrl, item.Path, languageCode);
 		}
 
-		public ISpecification<ContentItem> GetEditorFilter(IPrincipal user)
+		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user)
 		{
-			ISpecification<ContentItem> filter = new AccessSpecification<ContentItem>(user, _securityManager, Operations.Read);
-			filter = new CompositeSpecification<ContentItem>(
-				new PageSpecification<ContentItem>(),
-				filter);
-			return filter;
+			return items => items.Authorized(user, _securityManager, Operations.Read).Pages();
 		}
 
 		public string GetEmbeddedResourceUrl(Assembly assembly, string resourcePath)

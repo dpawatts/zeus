@@ -7,7 +7,7 @@ using Isis.Web;
 using Isis.Web.UI;
 using Zeus.Engine;
 using Zeus.Globalization.ContentTypes;
-using Zeus.Persistence.Specifications;
+using Zeus.Linq;
 using Zeus.Security;
 using System.Web.UI.HtmlControls;
 using System.Web;
@@ -40,12 +40,11 @@ namespace Zeus.Admin.Web.UI.WebControls
 			string path = Page.Request.GetOptionalString("selected");
 			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : RootNode;
 
-			ISpecification<ContentItem> filter = new AccessSpecification<ContentItem>(Page.User, Zeus.Context.SecurityManager, Operations.Read);
 			//if (Page.User.Identity.Name != "administrator")
 			//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
 			TreeNode treeNode = Zeus.Web.Tree.Between(_selectedItem, RootNode, true)
 				.OpenTo(_selectedItem)
-				.Filters(filter)
+				.Filter(items => items.Authorized(Page.User, Zeus.Context.SecurityManager, Operations.Read))
 				.LinkProvider(BuildLink)
 				.ToControl();
 

@@ -32,7 +32,7 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 		}
 
 		[ChildrenEditor("Filters", 15, AddNewText = "Add New Filter", TypeFilter = typeof(ListFilter), ContainerName = "ListContainer")]
-		public virtual IList<ListFilter> ListFilters
+		public virtual IEnumerable<ListFilter> ListFilters
 		{
 			get { return GetChildren<ListFilter>(); }
 		}

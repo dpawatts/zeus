@@ -31,7 +31,7 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields", TypeFilter = typeof(Question))]
-		public virtual IList<Question> FormFields
+		public virtual IEnumerable<Question> FormFields
 		{
 			get { return GetChildren<Question>(); }
 		}

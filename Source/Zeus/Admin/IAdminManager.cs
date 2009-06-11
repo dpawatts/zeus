@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Principal;
 using System.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Globalization.ContentTypes;
-using Zeus.Persistence.Specifications;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin
@@ -57,7 +57,7 @@ namespace Zeus.Admin
 		/// <summary>Gets the filter to be applied to items displayed in edit mode.</summary>
 		/// <param name="user">The user for whom to apply the filter.</param>
 		/// <returns>A filter.</returns>
-		ISpecification<ContentItem> GetEditorFilter(IPrincipal user);
+		Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user);
 
 		string GetEmbeddedResourceUrl(Assembly assembly, string resourcePath);
 

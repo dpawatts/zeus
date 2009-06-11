@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Isis.ComponentModel;
-using Zeus.Persistence.Specifications;
 
 namespace Zeus.Persistence
 {

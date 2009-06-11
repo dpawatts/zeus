@@ -164,7 +164,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			if (ParentItem != null)
 			{
-				IList<ContentItem> items = ParentItem.GetChildren();
+				IList<ContentItem> items = ParentItem.GetChildren().ToList();
 				if (TypeFilter != null)
 				{
 					Type type = BuildManager.GetType(TypeFilter, true);

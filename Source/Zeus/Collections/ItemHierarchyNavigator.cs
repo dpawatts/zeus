@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Zeus.Persistence.Specifications;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Zeus.Collections
 {
@@ -21,9 +21,9 @@ namespace Zeus.Collections
 			_currentNode = currentNode;
 		}
 
-		public ItemHierarchyNavigator(HierarchyBuilder builder, params ISpecification<ContentItem>[] filters)
+		public ItemHierarchyNavigator(HierarchyBuilder builder, Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> filter)
 		{
-			_currentNode = builder.Build(filters);
+			_currentNode = builder.Build(filter);
 		}
 
 		public ItemHierarchyNavigator(HierarchyBuilder builder)

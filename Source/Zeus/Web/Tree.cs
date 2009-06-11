@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Zeus.Collections;
 using System.Web.UI;
 using System.Collections.Generic;
-using Zeus.Persistence.Specifications;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Web
@@ -15,7 +13,7 @@ namespace Zeus.Web
 
 		private readonly HierarchyBuilder _treeBuilder;
 		private ClassProviderDelegate _classProvider = delegate { return string.Empty; };
-		private ISpecification<ContentItem>[] _filters;
+		private Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> _filter;
 		private LinkProviderDelegate _linkProvider;
 		private bool _excludeRoot;
 
@@ -51,9 +49,9 @@ namespace Zeus.Web
 			return this;
 		}
 
-		public Tree Filters(params ISpecification<ContentItem>[] filters)
+		public Tree Filter(Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> filter)
 		{
-			_filters = filters;
+			_filter = filter;
 			return this;
 		}
 
@@ -71,7 +69,7 @@ namespace Zeus.Web
 
 		public TreeNode ToControl()
 		{
-			IHierarchyNavigator<ContentItem> navigator = new ItemHierarchyNavigator(_treeBuilder, _filters);
+			IHierarchyNavigator<ContentItem> navigator = new ItemHierarchyNavigator(_treeBuilder, _filter);
 			TreeNode rootNode = BuildNodesRecursive(navigator);
 			rootNode.ChildrenOnly = _excludeRoot;
 			return rootNode;

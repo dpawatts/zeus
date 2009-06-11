@@ -15,7 +15,7 @@ namespace Zeus.Web.UI.WebControls
 	public class Zone : ItemAwareControl
 	{
 		private bool isDataBound;
-		private IList<ContentItem> items;
+		private IEnumerable<ContentItem> items;
 
 		/// <summary>Gets or sets the zone from which to fetch items.</summary>
 		public string ZoneName
@@ -25,7 +25,7 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		/// <summary>Gets or sets a list of items to display.</summary>
-		public virtual IList<ContentItem> DataSource
+		public virtual IEnumerable<ContentItem> DataSource
 		{
 			get
 			{
@@ -66,9 +66,9 @@ namespace Zeus.Web.UI.WebControls
 			base.OnDataBinding(e);
 		}
 
-		private IList<ContentItem> GetItems()
+		private IEnumerable<ContentItem> GetItems()
 		{
-			IList<ContentItem> items = null;
+			IEnumerable<ContentItem> items = null;
 			if (CurrentItem != null)
 				items = CurrentPage.GetChildren(ZoneName);
 
