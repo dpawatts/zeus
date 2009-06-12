@@ -19,6 +19,8 @@ namespace Zeus.Web.UI.WebControls
 
 		#endregion
 
+		#region Properties
+
 		public override string TagName
 		{
 			get { return "div"; }
@@ -64,6 +66,15 @@ namespace Zeus.Web.UI.WebControls
 			get { return (!string.IsNullOrEmpty(FileName)); }
 		}
 
+		public string BeforeUploadText
+		{
+			get { return (!string.IsNullOrEmpty(_currentFileName)) ? "Change" : "Upload file"; }
+		}
+
+		#endregion
+
+		#region Methods
+
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
@@ -79,9 +90,8 @@ namespace Zeus.Web.UI.WebControls
 			_hiddenIdentifierField = new HiddenField { ID = ID + "hdnIdentifier" };
 			Controls.Add(_hiddenIdentifierField);
 
-			FileUploadImplementation.AddChildControls();
-
 			_beforeUpload = new HtmlGenericControl("div") { ID = ID + "beforeUpload" };
+			_beforeUpload.Style["float"] = "left";
 			Controls.Add(_beforeUpload);
 
 			if (!string.IsNullOrEmpty(_currentFileName))
@@ -90,17 +100,19 @@ namespace Zeus.Web.UI.WebControls
 			_beforeUploadAnchor = new HtmlAnchor { Disabled = !Enabled };
 			_beforeUpload.Controls.Add(_beforeUploadAnchor);
 			_beforeUploadAnchor.HRef = "#";
-			if (!string.IsNullOrEmpty(_currentFileName))
-				_beforeUploadAnchor.InnerText = "Change";
-			else
-				_beforeUploadAnchor.InnerText = "Upload file";
+			_beforeUploadAnchor.InnerText = BeforeUploadText;
+			_beforeUploadAnchor.Visible = !FileUploadImplementation.RendersSelf;
 
 			_duringUpload = new HtmlGenericControl("div") { ID = ID + "duringUpload", InnerText = "Uploading..." };
 			Controls.Add(_duringUpload);
 			_duringUpload.Style[HtmlTextWriterStyle.Display] = "none";
+			_duringUpload.Style["float"] = "left";
 
 			_afterUpload = new HtmlGenericControl("div") { ID = ID + "afterUpload", InnerText = "Finished Upload", Disabled = !Enabled };
+			_afterUpload.Style["float"] = "left";
 			Controls.Add(_afterUpload);
+
+			FileUploadImplementation.AddChildControls();
 
 			/*
 				<!-- shown during upload -->
@@ -147,5 +159,7 @@ namespace Zeus.Web.UI.WebControls
 
 			base.OnPreRender(e);
 		}
+
+		#endregion
 	}
 }

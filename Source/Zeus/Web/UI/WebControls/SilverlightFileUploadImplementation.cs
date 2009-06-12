@@ -9,7 +9,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		private HtmlGenericControl _silverlightControl;
 
-		public SilverlightFileUploadImplementation(Control ownerControl)
+		public SilverlightFileUploadImplementation(FileDataEditor ownerControl)
 			: base(ownerControl)
 		{
 			
