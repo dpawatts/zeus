@@ -16,7 +16,7 @@ namespace Zeus.Web.UI.WebControls
 
 		public override string StartUploadJavascriptFunction
 		{
-			get { return string.Format("$('#{0}').get(0).openDialog();", _flashControlContainer.ClientID); }
+            get { return string.Format("swfobject.getObjectById('{0}').openDialog();", _flashControlContainer.ClientID); }
 		}
 
 		public override void AddChildControls()
@@ -29,12 +29,16 @@ namespace Zeus.Web.UI.WebControls
 		{
 			ScriptManager.RegisterClientScriptResource(OwnerControl, OwnerControl.GetType(),  "Zeus.Web.Resources.FileDataEditor.swfobject.js");
 
-			string flashVars = string.Format(@"{{
-				'PercentageChanged' : '$(""#{0}"").fileDataEditor().onPercentageChanged',
-				'UploadStarted' : '$(""#{0}"").fileDataEditor().onUploadStarted',
-				'UploadFinished' : '$(""#{0}"").fileDataEditor().onUploadCompleted' }}",
-				OwnerControl.ClientID);
-			string script = string.Format(@"swfobject.embedSWF('{0}', '{1}', '0', '0', '9.0.0', '', {2}, {{ 'allowScriptAccess' : 'always' }});",
+            string flashVars = string.Format(@"{{
+				PercentageChanged : '$(%22#{0}%22).fileDataEditor().onPercentageChanged',
+				UploadStarted : '$(%22#{0}%22).fileDataEditor().onUploadStarted',
+				UploadFinished : '$(%22#{0}%22).fileDataEditor().onUploadCompleted',
+                textColor : '#000000',
+                textSize : '12',
+                value : 'Upload' }}",
+                OwnerControl.ClientID);
+
+            string script = string.Format(@"swfobject.embedSWF('{0}', '{1}', '50', '20', '9.0.0', '', {2}, {{ allowScriptAccess: 'always', menu: 'false', bgColor: '#FFFFFF' }}, {{ id: '{1}', name: '{1}', style: 'float: left' }});",
 				EmbeddedWebResourceUtility.GetUrl(OwnerControl.GetType().Assembly, "Zeus.Web.Resources.FileDataEditor.FileDataUploader.swf"),
 				_flashControlContainer.ClientID,
 				flashVars);

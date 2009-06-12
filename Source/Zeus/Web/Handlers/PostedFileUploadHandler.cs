@@ -15,7 +15,7 @@ namespace Zeus.Web.Handlers
 			// Work out (and create if necessary) the path to upload to.
 			string uploadFolder = GetUploadFolder(identifier, true);
 			string finalUploadPath = Path.Combine(uploadFolder, fileName);
-			postedFile.SaveAs(finalUploadPath);
+            postedFile.SaveAs(finalUploadPath);
 		}
 	}
 }
