@@ -44,7 +44,7 @@ namespace Zeus.Web.UI.WebControls
 				OwnerControl.ClientID,
 				OwnerControl.BeforeUploadText);
 
-			string script = string.Format(@"swfobject.embedSWF('{0}', '{1}', '50', '20', '9.0.0', '', {2}, {{ allowScriptAccess: 'always', menu: 'false', bgColor: '#FFFFFF' }}, {{ id: '{1}', name: '{1}', style: 'float: left' }});",
+			string script = string.Format(@"swfobject.embedSWF('{0}', '{1}', '70', '20', '9.0.0', '', {2}, {{ allowScriptAccess: 'always', menu: 'false', bgColor: '#FFFFFF' }}, {{ id: '{1}', name: '{1}', style: 'float: left' }});",
 					EmbeddedWebResourceUtility.GetUrl(OwnerControl.GetType().Assembly, "Zeus.Web.Resources.FileDataEditor.FileDataUploader.swf"),
 					_flashControlContainer.ClientID,
 					flashVars);
