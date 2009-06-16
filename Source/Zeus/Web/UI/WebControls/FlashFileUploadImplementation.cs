@@ -26,7 +26,7 @@ namespace Zeus.Web.UI.WebControls
 
 		public override void AddChildControls()
 		{
-			_flashControlContainer = new HtmlGenericControl("div") { ID = "flashFileUploader" };
+			_flashControlContainer = new HtmlGenericControl("div") { ID = OwnerControl.ID + "flashFileUploader" };
 			OwnerControl.Controls.Add(_flashControlContainer);
 		}
 
