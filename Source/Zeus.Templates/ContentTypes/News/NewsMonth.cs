@@ -47,7 +47,7 @@ namespace Zeus.Templates.ContentTypes.News
 
 		public override void AddTo(ContentItem newParent)
 		{
-			Utility.Insert(this, newParent, "Year DESC");
+			Utility.Insert(this, newParent, "Month DESC");
 		}
 
 		#region IBreadcrumbAppearance Members
