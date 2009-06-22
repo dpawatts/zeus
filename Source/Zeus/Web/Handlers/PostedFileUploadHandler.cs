@@ -16,6 +16,8 @@ namespace Zeus.Web.Handlers
 			string uploadFolder = GetUploadFolder(identifier, true);
 			string finalUploadPath = Path.Combine(uploadFolder, fileName);
             postedFile.SaveAs(finalUploadPath);
+
+			context.Response.Write("1");
 		}
 	}
 }
