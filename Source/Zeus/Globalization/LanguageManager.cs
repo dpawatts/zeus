@@ -68,7 +68,7 @@ namespace Zeus.Globalization
 
 			// 2. If the language settings for the current item indicate that we can fallback
 			// to another language, check if a translation for that fallback language exists.
-			LanguageSetting languageSetting = contentItem.LanguageSettings.SingleOrDefault(ls => ls.Language == languageCode);
+			LanguageSetting languageSetting = GetLanguageSetting(contentItem, languageCode);
 			if (languageSetting != null && !string.IsNullOrEmpty(languageSetting.FallbackLanguage))
 			{
 				translatedItem = GetTranslationDirect(contentItem, languageSetting.FallbackLanguage);
@@ -84,6 +84,18 @@ namespace Zeus.Globalization
 
 			// 5. We don't have anything to show to the user.
 			return null;
+		}
+
+		private LanguageSetting GetLanguageSetting(ContentItem contentItem, string languageCode)
+		{
+			// Iterate upward until we find a content item with some language settings.
+			while (contentItem != null)
+			{
+				if (contentItem.LanguageSettings != null && contentItem.LanguageSettings.Any())
+					break;
+				contentItem = contentItem.Parent;
+			}
+			return contentItem.LanguageSettings.SingleOrDefault(ls => ls.Language == languageCode);
 		}
 
 		public ContentItem GetTranslationDirect(ContentItem contentItem, string languageCode)

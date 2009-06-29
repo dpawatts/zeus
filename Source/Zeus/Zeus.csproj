@@ -203,8 +203,11 @@
     <Compile Include="FileSystem\Images\ZeusImageDataSource.cs" />
     <Compile Include="FileSystem\Images\ZeusImageSource.cs" />
     <Compile Include="Globalization\ContentLanguage.cs" />
+    <Compile Include="Globalization\ILanguageSelector.cs" />
     <Compile Include="Globalization\LanguagePreferenceList.cs" />
     <Compile Include="Globalization\LanguageSelection.cs" />
+    <Compile Include="Globalization\LanguageSelector.cs" />
+    <Compile Include="Globalization\LanguageSelectorContext.cs" />
     <Compile Include="Globalization\LanguageSetting.cs" />
     <Compile Include="Globalization\ContentTypes\LanguageContainer.cs" />
     <Compile Include="Globalization\ContentTypes\Language.cs" />

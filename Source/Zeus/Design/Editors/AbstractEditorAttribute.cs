@@ -23,12 +23,14 @@ namespace Zeus.Design.Editors
 		/// <summary>Default/empty constructor.</summary>
 		protected AbstractEditorAttribute()
 		{
+			Shared = true;
 		}
 
 		/// <summary>Initializes a new instance of the AbstractEditableAttribute.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
 		protected AbstractEditorAttribute(string title, int sortOrder)
+			: this()
 		{
 			Title = title;
 			SortOrder = sortOrder;
@@ -39,6 +41,7 @@ namespace Zeus.Design.Editors
 		/// <param name="name">The name used for equality comparison and reference.</param>
 		/// <param name="sortOrder">The order of this editor</param>
 		protected AbstractEditorAttribute(string title, string name, int sortOrder)
+			: this()
 		{
 			Title = title;
 			Name = name;

@@ -175,7 +175,7 @@ namespace Zeus
 				if (_url == null)
 				{
 					if (_urlParser != null)
-						_url = _urlParser.BuildUrl(this);
+						_url = GetUrl(LanguageSelector.Fallback(ContentLanguage.PreferredCulture.Name, false));
 					else
 						_url = FindPath(PathData.DefaultAction).RewrittenUrl;
 				}
@@ -194,6 +194,16 @@ namespace Zeus
 		{
 			if (_urlParser != null)
 				return _urlParser.BuildUrl(this, languageCode);
+			return FindPath(PathData.DefaultAction).RewrittenUrl;
+		}
+
+		public virtual string GetUrl(ILanguageSelector languageSelector)
+		{
+			LanguageSelectorContext args = new LanguageSelectorContext(this);
+			languageSelector.LoadLanguage(args);
+
+			if (_urlParser != null)
+				return _urlParser.BuildUrl(this, args.SelectedLanguage);
 			return FindPath(PathData.DefaultAction).RewrittenUrl;
 		}
 
@@ -233,6 +243,14 @@ namespace Zeus
 				return path;
 			}
 		}
+
+		/// <summary>
+		/// If this content item has been loaded as a fallback translation when the page doesn't exist
+		/// in the desired language, this property stores the originally requested language, which is different from
+		/// this content item's language. This property is not persisted to the database, it is purely
+		/// in-memory.
+		/// </summary>
+		public string ActiveLanguage { get; set; }
 
 		#endregion
 
@@ -586,19 +604,72 @@ namespace Zeus
 			return GetChildrenInternal().Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
 		}
 
+		/// <summary>
+		/// Gets child items that the user is allowed to access.
+		/// It doesn't have to return the same collection as
+		/// the Children property.
+		/// </summary>
+		/// <returns></returns>
+		public virtual IEnumerable<ContentItem> GetGlobalizedChildren()
+		{
+			return GetChildrenInternalWithLanguageSelection().Authorized(HttpContext.Current.User, Context.SecurityManager, Operations.Read);
+		}
+
 		public virtual IEnumerable<T> GetChildren<T>()
 		{
-			return GetChildrenInternal().OfType<T>().ToList();
+			return GetChildrenInternal().OfType<T>();
+		}
+
+		public virtual IEnumerable<T> GetGlobalizedChildren<T>()
+		{
+			return GetChildrenInternalWithLanguageSelection().OfType<T>();
+		}
+
+		private IEnumerable<ContentItem> GetChildrenInternalWithLanguageSelection()
+		{
+			return GetChildrenInternalWithLanguageSelection(LanguageSelector.AutoDetect());
+		}
+
+		private IEnumerable<ContentItem> GetChildrenInternalWithLanguageSelection(ILanguageSelector languageSelector)
+		{
+			IEnumerable<ContentItem> children = GetChildrenInternal();
+
+			LanguageSelectorContext args = new LanguageSelectorContext(this);
+			languageSelector.LoadLanguage(args);
+			return FilterLanguage(children, languageSelector);
 		}
 
 		private IEnumerable<ContentItem> GetChildrenInternal()
 		{
+			// Get the actual item this item represents.
 			ContentItem realItem = this;
 			if (VersionOf != null)
 				realItem = realItem.VersionOf;
 			if (TranslationOf != null)
 				realItem = realItem.TranslationOf;
+
 			return realItem.Children;
+		}
+
+		private static IEnumerable<ContentItem> FilterLanguage(IEnumerable<ContentItem> pages, ILanguageSelector langSelector)
+		{
+			List<ContentItem> datas = new List<ContentItem>();
+			foreach (ContentItem page in pages)
+			{
+				ContentItem translation = SelectLanguageBranch(page, langSelector);
+				if (translation != null)
+					datas.Add(translation);
+			}
+			return datas;
+		}
+
+		private static ContentItem SelectLanguageBranch(ContentItem page, ILanguageSelector selector)
+		{
+			LanguageSelectorContext args = new LanguageSelectorContext(page);
+			selector.SelectPageLanguage(args);
+			if (string.IsNullOrEmpty(args.SelectedLanguage))
+				return null;
+			return Context.Current.LanguageManager.GetTranslationDirect(page, args.SelectedLanguage);
 		}
 
 		/// <summary>Finds children based on the given url segments. The method supports convering the last segments into action and parameter.</summary>
@@ -760,6 +831,12 @@ namespace Zeus
 					return true;
 
 			return false;
+		}
+
+		public virtual bool IsPublished()
+		{
+			return (Published != null && Published.Value <= DateTime.Now)
+				&& !(Expires != null && Expires.Value < DateTime.Now);
 		}
 
 		#endregion

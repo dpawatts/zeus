@@ -91,7 +91,8 @@ namespace Zeus.Web.UI.WebControls
 			Controls.Add(_hiddenIdentifierField);
 
 			_beforeUpload = new HtmlGenericControl("div") { ID = ID + "beforeUpload" };
-			_beforeUpload.Style["float"] = "left";
+			if (FileUploadImplementation.RendersSelf)
+				_beforeUpload.Style["float"] = "left";
 			Controls.Add(_beforeUpload);
 
 			if (!string.IsNullOrEmpty(_currentFileName))
@@ -106,10 +107,12 @@ namespace Zeus.Web.UI.WebControls
 			_duringUpload = new HtmlGenericControl("div") { ID = ID + "duringUpload", InnerText = "Uploading..." };
 			Controls.Add(_duringUpload);
 			_duringUpload.Style[HtmlTextWriterStyle.Display] = "none";
-			_duringUpload.Style["float"] = "left";
+			if (FileUploadImplementation.RendersSelf)
+				_duringUpload.Style["float"] = "left";
 
 			_afterUpload = new HtmlGenericControl("div") { ID = ID + "afterUpload", InnerText = "Finished Upload", Disabled = !Enabled };
-			_afterUpload.Style["float"] = "left";
+			if (FileUploadImplementation.RendersSelf)
+				_afterUpload.Style["float"] = "left";
 			Controls.Add(_afterUpload);
 
 			FileUploadImplementation.AddChildControls();
@@ -136,7 +139,9 @@ namespace Zeus.Web.UI.WebControls
 				_afterUpload.InnerText = _hiddenFileNameField.Value;
 			}
 
-			_beforeUploadAnchor.Attributes["onclick"] = FileUploadImplementation.StartUploadJavascriptFunction + "; return false;";
+			if (Enabled)
+				_beforeUploadAnchor.Attributes["onclick"] = FileUploadImplementation.StartUploadJavascriptFunction + "; return false;";
+			_beforeUploadAnchor.Disabled = !Enabled;
 
 			ScriptManager.RegisterClientScriptResource(this, typeof(FileDataEditor), "Zeus.Web.Resources.FileDataEditor.FileDataEditor.js");
 

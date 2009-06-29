@@ -112,7 +112,7 @@ namespace Zeus.Web
 						url = url.AppendQuery("page", item.ID);
 
 					// Prepend language identifier, if this is not the default language.
-					if (languageCode != _languageManager.GetDefaultLanguage() && !string.IsNullOrEmpty(languageCode))
+					if (!LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name) && !string.IsNullOrEmpty(languageCode))
 						url = url.PrependSegment(languageCode);
 
 					// we've reached the start page so we're done here

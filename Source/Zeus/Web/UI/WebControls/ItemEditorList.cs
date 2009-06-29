@@ -20,7 +20,8 @@ namespace Zeus.Web.UI.WebControls
 		private PlaceHolder itemEditorsContainer;
 		private ContentItem parentItem;
 		private List<string> addedTypes = new List<string>();
-		private List<ItemEditView> itemEditors = new List<ItemEditView>();
+		private readonly List<ItemEditView> itemEditors = new List<ItemEditView>();
+		private readonly List<ImageButton> _deleteButtons = new List<ImageButton>();
 		private List<int> deletedIndexes = new List<int>();
 		private int itemEditorIndex = 0;
 
@@ -99,6 +100,18 @@ namespace Zeus.Web.UI.WebControls
 		public ContentType CurrentItemDefinition
 		{
 			get { return Definitions[Type.GetType(ParentItemType)]; }
+		}
+
+		public override bool Enabled
+		{
+			get { return base.Enabled; }
+			set
+			{
+				EnsureChildControls();
+				_deleteButtons.ForEach(b => b.Enabled = value);
+				itemEditors.ForEach(ie => ie.Enabled = value);
+				base.Enabled = value;
+			}
 		}
 
 		#endregion
@@ -235,6 +248,8 @@ namespace Zeus.Web.UI.WebControls
 			b.CommandArgument = itemEditorIndex.ToString();
 			b.CausesValidation = false;
 			b.Click += DeleteItemClick;
+
+			_deleteButtons.Add(b);
 		}
 
 		private void DeleteItemClick(object sender, ImageClickEventArgs e)

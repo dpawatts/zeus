@@ -27,7 +27,7 @@ namespace Zeus.Serialization
 			using (ElementWriter detailElement = new ElementWriter("property", writer))
 			{
 				detailElement.WriteAttribute("name", detail.Name);
-				detailElement.WriteAttribute("typeName", detail.ValueType.GetTypeAndAssemblyName());
+				detailElement.WriteAttribute("typeName", detail.Value.GetType().GetTypeAndAssemblyName());
 
 				if (detail is ObjectProperty)
 				{

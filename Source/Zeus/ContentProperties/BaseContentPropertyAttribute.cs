@@ -8,10 +8,14 @@ namespace Zeus.ContentProperties
 	public abstract class BaseContentPropertyAttribute : Attribute, IContentProperty
 	{
 		protected BaseContentPropertyAttribute(string title, int sortOrder)
+			: this()
 		{
 			Title = title;
 			SortOrder = sortOrder;
+		}
 
+		private BaseContentPropertyAttribute()
+		{
 			Shared = true;
 		}
 

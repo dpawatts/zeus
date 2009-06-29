@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 
@@ -31,6 +32,19 @@ namespace Zeus.Web.UI.WebControls
 				base.CurrentItem = value;
 				if (value != null && ((ContentItem) value).VersionOf != null && ((ContentItem) value).ID == 0)
 					VersioningMode = ItemEditorVersioningMode.SaveOnly;
+			}
+		}
+
+		public override bool Enabled
+		{
+			get { return base.Enabled; }
+			set
+			{
+				EnsureChildControls();
+				foreach (Control propertyControl in PropertyControls.Values)
+					if (propertyControl is WebControl)
+						((WebControl)propertyControl).Enabled = value;
+				base.Enabled = value;
 			}
 		}
 

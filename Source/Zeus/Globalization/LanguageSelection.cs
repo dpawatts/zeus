@@ -20,5 +20,20 @@ namespace Zeus.Globalization
 				return (languageCode1.IndexOf(languageCode2, StringComparison.OrdinalIgnoreCase) >= 0);
 			return (string.Compare(languageCode1, 0, languageCode2, 0, index, StringComparison.OrdinalIgnoreCase) == 0);
 		}
+
+		public static bool IsHostLanguageMatch(string requestedLanguage)
+		{
+			return (string.Compare(GetLanguageFromHost(), requestedLanguage, StringComparison.OrdinalIgnoreCase) == 0);
+		}
+
+		public static string GetLanguageFromHost()
+		{
+			return Context.Current.Host.GetLanguageFromHostName();
+		}
+
+		public static string GetHostFromLanguage(string languageCode)
+		{
+			return Context.Current.Host.CurrentSite.GetHostName(languageCode);
+		}
 	}
 }
