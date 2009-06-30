@@ -17,7 +17,7 @@ namespace Zeus.Templates.ContentTypes.News
 
 		public override NewsContainer CurrentNewsContainer
 		{
-			get { return (Parent is NewsMonth) ? ((NewsMonth) Parent).CurrentNewsContainer : (NewsContainer) Parent; }
+			get { return (GetParent() is NewsMonth) ? ((NewsMonth)GetParent()).CurrentNewsContainer : (NewsContainer)GetParent(); }
 		}
 
 		[ContentProperty("Date", 30)]
@@ -33,7 +33,7 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return Date.ToLongDateString(); }
 		}
 
-		[ContentProperty("Content", 40)]
+		[ContentProperty("Content", 40, Shared = false)]
 		[HtmlTextBoxEditor(ContainerName = "Content")]
 		public virtual string Content
 		{

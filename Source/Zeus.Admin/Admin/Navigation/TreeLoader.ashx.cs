@@ -20,7 +20,7 @@ namespace Zeus.Admin.Navigation
 
 			//if (context.User.Identity.Name != "administrator")
 			//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
-			TreeNode tree = Zeus.Web.Tree.From(selectedItem, 2)
+			TreeNode tree = Zeus.Web.Tree.From(selectedItem.TranslationOf ?? selectedItem, 2)
 				.LinkProvider(BuildLink)
 				.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read))
 				.ToControl();

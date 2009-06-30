@@ -7,7 +7,7 @@ namespace Zeus.Templates.ContentTypes
 	[TabPanel("Content", "Content", 10)]
 	public abstract class BaseContentItem : ContentItem
 	{
-		[TextBoxEditor("Title", 10, Required = true, ContainerName = "Content")]
+		[TextBoxEditor("Title", 10, Required = true, ContainerName = "Content", Shared = false)]
 		public override string Title
 		{
 			get { return base.Title; }

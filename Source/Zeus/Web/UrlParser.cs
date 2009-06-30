@@ -112,8 +112,13 @@ namespace Zeus.Web
 						url = url.AppendQuery("page", item.ID);
 
 					// Prepend language identifier, if this is not the default language.
-					if (!LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name) && !string.IsNullOrEmpty(languageCode))
-						url = url.PrependSegment(languageCode);
+					if (!LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
+					{
+						if (LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name) != _webContext.LocalUrl.Authority)
+							url = url.SetAuthority(LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name));
+						else if (!string.IsNullOrEmpty(languageCode))
+							url = url.PrependSegment(languageCode);
+					}
 
 					// we've reached the start page so we're done here
 					return Url.ToAbsolute("~" + url.PathAndQuery);

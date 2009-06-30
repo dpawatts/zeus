@@ -4,6 +4,7 @@ using Isis.Web;
 using Isis.Web.Hosting;
 using Zeus.Web.UI;
 
+[assembly: EmbeddedResourceFile("Zeus.Admin.AffectedItems.ascx", "Zeus.Admin")]
 namespace Zeus.Admin
 {
 	public partial class AffectedItems : System.Web.UI.UserControl, IContentTemplate

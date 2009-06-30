@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using Zeus.Admin;
+using Zeus.ContentProperties;
 using Zeus.FileSystem;
 
 namespace Zeus.Web.Handlers
@@ -18,7 +19,22 @@ namespace Zeus.Web.Handlers
 			if (contentItem == null)
 				return;
 
-			FileData fileData = contentItem.GetDetail(context.Request.QueryString["DetailName"]) as FileData;
+			FileData fileData;
+			if (!string.IsNullOrEmpty(context.Request.QueryString["DetailCollectionName"]))
+			{
+				PropertyCollection propertyCollection = contentItem.GetDetailCollection(context.Request.QueryString["DetailCollectionName"], false);
+				if (propertyCollection == null)
+					return;
+
+				if (string.IsNullOrEmpty(context.Request.QueryString["Index"]))
+					return;
+
+				fileData = propertyCollection[Convert.ToInt32(context.Request.QueryString["Index"])] as FileData;
+			}
+			else
+			{
+				fileData = contentItem.GetDetail(context.Request.QueryString["DetailName"]) as FileData;
+			}
 			if (fileData == null)
 				return;
 

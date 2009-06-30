@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Zeus.Collections
+﻿namespace Zeus.Collections
 {
 	public class TreeHierarchyBuilder : HierarchyBuilder
 	{
-		private ContentItem _rootItem;
-		private int _maxDepth;
+		private readonly ContentItem _rootItem;
+		private readonly int _maxDepth;
 
 		public TreeHierarchyBuilder(ContentItem rootItem)
 			: this(rootItem, int.MaxValue)

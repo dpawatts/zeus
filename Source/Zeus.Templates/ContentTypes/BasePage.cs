@@ -8,7 +8,7 @@ namespace Zeus.Templates.ContentTypes
 	[TabPanel("SEO", "SEO", 20)]
 	public abstract class BasePage : BaseContentItem
 	{
-		[ContentProperty("HTML Title", 11, Description = "Used in the &lt;title&gt; element on the page")]
+		[ContentProperty("HTML Title", 11, Description = "Used in the &lt;title&gt; element on the page", Shared = false)]
 		[TextBoxEditor(ContainerName = "SEO")]
 		public virtual string HtmlTitle
 		{
@@ -16,7 +16,7 @@ namespace Zeus.Templates.ContentTypes
 			set { SetDetail("HtmlTitle", value); }
 		}
 
-		[ContentProperty("Page Title", 12, Description = "Used in the &lt;h1&gt; element on the page")]
+		[ContentProperty("Page Title", 12, Description = "Used in the &lt;h1&gt; element on the page", Shared = false)]
 		[TextBoxEditor(ContainerName = "SEO")]
 		public virtual string PageTitle
 		{
@@ -24,7 +24,7 @@ namespace Zeus.Templates.ContentTypes
 			set { SetDetail("PageTitle", value); }
 		}
 
-		[NameEditor("URL", 20, Required = true, ContainerName = "Content")]
+		[NameEditor("URL", 20, Required = true, ContainerName = "Content", Shared = false)]
 		public override string Name
 		{
 			get { return base.Name; }

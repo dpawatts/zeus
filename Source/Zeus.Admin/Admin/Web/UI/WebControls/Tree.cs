@@ -39,6 +39,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 
 			string path = Page.Request.GetOptionalString("selected");
 			_selectedItem = (!string.IsNullOrEmpty(path)) ? Zeus.Context.Current.Resolve<Navigator>().Navigate(path) : RootNode;
+			_selectedItem = _selectedItem.TranslationOf ?? _selectedItem;
 
 			//if (Page.User.Identity.Name != "administrator")
 			//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);

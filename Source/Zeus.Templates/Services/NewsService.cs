@@ -28,23 +28,23 @@ namespace Zeus.Templates.Services
 
 		public void Start()
 		{
-			_persister.ItemSaving += Persister_ItemSaving;
+			_persister.ItemSaving += OnPersisterItemSaving;
 		}
 
-		private void Persister_ItemSaving(object sender, CancelItemEventArgs e)
+		private void OnPersisterItemSaving(object sender, CancelItemEventArgs e)
 		{
-			if (e.AffectedItem is NewsItem)
+			if (e.AffectedItem is NewsItem && e.AffectedItem.TranslationOf == null)
 			{
 				// Move news item to correct year / month, creating them if necessary.
 				NewsItem newsItem = (NewsItem) e.AffectedItem;
 
 				// Get or create year item.
 				NewsYear year = (NewsYear) newsItem.CurrentNewsContainer.GetChild(newsItem.Date.ToString("yyyy"))
-				                ?? CreateItem<NewsYear>(newsItem.CurrentNewsContainer, newsItem.Date.ToString("yyyy"), newsItem.Date.ToString("yyyy"));
+					?? CreateItem<NewsYear>(newsItem.CurrentNewsContainer, newsItem.Date.ToString("yyyy"), newsItem.Date.ToString("yyyy"));
 
 				// Get or create month item.
 				NewsMonth month = (NewsMonth) year.GetChild(newsItem.Date.ToString("MM"))
-				                  ?? CreateItem<NewsMonth>(year, newsItem.Date.ToString("MM"), newsItem.Date.ToString("MMMM"));
+					?? CreateItem<NewsMonth>(year, newsItem.Date.ToString("MM"), newsItem.Date.ToString("MMMM"));
 
 				// Add news item to month.
 				newsItem.AddTo(month);
