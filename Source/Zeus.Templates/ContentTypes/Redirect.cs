@@ -1,4 +1,5 @@
 using Zeus.Design.Editors;
+using Zeus.Globalization;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes
@@ -12,7 +13,12 @@ namespace Zeus.Templates.ContentTypes
 	{
 		public override string Url
 		{
-			get { return Isis.Web.Url.ToAbsolute(RedirectItem.Url); }
+			get { return Isis.Web.Url.ToAbsolute(GetRedirectItem().Url); }
+		}
+
+		protected virtual ContentItem GetRedirectItem()
+		{
+			return Context.Current.LanguageManager.GetTranslation(RedirectItem, ContentLanguage.PreferredCulture.Name) ?? RedirectItem;
 		}
 
 		public override string HtmlTitle

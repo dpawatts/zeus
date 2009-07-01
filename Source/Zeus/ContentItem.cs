@@ -749,9 +749,13 @@ namespace Zeus
 		/// <returns></returns>
 		public virtual ContentItem GetParent()
 		{
-			if (TranslationOf != null)
-				return TranslationOf.Parent;
-			return Parent;
+			ContentItem realItem = TranslationOf ?? this;
+			ContentItem parent = realItem.Parent;
+
+			if (parent == null)
+				return null;
+
+			return Context.Current.LanguageManager.GetTranslation(parent, ContentLanguage.PreferredCulture.Name) ?? parent;
 		}
 
 		/// <summary>

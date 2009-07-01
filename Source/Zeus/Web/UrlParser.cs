@@ -121,7 +121,8 @@ namespace Zeus.Web
 					}
 
 					// we've reached the start page so we're done here
-					return Url.ToAbsolute("~" + url.PathAndQuery);
+					return url;
+					//return Url.ToAbsolute("~" + url.PathAndQuery);
 				}
 
 				url = url.PrependSegment(current.Name, current.Extension);

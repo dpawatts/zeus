@@ -15,6 +15,11 @@ namespace Zeus.Admin.Globalization
 			// Hide, if globalization is disabled.
 			if (!Context.Current.Resolve<GlobalizationSection>().Enabled)
 				return ActionPluginState.Hidden;
+
+			// Hide, if current item is not translatable.
+			if (!Context.Current.LanguageManager.CanBeTranslated(contentItem))
+				return ActionPluginState.Hidden;
+
 			return base.GetState(contentItem, webContext, securityManager);
 		}
 	}

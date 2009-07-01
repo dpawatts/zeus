@@ -42,6 +42,7 @@ namespace Zeus.Admin
 						ContentItem selectedItem = Engine.ContentTypes.CreateInstance(SelectedItem.GetType(), SelectedItem.Parent);
 						selectedItem.Language = SelectedLanguageCode;
 						selectedItem.TranslationOf = SelectedItem;
+						SelectedItem.Translations.Add(selectedItem);
 						selectedItem.Parent = null;
 						zeusItemEditView.CurrentItem = selectedItem;
 					}
@@ -59,7 +60,7 @@ namespace Zeus.Admin
 			}
 
 			hlCancel.NavigateUrl = CancelUrl();
-			pnlPageView.Visible = GlobalizationEnabled;
+			plcLanguages.Visible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
 
 			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
 			{

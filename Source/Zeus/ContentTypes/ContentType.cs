@@ -90,6 +90,8 @@ namespace Zeus.ContentTypes
 			get { return ContentTypeAttribute.Title; }
 		}
 
+		public bool Translatable { get; set; }
+
 		#endregion
 
 		#region Constructor

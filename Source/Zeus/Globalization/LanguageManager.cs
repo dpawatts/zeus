@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.Configuration;
+using Zeus.ContentTypes;
 using Zeus.FileSystem.Images;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
@@ -14,21 +15,26 @@ namespace Zeus.Globalization
 		private readonly IPersister _persister;
 		private readonly IFinder<ContentItem> _finder;
 		private readonly IHost _host;
+		private readonly IContentTypeManager _contentTypeManager;
 		private readonly GlobalizationSection _globalizationConfig;
 
 		#region Constructor
 
-		public LanguageManager(IPersister persister, IFinder<ContentItem> finder, IHost host)
-			: this(persister, finder, host, null)
+		public LanguageManager(IPersister persister, IFinder<ContentItem> finder,
+			IHost host, IContentTypeManager contentTypeManager)
+			: this(persister, finder, host, contentTypeManager, null)
 		{
 
 		}
 
-		public LanguageManager(IPersister persister, IFinder<ContentItem> finder, IHost host, GlobalizationSection globalizationConfig)
+		public LanguageManager(IPersister persister, IFinder<ContentItem> finder,
+			IHost host, IContentTypeManager contentTypeManager,
+			GlobalizationSection globalizationConfig)
 		{
 			_persister = persister;
 			_finder = finder;
 			_host = host;
+			_contentTypeManager = contentTypeManager;
 			_globalizationConfig = globalizationConfig;
 		}
 
@@ -57,6 +63,10 @@ namespace Zeus.Globalization
 		/// <returns></returns>
 		public ContentItem GetTranslation(ContentItem contentItem, string languageCode)
 		{
+			// If item can't be translated, return it immediately.
+			if (!CanBeTranslated(contentItem))
+				return contentItem;
+
 			// Get original item.
 			if (contentItem.TranslationOf != null)
 				contentItem = contentItem.TranslationOf;
@@ -95,6 +105,8 @@ namespace Zeus.Globalization
 					break;
 				contentItem = contentItem.Parent;
 			}
+			if (contentItem == null)
+				return null;
 			return contentItem.LanguageSettings.SingleOrDefault(ls => ls.Language == languageCode);
 		}
 
@@ -123,6 +135,18 @@ namespace Zeus.Globalization
 
 			result.AddRange(originalLanguageItem.Translations);
 			return result;
+		}
+
+		/// <summary>
+		/// Returns true if this content item can be translated. This method
+		/// checks if the content type for this content item has been decorated
+		/// with the [Translatable] attribute.
+		/// </summary>
+		/// <param name="contentItem"></param>
+		/// <returns></returns>
+		public bool CanBeTranslated(ContentItem contentItem)
+		{
+			return _contentTypeManager.GetContentType(contentItem.GetType()).Translatable;
 		}
 
 		public bool TranslationExists(ContentItem contentItem, string languageCode)

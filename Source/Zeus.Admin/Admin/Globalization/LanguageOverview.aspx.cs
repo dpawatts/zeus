@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
@@ -49,7 +50,7 @@ namespace Zeus.Admin.Globalization
 		private void CreateRows(IEnumerable<Language> languages)
 		{
 			CreateRow(SelectedItem, languages, 5);
-			foreach (ContentItem child in SelectedItem.GetChildren())
+			foreach (ContentItem child in SelectedItem.GetChildren().Where(ci => Engine.LanguageManager.CanBeTranslated(ci)))
 				CreateRow(child, languages, 15);
 		}
 

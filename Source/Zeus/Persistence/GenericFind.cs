@@ -88,7 +88,7 @@ namespace Zeus.Persistence
 		{
 			if (item.VersionOf != null) item = item.VersionOf;
 
-			foreach (ContentItem child in item.GetChildren())
+			foreach (ContentItem child in item.GetGlobalizedChildren())
 			{
 				yield return child;
 				foreach (ContentItem childItem in EnumerateAccessibleChildren(child))

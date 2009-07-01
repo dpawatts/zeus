@@ -3,7 +3,9 @@
 <%@ Register TagPrefix="zeus" TagName="AvailableZones" Src="~/Admin/AvailableZones.ascx" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<asp:Panel runat="server" ID="pnlPageView" CssClass="rightAligned">
-		<b>Page view:</b> <admin:LanguageDropDownList runat="server" ID="ddlLanguages" OnLanguageChanged="ddlLanguages_LanguageChanged" />
+		<asp:PlaceHolder runat="server" ID="plcLanguages" Visible="false">
+			<b>Page view:</b> <admin:LanguageDropDownList runat="server" ID="ddlLanguages" OnLanguageChanged="ddlLanguages_LanguageChanged" />
+		</asp:PlaceHolder>
 		<asp:HyperLink runat="server" ID="hplZones" CssClass="showZones command" NavigateUrl="javascript:void(0);">Zones</asp:HyperLink>
 	</asp:Panel>
 	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save and publish" ImageResourceName="Zeus.Admin.Assets.Images.Icons.page_save.png" CssClass="positive" OnClick="btnSave_Click" />

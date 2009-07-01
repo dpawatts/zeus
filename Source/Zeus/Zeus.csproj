@@ -213,6 +213,7 @@
     <Compile Include="Globalization\ContentTypes\Language.cs" />
     <Compile Include="Globalization\ILanguageManager.cs" />
     <Compile Include="Globalization\LanguageManager.cs" />
+    <Compile Include="Globalization\TranslatableAttribute.cs" />
     <Compile Include="Installation\DatabaseStatus.cs" />
     <Compile Include="Installation\InstallerHints.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />

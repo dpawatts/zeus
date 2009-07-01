@@ -41,7 +41,7 @@ namespace Zeus.Templates.Mvc
 		public static string NavigationLinks(this HtmlHelper html, string prefix, string postfix, string activePageCssClass, ContentItem currentPage)
 		{
 			string result = prefix;
-			foreach (ContentItem contentItem in Find.StartPage.GetChildren().Navigable())
+			foreach (ContentItem contentItem in Find.StartPage.GetGlobalizedChildren().Navigable())
 				result += string.Format("<li {1}><a href=\"{0}\">{2}</a></li>",
 					contentItem.Url,
 					(((contentItem is Redirect) && ((Redirect) contentItem).RedirectItem == currentPage) || Find.IsAccessibleChildOrSelf(contentItem, currentPage)) ? " class=\"" + activePageCssClass + "\"" : string.Empty,

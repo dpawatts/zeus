@@ -259,7 +259,7 @@ namespace Zeus.Design.Editors
 		{
 			UpdateEditorInternal(item, editor);
 
-			if (Context.Current.LanguageManager.Enabled && !editor.Page.IsPostBack)
+			if (Context.Current.LanguageManager.Enabled && Context.Current.LanguageManager.CanBeTranslated((ContentItem) item) && !editor.Page.IsPostBack)
 			{
 				bool enabled = !Shared || ((ContentItem) item).TranslationOf == null;
 				string globeTooltip = null;

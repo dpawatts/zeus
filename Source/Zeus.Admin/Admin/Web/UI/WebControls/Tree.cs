@@ -173,6 +173,9 @@ namespace Zeus.Admin.Web.UI.WebControls
 			if (contentItem == null)
 				return TranslationStatus.Available;
 
+			if (!Zeus.Context.Current.LanguageManager.CanBeTranslated(contentItem))
+				return TranslationStatus.Available;
+
 			if (string.IsNullOrEmpty(contentItem.Language))
 				return TranslationStatus.Available;
 

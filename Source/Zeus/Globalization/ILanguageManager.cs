@@ -13,6 +13,15 @@ namespace Zeus.Globalization
 		/// <returns>A list of translations of the item.</returns>
 		IList<ContentItem> GetTranslationsOf(ContentItem originalLanguageItem, bool includeOriginal);
 
+		/// <summary>
+		/// Returns true if this content item can be translated. This method
+		/// checks if the content type for this content item has been decorated
+		/// with the [Translatable] attribute.
+		/// </summary>
+		/// <param name="contentItem"></param>
+		/// <returns></returns>
+		bool CanBeTranslated(ContentItem contentItem);
+
 		string GetDefaultLanguage();
 		Language GetLanguage(string languageCode);
 		ContentItem GetTranslationDirect(ContentItem contentItem, string languageCode);

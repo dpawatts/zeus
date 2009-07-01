@@ -59,7 +59,8 @@ namespace Zeus.Web
 				if (startPage.ID == Host.CurrentSite.StartPageID)
 				{
 					// the start page belongs to the current site, use relative url
-					return Url.ToAbsolute("~" + url.PathAndQuery);
+					return url;
+					//return Url.ToAbsolute("~" + url.PathAndQuery);
 				}
 
 				// find the start page and use it's host name

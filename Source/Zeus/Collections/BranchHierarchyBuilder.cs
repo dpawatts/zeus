@@ -40,7 +40,7 @@ namespace Zeus.Collections
 
 				foreach (ContentItem childItem in GetChildren(currentItem))
 				{
-					if (previousNode != null && previousNode.Current == childItem)
+					if (previousNode != null && (previousNode.Current == childItem || previousNode.Current.TranslationOf == childItem))
 					{
 						currentNode.Children.Add(previousNode);
 					}
