@@ -14,7 +14,7 @@ namespace Zeus.Web
 
 		private readonly IPersister _persister;
 		private readonly IHost _host;
-		private readonly IWebContext _webContext;
+		protected readonly IWebContext _webContext;
 		private readonly bool _ignoreExistingFiles;
 		private readonly ILanguageManager _languageManager;
 		private readonly bool _useBrowserLanguagePreferences;

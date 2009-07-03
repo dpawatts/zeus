@@ -41,6 +41,11 @@ namespace Zeus.Web
 			return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey);
 		}
 
+		public override ContentItem StartPage
+		{
+			get { return GetStartPage(_webContext.Url); }
+		}
+
 		protected override ContentItem GetStartPage(Url url)
 		{
 			if (!url.IsAbsolute)
