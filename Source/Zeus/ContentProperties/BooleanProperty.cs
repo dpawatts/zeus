@@ -43,9 +43,9 @@ namespace Zeus.ContentProperties
 			get { return typeof(bool); }
 		}
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
-			return new CheckBoxEditorAttribute(title, string.Empty, sortOrder);
+			return new CheckBoxEditorAttribute(title, string.Empty, sortOrder) { ContainerName = containerName };
 		}
 	}
 }

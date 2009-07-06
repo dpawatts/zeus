@@ -3,12 +3,14 @@ using System.Web.UI.WebControls;
 using Isis.Web;
 using Isis.Web.UI;
 using Zeus.Design.Editors;
+using Zeus.Globalization;
 using Zeus.Integrity;
 
 namespace Zeus.AddIns.Forums.ContentTypes
 {
 	[ContentType]
 	[RestrictParents(typeof(Topic))]
+	[Translatable(false)]
 	public class Post : ContentItem
 	{
 		public override string IconUrl

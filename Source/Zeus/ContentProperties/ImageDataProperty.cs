@@ -23,9 +23,9 @@ namespace Zeus.ContentProperties
 
 		#region Methods
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
-			return new ImageDataUploadEditorAttribute(title, sortOrder);
+			return new ImageDataUploadEditorAttribute(title, sortOrder) { ContainerName = containerName };
 		}
 
 		#endregion

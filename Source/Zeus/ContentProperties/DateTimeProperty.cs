@@ -38,9 +38,9 @@ namespace Zeus.ContentProperties
 			get { return typeof(DateTime); }
 		}
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
-			return new DateEditorAttribute(title, sortOrder);
+			return new DateEditorAttribute(title, sortOrder) { ContainerName = containerName };
 		}
 	}
 }

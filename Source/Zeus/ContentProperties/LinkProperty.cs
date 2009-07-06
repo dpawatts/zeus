@@ -53,9 +53,9 @@ namespace Zeus.ContentProperties
 			get { return typeof(ContentItem); }
 		}
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
-			return new LinkedItemDropDownListEditor(title, sortOrder) { TypeFilter = propertyType };
+			return new LinkedItemDropDownListEditor(title, sortOrder) { TypeFilter = propertyType, ContainerName = containerName };
 		}
 	}
 }

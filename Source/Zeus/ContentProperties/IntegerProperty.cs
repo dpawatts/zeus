@@ -43,9 +43,9 @@ namespace Zeus.ContentProperties
 			get { return typeof(int); }
 		}
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
-			return new TextBoxEditorAttribute(title, sortOrder, 10);
+			return new TextBoxEditorAttribute(title, sortOrder, 10) { ContainerName = containerName };
 		}
 	}
 }

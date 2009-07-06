@@ -13,7 +13,7 @@ namespace Zeus
 	{
 		#region Fields
 
-		private Type _propertyDataType;
+		private readonly Type _propertyDataType;
 
 		#endregion
 
@@ -35,6 +35,7 @@ namespace Zeus
 
 		#region Properties
 
+		public string EditorContainerName { get; set; }
 		public PropertyInfo UnderlyingProperty { get; set; }
 
 		#endregion
@@ -44,7 +45,7 @@ namespace Zeus
 		protected override IEditor GetDefaultEditorInternal(Type propertyType)
 		{
 			PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
-			return propertyData.GetDefaultEditor(Title, SortOrder, propertyType);
+			return propertyData.GetDefaultEditor(Title, SortOrder, propertyType, EditorContainerName);
 		}
 
 		public override Type GetPropertyDataType()

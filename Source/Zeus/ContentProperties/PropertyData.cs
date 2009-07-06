@@ -78,7 +78,7 @@ namespace Zeus.ContentProperties
 
 		#region Methods
 
-		public abstract IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType);
+		public abstract IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName);
 
 		public virtual string GetXhtmlValue()
 		{

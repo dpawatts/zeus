@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using Isis.Web;
 using Isis.Web.UI;
 using Zeus.Design.Editors;
+using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
@@ -13,6 +14,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	[ContentType]
 	[RestrictParents(typeof(MessageBoard), typeof(Forum))]
 	[Template("~/UI/Views/Forums/Forum.aspx")]
+	[Translatable(false)]
 	public class Forum : BasePage
 	{
 		public override string IconUrl

@@ -43,7 +43,7 @@ namespace Zeus.ContentProperties
 
 		#region Methods
 
-		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType)
+		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
 			return null;
 		}

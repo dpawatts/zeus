@@ -3,6 +3,7 @@ using System.Linq;
 using Isis.Web;
 using Isis.Web.UI;
 using Zeus.Design.Editors;
+using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
@@ -12,6 +13,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	[ContentType]
 	[RestrictParents(typeof(Forum))]
 	[Template("~/UI/Views/Forums/Topic.aspx")]
+	[Translatable(false)]
 	public class Topic : BasePage
 	{
 		public override string IconUrl

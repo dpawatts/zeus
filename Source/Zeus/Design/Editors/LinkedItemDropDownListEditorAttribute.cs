@@ -43,12 +43,13 @@ namespace Zeus.Design.Editors
 
 		protected override ListItem[] GetListItems(IEditableObject item)
 		{
-			IEnumerable<ContentItem> items = Context.Current.Finder.Items().Distinct(ci => ci.ID);
+			IQueryable<ContentItem> items = Context.Current.Finder.Items();
 			if (TypeFilter != null)
-				items = items.OfType(TypeFilter);
+				items = ((IQueryable) items).OfType(TypeFilter).OfType<ContentItem>();
 			if (ExcludeSelf)
 				items = items.Where(i => i != item);
-			return items.OrderBy(i => i.HierarchicalTitle)
+			return items.ToList()
+				.OrderBy(i => i.HierarchicalTitle)
 				.Select(i => new ListItem {Value = i.ID.ToString(), Text = i.HierarchicalTitle})
 				.ToArray();
 		}
