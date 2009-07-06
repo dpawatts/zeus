@@ -92,6 +92,7 @@
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\IEmailSender.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="TemplatesInitializer.cs" />
   </ItemGroup>

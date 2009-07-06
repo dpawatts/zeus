@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Controllers\BaseController.generic.cs" />
     <Compile Include="Controllers\Forms\FormPageController.cs" />
+    <Compile Include="Controllers\PageController.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

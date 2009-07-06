@@ -3,7 +3,7 @@ using System;
 namespace Zeus.Web.Mvc
 {
 	/// <summary>
-	/// Helps the N2's MVC route handler to deal with actions in url.
+	/// Helps Zeus's MVC route handler to deal with actions in url.
 	/// </summary>
 	public class ActionResolver : IPathFinder
 	{

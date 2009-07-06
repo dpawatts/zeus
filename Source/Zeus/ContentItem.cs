@@ -244,14 +244,6 @@ namespace Zeus
 			}
 		}
 
-		/// <summary>
-		/// If this content item has been loaded as a fallback translation when the page doesn't exist
-		/// in the desired language, this property stores the originally requested language, which is different from
-		/// this content item's language. This property is not persisted to the database, it is purely
-		/// in-memory.
-		/// </summary>
-		public string ActiveLanguage { get; set; }
-
 		#endregion
 
 		/// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
