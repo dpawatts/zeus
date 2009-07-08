@@ -27,6 +27,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 
 		protected override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
+			TypedViewData.ForumService = ForumService;
 			TypedViewData.CurrentMember = CurrentMember;
 			TypedViewData.SearchUrl = SearchUrl;
 			base.OnActionExecuting(filterContext);
@@ -36,6 +37,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 	public interface IBaseForumViewData<T> : IViewData<T>
 		where T : BasePage
 	{
+		IForumService ForumService { get; set; }
 		Member CurrentMember { get; set; }
 		string SearchUrl { get; set; }
 	}

@@ -464,6 +464,7 @@
             
             </summary>
             <param name="loadImage">If true, the Image property of CompositionImage will be assigned; otherwise, it will be null</param>
+            <param name="useCache"></param>
             <returns></returns>
         </member>
         <member name="M:SoundInTheory.DynamicImage.Composition.LoadViewState(System.Object)">

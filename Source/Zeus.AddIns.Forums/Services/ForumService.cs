@@ -65,6 +65,20 @@ namespace Zeus.AddIns.Forums.Services
 			Context.Persister.Delete(topic);
 		}
 
+		public bool CanEditPost(Post post, Member member)
+		{
+			if (member == null)
+				return false;
+
+			if (post.Author == member)
+				return true;
+
+			if (post.Topic.Forum.Moderator != null && post.Topic.Forum.Moderator == member)
+				return true;
+
+			return false;
+		}
+
 		public Post CreateReply(Topic topic, Member member, string subject, string message)
 		{
 			// Create post.

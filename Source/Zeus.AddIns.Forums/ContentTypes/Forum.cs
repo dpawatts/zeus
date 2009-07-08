@@ -22,14 +22,15 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			get { return WebResourceUtility.GetUrl(typeof(Forum), "Zeus.AddIns.Forums.Web.Resources.comment.png"); }
 		}
 
-		[TextBoxEditor("Description", 20, TextMode = TextBoxMode.MultiLine)]
+		[ContentProperty("Description", 20, EditorContainerName = "Content")]
+		[TextBoxEditor(TextMode = TextBoxMode.MultiLine)]
 		public virtual string Description
 		{
 			get { return GetDetail("Description", string.Empty); }
 			set { SetDetail("Description", value); }
 		}
 
-		[LinkedItemDropDownListEditor("Moderator", 30, TypeFilter = typeof(Member))]
+		[ContentProperty("Moderator", 30, EditorContainerName = "Content")]
 		public virtual Member Moderator
 		{
 			get { return GetDetail<Member>("Moderator", null); }

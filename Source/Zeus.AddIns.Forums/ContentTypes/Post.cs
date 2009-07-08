@@ -18,28 +18,29 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			get { return WebResourceUtility.GetUrl(typeof(Forum), "Zeus.AddIns.Forums.Web.Resources.comment.png"); }
 		}
 
-		[TextBoxEditor("Subject", 10)]
+		[ContentProperty("Subject", 10)]
 		public override string Title
 		{
 			get { return base.Title; }
 			set { base.Title = value; }
 		}
 
-		[LinkedItemDropDownListEditor("Author", 20, TypeFilter = typeof(Member))]
+		[ContentProperty("Author", 20)]
 		public virtual Member Author
 		{
 			get { return GetDetail<Member>("Author", null); }
 			set { SetDetail("Author", value); }
 		}
 
-		[DateEditor("Date", 30)]
+		[ContentProperty("Date", 30)]
 		public override DateTime Created
 		{
 			get { return base.Created; }
 			set { base.Created = value; }
 		}
 
-		[TextBoxEditor("Message", 40, TextMode = TextBoxMode.MultiLine)]
+		[ContentProperty("Message", 40)]
+		[TextBoxEditor(TextMode = TextBoxMode.MultiLine)]
 		public virtual string Message
 		{
 			get { return GetDetail("Message", string.Empty); }

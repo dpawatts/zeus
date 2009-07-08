@@ -3,12 +3,12 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	public class PageController : Controller
+	public class PageNavigationController : Controller
 	{
 		public ActionResult Navigation(string url)
 		{
 			PathData pathData = Context.UrlParser.ResolvePath(url);
-			var viewData = new PageViewData
+			var viewData = new PageNavigationViewData
 			{
 				CurrentPage = pathData.CurrentItem
 			};
@@ -18,7 +18,7 @@ namespace Zeus.Templates.Mvc.Controllers
 		public ActionResult Breadcrumbs(string url)
 		{
 			PathData pathData = Context.UrlParser.ResolvePath(url);
-			var viewData = new PageViewData
+			var viewData = new PageNavigationViewData
 			{
 				CurrentPage = pathData.CurrentItem
 			};
@@ -26,7 +26,7 @@ namespace Zeus.Templates.Mvc.Controllers
 		}
 	}
 
-	public class PageViewData
+	public class PageNavigationViewData
 	{
 		public ContentItem CurrentPage;
 	}

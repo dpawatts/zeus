@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
 
@@ -23,9 +24,14 @@ namespace Zeus.Design.Editors
 			_max = max;
 		}
 
+		public bool Required { get; set; }
+
 		protected override ListItem[] GetListItems(IEditableObject contentItem)
 		{
-			return Enumerable.Range(_min, _max - _min + 1).Select(i => new ListItem(i.ToString())).ToArray();
+			List<ListItem> items = Enumerable.Range(_min, _max - _min + 1).Select(i => new ListItem(i.ToString())).ToList();
+			if (!Required)
+				items.Insert(0, new ListItem(string.Empty));
+			return items.ToArray();
 		}
 
 		protected override object GetValue(IEditableObject item)
