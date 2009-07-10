@@ -107,8 +107,8 @@ namespace Zeus.AddIns.Forums
 
 			// Lists
 			content = MatchReplace(@"\[\*\]([^[]+)", "<li>$1</li>", content);
-			content = MatchReplace(@"\[list\]([^]]+)\[/list\]", "</p><ul>$1</ul><p>", content);
-			content = MatchReplace(@"\[list=1\]([^]]+)\[/list\]", "</p><ol>$1</ol><p>", content);
+			content = MatchReplace(@"\[list\]([^]]+)\[/list\]", "</p><ul>$1</ul><p>", content, true);
+			content = MatchReplace(@"\[list=1\]([^]]+)\[/list\]", "</p><ol>$1</ol><p>", content, true);
 
 			// Headers
 			content = MatchReplace(@"\[h1\]([^]]+)\[/h1\]", "<h1>$1</h1>", content);
