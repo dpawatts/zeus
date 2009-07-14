@@ -10,7 +10,7 @@ namespace Zeus.Web.Handlers
 		{
 			HttpPostedFile postedFile = context.Request.Files["Filedata"];
 			Guid identifier = new Guid(context.Request.QueryString["identifier"]);
-			string fileName = context.Request.QueryString["file"];
+			string fileName = context.Server.UrlDecode(context.Request.QueryString["file"]);
 
 			// Work out (and create if necessary) the path to upload to.
 			string uploadFolder = GetUploadFolder(identifier, true);

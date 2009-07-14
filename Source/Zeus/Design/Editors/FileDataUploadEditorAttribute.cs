@@ -51,7 +51,7 @@ namespace Zeus.Design.Editors
 				// Populate FileData object.
 				newFile.FileName = fileEditor.FileName;
 				string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileEditor.Identifier);
-				string uploadedFile = Path.Combine(uploadFolder, fileEditor.FileName);
+				string uploadedFile = Path.Combine(uploadFolder, fileEditor.Page.Server.UrlDecode(fileEditor.FileName));
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
 					newFile.Data = fs.ReadAllBytes();
