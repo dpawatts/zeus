@@ -19,7 +19,7 @@ using PropertyCollection=System.Data.PropertyCollection;
 namespace Zeus.Installation
 {
 	/// <summary>
-	/// Wraps functionality to request database status and generate n2's 
+	/// Wraps functionality to request database status and generate Zeus's 
 	/// database schema on multiple database flavours.
 	/// </summary>
 	public class InstallationManager

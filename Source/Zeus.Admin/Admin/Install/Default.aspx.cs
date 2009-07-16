@@ -170,7 +170,7 @@ namespace Zeus.Admin.Install
 		/*protected void btnExportSchema_Click(object sender, EventArgs e)
 		{
 			Response.ContentType = "application/octet-stream";
-			Response.AddHeader("Content-Disposition", "attachment;filename=n2.sql");
+			Response.AddHeader("Content-Disposition", "attachment;filename=zeus.sql");
 
 			InstallationManager im = CurrentInstallationManager;
 			im.ExportSchema(Response.Output);

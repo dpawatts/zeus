@@ -62,7 +62,7 @@ namespace Zeus.Web.Security
 
 			User user = new User {Name = username, Password = password};
 			foreach (string role in roles)
-				user.Roles.Add(roleContainer.GetChild(role));
+				user.Roles.Add(roleContainer.GetRole(role));
 			user.AddTo(userContainer);
 
 			Context.Persister.Save(user);

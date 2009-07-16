@@ -49,7 +49,7 @@ namespace Zeus.Configuration
 			set { base["rewrite"] = value; }
 		}
 
-		/// <summary>Tells the rewriter whether it should rewrite when the url matches an existing file. By default N2 doesn't rewrite when the file exists.</summary>
+		/// <summary>Tells the rewriter whether it should rewrite when the url matches an existing file. By default Zeus doesn't rewrite when the file exists.</summary>
 		[ConfigurationProperty("ignoreExistingFiles", DefaultValue = false)]
 		public bool IgnoreExistingFiles
 		{

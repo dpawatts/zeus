@@ -14,7 +14,7 @@ namespace Zeus.Design.Editors
 	/// Attribute used to mark properties as editable. This attribute is predefined to use 
 	/// the <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
 	/// <example>
-	/// [N2.Details.EditableTextBox("Published", 80)]
+	/// [Zeus.Details.EditableTextBox("Published", 80)]
 	/// public override DateTime Published
 	/// {
 	///     get { return base.Published; } 

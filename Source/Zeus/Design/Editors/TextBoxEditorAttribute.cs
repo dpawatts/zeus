@@ -10,7 +10,7 @@ namespace Zeus.Design.Editors
 	/// Attribute used to mark properties as editable. This attribute is predefined to use 
 	/// the <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
 	/// <example>
-	/// [N2.Details.EditableTextBox("Published", 80)]
+	/// [Zeus.Details.EditableTextBox("Published", 80)]
 	/// public override DateTime Published
 	/// {
 	///     get { return base.Published; } 
@@ -69,7 +69,7 @@ namespace Zeus.Design.Editors
 
 		public string DataTypeErrorMessage
 		{
-			get { return _dataTypeErrorMessage ?? string.Format("{0} must be a valid {1}", Title, GetDataTypeName()); }
+			get { return _dataTypeErrorMessage ?? string.Format("{0} must be a valid {1}", Title, GetDataTypeName(true)); }
 			set { _dataTypeErrorMessage = value; }
 		}
 
@@ -87,7 +87,7 @@ namespace Zeus.Design.Editors
 			((TextBox) editor).ReadOnly = true;
 		}
 
-		private string GetDataTypeName()
+		private string GetDataTypeName(bool throwException)
 		{
 			Type propertyType = PropertyType.GetTypeOrUnderlyingType();
 			if (propertyType == typeof(int))
@@ -96,7 +96,9 @@ namespace Zeus.Design.Editors
 				return "number";
 			if (propertyType == typeof(DateTime))
 				return "date";
-			throw new NotSupportedException();
+			if (throwException)
+				throw new NotSupportedException();
+			return string.Empty;
 		}
 
 		protected override void AddValidators(Control panel, Control editor)
@@ -166,6 +168,7 @@ namespace Zeus.Design.Editors
 			tb.CssClass += " textEditor " + TextBoxCssClass;
 			if (Required)
 				tb.CssClass += " required";
+			tb.CssClass += " " + GetDataTypeName(false);
 			ModifyEditor(tb);
 			container.Controls.Add(tb);
 

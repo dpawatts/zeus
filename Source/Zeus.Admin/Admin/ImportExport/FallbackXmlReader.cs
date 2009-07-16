@@ -68,7 +68,7 @@ namespace Zeus.Admin.ImportExport
 		{
 			navigator.MoveToRoot();
 			if (!navigator.MoveToFirstChild())
-				throw new InvalidXmlException("Expected node n2 not found");
+				throw new InvalidXmlException("Expected node zeus not found");
 			if (!navigator.MoveToFirstChild())
 				throw new InvalidXmlException("Expected node item not found");
 		}

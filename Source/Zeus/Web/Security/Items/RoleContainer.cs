@@ -52,5 +52,13 @@ namespace Zeus.Web.Security.Items
 			if (role != null)
 				Children.Remove(role);
 		}
+
+		public virtual Role GetRole(string roleName)
+		{
+			Role role = GetChild(roleName) as Role;
+			if (role == null)
+				throw new ZeusException("Role '{0}' does not exist.", roleName);
+			return role;
+		}
 	}
 }

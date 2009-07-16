@@ -5,7 +5,7 @@ using Zeus.ContentTypes;
 namespace Zeus.Integrity
 {
 	/// <summary>
-	/// Class decoration that lets N2 which zones a data item can be added to. 
+	/// Class decoration that lets Zeus which zones a data item can be added to. 
 	/// This is mostly a hint for the user interface. Placing an item in a zone
 	/// merly means assigning the child item's ZoneName property a meaningful 
 	/// string.

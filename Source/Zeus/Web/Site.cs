@@ -25,7 +25,7 @@ namespace Zeus.Web
 
 		#region Properties
 
-		/// <summary>Matches hosts that ends with the site's authority, e.g. match both www.n2cms.com and n2cms.com.</summary>
+		/// <summary>Matches hosts that ends with the site's authority, e.g. match both www.zeus.com and zeus.com.</summary>
 		public bool Wildcards { get; set; }
 
 		public int StartPageID { get; set; }

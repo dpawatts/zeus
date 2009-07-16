@@ -5,7 +5,7 @@ using Zeus.ContentTypes;
 namespace Zeus.Integrity
 {
 	/// <summary>
-	/// Class decoration that lets N2 know that a class has zones where to 
+	/// Class decoration that lets Zeus know that a class has zones where to 
 	/// which data items can be bound (ZoneName).
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
