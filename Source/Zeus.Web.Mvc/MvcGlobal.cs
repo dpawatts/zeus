@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Isis.ComponentModel;
 using MvcContrib.Castle;
+using Spark.FileSystem;
+using Spark.Web.Mvc;
 using Zeus.Configuration;
 using Zeus.Engine;
 
@@ -43,8 +45,12 @@ namespace Zeus.Web.Mvc
 		{
 			ContentEngine engine = Zeus.Context.Initialize(false);
 
-			ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(engine.Container));
-			engine.Container.RegisterControllers(engine.Resolve<IAssemblyFinder>().GetAssemblies().ToArray());
+			SparkApplication app = new SparkApplication();
+			app.RegisterFacilities(engine.Container);
+			app.RegisterComponents(engine.Container);
+			app.RegisterViewEngine(ViewEngines.Engines);
+			app.RegisterPackages(engine.Container, RouteTable.Routes, ViewEngines.Engines);
+			//app.RegisterRoutes(RouteTable.Routes);
 
 			RegisterRoutes(RouteTable.Routes, engine);
 

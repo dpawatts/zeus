@@ -22,10 +22,12 @@ namespace Zeus.Web.Mvc
 		public const string ContentUrlKey = "url";
 		public const string ControllerKey = "controller";
 		public const string ActionKey = "action";
+		public const string AreaKey = "area";
 
 		readonly ContentEngine engine;
 		readonly IRouteHandler routeHandler;
 		readonly IDictionary<Type, string> controllerMap = new Dictionary<Type, string>();
+		readonly IDictionary<Type, string> areaMap = new Dictionary<Type, string>();
 
 		public ContentRoute(ContentEngine engine)
 			: this(engine, new MvcRouteHandler())
@@ -43,6 +45,7 @@ namespace Zeus.Web.Mvc
 			{
 				IControllerDescriptor controllerDefinition = GetControllerFor(id.ItemType, controllerDefinitions);
 				ControllerMap[id.ItemType] = controllerDefinition.ControllerName;
+				areaMap[id.ItemType] = controllerDefinition.AreaName;
 				IList<IPathFinder> finders = ContentItem.GetPathFinders(id.ItemType);
 				if (!finders.OfType<ActionResolver>().Any())
 				{
@@ -72,6 +75,7 @@ namespace Zeus.Web.Mvc
 				data.Values[ContentEngineKey] = engine;
 				data.Values[ControllerKey] = GetControllerName(td.CurrentItem.GetType());
 				data.Values[ActionKey] = td.Action;
+				data.Values[AreaKey] = GetAreaName(td.CurrentItem.GetType());
 				return data;
 			}
 			return null;
@@ -117,6 +121,11 @@ namespace Zeus.Web.Mvc
 		private string GetControllerName(Type type)
 		{
 			return ControllerMap[type];
+		}
+
+		private string GetAreaName(Type type)
+		{
+			return areaMap[type];
 		}
 
 		private static IControllerDescriptor GetControllerFor(Type itemType, IList<ControlsAttribute> controllerDefinitions)

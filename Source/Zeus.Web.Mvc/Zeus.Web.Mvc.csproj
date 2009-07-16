@@ -55,6 +55,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MvcContrib.Castle.dll</HintPath>
     </Reference>
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Modules, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
@@ -97,14 +109,21 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FallbackContentController.cs" />
-    <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="IPagination.cs" />
     <Compile Include="LazyPagination.cs" />
+    <Compile Include="Modules\EmbeddedContentRouteHandler.cs" />
+    <Compile Include="Modules\IWebPackage.cs" />
+    <Compile Include="Modules\IWebPackageManager.cs" />
+    <Compile Include="Modules\ModularControllerFactory.cs" />
+    <Compile Include="Modules\WebPackageBase.cs" />
+    <Compile Include="Modules\WebPackageManager.cs" />
     <Compile Include="MvcGlobal.cs" />
     <Compile Include="Pager.cs" />
-    <Compile Include="PaginationExtensions.cs" />
+    <Compile Include="Html\PaginationExtensions.cs" />
     <Compile Include="PaginationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SparkApplication.cs" />
     <Compile Include="ViewDataDictionaryWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

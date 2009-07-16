@@ -1,0 +1,5 @@
+﻿<viewdata model="Zeus.ContentItem"/>
+
+<h1>${Model.Title}</h1>
+
+<p>This view is coming from Zeus.Templates.Mvc, woo!</p>

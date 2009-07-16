@@ -14,6 +14,11 @@ namespace Zeus.Web
 		/// <summary>The type of controller to instantiate when the relationship is satisfied.</summary>
 		Type ControllerType { get; set; }
 
+		/// <summary>
+		/// An optional string containing the name of the area that this controller is in.
+		/// </summary>
+		string AreaName { get; set; }
+
 		/// <summary>Checks a whether the controller is the right one for a certain path.</summary>
 		/// <param name="path">The path containing information about the current content item.</param>
 		/// <param name="requiredType">The type of controller required by the caller. This is typically a type of interface deriving from <see cref="IAspectController"/>.</param>

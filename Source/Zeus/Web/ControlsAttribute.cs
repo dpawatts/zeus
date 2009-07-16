@@ -23,6 +23,7 @@ namespace Zeus.Web
 		}
 
 		public Type ControllerType { get; set; }
+		public string AreaName { get; set; }
 
 		public string ControllerName
 		{

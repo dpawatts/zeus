@@ -68,7 +68,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Views\CustomPage\Index.aspx" />
-    <Content Include="Views\FallbackContent\Index.aspx" />
     <Content Include="Views\FormPage\Submit.aspx" />
     <Content Include="Views\FormPage\Index.aspx" />
     <Content Include="Web.config" />
@@ -106,6 +105,11 @@
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\FallbackContent\Index.spark" />
+    <None Include="Views\Layouts\Application.spark" />
+    <None Include="Views\Shared\_global.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
