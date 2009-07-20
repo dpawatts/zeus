@@ -131,6 +131,8 @@
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\AuthorizedRoleCollection.cs" />
+    <Compile Include="Configuration\AuthorizedRoleElement.cs" />
     <Compile Include="Configuration\RecycleBinElement.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
     <Compile Include="Configuration\GlobalizationSection.cs" />

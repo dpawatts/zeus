@@ -70,16 +70,21 @@ namespace Zeus.Security
 		public virtual void AuthoriseRequest()
 		{
 			ContentItem item = _webContext.CurrentPage;
-			if (item != null && !_security.IsAuthorized(item, _webContext.User, Operations.Read))
-			{
-				CancelItemEventArgs args = new CancelItemEventArgs(item);
-				if (AuthorizationFailed != null)
-					AuthorizationFailed.Invoke(this, args);
 
-				if (!args.Cancel)
-					//throw new PermissionDeniedException(item, webContext.User);
-					throw new UnauthorizedAccessException();
-			}
+			if (item == null)
+				return;
+
+			if (_security.IsAuthorized(item, _webContext.User, Operations.Read))
+				return;
+
+			CancelItemEventArgs args = new CancelItemEventArgs(item);
+			if (AuthorizationFailed != null)
+				AuthorizationFailed.Invoke(this, args);
+
+			if (!args.Cancel)
+				//throw new PermissionDeniedException(item, webContext.User);
+				throw new UnauthorizedAccessException();
+
 		}
 
 		/// <summary>Is invoked when an item is saved.</summary>

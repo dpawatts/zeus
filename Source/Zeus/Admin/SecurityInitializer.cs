@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using Isis.ComponentModel;
 using Isis.Web.Security;
@@ -16,9 +17,11 @@ namespace Zeus.Admin
 				return;
 
 			// Dynamically add authorization rule for admin site.
+			List<string> authorizedRoles = new List<string>();
+			foreach (AuthorizedRoleElement authorizedRoleElement in IoC.Resolve<AdminSection>().AuthorizedRoles)
+				authorizedRoles.Add(authorizedRoleElement.Role);
 			authorizationService.AddRule(IoC.Resolve<AdminSection>().Path,
-				null, new[] { "Administrators", "Editors", "OrganisationEditors" },
-				new[] { "*" }, null);
+				null, authorizedRoles, new[] { "*" }, null);
 		}
 
 		public void Initialize(IAuthenticationContextService authenticationContextService)

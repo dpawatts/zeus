@@ -21,5 +21,15 @@ namespace Zeus.Security
 		/// <param name="operation"></param>
 		/// <returns>True if the user is authorized.</returns>
 		bool IsAuthorized(ContentItem item, IPrincipal principal, string operation);
+
+		/// <summary>Find out if a princpial has admin access.</summary>
+		/// <param name="user">The princpial to check.</param>
+		/// <returns>A boolean indicating whether the principal has admin access.</returns>
+		bool IsAdmin(IPrincipal user);
+
+		/// <summary>Check whether an item is published, i.e. it's published and isn't expired.</summary>
+		/// <param name="item">The item to check.</param>
+		/// <returns>A boolean indicating whether the item is published.</returns>
+		bool IsPublished(ContentItem item);
 	}
 }

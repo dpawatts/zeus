@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using Zeus.Configuration;
 using Zeus.Engine;
 
 namespace Zeus.Security
@@ -14,15 +15,17 @@ namespace Zeus.Security
 	{
 		#region Fields
 
-		private IPluginFinder<AvailableOperationAttribute> _operationFinder;
+		private readonly IPluginFinder<AvailableOperationAttribute> _operationFinder;
+		private readonly AdminSection _adminConfig;
 
 		#endregion
 
 		#region Constructor
 
-		public SecurityManager(IPluginFinder<AvailableOperationAttribute> operationFinder)
+		public SecurityManager(IPluginFinder<AvailableOperationAttribute> operationFinder, AdminSection adminConfig)
 		{
 			_operationFinder = operationFinder;
+			_adminConfig = adminConfig;
 		}
 
 		#endregion
@@ -46,18 +49,35 @@ namespace Zeus.Security
 
 		/// <summary>Find out if a principal is allowed to access an item.</summary>
 		/// <param name="item">The item to check against.</param>
-		/// <param name="principal">The principal to check for allowance.</param>
+		/// <param name="user">The principal to check for authorization.</param>
 		/// <param name="operation"></param>
 		/// <returns>True if the item has public access or the principal is allowed to access it.</returns>
-		public virtual bool IsAuthorized(ContentItem item, IPrincipal principal, string operation)
+		public virtual bool IsAuthorized(ContentItem item, IPrincipal user, string operation)
 		{
-			if (principal != null && string.Equals(principal.Identity.Name, "administrator", StringComparison.OrdinalIgnoreCase))
+			if (user != null && IsAdmin(user))
 				return true;
 
-			if (principal != null && principal.IsInRole("Administrators"))
-				return true;
+			if (!IsPublished(item) && operation == Operations.Read)
+				operation = Operations.ReadUnpublished;
 
-			return item.IsAuthorized(principal, operation);
+			return item.IsAuthorized(user, operation);
+		}
+
+		/// <summary>Check whether an item is published, i.e. it's published and isn't expired.</summary>
+		/// <param name="item">The item to check.</param>
+		/// <returns>A boolean indicating whether the item is published.</returns>
+		public virtual bool IsPublished(ContentItem item)
+		{
+			return (item.Published.HasValue && DateTime.Now >= item.Published)
+				&& (!item.Expires.HasValue || DateTime.Now < item.Expires.Value);
+		}
+
+		/// <summary>Find out if a princpial has admin access.</summary>
+		/// <param name="user">The princpial to check.</param>
+		/// <returns>A boolean indicating whether the principal has admin access.</returns>
+		public bool IsAdmin(IPrincipal user)
+		{
+			return user.IsInRole(_adminConfig.AdministratorRole);
 		}
 
 		#endregion

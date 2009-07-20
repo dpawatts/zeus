@@ -2,6 +2,7 @@ using System;
 
 namespace Zeus.Security
 {
+	[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = true)]
 	public class AvailableOperationAttribute : Attribute
 	{
 		#region Constructor

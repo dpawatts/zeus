@@ -5,6 +5,13 @@ namespace Zeus.Configuration
 {
 	public class AdminSection : ConfigurationSection
 	{
+		[ConfigurationProperty("authorizedRoles")]
+		public AuthorizedRoleCollection AuthorizedRoles
+		{
+			get { return (AuthorizedRoleCollection)base["authorizedRoles"]; }
+			set { base["authorizedRoles"] = value; }
+		}
+
 		[ConfigurationProperty("installer")]
 		public InstallerElement Installer
 		{
@@ -31,6 +38,13 @@ namespace Zeus.Configuration
 		{
 			get { return (TreeElement) base["tree"]; }
 			set { base["tree"] = value; }
+		}
+
+		[ConfigurationProperty("administratorRole", DefaultValue = "Administrators")]
+		public string AdministratorRole
+		{
+			get { return (string)base["administratorRole"]; }
+			set { base["administratorRole"] = value; }
 		}
 
 		[ConfigurationProperty("deleteItemUrl", DefaultValue = "~/admin/delete.aspx")]

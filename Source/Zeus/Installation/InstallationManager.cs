@@ -34,7 +34,8 @@ namespace Zeus.Installation
 		private readonly IFinder<PropertyCollection> _detailCollectionFinder;
 		private readonly IFinder<AuthorizationRule> _authorizationRuleFinder;
 		private readonly IHost _host;
-		private readonly ICredentialContextService _credentialContextService; 
+		private readonly ICredentialContextService _credentialContextService;
+		private readonly AdminSection _adminConfig;
 
 		#endregion
 
@@ -43,7 +44,7 @@ namespace Zeus.Installation
 		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, Importer importer, IPersister persister,
 			IFinder<ContentItem> contentItemFinder, IFinder<PropertyData> contentDetailFinder,
 			IFinder<PropertyCollection> detailCollectionFinder, IFinder<AuthorizationRule> authorizationRuleFinder,
-			ICredentialContextService credentialContextService)
+			ICredentialContextService credentialContextService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
@@ -54,6 +55,7 @@ namespace Zeus.Installation
 			_detailCollectionFinder = detailCollectionFinder;
 			_authorizationRuleFinder = authorizationRuleFinder;
 			_credentialContextService = credentialContextService;
+			_adminConfig = adminConfig;
 		}
 
 		#endregion
@@ -80,7 +82,7 @@ namespace Zeus.Installation
 		public void CreateAdministratorUser(string username, string password)
 		{
 			UserCreateStatus createStatus;
-			_credentialContextService.GetCurrentService().CreateUser(username, password, new[] { "Administrators" }, out createStatus);
+			_credentialContextService.GetCurrentService().CreateUser(username, password, new[] { _adminConfig.AdministratorRole }, out createStatus);
 			if (createStatus != UserCreateStatus.Success)
 				throw new ZeusException("Could not create user: " + createStatus);
 		}
