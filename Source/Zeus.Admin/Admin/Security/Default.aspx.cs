@@ -176,8 +176,7 @@ namespace Zeus.Admin.Security
 				foreach (string operation in allowedOperations)
 				{
 					CheckBox checkBox = (CheckBox) row.FindControl("chk" + i + operation);
-					if (checkBox.Checked)
-						item.AuthorizationRules.Add(new Zeus.Security.AuthorizationRule(item, operation, roleOrUser, type));
+					item.AuthorizationRules.Add(new Zeus.Security.AuthorizationRule(item, operation, roleOrUser, type, checkBox.Checked));
 				}
 			}
 

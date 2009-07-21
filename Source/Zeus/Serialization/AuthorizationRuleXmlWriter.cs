@@ -22,6 +22,7 @@ namespace Zeus.Serialization
 				role.WriteAttribute("operation", ar.Operation);
 				role.WriteAttribute("role", ar.Role);
 				role.WriteAttribute("user", ar.User);
+				role.WriteAttribute("allowed", ar.Allowed);
 			}
 		}
 	}

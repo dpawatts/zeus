@@ -164,7 +164,7 @@ namespace Zeus.Admin.ImportExport
 				{
 					Console.WriteLine(navigator.Value);
 					Dictionary<string, string> attributes = GetAttributes(navigator);
-					item.AuthorizationRules.Add(new AuthorizationRule(item, attributes["operation"], attributes["role"], attributes["user"]));
+					item.AuthorizationRules.Add(new AuthorizationRule(item, attributes["operation"], attributes["role"], attributes["user"], Convert.ToBoolean(attributes["user"])));
 				} while (navigator.MoveToNext());
 				navigator.MoveToParent();
 			}

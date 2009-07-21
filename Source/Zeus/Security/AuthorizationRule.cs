@@ -17,8 +17,8 @@ namespace Zeus.Security
 		/// <param name="operation"></param>
 		/// <param name="roleOrUser">The role or user name.</param>
 		/// <param name="type"></param>
-		public AuthorizationRule(ContentItem item, string operation, string roleOrUser, AuthorizationType type)
-			: this(item, operation, (type == AuthorizationType.Role) ? roleOrUser : null, (type == AuthorizationType.User) ? roleOrUser : null)
+		public AuthorizationRule(ContentItem item, string operation, string roleOrUser, AuthorizationType type, bool allowed)
+			: this(item, operation, (type == AuthorizationType.Role) ? roleOrUser : null, (type == AuthorizationType.User) ? roleOrUser : null, allowed)
 		{
 			
 		}
@@ -28,12 +28,14 @@ namespace Zeus.Security
 		/// <param name="operation"></param>
 		/// <param name="role">The role or user name.</param>
 		/// <param name="user"></param>
-		public AuthorizationRule(ContentItem item, string operation, string role, string user)
+		/// <param name="allowed"></param>
+		public AuthorizationRule(ContentItem item, string operation, string role, string user, bool allowed)
 		{
 			EnclosingItem = item;
 			Operation = operation;
 			Role = role;
 			User = user;
+			Allowed = allowed;
 		}
 
 		#endregion
@@ -54,6 +56,13 @@ namespace Zeus.Security
 
 		/// <summary>Gets the user name this class refers to.</summary>
 		public virtual string User { get; set; }
+
+		/// <summary>
+		/// Gets or sets whether this the specified user or role is allowed to perform this operation.
+		/// If a rule does not exist for a particular operation, the default is that the user or role
+		/// is NOT authorized.
+		/// </summary>
+		public virtual bool Allowed { get; set; }
 
 		/// <summary>Gets wether this role refers to everyone, i.e. the unauthenticated user.</summary>
 		public virtual bool IsEveryone
@@ -78,6 +87,9 @@ namespace Zeus.Security
 		/// <returns>True if the user is permitted.</returns>
 		public bool IsAuthorized(IPrincipal user, string operation)
 		{
+			if (!Allowed)
+				return false;
+
 			if (IsEveryone && (operation == null || operation == Operation))
 				return true;
 

@@ -88,7 +88,7 @@ namespace Zeus.ContentTypes
 
 				item.Parent = parentItem;
 				foreach (AuthorizationRule rule in parentItem.AuthorizationRules)
-					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User));
+					item.AuthorizationRules.Add(new AuthorizationRule(item, rule.Operation, rule.Role, rule.User, rule.Allowed));
 			}
 
 			if (item is ISelfPopulator)

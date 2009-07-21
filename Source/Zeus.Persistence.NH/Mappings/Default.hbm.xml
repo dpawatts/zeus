@@ -12,6 +12,7 @@
 		<property name="Operation" column="Operation" type="String" not-null="true" length="50" />
 		<property name="Role" column="Role" type="String" length="50" />
 		<property name="User" column="`User`" type="String" length="50" />
+		<property name="Allowed" column="Allowed" type="Boolean" />
 	</class>
 
 	<!-- ContentDetail: Boolean-, Integer-, Link-, Double-, DateTime-, String-, Object-Detail -->

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
 using Zeus.Security;
@@ -14,7 +15,8 @@ namespace Zeus.Serialization
 				string operation = attributes["operation"];
 				string role = attributes["role"];
 				string user = attributes["user"];
-				item.AuthorizationRules.Add(new AuthorizationRule(item, operation, role, user));
+				bool allowed = Convert.ToBoolean(attributes["allowed"]);
+				item.AuthorizationRules.Add(new AuthorizationRule(item, operation, role, user, allowed));
 			}
 		}
 	}
