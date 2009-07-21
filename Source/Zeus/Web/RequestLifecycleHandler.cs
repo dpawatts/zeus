@@ -90,7 +90,7 @@ namespace Zeus.Web
 
 		private void CheckInstallation()
 		{
-			bool isEditing = webContext.ToAppRelative(webContext.Url.LocalUrl).StartsWith("~/" + _adminConfig.Path, StringComparison.InvariantCultureIgnoreCase);
+			bool isEditing = webContext.ToAppRelative(webContext.Url.Path).StartsWith("~/" + _adminConfig.Path, StringComparison.InvariantCultureIgnoreCase);
 			if (!isEditing && !installer.GetStatus().IsInstalled)
 			{
 				webContext.Response.Redirect(installerUrl);

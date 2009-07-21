@@ -35,6 +35,16 @@ namespace Zeus.ContentTypes
 		public ContentTypeManager(IContentTypeBuilder contentTypeBuilder, IItemNotifier notifier)
 		{
 			_definitions = contentTypeBuilder.GetDefinitions();
+
+			// Verify that content types have unique names.
+			List<string> discriminators = new List<string>();
+			foreach (ContentType contentType in _definitions.Values)
+			{
+				if (discriminators.Contains(contentType.Discriminator))
+					throw new ZeusException("Duplicate content type discriminator. The discriminator '{0}' is already in use.", contentType.Discriminator);
+				discriminators.Add(contentType.Discriminator);
+			}
+
 			_notifier = notifier;
 		}
 
