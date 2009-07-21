@@ -225,5 +225,11 @@ namespace Zeus
 
 			return finalAction(source, destination);
 		}
+
+		public static string GetUrlSafeString(string value)
+		{
+			value = value.ToLower().Replace(' ', '-');
+			return Regex.Replace(value, @"[^a-zA-Z0-9\-]", string.Empty);
+		}
 	}
 }
