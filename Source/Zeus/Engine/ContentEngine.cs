@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Castle.Core;
 using Castle.Windsor;
 using Isis.ComponentModel;
 using Isis.Web;
@@ -121,7 +122,7 @@ namespace Zeus.Engine
 			IoC.SetupService<IDynamicContentManager, DynamicContentManager>();
 
 			// Engine
-			IoC.SetupService<IAspectControllerProvider, AspectControllerProvider>();
+			IoC.SetupService<IContentAdapterProvider, ContentAdapterProvider>();
 			//IoC.SetupService<IAssemblyFinder, AssemblyFinder>();
 			IoC.SetupService(typeof(IPluginFinder<>), typeof(PluginFinder<>));
 			IoC.SetupService<ITypeFinder, TypeFinder>();
@@ -209,5 +210,35 @@ namespace Zeus.Engine
 		{
 			return IoC.Resolve<T>();
 		}
+
+		/// <summary>Resolves a service configured for the factory.</summary>
+		/// <param name="serviceType">The type of service to resolve.</param>
+		/// <returns>An instance of the resolved service.</returns>
+		public object Resolve(Type serviceType)
+		{
+			return IoC.Container.Resolve(serviceType);
+		}
+
+		/// <summary>Releases a component from the IoC container.</summary>
+		/// <param name="instance">The component instance to release.</param>
+		public void Release(object instance)
+		{
+			IoC.Container.Release(instance);
+		}
+
+		public void AddComponentLifeStyle(string key, Type classType, ComponentLifeStyle lifeStyle)
+		{
+			LifestyleType lifeStyleType = lifeStyle == ComponentLifeStyle.Singleton
+				? LifestyleType.Singleton
+				: LifestyleType.Transient;
+
+			Container.AddComponentLifeStyle(key, classType, lifeStyleType);
+		}
+	}
+
+	public enum ComponentLifeStyle
+	{
+		Singleton = 0,
+		Transient = 1,
 	}
 }

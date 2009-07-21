@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.UI;
 using Isis.Web.UI;
 
-namespace Zeus.Web.Mvc
+namespace Zeus.Web.Mvc.Html
 {
 	public static class HtmlHelperExtensions
 	{

@@ -8,8 +8,8 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(Member))]
-	public class MemberController : BaseForumController<Member, IMemberViewData>
+	[Controls(typeof(Member), AreaName = ForumsWebPackage.AREA_NAME)]
+	public class MemberController : BaseForumController<Member>
 	{
 		protected override MessageBoard CurrentMessageBoard
 		{
@@ -43,7 +43,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		{
 			if (string.IsNullOrEmpty(nickname))
 			{
-				ModelState["nickname"].Errors.Add("Nickname is required");
+				ModelState.AddModelError("nickname", "Nickname is required");
 				return View("UpdateProfile");
 			}
 
@@ -66,10 +66,5 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 
 			return View("Index");
 		}
-	}
-
-	public interface IMemberViewData : IBaseForumViewData<Member>
-	{
-		
 	}
 }

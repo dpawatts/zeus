@@ -22,5 +22,12 @@ namespace Zeus.Templates.Configuration
 		{
 			get { return (TemplateRuleCollection) base[_propRules]; }
 		}
+
+		[ConfigurationProperty("mailConfiguration", DefaultValue = MailConfigSource.SystemNet)]
+		public MailConfigSource MailConfiguration
+		{
+			get { return (MailConfigSource)base["mailConfiguration"]; }
+			set { base["mailConfiguration"] = value; }
+		}
 	}
 }

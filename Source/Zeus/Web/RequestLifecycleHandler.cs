@@ -16,34 +16,39 @@ namespace Zeus.Web
 	/// </summary>
 	public class RequestLifecycleHandler : IRequestLifecycleHandler, IStartable
 	{
-		private readonly IErrorHandler errors;
-		private readonly IWebContext webContext;
-		private readonly EventBroker broker;
+		readonly IErrorHandler errors;
+		readonly IWebContext webContext;
+		readonly EventBroker broker;
 		readonly InstallationManager installer;
-		private readonly IRequestDispatcher dispatcher;
-		private readonly HostSection _hostConfig;
+		readonly IRequestDispatcher dispatcher;
 
 		protected bool initialized = false;
+		protected bool checkInstallation = false;
+		protected RewriteMethod rewriteMethod = RewriteMethod.RewriteRequest;
+		protected string installerUrl = "~/Admin/Install/Begin/Default.aspx";
 		private readonly AdminSection _adminConfig;
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors, HostSection hostConfig, AdminSection adminConfig)
-			: this(webContext, broker, installer, dispatcher, errors, hostConfig)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors, AdminSection editConfig, HostSection hostConfig)
+			: this(webContext, broker, installer, dispatcher, errors)
 		{
-			_adminConfig = adminConfig;
+			checkInstallation = editConfig.Installer.CheckInstallationStatus;
+			//installerUrl = editConfig.Installer.InstallUrl;
+			rewriteMethod = hostConfig.Web.Rewrite;
+			_adminConfig = editConfig;
 		}
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>
 		/// <param name="webContext">The web context wrapper.</param>
-		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors, HostSection hostConfig)
+		public RequestLifecycleHandler(IWebContext webContext, EventBroker broker, InstallationManager installer, IRequestDispatcher dispatcher, IErrorHandler errors)
 		{
 			this.webContext = webContext;
 			this.broker = broker;
 			this.errors = errors;
 			this.installer = installer;
 			this.dispatcher = dispatcher;
-			_hostConfig = hostConfig;
+			_adminConfig = null;
 		}
 
 		/// <summary>Subscribes to applications events.</summary>
@@ -70,24 +75,26 @@ namespace Zeus.Web
 				{
 					if (Url.ServerUrl == null)
 						Url.ServerUrl = webContext.Url.HostUrl;
-					if (_adminConfig.Installer.CheckInstallationStatus)
+					if (checkInstallation)
 						CheckInstallation();
 				}
 			}
 
-			RequestAspectController controller = dispatcher.ResolveAspectController<RequestAspectController>();
+			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
 			if (controller != null)
 			{
 				webContext.CurrentPath = controller.Path;
-				controller.RewriteRequest(_hostConfig.Web.Rewrite);
+				controller.RewriteRequest(rewriteMethod);
 			}
 		}
 
 		private void CheckInstallation()
 		{
-			bool isEditing = webContext.ToAppRelative(webContext.Url.Path).StartsWith("~/" + _adminConfig.Path, StringComparison.InvariantCultureIgnoreCase);
+			bool isEditing = webContext.ToAppRelative(webContext.Url.LocalUrl).StartsWith("~/" + _adminConfig.Path, StringComparison.InvariantCultureIgnoreCase);
 			if (!isEditing && !installer.GetStatus().IsInstalled)
-				webContext.Response.Redirect("~/" + _adminConfig.Path + "/install/default.aspx");
+			{
+				webContext.Response.Redirect(installerUrl);
+			}
 		}
 
 		/// <summary>Infuses the http handler (usually an aspx page) with the content page associated with the url if it implements the <see cref="IContentTemplate"/> interface.</summary>
@@ -95,7 +102,7 @@ namespace Zeus.Web
 		{
 			if (webContext.CurrentPath == null || webContext.CurrentPath.IsEmpty()) return;
 
-			RequestAspectController controller = dispatcher.ResolveAspectController<RequestAspectController>();
+			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
 			controller.InjectCurrentPage(webContext.Handler);
 		}
 
@@ -103,7 +110,7 @@ namespace Zeus.Web
 		{
 			if (webContext.CurrentPath == null || webContext.CurrentPath.IsEmpty()) return;
 
-			RequestAspectController controller = dispatcher.ResolveAspectController<RequestAspectController>();
+			RequestAdapter controller = dispatcher.ResolveAdapter<RequestAdapter>();
 			controller.AuthorizeRequest(webContext.User);
 		}
 

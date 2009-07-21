@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Specialized;
+using System.Web;
 using Isis.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
@@ -13,20 +14,22 @@ namespace Zeus.Web
 	/// </summary>
 	public class RequestDispatcher : IRequestDispatcher
 	{
-		readonly IAspectControllerProvider aspectProvider;
+		readonly IContentAdapterProvider aspectProvider;
 		readonly IWebContext webContext;
 		readonly IUrlParser parser;
 		readonly IErrorHandler errorHandler;
 		readonly bool rewriteEmptyExtension = true;
+		readonly bool observeAllExtensions = true;
 		readonly string[] observedExtensions = new[] { ".aspx" };
+		readonly string[] nonRewritablePaths = new[] { "~/admin/" };
 
-
-		public RequestDispatcher(IAspectControllerProvider aspectProvider, IWebContext webContext, IUrlParser parser, IErrorHandler errorHandler, HostSection config)
+		public RequestDispatcher(IContentAdapterProvider aspectProvider, IWebContext webContext, IUrlParser parser, IErrorHandler errorHandler, HostSection config)
 		{
 			this.aspectProvider = aspectProvider;
 			this.webContext = webContext;
 			this.parser = parser;
 			this.errorHandler = errorHandler;
+			//observeAllExtensions = config.Web.ObserveAllExtensions;
 			rewriteEmptyExtension = config.Web.ObserveEmptyExtension;
 			StringCollection additionalExtensions = config.Web.ObservedExtensions;
 			if (additionalExtensions != null && additionalExtensions.Count > 0)
@@ -35,17 +38,26 @@ namespace Zeus.Web
 				additionalExtensions.CopyTo(observedExtensions, 1);
 			}
 			observedExtensions[0] = config.Web.Extension;
+			//nonRewritablePaths = config.Web.Urls.NonRewritable.GetPaths(webContext);
 		}
 
 		/// <summary>Resolves the controller for the current Url.</summary>
 		/// <returns>A suitable controller for the given Url.</returns>
-		public virtual T ResolveAspectController<T>() where T : class, IAspectController
+		public virtual T ResolveAdapter<T>() where T : class, IContentAdapter
 		{
 			T controller = RequestItem<T>.Instance;
 			if (controller != null) return controller;
 
-			PathData path = ResolveUrl(webContext.Url);
-			controller = aspectProvider.ResolveAspectController<T>(path);
+			Url url = webContext.Url;
+			string path = url.Path;
+			foreach (string nonRewritablePath in nonRewritablePaths)
+			{
+				if (path.StartsWith(VirtualPathUtility.ToAbsolute(nonRewritablePath)))
+					return null;
+			}
+
+			PathData data = ResolveUrl(url);
+			controller = aspectProvider.ResolveAdapter<T>(data);
 
 			RequestItem<T>.Instance = controller;
 			return controller;
@@ -66,6 +78,9 @@ namespace Zeus.Web
 
 		private bool IsObservable(Url url)
 		{
+			if (observeAllExtensions)
+				return true;
+
 			if (url.LocalUrl == Url.ApplicationPath)
 				return true;
 
@@ -75,7 +90,7 @@ namespace Zeus.Web
 			foreach (string observed in observedExtensions)
 				if (string.Equals(observed, extension, StringComparison.InvariantCultureIgnoreCase))
 					return true;
-			if (url.GetQuery("page") != null)
+			if (url.GetQuery(PathData.PageQueryKey) != null)
 				return true;
 
 			return false;

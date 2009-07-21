@@ -81,6 +81,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.Forums.Mvc\Zeus.AddIns.Forums.Mvc.csproj">
+      <Project>{4F45064D-15DC-4DE2-9E0F-FD38E241CF4C}</Project>
+      <Name>Zeus.AddIns.Forums.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.Forums\Zeus.AddIns.Forums.csproj">
+      <Project>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</Project>
+      <Name>Zeus.AddIns.Forums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
       <Name>Zeus.Admin</Name>

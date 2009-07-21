@@ -1,3 +1,4 @@
+using Isis.Web;
 using Isis.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.Globalization;
@@ -19,11 +20,9 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			get { return WebResourceUtility.GetUrl(typeof(MessageBoard), "Zeus.AddIns.Forums.Web.Resources.comments.png"); }
 		}
 
-		[ContentProperty("New / Edit Post Page", 30, EditorContainerName = "Content")]
-		public virtual NewPost NewPostPage
+		public string PostUrl
 		{
-			get { return GetDetail<NewPost>("NewPostPage", null); }
-			set { SetDetail("NewPostPage", value); }
+			get { return new Url(Url).AppendSegment("post"); }
 		}
 
 		[ContentProperty("Topics Per Page", 40, EditorContainerName = "Content")]

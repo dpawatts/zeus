@@ -1,3 +1,4 @@
+using Zeus.AddIns.Forums.ContentTypes;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
@@ -8,7 +9,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("Page")]
 	[ReplacesParentContentType]
-	public class CustomPage : Page
+	public class CustomPage : Page, IMessageBoardContainer
 	{
 		[XhtmlStringContentProperty("Content", 30, Shared = false)]
 		public override string Content

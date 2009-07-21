@@ -6,6 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4F45064D-15DC-4DE2-9E0F-FD38E241CF4C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.AddIns.Forums.Mvc</RootNamespace>
@@ -35,6 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Castle.MicroKernel.dll</HintPath>
+    </Reference>
     <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Isis.dll</HintPath>
@@ -42,6 +47,14 @@
     <Reference Include="Isis.FrameworkBlocks.WebSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Isis.FrameworkBlocks.WebSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -68,13 +81,20 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\BaseForumController.cs" />
-    <Compile Include="Controllers\PostingController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\MessageBoardController.cs" />
-    <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="ForumsWebPackage.cs" />
+    <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BaseForumViewModel.cs" />
+    <Compile Include="ViewModels\ForumViewModel.cs" />
+    <Compile Include="ViewModels\MemberViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoardSearchResultsViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoardViewModel.cs" />
+    <Compile Include="ViewModels\MessageBoardPostViewModel.cs" />
+    <Compile Include="ViewModels\TopicViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.AddIns.Forums\Zeus.AddIns.Forums.csproj">
@@ -99,7 +119,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
+    <EmbeddedResource Include="Views\MessageBoard\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Shared\ForumHeader.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\css\forum.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\images\avatarBig.gif" />
+    <EmbeddedResource Include="Content\images\door.gif" />
+    <EmbeddedResource Include="Content\images\drawingPin.gif" />
+    <EmbeddedResource Include="Content\images\forumLogo.gif" />
+    <EmbeddedResource Include="Content\images\newPost.gif" />
+    <EmbeddedResource Include="Content\images\post.gif" />
+    <EmbeddedResource Include="Content\images\postBg.gif" />
+    <EmbeddedResource Include="Content\images\sticky.gif" />
+    <EmbeddedResource Include="Content\images\trash.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Forum\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Topic\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -109,4 +152,23 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52053</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

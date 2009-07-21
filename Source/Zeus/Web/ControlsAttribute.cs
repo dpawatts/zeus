@@ -6,9 +6,9 @@ namespace Zeus.Web
 	/// <summary>
 	/// Used to bind a controller to a certain content type.
 	/// </summary>
-	[DebuggerDisplay("ControlsAttribute: {ItemType}->{ControllerType}")]
+	[DebuggerDisplay("ControlsAttribute: {AdapterType}->{ItemType}")]
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
-	public class ControlsAttribute : Attribute, IComparable<ControlsAttribute>, IControllerDescriptor
+	public class ControlsAttribute : Attribute, IComparable<ControlsAttribute>, IAdapterDescriptor
 	{
 		private readonly Type itemType;
 
@@ -17,19 +17,21 @@ namespace Zeus.Web
 			this.itemType = itemType;
 		}
 
+		/// <summary>The type of item beeing adapted.</summary>
 		public Type ItemType
 		{
 			get { return itemType; }
 		}
 
-		public Type ControllerType { get; set; }
-		public string AreaName { get; set; }
+		/// <summary>The type of adapter referenced by this descriptor. This property is set by the framework as adapters are enumerated.</summary>
+		public Type AdapterType { get; set; }
 
+		/// <summary>The name of the controller. Used to reference the controller in ASP.NET MVC scenarios.</summary>
 		public string ControllerName
 		{
 			get
 			{
-				string name = ControllerType.Name;
+				string name = AdapterType.Name;
 				int i = name.IndexOf("Controller");
 				if (i > 0)
 				{
@@ -39,34 +41,32 @@ namespace Zeus.Web
 			}
 		}
 
-		public bool IsControllerFor(PathData path, Type requiredType)
+		public string AreaName { get; set; }
+
+		/// <summary>Compares the path against the referenced item type to determine whether this is the correct adapter.</summary>
+		/// <param name="path">The request path.</param>
+		/// <param name="requiredType">The type of adapter needed.</param>
+		/// <returns>True if the descriptor references the correct adapter.</returns>
+		public bool IsAdapterFor(PathData path, Type requiredType)
 		{
 			if (path.IsEmpty())
 				return false;
 
-			return ItemType.IsAssignableFrom(path.CurrentItem.GetType()) && requiredType.IsAssignableFrom(requiredType);
+			return ItemType.IsAssignableFrom(path.CurrentItem.GetType()) && requiredType.IsAssignableFrom(AdapterType);
 		}
 
-		#region IComparable<IControllerReference> Members
+		#region IComparable<IAdapterDescriptor> Members
 
-		public int CompareTo(IControllerDescriptor other)
+		public int CompareTo(IAdapterDescriptor other)
 		{
-			if (other.ItemType.IsSubclassOf(ItemType))
-				return DistanceBetween(ItemType, other.ItemType);
-			if (ItemType.IsSubclassOf(other.ItemType))
-				return -1 * DistanceBetween(other.ItemType, ItemType);
-
-			return 0;
+			return InheritanceDepth(other.ItemType) - InheritanceDepth(ItemType);
 		}
 
-		int DistanceBetween(Type super, Type sub)
+		int InheritanceDepth(Type type)
 		{
-			int distance = 1;
-			for (Type t = sub; t != super; t = t.BaseType)
-			{
-				++distance;
-			}
-			return distance;
+			if (type == null || type == typeof(object))
+				return 0;
+			return 1 + InheritanceDepth(type.BaseType);
 		}
 
 		#endregion

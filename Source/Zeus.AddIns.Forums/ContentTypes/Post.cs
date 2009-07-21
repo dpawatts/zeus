@@ -61,7 +61,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		{
 			get
 			{
-				return new Url(Topic.Forum.MessageBoard.NewPostPage.Url)
+				return new Url(Topic.Forum.MessageBoard.PostUrl)
 					.AppendQuery("f", Topic.Forum.ID)
 					.AppendQuery("t", Topic.ID)
 					.AppendQuery("p", ID)
@@ -74,7 +74,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		{
 			get
 			{
-				return new Url(Topic.Forum.MessageBoard.NewPostPage.Url)
+				return new Url(Topic.Forum.MessageBoard.PostUrl)
 					.AppendQuery("f", Topic.Forum.ID)
 					.AppendQuery("t", Topic.ID)
 					.AppendQuery("p", ID)

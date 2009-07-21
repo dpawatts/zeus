@@ -51,6 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Isis.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib.Castle, Version=1.0.0.916, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MvcContrib.Castle.dll</HintPath>
@@ -99,19 +103,12 @@
     <Compile Include="ActionResolver.cs" />
     <Compile Include="ContentController.cs" />
     <Compile Include="ContentRoute.cs" />
-    <Compile Include="ContentViewPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ContentViewMasterPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ContentViewUserControl.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="ControllerMapper.cs" />
     <Compile Include="FallbackContentController.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
-    <Compile Include="IPagination.cs" />
-    <Compile Include="LazyPagination.cs" />
+    <Compile Include="Html\PaginationExtensions.cs" />
+    <Compile Include="IControllerMapper.cs" />
+    <Compile Include="IContentItemContainer.generic.cs" />
     <Compile Include="Modules\EmbeddedContentRouteHandler.cs" />
     <Compile Include="Modules\IWebPackage.cs" />
     <Compile Include="Modules\IWebPackageManager.cs" />
@@ -119,12 +116,10 @@
     <Compile Include="Modules\WebPackageBase.cs" />
     <Compile Include="Modules\WebPackageManager.cs" />
     <Compile Include="MvcGlobal.cs" />
-    <Compile Include="Pager.cs" />
-    <Compile Include="Html\PaginationExtensions.cs" />
-    <Compile Include="PaginationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SparkApplication.cs" />
-    <Compile Include="ViewDataDictionaryWrapper.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewPageResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus\Zeus.csproj">

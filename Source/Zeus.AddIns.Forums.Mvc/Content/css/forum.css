@@ -1,0 +1,546 @@
+﻿/************************* reset table styles *********************/
+#forum label {
+     margin: 0;
+     padding: 0;
+}
+
+#forum ul {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#forum ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+}
+
+#forum td, #forum th {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+#forum input {
+    width: auto;
+}
+
+/****************************************** forum ***************************************/
+
+/**************** text styles *************/
+
+#forum label {
+    font-size: 13px;
+    color: #fff;
+
+}
+
+#forum table td {
+    padding-bottom: 6px;
+}
+
+#fSearchForm {
+    width: 296px;
+    float: left;
+}
+
+#forum #fSearch {
+    width: 170px;
+}
+
+#fSearchForm td {
+    padding-right: 6px;
+}
+
+#fUserNav {
+    width: 602px;
+    float: right;
+    text-align: right;
+}
+
+#fUserNav table {
+    float: right;
+    margin: 0 0 3px 0;
+}
+
+#fUserNav table td {
+    padding: 0 0px 6px 7px;
+}
+
+#fUserNav ul {
+    clear: both;
+}
+
+#fUserNav ul li {
+    display: inline;
+    margin: 0 0 0 6px;
+    font-weight: bold;
+}
+
+#fUserNav ul li a {
+    color: #d5d5d5;
+}
+
+#fUserNav p {
+    font-size: 14px;
+    font-family: arial;
+    color: #b0b0b0;
+    margin: 0 0 6px 0;
+}
+
+#fUserNav p span {
+    font-size: 17px;
+    padding: 0 0px 0 10px;
+    color: #ebebeb;
+    
+}
+
+#forum h3 {
+    color: #fff;
+    margin: 0 0 10px 0;
+}
+
+
+/**************** rungs *************/
+
+#fRungOne {
+    margin: 0 0 10px 0;
+    padding: 0 0 7px 0;
+    background: url('/assets/images/core/greyDotHoriz.gif') left bottom repeat-x;
+    
+}
+
+#fRungTwo {
+    padding-top: 7px;
+    border-bottom: 1px solid #939598;
+}
+
+#fRungThree {
+    padding: 7px 0;
+}
+
+/**************** pages nav *************/
+
+.fPages {
+    width: 100%;
+}
+
+#forum .fPages label {
+    padding: 0 10px 0 0;
+}
+
+#fPLeft {
+    width: 25%;
+}
+
+#fPMiddle {
+    width: 50%;
+}
+
+#fPRight {
+    width: 25%;
+}
+
+
+#forum .fPages p {
+    font-size: 14px;
+    color: #ebebeb;
+    margin: 0;
+}
+
+#forum .fPages td {
+    padding: 0;
+}
+
+.fPages td form {
+    text-align: right;
+}
+
+.fPages ul {
+    padding: 0 16px 0 0;
+    float: left;
+    width: auto;
+    margin: 0 auto;
+}
+
+.fPages li {
+    float: left;
+    background: url('/assets/images/core/greyDotVert.gif') right top repeat-y;
+}
+
+.fPages li a {
+    display: block;
+    padding: 4px 7px 7px;
+    font-size: 14px;
+    color: #ebebeb;
+}
+
+.fPages li a:hover {
+    background-color: #4b4b4b;
+    color: #fff;
+}
+
+.fPages li.on a {
+    background-color: #282828;
+    color: #fff;
+}
+
+.fPages .pagePrev, .fPages .pageNext {
+    background: none;
+}
+
+.fPages .pagePrev a {
+    padding: 4px 7px 4px 24px;
+    background: url('/assets/images/core/roundLeft.gif') 0px 5px no-repeat;
+}
+
+.fPages .pagePrev a:hover {
+    background: url('/assets/images/core/roundLeftRed.gif') 0px 5px no-repeat;
+}
+
+.fPages .pageNext a {
+    padding: 4px 24px 4px 7px;
+    background: url('/assets/images/core/roundRight.gif') 100% 5px no-repeat;
+}
+
+.fPages .pageNext a:hover {
+    background: url('/assets/images/core/roundRightRed.gif') 100% 5px no-repeat;
+}
+
+/**************** optional nav *************/
+
+#fRungThree {
+    padding: 10px 0;
+}
+
+#fRungThree ul li {
+    display: inline;
+    margin: 0 6px 0 0;
+    font-size: 16px;
+    color: #e2e2e2;
+    font-weight: bold;
+    
+}
+
+#fRungThree ul li a {
+    color: #fff;
+    
+}
+
+/****************************************** forum table ***************************************/
+
+#forumTable {
+    width: 100%;
+}
+
+#forumOne {
+    width: 72px;
+}
+
+#forumTwo {
+    width: 466px;
+}
+
+#forumTable th {
+    font-size:  12px;
+    text-transform: uppercase;
+    color: #fff;
+    font-family: arial;
+    padding: 5px 10px;
+    background-color: #303030;
+    border: 1px solid #7f7f7f;
+    
+}
+
+#forumTable td {
+    padding: 10px;
+    background-color: #303030;
+    border: 1px solid #7f7f7f;
+    
+}
+
+#forumTable td {
+    color: #b0b0b0;
+}
+
+#forumTable td a {
+    color: #ededed;
+    font-size: 14px;
+}
+
+.nameLeft {
+    width: 360px;
+    float: left;
+}
+
+.nameRight {
+    width: 85px;
+    float: right;
+}
+
+.nameRight a {
+    margin: 0 2px 0 0;
+}
+
+.nameLeft p {
+    font-size: 14px;
+    color: #9a8b84;
+    margin: 0 0 4px 0;
+}
+
+.nameLeft p a {
+    color: #58595b;
+    padding: 0 6px 0 0;
+    
+}
+
+.nameLeft p span {
+    color: #a61432;
+    padding: 0 4px 0 0;
+}
+
+.nameLeft .posterName {
+    color: #9a8b84;
+    text-transform: none;
+}
+
+
+.namePages li {
+    display: inline;
+    margin: 0 6px 0 0;
+    font-size: 14px;
+    color: #58595b;
+}
+
+#wrap .lastPost p {
+    color: #fff;
+}
+
+.lastPost p a {
+    text-transform: none;
+}
+
+.nameLeftOuter a {
+    font-size: 14px;
+}
+
+#wrap .nameLeftOuter p {
+    padding: 5px 0 0;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+}
+
+/****************************************** post page ***************************************/
+
+/**************** forum post page *************/
+
+.fPost {
+    background: #222222;
+    margin: 0 0 20px 0;
+    border: 1px solid #7f7f7f;
+    
+}
+
+.pTopBar{
+    background-color: #303030;
+        border-bottom: 1px solid #7f7f7f;
+        
+    padding: 5px;
+}
+
+.pTopBar p {
+    width: 325px;
+    float: left;
+    margin: 0;
+    font-size: 14px;
+    color: #fff;
+    clear: none;
+    
+}
+
+.pTopBar ul {
+    float: right;
+    text-align: right;
+    width: 308px;
+    clear: none;
+    
+}
+
+.pTopBar ul li {
+    display: inline;
+    margin: 0 0 0 5px;
+    font-family: arial;
+    font-size: 14px;
+    color: #cecece;
+}
+
+.pTopBar ul li a {
+    color: #fff;
+    font-family: arial;
+    
+}
+
+.postLeft {
+    width: 152px;
+    float: left;
+    padding: 10px;
+}
+
+.postLeft a {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+
+.postLeft img {
+    padding: 20px 0;
+}
+
+.postLeft p {
+    font-size: 14px;
+    color: #f5f5f5;
+    margin: 0;
+}
+
+.postRight {
+    padding: 10px 0px  10px 0;
+    width: 754px;
+    float: right;
+   
+    
+}
+
+.postRight h3 {
+    font-family: arial;
+    font-size: 14px;
+    color: #a61432;
+    margin: 0 0 12px 0;
+}
+
+.postRight p {
+    font-family: arial;
+    color: #767676;
+}
+
+.sig {
+    background: url('/assets/images/core/greyDotHoriz.gif') left top repeat-x;
+    padding: 15px 0 0;
+}
+
+
+#forumReply {
+    margin: 0 0 20px 0;
+
+}
+
+#fPreview {
+    background-color: #303030;
+    border: 1px solid #7f7f7f;    
+    padding: 8px;
+    margin: 0 0 20px 0;
+}
+
+#fPreview p {
+    margin: 0;
+}
+
+#fSummary {
+    background-color: #303030;
+    border: 1px solid #7f7f7f;}
+
+#fSummary p {
+    padding: 10px;
+}
+
+#fSummary div {
+    background: #3f3f3f;
+    border-bottom: 1px solid #fff;
+    padding: 7px;
+}
+
+#fSummary div p {
+    color: #fff;
+    margin: 0;
+    font-size: 14px;
+    padding: 0;
+}
+
+#forum #fSummaryLeft {
+    width: 50%;
+    float: left;
+    clear: none;
+}
+
+#forum #fSummaryRight{
+    
+    width: 50%;
+    float: right;
+    text-align: right;
+    clear: none;
+    
+}
+
+#subject
+{
+	width: 500px;
+}
+
+#smilies 
+{
+	float: right;
+	width: 100px;
+}
+
+#message
+{
+	width: 800px;
+	height: 400px;
+}
+
+.error
+{
+	color: Red;
+}
+
+#updateProfileForm {
+    padding: 20px 0 0;
+}
+
+#updateProfileForm label {
+    display: block;
+    width: 250px;
+    float: left;
+    padding: 0 30px 0 0;
+    font-size: 13px;
+    color: #525252;
+    margin: 2px 0 20px 0;
+    text-align: right;
+}
+
+#updateProfileForm br {
+    clear: both;
+}
+
+#updateProfileForm input {
+    float: left;
+    width: 250px;
+    margin: 0 0 20px 0;
+}
+
+#updateProfileForm textarea {
+    width: 250px;
+    height: 250px;
+    margin: 0 0 20px 0;
+    
+}
+
+#updateProfileForm #cSubmit, #updateProfileForm #sSubmit, #updateProfileForm #submit {
+    display: block;
+    margin: 0 0 0 280px;
+    width: 120px;
+    height: 20px;
+}

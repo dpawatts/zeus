@@ -46,11 +46,9 @@ namespace Zeus.Web.Mvc
 			ContentEngine engine = Zeus.Context.Initialize(false);
 
 			SparkApplication app = new SparkApplication();
-			app.RegisterFacilities(engine.Container);
 			app.RegisterComponents(engine.Container);
 			app.RegisterViewEngine(ViewEngines.Engines);
 			app.RegisterPackages(engine.Container, RouteTable.Routes, ViewEngines.Engines);
-			//app.RegisterRoutes(RouteTable.Routes);
 
 			RegisterRoutes(RouteTable.Routes, engine);
 

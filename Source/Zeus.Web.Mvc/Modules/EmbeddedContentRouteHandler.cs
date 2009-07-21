@@ -65,6 +65,9 @@ namespace Zeus.Web.Mvc.Modules
 				}
 				using (var stream = _routeHandler.GetStream(resource))
 				{
+					if (stream == null)
+						throw new ZeusException("Could not find embedded resource with name '" + resource + "'.");
+
 					var buffer = new byte[1024];
 					for (; ; )
 					{

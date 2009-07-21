@@ -77,6 +77,10 @@ namespace Zeus.Web
 		public PathData GetPath(ContentItem item, string remainingUrl)
 		{
 			string newTemplateUrl = GetTemplateUrl(item);
+
+			if (string.IsNullOrEmpty(remainingUrl))
+				return new PathData(item, newTemplateUrl);
+
 			if (remainingUrl.Equals(action, StringComparison.InvariantCultureIgnoreCase) || remainingUrl.Equals(action + item.Extension))
 				return new PathData(item, newTemplateUrl, action, string.Empty) { SslSecured = SslSecured };
 

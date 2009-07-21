@@ -67,7 +67,6 @@
     <Compile Include="Configuration\BadWordElement.cs" />
     <Compile Include="Configuration\ForumSection.cs" />
     <Compile Include="ContentTypes\IMessageBoardContainer.cs" />
-    <Compile Include="ContentTypes\NewPost.cs" />
     <Compile Include="ContentTypes\MemberContainer.cs" />
     <Compile Include="ContentTypes\Forum.cs" />
     <Compile Include="ContentTypes\Member.cs" />

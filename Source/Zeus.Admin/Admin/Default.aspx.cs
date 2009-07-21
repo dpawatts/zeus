@@ -44,11 +44,11 @@ namespace Zeus.Admin
 
 			// ExtJS CSS
 			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.Css.ext-all.css");
-            Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.Css.xtheme-gray.css");
+			Page.ClientScript.RegisterEmbeddedCssResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.Css.xtheme-gray.css");
 
 			// ExtJS JS
-            Page.ClientScript.RegisterEmbeddedJavascriptResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.ext-base.js", ResourceInsertPosition.HeaderTop);
-            Page.ClientScript.RegisterEmbeddedJavascriptResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.ext-all.js", ResourceInsertPosition.HeaderTop);
+			Page.ClientScript.RegisterEmbeddedJavascriptResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.ext-base.js", ResourceInsertPosition.HeaderTop);
+			Page.ClientScript.RegisterEmbeddedJavascriptResource(typeof(Default), "Zeus.Admin.Assets.ExtJS.ext-all.js", ResourceInsertPosition.HeaderTop);
 
 			base.OnPreRender(e);
 		}

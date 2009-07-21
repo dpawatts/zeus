@@ -3,6 +3,8 @@
   <head>
     <title>${Title}</title>
     <use:head />
+    
+    <use:headStyles />
   </head>
   <body>
     <div id="container">

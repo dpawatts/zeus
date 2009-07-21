@@ -3,24 +3,33 @@ using System.Linq;
 using Zeus.Examples.MinimalMvcExample.ContentTypes;
 using Zeus.Templates.Mvc.Controllers;
 using Zeus.Web;
+using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Examples.MinimalMvcExample.Controllers
 {
 	[Controls(typeof(CustomPage))]
-	public class CustomPageController : BaseController<CustomPage, ICustomPageViewData>
+	public class CustomPageController : ZeusController<CustomPage>
 	{
 		public override System.Web.Mvc.ActionResult Index()
 		{
-			TypedViewData.SearchResults = Context.Finder.Items<CustomPage>()
-				.Where(cp => cp.Content == "<p>test</p>")
+			return View(new CustomPageViewModel(CurrentItem)
+			{
+				SearchResults =
+					Context.Finder.Items<CustomPage>()
+						.Where(cp => cp.Content == "<p>test</p>")
 				//.OrderBy(cp => cp.Content)
-				;
-			return View("Index", TypedViewData);
+			});
 		}
 	}
 
-	public interface ICustomPageViewData : IViewData<CustomPage>
+	public class CustomPageViewModel : ViewModel<CustomPage>
 	{
-		IEnumerable<CustomPage> SearchResults { get; set; }
+		public CustomPageViewModel(CustomPage currentItem)
+			: base(currentItem)
+		{
+
+		}
+
+		public IEnumerable<CustomPage> SearchResults { get; set; }
 	}
 }

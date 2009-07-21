@@ -70,7 +70,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		{
 			get
 			{
-				return new Url(MessageBoard.NewPostPage.Url)
+				return new Url(MessageBoard.PostUrl)
 					.AppendQuery("f", ID)
 					.AppendQuery("mode", "newTopic")
 					.ToString();

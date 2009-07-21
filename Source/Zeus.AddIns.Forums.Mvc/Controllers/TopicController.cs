@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Isis.Web;
+using MvcContrib.Pagination;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.AddIns.Forums.Mvc.ViewModels;
 using Zeus.Web;
 using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(Topic))]
-	public class TopicController : BaseForumController<Topic, ITopicViewData>
+	[Controls(typeof(Topic), AreaName = ForumsWebPackage.AREA_NAME)]
+	public class TopicController : BaseForumController<Topic>
 	{
 		protected override MessageBoard CurrentMessageBoard
 		{
@@ -31,7 +33,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		public ActionResult Index(int? p, int? post)
 		{
 			var allPosts = CurrentItem.GetChildren<Post>().ToList();
-			TypedViewData.Posts = allPosts.AsPagination(p ?? 1, CurrentMessageBoard.PostsPerPage);
+			var viewModel = new TopicViewModel(CurrentItem, allPosts.AsPagination(p ?? 1, CurrentMessageBoard.PostsPerPage));
 
 			// Increment view count.
 			++CurrentItem.ViewCount;
@@ -46,12 +48,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 					return Redirect(new Url(CurrentItem.Url).AppendQuery("p", pageNumber).SetFragment("post" + post));
 			}
 
-			return View("Index");
+			return View(viewModel);
 		}
-	}
-
-	public interface ITopicViewData : IBaseForumViewData<Topic>
-	{
-		IPagination<Post> Posts { get; set; }
 	}
 }
