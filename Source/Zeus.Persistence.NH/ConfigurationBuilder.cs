@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions.Helpers;
 using Zeus.ContentTypes;
 using System.Text;
 using System.Collections.Generic;
@@ -45,8 +46,8 @@ namespace Zeus.Persistence.NH
 			properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();
 			properties["connection.connection_string_name"] = databaseSectionConfig.ConnectionStringName;
 
-			ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
-			persistenceModel.Conventions.DefaultLazyLoad = false;
+			//ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
+			//persistenceModel.Mappings.(DefaultLazy.AlwaysTrue());
 
 			_configuration = new NHibernate.Cfg.Configuration().AddProperties(properties);
 

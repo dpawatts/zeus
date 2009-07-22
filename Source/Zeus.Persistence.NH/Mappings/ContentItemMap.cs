@@ -38,9 +38,10 @@ namespace Zeus.Persistence.NH.Mappings
 				.Cascade.All()
 				.Inverse()
 				.LazyLoad()
-				.WithKeyColumn("ParentID")
-				// cache usage=read-write
-				.SetAttribute("order-by", "SortOrder");
+				.KeyColumnNames.Add("ParentID")
+				//.SetAttribute("order-by", "SortOrder")
+				.Cache.AsReadWrite()
+				;
 
 			HasMany<PropertyData>(x => x.Details)
 				//.AsList(cd => cd.WithColumn("ID"))
@@ -48,27 +49,26 @@ namespace Zeus.Persistence.NH.Mappings
 				.Inverse()
 				.Cascade.AllDeleteOrphan()
 				.LazyLoad()
-				// cache usage=read-write
-				.WithKeyColumn("ItemID")
-				.Where("DetailCollectionID IS NULL");
+				.KeyColumnNames.Add("ItemID")
+				.Where("DetailCollectionID IS NULL")
+				.Cache.AsReadWrite();
 
 			HasMany<PropertyCollection>(x => x.DetailCollections)
 				.AsMap(cd => cd.Name)
 				.Inverse()
 				.Cascade.AllDeleteOrphan()
 				.LazyLoad()
-				.WithKeyColumn("ItemID")
-				// cache usage=read-write
-				;
+				.KeyColumnNames.Add("ItemID")
+				.Cache.AsReadWrite();
 
 			HasMany(x => x.AuthorizationRules)
 				.AsBag()
 				.Cascade.AllDeleteOrphan()
 				.Inverse()
 				.LazyLoad()
-				.WithKeyColumn("ItemID")
-				// cache usage=read-write
-				.FetchType.Join();
+				.KeyColumnNames.Add("ItemID")
+				.FetchType.Join()
+				.Cache.AsReadWrite();
 		}
 	}
 }

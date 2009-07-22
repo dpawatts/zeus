@@ -58,14 +58,23 @@
 		</subclass>
 
 		<subclass name="Zeus.ContentProperties.ObjectProperty, Zeus" discriminator-value="Object">
-			<property name="Value" type="Serializable" length="2147483647" />
+			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
 		</subclass>
 		<subclass name="Zeus.ContentProperties.FileDataProperty, Zeus" discriminator-value="FileData">
-			<property name="Value" type="Serializable" length="2147483647" />
+			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
 		</subclass>
 		<subclass name="Zeus.ContentProperties.ImageDataProperty, Zeus" discriminator-value="ImageData">
-			<property name="Value" type="Serializable" length="2147483647" />
+			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
 		</subclass>
+	</class>
+
+	<!-- zeusDetailBlobs -->
+	<class name="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" table="zeusDetailBlobs">
+		<id name="ID" column="ID" type="Int32" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+		
+		<property name="Blob" type="Serializable" length="2147483647" />
 	</class>
 
 

@@ -21,8 +21,8 @@ namespace Zeus.Persistence.NH.Mappings
 				.AsBag()
 				.Cascade.AllDeleteOrphan()
 				.Inverse()
-				// cache usage=nonsrict-read-write
-				.WithKeyColumn("DetailCollectionID");
+				.KeyColumnNames.Add("DetailCollectionID")
+				.Cache.AsNonStrictReadWrite();
 		}
 	}
 }

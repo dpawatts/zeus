@@ -22,14 +22,6 @@ namespace Zeus.ContentProperties
 
 		#region Properties
 
-		public virtual TFileData FileDataValue { get; set; }
-
-		public override object Value
-		{
-			get { return FileDataValue; }
-			set { FileDataValue = (TFileData) value; }
-		}
-
 		public override Type ValueType
 		{
 			get { return typeof(TFileData); }

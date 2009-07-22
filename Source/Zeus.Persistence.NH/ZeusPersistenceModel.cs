@@ -6,7 +6,7 @@ namespace Zeus.Persistence.NH
 	{
 		public ZeusPersistenceModel()
 		{
-			addMappingsFromThisAssembly();
+			AddMappingsFromThisAssembly();
 		}
 	}
 }

@@ -34,11 +34,11 @@
   <ItemGroup>
     <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
+      <HintPath>..\..\Libraries\Castle\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\Libraries\Castle\Castle.MicroKernel.dll</HintPath>
     </Reference>
     <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

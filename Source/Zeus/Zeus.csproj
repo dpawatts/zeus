@@ -31,21 +31,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.Core.dll</HintPath>
+      <HintPath>..\..\Libraries\Castle\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.MicroKernel.dll</HintPath>
+      <HintPath>..\..\Libraries\Castle\Castle.MicroKernel.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Castle.Windsor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\Libraries\Castle\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\Libraries\NHibernate\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -162,6 +162,7 @@
     <Compile Include="ContentProperties\IntegerProperty.cs" />
     <Compile Include="ContentProperties\DoubleProperty.cs" />
     <Compile Include="ContentProperties\DateTimeProperty.cs" />
+    <Compile Include="ContentProperties\ObjectPropertyDataBlob.cs" />
     <Compile Include="ContentProperties\PropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\DefaultProperty.cs" />
     <Compile Include="ContentProperties\XhtmlStringContentPropertyAttribute.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Serialization\ItemXmlReader.cs" />
     <Compile Include="Serialization\WrongVersionException.cs" />
     <Compile Include="Web\Global.cs" />
+    <Compile Include="Web\Handlers\CacheHandler.cs" />
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
     <Compile Include="Web\Handlers\BaseFileUploadHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />

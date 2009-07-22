@@ -32,7 +32,18 @@ namespace Zeus.ContentProperties
 			get { return PropertyDataType.Object; }
 		}
 
-		public override object Value { get; set; }
+		public virtual ObjectPropertyDataBlob Blob { get; set; }
+
+		public override object Value
+		{
+			get { return (Blob != null) ? Blob.Blob : null; }
+			set
+			{
+				if (Blob == null)
+					Blob = new ObjectPropertyDataBlob();
+				Blob.Blob = value;
+			}
+		}
 
 		public override Type ValueType
 		{
