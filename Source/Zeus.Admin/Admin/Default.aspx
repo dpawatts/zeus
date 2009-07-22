@@ -8,40 +8,39 @@
 	<title><asp:Literal runat="server" ID="ltlAdminName1" /> Administration</title>
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-		window.zeus = new frameManager();
-});
+		$(document).ready(function() {
+			window.zeus = new frameManager();
+		});
 
-Ext.onReady(function() {
+		Ext.onReady(function() {
+			// NOTE: This is an example showing simple state management. During development,
+			// it is generally best to disable state management as dynamically-generated ids
+			// can change across page loads, leading to unpredictable results.  The developer
+			// should ensure that stable state ids are set for stateful components in real apps.
+			//Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
-    // NOTE: This is an example showing simple state management. During development,
-    // it is generally best to disable state management as dynamically-generated ids
-    // can change across page loads, leading to unpredictable results.  The developer
-    // should ensure that stable state ids are set for stateful components in real apps.
-    Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-
-    var viewport = new Ext.Viewport({
-        layout: 'border',
-        items: [
-                new Ext.BoxComponent({ // raw
-                    region: 'north',
-                    el: 'north',
-                    height: 59
-                }), {
-                    region: 'west',
-                    contentEl: 'west',
-                    split: true,
-                    width: 200,
-                    minSize: 175,
-                    maxSize: 400,
-                    collapsible: true
-                }, {
-                    region: 'center',
-                    contentEl: 'center'
-                }
-             ]
-    });
-});
+			var viewport = new Ext.Viewport({
+				layout: 'border',
+				items: [
+            new Ext.BoxComponent({ // raw
+            	region: 'north',
+            	el: 'north',
+            	height: 59
+            }), {
+            	region: 'west',
+            	contentEl: 'west',
+            	split: true,
+            	width: 200,
+            	minSize: 175,
+            	maxSize: 400,
+            	collapsible: true
+            }, {
+            	region: 'center',
+            	contentEl: 'center'
+            }
+         ]
+			});
+		});
 	</script>
 </head>
 <body>

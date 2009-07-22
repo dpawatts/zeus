@@ -53,7 +53,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		/// </summary>
 		public virtual Post LastPost
 		{
-			get { return Topics.Select(t => t.LastPost).OrderBy(p => p.Created).LastOrDefault(); }
+			get { return Topics.Select(t => t.LastPost).Where(p => p != null).OrderBy(p => p.Created).LastOrDefault(); }
 		}
 
 		public MessageBoard MessageBoard

@@ -391,9 +391,11 @@
     <EmbeddedResource Include="Admin\Assets\Images\Icons\arrow_redo.png" />
     <EmbeddedResource Include="Admin\Assets\Images\Icons\package_come_and_go.png" />
     <EmbeddedResource Include="Admin\Assets\ExtJS\Css\ext-all.css" />
-    <EmbeddedResource Include="Admin\Assets\ExtJS\Css\xtheme-gray.css" />
+    <EmbeddedResource Include="Admin\Assets\ExtJS\Css\xtheme-gray-v2.css" />
     <EmbeddedResource Include="Admin\Assets\ExtJS\ext-all.js" />
     <EmbeddedResource Include="Admin\Assets\ExtJS\ext-base.js" />
+    <EmbeddedResource Include="Admin\Assets\ExtJS\Css\xtheme-blue.css" />
+    <EmbeddedResource Include="Admin\Assets\ExtJS\Css\xtheme-gray.css" />
     <Content Include="Admin\Assets\Web.config" />
     <EmbeddedResource Include="Admin\Assets\Css\new.css" />
     <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />

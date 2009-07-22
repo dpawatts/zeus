@@ -57,7 +57,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 
 		public virtual Post LastPost
 		{
-			get { return Posts.Last(); }
+			get { return Posts.LastOrDefault(); }
 		}
 
 		public Forum Forum
