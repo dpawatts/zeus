@@ -25,5 +25,11 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			get { return GetDetail<ImageData>("Image", null); }
 			set { SetDetail("Image", value); }
 		}
+
+		[MultiImageDataUploadEditor("Images", 110)]
+		public PropertyCollection Images
+		{
+			get { return GetDetailCollection("Images", true); }
+		}
 	}
 }
