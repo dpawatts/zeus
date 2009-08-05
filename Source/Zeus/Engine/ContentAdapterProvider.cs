@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Castle.Core;
-using Isis.ComponentModel;
+using Isis.Reflection;
+using Ninject;
 using Zeus.Web;
 
 namespace Zeus.Engine
@@ -10,7 +10,7 @@ namespace Zeus.Engine
 	/// <summary>
 	/// Keeps track of and provides content adapters in the system.
 	/// </summary>
-	public class ContentAdapterProvider : IContentAdapterProvider, IStartable
+	public class ContentAdapterProvider : IContentAdapterProvider, IInitializable
 	{
 		readonly ContentEngine engine;
 		private readonly ITypeFinder _typeFinder;
@@ -73,9 +73,9 @@ namespace Zeus.Engine
 				typeof(T).FullName, path.CurrentItem, path.Path);
 		}
 
-		#region IStartable Members
+		#region IInitializable Members
 
-		public void Start()
+		public void Initialize()
 		{
 			List<IAdapterDescriptor> references = new List<IAdapterDescriptor>();
 			foreach (Type controllerType in _typeFinder.Find(typeof(IContentAdapter)))
@@ -100,10 +100,6 @@ namespace Zeus.Engine
 			}
 
 			RegisterAdapter(references.ToArray());
-		}
-
-		public void Stop()
-		{
 		}
 
 		#endregion

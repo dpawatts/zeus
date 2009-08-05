@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Isis.ComponentModel;
+using Isis.Reflection;
 using Zeus.Engine;
 
 namespace Zeus.Plugin

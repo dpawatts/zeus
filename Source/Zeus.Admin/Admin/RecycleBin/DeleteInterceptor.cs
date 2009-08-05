@@ -1,4 +1,4 @@
-using Castle.Core;
+using Ninject;
 using Zeus.Persistence;
 
 namespace Zeus.Admin.RecycleBin

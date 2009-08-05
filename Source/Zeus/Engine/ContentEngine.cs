@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Configuration;
-using Castle.Core;
-using Castle.Windsor;
-using Isis.ComponentModel;
+using Isis.FrameworkBlocks.DependencyInjection;
+using Isis.Reflection;
 using Isis.Web;
 using Isis.Web.Security;
 using Zeus.Admin;
 using Zeus.Configuration;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.DynamicContent;
 using Zeus.Globalization;
-using Zeus.Installation;
-using Zeus.Integrity;
 using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
-using Zeus.Serialization;
 using Zeus.Web;
-using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
 
 namespace Zeus.Engine
 {
 	public class ContentEngine
 	{
+		private readonly DependencyInjectionManager _dependencyInjectionManager;
+
 		#region Properties
 
 		public IAdminManager AdminManager
@@ -72,132 +67,57 @@ namespace Zeus.Engine
 			get { return Resolve<IWebContext>(); }
 		}
 
-		public IWindsorContainer Container
-		{
-			get { return IoC.Container; }
-		}
-
 		#endregion
 
 		#region Constructor
 
 		public ContentEngine(EventBroker eventBroker)
 		{
-			IoC.AddComponentInstance(eventBroker);
-			IoC.AddComponentInstance(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
-			HostSection hostSection = IoC.AddComponentInstance(ConfigurationManager.GetSection("zeus/host") as HostSection);
-			IoC.AddComponentInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
-			IoC.AddComponentInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
-			IoC.AddComponentInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
+			HostSection hostSection = (HostSection) ConfigurationManager.GetSection("zeus/host");
 
-			SetupBasicServices();
+			_dependencyInjectionManager = new DependencyInjectionManager();
+			_dependencyInjectionManager.Bind<IAssemblyFinder, AssemblyFinder>();
+			_dependencyInjectionManager.Bind<ITypeFinder, TypeFinder>();
+
+			_dependencyInjectionManager.BindInstance(eventBroker);
+			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
+			_dependencyInjectionManager.BindInstance(hostSection);
+			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
+			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
+			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
 
 			Url.DefaultExtension = hostSection.Web.Extension;
 		}
 
 		#endregion
 
-		private static void SetupBasicServices()
-		{
-			// Isis web security
-			IoC.SetupService<Isis.Web.IWebContext, WebContext>();
-			IoC.SetupService<IAuthorizationService, AuthorizationService>();
-			IoC.SetupService<ICredentialContextService, CredentialContextService>();
-			IoC.SetupService<IAuthenticationContextService, AuthenticationContextService>();
-
-			// Admin
-			IoC.SetupService<IAdminManager, AdminManager>();
-			IoC.SetupService<Navigator, Navigator>();
-
-			// Content Properties
-			IoC.SetupService<IContentPropertyManager, ContentPropertyManager>();
-
-			// Content Types
-			IoC.SetupService(typeof(AttributeExplorer<>), typeof(AttributeExplorer<>));
-			IoC.SetupService(typeof(IEditableHierarchyBuilder<>), typeof(EditableHierarchyBuilder<>));
-			IoC.SetupService<IContentTypeBuilder, ContentTypeBuilder>();
-			IoC.SetupService<IContentTypeManager, ContentTypeManager>();
-
-			// Dynamic Content
-			IoC.SetupService<IDynamicContentManager, DynamicContentManager>();
-
-			// Engine
-			IoC.SetupService<IContentAdapterProvider, ContentAdapterProvider>();
-			//IoC.SetupService<IAssemblyFinder, AssemblyFinder>();
-			IoC.SetupService(typeof(IPluginFinder<>), typeof(PluginFinder<>));
-			IoC.SetupService<ITypeFinder, TypeFinder>();
-
-			// Globalization
-			IoC.SetupService<ILanguageManager, LanguageManager>();
-
-			// Installation
-			IoC.SetupService<InstallationManager, InstallationManager>();
-
-			// Integrity
-			IoC.SetupService<IIntegrityManager, IntegrityManager>();
-			IoC.SetupService<IIntegrityEnforcer, IntegrityEnforcer>();
-
-			// Persistence
-			IoC.SetupService<IItemNotifier, ItemNotifier>();
-			IoC.SetupService<IPersister, ContentPersister>();
-			IoC.SetupService<IVersionManager, VersionManager>();
-
-			// Plugin
-			IoC.SetupService<IPluginBootstrapper, PluginBootstrapper>();
-
-			// Security
-			IoC.SetupService<ISecurityEnforcer, SecurityEnforcer>();
-			IoC.SetupService<ISecurityManager, SecurityManager>();
-
-			// Serialization
-			IoC.SetupService<Exporter, GZipExporter>();
-			IoC.SetupService<ItemXmlWriter, ItemXmlWriter>();
-			IoC.SetupService<Importer, GZipImporter>();
-			IoC.SetupService<ItemXmlReader, ItemXmlReader>();
-
-			// Web
-			IoC.SetupService<IErrorHandler, ErrorHandler>();
-			IoC.SetupService<IHost, Host>();
-			IoC.SetupService<IUrlParser, MultipleSitesUrlParser>();
-			IoC.SetupService<IPermanentLinkManager, PermanentLinkManager>();
-			IoC.SetupService<ICredentialRepository, CredentialRepository>();
-			IoC.SetupService<IWebSecurityManager, CredentialRepository>();
-			IoC.SetupService<PermissionDeniedHandler, PermissionDeniedHandler>(); // FIX
-			IoC.SetupService<IRequestDispatcher, RequestDispatcher>();
-			IoC.SetupService<IRequestLifecycleHandler, RequestLifecycleHandler>();
-			IoC.SetupService<IWebContext, WebRequestContext>();
-		}
-
 		public void AddComponent(string key, Type serviceType, Type classType)
 		{
-			IoC.AddComponent(key, serviceType, classType);
+			_dependencyInjectionManager.Bind(serviceType, classType);
 		}
 
 		public void AddComponent(string key, Type classType)
 		{
-			IoC.AddComponent(key, classType);
+			_dependencyInjectionManager.Bind(classType);
 		}
 
 		public void AddComponentInstance(string key, object instance)
 		{
-			IoC.AddComponentInstance(key, instance);
+			_dependencyInjectionManager.BindInstance(instance);
 		}
 
-		public void AddService<TService, TComponent>()
+		public void Bind<TService, TComponent>()
 			where TComponent : TService
 		{
-			IoC.SetupService<TService, TComponent>();
+			_dependencyInjectionManager.Bind<TService, TComponent>();
 		}
 
 		public void Initialize()
 		{
-			IoC.AddComponentInstance(this);
+			_dependencyInjectionManager.BindInstance(this);
 
 			IPluginBootstrapper invoker = Resolve<IPluginBootstrapper>();
 			invoker.InitializePlugins(this, invoker.GetPluginDefinitions());
-
-			IoC.SetupPlugins();
-			IoC.StartComponents();
 
 			CredentialLocation rootCredentialLocation = new CredentialLocation
     	{
@@ -208,7 +128,7 @@ namespace Zeus.Engine
 
 		public T Resolve<T>()
 		{
-			return IoC.Resolve<T>();
+			return _dependencyInjectionManager.Get<T>();
 		}
 
 		/// <summary>Resolves a service configured for the factory.</summary>
@@ -216,24 +136,24 @@ namespace Zeus.Engine
 		/// <returns>An instance of the resolved service.</returns>
 		public object Resolve(Type serviceType)
 		{
-			return IoC.Container.Resolve(serviceType);
+			return _dependencyInjectionManager.Get(serviceType);
 		}
 
-		/// <summary>Releases a component from the IoC container.</summary>
+		/*/// <summary>Releases a component from the IoC container.</summary>
 		/// <param name="instance">The component instance to release.</param>
 		public void Release(object instance)
 		{
 			IoC.Container.Release(instance);
-		}
+		}*/
 
-		public void AddComponentLifeStyle(string key, Type classType, ComponentLifeStyle lifeStyle)
+		/*public void AddComponentLifeStyle(string key, Type classType, ComponentLifeStyle lifeStyle)
 		{
 			LifestyleType lifeStyleType = lifeStyle == ComponentLifeStyle.Singleton
 				? LifestyleType.Singleton
 				: LifestyleType.Transient;
 
 			Container.AddComponentLifeStyle(key, classType, lifeStyleType);
-		}
+		}*/
 	}
 
 	public enum ComponentLifeStyle

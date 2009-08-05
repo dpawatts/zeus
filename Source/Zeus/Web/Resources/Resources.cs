@@ -82,8 +82,11 @@ using Isis.Web.UI;
 
 [assembly: WebResource("Zeus.Web.Resources.FileDataEditor.FileDataEditor.js", "text/javascript")]
 [assembly: EmbeddedWebResource("Zeus.Web.Resources.FileDataEditor.FileDataUploader.swf", "Zeus.Web.Resources", "application/x-shockwave-flash")]
-[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.Silverlight.js", "text/javascript")]
-[assembly: WebResource("Zeus.Web.Resources.FileDataEditor.SilverlightFileDataEditor.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.FileDataEditor.swfobject.js", "text/javascript")]
+
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach.js", "Zeus.Web.Resources", "text/javascript")]
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js", "Zeus.Web.Resources", "text/javascript")]
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js", "Zeus.Web.Resources", "text/javascript")]
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf", "Zeus.Web.Resources", "application/x-shockwave-flash")]
 
 [assembly: WebResource("Zeus.Web.Resources.tinymce.js", "text/javascript")]

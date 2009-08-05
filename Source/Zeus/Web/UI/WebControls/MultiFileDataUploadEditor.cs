@@ -42,8 +42,6 @@ namespace Zeus.Web.UI.WebControls
 		{
 			switch (UploadMethod)
 			{
-				case UploadMethod.Silverlight:
-					return new SilverlightFileUploadImplementation(fileUpload);
 				case UploadMethod.Flash:
 					return new FlashFileUploadImplementation(fileUpload);
 				default:

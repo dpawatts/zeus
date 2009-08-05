@@ -1,9 +1,8 @@
 ﻿using System.Reflection;
-using Isis.ComponentModel;
 
 namespace Zeus.Admin
 {
-	public interface IAdminAssemblyManager : IService
+	public interface IAdminAssemblyManager
 	{
 		Assembly Assembly { get; }
 	}

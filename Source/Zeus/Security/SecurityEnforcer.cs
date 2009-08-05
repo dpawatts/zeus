@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
-using Castle.Core;
+using Ninject;
 using Zeus.Persistence;
 
 namespace Zeus.Security

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
-using Isis.ComponentModel;
 
 namespace Zeus.Persistence
 {
-	public interface IFinder<T> : IService
+	public interface IFinder<T>
 	{
 		IQueryable<T> Items();
 

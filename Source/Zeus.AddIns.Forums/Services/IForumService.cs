@@ -1,11 +1,10 @@
-using Castle.Core;
-using Isis.ComponentModel;
 using Isis.Web.Security;
+using Ninject;
 using Zeus.AddIns.Forums.ContentTypes;
 
 namespace Zeus.AddIns.Forums.Services
 {
-	public interface IForumService : IService, IStartable
+	public interface IForumService : IStartable
 	{
 		bool CanEditPost(Post post, Member member);
 		Post CreateReply(Topic topic, Member member, string subject, string message);

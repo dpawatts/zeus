@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Registration;
+using Isis.FrameworkBlocks.DependencyInjection;
+using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
 
@@ -24,14 +25,20 @@ namespace Zeus.Web.Mvc.Modules
 
 		public void RegisterStandardComponents(IKernel container, Assembly assembly, string areaName)
 		{
-			container
-					.Register(AllTypes
-												.FromAssembly(assembly)
-												.BasedOn<IController>()
-												.Configure(component => component
-																										.Named(areaName.ToLowerInvariant() + "." +
-																													 component.ServiceType.Name.ToLowerInvariant())
-																										.LifeStyle.Transient));
+			DependencyInjectionUtility.RegisterAllComponentsTransient<IController>(
+				container, assembly, t => GetControllerName(t, areaName));
+		}
+
+		private static string GetControllerName(Type type, string areaName)
+		{
+			string name = type.Name.ToLowerInvariant();
+
+			if (name.EndsWith("controller"))
+				name = name.Substring(0, name.IndexOf("controller"));
+
+			name = areaName.ToLowerInvariant() + "." + name;
+
+			return name;
 		}
 
 		public void RegisterStandardRoutes(ICollection<RouteBase> routes, Assembly assembly, string areaName)

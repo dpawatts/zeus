@@ -1,6 +1,5 @@
 using System;
 using System.Configuration;
-using Isis.ComponentModel;
 using Isis.ExtensionMethods.Web.UI;
 using Isis.Web.Hosting;
 using Isis.Web.Security;
@@ -24,10 +23,10 @@ namespace Zeus.Admin
 
 			try
 			{
-				if (IoC.Resolve<ICredentialContextService>().GetCurrentService().ValidateUser(UserName.Text, Password.Text))
+				if (WebSecurityEngine.Current.Get<ICredentialContextService>().GetCurrentService().ValidateUser(UserName.Text, Password.Text))
 				{
-					string username = IoC.Resolve<ICredentialContextService>().GetCurrentService().GetUser(UserName.Text).Username;
-					IoC.Resolve<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
+					string username = WebSecurityEngine.Current.Get<ICredentialContextService>().GetCurrentService().GetUser(UserName.Text).Username;
+					WebSecurityEngine.Current.Get<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
 				}
 				else
 					FailureText.Text = "Invalid username or password";

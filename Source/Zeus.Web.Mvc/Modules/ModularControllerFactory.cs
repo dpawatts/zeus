@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.MicroKernel;
+using Ninject;
 
 namespace Zeus.Web.Mvc.Modules
 {
@@ -16,25 +16,35 @@ namespace Zeus.Web.Mvc.Modules
 
 		public IController CreateController(RequestContext requestContext, string controllerName)
 		{
-			var controllerKey = controllerName.ToLowerInvariant() + "controller";
+			string controllerKey = controllerName.ToLowerInvariant() + "controller";
 
 			object area;
 			if (requestContext.RouteData.Values.TryGetValue("area", out area))
 			{
-				var areaControllerKey = Convert.ToString(area).ToLowerInvariant() + "." + controllerKey;
-				if (_kernel.HasComponent(areaControllerKey))
-				{
-					//requestContext.RouteData.Values["controller"] = area + "/" + controllerName;
-					return _kernel.Resolve<IController>(areaControllerKey);
-				}
+				string areaControllerKey = Convert.ToString(area).ToLowerInvariant() + "." + controllerKey;
+				IController areaController = InstantiateController(areaControllerKey);
+				if (areaController != null)
+					return areaController;
 			}
 
-			return _kernel.HasComponent(controllerKey) ? _kernel.Resolve<IController>(controllerKey) : null;
+			return InstantiateController(controllerKey);
+		}
+
+		private IController InstantiateController(string controllerName)
+		{
+			IController controller = _kernel.TryGet<IController>(controllerName.ToLowerInvariant());
+
+			var standardController = controller as Controller;
+
+			if (standardController != null)
+				standardController.ActionInvoker = new NinjectActionInvoker(_kernel);
+
+			return controller;
 		}
 
 		public void ReleaseController(IController controller)
 		{
-			_kernel.ReleaseComponent(controller);
+			//_kernel.ReleaseComponent(controller);
 		}
 	}
 }

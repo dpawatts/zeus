@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Isis.ComponentModel;
 using MvcContrib.Castle;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
@@ -46,9 +45,8 @@ namespace Zeus.Web.Mvc
 			ContentEngine engine = Zeus.Context.Initialize(false);
 
 			SparkApplication app = new SparkApplication();
-			app.RegisterComponents(engine.Container);
 			app.RegisterViewEngine(ViewEngines.Engines);
-			app.RegisterPackages(engine.Container, RouteTable.Routes, ViewEngines.Engines);
+			app.RegisterPackages(engine, RouteTable.Routes, ViewEngines.Engines);
 
 			RegisterRoutes(RouteTable.Routes, engine);
 

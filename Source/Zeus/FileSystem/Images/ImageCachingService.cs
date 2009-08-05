@@ -1,5 +1,5 @@
 using System.Linq;
-using Castle.Core;
+using Ninject;
 using SoundInTheory.DynamicImage.Caching;
 using Zeus.ContentProperties;
 using Zeus.Persistence;
@@ -64,7 +64,8 @@ namespace Zeus.FileSystem.Images
 
 		public void Stop()
 		{
-			
+			_persister.ItemDeleted -= OnPersisterItemDeleted;
+			_persister.ItemSaved -= OnPersisterItemSaved;
 		}
 	}
 }

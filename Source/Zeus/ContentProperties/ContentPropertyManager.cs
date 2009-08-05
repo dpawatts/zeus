@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isis.ComponentModel;
 using Isis.ExtensionMethods;
 using Zeus.Engine;
 

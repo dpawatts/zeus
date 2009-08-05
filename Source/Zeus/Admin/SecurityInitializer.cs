@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using Isis.ComponentModel;
 using Isis.Web.Security;
 using Zeus.Configuration;
 
@@ -9,18 +8,24 @@ namespace Zeus.Admin
 {
 	public class SecurityInitializer : IAuthorizationInitializer, IAuthenticationContextInitializer
 	{
+		private readonly AdminSection _adminConfig;
+
+		public SecurityInitializer(AdminSection adminConfig)
+		{
+			_adminConfig = adminConfig;
+		}
+
 		public void Initialize(IAuthorizationService authorizationService)
 		{
 			// If site is currently in Install mode, don't do anything.
-			AdminSection adminSection = ConfigurationManager.GetSection("zeus/admin") as AdminSection;
-			if (adminSection != null && adminSection.Installer.Mode == InstallationMode.Install)
+			if (_adminConfig.Installer.Mode == InstallationMode.Install)
 				return;
 
 			// Dynamically add authorization rule for admin site.
 			List<string> authorizedRoles = new List<string>();
-			foreach (AuthorizedRoleElement authorizedRoleElement in IoC.Resolve<AdminSection>().AuthorizedRoles)
+			foreach (AuthorizedRoleElement authorizedRoleElement in _adminConfig.AuthorizedRoles)
 				authorizedRoles.Add(authorizedRoleElement.Role);
-			authorizationService.AddRule(IoC.Resolve<AdminSection>().Path,
+			authorizationService.AddRule(_adminConfig.Path,
 				null, authorizedRoles, new[] { "*" }, null);
 		}
 
@@ -29,7 +34,7 @@ namespace Zeus.Admin
 			authenticationContextService.AddLocation(new AuthenticationLocation
 			{
 				Enabled = true,
-				Path = IoC.Resolve<AdminSection>().Path,
+				Path = _adminConfig.Path,
 				Name = ".ISISWEBAUTH.ADMIN",
 				LoginUrl = "~/admin/login.aspx",
 				DefaultUrl = "~/admin/default.aspx",

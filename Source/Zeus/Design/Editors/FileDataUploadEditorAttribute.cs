@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.IO;
 using Isis.Web;
 using Zeus.ContentTypes;
@@ -21,13 +19,12 @@ namespace Zeus.Design.Editors
 		public FileDataUploadEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
-			
+			UploadMethod = UploadMethod.Flash;
 		}
 
 		public FileDataUploadEditorAttribute()
-			: base()
 		{
-
+			UploadMethod = UploadMethod.Flash;
 		}
 
 		protected virtual FileData CreateNewItem()
@@ -109,7 +106,7 @@ namespace Zeus.Design.Editors
 			FileData file = item[Name] as FileData;
 			if (file != null)
 			{
-				FileDataEditor fileUpload = editor as FileDataEditor;
+				FileDataEditor fileUpload = (FileDataEditor) editor;
 				fileUpload.CurrentFileName = file.FileName;
 			}
 		}
@@ -123,8 +120,6 @@ namespace Zeus.Design.Editors
 		{
 			switch (UploadMethod)
 			{
-				case UploadMethod.Silverlight :
-					return new SilverlightFileUploadImplementation(fileUpload);
 				case UploadMethod.Flash:
 					return new FlashFileUploadImplementation(fileUpload);
 				default :
@@ -135,7 +130,6 @@ namespace Zeus.Design.Editors
 
 	public enum UploadMethod
 	{
-		Silverlight,
 		Flash
 	}
 }

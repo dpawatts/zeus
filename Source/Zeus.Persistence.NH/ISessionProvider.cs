@@ -1,9 +1,8 @@
 ﻿using System;
-using Isis.ComponentModel;
 
 namespace Zeus.Persistence.NH
 {
-	public interface ISessionProvider : IService, IDisposable
+	public interface ISessionProvider : IDisposable
 	{
 		SessionContext OpenSession { get; }
 	}

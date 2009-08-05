@@ -24,8 +24,6 @@ namespace Zeus.Design.Editors
 			_max = max;
 		}
 
-		public bool Required { get; set; }
-
 		protected override ListItem[] GetListItems(IEditableObject contentItem)
 		{
 			List<ListItem> items = Enumerable.Range(_min, _max - _min + 1).Select(i => new ListItem(i.ToString())).ToList();

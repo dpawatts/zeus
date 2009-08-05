@@ -1,4 +1,4 @@
-using Castle.Core;
+using Ninject;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
 using Zeus.Templates.ContentTypes.News;
@@ -65,7 +65,7 @@ namespace Zeus.Templates.Services
 
 		public void Stop()
 		{
-
+			_persister.ItemSaving -= OnPersisterItemSaving;
 		}
 
 		#endregion

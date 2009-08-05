@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{480B28F5-C653-4E33-8B22-4C8148DAA45C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Isis.ApplicationBlocks.PaymentProcessing.Providers.Protx</RootNamespace>
+    <AssemblyName>Isis.ApplicationBlocks.PaymentProcessing.Providers.Protx</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtxPaymentProvider.cs" />
+    <Compile Include="Protx\Vsp\AbortResponse.cs" />
+    <Compile Include="Protx\Vsp\AbortTransaction.cs" />
+    <Compile Include="Protx\Vsp\ApplyChecksFlag.cs" />
+    <Compile Include="Protx\Vsp\AvsCv2Result.cs" />
+    <Compile Include="Protx\Vsp\CheckResult.cs" />
+    <Compile Include="Protx\Vsp\DirectRefundResponse.cs" />
+    <Compile Include="Protx\Vsp\DirectRefundTransaction.cs" />
+    <Compile Include="Protx\Vsp\DirectResponse.cs" />
+    <Compile Include="Protx\Vsp\DirectTransaction.cs" />
+    <Compile Include="Protx\Vsp\IVspBasketItem.cs" />
+    <Compile Include="Protx\Vsp\ManualResponse.cs" />
+    <Compile Include="Protx\Vsp\ManualTransaction.cs" />
+    <Compile Include="Protx\Vsp\MyString.cs" />
+    <Compile Include="Protx\Vsp\NotificationEventArgs.cs" />
+    <Compile Include="Protx\Vsp\NotificationEventHandler.cs" />
+    <Compile Include="Protx\Vsp\NotificationResponseEventArgs.cs" />
+    <Compile Include="Protx\Vsp\NotificationResponseHandler.cs" />
+    <Compile Include="Protx\Vsp\RefundResponse.cs" />
+    <Compile Include="Protx\Vsp\RefundTransaction.cs" />
+    <Compile Include="Protx\Vsp\RegisterResponse.cs" />
+    <Compile Include="Protx\Vsp\RegisterTransaction.cs" />
+    <Compile Include="Protx\Vsp\ReleaseResponse.cs" />
+    <Compile Include="Protx\Vsp\ReleaseTransaction.cs" />
+    <Compile Include="Protx\Vsp\RepeatResponse.cs" />
+    <Compile Include="Protx\Vsp\RepeatTransaction.cs" />
+    <Compile Include="Protx\Vsp\ServerInfo.cs" />
+    <Compile Include="Protx\Vsp\ThreeDSecureStatus.cs" />
+    <Compile Include="Protx\Vsp\TransactionData.cs" />
+    <Compile Include="Protx\Vsp\TransactionLookupFunction.cs" />
+    <Compile Include="Protx\Vsp\VoidResponse.cs" />
+    <Compile Include="Protx\Vsp\VoidTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspBasket.cs" />
+    <Compile Include="Protx\Vsp\VspBasketItem.cs" />
+    <Compile Include="Protx\Vsp\VspCardDetailedTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspCardTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspCardType.cs" />
+    <Compile Include="Protx\Vsp\VspConfiguration.cs" />
+    <Compile Include="Protx\Vsp\VspConfigurationHandler.cs" />
+    <Compile Include="Protx\Vsp\VspDirectResponse.cs" />
+    <Compile Include="Protx\Vsp\VspDirectTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspException.cs" />
+    <Compile Include="Protx\Vsp\VspFollowupTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspMoneyTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspNewTransactionResponse.cs" />
+    <Compile Include="Protx\Vsp\VspParameter.cs" />
+    <Compile Include="Protx\Vsp\VspProtocol.cs" />
+    <Compile Include="Protx\Vsp\VspRelatedTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspResponse.cs" />
+    <Compile Include="Protx\Vsp\VspResponseParameters.cs" />
+    <Compile Include="Protx\Vsp\VspSecuredResponse.cs" />
+    <Compile Include="Protx\Vsp\VspServiceType.cs" />
+    <Compile Include="Protx\Vsp\VspStatusType.cs" />
+    <Compile Include="Protx\Vsp\VspTransactedResponse.cs" />
+    <Compile Include="Protx\Vsp\VspTransaction.cs" />
+    <Compile Include="Protx\Vsp\VspTransactionParametersCollection.cs" />
+    <Compile Include="Protx\Vsp\VspTransactionType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Isis.ApplicationBlocks.PaymentProcessing\Isis.ApplicationBlocks.PaymentProcessing.csproj">
+      <Project>{EC839A72-E8A2-4097-8C0A-9F2B3002AB71}</Project>
+      <Name>Isis.ApplicationBlocks.PaymentProcessing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

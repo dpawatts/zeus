@@ -1,11 +1,9 @@
 using System.Linq;
-using System.Web;
-using Castle.Core;
+using Ninject;
 using Quiksoft.EasyMail.SMTP;
 using Zeus.AddIns.Mailouts.ContentTypes;
 using Zeus.AddIns.Mailouts.ContentTypes.ListFilters;
 using Zeus.Persistence;
-using Zeus.Web;
 
 namespace Zeus.AddIns.Mailouts.Services
 {

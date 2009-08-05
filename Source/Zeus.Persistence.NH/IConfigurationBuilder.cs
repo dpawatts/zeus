@@ -1,8 +1,6 @@
-﻿using Isis.ComponentModel;
-
-namespace Zeus.Persistence.NH
+﻿namespace Zeus.Persistence.NH
 {
-	public interface IConfigurationBuilder : IService
+	public interface IConfigurationBuilder
 	{
 		NHibernate.Cfg.Configuration Configuration
 		{

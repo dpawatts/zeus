@@ -31,33 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle\Castle.MicroKernel.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis.ApplicationBlocks.DataMigrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.ApplicationBlocks.DataMigrations.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis.FrameworkBlocks.WebSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.FrameworkBlocks.WebSecurity.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +43,10 @@
     <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
@@ -201,6 +181,7 @@
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
     <Compile Include="Engine\IContentAdapterProvider.cs" />
+    <Compile Include="Engine\ZeusModule.cs" />
     <Compile Include="FileSystem\Images\ContentItem.extensions.cs" />
     <Compile Include="FileSystem\Images\Image.cs" />
     <Compile Include="FileSystem\Images\ImageCachingService.cs" />
@@ -223,6 +204,7 @@
     <Compile Include="Globalization\TranslatableAttribute.cs" />
     <Compile Include="Installation\DatabaseStatus.cs" />
     <Compile Include="Installation\InstallerHints.cs" />
+    <Compile Include="Installation\Migrations\Migration002.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
     <Compile Include="Linq\ContentItemFilters.cs" />
     <Compile Include="Net\Mail\IMailSender.cs" />
@@ -289,6 +271,7 @@
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
+    <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
     <Compile Include="Web\UI\WebControls\FlashFileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\FileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\ImageDataEditor.cs" />
@@ -296,7 +279,6 @@
     <Compile Include="Web\UI\WebControls\MultiImageDataUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
-    <Compile Include="Web\UI\WebControls\SilverlightFileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabControl.cs" />
     <Compile Include="Web\UI\WebControls\FileEditor.cs" />
@@ -568,6 +550,22 @@
     <EmbeddedResource Include="Web\Resources\jQuery\ui.sortable.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Isis.ApplicationBlocks.DataMigrations\Isis.ApplicationBlocks.DataMigrations.csproj">
+      <Project>{53264600-A2A8-499B-A32F-9E9EB45CEF86}</Project>
+      <Name>Isis.ApplicationBlocks.DataMigrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isis.FrameworkBlocks.DependencyInjection\Isis.FrameworkBlocks.DependencyInjection.csproj">
+      <Project>{9BA0268A-F699-438F-BD66-AB70361940E0}</Project>
+      <Name>Isis.FrameworkBlocks.DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis %28Isis\Core\Isis%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
       <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>
       <Name>Zeus.ObjectEditor</Name>
@@ -575,9 +573,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataEditor.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\FileDataEditor\Silverlight.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.css" />
@@ -659,9 +654,12 @@
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
     <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
     <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
-    <EmbeddedResource Include="Web\Resources\FileDataEditor\SilverlightFileDataEditor.js" />
     <EmbeddedResource Include="Web\Resources\FileDataEditor\swfobject.js" />
     <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataUploader.swf" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyUpload3.Attach.js" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Fx.ProgressBar.js" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.js" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.swf" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

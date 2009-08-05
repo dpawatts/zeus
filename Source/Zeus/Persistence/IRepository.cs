@@ -1,8 +1,6 @@
-﻿using Isis.ComponentModel;
-
-namespace Zeus.Persistence
+﻿namespace Zeus.Persistence
 {
-	public interface IRepository<TKey, TEntity> : IService
+	public interface IRepository<TKey, TEntity>
 	{
 		ITransaction BeginTransaction();
 		void Flush();

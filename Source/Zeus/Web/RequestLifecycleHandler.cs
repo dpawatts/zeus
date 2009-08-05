@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Web;
-using Castle.Core;
 using Isis.Web;
+using Ninject;
 using Zeus.Configuration;
 using Zeus.Engine;
 using Zeus.Installation;

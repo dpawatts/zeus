@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Isis.ComponentModel;
+using Isis.Reflection;
 using MbUnit.Framework;
 using Zeus.Engine;
 using Zeus.Persistence;

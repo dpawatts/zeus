@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Isis;
-using Isis.ComponentModel;
+using Isis.Reflection;
 
 namespace Zeus.Engine
 {

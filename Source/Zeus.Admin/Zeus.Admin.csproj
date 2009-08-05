@@ -11,7 +11,8 @@
     <RootNamespace>Zeus</RootNamespace>
     <AssemblyName>Zeus.Admin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SilverlightApplicationList>{C6EB711C-E1D9-4021-8976-80DF5D64D878}|..\Zeus.SilverlightUpload\Zeus.SilverlightUpload.csproj|Admin\ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,17 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Castle\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis, Version=2.0.3440.27926, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis.FrameworkBlocks.WebSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.FrameworkBlocks.WebSecurity.dll</HintPath>
+      <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,6 +68,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Admin\AdminAssemblyManager.cs" />
+    <Compile Include="Admin\AdminModule.cs" />
     <Compile Include="Admin\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -304,9 +298,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
+      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
+      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis %28Isis\Core\Isis%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus</Name>
+      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -398,7 +400,6 @@
     <EmbeddedResource Include="Admin\Assets\ExtJS\Css\xtheme-gray.css" />
     <Content Include="Admin\Assets\Web.config" />
     <EmbeddedResource Include="Admin\Assets\Css\new.css" />
-    <EmbeddedResource Include="Admin\ClientBin\Zeus.SilverlightUpload.xap" />
     <EmbeddedResource Include="Admin\Paste.aspx" />
     <EmbeddedResource Include="Admin\Copy.aspx" />
     <EmbeddedResource Include="Admin\AffectedItems.ascx" />

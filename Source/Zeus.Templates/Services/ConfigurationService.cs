@@ -1,11 +1,11 @@
 using System.Linq;
-using Castle.Core;
+using Ninject;
 using Zeus.ContentTypes;
 using Zeus.Templates.Configuration;
 
 namespace Zeus.Templates.Services
 {
-	public class ConfigurationService : IStartable
+	public class ConfigurationService : IInitializable
 	{
 		#region Fields
 
@@ -26,17 +26,12 @@ namespace Zeus.Templates.Services
 
 		#region Methods
 
-		public void Start()
+		public void Initialize()
 		{
 			// For each registered content types, apply filters specified in <templates> config section.
 			foreach (ContentType contentType in _contentTypeManager.GetContentTypes().Where(ct => ct.ItemType.FullName.StartsWith("Zeus.Templates")))
 				if (!_configSection.Rules.IsContentTypeAllowed(contentType))
 					contentType.Enabled = false;
-		}
-
-		public void Stop()
-		{
-
 		}
 
 		#endregion
