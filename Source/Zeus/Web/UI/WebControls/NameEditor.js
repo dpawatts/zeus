@@ -32,10 +32,11 @@
 	function getNameFromTitle(title) {
 		return title.toLowerCase().replace(/[ ]+/g, "-").replace(/[^a-zA-Z0-9_-]/g, "");
 	};
+
+	// plugin defaults - added as a property on our plugin function
+	$.fn.nameEditor.defaults = {
+		titleEditorID: 'txtTitle'
+	};
+	
 	// end of closure
 })(jQuery);
-
-// plugin defaults - added as a property on our plugin function
-$.fn.nameEditor.defaults = {
-	titleEditorID: 'txtTitle'
-};

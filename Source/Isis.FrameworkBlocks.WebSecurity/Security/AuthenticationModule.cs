@@ -22,7 +22,7 @@ namespace Isis.Web.Security
 
 		protected static IAuthenticationService CurrentAuthenticationService
 		{
-			get { return WebSecurityEngine.Current.Get<IAuthenticationContextService>().GetCurrentService(); }
+			get { return WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService(); }
 		}
 
 		#endregion
@@ -43,7 +43,7 @@ namespace Isis.Web.Security
 			HttpApplication application = (HttpApplication) source;
 			HttpContextBase context = new HttpContextWrapper(application.Context);
 
-			IAuthenticationContextService authenticationContextService = WebSecurityEngine.Current.Get<IAuthenticationContextService>();
+			IAuthenticationContextService authenticationContextService = WebSecurityEngine.Get<IAuthenticationContextService>();
 			AuthenticationSection authenticationConfig = System.Web.Configuration.WebConfigurationManager.GetSection("isis.web/authentication") as AuthenticationSection;
 			string locationPath = context.Request.Path.ToLower();
 			if (authenticationConfig != null && !authenticationContextService.ContainsLocation(locationPath))
@@ -100,7 +100,7 @@ namespace Isis.Web.Security
 			IUser membershipUser = null;
 			try
 			{
-				membershipUser = WebSecurityEngine.Current.Get<ICredentialContextService>().GetCurrentService().GetUser(ticket.Name);	
+				membershipUser = WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().GetUser(ticket.Name);	
 			}
 			catch
 			{

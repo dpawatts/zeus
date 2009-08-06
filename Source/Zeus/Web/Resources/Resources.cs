@@ -84,8 +84,13 @@ using Isis.Web.UI;
 [assembly: EmbeddedWebResource("Zeus.Web.Resources.FileDataEditor.FileDataUploader.swf", "Zeus.Web.Resources", "application/x-shockwave-flash")]
 [assembly: WebResource("Zeus.Web.Resources.FileDataEditor.swfobject.js", "text/javascript")]
 
-[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach.js", "Zeus.Web.Resources", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.attach.png", "image/png")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.bar.gif", "image/gif")]
+[assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.error.png", "Zeus.Web.Resources", "image/png")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css", "text/css", PerformSubstitution = true)]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js", "text/javascript", PerformSubstitution = true)]
 [assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js", "Zeus.Web.Resources", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.progress.gif", "image/gif")]
 [assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js", "Zeus.Web.Resources", "text/javascript")]
 [assembly: EmbeddedWebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf", "Zeus.Web.Resources", "application/x-shockwave-flash")]
 

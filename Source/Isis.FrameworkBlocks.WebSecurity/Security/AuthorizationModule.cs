@@ -20,7 +20,7 @@ namespace Isis.Web.Security
 
 			// If an <authorization> section exists in the current web.config, and it hasn't yet
 			// been registered with the AuthorizationService, add it now.
-			IAuthorizationService authorizationService = WebSecurityEngine.Current.Get<IAuthorizationService>();
+			IAuthorizationService authorizationService = WebSecurityEngine.Get<IAuthorizationService>();
 			AuthorizationSection authorizationSection = System.Web.Configuration.WebConfigurationManager.GetSection("isis.web/authorization") as AuthorizationSection;
 			string locationPath = context.Request.Path.ToLower();
 			if (authorizationSection != null && !authorizationService.LocationExists(locationPath))

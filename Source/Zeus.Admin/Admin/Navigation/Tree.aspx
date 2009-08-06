@@ -14,8 +14,8 @@
 
 		function createContextMenu(span) {
 			var id = span.attr("data-id");
-			$("#contextMenu" + id).remove(); // Remove existing menu
-			var ul = $("<ul></ul>").attr("id", "contextMenu" + id).addClass("contextMenu");
+			jQuery("#contextMenu" + id).remove(); // Remove existing menu
+			var ul = jQuery("<ul></ul>").attr("id", "contextMenu" + id).addClass("contextMenu");
 			var menuItems = span.attr("data-contextmenuitems").split("|");
 			for (var i = 0; i < menuItems.length; i++) {
 				// 0: Name
@@ -28,8 +28,8 @@
 				if (actionPlugin.EnableCondition)
 					enableCondition += " && " + actionPlugin.EnableCondition;
 				
-				var li = $("<li></li>");
-				var a = $("<a></a>").text(actionPlugin.Text)
+				var li = jQuery("<li></li>");
+				var a = jQuery("<a></a>").text(actionPlugin.Text)
 					.css({ "background-image": "url(" + actionPlugin.ImageUrl + ")" })
 					.attr("target", actionPlugin.Target)
 					.attr("href", "#")
@@ -46,7 +46,7 @@
 						.replace("{action}", action);
 					a = a.attr("href", clickAction);
 					a.click(function() {
-						top.zeus.reloadContentPanel($(this).text(), $(this).attr("href"));
+						top.zeus.reloadContentPanel(jQuery(this).text(), jQuery(this).attr("href"));
 						return false;
 					});
 				}
@@ -57,7 +57,7 @@
 				li.append(a);
 				ul.append(li);
 			}
-			$('#contextMenus').append(ul);
+			jQuery('#contextMenus').append(ul);
 			return ul;
 		}
 
@@ -67,9 +67,9 @@
 
 		function initContextMenu() {
 			<asp:PlaceHolder runat="server" ID="plcTooltipsJavascript">
-			$('ul.simpleTree li span a').each(function() {
-				var splitTitle = $(this).attr("data-title").split("`");
-				$(this).qtip({
+			jQuery('ul.simpleTree li span a').each(function() {
+				var splitTitle = jQuery(this).attr("data-title").split("`");
+				jQuery(this).qtip({
 					content: "Content Type: " + splitTitle[0] + "<br />"
 						+ "Created: " + splitTitle[1] + "<br />"
 						+ "Updated: " + splitTitle[2] + "<br />"
@@ -83,14 +83,14 @@
 					position: {
 						corner: { target: 'bottomLeft' },
 						adjust: { x: 20, y: 90 },
-						container: $(window.top.document.body)
+						container: jQuery(window.top.document.body)
 					}
 				});
 			});
 			</asp:PlaceHolder>
 
-			$("ul.simpleTree li span").each(function(i) {
-				$(this).contextMenu(
+			jQuery("ul.simpleTree li span").each(function(i) {
+				jQuery(this).contextMenu(
 					{ menuCallback: createContextMenu },
 					function(action, el, pos) {
 						
@@ -99,12 +99,12 @@
 			});
 		}
 
-		$(document).ready(function() {
-			simpleTreeCollection = $('.simpleTree').simpleTree({
+		jQuery(document).ready(function() {
+			simpleTreeCollection = jQuery('.simpleTree').simpleTree({
 				autoclose: false,
 				afterClick: function(node) {
-					//top.preview.location.href = $("a:first", node).attr("href");
-					top.zeus.reloadContentPanel('Preview', $("a:first", node).attr("href"));
+					//top.preview.location.href = jQuery("a:first", node).attr("href");
+					top.zeus.reloadContentPanel('Preview', jQuery("a:first", node).attr("href"));
 					//alert("text-"+$('span:first',node).text());
 				},
 				afterDblClick: function(node) {
@@ -114,8 +114,8 @@
 					return confirm("Are you sure you wish to move this item?");
 				},
 				afterMove: function(destination, source, pos) {
-					var sourcePath = $("span:first", source).attr('data-path');
-					var destinationPath = $("span:first", destination).attr('data-path');
+					var sourcePath = jQuery("span:first", source).attr('data-path');
+					var destinationPath = jQuery("span:first", destination).attr('data-path');
 					top.zeus.reloadContentPanel('Move', "/admin/move.aspx?selected=" + sourcePath + "&destination=" + destinationPath + "&pos=" + pos);
 				},
 				afterAjax: function() {

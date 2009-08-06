@@ -13,21 +13,21 @@ namespace Zeus.Admin
 		#region Fields
 
 		private const string REFRESH_NAVIGATION_FORMAT = @"
-$(document).ready(function() {{
+jQuery(document).ready(function() {{
 	if (window.top.zeus)
 		window.top.zeus.refreshNavigation('{0}');
 	else
 		window.location = '{1}';
 }});";
 		private const string REFRESH_PREVIEW_FORMAT = @"
-$(document).ready(function() {{
+jQuery(document).ready(function() {{
 	if (window.top.zeus)
 		window.top.zeus.refreshPreview('{1}');
 	else
 		window.location = '{1}';
 }});";
 		private const string REFRESH_BOTH_FORMAT = @"
-$(document).ready(function() {{
+jQuery(document).ready(function() {{
 	if (window.top.zeus)
 		window.top.zeus.refresh('{0}', '{1}');
 	else

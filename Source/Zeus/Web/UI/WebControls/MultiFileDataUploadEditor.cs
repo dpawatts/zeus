@@ -15,8 +15,6 @@ namespace Zeus.Web.UI.WebControls
 			get { return "File"; }
 		}
 
-		public UploadMethod UploadMethod { get; set; }
-
 		#endregion
 
 		protected override Control CreateDetailEditor(int id, PropertyData detail)
@@ -40,13 +38,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private FileUploadImplementation CreateUpload(FileDataEditor fileUpload)
 		{
-			switch (UploadMethod)
-			{
-				case UploadMethod.Flash:
-					return new FlashFileUploadImplementation(fileUpload);
-				default:
-					throw new NotSupportedException();
-			}
+			return new FlashFileUploadImplementation(fileUpload);
 		}
 
 		protected override void Render(HtmlTextWriter writer)

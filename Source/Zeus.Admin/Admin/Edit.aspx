@@ -29,25 +29,25 @@
 		OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
 	
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$(".right fieldset").hide();
+		jQuery(document).ready(function() {
+			jQuery(".right fieldset").hide();
 
-			$(".showInfo").toggle(function() {
+			jQuery(".showInfo").toggle(function() {
 				zeustoggle.show(this, ".infoBox");
 			}, function() {
 				zeustoggle.hide(this, ".infoBox");
 			});
 
-			$(".showZones").toggle(function() {
+			jQuery(".showZones").toggle(function() {
 				zeustoggle.show(this, ".zonesBox");
 			}, function() {
 				zeustoggle.hide(this, ".zonesBox");
 			});
 
 			if (cookie.read(".infoBox"))
-				$(".showInfo").click();
+				jQuery(".showInfo").click();
 			if (cookie.read(".zonesBox"))
-				$(".showZones").click();
+				jQuery(".showZones").click();
 		});
    </script>
 </asp:Content>

@@ -19,12 +19,12 @@ namespace Zeus.Design.Editors
 		public FileDataUploadEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
-			UploadMethod = UploadMethod.Flash;
+			
 		}
 
 		public FileDataUploadEditorAttribute()
 		{
-			UploadMethod = UploadMethod.Flash;
+			
 		}
 
 		protected virtual FileData CreateNewItem()
@@ -32,15 +32,18 @@ namespace Zeus.Design.Editors
 			return new FileData();
 		}
 
-		public UploadMethod UploadMethod { get; set; }
-
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			FileDataEditor fileEditor = (FileDataEditor) editor;
+			FancyFileUpload fileEditor = (FancyFileUpload)editor;
 			FileData existingFile = item[Name] as FileData;
 
 			bool result = false;
-			if (fileEditor.HasNewOrChangedFile)
+			if (fileEditor.HasDeletedFile)
+			{
+				item[Name] = null;
+				result = true;
+			}
+			else if (fileEditor.HasNewOrChangedFile)
 			{
 				// Add new file.
 				FileData newFile = existingFile ?? CreateNewItem();
@@ -88,9 +91,8 @@ namespace Zeus.Design.Editors
 		/// <returns>A text box control.</returns>
 		protected override Control AddEditor(Control container)
 		{
-			FileDataEditor fileUpload = CreateEditor();
+			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = Name;
-			fileUpload.FileUploadImplementation = CreateUpload(fileUpload);
 			container.Controls.Add(fileUpload);
 
 			return fileUpload;
@@ -98,7 +100,7 @@ namespace Zeus.Design.Editors
 
 		protected override void DisableEditor(Control editor)
 		{
-			((FileDataEditor) editor).Enabled = false;
+			((FancyFileUpload)editor).Enabled = false;
 		}
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
@@ -106,30 +108,14 @@ namespace Zeus.Design.Editors
 			FileData file = item[Name] as FileData;
 			if (file != null)
 			{
-				FileDataEditor fileUpload = (FileDataEditor) editor;
+				FancyFileUpload fileUpload = (FancyFileUpload)editor;
 				fileUpload.CurrentFileName = file.FileName;
 			}
 		}
 
-		protected virtual FileDataEditor CreateEditor()
+		protected virtual FancyFileUpload CreateEditor()
 		{
-			return new FileDataEditor();
+			return new FancyFileUpload();
 		}
-
-		protected FileUploadImplementation CreateUpload(FileDataEditor fileUpload)
-		{
-			switch (UploadMethod)
-			{
-				case UploadMethod.Flash:
-					return new FlashFileUploadImplementation(fileUpload);
-				default :
-					throw new NotSupportedException();
-			}
-		}
-	}
-
-	public enum UploadMethod
-	{
-		Flash
 	}
 }

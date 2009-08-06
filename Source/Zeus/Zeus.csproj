@@ -271,6 +271,7 @@
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
+    <Compile Include="Web\UI\WebControls\FancyImageUpload.cs" />
     <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
     <Compile Include="Web\UI\WebControls\FlashFileUploadImplementation.cs" />
     <Compile Include="Web\UI\WebControls\FileUploadImplementation.cs" />
@@ -656,10 +657,15 @@
     <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
     <EmbeddedResource Include="Web\Resources\FileDataEditor\swfobject.js" />
     <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataUploader.swf" />
-    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyUpload3.Attach.js" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyUpload3.Attach2.js" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\Fx.ProgressBar.js" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.js" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.swf" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\attach.png" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\bar.gif" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\error.png" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\progress.gif" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyFileUpload.css" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

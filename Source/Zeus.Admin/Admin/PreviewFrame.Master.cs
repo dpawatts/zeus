@@ -16,6 +16,7 @@ namespace Zeus.Admin
 		protected override void OnPreRender(EventArgs e)
 		{
 			Page.ClientScript.RegisterJQuery();
+
 			Page.ClientScript.RegisterJavascriptResource(typeof(PreviewFrame), "Zeus.Admin.Assets.JS.Plugins.jquery.cookies.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterJavascriptResource(typeof(PreviewFrame), "Zeus.Admin.Assets.JS.zeus.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterCssResource(typeof(PreviewFrame), "Zeus.Admin.Assets.Css.reset.css");

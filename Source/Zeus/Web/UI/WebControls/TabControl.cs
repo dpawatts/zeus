@@ -62,8 +62,8 @@ namespace Zeus.Web.UI.WebControls
 					}}
 				}}
 				
-				$(document).ready(function() {{
-					$('#{0}').tabs(
+				jQuery(document).ready(function() {{
+					jQuery('#{0}').tabs(
 						{{
 							show: function(event, ui) {{ handlePostbacks(ui.panel.id); }}
 						}}

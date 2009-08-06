@@ -23,10 +23,10 @@ namespace Zeus.Admin
 
 			try
 			{
-				if (WebSecurityEngine.Current.Get<ICredentialContextService>().GetCurrentService().ValidateUser(UserName.Text, Password.Text))
+				if (WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().ValidateUser(UserName.Text, Password.Text))
 				{
-					string username = WebSecurityEngine.Current.Get<ICredentialContextService>().GetCurrentService().GetUser(UserName.Text).Username;
-					WebSecurityEngine.Current.Get<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
+					string username = WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().GetUser(UserName.Text).Username;
+					WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
 				}
 				else
 					FailureText.Text = "Invalid username or password";

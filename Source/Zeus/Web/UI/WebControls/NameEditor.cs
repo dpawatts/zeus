@@ -70,8 +70,8 @@ namespace Zeus.Web.UI.WebControls
 
 			ItemView itemView = Parent.FindParent<ItemView>();
 			Control titleEditor = itemView.PropertyControls["Title"];
-			string script = string.Format(@"$(document).ready(function() {{
-					$('#{0}, #{1}').nameEditor({{titleEditorID: '{2}'}});
+			string script = string.Format(@"jQuery(document).ready(function() {{
+					jQuery('#{0}, #{1}').nameEditor({{titleEditorID: '{2}'}});
 				}});", _label.ClientID, _textBox.ClientID, titleEditor.ClientID);
 			this.Page.ClientScript.RegisterStartupScript(typeof(NameEditor), "InitNameEditor", script, true);
 		}

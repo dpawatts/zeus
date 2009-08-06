@@ -67,7 +67,7 @@ namespace Isis.Web.UI.WebControls
 
 		private static IAuthenticationService CurrentAuthenticationService
 		{
-			get { return WebSecurityEngine.Current.Get<IAuthenticationContextService>().GetCurrentService(); }
+			get { return WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService(); }
 		}
 
 		private void LogoutClicked(object Source, CommandEventArgs e)

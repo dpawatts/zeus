@@ -30,6 +30,7 @@
 * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+(function($){
 
 $.fn.simpleTree = function(opt) {
 	return this.each(function() {
@@ -416,3 +417,4 @@ $.fn.simpleTree = function(opt) {
 		TREE.init(ROOT);
 	});
 }
+})(jQuery);

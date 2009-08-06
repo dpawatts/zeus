@@ -116,6 +116,8 @@ namespace Zeus.Engine
 		{
 			_dependencyInjectionManager.BindInstance(this);
 
+			WebSecurityEngine.DependencyInjectionManager = _dependencyInjectionManager;
+
 			IPluginBootstrapper invoker = Resolve<IPluginBootstrapper>();
 			invoker.InitializePlugins(this, invoker.GetPluginDefinitions());
 

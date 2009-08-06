@@ -54,9 +54,9 @@ namespace Zeus.Design.Editors
 			*/return false;
 		}
 
-		protected override FileDataEditor CreateEditor()
+		protected override FancyFileUpload CreateEditor()
 		{
-			return new ImageDataEditor();
+			return new FancyImageUpload();
 		}
 	}
 }

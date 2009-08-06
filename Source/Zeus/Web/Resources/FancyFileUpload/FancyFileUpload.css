@@ -1,0 +1,25 @@
+﻿.demo-list .file {
+	line-height: 2em;
+	padding-left: 22px;
+	background: url(<%= WebResource("Zeus.Web.Resources.FancyFileUpload.attach.png") %>) no-repeat 1px 50%;
+}
+
+.demo-list .file span,
+.demo-list .file a {
+	padding: 0 4px;
+}
+
+.demo-list .file .file-size {
+	color: #666;
+}
+
+.demo-list .file .file-error {
+	color: #8a1f11;
+}
+
+.demo-list .file .file-progress {
+	width: 125px;
+	height: 12px;
+	vertical-align: middle;
+	background-image: url(<%= WebResource("Zeus.Web.Resources.FancyFileUpload.progress.gif") %>);
+}
