@@ -14,6 +14,10 @@ namespace Zeus.ContentTypes
 		/// <returns>A new root container.</returns>
 		public virtual IEditorContainer Build(IEnumerable<IEditorContainer> containers, IEnumerable<T> editables)
 		{
+			// Clear existing containers, in case this is a rebuild.
+			foreach (IEditorContainer container in containers)
+				container.Contained.Clear();
+
 			IEditorContainer rootContainer = new RootEditorContainer();
 			AddContainersToRootContainer(rootContainer, containers);
 			AddEditorsToContainers(rootContainer, containers, editables);

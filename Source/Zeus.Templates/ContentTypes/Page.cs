@@ -8,7 +8,8 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(StartPage), typeof(Page), typeof(Redirect))]
 	public class Page : BasePage
 	{
-		[XhtmlStringContentProperty("Content", 30, Shared = false), HtmlTextBoxEditor(ContainerName = "Content")]
+		[XhtmlStringContentProperty("Content", 30, Shared = false),
+		HtmlTextBoxEditor(ContainerName = "Content")]
 		public virtual string Content
 		{
 			get { return GetDetail("Content", string.Empty); }

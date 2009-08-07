@@ -1,10 +1,10 @@
-﻿using System.Web.UI.WebControls;
+﻿using Zeus.ContentTypes;
 using Zeus.Design.Editors;
-using Zeus.Web.UI;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[DefaultTemplate]
+	[DefaultContainer("Content")]
 	public abstract class BasePage : BaseContentItem
 	{
 		[NameEditor("URL", 20, Required = true, ContainerName = "Content", Shared = false)]

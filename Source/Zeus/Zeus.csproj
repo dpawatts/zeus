@@ -151,6 +151,7 @@
     <Compile Include="ContentProperties\IContentPropertyManager.cs" />
     <Compile Include="ContentTypes\AbstractContentTypeRefiner.cs" />
     <Compile Include="ContentTypes\AttributeExplorer.cs" />
+    <Compile Include="ContentTypes\DefaultContainerAttribute.cs" />
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
     <Compile Include="ContentTypes\IEditableHierarchyBuilder.cs" />
