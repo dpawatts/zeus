@@ -57,6 +57,7 @@ namespace Zeus.ContentTypes
 		public void AddContained(IContainable containable)
 		{
 			_contained.Add(containable);
+			_contained.Sort();
 		}
 
 		#region IComparable x 2 Members

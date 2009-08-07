@@ -76,13 +76,13 @@ namespace Zeus.ContentTypes
 
 		public IEnumerable<IContentProperty> Properties { get; internal set; }
 
-		public IEnumerable<IEditor> Editors { get; internal set; }
+		public IList<IEditor> Editors { get; internal set; }
 
 		public IEnumerable<IDisplayer> Displayers { get; internal set; }
 
 		public IEditorContainer RootContainer { get; set; }
 
-		public IEnumerable<IEditorContainer> Containers { get; internal set; }
+		public IList<IEditorContainer> Containers { get; internal set; }
 
 		/// <summary>Gets the name used when presenting this item class to editors.</summary>
 		public string Title
@@ -201,40 +201,40 @@ namespace Zeus.ContentTypes
 			return AllowedChildren.Contains(child);
 		}
 
-		public void AddContainer(string name, IEditorContainer newContainer)
+		/// <summary>
+		/// Adds an containable editor or container to existing editors and to a container.
+		/// </summary>
+		/// <param name="containable">The editable to add.</param>
+		public void Add(IContainable containable)
 		{
-			IEditorContainer container = Containers.SingleOrDefault(e => e.Name == name);
-			if (container != null)
-				throw new ArgumentException("A container with this name already exists. Please use ReplaceContainer() instead.", "name");
-
-			newContainer.Name = name;
-
-			// FUDGE - should run EditableHierarchyBuilder again.
-			RootContainer.Contained.Add(newContainer);
-
-			List<IEditorContainer> newContainers = new List<IEditorContainer>(Containers);
-			newContainers.Add(newContainer);
-			newContainers.Sort();
-			Containers = newContainers;
+			if (string.IsNullOrEmpty(containable.ContainerName))
+			{
+				RootContainer.AddContained(containable);
+				AddToCollection(containable);
+			}
+			else
+			{
+				foreach (IEditorContainer container in Containers)
+				{
+					if (container.Name == containable.ContainerName)
+					{
+						container.AddContained(containable);
+						AddToCollection(containable);
+						return;
+					}
+				}
+				throw new ZeusException(
+					"The editor '{0}' references a container '{1}' which doesn't seem to be defined on '{2}'. Either add a container with this name or remove the reference to that container.",
+					containable.Name, containable.ContainerName, ItemType);
+			}
 		}
 
-		public void AddEditor(string name, Type propertyType, IEditor newEditor)
+		private void AddToCollection(IContainable containable)
 		{
-			IEditor editor = Editors.SingleOrDefault(e => e.Name == name);
-			if (editor != null)
-				throw new ArgumentException("An editor with this name already exists. Please use ReplaceEditor() instead.", "name");
-
-			newEditor.Name = name;
-			newEditor.PropertyType = propertyType;
-
-			List<IEditor> newEditors = new List<IEditor>(Editors);
-			newEditors.Add(newEditor);
-			newEditors.Sort();
-			Editors = newEditors;
-
-			IEditorContainer container = Containers.SingleOrDefault(c => c.Name == newEditor.ContainerName) ?? RootContainer;
-			container.Contained.Add(newEditor);
-			container.Contained.Sort();
+			if (containable is IEditor)
+				Editors.Add(containable as IEditor);
+			else if (containable is IEditorContainer)
+				Containers.Add(containable as IEditorContainer);
 		}
 
 		public void ReplaceEditor(string name, IEditor newEditor)

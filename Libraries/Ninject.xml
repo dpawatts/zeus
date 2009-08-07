@@ -1802,6 +1802,18 @@
             Releases resources held by the object.
             </summary>
         </member>
+        <member name="M:Ninject.KernelBase.GetAllBindings">
+            <summary>
+            Added by TJ - gets all bindings registered with this kernel.
+            </summary>
+            <returns>All bindings.</returns>
+        </member>
+        <member name="M:Ninject.KernelBase.InitializeServices">
+            <summary>
+            Added by TJ - scans all bindings for types that implement IInitializable
+            and "eager-initializes" them.
+            </summary>
+        </member>
         <member name="M:Ninject.KernelBase.Unbind(System.Type)">
             <summary>
             Unregisters all bindings for the specified service.

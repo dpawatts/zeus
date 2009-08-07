@@ -131,7 +131,7 @@ window.addEvent('domready', function() {{
 	up = new FancyUpload3.Attach('{3}', '{4}', {{
 		path: '{0}',
 		url: '/PostedFileUpload.axd',
-		fileSizeMax: 2 * 1024 * 1024,
+		fileSizeMax: 10 * 1024 * 1024,
 		data: 'identifier={5}',
 		
 		verbose: true,

@@ -85,5 +85,36 @@ namespace Zeus.Templates.Mvc.Html
 
 			return stringWriter.ToString();
 		}
+
+		public static string PropertyOrDefault(this HtmlHelper html, ContentItem contentItem, string propertyName, string fallbackPropertyName)
+		{
+			if (contentItem == null)
+				return string.Empty;
+
+			if (!contentItem.Details.ContainsKey(propertyName))
+				return contentItem[fallbackPropertyName].ToString();
+
+			return contentItem[propertyName].ToString();
+		}
+
+		public static string HtmlTitle(this HtmlHelper html, ContentItem contentItem)
+		{
+			return html.PropertyOrDefault(contentItem, "HtmlTitle", "Title");
+		}
+
+		public static string PageTitle(this HtmlHelper html, ContentItem contentItem)
+		{
+			return html.PropertyOrDefault(contentItem, "PageTitle", "Title");
+		}
+
+		public static string MetaKeywords(this HtmlHelper html, ContentItem contentItem)
+		{
+			return html.PropertyOrDefault(contentItem, "MetaKeywords", "Title");
+		}
+
+		public static string MetaDescription(this HtmlHelper html, ContentItem contentItem)
+		{
+			return html.PropertyOrDefault(contentItem, "MetaDescription", "Title");
+		}
 	}
 }

@@ -21,30 +21,6 @@ namespace Zeus.Templates.ContentTypes
 			return Context.Current.LanguageManager.GetTranslation(RedirectItem, ContentLanguage.PreferredCulture.Name) ?? RedirectItem;
 		}
 
-		public override string HtmlTitle
-		{
-			get { return base.HtmlTitle; }
-			set { base.HtmlTitle = value; }
-		}
-
-		public override string PageTitle
-		{
-			get { return base.PageTitle; }
-			set { base.PageTitle = value; }
-		}
-
-		public override string MetaKeywords
-		{
-			get { return base.MetaKeywords; }
-			set { base.MetaKeywords = value; }
-		}
-
-		public override string MetaDescription
-		{
-			get { return base.MetaDescription; }
-			set { base.MetaDescription = value; }
-		}
-
 		[LinkedItemDropDownListEditor("Redirect to", 30, Required = true, TypeFilter = typeof(BasePage), ContainerName = "Content")]
 		public virtual ContentItem RedirectItem
 		{

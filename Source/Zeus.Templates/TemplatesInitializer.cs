@@ -25,6 +25,8 @@ namespace Zeus.Templates
 				engine.AddComponent("zeus.templates.contentMailSender", typeof(IMailSender), typeof(MailSender));
 			else
 				engine.AddComponent("zeus.templates.fakeMailSender", typeof(IMailSender), typeof(FakeMailSender));
+
+			engine.AddComponent("zeus.templates.services.seoDefinitionAppender", typeof(SeoDefinitionAppender));
 		}
 	}
 }

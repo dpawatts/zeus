@@ -39,12 +39,12 @@ namespace Zeus.Web.UI.WebControls
 				otherEditors.Add("'" + propertyControl.Key + "' : '" + propertyControl.Value.ClientID + "'");
 			string reactiveOptions = string.Format(@"{{formatString: '{0}', keepUpdatedClientID: '{1}', otherEditors: {{{2}}} }}",
 				FormatString, chkKeepUpdated.ClientID, string.Join(", ", otherEditors.ToArray()));
-			string script = string.Format(@"$(document).ready(function() {{
-					$('#{0}').reactiveTextBox({1});
+			string script = string.Format(@"jQuery(document).ready(function() {{
+					jQuery('#{0}').reactiveTextBox({1});
 					var chkKeepUpdated = document.getElementById('{2}');
-					var value1 = $.fn.reactiveTextBox.formattedValue({1});
-					var value2 = $('#{0}').val();
-					chkKeepUpdated.checked = (value1 == value2);
+					var value1 = jQuery.fn.reactiveTextBox.formattedValue({1});
+					var value2 = jQuery('#{0}').val();
+					chkKeepUpdated.checked = (value1 == value2 || value2 == '');
 				}});", ClientID, reactiveOptions, chkKeepUpdated.ClientID);
 			Page.ClientScript.RegisterStartupScript(typeof(ReactiveTextBox), ClientID, script, true);
 		}

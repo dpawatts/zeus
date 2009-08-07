@@ -14,6 +14,11 @@ namespace Isis.FrameworkBlocks.DependencyInjection
 			_kernel.Load("*.dll");
 		}
 
+		public void Initialize()
+		{
+			((KernelBase) _kernel).InitializeServices();
+		}
+
 		public void Bind<TService, TComponent>()
 			where TComponent : TService
 		{

@@ -44,10 +44,10 @@
 		return result;
 	};
 
+	// plugin defaults - added as a property on our plugin function
+	$.fn.reactiveTextBox.defaults = {
+		formatString: ""
+	};
+
 	// end of closure
 })(jQuery);
-
-// plugin defaults - added as a property on our plugin function
-$.fn.reactiveTextBox.defaults = {
-	formatString : ""
-};

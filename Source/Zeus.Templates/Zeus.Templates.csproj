@@ -59,6 +59,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configuration\MailConfigSource.cs" />
+    <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplateRule.cs" />
     <Compile Include="Configuration\TemplateRuleAction.cs" />
     <Compile Include="Configuration\TemplateRuleCollection.cs" />
@@ -88,10 +89,12 @@
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeoUtility.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\FakeMailSender.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\NewsService.cs" />
+    <Compile Include="Services\SeoDefinitionAppender.cs" />
     <Compile Include="TemplatesInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
