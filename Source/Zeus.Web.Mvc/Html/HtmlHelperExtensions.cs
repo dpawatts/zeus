@@ -1,8 +1,9 @@
 using System;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
-using System.Web.UI;
 using Isis.Web.UI;
+using Zeus.ContentProperties;
 
 namespace Zeus.Web.Mvc.Html
 {
@@ -18,6 +19,18 @@ namespace Zeus.Web.Mvc.Html
 		{
 			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>",
 				EmbeddedWebResourceUtility.GetUrl(assembly, resourceName));
+		}
+
+		public static string DisplayProperty<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)
+			where TItem : ContentItem
+		{
+			MemberExpression memberExpression = (MemberExpression) expression.Body;
+
+			if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
+				return string.Empty;
+
+			PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
+			return propertyData.GetXhtmlValue();
 		}
 	}
 }

@@ -8,7 +8,7 @@ using Zeus.Templates.ContentTypes;
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("Page")]
-	[ReplacesParentContentType]
+	//[ReplacesParentContentType]
 	public class CustomPage : Page, IMessageBoardContainer
 	{
 		[XhtmlStringContentProperty("Content", 30, Shared = false)]

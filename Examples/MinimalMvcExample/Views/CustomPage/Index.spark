@@ -1,0 +1,7 @@
+﻿<viewdata model="Zeus.Examples.MinimalMvcExample.ContentTypes.CustomPage"/>
+
+<h1>${Model.Title}</h1>
+
+<p>This view is coming from Zeus.Templates.Mvc, woo!</p>
+
+${Html.DisplayProperty(Model, ci => ci.Content)}

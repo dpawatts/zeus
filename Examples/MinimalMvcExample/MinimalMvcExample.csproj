@@ -67,7 +67,6 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Views\CustomPage\Index.aspx" />
     <Content Include="Views\FormPage\Submit.aspx" />
     <Content Include="Views\FormPage\Index.aspx" />
     <Content Include="Web.config" />
@@ -119,6 +118,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\CustomPage\Index.spark" />
     <None Include="Views\FallbackContent\Index.spark" />
     <None Include="Views\Layouts\Application.spark" />
     <None Include="Views\Shared\_global.spark" />

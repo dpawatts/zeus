@@ -102,6 +102,9 @@
     <EmbeddedResource Include="Views\StartPage\Index.spark" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\Page\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Views\FormPage\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

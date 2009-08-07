@@ -10,22 +10,22 @@
 		
 		function createContextMenu(span) {
 			var id = span.attr("data-id");
-			$("#contextMenu" + id).remove(); // Remove existing menu
-			var ul = $("<ul></ul>").attr("id", "contextMenu" + id).addClass("contextMenu");
-			var li = $("<li></li>");
-			var a = $("<a></a>").text("Upload")
+			jQuery("#contextMenu" + id).remove(); // Remove existing menu
+			var ul = jQuery("<ul></ul>").attr("id", "contextMenu" + id).addClass("contextMenu");
+			var li = jQuery("<li></li>");
+			var a = jQuery("<a></a>").text("Upload")
 				.css({ "background-image" : "url(/admin/assets/images/icons/arrow_up.png)" })
 				.attr("href", "#")
 				.attr("onclick", "showUploadDialog('" + span.attr("data-path") + "')");
 			li.append(a);
 			ul.append(li);
-			$('#contextMenus').append(ul);
+			jQuery('#contextMenus').append(ul);
 			return ul;
 		}
 		
 		function initContextMenu() {
-			$("ul.simpleTree li span[data-type='Folder']").each(function(i) {
-				$(this).contextMenu(
+			jQuery("ul.simpleTree li span[data-type='Folder']").each(function(i) {
+				jQuery(this).contextMenu(
 					{ menuCallback: createContextMenu },
 					function(action, el, pos) {
 						
@@ -34,8 +34,8 @@
 			});
 		}
 
-		$(document).ready(function() {
-			simpleTreeCollection = $('.simpleTree').simpleTree({
+		jQuery(document).ready(function() {
+			simpleTreeCollection = jQuery('.simpleTree').simpleTree({
 				autoclose: false,
 				afterClick: function(node) {
 					//top.preview.location.href = $("a:first", node).attr("href");
@@ -54,12 +54,12 @@
 		function file_onClick(a) {
 			var href;
 			<% if (Request.QueryString["absoluteurls"] == "true") { %>
-			href = $(a).attr('href');
+			href = jQuery(a).attr('href');
 			<% } else { %>
-			href = $(a).attr("data-url");
+			href = jQuery(a).attr("data-url");
 			<% } %>
 			<% if (Request.QueryString["destinationType"] != "image") { %>
-			href = "~/link/" + $(a).parent().attr("data-id");
+			href = "~/link/" + jQuery(a).parent().attr("data-id");
 			<% } %>
 			selectFile(href);
 			window.close();
@@ -75,17 +75,17 @@
 		
 		function setupLinks() {
 		<% if (Request.QueryString["destinationType"] == "image") { %>
-			$("span[data-type='File'] a").click(function() {
+			jQuery("span[data-type='File'] a").click(function() {
 				return file_onClick(this);
 			});
 		<% } else { %>
-			$("ul.simpleTree span a").click(function() {
+			jQuery("ul.simpleTree span a").click(function() {
 				return file_onClick(this);
 			});
 		<% } %>
 		}
 		
-		$(document).ready(function() {
+		jQuery(document).ready(function() {
 			setupLinks();
 		});
 	</script>
