@@ -53,6 +53,9 @@ namespace Zeus.Templates.Configuration
 
 		internal bool IsContentTypeAllowed(ContentType contentType)
 		{
+			if (Count == 0)
+				return true;
+
 			if (contentType != null)
 				foreach (TemplateRule rule in this)
 				{

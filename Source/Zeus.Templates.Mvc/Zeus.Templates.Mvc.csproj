@@ -69,6 +69,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="ContentTypes\Forms\IQuestion.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\ZeusController.generic.cs" />
     <Compile Include="Controllers\Forms\FormPageController.cs" />
     <Compile Include="Controllers\PageNavigationController.cs" />
@@ -103,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Page\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Sitemap\Index.spark" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\FormPage\" />

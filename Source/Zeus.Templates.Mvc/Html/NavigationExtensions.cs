@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using Zeus.FileSystem;
 using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
@@ -75,6 +77,37 @@ namespace Zeus.Templates.Mvc.Html
 		private static string GetBreadcrumbItem(ILink link, Func<ILink, string> formatCallback)
 		{
 			return formatCallback(link);
+		}
+
+		public static string Sitemap(this HtmlHelper html)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (ContentItem contentItem in Find.StartPage.GetChildren().Pages().Visible())
+			{
+				sb.AppendFormat("<h4><a href=\"{0}\">{1}</a></h4>", contentItem.Url, contentItem.Title);
+				SitemapRecursive(contentItem, sb);
+			}
+			return sb.ToString();
+		}
+
+		private static void SitemapRecursive(ContentItem contentItem, StringBuilder sb)
+		{
+			var childItems = contentItem.GetChildren().Pages().Visible();
+			if (childItems.Any())
+			{
+				sb.Append("<ul>");
+				foreach (ContentItem childItem in childItems)
+				{
+					sb.Append("<li>");
+					if (childItem.Visible)
+						sb.AppendFormat("<a href=\"{0}\">{1}</a>", childItem.Url, childItem.Title);
+					else
+						sb.Append(childItem.Title);
+					SitemapRecursive(childItem, sb);
+					sb.Append("</li>");
+				}
+				sb.Append("</ul>");
+			}
 		}
 	}
 }

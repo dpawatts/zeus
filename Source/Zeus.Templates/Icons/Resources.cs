@@ -8,3 +8,4 @@ using System.Web.UI;
 [assembly: WebResource("Zeus.Templates.Icons.page_white.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.page_world.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.report.png", "image/png")]
+[assembly: WebResource("Zeus.Templates.Icons.sitemap.png", "image/png")]
