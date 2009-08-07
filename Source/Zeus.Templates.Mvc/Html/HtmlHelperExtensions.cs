@@ -99,22 +99,22 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string HtmlTitle(this HtmlHelper html, ContentItem contentItem)
 		{
-			return html.PropertyOrDefault(contentItem, "HtmlTitle", "Title");
+			return html.PropertyOrDefault(contentItem, SeoUtility.HTML_TITLE, "Title");
 		}
 
 		public static string PageTitle(this HtmlHelper html, ContentItem contentItem)
 		{
-			return html.PropertyOrDefault(contentItem, "PageTitle", "Title");
+			return html.PropertyOrDefault(contentItem, SeoUtility.PAGE_TITLE, "Title");
 		}
 
 		public static string MetaKeywords(this HtmlHelper html, ContentItem contentItem)
 		{
-			return html.PropertyOrDefault(contentItem, "MetaKeywords", "Title");
+			return html.PropertyOrDefault(contentItem, SeoUtility.META_KEYWORDS, "Title");
 		}
 
 		public static string MetaDescription(this HtmlHelper html, ContentItem contentItem)
 		{
-			return html.PropertyOrDefault(contentItem, "MetaDescription", "Title");
+			return html.PropertyOrDefault(contentItem, SeoUtility.META_DESCRIPTION, "Title");
 		}
 	}
 }
