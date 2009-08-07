@@ -27,6 +27,10 @@ namespace Zeus.Design.Editors
 			
 		}
 
+		public string TypeFilterDescription { get; set; }
+		public string[] TypeFilter { get; set; }
+		public int MaximumFileSize { get; set; }
+
 		protected virtual FileData CreateNewItem()
 		{
 			return new FileData();
@@ -93,6 +97,12 @@ namespace Zeus.Design.Editors
 		{
 			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = Name;
+			if (!string.IsNullOrEmpty(TypeFilterDescription))
+				fileUpload.TypeFilterDescription = TypeFilterDescription;
+			if (TypeFilter != null)
+				fileUpload.TypeFilter = TypeFilter;
+			if (MaximumFileSize > 0)
+				fileUpload.MaximumFileSize = MaximumFileSize;
 			container.Controls.Add(fileUpload);
 
 			return fileUpload;

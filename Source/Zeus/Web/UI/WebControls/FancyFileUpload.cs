@@ -38,6 +38,12 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["TypeFilter"] = value; }
 		}
 
+		public int MaximumFileSize
+		{
+			get { return (int) (ViewState["MaximumFileSize"] ?? 5); }
+			set { ViewState["MaximumFileSize"] = value; }
+		}
+
 		public bool HasNewOrChangedFile
 		{
 			get { return (!string.IsNullOrEmpty(FileName)) && FileName != "-1"; }
@@ -131,7 +137,7 @@ window.addEvent('domready', function() {{
 	up = new FancyUpload3.Attach('{3}', '{4}', {{
 		path: '{0}',
 		url: '/PostedFileUpload.axd',
-		fileSizeMax: 10 * 1024 * 1024,
+		fileSizeMax: {7} * 1024 * 1024,
 		data: 'identifier={5}',
 		
 		verbose: true,
@@ -196,9 +202,13 @@ window.addEvent('domready', function() {{
 	}});
 
 }});", EmbeddedWebResourceUtility.GetUrl(GetType().Assembly, "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf"),
-		 TypeFilterDescription, string.Join(";",  TypeFilter),
-		 GetListClientID(), GetAnchorClientID(),
-		 Identifier, _hiddenFileNameField.ClientID);
+		 TypeFilterDescription,
+		 string.Join(";",  TypeFilter),
+		 GetListClientID(),
+		 GetAnchorClientID(),
+		 Identifier,
+		 _hiddenFileNameField.ClientID,
+		 MaximumFileSize);
 			ScriptManager.RegisterClientScriptBlock(this, GetType(), ClientID + "FancyFileUpload", script, true);
 
 			if (!string.IsNullOrEmpty(_currentFileName))
