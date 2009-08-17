@@ -67,8 +67,6 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Views\FormPage\Submit.aspx" />
-    <Content Include="Views\FormPage\Index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +81,10 @@
     <ProjectReference Include="..\..\Source\Isis\Isis.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis %28Isis\Core\Isis%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
+      <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
+      <Name>Zeus.AddIns.ECommerce</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.AddIns.Forums.Mvc\Zeus.AddIns.Forums.Mvc.csproj">
       <Project>{4F45064D-15DC-4DE2-9E0F-FD38E241CF4C}</Project>

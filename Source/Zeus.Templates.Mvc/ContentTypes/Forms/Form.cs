@@ -3,9 +3,10 @@ using System.Web.UI.WebControls;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
 
-namespace Zeus.Templates.ContentTypes.Forms
+namespace Zeus.Templates.Mvc.ContentTypes.Forms
 {
 	[ContentType("Form", "Form", "A form that can be sumitted and sent to an email address.", "", 250)]
 	[AllowedZones("Content", "ColumnLeft", "ColumnRight")]
@@ -30,10 +31,10 @@ namespace Zeus.Templates.ContentTypes.Forms
 			set { SetDetail("IntroText", value); }
 		}
 
-		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields", TypeFilter = typeof(Question))]
-		public virtual IEnumerable<Question> FormFields
+		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields", TypeFilter = typeof(IQuestion))]
+		public virtual IEnumerable<IQuestion> FormFields
 		{
-			get { return GetChildren<Question>(); }
+			get { return GetChildren<IQuestion>(); }
 		}
 
 		[ContentProperty("Mail From", 120)]

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Zeus.Templates.Design.Editors;
+using Zeus.Templates.Mvc.Design.Editors;
 
-namespace Zeus.Templates.ContentTypes.Forms
+namespace Zeus.Templates.Mvc.ContentTypes.Forms
 {
 	public abstract class OptionSelectQuestion : Question
 	{

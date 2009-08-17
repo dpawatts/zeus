@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using Isis.Web.UI;
 using Zeus.ContentProperties;
+using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Web.Mvc.Html
 {
@@ -25,6 +26,21 @@ namespace Zeus.Web.Mvc.Html
 			where TItem : ContentItem
 		{
 			MemberExpression memberExpression = (MemberExpression) expression.Body;
+
+			if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
+				return string.Empty;
+
+			PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
+			return propertyData.GetXhtmlValue();
+		}
+
+		public static string DisplayProperty<TModel, TItem>(this HtmlHelper<TModel> helper, Expression<Func<TItem, object>> expression)
+			where TModel : ViewModel<TItem>
+			where TItem : ContentItem
+		{
+			ContentItem contentItem = helper.ViewData.Model.CurrentItem;
+
+			MemberExpression memberExpression = (MemberExpression)expression.Body;
 
 			if (!contentItem.Details.ContainsKey(memberExpression.Member.Name))
 				return string.Empty;

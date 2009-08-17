@@ -8,6 +8,7 @@ using Spark.FileSystem;
 using Spark.Web.Mvc;
 using Zeus.Configuration;
 using Zeus.Engine;
+using Zeus.Web.Mvc.Modules;
 
 namespace Zeus.Web.Mvc
 {
@@ -47,6 +48,8 @@ namespace Zeus.Web.Mvc
 			SparkApplication app = new SparkApplication();
 			app.RegisterViewEngine(ViewEngines.Engines);
 			app.RegisterPackages(engine, RouteTable.Routes, ViewEngines.Engines);
+
+			ControllerBuilder.Current.SetControllerFactory(engine.Resolve<IControllerFactory>());
 
 			RegisterRoutes(RouteTable.Routes, engine);
 

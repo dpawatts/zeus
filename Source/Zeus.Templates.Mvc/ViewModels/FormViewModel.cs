@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Zeus.Templates.ContentTypes.Forms;
 using Zeus.Templates.Mvc.ContentTypes.Forms;
 using Zeus.Web.Mvc.ViewModels;
 
@@ -14,6 +13,5 @@ namespace Zeus.Templates.Mvc.ViewModels
 		}
 
 		public IEnumerable<IQuestion> Elements { get; private set; }
-		public bool FormSubmitted { get; set; }
 	}
 }

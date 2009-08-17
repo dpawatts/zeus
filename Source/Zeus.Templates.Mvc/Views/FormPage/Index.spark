@@ -1,0 +1,15 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.FormViewModel" />
+
+<form action="${Model.CurrentItem.Parent.Url}/submit" method="post">
+	${Html.DisplayProperty(Model.CurrentItem, m => m.Title)}
+	${Html.DisplayProperty(Model.CurrentItem, m => m.IntroText)}
+
+	<div class="inputForm">
+		<div each="var formElement in Model.Elements" class="row cf">
+			<label class="label" for="${formElement.ElementID}">${formElement.QuestionText}</label>
+			${formElement.CreateHtmlElement()}
+		</div>
+	</div>
+
+	${Html.SubmitButton("Submit", "Send")}
+</form>

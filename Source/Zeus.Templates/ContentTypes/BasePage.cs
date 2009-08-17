@@ -4,10 +4,9 @@ using Zeus.Design.Editors;
 namespace Zeus.Templates.ContentTypes
 {
 	[DefaultTemplate]
-	[DefaultContainer("Content")]
 	public abstract class BasePage : BaseContentItem
 	{
-		[NameEditor("URL", 20, Required = true, ContainerName = "Content", Shared = false)]
+		[NameEditor("URL", 20, Required = true, Shared = false)]
 		public override string Name
 		{
 			get { return base.Name; }
@@ -15,7 +14,6 @@ namespace Zeus.Templates.ContentTypes
 		}
 
 		[ContentProperty("Visible in Menu", 25)]
-		[CheckBoxEditor(ContainerName = "Content")]
 		public override bool Visible
 		{
 			get { return base.Visible; }

@@ -16,7 +16,7 @@ namespace Zeus.Web.Mvc.Modules
 
 		public IController CreateController(RequestContext requestContext, string controllerName)
 		{
-			string controllerKey = controllerName.ToLowerInvariant() + "controller";
+			string controllerKey = controllerName.ToLowerInvariant();
 
 			object area;
 			if (requestContext.RouteData.Values.TryGetValue("area", out area))

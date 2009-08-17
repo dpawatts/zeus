@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
 
-namespace Zeus.Templates.ContentTypes.Forms
+namespace Zeus.Templates.Mvc.ContentTypes.Forms
 {
 	[ContentType("Form Page", "FormPage", "A page with a form that can be submitted and sent to an email address.", "", 240)]
 	[RestrictParents(typeof(BasePage))]

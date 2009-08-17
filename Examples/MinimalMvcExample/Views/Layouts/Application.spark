@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
-    <title>${Html.HtmlTitle(Model)}</title>
+    <title>${Html.HtmlTitle(Model.CurrentItem)}</title>
     
-    <meta name="keywords" content="${Html.MetaKeywords(Model)}" />
-    <meta name="description" content="${Html.MetaDescription(Model)}" />
+    <meta name="keywords" content="${Html.MetaKeywords(Model.CurrentItem)}" />
+    <meta name="description" content="${Html.MetaDescription(Model.CurrentItem)}" />
     
     <use:head />
     
@@ -13,7 +13,7 @@
   <body>
     <div id="container">
       <div id="header">
-        <h1>${Html.PageTitle(Model)}</h1>
+        <h1>${Html.PageTitle(Model.CurrentItem)}</h1>
         <h2>space reserved for your website slogan!</h2>
       </div>
       <div id="navigation">        

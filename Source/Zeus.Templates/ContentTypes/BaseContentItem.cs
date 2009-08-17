@@ -1,4 +1,5 @@
 using Isis.Web.UI;
+using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Web.UI;
@@ -7,20 +8,14 @@ namespace Zeus.Templates.ContentTypes
 {
 	[TabPanel("Content", "Content", 10)]
 	[Translatable]
+	[DefaultContainer("Content")]
 	public abstract class BaseContentItem : ContentItem
 	{
-		[TextBoxEditor("Title", 10, Required = true, ContainerName = "Content", Shared = false)]
+		[TextBoxEditor("Title", 10, Required = true, Shared = false)]
 		public override string Title
 		{
 			get { return base.Title; }
 			set { base.Title = value; }
-		}
-
-		[NameEditor("Name", 20, Required = true, ContainerName = "Content")]
-		public override string Name
-		{
-			get { return base.Name; }
-			set { base.Name = value; }
 		}
 
 		public override string IconUrl

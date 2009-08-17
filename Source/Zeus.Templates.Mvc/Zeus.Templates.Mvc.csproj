@@ -68,12 +68,22 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="ContentTypes\Forms\Form.cs" />
+    <Compile Include="ContentTypes\Forms\FormPage.cs" />
+    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
     <Compile Include="ContentTypes\Forms\IQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Option.cs" />
+    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Question.cs" />
+    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\ZeusController.generic.cs" />
     <Compile Include="Controllers\Forms\FormPageController.cs" />
     <Compile Include="Controllers\PageNavigationController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
+    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Html\ImageExtensions.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Html\NavigationExtensions.cs" />
@@ -109,7 +119,10 @@
     <EmbeddedResource Include="Views\Sitemap\Index.spark" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\FormPage\" />
+    <EmbeddedResource Include="Views\FormPage\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FormPage\Submit.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
