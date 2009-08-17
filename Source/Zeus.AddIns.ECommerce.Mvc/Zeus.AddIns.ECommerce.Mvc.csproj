@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>4759523e-7b0d-4ff9-8d40-bcdf545b9791</ProjectGuid>
+    <ProjectGuid>{8347D9D0-B67F-4C9C-B0C2-A9B354CB49C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.AddIns.ECommerce.Mvc</RootNamespace>
@@ -35,6 +35,10 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -45,8 +49,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
+      <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
+      <Name>Zeus.AddIns.ECommerce</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates.Mvc\Zeus.Templates.Mvc.csproj">
+      <Project>{0ADE208D-2C8D-46AE-A433-2F21505B628C}</Project>
+      <Name>Zeus.Templates.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
+      <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
+      <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus\Zeus.csproj">
+      <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
+      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
