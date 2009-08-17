@@ -2,6 +2,7 @@
 using System.Text;
 using Isis.Collections;
 using Zeus.Admin;
+using Zeus.Collections;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Globalization;
@@ -29,9 +30,10 @@ namespace Zeus
 		private DateTime? _expires;
 		private IList<ContentItem> _children = new List<ContentItem>();
 		private IList<ContentItem> _translations = new List<ContentItem>();
-		private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
-		private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
+		private PropertyDataDictionary _properties;
+		private PropertyCollectionDictionary _propertyCollections;
 		private string _url;
+
 		[Copy]
 		private IUrlParser _urlParser;
 
@@ -121,17 +123,31 @@ namespace Zeus
 		public virtual string SavedBy { get; set; }
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		public virtual IDictionary<string, PropertyData> Details
+		private IList<PropertyData> DetailsInternal { get; set; }
+
+		public PropertyDataDictionary Details
 		{
-			get { return _details; }
-			set { _details = value; }
+			get
+			{
+				if (_properties == null)
+					_properties = new PropertyDataDictionary(DetailsInternal);
+
+				return _properties;
+			}
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		public virtual IDictionary<string, PropertyCollection> DetailCollections
+		private IList<PropertyCollection> DetailCollectionsInternal { get; set; }
+
+		public PropertyCollectionDictionary DetailCollections
 		{
-			get { return _detailCollections; }
-			set { _detailCollections = value; }
+			get
+			{
+				if (_propertyCollections == null)
+					_propertyCollections = new PropertyCollectionDictionary(DetailCollectionsInternal);
+
+				return _propertyCollections;
+			}
 		}
 
 		/// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
@@ -321,6 +337,7 @@ namespace Zeus
 				}
 			}
 		}
+
 		#endregion
 
 		protected ContentItem()
@@ -339,7 +356,7 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual object GetDetail(string detailName)
 		{
-			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
+			PropertyDataDictionary details = GetCurrentOrMasterLanguageDetails(detailName);
 			return details.ContainsKey(detailName)
 				? details[detailName].Value
 				: null;
@@ -351,13 +368,13 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual T GetDetail<T>(string detailName, T defaultValue)
 		{
-			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
+			PropertyDataDictionary details = GetCurrentOrMasterLanguageDetails(detailName);
 			if (details.ContainsKey(detailName))
 				return Utility.Convert<T>(details[detailName].Value);
 			return defaultValue;
 		}
 
-		private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
+		private PropertyDataDictionary GetCurrentOrMasterLanguageDetails(string detailName)
 		{
 			// Look up content property matching this name.
 			IContentProperty property = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName);
@@ -407,7 +424,7 @@ namespace Zeus
 			if (value == null || !value.Equals(defaultValue))
 				SetDetail(detailName, value);
 			else if (Details.ContainsKey(detailName))
-				_details.Remove(detailName);
+				Details.Remove(detailName);
 		}
 
 		/// <summary>Set a value into the <see cref="Details"/> bag. If a value with the same name already exists it is overwritten.</summary>
@@ -543,11 +560,11 @@ namespace Zeus
 
 		private void CloneDetails(ContentItem cloned)
 		{
-			cloned.Details = new Dictionary<string, PropertyData>();
+			cloned.DetailsInternal = new List<PropertyData>();
 			foreach (var detail in Details.Values)
 				cloned[detail.Name] = detail.Value;
 
-			cloned.DetailCollections = new Dictionary<string, PropertyCollection>();
+			cloned.DetailCollectionsInternal = new List<PropertyCollection>();
 			foreach (PropertyCollection collection in DetailCollections.Values)
 			{
 				PropertyCollection clonedCollection = collection.Clone();

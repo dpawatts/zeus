@@ -119,19 +119,17 @@
 			<one-to-many class="Zeus.ContentItem, Zeus"/>
 		</bag>
 
-		<map name="Details" inverse="true" cascade="all-delete-orphan" generic="true" where="DetailCollectionID IS NULL" lazy="true">
+		<bag name="DetailsInternal" inverse="true" cascade="all-delete-orphan" generic="true" where="DetailCollectionID IS NULL" lazy="true">
 			<cache usage="read-write" />
 			<key column="ItemID" />
-			<index column="Name" type="String" />
 			<one-to-many class="Zeus.ContentProperties.PropertyData, Zeus"/>
-		</map>
+		</bag>
 
-		<map name="DetailCollections" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
+		<bag name="DetailCollectionsInternal" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
 			<cache usage="read-write" />
 			<key column="ItemID" />
-			<index column="Name" type="String" />
 			<one-to-many class="Zeus.ContentProperties.PropertyCollection, Zeus"/>
-		</map>
+		</bag>
 
 		<bag name="AuthorizationRules" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true" batch-size="10">
 			<cache usage="read-write" />

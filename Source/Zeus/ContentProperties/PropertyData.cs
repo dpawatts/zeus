@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Isis.ExtensionMethods;
+using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
 using Zeus.FileSystem.Images;
 
 namespace Zeus.ContentProperties
 {
-	public abstract class PropertyData : ICloneable
+	public abstract class PropertyData : ICloneable, IUniquelyNamed
 	{
 		#region Private fields
 

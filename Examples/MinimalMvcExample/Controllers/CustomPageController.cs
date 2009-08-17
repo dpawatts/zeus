@@ -13,6 +13,8 @@ namespace Zeus.Examples.MinimalMvcExample.Controllers
 	{
 		public override ActionResult Index()
 		{
+			var something = Engine.Finder.Items<CustomPage>().Where(cp => cp.Content.Contains("blah")) //.OrderBy(cp => cp.Content)
+				.ToList();
 			return View(CurrentItem);
 		}
 	}

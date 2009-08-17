@@ -105,6 +105,7 @@
     <Compile Include="CancelItemEventArgs.cs" />
     <Compile Include="Collections\ItemComparer.cs" />
     <Compile Include="Collections\ItemComparer.generic.cs" />
+    <Compile Include="Collections\NamedCollectionDictionary.cs" />
     <Compile Include="Collections\TreeHierarchyBuilder.cs" />
     <Compile Include="Collections\ItemHierarchyNavigator.cs" />
     <Compile Include="Collections\IHierarchyNavigator.cs" />
@@ -143,6 +144,8 @@
     <Compile Include="ContentProperties\DoubleProperty.cs" />
     <Compile Include="ContentProperties\DateTimeProperty.cs" />
     <Compile Include="ContentProperties\ObjectPropertyDataBlob.cs" />
+    <Compile Include="ContentProperties\PropertyCollectionDictionary.cs" />
+    <Compile Include="ContentProperties\PropertyDataDictionary.cs" />
     <Compile Include="ContentProperties\PropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\DefaultProperty.cs" />
     <Compile Include="ContentProperties\XhtmlStringContentPropertyAttribute.cs" />

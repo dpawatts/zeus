@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Zeus.ContentTypes;
 
 namespace Zeus.ContentProperties
 {
-	public class PropertyCollection : IEnumerable<object>, IList, ICloneable
+	public class PropertyCollection : IEnumerable<object>, IList, ICloneable, IUniquelyNamed
 	{
 		#region Private fields
 
