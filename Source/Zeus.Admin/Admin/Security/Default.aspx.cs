@@ -94,6 +94,7 @@ namespace Zeus.Admin.Security
 			headerRow.Cells.Add(new TableHeaderCell());
 			foreach (string operation in allowedOperations)
 				headerRow.Cells.Add(new TableHeaderCell { Text = operation });
+			headerRow.Cells.Add(new TableHeaderCell());
 			tblPermissions.Rows.Add(headerRow);
 		}
 
@@ -134,6 +135,13 @@ namespace Zeus.Admin.Security
 				cell.Controls.Add(checkBox);
 				row.Cells.Add(cell);
 			}
+
+			TableCell deleteCell = new TableCell();
+			LinkButton deleteButton = new LinkButton { ID = "btnDelete" + index, Text = "Delete" };
+			deleteButton.Click += deleteButton_Click;
+			deleteCell.Controls.Add(deleteButton);
+			row.Cells.Add(deleteCell);
+
 			tblPermissions.Rows.Add(row);
 
 			switch (type)
@@ -145,6 +153,11 @@ namespace Zeus.Admin.Security
 					_displayedUsers.Add(roleOrUser);
 					break;
 			}
+		}
+
+		private void deleteButton_Click(object sender, EventArgs e)
+		{
+			((LinkButton) sender).Parent.Parent.Visible = false;
 		}
 
 		private void ApplyRulesRecursive(ContentItem item, IEnumerable<string> allowedOperations)
@@ -167,6 +180,8 @@ namespace Zeus.Admin.Security
 			for (int i = 1; i < tblPermissions.Rows.Count; ++i)
 			{
 				TableRow row = tblPermissions.Rows[i];
+				if (!row.Visible)
+					continue;
 
 				// Get user or role for this row.
 				string roleOrUser = ((HiddenField) row.FindControl("hdn" + i + "RoleOrUser")).Value;

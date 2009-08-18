@@ -122,6 +122,42 @@ namespace Zeus.Integrity
 			return true;
 		}
 
+		/// <summary>Check if an item can be moved to a destination.</summary>
+		/// <param name="source">The item to move.</param>
+		/// <param name="destination">The destination below which the item should be moved to.</param>
+		/// <returns>True if the item can be moved.</returns>
+		public bool CanMove(ContentItem source, ContentItem destination)
+		{
+			return GetMoveException(source, destination) == null;
+		}
+
+		/// <summary>Check if an item can be copied to a destination.</summary>
+		/// <param name="source">The item to copy.</param>
+		/// <param name="destination">The destination below which the item should be copied to.</param>
+		/// <returns>True if the item can be copied.</returns>
+		public bool CanCopy(ContentItem source, ContentItem destination)
+		{
+			return GetCopyException(source, destination) == null;
+		}
+
+		/// <summary>Check the current state of an item to see if it ca be deleted.</summary>
+		/// <param name="item">The item that should be deleted.</param>
+		/// <returns>True if the item can be deleted.</returns>
+		public bool CanDelete(ContentItem item)
+		{
+			return GetDeleteException(item) == null;
+		}
+
+		/// <summary>Check the current state of an item to see if it ca be saved.</summary>
+		/// <param name="item">The item that should be saved.</param>
+		/// <returns>True if the item can be saved.</returns>
+		public bool CanSave(ContentItem item)
+		{
+			return GetSaveException(item) == null;
+		}
+
+		#region Helper methods
+
 		/// <summary>Checks that destination have no child item with the same name.</summary>
 		private static bool IsNameOccupiedOnDestination(ContentItem source, ContentItem destination)
 		{
@@ -155,5 +191,7 @@ namespace Zeus.Integrity
 			}
 			return true;
 		}
+
+		#endregion
 	}
 }

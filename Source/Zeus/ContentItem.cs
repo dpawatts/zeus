@@ -30,6 +30,8 @@ namespace Zeus
 		private DateTime? _expires;
 		private IList<ContentItem> _children = new List<ContentItem>();
 		private IList<ContentItem> _translations = new List<ContentItem>();
+		private IList<PropertyData> _detailsInternal = new List<PropertyData>();
+		private IList<PropertyCollection> _detailCollectionsInternal = new List<PropertyCollection>();
 		private PropertyDataDictionary _properties;
 		private PropertyCollectionDictionary _propertyCollections;
 		private string _url;
@@ -123,7 +125,11 @@ namespace Zeus
 		public virtual string SavedBy { get; set; }
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		private IList<PropertyData> DetailsInternal { get; set; }
+		private IList<PropertyData> DetailsInternal
+		{
+			get { return _detailsInternal; }
+			set { _detailsInternal = value; }
+		}
 
 		public PropertyDataDictionary Details
 		{
@@ -137,7 +143,11 @@ namespace Zeus
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		private IList<PropertyCollection> DetailCollectionsInternal { get; set; }
+		private IList<PropertyCollection> DetailCollectionsInternal
+		{
+			get { return _detailCollectionsInternal; }
+			set { _detailCollectionsInternal = value; }
+		}
 
 		public PropertyCollectionDictionary DetailCollections
 		{

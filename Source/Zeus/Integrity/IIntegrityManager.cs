@@ -4,6 +4,28 @@ namespace Zeus.Integrity
 {
 	public interface IIntegrityManager
 	{
+		/// <summary>Check wether a copy operation is allowed.</summary>
+		/// <param name="source">The item to copy.</param>
+		/// <param name="destination">The destination for the copied item.</param>
+		/// <returns>True if the item can becopied.</returns>
+		bool CanCopy(ContentItem source, ContentItem destination);
+
+		/// <summary>Checks wether an item can be deleted</summary>
+		/// <param name="item">The item to delete.</param>
+		/// <returns>True if the item can be deleted.</returns>
+		bool CanDelete(ContentItem item);
+
+		/// <summary>Check wether a move operation is allowed.</summary>
+		/// <param name="source">The item to move.</param>
+		/// <param name="destination">The parent item where the item will be moved to.</param>
+		/// <returns>True if the item can be moved.</returns>
+		bool CanMove(ContentItem source, ContentItem destination);
+
+		/// <summary>Checks wether an item can be saved.</summary>
+		/// <param name="item">The item to save.</param>
+		/// <returns>True if the item can be saved.</returns>
+		bool CanSave(ContentItem item);
+
 		ZeusException GetMoveException(ContentItem source, ContentItem destination);
 		ZeusException GetCopyException(ContentItem source, ContentItem destination);
 		ZeusException GetDeleteException(ContentItem item);

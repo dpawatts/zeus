@@ -112,7 +112,7 @@ namespace Zeus.Web
 						url = url.AppendQuery("page", item.ID);
 
 					// Prepend language identifier, if this is not the default language.
-					if (!LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
+					if (_languageManager.Enabled && !LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
 					{
 						if (LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name) != _webContext.LocalUrl.Authority)
 							url = url.SetAuthority(LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name));

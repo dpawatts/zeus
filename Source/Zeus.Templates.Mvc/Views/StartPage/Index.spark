@@ -1,5 +1,5 @@
-﻿<viewdata model="Zeus.ContentItem"/>
+﻿<viewdata model="Zeus.Web.Mvc.ViewModels.ViewModel[[Zeus.Templates.ContentTypes.StartPage]]" />
 
-<h1>${Model.Title}</h1>
+<h1>${Model.CurrentItem.Title}</h1>
 
 <p>This view is coming from Zeus.Templates.Mvc, woo!</p>

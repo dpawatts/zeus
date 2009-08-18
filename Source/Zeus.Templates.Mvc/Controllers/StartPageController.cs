@@ -2,15 +2,16 @@ using System.Web.Mvc;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 using Zeus.Web.Mvc;
+using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
 	[Controls(typeof(StartPage), AreaName = "Templates")]
-	public class StartPageController : Controller
+	public class StartPageController : ZeusController<StartPage>
 	{
-		public ActionResult Index()
+		public override ActionResult Index()
 		{
-			return View(ControllerContext.RouteData.Values[ContentRoute.ContentItemKey]);
+			return View(new ViewModel<StartPage>(CurrentItem));
 		}
 	}
 }

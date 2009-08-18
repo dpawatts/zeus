@@ -47,10 +47,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
     </Reference>
-    <Reference Include="Spark.Modules, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Spark\Spark.Modules.dll</HintPath>
-    </Reference>
     <Reference Include="Spark.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc.dll</HintPath>
