@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentTypes\ShoppingCartPage.cs" />
     <Compile Include="ContentTypes\GroupContainer.cs" />
     <Compile Include="ContentTypes\VariationContainer.cs" />
     <Compile Include="ContentTypes\VariationSet.cs" />

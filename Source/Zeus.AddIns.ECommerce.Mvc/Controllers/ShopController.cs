@@ -10,10 +10,5 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
         {
             return base.Index();
         }
-
-        public ActionResult ShoppingCart()
-        {
-            
-        }
     }
 }
