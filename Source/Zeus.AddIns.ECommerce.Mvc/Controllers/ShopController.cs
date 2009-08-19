@@ -1,4 +1,4 @@
-using Zeus.AddIns.ECommerce.ContentTypes;
+using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;

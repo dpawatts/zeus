@@ -124,6 +124,11 @@ namespace Zeus.Web
 			get { throw new NotSupportedException("In thread context. No handler when not running in http web context."); }
 		}
 
+		public virtual HttpSessionStateBase Session
+		{
+			get { throw new NotSupportedException("In thread context. No handler when not running in http web context."); }
+		}
+
 		public virtual string PhysicalPath
 		{
 			get { throw new NotSupportedException("In thread context. No handler when not running in http web context."); }

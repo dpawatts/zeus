@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Security.Principal;
+using System.Web;
 using Isis.Web;
 
 namespace Zeus.Web
@@ -11,6 +12,8 @@ namespace Zeus.Web
 
 		/// <summary>The template used to serve this request.</summary>
 		PathData CurrentPath { get; set; }
+
+		HttpSessionStateBase Session { get; }
 
 		/// <summary>The physical path on disk to the requested page.</summary>
 		string PhysicalPath { get; }

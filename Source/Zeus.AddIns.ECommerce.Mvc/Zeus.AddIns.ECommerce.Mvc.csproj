@@ -56,11 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ShoppingCartPageController.cs" />
+    <Compile Include="Controllers\ShoppingBasketPageController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="ECommerceWebPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\ShoppingCartPageViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingBasketPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Shop\Index.spark" />
-    <EmbeddedResource Include="Views\ShoppingCartPage\Index.spark" />
+    <EmbeddedResource Include="Views\ShoppingBasketPage\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

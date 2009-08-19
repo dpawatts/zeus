@@ -51,6 +51,12 @@ namespace Isis.Web
 			get { return new HttpResponseWrapper(CurrentHttpContext.Response); }
 		}
 
+		/// <summary>The current session object.</summary>
+		public HttpSessionStateBase Session
+		{
+			get { return new HttpSessionStateWrapper(CurrentHttpContext.Session); }
+		}
+
 		public Url Url
 		{
 			get { return new Url(Request.Url.Scheme, Request.Url.Authority, Request.RawUrl); }
