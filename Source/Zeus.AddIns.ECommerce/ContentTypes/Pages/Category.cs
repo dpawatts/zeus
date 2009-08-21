@@ -7,6 +7,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Shop))]
 	public class Category : BasePage
 	{
-		
+		public string PossessiveTitle
+		{
+			get { return Title + "'s"; }
+		}
 	}
 }
