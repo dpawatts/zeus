@@ -13,21 +13,41 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public static class NavigationExtensions
 	{
-		public static string NavigationLinks(this HtmlHelper html, string prefix, string postfix, string activePageCssClass, ContentItem currentPage)
+		public delegate string CssClassFunc(ContentItem contentItem, bool isFirst, bool isLast);
+
+		public static string NavigationLinks(this HtmlHelper html, Func<string, string> layoutCallback,
+			CssClassFunc cssClassCallback)
 		{
-			string result = prefix;
-			foreach (ContentItem contentItem in Find.StartPage.GetGlobalizedChildren().Navigable())
-				result += string.Format("<li {1}><a href=\"{0}\">{2}</a></li>",
-					contentItem.Url,
-					(((contentItem is Redirect) && ((Redirect)contentItem).RedirectItem == currentPage) || Find.IsAccessibleChildOrSelf(contentItem, currentPage)) ? " class=\"" + activePageCssClass + "\"" : string.Empty,
-					contentItem.Title);
-			result += postfix;
+			var navigationItems = Find.StartPage.GetGlobalizedChildren().Navigable();
+
+			string result = string.Empty;
+			foreach (ContentItem contentItem in navigationItems)
+				result += string.Format("<li class=\"{0}\"><span><a href=\"{1}\">{2}</a></span></li>",
+					cssClassCallback(contentItem, contentItem == navigationItems.First(), contentItem == navigationItems.Last()),
+					contentItem.Url, contentItem.Title);
+				
+			result = layoutCallback(result);
 			return result;
 		}
 
 		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
 		{
-			return NavigationLinks(html, "<ul>", "</ul>", "on", currentPage);
+			return NavigationLinks(html,
+			                       nl => "<ul>" + nl + "</ul>",
+			                       (ci, isFirst, isLast) =>
+			                       {
+			                       	string result = string.Empty;
+			                       	if (IsCurrentPage(ci, currentPage))
+			                       		result += "on";
+			                       	if (isLast)
+			                       		result += " last";
+			                       	return result;
+			                       });
+		}
+
+		private static bool IsCurrentPage(ContentItem itemToCheck, ContentItem currentPage)
+		{
+			return (((itemToCheck is Redirect) && ((Redirect)itemToCheck).RedirectItem == currentPage) || Find.IsAccessibleChildOrSelf(itemToCheck, currentPage));
 		}
 
 		public static string Breadcrumbs(this HtmlHelper html, ContentItem currentPage)

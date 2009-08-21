@@ -15,7 +15,7 @@ namespace Isis.Web.Security
 		{
 			_webContext = webContext;
 
-			AuthenticationSection authSection = WebConfigurationManager.GetSection("isis.web/authentication", _webContext.Url.Path) as AuthenticationSection;
+			AuthenticationSection authSection = WebConfigurationManager.GetSection("isis.web/authentication") as AuthenticationSection;
 			if (authSection == null)
 				authSection = new AuthenticationSection();
 			_rootLocation = authSection.ToAuthenticationLocation();

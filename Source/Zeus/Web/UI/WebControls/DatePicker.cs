@@ -21,7 +21,7 @@ namespace Zeus.Web.UI.WebControls
 			Page.ClientScript.RegisterEmbeddedCssResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.ui.css");
 			Page.ClientScript.RegisterCssResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.DatePicker.css");
 
-			string script = @"if (!$.browser.msie) $('#" + ClientID + @"').datepicker({ 
+			string script = @"if (!jQuery.browser.msie) jQuery('#" + ClientID + @"').datepicker({ 
     duration: '', 
     showOn: 'both', 
     buttonImage: '" + Page.ClientScript.GetWebResourceUrl(GetType(), "Zeus.Web.Resources.jQuery.calendar.gif") + @"',
