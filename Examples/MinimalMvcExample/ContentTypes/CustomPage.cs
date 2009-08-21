@@ -18,18 +18,18 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			set { base.Content = value; }
 		}
 
-		[ContentProperty("Image", 100, Shared = false)]
-		[ImageDataUploadEditor]
-		public ImageData Image
+		/*[ContentProperty("Image", 100, Shared = false)]
+		[ChildEditor]
+		public Image Image
 		{
-			get { return GetDetail<ImageData>("Image", null); }
+			get { return GetDetail<Image>("Image", null); }
 			set { SetDetail("Image", value); }
-		}
+		}*/
 
-		[MultiImageDataUploadEditor("Images", 110)]
+		/*[MultiImageDataUploadEditor("Images", 110)]
 		public PropertyCollection Images
 		{
 			get { return GetDetailCollection("Images", true); }
-		}
+		}*/
 	}
 }

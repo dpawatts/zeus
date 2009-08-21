@@ -1,6 +1,3 @@
-using System;
-using System.Linq.Expressions;
-using System.Web;
 using System.Web.Mvc;
 using Zeus.FileSystem.Images;
 
@@ -8,50 +5,57 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public static class ImageExtensions
 	{
-		public static string FileUrl(this HtmlHelper helper, ContentItem contentItem, string detailName)
+		public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill)
 		{
-			return string.Format("/FileData.axd?Path={0}&DetailName={1}", HttpUtility.UrlEncode(contentItem.Path), detailName);
+			if (image == null)
+				return string.Empty;
+			return image.GetUrl(width, height, fill);
 		}
 
-		public static string FileUrl(this HtmlHelper helper, ContentItem contentItem, string detailCollectionName, int index)
+		public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height)
 		{
-			return string.Format("/FileData.axd?Path={0}&DetailCollectionName={1}&Index={2}", HttpUtility.UrlEncode(contentItem.Path), detailCollectionName, index);
+			if (image == null)
+				return string.Empty;
+			return image.GetUrl(width, height);
 		}
 
-		public static string ImageUrl(this HtmlHelper helper, ContentItem contentItem, string detailName, int width, int height, bool fill)
+		public static string ImageUrl(this HtmlHelper helper, Image image)
 		{
-			return contentItem.GetImageUrl(detailName, width, height, fill);
+			if (image == null)
+				return string.Empty;
+			return image.Url;
 		}
 
-		public static string ImageUrl<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression, int width, int height, bool fill)
-			where TItem : ContentItem
+		public static string Image(this HtmlHelper helper, Image image, int width, int height, bool fill)
 		{
-			MemberExpression memberExpression = (MemberExpression) expression.Body;
-			return helper.ImageUrl(contentItem, memberExpression.Member.Name, width, height, fill);
+			if (image == null)
+				return string.Empty;
+			return ImageTag(image, ImageUrl(helper, image, width, height, fill));
 		}
 
-		public static string ImageUrl(this HtmlHelper helper, ContentItem contentItem, string detailName)
+		public static string Image(this HtmlHelper helper, Image image, int width, int height)
 		{
-			return contentItem.GetImageUrl(detailName);
+			if (image == null)
+				return string.Empty;
+			return ImageTag(image, ImageUrl(helper, image, width, height));
 		}
 
-		public static string ImageUrl<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)
-			where TItem : ContentItem
+		public static string Image(this HtmlHelper helper, Image image)
 		{
-			MemberExpression memberExpression = (MemberExpression)expression.Body;
-			return helper.ImageUrl(contentItem, memberExpression.Member.Name);
+			if (image == null)
+				return string.Empty;
+			return ImageTag(image, ImageUrl(helper, image));
 		}
 
-		public static string ImageUrl(this HtmlHelper helper, ContentItem contentItem, string detailCollectionName, int index, int width, int height, bool fill)
+		private static string ImageTag(Image image, string imageUrl)
 		{
-			return contentItem.GetImageUrl(detailCollectionName, index, width, height, fill);
-		}
-
-		public static string ImageUrl<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression, int index, int width, int height, bool fill)
-			where TItem : ContentItem
-		{
-			MemberExpression memberExpression = (MemberExpression)expression.Body;
-			return helper.ImageUrl(contentItem, memberExpression.Member.Name, index, width, height, fill);
+			MvcContrib.UI.Tags.Image imageTag = new MvcContrib.UI.Tags.Image
+			{
+				Src = imageUrl,
+				Alt = image.Caption
+			};
+			imageTag.Attributes["border"] = "0";
+			return imageTag.ToString();
 		}
 	}
 }

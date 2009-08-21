@@ -66,7 +66,7 @@ namespace Zeus.Web.UI.WebControls
 			// Render javascript for updating name textbox based on title textbox.
 			Page.ClientScript.RegisterClientScriptResource(typeof(NameEditor), "Zeus.Web.UI.WebControls.NameEditor.js");
 
-			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"$('#" + _label.ClientID + "').hide();$('#" + _textBox.ClientID + "').show();return false;\">Edit</a></span>"));
+			_labelPanel.Controls.Add(new LiteralControl("<br /><span class=\"edit\"><a href=\"#\" onclick=\"jQuery('#" + _label.ClientID + "').hide();jQuery('#" + _textBox.ClientID + "').show();return false;\">Edit</a></span>"));
 
 			ItemView itemView = Parent.FindParent<ItemView>();
 			Control titleEditor = itemView.PropertyControls["Title"];

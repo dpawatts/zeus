@@ -62,11 +62,18 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			set { SetDetail("Signature", value); }
 		}
 
-		[ImageDataUploadEditor("Avatar", 40)]
-		public virtual ImageData Avatar
+		[ChildEditor("Avatar", 40)]
+		public virtual Image Avatar
 		{
-			get { return GetDetail<ImageData>("Image", null); }
-			set { SetDetail("Image", value); }
+			get { return GetChild("Avatar") as Image; }
+			set
+			{
+				if (value != null)
+				{
+					value.Name = "Avatar";
+					value.AddTo(this);
+				}
+			}
 		}
 
 		public virtual int PostCount

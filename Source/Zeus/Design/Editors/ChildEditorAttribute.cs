@@ -34,25 +34,10 @@ namespace Zeus.Design.Editors
 
 		#region Constructors
 
-		public ChildEditorAttribute()
+		public ChildEditorAttribute(string title, int sortOrder)
+			: base(title, sortOrder)
 		{
-		}
-
-		public ChildEditorAttribute(int sortOrder)
-			: this(null, null, sortOrder)
-		{
-		}
-
-		public ChildEditorAttribute(string defaultChildName, int sortOrder)
-			: this(defaultChildName, null, sortOrder)
-		{
-		}
-
-		public ChildEditorAttribute(string defaultChildName, string defaultChildZoneName, int sortOrder)
-		{
-			DefaultChildName = defaultChildName;
-			DefaultChildZoneName = defaultChildZoneName;
-			SortOrder = sortOrder;
+			
 		}
 
 		#endregion
@@ -60,7 +45,7 @@ namespace Zeus.Design.Editors
 		#region Properties
 
 		/// <summary>The name that will be assigned to new child items.</summary>
-		public string DefaultChildName { get; set; }
+		//public string DefaultChildName { get; set; }
 
 		/// <summary>The zone name that will be assigned to new child items.</summary>
 		public string DefaultChildZoneName { get; set; }
@@ -76,9 +61,14 @@ namespace Zeus.Design.Editors
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			ItemEditView itemEditor = editor as ItemEditView;
-			itemEditor.Update();
-			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) => itemEditor.Save());
+			ItemEditView itemEditor = (ItemEditView) editor;
+			//itemEditor.Update();
+			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
+			{
+				ContentItem child;
+				if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
+					Context.Persister.Delete(child);
+			});
 			return true;
 		}
 
@@ -148,7 +138,7 @@ namespace Zeus.Design.Editors
 						childItemType),
 					ex);
 			}
-			child.Name = DefaultChildName;
+			child.Name = Name;
 			child.ZoneName = DefaultChildZoneName;
 			child.AddTo(item);
 			return child;

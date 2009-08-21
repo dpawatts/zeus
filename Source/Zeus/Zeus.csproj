@@ -129,12 +129,9 @@
     <Compile Include="Configuration\VersioningElement.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
-    <Compile Include="ContentProperties\BaseFileDataProperty.cs" />
     <Compile Include="ContentProperties\IntegerPropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\DoublePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ObjectPropertyDataTypeAttribute.cs" />
-    <Compile Include="ContentProperties\ImageDataProperty.cs" />
-    <Compile Include="ContentProperties\FileDataProperty.cs" />
     <Compile Include="ContentProperties\LinkPropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\PropertyCollection.cs" />
     <Compile Include="ContentProperties\PropertyAuthorizedRolesAttribute.cs" />
@@ -177,22 +174,18 @@
     <Compile Include="DynamicContent\DateTimeDynamicContent.cs" />
     <Compile Include="DynamicContent\SimpleEditableObject.cs" />
     <Compile Include="DynamicContent\SimpleTypeDefinition.cs" />
-    <Compile Include="Design\Editors\ImageDataUploadEditorAttribute.cs" />
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
-    <Compile Include="Design\Editors\MultiImageDataUploadEditorAttribute.cs" />
+    <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
     <Compile Include="Engine\IContentAdapterProvider.cs" />
     <Compile Include="Engine\ZeusModule.cs" />
-    <Compile Include="FileSystem\Images\ContentItem.extensions.cs" />
     <Compile Include="FileSystem\Images\Image.cs" />
     <Compile Include="FileSystem\Images\ImageCachingService.cs" />
     <Compile Include="FileSystem\Images\ImageCachingServiceInitializer.cs" />
-    <Compile Include="FileSystem\Images\ImageData.cs" />
-    <Compile Include="FileSystem\Images\ZeusImageDataInCollectionSource.cs" />
-    <Compile Include="FileSystem\Images\ZeusImageDataSource.cs" />
+    <Compile Include="FileSystem\Images\ImageLayerBuilderExtensions.cs" />
     <Compile Include="FileSystem\Images\ZeusImageSource.cs" />
     <Compile Include="Globalization\ContentLanguage.cs" />
     <Compile Include="Globalization\ILanguageSelector.cs" />
@@ -277,16 +270,11 @@
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
     <Compile Include="Web\UI\WebControls\FancyImageUpload.cs" />
     <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
-    <Compile Include="Web\UI\WebControls\FlashFileUploadImplementation.cs" />
-    <Compile Include="Web\UI\WebControls\FileUploadImplementation.cs" />
-    <Compile Include="Web\UI\WebControls\ImageDataEditor.cs" />
-    <Compile Include="Web\UI\WebControls\ImageEditor.cs" />
     <Compile Include="Web\UI\WebControls\MultiImageDataUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\TabControl.cs" />
-    <Compile Include="Web\UI\WebControls\FileEditor.cs" />
     <Compile Include="Web\UI\WebControls\IEditableObjectEditor.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewTypeDefinitionEventArgs.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewEditableObjectEventArgs.cs" />
@@ -330,13 +318,11 @@
     <Compile Include="Design\Editors\DateEditorAttribute.cs" />
     <Compile Include="DestinationEventArgs.cs" />
     <Compile Include="Design\Editors\DropDownListEditorAttribute.cs" />
-    <Compile Include="Design\Editors\FileDataUploadEditorAttribute.cs" />
     <Compile Include="Design\Displayers\DisplayerAttribute.cs" />
     <Compile Include="Design\Editors\LinkedItemsEditorAttribute.cs" />
     <Compile Include="Engine\EventBroker.cs" />
     <Compile Include="Engine\IPluginFinder.cs" />
     <Compile Include="Engine\PluginFinder.cs" />
-    <Compile Include="FileSystem\FileData.cs" />
     <Compile Include="Integrity\AllowedZones.cs" />
     <Compile Include="Integrity\CannotDeleteRootException.cs" />
     <Compile Include="Integrity\DestinationOnOrBelowItselfException.cs" />
@@ -347,8 +333,6 @@
     <Compile Include="Security\Operations.cs" />
     <Compile Include="Web\ControlsAttribute.cs" />
     <Compile Include="Web\ErrorHandler.cs" />
-    <Compile Include="Web\Handlers\FileDataHandler.cs" />
-    <Compile Include="Web\Handlers\ChunkedFileUploadHandler.cs" />
     <Compile Include="Web\HttpRequestContextAccessor.cs" />
     <Compile Include="Web\IClosable.cs" />
     <Compile Include="Web\IControllerDescriptor.cs" />
@@ -376,7 +360,7 @@
     <Compile Include="Web\UI\WebControls\Breadcrumbs.cs" />
     <Compile Include="Web\UI\WebControls\BreadcrumbItem.cs" />
     <Compile Include="Web\UI\WebControls\BaseDetailCollectionEditor.cs" />
-    <Compile Include="Web\UI\WebControls\MultiFileDataUploadEditor.cs" />
+    <Compile Include="Web\UI\WebControls\MultiFileUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
     <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
@@ -490,7 +474,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\DatePicker.cs" />
-    <Compile Include="Web\UI\WebControls\FileDataEditor.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
     <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">

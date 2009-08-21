@@ -6,6 +6,7 @@ using Zeus.FileSystem;
 using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
+using Zeus.Web.Mvc.ViewModels;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Templates.Mvc.Html
@@ -33,7 +34,7 @@ namespace Zeus.Templates.Mvc.Html
 		{
 			return Breadcrumbs(html, currentPage, "<ul id=\"crumbs\">", "</ul>", 1, 2, string.Empty,
 				l => string.Format("<li><a href=\"{0}\">{1}</a></li>", l.Url, l.Contents),
-				l => string.Format("<li class=\"last\"><a href=\"{0}\">{1}</a></li>", l.Url, l.Contents));
+				l => string.Format("<li class=\"last\">{0}</li>", l.Contents));
 		}
 
 		public static string Breadcrumbs(this HtmlHelper html, ContentItem currentPage, string prefix, string postfix, int startLevel, int visibilityLevel, string separatorText,

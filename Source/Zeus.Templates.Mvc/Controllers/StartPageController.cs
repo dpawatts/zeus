@@ -6,7 +6,7 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(StartPage), AreaName = "Templates")]
+	[Controls(typeof(StartPage), AreaName = TemplatesWebPackage.AREA_NAME)]
 	public class StartPageController : ZeusController<StartPage>
 	{
 		public override ActionResult Index()

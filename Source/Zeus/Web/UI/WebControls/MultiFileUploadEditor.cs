@@ -6,7 +6,7 @@ using Zeus.FileSystem;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class MultiFileDataUploadEditor : BaseDetailCollectionEditor
+	public class MultiFileUploadEditor : BaseDetailCollectionEditor
 	{
 		#region Properties
 
@@ -19,26 +19,22 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override Control CreateDetailEditor(int id, PropertyData detail)
 		{
-			ObjectProperty linkDetail = detail as ObjectProperty;
+			/*ObjectProperty linkDetail = detail as ObjectProperty;
 
 			FileDataEditor fileUpload = CreateEditor();
 			fileUpload.ID = ID + "_upl_" + id;
 			fileUpload.FileUploadImplementation = CreateUpload(fileUpload);
 
 			if (linkDetail != null)
-				fileUpload.CurrentFileName = ((FileData) linkDetail.Value).FileName;
+				fileUpload.CurrentFileName = ((File) linkDetail.Value).FileName;
 
-			return fileUpload;
+			return fileUpload;*/
+			throw new NotImplementedException();
 		}
 
-		protected virtual FileDataEditor CreateEditor()
+		protected virtual FancyFileUpload CreateEditor()
 		{
-			return new FileDataEditor();
-		}
-
-		private FileUploadImplementation CreateUpload(FileDataEditor fileUpload)
-		{
-			return new FlashFileUploadImplementation(fileUpload);
+			return new FancyFileUpload();
 		}
 
 		protected override void Render(HtmlTextWriter writer)

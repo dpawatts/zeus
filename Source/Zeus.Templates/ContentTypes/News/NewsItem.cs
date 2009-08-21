@@ -41,7 +41,7 @@ namespace Zeus.Templates.ContentTypes.News
 			set { SetDetail("Content", value); }
 		}
 
-		[MultiImageDataUploadEditor("Images", 50, ContainerName = "Content")]
+		[MultiImageUploadEditor("Images", 50, ContainerName = "Content")]
 		public virtual PropertyCollection Images
 		{
 			get { return GetDetailCollection("Images", true); }

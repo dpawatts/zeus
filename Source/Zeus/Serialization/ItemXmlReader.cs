@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
+using Ninject;
 using Zeus.ContentTypes;
 
 namespace Zeus.Serialization
@@ -10,6 +11,7 @@ namespace Zeus.Serialization
 		private readonly IContentTypeManager definitions;
 		private readonly IDictionary<string, IXmlReader> readers;
 
+		[Inject]
 		public ItemXmlReader(IContentTypeManager definitions)
 			: this(definitions, DefaultReaders())
 		{

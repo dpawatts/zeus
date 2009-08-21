@@ -41,11 +41,18 @@ namespace Zeus.Globalization.ContentTypes
 			set { SetDetail("UrlSegment", value); }
 		}
 
-		[ContentProperty("Flag Icon", 50), ImageDataUploadEditor("Flag Icon", 50)]
-		public virtual ImageData FlagIcon
+		[ChildEditor("Flag Icon", 50)]
+		public virtual Image FlagIcon
 		{
-			get { return GetDetail<ImageData>("FlagIcon", null); }
-			set { SetDetail("FlagIcon", value); }
+			get { return GetChild("FlagIcon") as Image; }
+			set
+			{
+				if (value != null)
+				{
+					value.Name = "FlagIcon";
+					value.AddTo(this);
+				}
+			}
 		}
 
 		public override string IconUrl
@@ -53,7 +60,7 @@ namespace Zeus.Globalization.ContentTypes
 			get
 			{
 				if (FlagIcon != null)
-					return this.GetImageUrl("FlagIcon");
+					return FlagIcon.Url;
 				return WebResourceUtility.GetUrl(typeof(Language), "Zeus.Web.Resources.Icons.world_link.png");
 			}
 		}

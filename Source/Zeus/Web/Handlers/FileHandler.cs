@@ -14,7 +14,10 @@ namespace Zeus.Web.Handlers
 
 		public void ProcessRequest(HttpContext context)
 		{
-			File file = (File) Zeus.Context.Current.Resolve<Navigator>().Navigate(context.Request.QueryString["Path"]);
+			File file = Context.Current.Resolve<Navigator>().Navigate(context.Request.QueryString["Path"]) as File;
+			if (file == null)
+				return;
+
 			context.Response.ContentType = file.ContentType;
 			context.Response.OutputStream.Write(file.Data, 0, file.Data.Length);
 			context.Response.Flush();

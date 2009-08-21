@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using MvcContrib.Castle;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
 using Zeus.Configuration;

@@ -195,7 +195,9 @@ namespace Zeus.Globalization
 			language.Enabled = enabled;
 
 			string flagIconFileName = flagIconName + ".png";
-			language.FlagIcon = ImageData.FromStream(typeof(LanguageManager).Assembly.GetManifestResourceStream("Zeus.Web.Resources.Flags." + flagIconFileName), flagIconFileName);
+			Image flagIcon = Image.FromStream(typeof(LanguageManager).Assembly.GetManifestResourceStream("Zeus.Web.Resources.Flags." + flagIconFileName),
+																				flagIconFileName);
+			language.FlagIcon = flagIcon;
 		}
 
 		#endregion

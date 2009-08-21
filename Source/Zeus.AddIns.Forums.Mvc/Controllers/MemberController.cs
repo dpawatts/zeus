@@ -53,12 +53,14 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 
 			if (avatar != null && avatar.ContentLength > 0)
 			{
-				ImageData image = new ImageData
+				Image image = new Image
 				{
+					Name = avatar.FileName,
 					Data = avatar.InputStream.ReadAllBytes(),
 					ContentType = avatar.ContentType,
 					Size = avatar.ContentLength
 				};
+				image.AddTo(CurrentMember);
 				CurrentMember.Avatar = image;
 			}
 

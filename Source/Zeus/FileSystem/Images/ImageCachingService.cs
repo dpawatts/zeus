@@ -40,25 +40,6 @@ namespace Zeus.FileSystem.Images
 					ZeusImageSource source = new ZeusImageSource { ContentID = contentItem.ID };
 					DynamicImageCacheManager.Remove(source);
 				}
-				else
-				{
-					foreach (ImageDataProperty imageDataProperty in contentItem.Details.OfType<ImageDataProperty>())
-					{
-						ZeusImageDataSource source = new ZeusImageDataSource { ContentID = contentItem.ID, DetailName = imageDataProperty.Name };
-						DynamicImageCacheManager.Remove(source);
-					}
-
-					foreach (PropertyCollection propertyCollection in contentItem.DetailCollections.Values)
-					{
-						var imageDataProperties = propertyCollection.Details.OfType<ImageDataProperty>(); 
-						for (int i = 0, length = imageDataProperties.Count(); i < length; ++i)
-						{
-							ImageDataProperty imageDataProperty = imageDataProperties.ElementAt(i);
-							ZeusImageDataInCollectionSource source = new ZeusImageDataInCollectionSource { ContentID = contentItem.ID, DetailName = imageDataProperty.Name, Index = i };
-							DynamicImageCacheManager.Remove(source);
-						}
-					}
-				}
 			}
 		}
 

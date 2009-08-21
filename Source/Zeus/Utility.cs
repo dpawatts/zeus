@@ -38,6 +38,11 @@ namespace Zeus
 				{
 					if (!(value is IConvertible))
 						throw new ZeusException("Cannot convert object of type '{0}' because it does not implement IConvertible", value.GetType());
+					if (destinationType.IsNullable())
+					{
+						NullableConverter nullableConverter = new NullableConverter(destinationType);
+						destinationType = nullableConverter.UnderlyingType;
+					}
 					return System.Convert.ChangeType(value, destinationType);
 				}
 			}

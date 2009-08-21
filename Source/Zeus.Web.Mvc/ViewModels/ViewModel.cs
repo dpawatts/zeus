@@ -1,8 +1,17 @@
+using System;
 using Zeus.Web.UI;
 
 namespace Zeus.Web.Mvc.ViewModels
 {
-	public class ViewModel<T> : IContentItemContainer<T>
+	public abstract class ViewModel
+	{
+		public ContentItem CurrentItem
+		{
+			get { throw new NotSupportedException(); }
+		}
+	}
+
+	public class ViewModel<T> : ViewModel, IContentItemContainer<T>
 		where T : ContentItem
 	{
 		public ViewModel(T currentItem)
@@ -16,6 +25,6 @@ namespace Zeus.Web.Mvc.ViewModels
 			get { return CurrentItem; }
 		}
 
-		public T CurrentItem { get; set; }
+		public new T CurrentItem { get; set; }
 	}
 }

@@ -125,7 +125,7 @@ namespace Zeus
 		public virtual string SavedBy { get; set; }
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		private IList<PropertyData> DetailsInternal
+		internal IList<PropertyData> DetailsInternal
 		{
 			get { return _detailsInternal; }
 			set { _detailsInternal = value; }
@@ -143,7 +143,7 @@ namespace Zeus
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		private IList<PropertyCollection> DetailCollectionsInternal
+		internal IList<PropertyCollection> DetailCollectionsInternal
 		{
 			get { return _detailCollectionsInternal; }
 			set { _detailCollectionsInternal = value; }
@@ -740,6 +740,15 @@ namespace Zeus
 			}
 
 			return PathData.Empty;
+		}
+
+		/// <summary>
+		/// Checks whether this content item contains any properties or property collections.
+		/// </summary>
+		/// <returns></returns>
+		public virtual bool IsEmpty()
+		{
+			return !DetailsInternal.Any() && !DetailCollectionsInternal.Any();
 		}
 
 		/// <summary>

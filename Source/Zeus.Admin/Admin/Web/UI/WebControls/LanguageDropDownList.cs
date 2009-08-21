@@ -22,7 +22,8 @@ namespace Zeus.Admin.Web.UI.WebControls
 				foreach (Language language in Zeus.Context.Current.Resolve<ILanguageManager>().GetAvailableLanguages())
 				{
 					ListItem listItem = new ListItem(language.Title, language.Name);
-					listItem.Attributes["style"] = "background-image: url(" + language.GetImageUrl("FlagIcon") + "); background-repeat: no-repeat; background-position: 2px 2px; padding-left: 20px;";
+					if (language.FlagIcon != null)
+						listItem.Attributes["style"] = "background-image: url(" + language.FlagIcon.Url + "); background-repeat: no-repeat; background-position: 2px 2px; padding-left: 20px;";
 					Items.Add(listItem);
 				}
 			}

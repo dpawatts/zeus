@@ -39,10 +39,15 @@ namespace Isis.ApplicationBlocks.DataMigrations.Framework
 		private void AddColumn(Table dbTable, Column column)
 		{
 			Smo.Column dbColumn = new Smo.Column(dbTable, column.Name, column.Type);
+			PopulateColumn(column, dbTable, dbColumn);
+			dbTable.Columns.Add(dbColumn);
+		}
 
+		private void PopulateColumn(Column column, Smo.Table dbTable, Smo.Column dbColumn)
+		{
 			if (column.DefaultValue != null)
 			{
-				Smo.DefaultConstraint defaultConstraint = dbColumn.AddDefaultConstraint();
+				Smo.DefaultConstraint defaultConstraint = dbColumn.DefaultConstraint ?? dbColumn.AddDefaultConstraint();
 				defaultConstraint.Text = GetDefaultValue(column.DefaultValue);
 			}
 
@@ -59,8 +64,6 @@ namespace Isis.ApplicationBlocks.DataMigrations.Framework
 
 			if ((column.ColumnProperties & ColumnProperties.Unique) == ColumnProperties.Unique)
 				AddUniqueIndex(column, dbTable);
-
-			dbTable.Columns.Add(dbColumn);
 		}
 
 		private static string GetDefaultValue(object defaultValue)
@@ -148,6 +151,24 @@ namespace Isis.ApplicationBlocks.DataMigrations.Framework
 			Smo.Table dbTable = GetTable(table);
 			AddColumn(dbTable, column);
 			dbTable.Alter();
+		}
+
+		/// <summary>
+		/// Alters an existing column in an existing table
+		/// </summary>
+		/// <param name="table">The name of the table that will get the new column</param>
+		/// <param name="column">The new column definition</param>
+		protected void AlterColumn(string table, Column column)
+		{
+			Smo.Table dbTable = GetTable(table);
+			AlterColumn(dbTable, dbTable.Columns[column.Name], column);
+			dbTable.Alter();
+		}
+
+		private void AlterColumn(Table dbTable, Smo.Column dbColumn, Column column)
+		{
+			PopulateColumn(column, dbTable, dbColumn);
+			dbTable.Columns.Add(dbColumn);
 		}
 
 		#endregion

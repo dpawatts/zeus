@@ -37,8 +37,7 @@ namespace Zeus.Installation.Migrations
 				new Column("ItemID", Smo.DataType.Int, ColumnProperties.NotNull),
 				new Column("Operation", Smo.DataType.NVarChar(50), ColumnProperties.NotNull),
 				new Column("Role", Smo.DataType.NVarChar(50), ColumnProperties.Null),
-				new Column("User", Smo.DataType.NVarChar(50), ColumnProperties.Null),
-				new Column("Allowed", Smo.DataType.Int, ColumnProperties.NotNull));
+				new Column("User", Smo.DataType.NVarChar(50), ColumnProperties.Null));
 
 			AddTable("zeusLanguageSettings",
 				new Column("ID", Smo.DataType.Int, ColumnProperties.PrimaryKeyWithIdentity),

@@ -84,6 +84,7 @@
     <Compile Include="Controllers\PageNavigationController.cs" />
     <Compile Include="Controllers\StartPageController.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Html\FileExtensions.cs" />
     <Compile Include="Html\ImageExtensions.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Html\NavigationExtensions.cs" />

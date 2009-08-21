@@ -1,6 +1,6 @@
 namespace Zeus.Web.UI.WebControls
 {
-	public class MultiImageDataUploadEditor : MultiFileDataUploadEditor
+	public class MultiImageUploadEditor : MultiFileUploadEditor
 	{
 		#region Properties
 
@@ -11,9 +11,9 @@ namespace Zeus.Web.UI.WebControls
 
 		#endregion
 
-		protected override FileDataEditor CreateEditor()
+		protected override FancyFileUpload CreateEditor()
 		{
-			return new ImageDataEditor();
+			return new FancyImageUpload();
 		}
 	}
 }

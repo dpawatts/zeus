@@ -1,16 +1,18 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web.UI;
 using Isis.ExtensionMethods.IO;
 using Isis.Web;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
+using File=Zeus.FileSystem.File;
 
 namespace Zeus.Design.Editors
 {
-	public class MultiFileDataUploadEditorAttribute : BaseDetailCollectionEditorAttribute
+	public class MultiFileUploadEditorAttribute : BaseDetailCollectionEditorAttribute
 	{
-		public MultiFileDataUploadEditorAttribute(string title, int sortOrder)
+		public MultiFileUploadEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
 			
@@ -18,7 +20,8 @@ namespace Zeus.Design.Editors
 
 		protected override void CreateOrUpdateDetailCollectionItem(object existingDetail, Control editor, out object newDetail)
 		{
-			FileDataEditor fileEditor = (FileDataEditor) editor;
+			throw new NotImplementedException();
+			/*FileDataEditor fileEditor = (FileDataEditor) editor;
 			FileData existingFile = existingDetail as FileData;
 			if (fileEditor.HasNewOrChangedFile)
 			{
@@ -45,17 +48,17 @@ namespace Zeus.Design.Editors
 			else
 			{
 				newDetail = null;
-			}
+			}*/
 		}
 
-		protected virtual FileData CreateNewItem()
+		protected virtual File CreateNewItem()
 		{
-			return new FileData();
+			return new File();
 		}
 
 		protected override BaseDetailCollectionEditor CreateEditor()
 		{
-			return new MultiFileDataUploadEditor();
+			return new MultiFileUploadEditor();
 		}
 	}
 }

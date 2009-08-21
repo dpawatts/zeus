@@ -1,97 +1,68 @@
 using System;
 using System.IO;
+using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using Zeus.Admin;
+using Isis.ExtensionMethods.IO;
+using Isis.Web;
 using Zeus.ContentTypes;
-using Zeus.FileSystem;
+using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
 using File = Zeus.FileSystem.File;
 
 namespace Zeus.Design.Editors
 {
-	/// <summary>
-	/// Attribute used to mark properties as editable. This attribute is predefined to use 
-	/// the <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
-	/// <example>
-	/// [Zeus.Details.EditableTextBox("Published", 80)]
-	/// public override DateTime Published
-	/// {
-	///     get { return base.Published; } 
-	///     set { base.Published = value; }
-	/// }
-	/// </example>
 	[AttributeUsage(AttributeTargets.Property)]
 	public class FileUploadEditorAttribute : AbstractEditorAttribute
 	{
 		/// <summary>Initializes a new instance of the EditableTextBoxAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
-		public FileUploadEditorAttribute(string title, int sortOrder, string folderPath)
+		public FileUploadEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
-			FolderPath = folderPath;
+
 		}
 
 		#region Properties
 
-		public string FolderPath { get; set; }
+		public string TypeFilterDescription { get; set; }
+		public string[] TypeFilter { get; set; }
+		public int MaximumFileSize { get; set; }
 
 		#endregion
 
-		protected virtual File CreateNewItem()
-		{
-			return new File();
-		}
-
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			FileUpload fileUpload = (FileUpload) editor;
-			File existingImage = item[Name] as File;
+			FancyFileUpload fileUpload = (FancyFileUpload) editor;
+			File file = (File) item;
 
 			bool result = false;
-			if (fileUpload.HasFile)
+			if (fileUpload.HasDeletedFile)
 			{
-				// Add new file.
-				File newImage = existingImage;
-				if (newImage == null)
+				file.Data = null;
+				result = true;
+			}
+			else if (fileUpload.HasNewOrChangedFile)
+			{
+				// Populate File object.
+				file.FileName = fileUpload.FileName;
+				string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier);
+				string uploadedFile = Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
+				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
-					newImage = CreateNewItem();
-
-					Folder folder = (Folder) Context.Current.Resolve<Navigator>().Navigate(FolderPath);
-					if (folder == null)
-						throw new ZeusException("Folder path '{0}' does not exist", FolderPath);
-					newImage.AddTo(folder);
+					file.Data = fs.ReadAllBytes();
+					file.ContentType = MimeUtility.GetMimeType(file.Data);
+					file.Size = fs.Length;
 				}
 
-				newImage.Name = Path.GetFileName(fileUpload.PostedFile.FileName);
-				newImage.Data = fileUpload.FileBytes;
-				newImage.ContentType = fileUpload.PostedFile.ContentType;
-				newImage.Size = fileUpload.PostedFile.ContentLength;
-
-				Context.Persister.Save(newImage);
-
-				item[Name] = newImage;
+				// Delete temp folder.
+				System.IO.File.Delete(uploadedFile);
+				Directory.Delete(uploadFolder);
 
 				result = true;
 			}
-
-			if (OnItemUpdated(item, editor))
-				result = true;
 
 			return result;
-		}
-
-		protected virtual bool OnItemUpdated(IEditableObject item, Control editor)
-		{
-			FileEditor fileUpload = editor as FileEditor;
-			if (fileUpload.ShouldClear)
-			{
-				item[Name] = null;
-				return true;
-			}
-
-			return false;
 		}
 
 		/// <summary>Creates a text box editor.</summary>
@@ -99,8 +70,14 @@ namespace Zeus.Design.Editors
 		/// <returns>A text box control.</returns>
 		protected override Control AddEditor(Control container)
 		{
-			Control fileUpload = CreateEditor();
+			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = Name;
+			if (!string.IsNullOrEmpty(TypeFilterDescription))
+				fileUpload.TypeFilterDescription = TypeFilterDescription;
+			if (TypeFilter != null)
+				fileUpload.TypeFilter = TypeFilter;
+			if (MaximumFileSize > 0)
+				fileUpload.MaximumFileSize = MaximumFileSize;
 			container.Controls.Add(fileUpload);
 
 			return fileUpload;
@@ -108,22 +85,22 @@ namespace Zeus.Design.Editors
 
 		protected override void DisableEditor(Control editor)
 		{
-			((FileEditor) editor).Enabled = false;
+			((FancyFileUpload)editor).Enabled = false;
 		}
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			File file = item[Name] as File;
-			if (file != null)
+			File file = (File) item;
+			if (!file.IsEmpty())
 			{
-				FileEditor fileUpload = editor as FileEditor;
-				fileUpload.ContentID = file.ID;
+				FancyFileUpload fileUpload = (FancyFileUpload)editor;
+				fileUpload.CurrentFileName = file.FileName;
 			}
 		}
 
-		protected virtual Control CreateEditor()
+		protected virtual FancyFileUpload CreateEditor()
 		{
-			return new FileEditor();
+			return new FancyFileUpload();
 		}
 	}
 }

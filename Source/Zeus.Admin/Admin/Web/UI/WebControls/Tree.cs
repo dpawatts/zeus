@@ -151,7 +151,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 						break;
 					case TranslationStatus.DisplayedInAnotherLanguage :
 						Language language = Zeus.Context.Current.LanguageManager.GetLanguage(translatedItem.Language);
-						translationImage.ImageUrl = language.GetImageUrl("FlagIcon");
+						translationImage.ImageUrl = language.FlagIcon.Url;
 						translationImage.ToolTip = "Page is displayed in another language (" + language.Title + ").";
 						break;
 				}

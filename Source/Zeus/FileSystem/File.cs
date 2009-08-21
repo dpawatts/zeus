@@ -1,12 +1,14 @@
 ﻿using System.Web;
 using Isis.Web.UI;
+using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 using Zeus.FileSystem.Details;
 using Zeus.Integrity;
 
 namespace Zeus.FileSystem
 {
 	[ContentType(Description = "A node that represents a file.")]
-	[RestrictParents(typeof(IFileSystemContainer), typeof(Folder))]
+	[ContentTypeAuthorizedRoles(new string[] {})]
 	public class File : FileSystemNode
 	{
 		public override string IconUrl
@@ -55,19 +57,13 @@ namespace Zeus.FileSystem
 			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
 		}
 
-		[UploadEditor(IsLocallyUnique = true)]
-		public override string Name
-		{
-			get { return base.Name; }
-			set { base.Name = value; }
-		}
-
 		public string FileExtension
 		{
-			get { return System.IO.Path.GetExtension(Name); }
+			get { return System.IO.Path.GetExtension(FileName); }
 		}
 
-		public byte[] Data
+		[FileUploadEditor("File", 100)]
+		public virtual byte[] Data
 		{
 			get { return GetDetail<byte[]>("Data", null); }
 			set { SetDetail("Data", value); }
@@ -83,6 +79,24 @@ namespace Zeus.FileSystem
 		{
 			get { return GetDetail<long?>("Size", null); }
 			set { SetDetail("Size", value); }
+		}
+
+		[ContentProperty("Caption", 200)]
+		public string Caption
+		{
+			get { return GetDetail("Caption", string.Empty); }
+			set { SetDetail("Caption", value); }
+		}
+
+		public string FileName
+		{
+			get { return GetDetail("FileName", string.Empty); }
+			set { SetDetail("FileName", value); }
+		}
+
+		public override bool IsEmpty()
+		{
+			return Data == null;
 		}
 	}
 }

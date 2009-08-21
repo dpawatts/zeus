@@ -5,7 +5,7 @@ using Zeus.Templates.ContentTypes;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
-	[ContentType]
+	[ContentType(Name = "BaseShop")]
 	public class Shop : BasePage, ISelfPopulator
 	{
 		private const string SHOPPING_BASKETS_NAME = "ShoppingBaskets";

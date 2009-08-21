@@ -60,12 +60,6 @@
 		<subclass name="Zeus.ContentProperties.ObjectProperty, Zeus" discriminator-value="Object">
 			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
 		</subclass>
-		<subclass name="Zeus.ContentProperties.FileDataProperty, Zeus" discriminator-value="FileData">
-			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
-		</subclass>
-		<subclass name="Zeus.ContentProperties.ImageDataProperty, Zeus" discriminator-value="ImageData">
-			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
-		</subclass>
 	</class>
 
 	<!-- zeusDetailBlobs -->
