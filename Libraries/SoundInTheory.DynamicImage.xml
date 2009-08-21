@@ -187,6 +187,41 @@
             <param name="destination">The destination image.</param>
             <param name="g">A <see cref="T:System.Drawing.Graphics"/> object, created from <paramref name="destination"/>.</param>
         </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.TransformFilter.TransformInverse(System.Int32,System.Int32)">
+            <summary>
+            Inverse transform a point. This method needs to be overriden by all subclasses.
+            </summary>
+            <param name="x">The X position of the pixel in the output image.</param>
+            <param name="y">The Y position of the pixel in the output image.</param>
+            <returns>The position of the pixel in the input image.</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.TransformFilter.GetTransformedSpace(System.Drawing.Rectangle)">
+            <summary>
+            Forward transform a rectangle. Used to determine the size of the output image.
+            </summary>
+            <param name="rect">The rectangle to transform.</param>
+            <returns>The transformed rectangle.</returns>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.TransformFilter.EdgeAction">
+            <summary>
+            Gets or sets the action to perform for pixels off the edge of the image.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.TransformFilter.InterpolationMode">
+            <summary>
+            Gets or sets the type of interpolation to perform.
+            </summary>
+        </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.InterpolationMode.NearestNeighbor">
+            <summary>
+            Use nearest-neighbout interpolation.
+            </summary>
+        </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.InterpolationMode.Bilinear">
+            <summary>
+            Use bilinear interpolation.
+            </summary>
+        </member>
         <member name="M:SoundInTheory.DynamicImage.Layer.LoadViewState(System.Object)">
             <summary>
             Loads the previously saved state of the <see cref="T:SoundInTheory.DynamicImage.Layer"/> object.
@@ -947,6 +982,26 @@
             Tracks view state changes to the <see cref="T:SoundInTheory.DynamicImage.ClosedShapeLayer"/> object.
             </summary>
         </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.EdgeAction.Zero">
+            <summary>
+            Treat pixels off the edge as zero.
+            </summary>
+        </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.EdgeAction.Clamp">
+            <summary>
+            Clamp pixels to the image edges.
+            </summary>
+        </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.EdgeAction.Wrap">
+            <summary>
+            Wrap pixels off the edge onto the opposite edge.
+            </summary>
+        </member>
+        <member name="F:SoundInTheory.DynamicImage.Filters.EdgeAction.RgbClamp">
+            <summary>
+            Clamp pixels RGB to the image edges, but zero the alpha. This prevents gray borders on your image.
+            </summary>
+        </member>
         <member name="T:SoundInTheory.DynamicImage.Caching.DynamicImageCachingMode">
             <summary>
             Specifies how generated images will be cached.
@@ -1226,6 +1281,55 @@
             Specifies that the layer will be anchored to the top and right of the output image.
             </summary>
         </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageMath.BilinearInterpolate(System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Bilinear interpolation of ARGB values.
+            </summary>
+            <param name="x">The X interpolation parameter 0..1</param>
+            <param name="y">The y interpolation parameter 0..1</param>
+            <param name="nw"></param>
+            <param name="ne"></param>
+            <param name="sw"></param>
+            <param name="se"></param>
+            <returns>The interpolated value.</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageMath.BilinearInterpolate(System.Single,System.Single,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Bilinear interpolation of ARGB values.
+            </summary>
+            <param name="x">The X interpolation parameter 0..1</param>
+            <param name="y">The y interpolation parameter 0..1</param>
+            <param name="nw"></param>
+            <param name="ne"></param>
+            <param name="sw"></param>
+            <param name="se"></param>
+            <returns>The interpolated value.</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageMath.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Clamps a value to an interval.
+            </summary>
+            <param name="x">The input parameter.</param>
+            <param name="a">The lower clamp threshold.</param>
+            <param name="b">The upper clamp threshold.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageMath.Mod(System.Double,System.Double)">
+            <summary>
+            Returns a mod b. This differs from the % operator with respect to negative numbers.
+            </summary>
+            <param name="a">The dividend.</param>
+            <param name="b">The divisor.</param>
+            <returns>a mod b</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageMath.Mod(System.Int32,System.Int32)">
+            <summary>
+            Returns a mod b. This differs from the % operator with respect to negative numbers.
+            </summary>
+            <param name="a">The dividend.</param>
+            <param name="b">The divisor.</param>
+            <returns>a mod b</returns>
+        </member>
         <member name="T:SoundInTheory.DynamicImage.Filters.InversionFilter">
             <summary>
             Inverts the colours of the image.
@@ -1460,6 +1564,60 @@
             <summary>
             Gets or sets the y-position of the reflected image
             </summary>
+        </member>
+        <member name="T:SoundInTheory.DynamicImage.Filters.PerspectiveFilter">
+            <summary>
+            A filter which performs a perspective distortion on an image.
+            Coordinates are treated as if the image was a unit square, i.e. the bottom-right corner of the image is at (1, 1).
+            The filter maps the unit square onto an arbitrary convex quadrilateral or vice versa.
+            </summary>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.#ctor">
+            Construct a PerspectiveFilter.
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            Construct a PerspectiveFilter.
+            @param x0 the new position of the top left corner
+            @param y0 the new position of the top left corner
+            @param x1 the new position of the top right corner
+            @param y1 the new position of the top right corner
+            @param x2 the new position of the bottom right corner
+            @param y2 the new position of the bottom right corner
+            @param x3 the new position of the bottom left corner
+            @param y3 the new position of the bottom left corner
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.setCorners(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            Set the new positions of the image corners.
+            This is the same as unitSquareToQuad, but the coordinates are in image pixels, not relative to the unit square.
+            This method is provided as a convenience.
+            @param x0 the new position of the top left corner
+            @param y0 the new position of the top left corner
+            @param x1 the new position of the top right corner
+            @param y1 the new position of the top right corner
+            @param x2 the new position of the bottom right corner
+            @param y2 the new position of the bottom right corner
+            @param x3 the new position of the bottom left corner
+            @param y3 the new position of the bottom left corner
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.UnitSquareToQuad(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            Set the transform to map the unit square onto a quadrilateral. When filtering, all coordinates will be scaled
+            by the size of the image.
+            @param x0 the new position of the top left corner
+            @param y0 the new position of the top left corner
+            @param x1 the new position of the top right corner
+            @param y1 the new position of the top right corner
+            @param x2 the new position of the bottom right corner
+            @param y2 the new position of the bottom right corner
+            @param x3 the new position of the bottom left corner
+            @param y3 the new position of the bottom left corner
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.getOriginX">
+            Get the origin of the output image. Use this for working out where to draw your new image.
+            @return the X origin.
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.getOriginY">
+            Get the origin of the output image. Use this for working out where to draw your new image.
+            @return the Y origin.
         </member>
         <member name="T:SoundInTheory.DynamicImage.Filters.SepiaFilter">
             <summary>

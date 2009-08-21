@@ -14,7 +14,7 @@ namespace Zeus.Persistence.NH.Mappings
 			Id(x => x.ID).WithUnsavedValue(0).GeneratedBy.Native();
 
 			DiscriminateSubClassesOnColumn("Type")
-				.SubClass<BooleanProperty>("Bool", m => m.Map(x => x.BooleanValue, "BoolValue"))
+				.SubClass<BooleanProperty>("Bool", m => m.Map(x => x.BoolValue, "BoolValue"))
 				.SubClass<IntegerProperty>("Int", m => m.Map(x => x.IntegerValue, "IntValue"))
 				.SubClass<LinkProperty>("Link", m => m.References(x => x.LinkedItem, "LinkValue").LazyLoad())
 				.SubClass<DoubleProperty>("Double", m => m.Map(x => x.DoubleValue, "DoubleValue"))

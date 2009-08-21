@@ -15,12 +15,12 @@ namespace Zeus.ContentProperties
 		public BooleanProperty(ContentItem containerItem, string name, bool value)
 			: base(containerItem, name)
 		{
-			BooleanValue = value;
+			BoolValue = value;
 		}
 
 		#endregion
 
-		public virtual bool BooleanValue { get; set; }
+		public virtual bool BoolValue { get; set; }
 
 		public override string ColumnName
 		{
@@ -34,8 +34,8 @@ namespace Zeus.ContentProperties
 
 		public override object Value
 		{
-			get { return BooleanValue; }
-			set { BooleanValue = (bool) value; }
+			get { return BoolValue; }
+			set { BoolValue = (bool) value; }
 		}
 
 		public override Type ValueType

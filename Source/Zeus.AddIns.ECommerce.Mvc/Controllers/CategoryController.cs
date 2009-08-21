@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using MvcContrib.Pagination;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
@@ -11,11 +12,20 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 	[Controls(typeof(Category), AreaName = ECommerceWebPackage.AREA_NAME)]
 	public class CategoryController : ZeusController<Category>
 	{
+		[NonAction]
+		public override ActionResult Index()
+		{
+			throw new NotSupportedException();
+		}
+
 		public ActionResult Index(int? p)
 		{
-			return View(new CategoryViewModel(CurrentItem,
-				CurrentItem.GetChildren<Subcategory>(),
-				CurrentItem.GetChildren<Product>()));
+			var subcategories = CurrentItem.GetChildren<Subcategory>();
+			if (subcategories.Any())
+				return View(new CategoryViewModel(CurrentItem,
+					subcategories, CurrentItem.GetChildren<Product>()));
+			return View("IndexNoSubcategories", new CategoryNoSubcategoriesViewModel(CurrentItem,
+				CurrentItem.GetChildren<Product>().AsPagination(p ?? 1, 8)));
 		}
 	}
 }

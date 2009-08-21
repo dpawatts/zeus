@@ -44,7 +44,7 @@ namespace Zeus.Persistence.NH.Linq
 				ParameterExpression contentDetailParameter = Expression.Parameter(detailType, "cd");
 
 				// Make an expression for a call to the Details property.
-				Expression detailsProperty = Expression.Property(leftMemberExpression.Expression, "Details");
+				Expression detailsProperty = Expression.Property(leftMemberExpression.Expression, "DetailsInternal");
 
 				// This is the property that is mapped to the database column. In our case, we store each
 				// value type in its own column. In other words the key/value table contains columns for

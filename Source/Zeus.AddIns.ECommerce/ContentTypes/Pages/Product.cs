@@ -57,5 +57,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		{
 			get { return GetDetailCollection("ExtraImages", true); }
 		}
+
+		public Category CurrentCategory
+		{
+			get { return (Category) ((Parent is Category) ? Parent : Parent.Parent); }
+		}
 	}
 }

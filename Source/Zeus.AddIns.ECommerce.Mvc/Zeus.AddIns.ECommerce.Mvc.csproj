@@ -69,6 +69,7 @@
     <Compile Include="Html\ShoppingBasketExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CategoryNoSubcategoriesViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="Html\ShoppingBasketPageViewModel.cs" />
     <Compile Include="ViewModels\SubcategoryViewModel.cs" />

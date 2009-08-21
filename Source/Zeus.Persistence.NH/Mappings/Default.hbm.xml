@@ -30,7 +30,7 @@
 		<property name="Name" type="String" length="50" />
 
 		<subclass name="Zeus.ContentProperties.BooleanProperty, Zeus" discriminator-value="Bool">
-			<property name="BooleanValue" column="BoolValue" type="Boolean" />
+			<property name="BoolValue" column="BoolValue" type="Boolean" />
 		</subclass>
 
 		<subclass name="Zeus.ContentProperties.IntegerProperty, Zeus" discriminator-value="Int">
