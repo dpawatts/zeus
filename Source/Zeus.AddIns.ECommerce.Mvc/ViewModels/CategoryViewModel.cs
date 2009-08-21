@@ -6,12 +6,14 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 {
 	public class CategoryViewModel : ViewModel<Category>
 	{
-		public CategoryViewModel(Category currentItem, IEnumerable<Product> products)
+		public CategoryViewModel(Category currentItem, IEnumerable<Subcategory> subcategories, IEnumerable<Product> products)
 			: base(currentItem)
 		{
+			Subcategories = subcategories;
 			Products = products;
 		}
 
+		public IEnumerable<Subcategory> Subcategories { get; set; }
 		public IEnumerable<Product> Products { get; set; }
 	}
 }

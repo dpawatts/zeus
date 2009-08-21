@@ -63,6 +63,7 @@
     <Compile Include="ContentTypes\Pages\Product.cs" />
     <Compile Include="ContentTypes\Pages\Shop.cs" />
     <Compile Include="ContentTypes\Data\Variation.cs" />
+    <Compile Include="ContentTypes\Pages\Subcategory.cs" />
     <Compile Include="Design\Editors\GroupItemsEditorAttribute.cs" />
     <Compile Include="ECommerceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

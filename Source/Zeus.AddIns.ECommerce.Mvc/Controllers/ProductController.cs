@@ -11,7 +11,9 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 	{
 		public override ActionResult Index()
 		{
-			return View(new ProductViewModel(CurrentItem));
+			return View(new ProductViewModel(CurrentItem,
+				(Category) CurrentItem.Parent.Parent,
+				CurrentItem.Parent.Parent.GetChildren<Subcategory>()));
 		}
 	}
 }
