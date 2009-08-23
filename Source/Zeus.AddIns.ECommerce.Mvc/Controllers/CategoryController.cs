@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Isis.Collections.Generic;
 using MvcContrib.Pagination;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
@@ -18,14 +19,14 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			throw new NotSupportedException();
 		}
 
-		public ActionResult Index(int? p)
+		public ActionResult Index(int? page, bool? viewAll)
 		{
 			var subcategories = CurrentItem.GetChildren<Subcategory>();
 			if (subcategories.Any())
 				return View(new CategoryViewModel(CurrentItem,
 					subcategories, CurrentItem.GetChildren<Product>()));
 			return View("IndexNoSubcategories", new CategoryNoSubcategoriesViewModel(CurrentItem,
-				CurrentItem.GetChildren<Product>().AsPagination(p ?? 1, 8)));
+				CurrentItem.GetChildren<Product>().AsPageable(!(viewAll ?? false), page ?? 1, 8)));
 		}
 	}
 }

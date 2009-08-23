@@ -54,7 +54,7 @@ namespace Zeus.Web
 						if (HostingEnvironment.VirtualPathProvider.FileExists(defaultUrl.Path))
 						{
 							// ....rewrite the path to refer to this default document, and serve it up
-							HttpContext.Current.RewritePath(defaultUrl.Path + defaultUrl.Query);
+							HttpContext.Current.RewritePath(defaultUrl.Path + defaultUrl.Querystring);
 							break;
 						}
 					}

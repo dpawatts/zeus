@@ -58,8 +58,8 @@ namespace Zeus.Web
 
 		#region Properties
 
-		public static string ItemQueryKey = "item";
-		public static string PageQueryKey = "page";
+		public static string ItemQueryKey = "zeus_item";
+		public static string PageQueryKey = "zeus_page";
 
 		public static PathData Empty
 		{

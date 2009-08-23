@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Isis.Collections.Generic;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Web.Mvc.ViewModels;
 using MvcContrib.Pagination;
@@ -9,7 +10,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 	{
 		public SubcategoryViewModel(Subcategory currentItem, Category parentCategory,
 			IEnumerable<Subcategory> parentCategorySubcategories,
-			IPagination<Product> products)
+			IPageable<Product> products)
 			: base(currentItem)
 		{
 			ParentCategory = parentCategory;
@@ -19,6 +20,6 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 
 		public Category ParentCategory { get; set; }
 		public IEnumerable<Subcategory> ParentCategorySubcategories { get; set; }
-		public IPagination<Product> Products { get; set; }
+		public IPageable<Product> Products { get; set; }
 	}
 }

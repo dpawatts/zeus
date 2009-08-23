@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
+using Isis.Web;
 using Isis.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.Web.Mvc.ViewModels;
@@ -47,6 +48,16 @@ namespace Zeus.Web.Mvc.Html
 
 			PropertyData propertyData = contentItem.Details[memberExpression.Member.Name];
 			return propertyData.GetXhtmlValue();
+		}
+
+		public static Url Url(this HtmlHelper html, ContentItem contentItem)
+		{
+			return new Url(contentItem.Url);
+		}
+
+		public static Url CurrentUrl(this HtmlHelper html)
+		{
+			return new Url(html.ViewContext.HttpContext.Request.RawUrl);
 		}
 	}
 }

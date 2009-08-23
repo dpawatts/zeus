@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using Isis.Collections.Generic;
 using Isis.ExtensionMethods;
-using MvcContrib.Pagination;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
 using Zeus.Templates.Mvc.Controllers;
@@ -19,7 +19,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			throw new NotSupportedException();
 		}
 
-		public ActionResult Index(int? p, string keywords)
+		public ActionResult Index(string keywords, int? page, bool? viewAll)
 		{
 			if (keywords == null)
 				keywords = string.Empty;
@@ -27,7 +27,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			var searchResults = Find.EnumerateAccessibleChildren(CurrentItem.Parent)
 				.OfType<Product>()
 				.Where(product => product.Title.Contains(keywords, StringComparison.InvariantCultureIgnoreCase))
-				.AsPagination(p ?? 1, 8);
+				.AsPageable(!(viewAll ?? false), page ?? 1, 8);
 			return View(new SearchResultsPageViewModel(CurrentItem, keywords, searchResults));
 		}
 	}

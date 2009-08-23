@@ -13,7 +13,7 @@ namespace Isis.Tests.Web
             Assert.AreEqual("http", url.Scheme);
             Assert.AreEqual("localhost", url.Authority);
             Assert.AreEqual("/my/path/to/the/file.aspx", url.Path);
-            Assert.AreEqual("query=nothing", url.Query);
+            Assert.AreEqual("query=nothing", url.Querystring);
             Assert.AreEqual("fragment", url.Fragment);
             Assert.AreEqual(".aspx", url.Extension);
             Assert.AreEqual("/my/path/to/the/file.aspx?query=nothing", url.PathAndQuery);

@@ -29,7 +29,7 @@ namespace Isis.Web
 			Scheme = uri.Scheme;
 			Authority = uri.Authority;
 			Path = uri.AbsolutePath;
-			Query = uri.Query;
+			Querystring = uri.Query;
 			Fragment = uri.Fragment;
 		}
 
@@ -39,7 +39,7 @@ namespace Isis.Web
 			Scheme = other.Scheme;
 			Authority = other.Authority;
 			Path = other.Path;
-			Query = other.Query;
+			Querystring = other.Querystring;
 			Fragment = other.Fragment;
 		}
 
@@ -49,7 +49,7 @@ namespace Isis.Web
 			Scheme = scheme;
 			Authority = authority;
 			Path = path;
-			Query = query;
+			Querystring = query;
 			Fragment = fragment;
 		}
 
@@ -96,7 +96,7 @@ namespace Isis.Web
 
 		public string Path { get; private set; }
 
-		public string Query { get; private set; }
+		public string Querystring { get; private set; }
 
 		public string Fragment { get; private set; }
 
@@ -128,13 +128,13 @@ namespace Isis.Web
 
 		public Url LocalUrl
 		{
-			get { return new Url(null, null, Path, Query, Fragment); }
+			get { return new Url(null, null, Path, Querystring, Fragment); }
 		}
 
 		/// <summary>The combination of the path and the query string, e.g. /path.aspx?key=value.</summary>
 		public string PathAndQuery
 		{
-			get { return string.IsNullOrEmpty(Query) ? Path : Path + "?" + Query; }
+			get { return string.IsNullOrEmpty(Querystring) ? Path : Path + "?" + Querystring; }
 		}
 
 		public string PathWithoutExtension
@@ -158,7 +158,7 @@ namespace Isis.Web
 			Scheme = null;
 			Authority = null;
 			Path = string.Empty;
-			Query = null;
+			Querystring = null;
 			Fragment = null;
 		}
 
@@ -201,11 +201,11 @@ namespace Isis.Web
 		private void LoadQuery(string url, int queryIndex, int hashIndex)
 		{
 			if (hashIndex >= 0 && queryIndex >= 0)
-				Query = EmptyToNull(url.Substring(queryIndex + 1, hashIndex - queryIndex - 1));
+				Querystring = EmptyToNull(url.Substring(queryIndex + 1, hashIndex - queryIndex - 1));
 			else if (queryIndex >= 0)
-				Query = EmptyToNull(url.Substring(queryIndex + 1));
+				Querystring = EmptyToNull(url.Substring(queryIndex + 1));
 			else
-				Query = null;
+				Querystring = null;
 		}
 
 		private void LoadFragment(string url, int hashIndex)
@@ -242,10 +242,10 @@ namespace Isis.Web
 		public Url AppendQuery(string keyValue)
 		{
 			var clone = new Url(this);
-			if (string.IsNullOrEmpty(Query))
-				clone.Query = keyValue;
+			if (string.IsNullOrEmpty(Querystring))
+				clone.Querystring = keyValue;
 			else if (!string.IsNullOrEmpty(keyValue))
-				clone.Query += Amp + keyValue;
+				clone.Querystring += Amp + keyValue;
 			return clone;
 		}
 
@@ -261,8 +261,8 @@ namespace Isis.Web
 			{
 				int slashIndex = Path.IndexOf('/', 1);
 				if (slashIndex < 0)
-					return new Url(Scheme, Authority, "/", Query, Fragment);
-				return new Url(Scheme, Authority, Path.Substring(slashIndex), Query, Fragment);
+					return new Url(Scheme, Authority, "/", Querystring, Fragment);
+				return new Url(Scheme, Authority, Path.Substring(slashIndex), Querystring, Fragment);
 			}
 
 			string[] segments = PathWithoutExtension.Split(_slashes, StringSplitOptions.RemoveEmptyEntries);
@@ -273,7 +273,7 @@ namespace Isis.Web
 				return RemoveTrailingSegment();
 
 			string newPath = "/" + string.Join("/", segments, 0, index) + "/" + string.Join("/", segments, index + 1, segments.Length - index - 1) + Extension;
-			return new Url(Scheme, Authority, newPath, Query, Fragment);
+			return new Url(Scheme, Authority, newPath, Querystring, Fragment);
 		}
 
 		/// <summary>Removes the last part from the url segments.</summary>
@@ -291,7 +291,7 @@ namespace Isis.Web
 			if (lastSlashIndex > 0)
 				newPath = Path.Substring(0, lastSlashIndex) + (maintainExtension ? Extension : "");
 
-			return new Url(Scheme, Authority, newPath, Query, Fragment);
+			return new Url(Scheme, Authority, newPath, Querystring, Fragment);
 		}
 
 		/// <summary>Removes the last part from the url segments.</summary>
@@ -302,7 +302,7 @@ namespace Isis.Web
 
 		public Url SetAuthority(string authority)
 		{
-			return new Url(Scheme ?? "http", authority, Path, Query, Fragment);
+			return new Url(Scheme ?? "http", authority, Path, Querystring, Fragment);
 		}
 
 		public Url SetQueryParameter(string key, int value)
@@ -310,13 +310,36 @@ namespace Isis.Web
 			return SetQueryParameter(key, value.ToString());
 		}
 
+		public Url Query(string key, string value)
+		{
+			return SetQueryParameter(key, value);
+		}
+
+		public Url Query(string key, bool value)
+		{
+			return SetQueryParameter(key, value.ToString().ToLower());
+		}
+
+		public Url Query(string key, int value)
+		{
+			return SetQueryParameter(key, value);
+		}
+
+		public Url RemoveQuery(string key)
+		{
+			return SetQueryParameter(key, null);
+		}
+
 		public Url SetQueryParameter(string key, string value)
 		{
-			if (Query == null)
-				return AppendQuery(key, value);
+			if (Querystring == null)
+				if (value != null)
+					return AppendQuery(key, value);
+				else
+					return this;
 
 			var clone = new Url(this);
-			string[] queries = Query.Split(_querySplitter, StringSplitOptions.RemoveEmptyEntries);
+			string[] queries = Querystring.Split(_querySplitter, StringSplitOptions.RemoveEmptyEntries);
 			for (int i = 0; i < queries.Length; i++)
 			{
 				if (queries[i].StartsWith(key + "=", StringComparison.InvariantCultureIgnoreCase))
@@ -324,30 +347,32 @@ namespace Isis.Web
 					if (value != null)
 					{
 						queries[i] = key + "=" + HttpUtility.UrlEncode(value);
-						clone.Query = string.Join(Amp, queries);
+						clone.Querystring = string.Join(Amp, queries);
 						return clone;
 					}
 
 					if (queries.Length == 1)
-						clone.Query = null;
-					else if (Query.Length == 2)
-						clone.Query = queries[i == 0 ? 1 : 0];
+						clone.Querystring = null;
+					else if (Querystring.Length == 2)
+						clone.Querystring = queries[i == 0 ? 1 : 0];
 					else if (i == 0)
-						clone.Query = string.Join(Amp, queries, 1, queries.Length - 1);
+						clone.Querystring = string.Join(Amp, queries, 1, queries.Length - 1);
 					else if (i == queries.Length - 1)
-						clone.Query = string.Join(Amp, queries, 0, queries.Length - 1);
+						clone.Querystring = string.Join(Amp, queries, 0, queries.Length - 1);
 					else
-						clone.Query = string.Join(Amp, queries, 0, i) + Amp +
+						clone.Querystring = string.Join(Amp, queries, 0, i) + Amp +
 													string.Join(Amp, queries, i + 1, queries.Length - i - 1);
 					return clone;
 				}
 			}
-			return AppendQuery(key, value);
+			if (value != null)
+				return AppendQuery(key, value);
+			return this;
 		}
 
 		public Url SetQueryParameter(string keyValue)
 		{
-			if (Query == null)
+			if (Querystring == null)
 				return AppendQuery(keyValue);
 
 			int eqIndex = keyValue.IndexOf('=');
@@ -359,7 +384,7 @@ namespace Isis.Web
 
 		public Url SetScheme(string scheme)
 		{
-			return new Url(scheme, Authority, Path, Query, Fragment);
+			return new Url(scheme, Authority, Path, Querystring, Fragment);
 		}
 
 		public Url AppendSegment(string segment)
@@ -390,7 +415,7 @@ namespace Isis.Web
 			else
 				newPath = Path + "/" + segment;
 
-			return new Url(Scheme, Authority, newPath, Query, Fragment);
+			return new Url(Scheme, Authority, newPath, Querystring, Fragment);
 		}
 
 		public static Url Parse(string url)
@@ -426,7 +451,7 @@ namespace Isis.Web
 				newPath = "/" + segment + Path;
 			}
 
-			return new Url(Scheme, Authority, newPath, Query, Fragment);
+			return new Url(Scheme, Authority, newPath, Querystring, Fragment);
 		}
 
 		/// <summary>Removes the file extension from a path.</summary>
@@ -446,7 +471,7 @@ namespace Isis.Web
 
 		public Url SetFragment(string fragment)
 		{
-			return new Url(Scheme, Authority, Path, Query, fragment.TrimStart('#'));
+			return new Url(Scheme, Authority, Path, Querystring, fragment.TrimStart('#'));
 		}
 
 		public Url SetQuery(string query)
@@ -459,7 +484,7 @@ namespace Isis.Web
 			if (path.StartsWith("~"))
 				path = ToAbsolute(path);
 			int queryIndex = QueryIndex(path);
-			return new Url(Scheme, Authority, queryIndex < 0 ? path : path.Substring(0, queryIndex), Query, Fragment);
+			return new Url(Scheme, Authority, queryIndex < 0 ? path : path.Substring(0, queryIndex), Querystring, Fragment);
 		}
 
 		public Url UpdateQuery(NameValueCollection queryString)
@@ -504,8 +529,8 @@ namespace Isis.Web
 				url = Scheme + "://" + Authority + Path;
 			else
 				url = Path;
-			if (Query != null)
-				url += "?" + Query;
+			if (Querystring != null)
+				url += "?" + Querystring;
 			if (Fragment != null)
 				url += "#" + Fragment;
 			return url;
@@ -555,10 +580,10 @@ namespace Isis.Web
 		public IDictionary<string, string> GetQueries()
 		{
 			var dictionary = new Dictionary<string, string>();
-			if (Query == null)
+			if (Querystring == null)
 				return dictionary;
 
-			string[] queries = Query.Split(_querySplitter, StringSplitOptions.RemoveEmptyEntries);
+			string[] queries = Querystring.Split(_querySplitter, StringSplitOptions.RemoveEmptyEntries);
 			for (int i = 0; i < queries.Length; i++)
 			{
 				string q = queries[i];
