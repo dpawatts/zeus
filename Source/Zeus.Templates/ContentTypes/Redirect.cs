@@ -28,6 +28,13 @@ namespace Zeus.Templates.ContentTypes
 			set { SetDetail("RedirectItem", value); }
 		}
 
+		[ContentProperty("Check Children for Navigation State", 40, Description = "For example, uncheck this for a 'Home' redirect item, otherwise you will have two highlighted items in the navigation.")]
+		public virtual bool CheckChildrenForNavigationState
+		{
+			get { return GetDetail("CheckChildrenForNavigationState", true); }
+			set { SetDetail("CheckChildrenForNavigationState", value); }
+		}
+
 		protected override string IconName
 		{
 			get { return "page_go"; }

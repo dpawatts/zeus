@@ -47,7 +47,17 @@ namespace Zeus.Templates.Mvc.Html
 
 		private static bool IsCurrentPage(ContentItem itemToCheck, ContentItem currentPage)
 		{
-			return (((itemToCheck is Redirect) && ((Redirect)itemToCheck).RedirectItem == currentPage) || Find.IsAccessibleChildOrSelf(itemToCheck, currentPage));
+			if ((itemToCheck is Redirect))
+			{
+				Redirect redirect = (Redirect) itemToCheck;
+				if (redirect.RedirectItem == currentPage)
+					return true;
+				if (redirect.CheckChildrenForNavigationState && Find.IsAccessibleChildOrSelf(((Redirect)itemToCheck).RedirectItem, currentPage))
+					return true;
+			}
+			if (Find.IsAccessibleChildOrSelf(itemToCheck, currentPage))
+				return true;
+			return false;
 		}
 
 		public static string Breadcrumbs(this HtmlHelper html, ContentItem currentPage)
