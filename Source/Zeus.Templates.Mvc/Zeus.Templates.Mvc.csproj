@@ -91,6 +91,7 @@
     <Compile Include="Html\ImageExtensions.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Html\NavigationExtensions.cs" />
+    <Compile Include="Html\ValidationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplatesWebPackage.cs" />
     <Compile Include="ViewModels\NewsItemViewModel.cs" />

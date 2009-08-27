@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=1.1.0.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MvcContrib.dll</HintPath>
@@ -75,6 +79,7 @@
     <Compile Include="ViewModels\CheckoutPageViewModel.cs" />
     <Compile Include="ViewModels\CheckoutPageSummaryViewModel.cs" />
     <Compile Include="ViewModels\CheckoutPageReceiptViewModel.cs" />
+    <Compile Include="ViewModels\CheckoutPageFormModel.cs" />
     <Compile Include="ViewModels\SearchResultsPageViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ShoppingBasketPageViewModel.cs" />

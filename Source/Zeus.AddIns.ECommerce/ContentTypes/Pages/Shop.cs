@@ -1,11 +1,15 @@
 using System;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
+using Zeus.ContentProperties;
 using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
 	[ContentType(Name = "BaseShop")]
+	[TabPanel("ECommerce", "E-Commerce", 100)]
 	public class Shop : BasePage, ISelfPopulator
 	{
 		private const string SHOPPING_BASKETS_NAME = "shopping-baskets";
@@ -30,6 +34,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		public CheckoutPage CheckoutPage
 		{
 			get { return GetChild(CHECKOUT_NAME) as CheckoutPage; }
+		}
+
+		[StringCollectionEditor("Titles", 200, ContainerName = "ECommerce")]
+		public PropertyCollection Titles
+		{
+			get { return GetDetailCollection("Titles", true); }
 		}
 
 		void ISelfPopulator.Populate()

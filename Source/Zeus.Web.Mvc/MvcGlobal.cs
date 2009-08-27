@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
+using FluentValidation.Attributes;
+using FluentValidation.Mvc;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
 using Zeus.Configuration;
@@ -51,6 +53,8 @@ namespace Zeus.Web.Mvc
 			ControllerBuilder.Current.SetControllerFactory(engine.Resolve<IControllerFactory>());
 
 			RegisterRoutes(RouteTable.Routes, engine);
+
+			ModelBinders.Binders.DefaultBinder = new FluentValidationModelBinder(new AttributedValidatorFactory());
 
 			base.OnApplicationStart(e);
 		}

@@ -6,7 +6,7 @@ namespace Zeus.Templates.Mvc.Html
 	{
 		public static string Label(this HtmlHelper html, string @for, string text)
 		{
-			return string.Format(@"<label for=""{0}"">{1}</label>", @for, text);
+			return string.Format(@"<label for=""{0}"">{1}</label>", @for.Replace(".", "_"), text);
 		}
 
 		public static string PropertyOrDefault(this HtmlHelper html, ContentItem contentItem, string propertyName, string fallbackPropertyName)

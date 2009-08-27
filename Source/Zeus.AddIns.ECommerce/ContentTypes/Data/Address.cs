@@ -1,5 +1,6 @@
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
-using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -35,7 +36,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("Surname", value); }
 		}
 
-		[ContentProperty("Address Line 1", 230)]
+		[ContentProperty("Address Line One", 230)]
 		public string AddressLine1
 		{
 			get { return GetDetail("AddressLine1", string.Empty); }
