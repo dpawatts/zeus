@@ -4,13 +4,13 @@ using Zeus.Templates.ContentTypes;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
-	[ContentType("Shopping Basket Container")]
+	[ContentType("Delivery Method Container")]
 	[RestrictParents(typeof(Shop))]
-	public class ShoppingBasketContainer : BaseContentItem
+	public class DeliveryMethodContainer : BaseContentItem
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(ShoppingBasketContainer), "Zeus.AddIns.ECommerce.Icons.basket_go.png"); }
+			get { return GetIconUrl(typeof(DeliveryMethodContainer), "Zeus.AddIns.ECommerce.Icons.lorry_go.png"); }
 		}
 	}
 }

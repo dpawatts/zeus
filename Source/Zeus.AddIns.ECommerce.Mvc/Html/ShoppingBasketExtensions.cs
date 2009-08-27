@@ -18,8 +18,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Html
 
 			IShoppingBasketService shoppingBasketService = Context.Current.Resolve<IShoppingBasketService>();
 			IShoppingBasket shoppingBasket = shoppingBasketService.GetBasket(shop);
-			string innerText = string.Format("You have <span>{0}</span> items in your shopping basket (<span>{1:F2}</span>)",
-				shoppingBasket.Items.Count(), shoppingBasket.TotalItemPrice);
+			string innerText = string.Format("You have <span>{0}</span> items in your shopping basket (<span>{1:C2}</span>)",
+				shoppingBasket.TotalItemCount, shoppingBasket.SubTotalPrice);
 
 			return new MvcContrib.UI.Tags.Link
 			{

@@ -1,3 +1,4 @@
+using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 
 namespace Zeus.AddIns.ECommerce.Services
@@ -9,5 +10,8 @@ namespace Zeus.AddIns.ECommerce.Services
 		IShoppingBasket GetBasket(Shop shop);
 		void RemoveItem(Shop shop, Product product);
 		void UpdateQuantity(Shop shop, Product product, int newQuantity);
+		string GetMaskedCardNumber(string cardNumber);
+		bool IsValid(PaymentCard paymentCard, string cardNumber, string verificationCode);
+		void SaveBasket(Shop shop);
 	}
 }

@@ -3,12 +3,12 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 {
-	public class ShoppingBasketPageViewModel : ViewModel<ShoppingBasketPage>
+	public class CheckoutPageReceiptViewModel : ViewModel<CheckoutPage>
 	{
-		public ShoppingBasketPageViewModel(ShoppingBasketPage currentItem)
+		public CheckoutPageReceiptViewModel(CheckoutPage currentItem)
 			: base(currentItem)
 		{
-
+			
 		}
 	}
 }

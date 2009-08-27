@@ -1,5 +1,4 @@
-﻿using Zeus.ContentTypes;
-using Zeus.Design.Editors;
+﻿using Zeus.Design.Editors;
 
 namespace Zeus.Templates.ContentTypes
 {

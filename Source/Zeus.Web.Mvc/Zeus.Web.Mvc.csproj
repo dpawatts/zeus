@@ -80,6 +80,7 @@
     <Compile Include="ContentController.cs" />
     <Compile Include="ContentRoute.cs" />
     <Compile Include="ControllerMapper.cs" />
+    <Compile Include="RequireSslAttribute.cs" />
     <Compile Include="SparkView.cs" />
     <Compile Include="FallbackContentController.cs" />
     <Compile Include="Html\HtmlHelperExtensions.cs" />

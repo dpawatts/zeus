@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using Zeus.AddIns.ECommerce.ContentTypes.Data;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
 	public interface IShoppingBasket
 	{
 		IEnumerable<IShoppingBasketItem> Items { get; }
-		decimal TotalItemPrice { get; }
+		DeliveryMethod DeliveryMethod { get; set; }
+		int TotalItemCount { get; }
+		decimal SubTotalPrice { get; }
+		decimal TotalPrice { get; }
 	}
 }

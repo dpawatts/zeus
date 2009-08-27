@@ -1,12 +1,14 @@
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.AddIns.ECommerce.Services;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
 	[ContentType("Shopping Basket Item")]
 	[RestrictParents(typeof(ShoppingBasket))]
-	public class ShoppingBasketItem : BaseContentItem
+	public class ShoppingBasketItem : BaseContentItem, IShoppingBasketItem
 	{
 		public Product Product
 		{
@@ -14,10 +16,20 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("Product", value); }
 		}
 
+		public PropertyCollection VariationChoices
+		{
+			get { return GetDetailCollection("VariationChoices", true); }
+		}
+
 		public int Quantity
 		{
 			get { return GetDetail("Quantity", 0); }
 			set { SetDetail("Quantity", value); }
+		}
+
+		public decimal LineTotal
+		{
+			get { return Product.CurrentPrice * Quantity; }
 		}
 	}
 }

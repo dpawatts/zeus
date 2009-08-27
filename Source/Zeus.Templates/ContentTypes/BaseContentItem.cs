@@ -1,3 +1,4 @@
+using System;
 using Isis.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
@@ -20,7 +21,7 @@ namespace Zeus.Templates.ContentTypes
 
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(BaseContentItem), "Zeus.Templates.Icons." + IconName + ".png"); }
+			get { return GetIconUrl(typeof(BaseContentItem), "Zeus.Templates.Icons." + IconName + ".png"); }
 		}
 
 		protected virtual string IconName
@@ -31,6 +32,16 @@ namespace Zeus.Templates.ContentTypes
 		public override bool IsPage
 		{
 			get { return false; }
+		}
+
+		protected virtual string GetIconUrl(Type type, string resourceName)
+		{
+			return WebResourceUtility.GetUrl(type, resourceName);
+		}
+
+		protected virtual string GetIconUrl(string resourceName)
+		{
+			return GetIconUrl(GetType(), resourceName);
 		}
 	}
 }

@@ -10,6 +10,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[RestrictParents(typeof(Category))]
 	public class Product : BasePage
 	{
+		public override string IconUrl
+		{
+			get { return GetIconUrl(typeof(Product), "Zeus.AddIns.ECommerce.Icons.package.png"); }
+		}
+
 		[ContentProperty("Product Code", 200)]
 		public string ProductCode
 		{

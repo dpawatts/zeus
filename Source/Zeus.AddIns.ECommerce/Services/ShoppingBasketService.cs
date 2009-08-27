@@ -13,11 +13,13 @@ namespace Zeus.AddIns.ECommerce.Services
 	{
 		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
+		private readonly IFinder<ShoppingBasket> _finder;
 
-		public ShoppingBasketService(IPersister persister, IWebContext webContext)
+		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder<ShoppingBasket> finder)
 		{
 			_persister = persister;
 			_webContext = webContext;
+			_finder = finder;
 		}
 
 		public void AddItem(Shop shop, Product product)
@@ -80,16 +82,17 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		private static string GetCookieKey(Shop shop)
 		{
-			return "ZeusECommerce" + shop.ID + "ShoppingCartID";
+			return "ZeusECommerce" + shop.ID;
 		}
 
 		private ShoppingBasket GetShoppingBasketFromCookie(Shop shop)
 		{
 			HttpCookie cookie = _webContext.Request.Cookies[GetCookieKey(shop)];
-			int shoppingBasketID;
-			if (cookie != null && int.TryParse(cookie.Value, out shoppingBasketID))
-				return _persister.Get<ShoppingBasket>(shoppingBasketID);
-			return null;
+			if (cookie == null)
+				return null;
+
+			string shopperID = cookie.Value;
+			return _finder.Items().SingleOrDefault(sb => sb.Name == shopperID);
 		}
 
 		private ShoppingBasket GetCurrentShoppingBasketInternal(Shop shop)
@@ -109,11 +112,11 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 			else
 			{
-				shoppingBasket = new ShoppingBasket();
+				shoppingBasket = new ShoppingBasket { Name = Guid.NewGuid().ToString() };
 				shoppingBasket.AddTo(shop.ShoppingBaskets);
 				_persister.Save(shoppingBasket);
 
-				HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.ID.ToString())
+				HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name)
 				{
 					Expires = DateTime.Now.AddYears(1)
 				};
@@ -121,6 +124,63 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 
 			return shoppingBasket;
+		}
+
+		/// <summary>
+		/// Masks the credit card using XXXXXX and appends the last 4 digits
+		/// </summary>
+		public string GetMaskedCardNumber(string cardNumber)
+		{
+			string result = "****";
+			if (cardNumber.Length > 8)
+			{
+				string lastFour = cardNumber.Substring(cardNumber.Length - 4, 4);
+				result = "**** **** **** " + lastFour;
+			}
+			return result;
+		}
+
+		/// <summary>
+		/// Validates the payment card, making sure that the card is not expired
+		/// and that it passed the Luhn Algorigthm
+		/// </summary>
+		public bool IsValid(PaymentCard paymentCard, string cardNumber, string verificationCode)
+		{
+			if (paymentCard.ValidTo < DateTime.Today)
+				return false;
+
+			if (paymentCard.ValidFrom != null && paymentCard.ValidFrom.Value > DateTime.Today)
+				return false;
+
+			// Remove empty chars, and set to an array
+			char[] cardChars = cardNumber.Replace(" ", "").ToCharArray();
+
+			int sum = 0;
+			int currentDigit = 0;
+			bool alternate = false;
+
+			// Use the Luhn Algorithm to validate the card number.
+			// http://en.wikipedia.org/wiki/Luhn_algorithm
+			// Count from left to right.
+			for (int i = cardChars.Length - 1; i >= 0; i--)
+			{
+				if (alternate)
+				{
+					int.TryParse(cardChars[i].ToString(), out currentDigit);
+					currentDigit *= 2;
+					if (currentDigit > 9)
+						currentDigit -= 9;
+				}
+				sum += currentDigit;
+				alternate = !alternate;
+			}
+
+			return sum % 10 == 0;
+		}
+
+		public void SaveBasket(Shop shop)
+		{
+			_persister.Save(GetCurrentShoppingBasketInternal(shop));
 		}
 	}
 }
