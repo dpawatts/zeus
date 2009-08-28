@@ -11,7 +11,12 @@ namespace Zeus.AddIns.ECommerce.Services
 		decimal SubTotalPrice { get; }
 		decimal TotalPrice { get; }
 
-		Address BillingAddress { get; }
-		Address ShippingAddress { get; }
+		Address BillingAddress { get; set; }
+		Address ShippingAddress { get; set; }
+
+		PaymentCard PaymentCard { get; set; }
+
+		string EmailAddress { get; set; }
+		string TelephoneNumber { get; set; }
 	}
 }

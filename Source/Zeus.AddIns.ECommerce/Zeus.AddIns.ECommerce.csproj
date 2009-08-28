@@ -78,12 +78,15 @@
     <Compile Include="Design\Editors\GroupItemsEditorAttribute.cs" />
     <Compile Include="ECommerceModule.cs" />
     <Compile Include="Icons\Resources.cs" />
+    <Compile Include="PaymentGateways\PaymentCardType.cs" />
+    <Compile Include="PaymentGateways\PaymentResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IShoppingBasketItem.cs" />
     <Compile Include="Services\IDeliveryCostCalculator.cs" />
     <Compile Include="Services\IShoppingBasket.cs" />
     <Compile Include="Services\IShoppingBasketService.cs" />
-    <Compile Include="Services\IPaymentGateway.cs" />
+    <Compile Include="PaymentGateways\IPaymentGateway.cs" />
+    <Compile Include="PaymentGateways\PaymentRequest.cs" />
     <Compile Include="Services\ShoppingBasketService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -16,7 +17,7 @@ namespace Isis.ExtensionMethods
 
 		public static T Deserialize<T>(this string serializedValue)
 		{
-			return (T) Deserialize(serializedValue, typeof(T));
+			return (T)Deserialize(serializedValue, typeof(T));
 		}
 
 		public static object Deserialize(this string serializedValue, Type type)
@@ -46,7 +47,7 @@ namespace Isis.ExtensionMethods
 			StringReader stringReader = new StringReader(xml);
 
 			XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-			T result = (T) xmlSerializer.Deserialize(stringReader);
+			T result = (T)xmlSerializer.Deserialize(stringReader);
 
 			stringReader.Close();
 
@@ -84,10 +85,10 @@ namespace Isis.ExtensionMethods
 			return Regex.Replace(value, expression, string.Empty);
 		}
 
-        public static string RemoveWrappingHtmlTags(this string value)
-        {
-            return Regex.Replace(value, @"^<.*?>(.*)<.*?>?", "$1");
-        }
+		public static string RemoveWrappingHtmlTags(this string value)
+		{
+			return Regex.Replace(value, @"^<.*?>(.*)<.*?>?", "$1");
+		}
 
 		public static string ToBase64String(this string value)
 		{
@@ -116,7 +117,7 @@ namespace Isis.ExtensionMethods
 
 		public static T ToEnum<T>(this string value)
 		{
-			return (T) Enum.Parse(typeof(T), value);
+			return (T)Enum.Parse(typeof(T), value);
 		}
 
 		/// <summary>Gets the type from a string.</summary>
@@ -158,6 +159,15 @@ namespace Isis.ExtensionMethods
 			}
 
 			return sb.ToString() + "...";
+		}
+
+		public static int LuhnChecksum(this string value)
+		{
+			return value
+				.Where(Char.IsDigit)
+				.Reverse()
+				.SelectMany((c, i) => ((c - '0') << (i & 1)).ToString())
+				.Sum(c => c - '0') % 10;
 		}
 	}
 }

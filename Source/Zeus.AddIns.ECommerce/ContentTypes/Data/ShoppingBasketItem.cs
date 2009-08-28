@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
@@ -30,6 +33,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		public decimal LineTotal
 		{
 			get { return Product.CurrentPrice * Quantity; }
+		}
+
+		public IEnumerable<Variation> Variations
+		{
+			get { return VariationChoices.Cast<Variation>(); }
 		}
 	}
 }

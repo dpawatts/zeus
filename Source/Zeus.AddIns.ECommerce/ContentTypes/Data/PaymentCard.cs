@@ -29,6 +29,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("NameOnCard", value); }
 		}
 
+		[ContentProperty("MaskedCardNumber", 220)]
+		public string MaskedCardNumber
+		{
+			get { return GetDetail("MaskedCardNumber", string.Empty); }
+			set { SetDetail("MaskedCardNumber", value); }
+		}
+
 		[ContentProperty("Expiry Month", 230)]
 		public int ExpiryMonth
 		{
@@ -72,15 +79,15 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			{
 				if (StartMonth != null && StartYear != null)
 					// Sets the date to the first day of the month.
-					return new DateTime(StartYear.Value, StartMonth.Value, DateTime.DaysInMonth(StartYear.Value, StartMonth.Value));
+					return new DateTime(StartYear.Value, StartMonth.Value, 1);
 				return null;
 			}
 		}
 
 		[ContentProperty("Issue Number", 270)]
-		public int? IssueNumber
+		public string IssueNumber
 		{
-			get { return GetDetail<int?>("IssueNumber", null); }
+			get { return GetDetail("IssueNumber", string.Empty); }
 			set { SetDetail("IssueNumber", value); }
 		}
 	}

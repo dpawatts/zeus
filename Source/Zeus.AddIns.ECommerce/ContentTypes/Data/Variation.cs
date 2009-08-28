@@ -7,6 +7,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(VariationSet))]
 	public class Variation : BaseContentItem
 	{
-		
+		public VariationSet VariationSet
+		{
+			get { return (VariationSet)Parent; }
+		}
 	}
 }

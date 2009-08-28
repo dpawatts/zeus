@@ -9,14 +9,16 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 	public class ShoppingBasketPageViewModel : ViewModel<ShoppingBasketPage>
 	{
 		public ShoppingBasketPageViewModel(ShoppingBasketPage currentItem, IShoppingBasket shoppingBasket,
-			IEnumerable<SelectListItem> deliveryMethods)
+			IEnumerable<SelectListItem> deliveryMethods, CheckoutPage checkoutPage)
 			: base(currentItem)
 		{
 			ShoppingBasket = shoppingBasket;
 			DeliveryMethods = deliveryMethods;
+			CheckoutPage = checkoutPage;
 		}
 
 		public IShoppingBasket ShoppingBasket { get; set; }
 		public IEnumerable<SelectListItem> DeliveryMethods { get; set; }
+		public CheckoutPage CheckoutPage { get; set; }
 	}
 }

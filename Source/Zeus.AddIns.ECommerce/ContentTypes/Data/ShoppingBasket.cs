@@ -62,6 +62,18 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("DeliveryMethod", value); }
 		}
 
+		public string EmailAddress
+		{
+			get { return GetDetail("EmailAddress", string.Empty); }
+			set { SetDetail("EmailAddress", value); }
+		}
+
+		public string TelephoneNumber
+		{
+			get { return GetDetail("TelephoneNumber", string.Empty); }
+			set { SetDetail("TelephoneNumber", value); }
+		}
+
 		public IEnumerable<IShoppingBasketItem> Items
 		{
 			get { return GetChildren<ShoppingBasketItem>().Cast<IShoppingBasketItem>(); }

@@ -38,7 +38,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 					Value = dm.ID.ToString(),
 					Selected = (dm == shoppingBasket.DeliveryMethod)
 				});
-			return View(new ShoppingBasketPageViewModel(CurrentItem, GetShoppingBasket(), deliveryMethods));
+			return View(new ShoppingBasketPageViewModel(CurrentItem, GetShoppingBasket(), deliveryMethods, CurrentShop.CheckoutPage));
 		}
 
 		public ActionResult UpdateQuantity(
@@ -58,11 +58,6 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			_shoppingBasketService.SaveBasket(CurrentShop);
 
 			return Redirect(CurrentItem.Url);
-		}
-
-		public ActionResult Checkout(int deliveryMethodID)
-		{
-			return View();
 		}
 
 		private IShoppingBasket GetShoppingBasket()

@@ -140,44 +140,6 @@ namespace Zeus.AddIns.ECommerce.Services
 			return result;
 		}
 
-		/// <summary>
-		/// Validates the payment card, making sure that the card is not expired
-		/// and that it passed the Luhn Algorigthm
-		/// </summary>
-		public bool IsValid(PaymentCard paymentCard, string cardNumber, string verificationCode)
-		{
-			if (paymentCard.ValidTo < DateTime.Today)
-				return false;
-
-			if (paymentCard.ValidFrom != null && paymentCard.ValidFrom.Value > DateTime.Today)
-				return false;
-
-			// Remove empty chars, and set to an array
-			char[] cardChars = cardNumber.Replace(" ", "").ToCharArray();
-
-			int sum = 0;
-			int currentDigit = 0;
-			bool alternate = false;
-
-			// Use the Luhn Algorithm to validate the card number.
-			// http://en.wikipedia.org/wiki/Luhn_algorithm
-			// Count from left to right.
-			for (int i = cardChars.Length - 1; i >= 0; i--)
-			{
-				if (alternate)
-				{
-					int.TryParse(cardChars[i].ToString(), out currentDigit);
-					currentDigit *= 2;
-					if (currentDigit > 9)
-						currentDigit -= 9;
-				}
-				sum += currentDigit;
-				alternate = !alternate;
-			}
-
-			return sum % 10 == 0;
-		}
-
 		public void SaveBasket(Shop shop)
 		{
 			_persister.Save(GetCurrentShoppingBasketInternal(shop));
