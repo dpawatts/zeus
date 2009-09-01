@@ -30,24 +30,24 @@ namespace Zeus.Templates.Mvc.Html
 		{
 			if (image == null)
 				return string.Empty;
-			return ImageTag(image, ImageUrl(helper, image, width, height, fill));
+			return ImageTag(helper, image, ImageUrl(helper, image, width, height, fill));
 		}
 
 		public static string Image(this HtmlHelper helper, Image image, int width, int height)
 		{
 			if (image == null)
 				return string.Empty;
-			return ImageTag(image, ImageUrl(helper, image, width, height));
+			return ImageTag(helper, image, ImageUrl(helper, image, width, height));
 		}
 
 		public static string Image(this HtmlHelper helper, Image image)
 		{
 			if (image == null)
 				return string.Empty;
-			return ImageTag(image, ImageUrl(helper, image));
+			return ImageTag(helper, image, ImageUrl(helper, image));
 		}
 
-		private static string ImageTag(Image image, string imageUrl)
+		public static string ImageTag(this HtmlHelper helper, Image image, string imageUrl)
 		{
 			MvcContrib.UI.Tags.Image imageTag = new MvcContrib.UI.Tags.Image
 			{

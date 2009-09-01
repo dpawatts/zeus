@@ -1,5 +1,9 @@
 using System.Web.UI;
 
+[assembly: WebResource("Zeus.AddIns.ECommerce.Icons.arrow_branch.png", "image/png")]
+[assembly: WebResource("Zeus.AddIns.ECommerce.Icons.arrow_divide.png", "image/png")]
+[assembly: WebResource("Zeus.AddIns.ECommerce.Icons.arrow_join.png", "image/png")]
+[assembly: WebResource("Zeus.AddIns.ECommerce.Icons.arrow_merge.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.ECommerce.Icons.basket.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.ECommerce.Icons.basket_go.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.ECommerce.Icons.basket_put.png", "image/png")]

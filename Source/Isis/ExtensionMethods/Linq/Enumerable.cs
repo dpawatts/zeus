@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data;
 using System.Collections;
 using System.Reflection;
+using System.Text;
 
 namespace Isis.ExtensionMethods.Linq
 {
@@ -158,6 +159,19 @@ namespace Isis.ExtensionMethods.Linq
 			for (int i = 0, length = values.Length; i < length; i++)
 				values[i] = string.Format(format, values[i]);
 			return string.Join(separator, values);
+		}
+
+		public static string Join<T>(this IEnumerable<T> source, Func<T, string> valueCallback, string separator)
+		{
+			T[] values = source.ToArray();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0, length = values.Length; i < length; i++)
+			{
+				sb.Append(valueCallback(values[i]));
+				if (i < length - 1)
+					sb.Append(separator);
+			}
+			return sb.ToString();
 		}
 
 		public static IEnumerable<T> OfType<T>(this IEnumerable<T> source, Type type)

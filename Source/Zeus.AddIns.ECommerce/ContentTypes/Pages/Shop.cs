@@ -12,6 +12,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[TabPanel("ECommerce", "E-Commerce", 100)]
 	public class Shop : BasePage, ISelfPopulator
 	{
+		private const string VARIATION_CONTAINER_NAME = "variations";
 		private const string SHOPPING_BASKETS_NAME = "shopping-baskets";
 		private const string DELIVERY_METHODS_NAME = "delivery-methods";
 		private const string CHECKOUT_NAME = "checkout";
@@ -19,6 +20,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		public override string IconUrl
 		{
 			get { return GetIconUrl(typeof(Shop), "Zeus.AddIns.ECommerce.Icons.money.png"); }
+		}
+
+		public VariationSetContainer VariationsSet
+		{
+			get { return GetChild(VARIATION_CONTAINER_NAME) as VariationSetContainer; }
 		}
 
 		public ShoppingBasketContainer ShoppingBaskets
@@ -44,6 +50,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 
 		void ISelfPopulator.Populate()
 		{
+			VariationSetContainer variationsSet = new VariationSetContainer
+			{
+				Name = VARIATION_CONTAINER_NAME,
+				Title = "VariationsSet"
+			};
+			variationsSet.AddTo(this);
+
 			ShoppingBasketContainer shoppingBaskets = new ShoppingBasketContainer
 			{
 				Name = SHOPPING_BASKETS_NAME,

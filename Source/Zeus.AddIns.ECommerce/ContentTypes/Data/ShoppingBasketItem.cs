@@ -19,11 +19,6 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("Product", value); }
 		}
 
-		public PropertyCollection VariationChoices
-		{
-			get { return GetDetailCollection("VariationChoices", true); }
-		}
-
 		public int Quantity
 		{
 			get { return GetDetail("Quantity", 0); }
@@ -35,9 +30,22 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Product.CurrentPrice * Quantity; }
 		}
 
+		public VariationPermutation VariationPermutation
+		{
+			get { return GetChild("variation-permutation") as VariationPermutation; }
+			set
+			{
+				if (value != null)
+				{
+					value.Name = "variation-permutation";
+					value.AddTo(this);
+				}
+			}
+		}
+
 		public IEnumerable<Variation> Variations
 		{
-			get { return VariationChoices.Cast<Variation>(); }
+			get { return VariationPermutation.Variations.Cast<Variation>(); }
 		}
 	}
 }

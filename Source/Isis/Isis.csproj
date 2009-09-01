@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayHelper.cs" />
+    <Compile Include="Collections\Generic\CartesianProductUtility.cs" />
+    <Compile Include="Collections\Generic\EnumerableUtility.cs" />
     <Compile Include="Collections\Generic\IPageable.cs" />
     <Compile Include="Collections\Generic\Pageable.cs" />
     <Compile Include="Collections\Generic\PageableExtensions.cs" />

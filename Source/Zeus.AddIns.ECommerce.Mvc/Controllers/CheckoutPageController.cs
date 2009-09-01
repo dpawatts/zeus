@@ -85,6 +85,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			paymentCard.IssueNumber = checkoutDetails.CardIssueNumber;
 			shoppingBasket.EmailAddress = checkoutDetails.EmailAddress;
 			shoppingBasket.TelephoneNumber = checkoutDetails.TelephoneNumber;
+			shoppingBasket.MobileTelephoneNumber = checkoutDetails.MobileTelephoneNumber;
 
 			_shoppingBasketService.SaveBasket(CurrentShop);
 

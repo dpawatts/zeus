@@ -84,7 +84,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundInTheory.WatercooledSp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.AddIns.ECommerce.PaymentGateways.SagePay", "Zeus.AddIns.ECommerce.PaymentGateways.SagePay\Zeus.AddIns.ECommerce.PaymentGateways.SagePay.csproj", "{2F01CC7A-40AE-4475-9948-E2B2EA405C13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.Own.RoastedAmoeba.Web", "..\Examples\TJ.Own.RoastedAmoeba.Web\TJ.Own.RoastedAmoeba.Web.csproj", "{9B6480CD-A194-44C6-B2C6-0859EB26F04C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TJ.Own.RoastedAmoeba.Web", "..\..\TJ.Own.RoastedAmoeba\Source\Web\TJ.Own.RoastedAmoeba.Web.csproj", "{9B6480CD-A194-44C6-B2C6-0859EB26F04C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

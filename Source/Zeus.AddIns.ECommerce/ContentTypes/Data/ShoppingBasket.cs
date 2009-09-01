@@ -74,6 +74,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("TelephoneNumber", value); }
 		}
 
+		public string MobileTelephoneNumber
+		{
+			get { return GetDetail("MobileTelephoneNumber", string.Empty); }
+			set { SetDetail("MobileTelephoneNumber", value); }
+		}
+
 		public IEnumerable<IShoppingBasketItem> Items
 		{
 			get { return GetChildren<ShoppingBasketItem>().Cast<IShoppingBasketItem>(); }

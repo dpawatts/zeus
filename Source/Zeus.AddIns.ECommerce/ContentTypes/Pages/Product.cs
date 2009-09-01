@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
+using Zeus.AddIns.ECommerce.ContentTypes.Data;
+using Zeus.AddIns.ECommerce.Design.Editors;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.FileSystem.Images;
@@ -61,6 +65,22 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		public PropertyCollection ExtraImages
 		{
 			get { return GetDetailCollection("ExtraImages", true); }
+		}
+
+		[VariationConfigurationEditor("Variations", 260)]
+		public IEnumerable<VariationConfiguration> VariationConfigurations
+		{
+			get { return GetChildren<VariationConfiguration>(); }
+		}
+
+		public IEnumerable<VariationSet> AvailableVariationSets
+		{
+			get
+			{
+				return VariationConfigurations
+					.SelectMany(vc => vc.Permutation.Variations.Cast<Variation>().Select(v => v.VariationSet))
+					.Distinct();
+			}
 		}
 
 		public Category CurrentCategory

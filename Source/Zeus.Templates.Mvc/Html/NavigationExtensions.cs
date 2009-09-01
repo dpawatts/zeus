@@ -15,10 +15,10 @@ namespace Zeus.Templates.Mvc.Html
 	{
 		public delegate string CssClassFunc(ContentItem contentItem, bool isFirst, bool isLast);
 
-		public static string NavigationLinks(this HtmlHelper html, Func<string, string> layoutCallback,
+		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
 			CssClassFunc cssClassCallback)
 		{
-			var navigationItems = Find.StartPage.GetGlobalizedChildren().Navigable();
+			var navigationItems = startItem.GetGlobalizedChildren().Navigable();
 
 			string result = string.Empty;
 			foreach (ContentItem contentItem in navigationItems)
@@ -33,6 +33,7 @@ namespace Zeus.Templates.Mvc.Html
 		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
 		{
 			return NavigationLinks(html,
+				Find.StartPage,
 			                       nl => "<ul>" + nl + "</ul>",
 			                       (ci, isFirst, isLast) =>
 			                       {
@@ -43,6 +44,22 @@ namespace Zeus.Templates.Mvc.Html
 			                       		result += " last";
 			                       	return result;
 			                       });
+		}
+
+		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, ContentItem currentPage, string listClientId)
+		{
+			return NavigationLinks(html,
+				startItem,
+														 nl => "<ul id=\"" + listClientId + "\">" + nl + "</ul>",
+														 (ci, isFirst, isLast) =>
+														 {
+															 string result = string.Empty;
+															 if (IsCurrentPage(ci, currentPage))
+																 result += "on";
+															 if (isLast)
+																 result += " last";
+															 return result;
+														 });
 		}
 
 		private static bool IsCurrentPage(ContentItem itemToCheck, ContentItem currentPage)

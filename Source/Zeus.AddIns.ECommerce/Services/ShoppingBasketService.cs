@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Isis.Collections.Generic;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Persistence;
@@ -22,15 +23,18 @@ namespace Zeus.AddIns.ECommerce.Services
 			_finder = finder;
 		}
 
-		public void AddItem(Shop shop, Product product)
+		public void AddItem(Shop shop, Product product, IEnumerable<Variation> variations)
 		{
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
 
 			// If card is already in basket, just increment quantity, otherwise create a new item.
-			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product);
+			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && EnumerableUtility.Equals(i.Variations, variations));
 			if (item == null)
 			{
-				item = new ShoppingBasketItem { Product = product, Quantity = 1 };
+				VariationPermutation variationPermutation = new VariationPermutation();
+				foreach (Variation variation in variations)
+					variationPermutation.Variations.Add(variation);
+				item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
 				item.AddTo(shoppingBasket);
 			}
 			else
@@ -41,18 +45,18 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(shoppingBasket);
 		}
 
-		public void RemoveItem(Shop shop, Product product)
+		public void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation)
 		{
-			UpdateQuantity(shop, product, 0);
+			UpdateQuantity(shop, product, variationPermutation, 0);
 		}
 
-		public void UpdateQuantity(Shop shop, Product product, int newQuantity)
+		public void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity)
 		{
 			if (newQuantity < 0)
 				throw new ArgumentOutOfRangeException("newQuantity", "Quantity must be greater than or equal to 0.");
 
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
-			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product);
+			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && i.VariationPermutation == variationPermutation);
 
 			if (item == null)
 				return;

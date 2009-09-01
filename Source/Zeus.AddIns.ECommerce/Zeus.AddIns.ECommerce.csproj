@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTypes\Data\Address.cs" />
+    <Compile Include="ContentTypes\Data\VariationPermutation.cs" />
+    <Compile Include="ContentTypes\Data\VariationConfiguration.cs" />
     <Compile Include="ContentTypes\Data\PaymentCard.cs" />
     <Compile Include="ContentTypes\Data\DeliveryMethod.cs" />
     <Compile Include="ContentTypes\Data\DeliveryMethodContainer.cs" />
@@ -68,14 +70,14 @@
     <Compile Include="ContentTypes\Pages\CheckoutPage.cs" />
     <Compile Include="ContentTypes\Pages\SearchResultsPage.cs" />
     <Compile Include="ContentTypes\Pages\ShoppingBasketPage.cs" />
-    <Compile Include="ContentTypes\Data\VariationContainer.cs" />
+    <Compile Include="ContentTypes\Data\VariationSetContainer.cs" />
     <Compile Include="ContentTypes\Data\VariationSet.cs" />
     <Compile Include="ContentTypes\Pages\Category.cs" />
     <Compile Include="ContentTypes\Pages\Product.cs" />
     <Compile Include="ContentTypes\Pages\Shop.cs" />
     <Compile Include="ContentTypes\Data\Variation.cs" />
     <Compile Include="ContentTypes\Pages\Subcategory.cs" />
-    <Compile Include="Design\Editors\GroupItemsEditorAttribute.cs" />
+    <Compile Include="Design\Editors\VariationConfigurationEditorAttribute.cs" />
     <Compile Include="ECommerceModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="PaymentGateways\IPaymentGatewayService.cs" />
@@ -129,6 +131,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\money_pound.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\arrow_branch.png" />
+    <EmbeddedResource Include="Icons\arrow_divide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\arrow_join.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\arrow_merge.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentTypes\Widgets\" />

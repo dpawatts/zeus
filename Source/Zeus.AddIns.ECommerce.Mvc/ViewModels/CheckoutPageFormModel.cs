@@ -69,6 +69,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 		public string EmailAddress { get; set; }
 		public string ConfirmEmailAddress { get; set; }
 		public string TelephoneNumber { get; set; }
+		public string MobileTelephoneNumber { get; set; }
 		public string AcceptTermsAndConditions { get; set; }
 
 		public bool DoesAcceptTermsAndConditions

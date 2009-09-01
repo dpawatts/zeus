@@ -16,5 +16,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		{
 			get { return Title + "'s"; }
 		}
+
+		public Shop Shop
+		{
+			get { return (Shop) Parent; }
+		}
 	}
 }

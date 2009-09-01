@@ -9,6 +9,7 @@ namespace Zeus.AddIns.ECommerce.Services
 		Product Product { get; }
 		int Quantity { get; }
 		decimal LineTotal { get; }
+		VariationPermutation VariationPermutation { get; }
 		IEnumerable<Variation> Variations { get; }
 	}
 }

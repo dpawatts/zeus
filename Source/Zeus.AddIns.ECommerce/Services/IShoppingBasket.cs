@@ -18,5 +18,6 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		string EmailAddress { get; set; }
 		string TelephoneNumber { get; set; }
+		string MobileTelephoneNumber { get; set; }
 	}
 }
