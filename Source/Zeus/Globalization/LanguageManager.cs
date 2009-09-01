@@ -49,10 +49,17 @@ namespace Zeus.Globalization
 
 		#endregion
 
+		public IEnumerable<Language> GetAvailableLanguages(bool create)
+		{
+			LanguageContainer container = GetLanguageContainer(create);
+			if (container != null)
+				return container.GetChildren<Language>().Where(l => l.Enabled);
+			return new List<Language>();
+		}
+
 		public IEnumerable<Language> GetAvailableLanguages()
 		{
-			LanguageContainer container = GetLanguageContainer(true);
-			return container.GetChildren<Language>().Where(l => l.Enabled);
+			return GetAvailableLanguages(true);
 		}
 
 		/// <summary>
@@ -161,7 +168,7 @@ namespace Zeus.Globalization
 
 		public string GetDefaultLanguage()
 		{
-			return GetAvailableLanguages().First().Name;
+			return GetAvailableLanguages(true).First().Name;
 		}
 
 		#region Helper methods

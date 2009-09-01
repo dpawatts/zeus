@@ -764,7 +764,9 @@ namespace Zeus
 			if (parent == null)
 				return null;
 
-			return Context.Current.LanguageManager.GetTranslation(parent, ContentLanguage.PreferredCulture.Name) ?? parent;
+			return (Context.Current.LanguageManager.Enabled)
+				? (Context.Current.LanguageManager.GetTranslation(parent, ContentLanguage.PreferredCulture.Name) ?? parent)
+				: parent;
 		}
 
 		/// <summary>

@@ -80,6 +80,7 @@
     <Compile Include="ViewModels\CheckoutPageSummaryViewModel.cs" />
     <Compile Include="ViewModels\CheckoutPageReceiptViewModel.cs" />
     <Compile Include="ViewModels\CheckoutPageFormModel.cs" />
+    <Compile Include="ViewModels\CheckoutPageSummaryFormModel.cs" />
     <Compile Include="ViewModels\SearchResultsPageViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ShoppingBasketPageViewModel.cs" />

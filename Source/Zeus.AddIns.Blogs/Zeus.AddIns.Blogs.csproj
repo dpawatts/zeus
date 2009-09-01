@@ -57,10 +57,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlogModule.cs" />
+    <Compile Include="ContentTypes\BaseBlogPage.cs" />
     <Compile Include="ContentTypes\Blog.cs" />
+    <Compile Include="ContentTypes\BlogMonth.cs" />
+    <Compile Include="ContentTypes\BlogYear.cs" />
+    <Compile Include="ContentTypes\Post.cs" />
+    <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BlogInitializer.cs" />
+    <Compile Include="Services\BlogService.cs" />
+    <Compile Include="BlogsInitializer.cs" />
     <Compile Include="Web\BlogAdapter.cs" />
     <Compile Include="Web\MetaWeblog\IMetaWeblog.cs" />
     <Compile Include="Web\MetaWeblog\MetaWeblog.cs" />
@@ -77,10 +82,22 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis %28Isis\Core\Isis%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
+      <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
+      <Name>Zeus.Templates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus %28Zeus\Core\Zeus%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\calendar.png" />
+    <EmbeddedResource Include="Icons\calendar_view_day.png" />
+    <EmbeddedResource Include="Icons\calendar_view_month.png" />
+    <EmbeddedResource Include="Icons\comment.png" />
+    <EmbeddedResource Include="Icons\comments.png" />
+    <EmbeddedResource Include="Icons\user_comment.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

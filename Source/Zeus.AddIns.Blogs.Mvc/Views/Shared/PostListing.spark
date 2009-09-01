@@ -1,0 +1,29 @@
+﻿<use namespace="System.Collections.Generic" />
+<use namespace="System.Linq" />
+<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
+<macro name="PostListing" posts="IEnumerable<Post>">
+	<dl class="entries">
+		<if condition="posts.Any()">
+			<for each="Post post in posts">
+				<dt>
+					<a title="Permanent link to this post" href="${post.Url}">
+						${post.Title}
+					</a>
+				</dt>
+
+				<dd>
+					${post.Text}
+				</dd>
+				<dd class="posted">
+					<a title="Permanent link to this post" class="plink" href="${post.Url}">
+						${post.Date.ToString("dd MMMM, yyyy")} at ${post.Date.ToString("HH:mm")}
+					</a>
+					<a class="clink" href="${post.Url}#disqus_thread">Comments</a>
+				</dd>
+			</for>
+		</if>
+		<else>
+			<p>No blog entries match this filter.</p>
+		</else>
+	</dl>
+</macro>

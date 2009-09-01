@@ -27,7 +27,7 @@ namespace Zeus.Globalization
 			CultureInfo culture = null;
 			foreach (string languageCode in preferenceList)
 			{
-				foreach (Language branch in Context.Current.LanguageManager.GetAvailableLanguages())
+				foreach (Language branch in Context.Current.LanguageManager.GetAvailableLanguages(false))
 				{
 					if (string.Compare(languageCode, branch.Name, StringComparison.OrdinalIgnoreCase) == 0)
 						return branch.Culture;

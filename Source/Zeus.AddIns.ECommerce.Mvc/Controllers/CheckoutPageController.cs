@@ -4,6 +4,7 @@ using Isis.Web;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
+using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.AddIns.ECommerce.Services;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
@@ -121,8 +122,19 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Summary(object value)
+		public ActionResult Summary(CheckoutPageSummaryFormModel postedData)
 		{
+			IShoppingBasket shoppingBasket = GetShoppingBasket();
+
+			// Process payment.
+			IPaymentGateway paymentGateway = Engine.Resolve<IPaymentGatewayService>().GetCurrent();
+			PaymentRequest paymentRequest = new PaymentRequest(shoppingBasket.BillingAddress, shoppingBasket.ShippingAddress, null, 0, null);
+			PaymentResponse paymentResponse = paymentGateway.TakePayment(paymentRequest);
+
+			if (paymentResponse.Success)
+			{
+				
+			}
 			return View(new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket()));
 		}
 

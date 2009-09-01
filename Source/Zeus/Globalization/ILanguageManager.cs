@@ -6,6 +6,7 @@ namespace Zeus.Globalization
 	public interface ILanguageManager
 	{
 		IEnumerable<Language> GetAvailableLanguages();
+		IEnumerable<Language> GetAvailableLanguages(bool create);
 
 		/// <summary>Retrieves all translations of an item, optionally including the original language version.</summary>
 		/// <param name="originalLanguageItem">The item whose translations to get.</param>

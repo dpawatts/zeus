@@ -11,6 +11,7 @@ namespace Zeus.Globalization.ContentTypes
 	[ContentType]
 	[ContentTypeAuthorizedRoles(RoleNames.Administrators)]
 	[RestrictParents(typeof(LanguageContainer))]
+	[Translatable(false)]
 	public class Language : ContentItem
 	{
 		[TextBoxEditor("Name", 10, Required = true)]
