@@ -38,7 +38,7 @@ namespace Zeus.Templates.Mvc.Html
 			                       (ci, isFirst, isLast) =>
 			                       {
 			                       	string result = string.Empty;
-			                       	if (IsCurrentPage(ci, currentPage))
+															if (IsCurrentOrParentPage(html, ci, currentPage))
 			                       		result += "on";
 			                       	if (isLast)
 			                       		result += " last";
@@ -54,7 +54,7 @@ namespace Zeus.Templates.Mvc.Html
 														 (ci, isFirst, isLast) =>
 														 {
 															 string result = string.Empty;
-															 if (IsCurrentPage(ci, currentPage))
+															 if (IsCurrentOrParentPage(html, ci, currentPage))
 																 result += "on";
 															 if (isLast)
 																 result += " last";
@@ -62,7 +62,18 @@ namespace Zeus.Templates.Mvc.Html
 														 });
 		}
 
-		private static bool IsCurrentPage(ContentItem itemToCheck, ContentItem currentPage)
+		/// <summary>
+		/// Returns true if this page, or one of its descendents, is the current page.
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="itemToCheck"></param>
+		/// <returns></returns>
+		public static bool IsCurrentBranch(this HtmlHelper helper, ContentItem itemToCheck)
+		{
+			return IsCurrentOrParentPage(helper, itemToCheck, Find.CurrentPage);
+		}
+
+		public static bool IsCurrentOrParentPage(this HtmlHelper helper, ContentItem itemToCheck, ContentItem currentPage)
 		{
 			if ((itemToCheck is Redirect))
 			{

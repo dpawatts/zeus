@@ -13,5 +13,6 @@ namespace Zeus.AddIns.ECommerce.Services
 		void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity);
 		string GetMaskedCardNumber(string cardNumber);
 		void SaveBasket(Shop shop);
+		bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations);
 	}
 }

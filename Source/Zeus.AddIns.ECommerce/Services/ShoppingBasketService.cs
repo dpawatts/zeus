@@ -148,5 +148,11 @@ namespace Zeus.AddIns.ECommerce.Services
 		{
 			_persister.Save(GetCurrentShoppingBasketInternal(shop));
 		}
+
+		public bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
+		{
+			return product.VariationConfigurations.Any(vc => vc.Available 
+				&& EnumerableUtility.EqualsIgnoringOrder(vc.Permutation.Variations.Cast<Variation>(), variations));
+		}
 	}
 }

@@ -42,6 +42,13 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				}
 			}
 
+			// Check that this is a valid variation configuration.
+			if (!_shoppingBasketService.IsValidVariationPermutation(CurrentItem, variations))
+			{
+				TempData["ErrorMessage"] = "This product is not available in this configuration.";
+				return RedirectToParentPage();
+			}
+
 			Shop shop = (Shop) CurrentItem.CurrentCategory.Parent;
 			_shoppingBasketService.AddItem(shop, CurrentItem, variations);
 

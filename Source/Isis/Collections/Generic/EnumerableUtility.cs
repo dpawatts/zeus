@@ -29,5 +29,18 @@ namespace Isis.Collections.Generic
 
 			return true;
 		}
+
+		public static bool EqualsIgnoringOrder<T>(IEnumerable<T> left, IEnumerable<T> right)
+		{
+			// Count the number of matching left and right elements.
+			var table = new MatchTable<T>((x, y) => Equals(x, y));
+			foreach (T expectedElement in left)
+				table.AddLeftValue(expectedElement);
+
+			foreach (T actualElement in right)
+				table.AddRightValue(actualElement);
+
+			return (table.NonEqualCount == 0);
+		}
 	}
 }
