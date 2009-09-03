@@ -1,0 +1,9 @@
+﻿<use namespace="System.Collections.Generic" />
+<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
+<macro name="PreviousPosts" posts="IEnumerable<Post>">
+	<ul class="articles">
+		<li each="Post post in posts">
+			<a title="Permanent link to this post" href="${post.Url}">${post.Title}</a>
+		</li>
+	</ul>
+</macro>

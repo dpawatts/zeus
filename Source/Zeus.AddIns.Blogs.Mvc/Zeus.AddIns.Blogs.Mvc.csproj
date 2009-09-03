@@ -60,6 +60,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\BlogYearController.cs" />
     <Compile Include="Controllers\BlogMonthController.cs" />
+    <Compile Include="Controllers\RecentPostsController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="BlogsWebPackage.cs" />
     <Compile Include="Html\PingbackExtensions.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\BlogYearViewModel.cs" />
     <Compile Include="ViewModels\BlogMonthViewModel.cs" />
+    <Compile Include="ViewModels\RecentPostsViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\BlogMonth\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Shared\PreviousPosts.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RecentPosts\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

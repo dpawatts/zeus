@@ -1,8 +1,10 @@
 ﻿using Zeus.Design.Editors;
+using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[DefaultTemplate]
+	[AvailableZone("Content", "Content")]
 	public abstract class BasePage : BaseContentItem
 	{
 		[NameEditor("URL", 20, Required = true, Shared = false)]

@@ -5,6 +5,7 @@ using Isis.FrameworkBlocks.DependencyInjection;
 using Ninject;
 using Ninject.Modules;
 using System.Web.Mvc;
+using Zeus.Web.Mvc.Html;
 using Zeus.Web.Mvc.Modules;
 
 namespace Zeus.Web.Mvc
@@ -13,6 +14,7 @@ namespace Zeus.Web.Mvc
 	{
 		public override void Load()
 		{
+			Bind<ITemplateRenderer>().To<TemplateRenderer>().InSingletonScope();
 			Bind<IControllerMapper>().To<ControllerMapper>().InSingletonScope();
 			Bind<IControllerFactory>().To<ModularControllerFactory>().InSingletonScope();
 			Bind<IWebPackageManager>().To<WebPackageManager>().InSingletonScope();

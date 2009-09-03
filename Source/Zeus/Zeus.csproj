@@ -258,6 +258,7 @@
     <Compile Include="Web\IHost.cs" />
     <Compile Include="Web\IPermanentLinkManager.cs" />
     <Compile Include="Web\MultipleSitesUrlParser.cs" />
+    <Compile Include="Web\Parts\PartsAdapter.cs" />
     <Compile Include="Web\PathDictionary.cs" />
     <Compile Include="Web\PermanentLinkManager.cs" />
     <Compile Include="Web\RequestAdapter.cs" />

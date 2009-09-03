@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
@@ -15,51 +16,64 @@ namespace Zeus.Templates.Mvc.Html
 	{
 		public delegate string CssClassFunc(ContentItem contentItem, bool isFirst, bool isLast);
 
-		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
-			CssClassFunc cssClassCallback)
+		public static IEnumerable<ContentItem> NavigationItems(this HtmlHelper html)
 		{
-			var navigationItems = startItem.GetGlobalizedChildren().Navigable();
+			return NavigationItems(html, Find.StartPage);
+		}
+
+		public static IEnumerable<ContentItem> NavigationItems(this HtmlHelper html, ContentItem startPage)
+		{
+			return startPage.GetGlobalizedChildren().Navigable();
+		}
+
+		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
+			CssClassFunc cssClassCallback, Func<ContentItem, string, string> activeTextCallback)
+		{
+			var navigationItems = NavigationItems(html, startItem);
 
 			string result = string.Empty;
 			foreach (ContentItem contentItem in navigationItems)
+			{
 				result += string.Format("<li class=\"{0}\"><span><a href=\"{1}\">{2}</a></span></li>",
 					cssClassCallback(contentItem, contentItem == navigationItems.First(), contentItem == navigationItems.Last()),
-					contentItem.Url, contentItem.Title);
-				
+					contentItem.Url, activeTextCallback(contentItem, contentItem.Title));
+			}
+
 			result = layoutCallback(result);
 			return result;
 		}
 
-		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
-		{
-			return NavigationLinks(html,
-				Find.StartPage,
-			                       nl => "<ul>" + nl + "</ul>",
-			                       (ci, isFirst, isLast) =>
-			                       {
-			                       	string result = string.Empty;
-															if (IsCurrentOrParentPage(html, ci, currentPage))
-			                       		result += "on";
-			                       	if (isLast)
-			                       		result += " last";
-			                       	return result;
-			                       });
-		}
-
-		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, ContentItem currentPage, string listClientId)
+		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, ContentItem currentPage, string listClientId, string currentCssClass,
+			Func<string, string> activeTextCallback)
 		{
 			return NavigationLinks(html,
 				startItem,
-														 nl => "<ul id=\"" + listClientId + "\">" + nl + "</ul>",
-														 (ci, isFirst, isLast) =>
-														 {
-															 string result = string.Empty;
-															 if (IsCurrentOrParentPage(html, ci, currentPage))
-																 result += "on";
-															 if (isLast)
-																 result += " last";
-															 return result;
-														 });
+				nl => "<ul id=\"" + listClientId + "\">" + nl + "</ul>",
+				(ci, isFirst, isLast) =>
+				{
+					string result = string.Empty;
+					if (IsCurrentBranch(html, ci, currentPage))
+						result += currentCssClass;
+					if (isLast)
+						result += " last";
+					return result;
+				},
+				(ci, title) =>
+				{
+					if (IsCurrentBranch(html, ci, currentPage))
+						return activeTextCallback(title);
+					return title;
+				});
+		}
+
+		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage, string currentCssClass, Func<string, string> activeTextCallback)
+		{
+			return NavigationLinks(html, Find.StartPage, currentPage, null, currentCssClass, activeTextCallback);
+		}
+
+		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
+		{
+			return NavigationLinks(html, Find.StartPage, currentPage, null, "on", title => title);
 		}
 
 		/// <summary>
@@ -70,10 +84,10 @@ namespace Zeus.Templates.Mvc.Html
 		/// <returns></returns>
 		public static bool IsCurrentBranch(this HtmlHelper helper, ContentItem itemToCheck)
 		{
-			return IsCurrentOrParentPage(helper, itemToCheck, Find.CurrentPage);
+			return IsCurrentBranch(helper, itemToCheck, Find.CurrentPage);
 		}
 
-		public static bool IsCurrentOrParentPage(this HtmlHelper helper, ContentItem itemToCheck, ContentItem currentPage)
+		public static bool IsCurrentBranch(this HtmlHelper helper, ContentItem itemToCheck, ContentItem currentPage)
 		{
 			if ((itemToCheck is Redirect))
 			{
