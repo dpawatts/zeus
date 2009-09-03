@@ -144,6 +144,18 @@
             Image to apply the <see cref="T:SoundInTheory.DynamicImage.Filters.ImageReplacementFilter"/> to.
             </param>
         </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageReplacementFilter.OnBeginApplyFilter(SoundInTheory.DynamicImage.Util.FastBitmap)">
+            <summary>
+            This method allows derived classes to perform actions 
+            prior to the filter being applied.
+            </summary>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ImageReplacementFilter.OnEndApplyFilter">
+            <summary>
+            This method allows derived classes to perform actions 
+            after the filter has been applied.
+            </summary>
+        </member>
         <member name="M:SoundInTheory.DynamicImage.Filters.ImageReplacementFilter.GetDestinationDimensions(SoundInTheory.DynamicImage.Util.FastBitmap,System.Int32@,System.Int32@)">
             <summary>
             When overridden in a derived class, returns the dimensions of the output image.
@@ -639,45 +651,25 @@
 				</para>
 			</example>
         </member>
-        <member name="T:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter">
+        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.OnBeginApplyFilter(SoundInTheory.DynamicImage.Util.FastBitmap)">
             <summary>
-            The base class for filters that apply a colour matrix to the image.
+            This method allows derived classes to perform actions 
+            prior to the filter being applied.
             </summary>
         </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.GetDestinationDimensions(SoundInTheory.DynamicImage.Util.FastBitmap,System.Int32@,System.Int32@)">
+        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.OnEndApplyFilter">
             <summary>
-            Returns the dimensions of the output image.
+            This method allows derived classes to perform actions 
+            after the filter has been applied.
             </summary>
-            <param name="source">The source image.</param>
-            <param name="width">The desired width of the output image.</param>
-            <param name="height">The desired height of the output image.</param>
-            <returns><c>true</c> if the destination image should be created; otherwise <c>false</c>.
-            <see cref="T:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter"/> always returns <c>true</c> and sets the destination
-            dimensions to the same as the source dimensions.</returns>
         </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.ApplyFilter(SoundInTheory.DynamicImage.Util.FastBitmap,SoundInTheory.DynamicImage.Util.FastBitmap,System.Drawing.Graphics)">
+        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.GetOutputColour(System.Drawing.Color,System.Int32,System.Int32)">
             <summary>
-            Applies the filter to the specified source.
+            This method is called for each pixel in the source image.
+            Derived classes must implement their functionality within this method.
             </summary>
-            <param name="source">The source image.</param>
-            <param name="destination">The destination image.</param>
-            <param name="g">A <see cref="T:System.Drawing.Graphics"/> object, created from <paramref name="destination"/>.</param>
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.GetColourMatrixValues">
-            <summary>
-            When overridden in an inherited class, returns a matrix that will be used
-            to transform the colour of each pixel in an image.
-            </summary>
-            <returns>Returns a float array that is used to create a 
-            <see cref="T:System.Drawing.Imaging.ColorMatrix"/>.</returns>
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.OpacityAdjustmentFilter.GetColourMatrixValues">
-            <summary>
-            Returns a matrix that will be used
-            to transform the opacity of each pixel in an image.
-            </summary>
-            <returns>Returns a float array that is used to create a 
-            <see cref="T:System.Drawing.Imaging.ColorMatrix"/>.</returns>
+            <param name="inputColour">The input colour.</param>
+            <returns>The output colour.</returns>
         </member>
         <member name="P:SoundInTheory.DynamicImage.Filters.OpacityAdjustmentFilter.Opacity">
             <summary>
@@ -720,6 +712,38 @@
             Valid values are between 0 and 20 (inclusive).
             </summary>
         </member>
+        <member name="T:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter">
+            <summary>
+            The base class for filters that apply a colour matrix to the image.
+            </summary>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.GetDestinationDimensions(SoundInTheory.DynamicImage.Util.FastBitmap,System.Int32@,System.Int32@)">
+            <summary>
+            Returns the dimensions of the output image.
+            </summary>
+            <param name="source">The source image.</param>
+            <param name="width">The desired width of the output image.</param>
+            <param name="height">The desired height of the output image.</param>
+            <returns><c>true</c> if the destination image should be created; otherwise <c>false</c>.
+            <see cref="T:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter"/> always returns <c>true</c> and sets the destination
+            dimensions to the same as the source dimensions.</returns>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.ApplyFilter(SoundInTheory.DynamicImage.Util.FastBitmap,SoundInTheory.DynamicImage.Util.FastBitmap,System.Drawing.Graphics)">
+            <summary>
+            Applies the filter to the specified source.
+            </summary>
+            <param name="source">The source image.</param>
+            <param name="destination">The destination image.</param>
+            <param name="g">A <see cref="T:System.Drawing.Graphics"/> object, created from <paramref name="destination"/>.</param>
+        </member>
+        <member name="M:SoundInTheory.DynamicImage.Filters.ColourMatrixFilter.GetColourMatrixValues">
+            <summary>
+            When overridden in an inherited class, returns a matrix that will be used
+            to transform the colour of each pixel in an image.
+            </summary>
+            <returns>Returns a float array that is used to create a 
+            <see cref="T:System.Drawing.Imaging.ColorMatrix"/>.</returns>
+        </member>
         <member name="T:SoundInTheory.DynamicImage.FractalLayer">
             <summary>
             http://student.kuleuven.be/~m0216922/CG/juliamandelbrot.html
@@ -730,26 +754,6 @@
             Adjusts the colour tint of the layer.
             </summary>
             <!-- No matching elements were found for the following include tag --><include file="../documentation.xml" path="docs/types/type[@name = 'ColorTintFilter']/*"/>
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.OnBeginApplyFilter(SoundInTheory.DynamicImage.Util.FastBitmap)">
-            <summary>
-            This method allows derived classes to perform actions 
-            prior to the filter being applied.
-            </summary>
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.OnEndApplyFilter">
-            <summary>
-            This method allows derived classes to perform actions 
-            after the filter has been applied.
-            </summary>
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PixelFilter.GetOutputColour(System.Drawing.Color,System.Int32,System.Int32)">
-            <summary>
-            This method is called for each pixel in the source image.
-            Derived classes must implement their functionality within this method.
-            </summary>
-            <param name="inputColour">The input colour.</param>
-            <returns>The output colour.</returns>
         </member>
         <member name="M:SoundInTheory.DynamicImage.Filters.ColorTintFilter.GetOutputColour(System.Drawing.Color,System.Int32,System.Int32)">
             <summary>
@@ -1053,6 +1057,27 @@
         <member name="P:SoundInTheory.DynamicImage.Font.CustomFontFileFamilyIndex">
             <summary>
             Gets or sets the font family index of the type faces defined by the specified CustomFontFile.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:SoundInTheory.DynamicImage.LayerBlender" -->
+        <member name="T:SoundInTheory.DynamicImage.Filters.EmbossFilter">
+            <summary>
+            Embosses an image.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.EmbossFilter.BumpHeight">
+            <summary>
+            Gets or sets the bump height for embossing.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.EmbossFilter.LightElevation">
+            <summary>
+            Gets or sets the light elevation in degrees.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.EmbossFilter.LightAngle">
+            <summary>
+            Gets or sets the light elevation in degrees.
             </summary>
         </member>
         <member name="T:SoundInTheory.DynamicImage.Filters.DropShadowFilter">
@@ -1476,6 +1501,7 @@
             Creates the effect of an image placed on a shiny floor. This filter
             adds a reflection of the image just below it.
             </summary>
+            <see cref="!:http://www.jhlabs.com/java/java2d/reflections/index.html"/>
             <example>
 				<para>
 					This example shows the use of the <see cref="T:SoundInTheory.DynamicImage.Filters.ShinyFloorFilter"/>. This example uses a ReflectionPercentage value of 100 and a ReflectionOpacity value of 25.
@@ -1557,7 +1583,7 @@
         <member name="P:SoundInTheory.DynamicImage.Filters.ShinyFloorFilter.ReflectionOpacity">
             <summary>
             Gets or sets the opacity of the start of the reflected image.
-            The reflection will fade out to an opaque white.
+            The reflection will fade out to transparent.
             </summary>
         </member>
         <member name="P:SoundInTheory.DynamicImage.Filters.ShinyFloorFilter.ReflectionPositionY">
@@ -1565,59 +1591,57 @@
             Gets or sets the y-position of the reflected image
             </summary>
         </member>
-        <member name="T:SoundInTheory.DynamicImage.Filters.PerspectiveFilter">
+        <member name="T:SoundInTheory.DynamicImage.Filters.DistortCornersFilter">
             <summary>
             A filter which performs a perspective distortion on an image.
-            Coordinates are treated as if the image was a unit square, i.e. the bottom-right corner of the image is at (1, 1).
-            The filter maps the unit square onto an arbitrary convex quadrilateral or vice versa.
+            The filter maps the original image onto an arbitrary convex quadrilateral.
             </summary>
         </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.#ctor">
-            Construct a PerspectiveFilter.
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
-            Construct a PerspectiveFilter.
-            @param x0 the new position of the top left corner
-            @param y0 the new position of the top left corner
-            @param x1 the new position of the top right corner
-            @param y1 the new position of the top right corner
-            @param x2 the new position of the bottom right corner
-            @param y2 the new position of the bottom right corner
-            @param x3 the new position of the bottom left corner
-            @param y3 the new position of the bottom left corner
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.setCorners(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
-            Set the new positions of the image corners.
-            This is the same as unitSquareToQuad, but the coordinates are in image pixels, not relative to the unit square.
-            This method is provided as a convenience.
-            @param x0 the new position of the top left corner
-            @param y0 the new position of the top left corner
-            @param x1 the new position of the top right corner
-            @param y1 the new position of the top right corner
-            @param x2 the new position of the bottom right corner
-            @param y2 the new position of the bottom right corner
-            @param x3 the new position of the bottom left corner
-            @param y3 the new position of the bottom left corner
-        </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.UnitSquareToQuad(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+        <member name="M:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.MapSquareToQuad">
+            <summary>
             Set the transform to map the unit square onto a quadrilateral. When filtering, all coordinates will be scaled
             by the size of the image.
-            @param x0 the new position of the top left corner
-            @param y0 the new position of the top left corner
-            @param x1 the new position of the top right corner
-            @param y1 the new position of the top right corner
-            @param x2 the new position of the bottom right corner
-            @param y2 the new position of the bottom right corner
-            @param x3 the new position of the bottom left corner
-            @param y3 the new position of the bottom left corner
+            </summary>
         </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.getOriginX">
-            Get the origin of the output image. Use this for working out where to draw your new image.
-            @return the X origin.
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.X1">
+            <summary>
+            Gets or sets the top-left corner X-coordinate.
+            </summary>
         </member>
-        <member name="M:SoundInTheory.DynamicImage.Filters.PerspectiveFilter.getOriginY">
-            Get the origin of the output image. Use this for working out where to draw your new image.
-            @return the Y origin.
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.Y1">
+            <summary>
+            Gets or sets the top-left corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.X2">
+            <summary>
+            Gets or sets the top-right corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.Y2">
+            <summary>
+            Gets or sets the top-right corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.X3">
+            <summary>
+            Gets or sets the bottom-right corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.Y3">
+            <summary>
+            Gets or sets the bottom-right corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.X4">
+            <summary>
+            Gets or sets the bottom-left corner X-coordinate.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.DistortCornersFilter.Y4">
+            <summary>
+            Gets or sets the bottom-left corner X-coordinate.
+            </summary>
         </member>
         <member name="T:SoundInTheory.DynamicImage.Filters.SepiaFilter">
             <summary>
