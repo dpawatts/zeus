@@ -8,7 +8,7 @@ using Zeus.Web;
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
 	[ContentType]
-	[RestrictParents(typeof(ShoppingBasketItem), typeof(VariationConfiguration))]
+	[RestrictParents(typeof(ShoppingBasketItem), typeof(VariationConfiguration), typeof(OrderItem))]
 	public class VariationPermutation : BaseContentItem, ILink
 	{
 		public override string IconUrl

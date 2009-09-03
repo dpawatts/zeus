@@ -59,6 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTypes\Data\Address.cs" />
+    <Compile Include="ContentTypes\Data\OrderItem.cs" />
+    <Compile Include="ContentTypes\Data\OrderContainer.cs" />
+    <Compile Include="ContentTypes\Data\Order.cs" />
+    <Compile Include="ContentTypes\Data\OrderStatus.cs" />
     <Compile Include="ContentTypes\Data\VariationPermutation.cs" />
     <Compile Include="ContentTypes\Data\VariationConfiguration.cs" />
     <Compile Include="ContentTypes\Data\PaymentCard.cs" />
@@ -80,9 +84,7 @@
     <Compile Include="Design\Editors\VariationConfigurationEditorAttribute.cs" />
     <Compile Include="ECommerceModule.cs" />
     <Compile Include="Icons\Resources.cs" />
-    <Compile Include="PaymentGateways\IPaymentGatewayService.cs" />
     <Compile Include="PaymentGateways\PaymentCardType.cs" />
-    <Compile Include="PaymentGateways\PaymentGatewayService.cs" />
     <Compile Include="PaymentGateways\PaymentResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IShoppingBasketItem.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="PaymentGateways\IPaymentGateway.cs" />
     <Compile Include="PaymentGateways\PaymentRequest.cs" />
     <Compile Include="Services\ShoppingBasketService.cs" />
+    <Compile Include="ZeusECommerceException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Isis\Isis.csproj">

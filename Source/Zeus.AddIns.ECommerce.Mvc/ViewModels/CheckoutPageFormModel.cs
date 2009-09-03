@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.Attributes;
 using Isis.ExtensionMethods;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
+using Zeus.AddIns.ECommerce.PaymentGateways;
 
 namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 {
@@ -32,7 +33,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 		public string ShippingTownCity { get; set; }
 		public string ShippingPostcode { get; set; }
 
-		public string CardType { get; set; }
+		public PaymentCardType CardType { get; set; }
 		public string CardHolderName { get; set; }
 		public string CardNumber { get; set; }
 
@@ -86,7 +87,6 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 			RuleFor(x => x.BillingFirstName).NotEmpty();
 			RuleFor(x => x.BillingSurname).NotEmpty();
 			RuleFor(x => x.BillingAddressLine1).NotEmpty();
-			RuleFor(x => x.BillingAddressLine2).NotEmpty();
 			RuleFor(x => x.BillingTownCity).NotEmpty();
 			RuleFor(x => x.BillingPostcode).NotEmpty();
 
@@ -94,7 +94,6 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 			RuleFor(x => x.ShippingFirstName).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
 			RuleFor(x => x.ShippingSurname).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
 			RuleFor(x => x.ShippingAddressLine1).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
-			RuleFor(x => x.ShippingAddressLine2).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
 			RuleFor(x => x.ShippingTownCity).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
 			RuleFor(x => x.ShippingPostcode).NotEmpty().When(x => !x.IsDeliveryAddressSameAsBillingAddress);
 

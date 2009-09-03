@@ -34,7 +34,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			foreach (VariationSet variationSet in CurrentItem.AvailableVariationSets)
 			{
 				string selectedValue = formValues["variationSet" + variationSet.ID];
-				if (!string.IsNullOrEmpty(selectedValue))
+				if (!string.IsNullOrEmpty(selectedValue.Trim()))
 				{
 					int variationID = Convert.ToInt32(selectedValue);
 					Variation variation = Engine.Persister.Get<Variation>(variationID);

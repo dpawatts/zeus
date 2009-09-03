@@ -6,13 +6,34 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
 	public class PaymentRequest
 	{
 		public PaymentRequest(Address billingAddress, Address shippingAddress,
-			string transactionCode, decimal amount, string description)
+			string transactionCode, decimal amount, string description,
+			string cardHolder, string cardNumber,
+			DateTime? validFrom, DateTime validTo,
+			string issueNumber, string verificationCode,
+			PaymentCardType cardType,
+			string telephoneNumber, string emailAddress,
+			string clientIpAddress)
 		{
 			BillingAddress = billingAddress;
 			ShippingAddress = shippingAddress;
 			TransactionCode = transactionCode;
 			Amount = amount;
 			Description = description;
+
+			CardHolder = cardHolder;
+			CardNumber = cardNumber;
+
+			ValidFrom = validFrom;
+			ValidTo = validTo;
+
+			IssueNumber = issueNumber;
+			VerificationCode = verificationCode;
+			CardType = cardType;
+
+			TelephoneNumber = telephoneNumber;
+			EmailAddress = emailAddress;
+
+			ClientIpAddress = clientIpAddress;
 		}
 
 		public Address BillingAddress { get; private set; }

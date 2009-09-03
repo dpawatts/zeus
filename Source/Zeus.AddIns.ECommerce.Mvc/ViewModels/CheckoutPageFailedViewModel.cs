@@ -3,16 +3,16 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 {
-	public class CheckoutPageReceiptViewModel : ViewModel<CheckoutPage>
+	public class CheckoutPageFailedViewModel : ViewModel<CheckoutPage>
 	{
-		public CheckoutPageReceiptViewModel(CheckoutPage currentItem, string orderNumber, ContentItem contactPage)
+		public CheckoutPageFailedViewModel(CheckoutPage currentItem, string errorMessage, ContentItem contactPage)
 			: base(currentItem)
 		{
-			OrderNumber = orderNumber;
+			ErrorMessage = errorMessage;
 			ContactPage = contactPage;
 		}
 
-		public string OrderNumber { get; set; }
+		public string ErrorMessage { get; set; }
 		public ContentItem ContactPage { get; set; }
 	}
 }

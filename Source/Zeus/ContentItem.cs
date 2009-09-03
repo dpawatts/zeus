@@ -510,10 +510,16 @@ namespace Zeus
 			}
 		}
 
+		public virtual ContentItem Clone(bool includeChildren)
+		{
+			return Clone(includeChildren, false);
+		}
+
 		/// <summary>Creats a copy of this item including details, authorization rules, and language settings, while resetting ID.</summary>
 		/// <param name="includeChildren">Specifies whether this item's child items also should be cloned.</param>
+		/// <param name="includeTranslations"></param>
 		/// <returns>The cloned item with or without cloned child items.</returns>
-		public virtual ContentItem Clone(bool includeChildren)
+		public virtual ContentItem Clone(bool includeChildren, bool includeTranslations)
 		{
 			ContentItem cloned = (ContentItem) MemberwiseClone();
 			cloned.ID = 0;
@@ -521,6 +527,7 @@ namespace Zeus
 
 			CloneDetails(cloned);
 			CloneChildren(includeChildren, cloned);
+			CloneTranslations(includeTranslations, cloned);
 			CloneAuthorizationRules(cloned);
 			CloneLanguageSettings(cloned);
 
@@ -565,6 +572,17 @@ namespace Zeus
 				{
 					ContentItem clonedChild = child.Clone(true);
 					clonedChild.AddTo(cloned);
+				}
+		}
+
+		private void CloneTranslations(bool includeTranslations, ContentItem cloned)
+		{
+			cloned.Translations = new List<ContentItem>();
+			if (includeTranslations)
+				foreach (ContentItem translation in Translations)
+				{
+					ContentItem clonedTranslation = translation.Clone(true);
+					clonedTranslation.AddTo(cloned);
 				}
 		}
 

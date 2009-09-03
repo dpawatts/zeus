@@ -1,5 +1,6 @@
 using System;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -16,9 +17,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		}
 
 		[ContentProperty("CardType", 200)]
-		public string CardType
+		public PaymentCardType CardType
 		{
-			get { return GetDetail("CardType", string.Empty); }
+			get { return GetDetail("CardType", PaymentCardType.None); }
 			set { SetDetail("CardType", value); }
 		}
 

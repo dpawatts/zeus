@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Net;
 using System.Text;
 using Isis.ExtensionMethods;
+using Zeus.AddIns.ECommerce.PaymentGateways.SagePay.Configuration;
 
 namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 {
@@ -13,12 +15,16 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 	{
 		private readonly string _vpsProtocol, _vendorName, _currency, _purchaseUrl;
 
-		public SagePayPaymentGateway(NameValueCollection configuration)
+		public SagePayPaymentGateway()
 		{
-			_vpsProtocol = configuration["vpsProtocol"] ?? "2.23";
-			_vendorName = configuration["vendorName"];
-			_currency = configuration["currency"] ?? "GBP";
-			_purchaseUrl = configuration["purchaseUrl"];
+			// Get configuration section.
+			SagePaySection configSection = ConfigurationManager.GetSection("zeus.addIns.ecommerce.paymentGateways/sagePay") as SagePaySection;
+			if (configSection == null)
+				configSection = new SagePaySection();
+			_vpsProtocol = configSection.VpsProtocol;
+			_vendorName = configSection.VendorName;
+			_currency = configSection.Currency;
+			_purchaseUrl = configSection.PurchaseUrl;
 		}
 
 		public bool SupportsCardType(PaymentCardType cardType)

@@ -4,6 +4,8 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
 {
 	public enum PaymentCardType
 	{
+		None = -1,
+
 		[Description("VISA Credit")]
 		VisaCredit,
 

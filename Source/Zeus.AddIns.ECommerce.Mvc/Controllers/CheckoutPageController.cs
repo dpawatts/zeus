@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Isis.Web;
+using Isis.ExtensionMethods;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
-using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.AddIns.ECommerce.Services;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
@@ -47,7 +46,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			Address billingAddress = shoppingBasket.BillingAddress;
 			if (billingAddress == null)
 				shoppingBasket.BillingAddress = billingAddress = new Address();
-			billingAddress.Title = checkoutDetails.BillingTitle;
+			billingAddress.PersonTitle = checkoutDetails.BillingTitle;
 			billingAddress.FirstName = checkoutDetails.BillingFirstName;
 			billingAddress.Surname = checkoutDetails.BillingSurname;
 			billingAddress.AddressLine1 = checkoutDetails.BillingAddressLine1;
@@ -59,7 +58,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				Address shippingAddress = shoppingBasket.ShippingAddress;
 				if (shippingAddress == null)
 					shoppingBasket.ShippingAddress = shippingAddress = new Address();
-				shippingAddress.Title = checkoutDetails.ShippingTitle;
+				shippingAddress.PersonTitle = checkoutDetails.ShippingTitle;
 				shippingAddress.FirstName = checkoutDetails.ShippingFirstName;
 				shippingAddress.Surname = checkoutDetails.ShippingSurname;
 				shippingAddress.AddressLine1 = checkoutDetails.ShippingAddressLine1;
@@ -93,12 +92,17 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			TempData["CardNumber"] = checkoutDetails.CardNumber;
 			TempData["CardVerificationCode"] = checkoutDetails.CardVerificationCode;
 
-			return Redirect(new Url(CurrentItem.Url).AppendSegment("summary"));
+			return View("Summary", new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket()));
 		}
 
 		private ActionResult GetIndexView()
 		{
-			IEnumerable<SelectListItem> cardTypes = new[] { new SelectListItem { Text = "Maestro", Value = "MA" } };
+			IEnumerable<SelectListItem> cardTypes = new [] { new SelectListItem { Text = "Please select...", Value = "" }}
+				.Union(_shoppingBasketService.GetSupportedCardTypes().Select(pct => new SelectListItem
+				{
+					Text = pct.GetDescription(),
+					Value = pct.ToString()
+				}));
 			IShoppingBasket shoppingBasket = GetShoppingBasket();
 			return View("Index", new CheckoutPageViewModel(CurrentItem,
 				GetTitles((shoppingBasket.BillingAddress != null) ? shoppingBasket.BillingAddress.Title : null),
@@ -116,32 +120,19 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			});
 		}
 
-		[AcceptVerbs(HttpVerbs.Get)]
-		public ActionResult Summary()
-		{
-			return View(new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket()));
-		}
-
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Summary(CheckoutPageSummaryFormModel postedData)
+		public ActionResult PlaceOrder(string cardNumber,
+			[Bind(Prefix = "cvc")] string cardVerificationCode)
 		{
-			IShoppingBasket shoppingBasket = GetShoppingBasket();
-
-			// Process payment.
-			IPaymentGateway paymentGateway = Engine.Resolve<IPaymentGatewayService>().GetCurrent();
-			PaymentRequest paymentRequest = new PaymentRequest(shoppingBasket.BillingAddress, shoppingBasket.ShippingAddress, null, 0, null);
-			PaymentResponse paymentResponse = paymentGateway.TakePayment(paymentRequest);
-
-			if (paymentResponse.Success)
+			try
 			{
-				
+				Order order = _shoppingBasketService.PlaceOrder(CurrentShop, cardNumber, cardVerificationCode);
+				return View("Receipt", new CheckoutPageReceiptViewModel(CurrentItem, order.ID.ToString(), CurrentShop.ContactPage));
 			}
-			return View(new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket()));
-		}
-
-		public ActionResult Receipt()
-		{
-			return View(new CheckoutPageReceiptViewModel(CurrentItem));
+			catch (ZeusECommerceException ex)
+			{
+				return View("Failed", new CheckoutPageFailedViewModel(CurrentItem, ex.Message, CurrentShop.ContactPage));
+			}
 		}
 
 		private IShoppingBasket GetShoppingBasket()

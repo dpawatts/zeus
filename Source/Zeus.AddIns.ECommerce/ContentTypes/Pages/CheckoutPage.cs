@@ -12,5 +12,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		{
 			get { return GetIconUrl(typeof(CheckoutPage), "Zeus.AddIns.ECommerce.Icons.money_pound.png"); }
 		}
+
+		[XhtmlStringContentProperty("Extra Information", 210)]
+		public string ExtraInformation
+		{
+			get { return GetDetail("ExtraInformation", string.Empty); }
+			set { SetDetail("ExtraInformation", value); }
+		}
 	}
 }

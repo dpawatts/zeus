@@ -14,6 +14,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		private const string VARIATION_CONTAINER_NAME = "variations";
 		private const string SHOPPING_BASKETS_NAME = "shopping-baskets";
+		private const string ORDERS_NAME = "orders";
 		private const string DELIVERY_METHODS_NAME = "delivery-methods";
 		private const string CHECKOUT_NAME = "checkout";
 
@@ -32,6 +33,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return GetChild(SHOPPING_BASKETS_NAME) as ShoppingBasketContainer; }
 		}
 
+		public OrderContainer Orders
+		{
+			get { return GetChild(ORDERS_NAME) as OrderContainer; }
+		}
+
 		public DeliveryMethodContainer DeliveryMethods
 		{
 			get { return GetChild(DELIVERY_METHODS_NAME) as DeliveryMethodContainer; }
@@ -46,6 +52,27 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		public PropertyCollection Titles
 		{
 			get { return GetDetailCollection("Titles", true); }
+		}
+
+		[ContentProperty("Contact Page", 210, EditorContainerName = "ECommerce")]
+		public ContentItem ContactPage
+		{
+			get { return GetDetail<ContentItem>("ContactPage", null); }
+			set { SetDetail("ContactPage", value); }
+		}
+
+		[ContentProperty("Confirmation Email From", 220, EditorContainerName = "ECommerce")]
+		public string ConfirmationEmailFrom
+		{
+			get { return GetDetail("ConfirmationEmailFrom", string.Empty); }
+			set { SetDetail("ConfirmationEmailFrom", value); }
+		}
+
+		[ContentProperty("Vendor Email", 220, EditorContainerName = "ECommerce", Description = "This is the email address which will receive the vendor's copy of the order confirmation email.")]
+		public string VendorEmail
+		{
+			get { return GetDetail("VendorEmail", string.Empty); }
+			set { SetDetail("VendorEmail", value); }
 		}
 
 		void ISelfPopulator.Populate()
@@ -63,6 +90,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 				Title = "Shopping Baskets"
 			};
 			shoppingBaskets.AddTo(this);
+
+			OrderContainer orders = new OrderContainer
+			{
+				Name = ORDERS_NAME,
+				Title = "Orders"
+			};
+			orders.AddTo(this);
 
 			DeliveryMethodContainer deliveryMethods = new DeliveryMethodContainer
 			{
