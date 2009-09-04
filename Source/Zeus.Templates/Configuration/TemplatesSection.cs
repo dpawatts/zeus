@@ -24,5 +24,12 @@ namespace Zeus.Templates.Configuration
 			get { return (SeoElement)base["seo"]; }
 			set { base["seo"] = value; }
 		}
+
+		[ConfigurationProperty("availableZones")]
+		public TemplateZoneCollection AvailableZones
+		{
+			get { return (TemplateZoneCollection)base["availableZones"]; }
+			set { base["availableZones"] = value; }
+		}
 	}
 }

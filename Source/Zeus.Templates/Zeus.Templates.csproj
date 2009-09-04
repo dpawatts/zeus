@@ -58,6 +58,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\TemplateZone.cs" />
+    <Compile Include="Configuration\TemplateZoneCollection.cs" />
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplateRule.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\SeoDefinitionAppender.cs" />
+    <Compile Include="Services\TemplatesPartsAdapter.cs" />
     <Compile Include="TemplatesInitializer.cs" />
   </ItemGroup>
   <ItemGroup>

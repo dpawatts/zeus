@@ -62,6 +62,8 @@
     <Compile Include="ContentTypes\BlogMonth.cs" />
     <Compile Include="ContentTypes\BlogYear.cs" />
     <Compile Include="ContentTypes\Comment.cs" />
+    <Compile Include="ContentTypes\ArchiveLinks.cs" />
+    <Compile Include="ContentTypes\RecentPostsSummary.cs" />
     <Compile Include="ContentTypes\Post.cs" />
     <Compile Include="ContentTypes\RecentPosts.cs" />
     <Compile Include="BlogsModule.cs" />

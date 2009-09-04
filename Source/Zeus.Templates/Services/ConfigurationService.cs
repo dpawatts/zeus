@@ -32,6 +32,11 @@ namespace Zeus.Templates.Services
 			foreach (ContentType contentType in _contentTypeManager.GetContentTypes().Where(ct => ct.ItemType.FullName.StartsWith("Zeus.Templates")))
 				if (!_configSection.Rules.IsContentTypeAllowed(contentType))
 					contentType.Enabled = false;
+
+			// Add available zones to all page content types.
+			foreach (ContentType contentType in _contentTypeManager.GetContentTypes())//.Where(ct => ct.IsPage))
+				foreach (TemplateZone templateZone in _configSection.AvailableZones)
+					contentType.AddAvailableZone(templateZone.Name, templateZone.Title);
 		}
 
 		#endregion

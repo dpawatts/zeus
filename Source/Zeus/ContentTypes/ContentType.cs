@@ -153,6 +153,15 @@ namespace Zeus.ContentTypes
 				AllowedChildren.Add(definition);
 		}
 
+		/// <summary>Adds an available zone to the list of available zones.</summary>
+		/// <param name="zoneName">The zone name to add.</param>
+		/// <param name="title"></param>
+		public void AddAvailableZone(string zoneName, string title)
+		{
+			if (!AvailableZones.Any(az => az.ZoneName == zoneName))
+				AvailableZones.Add(new AvailableZoneAttribute(title, zoneName));
+		}
+
 		public bool HasZone(string zone)
 		{
 			if (string.IsNullOrEmpty(zone))
