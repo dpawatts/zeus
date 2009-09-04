@@ -39,5 +39,12 @@ namespace Zeus.Templates.Mvc.Html
 		{
 			return html.PropertyOrDefault(contentItem, SeoUtility.META_DESCRIPTION, "Title");
 		}
+
+		public static string Pluralize(this HtmlHelper html, string word, int count)
+		{
+			if (count != 1)
+				word = word + "s";
+			return word;
+		}
 	}
 }

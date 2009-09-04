@@ -1,4 +1,5 @@
 ﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.PostViewModel"/>
+<use namespace="System.Linq" />
 
 <div id="title">
 	<h1>${Model.CurrentItem.Title}</h1>
@@ -6,3 +7,45 @@
 </div>
 
 ${Model.CurrentItem.Text}
+
+<div id="comments">
+	<h3 id="chead">
+		${Model.Comments.Count()} ${Html.Pluralize("Comment", Model.Comments.Count())}
+		<a href="#add-com">Add your own</a>
+	</h3>
+
+	<dl>
+		<for each="var comment in Model.Comments">
+			<dt id="comment${commentIndex + 1}" class="tim?{comment.AuthorName == "Tim Jones" && comment.AuthorUrl == "http://www.roastedamoeba.com"}">
+				<a title="Link to this comment" class="comment-number" href="#comment${commentIndex + 1}">
+					${"#"}${commentIndex + 1}
+				</a>
+				<img src="/assets/images/blog/anon16-rounded.gif" width="16" height="16" alt="" />
+				<a if="!string.IsNullOrEmpty(comment.AuthorUrl)" rel="nofollow" title="${comment.AuthorUrl}" href="${comment.AuthorUrl}">${comment.AuthorName} <em>&#8594; ${comment.AuthorUrl}</em></a>
+				<if condition="string.IsNullOrEmpty(comment.AuthorUrl)">${comment.AuthorName}</if>
+			</dt>
+			<dd class="tim?{comment.AuthorName == "Tim Jones" && comment.AuthorUrl == "http://www.roastedamoeba.com"}">
+				${comment.Text}
+			</dd>
+		</for>
+	</dl>
+	
+	<h3 id="add-com">Add a New Comment</h3>
+
+	<div id="comments-form">
+		<form action="${Html.Url(Model.CurrentItem).AppendSegment("comment")}" method="post">
+			<p>${Html.Label("name", "Your Name:")} ${Html.ValidationMessage("name")}<br />
+			${Html.TextBox("name")}</p>
+			
+			<p>${Html.Label("url", "Your URL:")}<br />
+			${Html.TextBox("url")}</p>
+
+			<p>${Html.Label("text", "Your Comment:")} ${Html.ValidationMessage("text")}<br />
+			${Html.TextArea("text", null, 10, 50, null)}</p>
+
+			<p>${Html.SubmitButton("submit", " Post Comment ")}</p>
+		</form>
+
+		<p class="note"><strong class="alert">Comment Guidelines:</strong> Basic XHTML is allowed (a href, strong, em, code).  Line breaks and paragraphs are automatically generated.  Off-topic or inappropriate comments will be edited or deleted.  Email addresses will never be published.  Thanks.</p>
+	</div>
+</div>

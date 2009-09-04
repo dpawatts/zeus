@@ -61,12 +61,16 @@
     <Compile Include="ContentTypes\Blog.cs" />
     <Compile Include="ContentTypes\BlogMonth.cs" />
     <Compile Include="ContentTypes\BlogYear.cs" />
+    <Compile Include="ContentTypes\Comment.cs" />
     <Compile Include="ContentTypes\Post.cs" />
     <Compile Include="ContentTypes\RecentPosts.cs" />
+    <Compile Include="BlogsModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="BlogsInitializer.cs" />
+    <Compile Include="Services\CommentService.cs" />
+    <Compile Include="Services\ICommentService.cs" />
     <Compile Include="Web\BlogAdapter.cs" />
     <Compile Include="Web\MetaWeblog\IMetaWeblog.cs" />
     <Compile Include="Web\MetaWeblog\MetaWeblog.cs" />

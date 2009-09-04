@@ -5,7 +5,7 @@ using Zeus.Integrity;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
-	[ContentType]
+	[ContentType("Blog Post")]
 	[RestrictParents(typeof(Blog), typeof(BlogMonth))]
 	public class Post : BaseBlogPage
 	{
