@@ -6,12 +6,15 @@ namespace Zeus.AddIns.ECommerce.Mvc.ViewModels
 {
 	public class CheckoutPageSummaryViewModel : ViewModel<CheckoutPage>
 	{
-		public CheckoutPageSummaryViewModel(CheckoutPage currentItem, IShoppingBasket shoppingBasket)
+		public CheckoutPageSummaryViewModel(CheckoutPage currentItem, IShoppingBasket shoppingBasket,
+			ShoppingBasketPage shoppingBasketPage)
 			: base(currentItem)
 		{
 			ShoppingBasket = shoppingBasket;
+			ShoppingBasketPage = shoppingBasketPage;
 		}
 
 		public IShoppingBasket ShoppingBasket { get; set; }
+		public ShoppingBasketPage ShoppingBasketPage { get; set; }
 	}
 }

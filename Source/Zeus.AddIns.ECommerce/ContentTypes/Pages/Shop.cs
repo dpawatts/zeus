@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
@@ -46,6 +47,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		public CheckoutPage CheckoutPage
 		{
 			get { return GetChild(CHECKOUT_NAME) as CheckoutPage; }
+		}
+
+		public ShoppingBasketPage ShoppingBasketPage
+		{
+			get { return GetChildren<ShoppingBasketPage>().FirstOrDefault(); }
 		}
 
 		[StringCollectionEditor("Titles", 200, ContainerName = "ECommerce")]

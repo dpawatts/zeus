@@ -62,6 +62,15 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			return Redirect(CurrentItem.Url);
 		}
 
+		public ActionResult Checkout()
+		{
+			// Validate that there are items in the shopping basket.
+			if (!GetShoppingBasket().Items.Any())
+				return RedirectToParentPage();
+
+			return Redirect(CurrentShop.CheckoutPage.Url);
+		}
+
 		private IShoppingBasket GetShoppingBasket()
 		{
 			return _shoppingBasketService.GetBasket(CurrentShop);

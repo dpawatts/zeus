@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Isis.ExtensionMethods;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
@@ -31,6 +32,43 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public override ActionResult Index()
 		{
+			// If we already have shopping basket data entered, add it to ModelState now.
+			IShoppingBasket shoppingBasket = GetShoppingBasket();
+			if (shoppingBasket.BillingAddress != null)
+			{
+				ModelState.Add("BillingTitle", shoppingBasket.BillingAddress.PersonTitle);
+				ModelState.Add("BillingFirstName", shoppingBasket.BillingAddress.FirstName);
+				ModelState.Add("BillingSurname", shoppingBasket.BillingAddress.Surname);
+				ModelState.Add("BillingAddressLine1", shoppingBasket.BillingAddress.AddressLine1);
+				ModelState.Add("BillingAddressLine2", shoppingBasket.BillingAddress.AddressLine2);
+				ModelState.Add("BillingTownCity", shoppingBasket.BillingAddress.TownCity);
+				ModelState.Add("BillingPostcode", shoppingBasket.BillingAddress.Postcode);
+			}
+			if (shoppingBasket.ShippingAddress != null)
+			{
+				ModelState.Add("ShippingTitle", shoppingBasket.ShippingAddress.PersonTitle);
+				ModelState.Add("ShippingFirstName", shoppingBasket.ShippingAddress.FirstName);
+				ModelState.Add("ShippingSurname", shoppingBasket.ShippingAddress.Surname);
+				ModelState.Add("ShippingAddressLine1", shoppingBasket.ShippingAddress.AddressLine1);
+				ModelState.Add("ShippingAddressLine2", shoppingBasket.ShippingAddress.AddressLine2);
+				ModelState.Add("ShippingTownCity", shoppingBasket.ShippingAddress.TownCity);
+				ModelState.Add("ShippingPostcode", shoppingBasket.ShippingAddress.Postcode);
+			}
+			if (shoppingBasket.PaymentCard != null)
+			{
+				ModelState.Add("CardType", shoppingBasket.PaymentCard.CardType);
+				ModelState.Add("CardHolderName", shoppingBasket.PaymentCard.NameOnCard);
+				ModelState.Add("CardExpiryMonth", shoppingBasket.PaymentCard.ExpiryMonth);
+				ModelState.Add("CardExpiryYear", shoppingBasket.PaymentCard.ExpiryYear);
+				ModelState.Add("CardStartMonth", shoppingBasket.PaymentCard.StartMonth);
+				ModelState.Add("CardStartYear", shoppingBasket.PaymentCard.StartYear);
+				ModelState.Add("CardIssueNumber", shoppingBasket.PaymentCard.IssueNumber);
+			}
+			ModelState.Add("EmailAddress", shoppingBasket.EmailAddress);
+			ModelState.Add("ConfirmEmailAddress", shoppingBasket.EmailAddress);
+			ModelState.Add("TelephoneNumber", shoppingBasket.TelephoneNumber);
+			ModelState.Add("MobileTelephoneNumber", shoppingBasket.MobileTelephoneNumber);
+
 			return GetIndexView();
 		}
 
@@ -92,7 +130,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			TempData["CardNumber"] = checkoutDetails.CardNumber;
 			TempData["CardVerificationCode"] = checkoutDetails.CardVerificationCode;
 
-			return View("Summary", new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket()));
+			return View("Summary", new CheckoutPageSummaryViewModel(CurrentItem, GetShoppingBasket(),
+				CurrentShop.ShoppingBasketPage));
 		}
 
 		private ActionResult GetIndexView()
@@ -107,7 +146,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			return View("Index", new CheckoutPageViewModel(CurrentItem,
 				GetTitles((shoppingBasket.BillingAddress != null) ? shoppingBasket.BillingAddress.Title : null),
 				GetTitles((shoppingBasket.ShippingAddress != null) ? shoppingBasket.ShippingAddress.Title : null),
-				cardTypes));
+				cardTypes, CurrentShop.ShoppingBasketPage));
 		}
 
 		private IEnumerable<SelectListItem> GetTitles(string selectedTitle)

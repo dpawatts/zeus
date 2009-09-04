@@ -96,6 +96,7 @@
     <Compile Include="Html\TemplateRenderer.cs" />
     <Compile Include="Html\ZoneExtensions.cs" />
     <Compile Include="Html\ZoneHelper.cs" />
+    <Compile Include="ModelStateDictionaryExtensions.cs" />
     <Compile Include="RequireSslAttribute.cs" />
     <Compile Include="SparkView.cs" />
     <Compile Include="FallbackContentController.cs" />
