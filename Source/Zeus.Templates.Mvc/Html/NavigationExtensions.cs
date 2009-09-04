@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Zeus.FileSystem;
 using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
-using Zeus.Web.Mvc.ViewModels;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Templates.Mvc.Html
@@ -27,24 +25,37 @@ namespace Zeus.Templates.Mvc.Html
 		}
 
 		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
-			CssClassFunc cssClassCallback, Func<ContentItem, string, string> activeTextCallback)
+			CssClassFunc cssClassCallback)
 		{
 			var navigationItems = NavigationItems(html, startItem);
 
 			string result = string.Empty;
 			foreach (ContentItem contentItem in navigationItems)
-			{
 				result += string.Format("<li class=\"{0}\"><span><a href=\"{1}\">{2}</a></span></li>",
 					cssClassCallback(contentItem, contentItem == navigationItems.First(), contentItem == navigationItems.Last()),
-					contentItem.Url, activeTextCallback(contentItem, contentItem.Title));
-			}
+					contentItem.Url, contentItem.Title);
 
 			result = layoutCallback(result);
 			return result;
 		}
 
-		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, ContentItem currentPage, string listClientId, string currentCssClass,
-			Func<string, string> activeTextCallback)
+		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
+		{
+			return NavigationLinks(html,
+				Find.StartPage,
+				nl => "<ul>" + nl + "</ul>",
+				(ci, isFirst, isLast) =>
+				{
+					string result = string.Empty;
+					if (IsCurrentBranch(html, ci, currentPage))
+						result += "on";
+					if (isLast)
+						result += " last";
+					return result;
+				});
+		}
+
+		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, ContentItem currentPage, string listClientId)
 		{
 			return NavigationLinks(html,
 				startItem,
@@ -53,27 +64,11 @@ namespace Zeus.Templates.Mvc.Html
 				{
 					string result = string.Empty;
 					if (IsCurrentBranch(html, ci, currentPage))
-						result += currentCssClass;
+						result += "on";
 					if (isLast)
 						result += " last";
 					return result;
-				},
-				(ci, title) =>
-				{
-					if (IsCurrentBranch(html, ci, currentPage))
-						return activeTextCallback(title);
-					return title;
 				});
-		}
-
-		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage, string currentCssClass, Func<string, string> activeTextCallback)
-		{
-			return NavigationLinks(html, Find.StartPage, currentPage, null, currentCssClass, activeTextCallback);
-		}
-
-		public static string NavigationLinks(this HtmlHelper html, ContentItem currentPage)
-		{
-			return NavigationLinks(html, Find.StartPage, currentPage, null, "on", title => title);
 		}
 
 		/// <summary>
