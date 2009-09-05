@@ -31,6 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Argotic.Common, Version=2008.0.2.0, Culture=neutral, PublicKeyToken=84b2ce808fb02469, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Argotic\Argotic.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Argotic.Core, Version=2008.0.2.0, Culture=neutral, PublicKeyToken=84b2ce808fb02469, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Argotic\Argotic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Argotic.Extensions, Version=2008.0.2.0, Culture=neutral, PublicKeyToken=84b2ce808fb02469, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Argotic\Argotic.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="CookComputing.XmlRpcV2, Version=2.4.0.0, Culture=neutral, PublicKeyToken=a7d6e17aa302004d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\CookComputing.XmlRpcV2.dll</HintPath>
@@ -68,6 +80,14 @@
     <Compile Include="ContentTypes\RecentPosts.cs" />
     <Compile Include="BlogsModule.cs" />
     <Compile Include="Icons\Resources.cs" />
+    <Compile Include="Plugins\ImportAtom.aspx.cs">
+      <DependentUpon>ImportAtom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\ImportAtom.aspx.designer.cs">
+      <DependentUpon>ImportAtom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\ImportExportBlogXmlActionPluginAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="BlogsInitializer.cs" />
@@ -89,6 +109,10 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis %28Isis\Core\Isis%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.Admin\Zeus.Admin.csproj">
+      <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
+      <Name>Zeus.Admin</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
@@ -105,6 +129,14 @@
     <EmbeddedResource Include="Icons\comment.png" />
     <EmbeddedResource Include="Icons\comments.png" />
     <EmbeddedResource Include="Icons\user_comment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Plugins\ImportAtom.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\package_come_and_go.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

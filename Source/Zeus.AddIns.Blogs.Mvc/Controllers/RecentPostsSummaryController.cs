@@ -15,7 +15,8 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 		{
 			IEnumerable<Post> posts = Find.EnumerateAccessibleChildren(CurrentItem.Blog)
 				//.Where(p => p.IsPublished())
-				.OfType<Post>().OrderByDescending(p => p.Date);
+				.OfType<Post>().OrderByDescending(p => p.Date)
+				.Take(CurrentItem.NumberToShow);
 			return PartialView(new RecentPostsSummaryViewModel(CurrentItem, posts));
 		}
 	}

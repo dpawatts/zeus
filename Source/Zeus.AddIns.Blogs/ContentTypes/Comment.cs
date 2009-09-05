@@ -33,6 +33,13 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("AuthorUrl", value); }
 		}
 
+		[ContentProperty("Author Email", 215)]
+		public virtual string AuthorEmail
+		{
+			get { return GetDetail("AuthorEmail", string.Empty); }
+			set { SetDetail("AuthorEmail", value); }
+		}
+
 		[XhtmlStringContentProperty("Text", 220)]
 		public virtual string Text
 		{
