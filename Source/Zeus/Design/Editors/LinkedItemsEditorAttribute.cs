@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zeus.ContentProperties;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
@@ -20,7 +21,7 @@ namespace Zeus.Design.Editors
 			return new LinkedItemsEditor { ID = Name, TypeFilter = TypeFilter.ToString() };
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, PropertyData existingDetail, Control editor, out object newDetail)
 		{
 			DropDownList ddl = (DropDownList) editor;
 			newDetail = Context.Persister.Get(Convert.ToInt32(ddl.SelectedValue));

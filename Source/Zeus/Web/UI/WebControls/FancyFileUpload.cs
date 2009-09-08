@@ -10,7 +10,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Fields
 
-		private HiddenField _hiddenFileNameField, _hiddenIdentifierField;
+		private HiddenField _hiddenFileNameField;
 		private string _currentFileName;
 
 		#endregion
@@ -23,6 +23,16 @@ namespace Zeus.Web.UI.WebControls
 			{
 				_currentFileName = value;
 				EnsureChildControls();
+			}
+		}
+
+		public string Identifier
+		{
+			get
+			{
+				if (ViewState["Identifier"] == null)
+					ViewState["Identifier"] = Guid.NewGuid().ToString();
+				return ViewState["Identifier"] as string;
 			}
 		}
 
@@ -63,15 +73,6 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		public string Identifier
-		{
-			get
-			{
-				EnsureChildControls();
-				return _hiddenIdentifierField.Value;
-			}
-		}
-
 		public bool Enabled
 		{
 			get { return (bool)(ViewState["Enabled"] ?? true); }
@@ -104,19 +105,15 @@ namespace Zeus.Web.UI.WebControls
 			_hiddenFileNameField = new HiddenField { ID = ID + "hdnFileName" };
 			Controls.Add(_hiddenFileNameField);
 
-			_hiddenIdentifierField = new HiddenField { ID = ID + "hdnIdentifier" };
-			if (!Page.IsPostBack)
-				_hiddenIdentifierField.Value = Guid.NewGuid().ToString();
-			Controls.Add(_hiddenIdentifierField);
-
-			string html = string.Format(@"<div style=""float:left;width:600px;margin-bottom:10px;""><a href=""#"" id=""{0}"">Attach a file</a>
-				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
-			Controls.Add(new LiteralControl(html));
 			base.CreateChildControls();
 		}
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			string html = string.Format(@"<div style=""float:left;width:600px;margin-bottom:10px;""><a href=""#"" id=""{0}"">Attach a file</a>
+				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
+			Controls.Add(new LiteralControl(html));
+
 			Page.ClientScript.RegisterCssResource(GetType(), "Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css");
 
 			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadMooTools", 
@@ -131,10 +128,10 @@ namespace Zeus.Web.UI.WebControls
 			Page.ClientScript.RegisterClientScriptResource(GetType(),
 				"Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
 
-			string script = string.Format(@"var up;
+			string script = string.Format(@"var {8}up;
 window.addEvent('domready', function() {{
 
-	up = new FancyUpload3.Attach('{3}', '{4}', {{
+	{8}up = new FancyUpload3.Attach('{3}', '{4}', {{
 		path: '{0}',
 		url: '/PostedFileUpload.axd',
 		fileSizeMax: {7} * 1024 * 1024,
@@ -208,14 +205,15 @@ window.addEvent('domready', function() {{
 		 GetAnchorClientID(),
 		 Identifier,
 		 _hiddenFileNameField.ClientID,
-		 MaximumFileSize);
+		 MaximumFileSize,
+		 ClientID);
 			ScriptManager.RegisterClientScriptBlock(this, GetType(), ClientID + "FancyFileUpload", script, true);
 
 			if (!string.IsNullOrEmpty(_currentFileName))
 			{
 				string existingFileScript = string.Format(@"window.addEvent('domready', function() {{
-	up.select.setStyle('display', 'none');
-	up.reposition();
+	{2}up.select.setStyle('display', 'none');
+	{2}up.reposition();
 
 	var existingUi = {{}};
 
@@ -224,17 +222,17 @@ window.addEvent('domready', function() {{
 
 	existingUi.element.adopt(
 		existingUi.title
-	).inject(up.list).highlight();
+	).inject({2}up.list).highlight();
 
 	var checkbox = new Element('input', {{type: 'checkbox', 'checked': true}});
 	checkbox.addEvent('click', function() {{
 		existingUi.element = existingUi.element.destroy();
-		up.onFileRemove();
+		{2}up.onFileRemove();
 		document.getElementById('{1}').value = '-1';
 		return false;
 	}});
 	checkbox.inject(existingUi.element, 'top');
-}});", _currentFileName, _hiddenFileNameField.ClientID);
+}});", _currentFileName, _hiddenFileNameField.ClientID, ClientID);
 				ScriptManager.RegisterClientScriptBlock(this, GetType(), ClientID + "FancyFileUploadExistingFile", existingFileScript, true);
 			}
 

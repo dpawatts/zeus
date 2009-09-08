@@ -3,6 +3,7 @@ using System.IO;
 using System.Web.UI;
 using Isis.ExtensionMethods.IO;
 using Isis.Web;
+using Zeus.ContentProperties;
 using Zeus.FileSystem;
 using Zeus.Web.Handlers;
 using Zeus.Web.UI.WebControls;
@@ -18,15 +19,22 @@ namespace Zeus.Design.Editors
 			
 		}
 
-		protected override void CreateOrUpdateDetailCollectionItem(object existingDetail, Control editor, out object newDetail)
+		protected override void CreateOrUpdateDetailCollectionItem(ContentItem contentItem, PropertyData existingDetail, Control editor, out object newDetail)
 		{
-			throw new NotImplementedException();
-			/*FileDataEditor fileEditor = (FileDataEditor) editor;
-			FileData existingFile = existingDetail as FileData;
+			FancyFileUpload fileEditor = (FancyFileUpload)editor;
+			LinkProperty existingFileProperty = existingDetail as LinkProperty;
 			if (fileEditor.HasNewOrChangedFile)
 			{
 				// Add new file.
-				FileData newFile = existingFile ?? CreateNewItem();
+				File newFile = null;
+				if (existingFileProperty != null)
+					newFile = existingFileProperty.LinkedItem as File;
+				if (newFile == null)
+				{
+					newFile = CreateNewItem();
+					newFile.Name = Name + Guid.NewGuid();
+					newFile.AddTo(contentItem);
+				}
 
 				// Populate FileData object.
 				newFile.FileName = fileEditor.FileName;
@@ -48,7 +56,7 @@ namespace Zeus.Design.Editors
 			else
 			{
 				newDetail = null;
-			}*/
+			}
 		}
 
 		protected virtual File CreateNewItem()

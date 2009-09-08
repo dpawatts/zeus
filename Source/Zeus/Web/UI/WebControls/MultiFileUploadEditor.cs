@@ -19,17 +19,15 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override Control CreateDetailEditor(int id, PropertyData detail)
 		{
-			/*ObjectProperty linkDetail = detail as ObjectProperty;
+			LinkProperty linkDetail = detail as LinkProperty;
 
-			FileDataEditor fileUpload = CreateEditor();
+			FancyFileUpload fileUpload = CreateEditor();
 			fileUpload.ID = ID + "_upl_" + id;
-			fileUpload.FileUploadImplementation = CreateUpload(fileUpload);
 
 			if (linkDetail != null)
-				fileUpload.CurrentFileName = ((File) linkDetail.Value).FileName;
+				fileUpload.CurrentFileName = ((File) linkDetail.LinkedItem).FileName;
 
-			return fileUpload;*/
-			throw new NotImplementedException();
+			return fileUpload;
 		}
 
 		protected virtual FancyFileUpload CreateEditor()

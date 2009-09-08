@@ -25,7 +25,7 @@ namespace Zeus.Design.Editors
 				{
 					PropertyData existingDetail = (detailCollection.Count > i) ? detailCollection.Details[i] : null;
 					object newDetail;
-					CreateOrUpdateDetailCollectionItem(existingDetail, detailCollectionEditor.Editors[i], out newDetail);
+					CreateOrUpdateDetailCollectionItem((ContentItem) item, existingDetail, detailCollectionEditor.Editors[i], out newDetail);
 					if (newDetail != null)
 						if (existingDetail != null)
 							existingDetail.Value = newDetail;
@@ -42,7 +42,7 @@ namespace Zeus.Design.Editors
 			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors.Count > 0;
 		}
 
-		protected abstract void CreateOrUpdateDetailCollectionItem(object existingDetail, Control editor, out object newDetail);
+		protected abstract void CreateOrUpdateDetailCollectionItem(ContentItem item,PropertyData existingDetail, Control editor, out object newDetail);
 		protected abstract BaseDetailCollectionEditor CreateEditor();
 
 		protected override Control AddEditor(Control container)
