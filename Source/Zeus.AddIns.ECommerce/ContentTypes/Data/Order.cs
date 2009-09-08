@@ -66,6 +66,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("DeliveryMethod", value); }
 		}
 
+		public decimal DeliveryPrice
+		{
+			get { return GetDetail("DeliveryPrice", 0m); }
+			set { SetDetail("DeliveryPrice", value); }
+		}
+
 		public string EmailAddress
 		{
 			get { return GetDetail("EmailAddress", string.Empty); }
@@ -96,18 +102,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		public decimal SubTotalPrice
 		{
-			get { return Items.Sum(i => i.Product.CurrentPrice * i.Quantity); }
+			get { return Items.Sum(i => i.LineTotal); }
 		}
 
 		public decimal TotalPrice
 		{
-			get
-			{
-				decimal result = SubTotalPrice;
-				if (DeliveryMethod != null)
-					result += DeliveryMethod.Price;
-				return result;
-			}
+			get { return SubTotalPrice + DeliveryPrice; }
 		}
 	}
 }

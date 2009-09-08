@@ -177,6 +177,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			Order order = new Order
 			{
 				DeliveryMethod = shoppingBasket.DeliveryMethod,
+				DeliveryPrice = shoppingBasket.DeliveryMethod.Price,
 				BillingAddress = (Address)shoppingBasket.BillingAddress.Clone(true),
 				ShippingAddress = (Address)(shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
 				PaymentCard = (PaymentCard)shoppingBasket.PaymentCard.Clone(true),
@@ -190,6 +191,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				OrderItem orderItem = new OrderItem
 				{
 					Product = shoppingBasketItem.Product,
+					ProductTitle = shoppingBasketItem.Product.Title,
 					Quantity = shoppingBasketItem.Quantity,
 					Price = shoppingBasketItem.Product.CurrentPrice
 				};
