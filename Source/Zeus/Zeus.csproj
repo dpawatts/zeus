@@ -271,7 +271,7 @@
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
     <Compile Include="Web\UI\WebControls\FancyImageUpload.cs" />
     <Compile Include="Web\UI\WebControls\FancyFileUpload.cs" />
-    <Compile Include="Web\UI\WebControls\MultiImageDataUploadEditor.cs" />
+    <Compile Include="Web\UI\WebControls\MultiImageUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\ReactiveTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ItemEditorVersioningMode.cs" />
     <Compile Include="Web\UI\WebControls\StringCollectionEditor.cs" />
