@@ -80,6 +80,7 @@
     <Compile Include="ContentTypes\RootItem.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\StartPage.cs" />
+    <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoUtility.cs" />
