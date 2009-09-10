@@ -15,12 +15,6 @@ namespace Zeus.Templates
 			engine.AddComponent("zeus.templates.services.news", typeof(NewsService));
 
 			TemplatesSection configSection = ConfigurationManager.GetSection("zeus/templates") as TemplatesSection;
-			if (configSection != null)
-			{
-				engine.AddComponentInstance("zeus.templates.configuration.templatesection", configSection);
-				engine.AddComponent("zeus.templates.services.configuration", typeof(ConfigurationService));
-			}
-
 			if (configSection == null || configSection.MailConfiguration == MailConfigSource.SystemNet)
 				engine.AddComponent("zeus.templates.contentMailSender", typeof(IMailSender), typeof(MailSender));
 			else

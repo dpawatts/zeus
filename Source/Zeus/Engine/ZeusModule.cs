@@ -43,6 +43,7 @@ namespace Zeus.Engine
 			Bind(typeof(IEditableHierarchyBuilder<>)).To(typeof(EditableHierarchyBuilder<>)).InSingletonScope();
 			Bind<IContentTypeBuilder>().To<ContentTypeBuilder>().InSingletonScope();
 			Bind<IContentTypeManager>().To<ContentTypeManager>().InSingletonScope();
+			Bind<ContentTypeConfigurationService>().ToSelf().InSingletonScope();
 
 			// Dynamic Content
 			Bind<IDynamicContentManager>().To<DynamicContentManager>().InSingletonScope();

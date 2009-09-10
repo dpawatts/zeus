@@ -83,6 +83,7 @@ namespace Zeus.Engine
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
 			_dependencyInjectionManager.BindInstance(hostSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
+			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
 

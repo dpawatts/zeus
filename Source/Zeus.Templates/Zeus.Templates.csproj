@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
+      <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -58,19 +58,15 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Configuration\TemplateZone.cs" />
-    <Compile Include="Configuration\TemplateZoneCollection.cs" />
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
-    <Compile Include="Configuration\TemplateRule.cs" />
-    <Compile Include="Configuration\TemplateRuleAction.cs" />
-    <Compile Include="Configuration\TemplateRuleCollection.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\News\BaseNewsPage.cs" />
+    <Compile Include="ContentTypes\News\LatestNewsSummary.cs" />
     <Compile Include="ContentTypes\News\NewsContainer.cs" />
     <Compile Include="ContentTypes\News\NewsItem.cs" />
     <Compile Include="ContentTypes\News\NewsMonth.cs" />
@@ -84,7 +80,6 @@
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoUtility.cs" />
-    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\FakeMailSender.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\NewsService.cs" />

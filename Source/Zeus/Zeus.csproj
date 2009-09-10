@@ -49,7 +49,7 @@
     </Reference>
     <Reference Include="SoundInTheory.DynamicImage, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
+      <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -114,7 +114,15 @@
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
     <Compile Include="Configuration\AuthorizedRoleCollection.cs" />
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
+    <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
+    <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
     <Compile Include="Configuration\RecycleBinElement.cs" />
+    <Compile Include="Configuration\ContentTypesSection.cs" />
+    <Compile Include="Configuration\ContentTypeRule.cs" />
+    <Compile Include="Configuration\ContentTypeRuleAction.cs" />
+    <Compile Include="Configuration\ContentTypeRuleCollection.cs" />
+    <Compile Include="Configuration\ContentTypeZone.cs" />
+    <Compile Include="Configuration\ContentTypeZoneCollection.cs" />
     <Compile Include="Configuration\TreeElement.cs" />
     <Compile Include="Configuration\GlobalizationSection.cs" />
     <Compile Include="Configuration\DynamicContentControl.cs" />
@@ -151,6 +159,7 @@
     <Compile Include="ContentProperties\IContentPropertyManager.cs" />
     <Compile Include="ContentTypes\AbstractContentTypeRefiner.cs" />
     <Compile Include="ContentTypes\AttributeExplorer.cs" />
+    <Compile Include="ContentTypes\ContentTypeConfigurationService.cs" />
     <Compile Include="ContentTypes\DefaultContainerAttribute.cs" />
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />

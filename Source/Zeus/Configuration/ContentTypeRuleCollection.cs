@@ -2,10 +2,10 @@ using System.Configuration;
 using System.Globalization;
 using Zeus.ContentTypes;
 
-namespace Zeus.Templates.Configuration
+namespace Zeus.Configuration
 {
-	[ConfigurationCollection(typeof(TemplateRule), AddItemName = "allow,deny", CollectionType = ConfigurationElementCollectionType.BasicMapAlternate)]
-	public class TemplateRuleCollection : ConfigurationElementCollection
+	[ConfigurationCollection(typeof(ContentTypeRule), AddItemName = "allow,deny", CollectionType = ConfigurationElementCollectionType.BasicMapAlternate)]
+	public class ContentTypeRuleCollection : ConfigurationElementCollection
 	{
 		public override ConfigurationElementCollectionType CollectionType
 		{
@@ -19,29 +19,29 @@ namespace Zeus.Templates.Configuration
 
 		protected override ConfigurationElement CreateNewElement()
 		{
-			return new TemplateRule();
+			return new ContentTypeRule();
 		}
 
 		protected override ConfigurationElement CreateNewElement(string elementName)
 		{
-			TemplateRule rule = new TemplateRule();
+			ContentTypeRule rule = new ContentTypeRule();
 			string str = elementName.ToLower(CultureInfo.InvariantCulture);
 			if (str != null)
 			{
 				if (str != "allow")
 				{
 					if (str == "deny")
-						rule.Action = TemplateRuleAction.Deny;
+						rule.Action = ContentTypeRuleAction.Deny;
 					return rule;
 				}
-				rule.Action = TemplateRuleAction.Allow;
+				rule.Action = ContentTypeRuleAction.Allow;
 			}
 			return rule;
 		}
 
 		protected override object GetElementKey(ConfigurationElement element)
 		{
-			TemplateRule rule = (TemplateRule) element;
+			ContentTypeRule rule = (ContentTypeRule) element;
 			return rule.Action.ToString();
 		}
 
@@ -57,7 +57,7 @@ namespace Zeus.Templates.Configuration
 				return true;
 
 			if (contentType != null)
-				foreach (TemplateRule rule in this)
+				foreach (ContentTypeRule rule in this)
 				{
 					int num = rule.IsContentTypeAllowed(contentType);
 					if (num != 0)

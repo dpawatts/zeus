@@ -1,13 +1,14 @@
 ﻿using System.Configuration;
+using Zeus.Configuration;
 
 namespace Zeus.Templates.Configuration
 {
 	public class TemplatesSection : ConfigurationSection
 	{
 		[ConfigurationProperty("rules")]
-		public TemplateRuleCollection Rules
+		public ContentTypeRuleCollection Rules
 		{
-			get { return (TemplateRuleCollection) base["rules"]; }
+			get { return (ContentTypeRuleCollection) base["rules"]; }
 			set { base["rules"] = value; }
 		}
 
@@ -26,9 +27,9 @@ namespace Zeus.Templates.Configuration
 		}
 
 		[ConfigurationProperty("availableZones")]
-		public TemplateZoneCollection AvailableZones
+		public ContentTypeZoneCollection AvailableZones
 		{
-			get { return (TemplateZoneCollection)base["availableZones"]; }
+			get { return (ContentTypeZoneCollection)base["availableZones"]; }
 			set { base["availableZones"] = value; }
 		}
 	}

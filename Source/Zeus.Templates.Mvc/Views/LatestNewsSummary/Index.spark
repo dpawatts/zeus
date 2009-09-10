@@ -1,0 +1,11 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.LatestNewsSummaryViewModel" />
+
+<h3 class="plusMed">APDS company news</h3>
+<div class="dotsTop">
+	<ul id="homeNews">
+		<li each="var newsItem in Model.NewsItems">
+			<a href="${newsItem.Url}"><span>${newsItem.Date.ToString("dd.MM.yy")}</span> ${newsItem.Title}</a>
+		</li>
+	</ul>
+	<a if="Model.CurrentItem.NewsSection != null" href="${Model.CurrentItem.NewsSection.Url}" class="button clearfix"><span>Go to news archive</span></a>
+</div> <!-- dotsTop -->

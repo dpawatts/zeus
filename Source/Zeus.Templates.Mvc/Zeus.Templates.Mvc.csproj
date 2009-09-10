@@ -91,6 +91,7 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="Controllers\News\LatestNewsSummaryController.cs" />
     <Compile Include="Controllers\TextItemController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\News\NewsItemController.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssResult.cs" />
     <Compile Include="TemplatesWebPackage.cs" />
+    <Compile Include="ViewModels\LatestNewsSummaryViewModel.cs" />
     <Compile Include="ViewModels\TextItemViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
     <Compile Include="ViewModels\PageViewModel.cs" />
@@ -153,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\TextItem\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LatestNewsSummary\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

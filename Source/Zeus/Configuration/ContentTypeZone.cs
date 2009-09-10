@@ -1,8 +1,8 @@
 using System.Configuration;
 
-namespace Zeus.Templates.Configuration
+namespace Zeus.Configuration
 {
-	public class TemplateZone : ConfigurationElement
+	public class ContentTypeZone : ConfigurationElement
 	{
 		[ConfigurationProperty("name", DefaultValue = "")]
 		public string Name

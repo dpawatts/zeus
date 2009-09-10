@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions.Helpers;
 using Zeus.ContentTypes;
 using System.Text;
 using System.Collections.Generic;
 using Zeus.Configuration;
-using FluentNHibernate.Cfg;
-using Zeus.Web;
 
 namespace Zeus.Persistence.NH
 {

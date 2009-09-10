@@ -2,11 +2,11 @@ using System;
 using System.Configuration;
 using Zeus.ContentTypes;
 
-namespace Zeus.Templates.Configuration
+namespace Zeus.Configuration
 {
-	public class TemplateRule : ConfigurationElement
+	public class ContentTypeRule : ConfigurationElement
 	{
-		public TemplateRuleAction Action { get; set; }
+		public ContentTypeRuleAction Action { get; set; }
 
 		[ConfigurationProperty("type", DefaultValue = "")]
 		public string Type
@@ -22,7 +22,7 @@ namespace Zeus.Templates.Configuration
 
 		internal int IsContentTypeAllowed(ContentType contentType)
 		{
-			int num = (Action == TemplateRuleAction.Allow) ? 1 : -1;
+			int num = (Action == ContentTypeRuleAction.Allow) ? 1 : -1;
 			if (AllSpecified)
 				return num;
 

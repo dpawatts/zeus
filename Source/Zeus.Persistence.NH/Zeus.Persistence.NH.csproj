@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentNHibernate, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -78,10 +78,6 @@
     <Compile Include="Linq\ContentPropertyVisitor.cs" />
     <Compile Include="Linq\ZeusExtensions.cs" />
     <Compile Include="Linq\ZeusQueryProvider.cs" />
-    <Compile Include="Mappings\ContentItemMap.cs" />
-    <Compile Include="Mappings\AuthorizedRoleMap.cs" />
-    <Compile Include="Mappings\ContentDetailMap.cs" />
-    <Compile Include="Mappings\DetailCollectionMap.cs" />
     <Compile Include="NotifyingInterceptor.cs" />
     <Compile Include="PersistenceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,7 +85,6 @@
     <Compile Include="SessionContext.cs" />
     <Compile Include="SessionProvider.cs" />
     <Compile Include="Transaction.cs" />
-    <Compile Include="ZeusPersistenceModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Isis\Isis.csproj">
