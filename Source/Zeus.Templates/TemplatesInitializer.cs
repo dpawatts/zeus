@@ -4,6 +4,7 @@ using Zeus.Net.Mail;
 using Zeus.Plugin;
 using Zeus.Templates.Configuration;
 using Zeus.Templates.Services;
+using Zeus.Templates.Services.Syndication;
 
 namespace Zeus.Templates
 {
@@ -21,6 +22,7 @@ namespace Zeus.Templates
 				engine.AddComponent("zeus.templates.fakeMailSender", typeof(IMailSender), typeof(FakeMailSender));
 
 			engine.AddComponent("zeus.templates.services.seoDefinitionAppender", typeof(SeoDefinitionAppender));
+			engine.AddComponent("zeus.templates.services.syndicatableDefinitionAppender", typeof(SyndicatableDefinitionAppender));
 		}
 	}
 }

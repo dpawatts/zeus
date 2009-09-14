@@ -1,5 +1,6 @@
 using System.Web.UI;
 
+[assembly: WebResource("Zeus.Templates.Icons.feed.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.newspaper.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.newspaper_link.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.page.png", "image/png")]
