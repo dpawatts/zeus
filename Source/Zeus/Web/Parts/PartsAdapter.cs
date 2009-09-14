@@ -15,14 +15,14 @@ namespace Zeus.Web.Parts
 	{
 		/// <summary>Retrieves content items added to a zone of the parnet item.</summary>
 		/// <param name="parentItem">The item whose items to get.</param>
-		/// <param name="zoneName">The zone in which the items should be contained.</param>
+		/// <param name="zoneNames">The zone(s) in which the items should be contained.</param>
 		/// <returns>A list of items in the zone.</returns>
-		public virtual IEnumerable<ContentItem> GetItemsInZone(ContentItem parentItem, string zoneName)
+		public virtual IEnumerable<ContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
 		{
 			if (parentItem == null)
 				return new List<ContentItem>();
 
-			return parentItem.GetChildren(zoneName);
+			return parentItem.GetChildren(zoneNames);
 		}
 
 		/// <summary>Retrieves allowed item definitions.</summary>

@@ -7,22 +7,23 @@ using Zeus.Web.Parts;
 namespace Zeus.Templates.Services
 {
 	/// <summary>
-	/// Implements "Recusive" zones functionality.
+	/// Implements "Recursive" zones functionality.
 	/// </summary>
 	[Controls(typeof(BasePage))]
 	public class TemplatesPartsAdapter : PartsAdapter
 	{
-		public override IEnumerable<ContentItem> GetItemsInZone(ContentItem parentItem, string zoneName)
+		public override IEnumerable<ContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
 		{
-			List<ContentItem> items = base.GetItemsInZone(parentItem, zoneName).ToList();
+			List<ContentItem> items = base.GetItemsInZones(parentItem, zoneNames).ToList();
 			ContentItem grandParentItem = parentItem;
-			if (zoneName.StartsWith("Recursive") && grandParentItem is BasePage)
-			{
-				if (parentItem.VersionOf == null)
-					items.AddRange(GetItemsInZone(parentItem.Parent, zoneName));
-				else
-					items.AddRange(GetItemsInZone(parentItem.VersionOf.Parent, zoneName));
-			}
+			foreach (string zoneName in zoneNames)
+				if (zoneName.StartsWith("Recursive") && grandParentItem is BasePage)
+				{
+					if (parentItem.VersionOf == null)
+						items.AddRange(GetItemsInZones(parentItem.Parent, zoneName));
+					else
+						items.AddRange(GetItemsInZones(parentItem.VersionOf.Parent, zoneName));
+				}
 			return items;
 		}
 	}

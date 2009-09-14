@@ -6,7 +6,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes
 {
-	[ContentType("Feed", Description = "An RSS feed that outputs an xml with the latest feeds.")]
+	[ContentType("Feed", Description = "An RSS feed that outputs XML with the latest feed data.")]
 	[RestrictParents(typeof(BasePage))]
 	public class RssFeed : BasePage, IFeed, INode
 	{
@@ -46,11 +46,6 @@ namespace Zeus.Templates.ContentTypes
 		public override string Url
 		{
 			get { return base.Url + "?hungry=yes"; }
-		}
-
-		public string PreviewUrl
-		{
-			get { return base.FindPath(PathData.DefaultAction).RewrittenUrl; }
 		}
 
 		public virtual IEnumerable<ISyndicatable> GetItems()

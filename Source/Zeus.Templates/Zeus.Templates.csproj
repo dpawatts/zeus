@@ -65,6 +65,7 @@
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
+    <Compile Include="ContentTypes\Widgets\FeedLink.cs" />
     <Compile Include="ContentTypes\News\BaseNewsPage.cs" />
     <Compile Include="ContentTypes\News\LatestNewsSummary.cs" />
     <Compile Include="ContentTypes\News\NewsContainer.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Services\Syndication\ISyndicatable.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\NewsService.cs" />
-    <Compile Include="Services\Syndication\RssWriter.cs" />
     <Compile Include="Services\SeoDefinitionAppender.cs" />
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />
     <Compile Include="Services\TemplatesPartsAdapter.cs" />
@@ -125,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\feed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\feed_link.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

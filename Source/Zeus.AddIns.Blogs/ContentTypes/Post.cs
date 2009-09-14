@@ -1,13 +1,13 @@
 using System;
 using Zeus.ContentProperties;
-using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Templates.Services.Syndication;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType("Blog Post")]
 	[RestrictParents(typeof(Blog), typeof(BlogMonth))]
-	public class Post : BaseBlogPage
+	public class Post : BaseBlogPage, ISyndicatable
 	{
 		public override string IconUrl
 		{
@@ -29,6 +29,11 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		{
 			get { return GetDetail("Text", string.Empty); }
 			set { SetDetail("Text", value); }
+		}
+
+		string ISyndicatable.Summary
+		{
+			get { return Text; }
 		}
 	}
 }

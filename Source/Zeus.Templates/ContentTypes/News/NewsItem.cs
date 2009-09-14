@@ -3,12 +3,13 @@ using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
 using Zeus.Integrity;
+using Zeus.Templates.Services.Syndication;
 
 namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Item")]
 	[RestrictParents(typeof(NewsContainer), typeof(NewsMonth))]
-	public class NewsItem : BaseNewsPage, IFileSystemContainer
+	public class NewsItem : BaseNewsPage, IFileSystemContainer, ISyndicatable
 	{
 		protected override string IconName
 		{
@@ -33,6 +34,13 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return Date.ToLongDateString(); }
 		}
 
+		[XhtmlStringContentProperty("Introduction", 35)]
+		public virtual string Introduction
+		{
+			get { return GetDetail("Introduction", string.Empty); }
+			set { SetDetail("Introduction", value); }
+		}
+
 		[ContentProperty("Content", 40, Shared = false)]
 		[HtmlTextBoxEditor(ContainerName = "Content")]
 		public virtual string Content
@@ -50,6 +58,11 @@ namespace Zeus.Templates.ContentTypes.News
 		public override void AddTo(ContentItem newParent)
 		{
 			Utility.Insert(this, newParent, "Date DESC");
+		}
+
+		string ISyndicatable.Summary
+		{
+			get { return Introduction; }
 		}
 	}
 }

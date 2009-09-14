@@ -13,7 +13,7 @@ namespace Zeus.Web.Mvc.Html
 {
 	public interface ITemplateRenderer
 	{
-		string RenderTemplate(ContentItem item, IContentItemContainer container);
+		string RenderTemplate(ContentItem item, IContentItemContainer container, string action);
 	}
 
 	public class TemplateRenderer : ITemplateRenderer
@@ -27,7 +27,7 @@ namespace Zeus.Web.Mvc.Html
 			_engine = engine;
 		}
 
-		public string RenderTemplate(ContentItem item, IContentItemContainer container)
+		public string RenderTemplate(ContentItem item, IContentItemContainer container, string action)
 		{
 			var routeData = new RouteData();
 
@@ -35,7 +35,7 @@ namespace Zeus.Web.Mvc.Html
 			routeData.Values[ContentRoute.ContentEngineKey] = _engine;
 			routeData.Values[ContentRoute.ControllerKey] = _controllerMapper.GetControllerName(item.GetType());
 			routeData.Values[ContentRoute.AreaKey] = _controllerMapper.GetAreaName(item.GetType());
-			routeData.Values[ContentRoute.ActionKey] = "index";
+			routeData.Values[ContentRoute.ActionKey] = action;
 
 			var writer = new StringWriter();
 

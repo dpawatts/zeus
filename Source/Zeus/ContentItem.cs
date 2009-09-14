@@ -630,6 +630,16 @@ namespace Zeus
 			return GetChildren().Authorized(Operations.Read).InZone(childZoneName);
 		}
 
+		public virtual IEnumerable<ContentItem> GetChildren(params string[] zoneNames)
+		{
+			return GetChildren().Authorized(Operations.Read).InZones(zoneNames);
+		}
+
+		public virtual IEnumerable<ContentItem> GetChildrenInZones()
+		{
+			return GetChildren().Authorized(Operations.Read).InZones();
+		}
+
 		/// <summary>
 		/// Gets child items that the user is allowed to access.
 		/// It doesn't have to return the same collection as

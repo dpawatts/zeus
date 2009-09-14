@@ -92,6 +92,7 @@
     <Compile Include="ContentController.cs" />
     <Compile Include="ContentRoute.cs" />
     <Compile Include="ControllerMapper.cs" />
+    <Compile Include="Html\BaseWidgetHelper.cs" />
     <Compile Include="Html\ItemHelper.cs" />
     <Compile Include="Html\TemplateRenderer.cs" />
     <Compile Include="Html\ZoneExtensions.cs" />

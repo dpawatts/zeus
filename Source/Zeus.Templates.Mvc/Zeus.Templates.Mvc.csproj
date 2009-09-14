@@ -91,6 +91,9 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="Controllers\WidgetController.generic.cs" />
+    <Compile Include="Controllers\FeedLinkController.cs" />
+    <Compile Include="Controllers\RssFeedController.cs" />
     <Compile Include="Controllers\News\LatestNewsSummaryController.cs" />
     <Compile Include="Controllers\TextItemController.cs" />
     <Compile Include="Controllers\PageController.cs" />
@@ -107,9 +110,12 @@
     <Compile Include="Html\HtmlHelperExtensions.cs" />
     <Compile Include="Html\NavigationExtensions.cs" />
     <Compile Include="Html\ValidationExtensions.cs" />
+    <Compile Include="Html\WidgetExtensions.cs" />
+    <Compile Include="Html\WidgetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssResult.cs" />
     <Compile Include="TemplatesWebPackage.cs" />
+    <Compile Include="ViewModels\FeedLinkViewModel.cs" />
     <Compile Include="ViewModels\LatestNewsSummaryViewModel.cs" />
     <Compile Include="ViewModels\TextItemViewModel.cs" />
     <Compile Include="ViewModels\StartPageViewModel.cs" />
@@ -121,6 +127,10 @@
     <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
       <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
       <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Isis\Isis.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Isis %28Isis\Core\Isis%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
@@ -158,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\LatestNewsSummary\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FeedLink\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\FeedLink\Header.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
