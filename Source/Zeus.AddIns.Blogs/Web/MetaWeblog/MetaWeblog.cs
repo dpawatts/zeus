@@ -1,6 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CookComputing.XmlRpc;
+using Isis.Web;
+using Isis.Web.Security;
+using Zeus.AddIns.Blogs.ContentTypes;
+using Zeus.AddIns.Blogs.Services;
 
 namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 {
@@ -13,12 +18,8 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				string id = string.Empty;
-
-				// TODO: Implement your own logic to add the post and set the id
-				throw new NotImplementedException();
-
-				return id;
+				ContentTypes.Post newPost = GetBlogService().AddPost(GetBlog(blogid), post.dateCreated, post.title, post.description, publish);
+				return newPost.ID.ToString();
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -42,12 +43,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				Post post = new Post();
-
-				// TODO: Implement your own logic to update the post and set the post
-				throw new NotImplementedException();
-
-				return post;
+				return PopulatePost(Zeus.Context.Persister.Get<ContentTypes.Post>(Convert.ToInt32(postid)));
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -71,12 +67,9 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				List<Post> posts = new List<Post>();
-
-				// TODO: Implement your own logic to get posts and set the posts
-				throw new NotImplementedException();
-
-				return posts.ToArray();
+				return GetBlogService().GetRecentPosts(GetBlog(blogid), numberOfPosts)
+					.Select(p => PopulatePost(p))
+					.ToArray();
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -114,12 +107,14 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				List<BlogInfo> infoList = new List<BlogInfo>();
-
-				// TODO: Implement your own logic to get blog info objects and set the infoList
-				throw new NotImplementedException();
-
-				return infoList.ToArray();
+				return Find.EnumerateAccessibleChildren(Find.StartPage).OfType<Blog>()
+					.Select(b => new BlogInfo
+					{
+						blogid = b.ID.ToString(),
+						blogName = b.Title,
+						url = GetLink(b.Url)
+					})
+					.ToArray();
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -142,14 +137,36 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 
 		#region Private Methods
 
-		private bool ValidateUser(string username, string password)
+		private static bool ValidateUser(string username, string password)
 		{
-			bool result = false;
+			return WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().ValidateUser(username, password);
+		}
 
-			// TODO: Implement the logic to validate the user
-			throw new NotImplementedException();
+		private static string GetLink(string url)
+		{
+			return Zeus.Context.Current.WebContext.Url.HostUrl + url;
+		}
 
-			return result;
+		private static Blog GetBlog(string id)
+		{
+			return Zeus.Context.Persister.Get<Blog>(Convert.ToInt32(id));
+		}
+
+		private static IBlogService GetBlogService()
+		{
+			return Zeus.Context.Current.Resolve<IBlogService>();
+		}
+
+		private static Post PopulatePost(ContentTypes.Post post)
+		{
+			return new Post
+			{
+				dateCreated = post.Created,
+				description = post.Text,
+				title = post.Title,
+				permalink = GetLink(post.Url),
+				postid = post.ID
+			};
 		}
 
 		#endregion

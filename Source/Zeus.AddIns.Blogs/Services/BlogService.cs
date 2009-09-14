@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Ninject;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.ContentTypes;
@@ -5,7 +8,7 @@ using Zeus.Persistence;
 
 namespace Zeus.AddIns.Blogs.Services
 {
-	public class BlogService : IStartable
+	public class BlogService : IBlogService, IStartable
 	{
 		#region Fields
 
@@ -68,5 +71,28 @@ namespace Zeus.AddIns.Blogs.Services
 		}
 
 		#endregion
+
+		public Post AddPost(Blog blog, DateTime dateCreated, string title, string text, bool publish)
+		{
+			Post post = _contentTypeManager.CreateInstance<Post>(blog);
+			post.Title = title;
+			post.Text = text;
+			post.Created = dateCreated;
+			if (publish)
+				post.Published = dateCreated;
+			
+			post.AddTo(blog);
+			_persister.Save(post);
+
+			return post;
+		}
+
+		public IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts)
+		{
+			return Find.EnumerateAccessibleChildren(blog)
+				//.Where(p => p.IsPublished())
+				.OfType<Post>().OrderByDescending(p => p.Date)
+				.Take(numberOfPosts);
+		}
 	}
 }
