@@ -7,6 +7,7 @@ namespace Zeus.AddIns.Blogs.Services
 	public interface IBlogService
 	{
 		Post AddPost(Blog blog, DateTime dateCreated, string title, string text, bool publish);
+		void UpdatePost(Post post, DateTime dateCreated, string title, string text, bool publish);
 		IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts);
 	}
 }

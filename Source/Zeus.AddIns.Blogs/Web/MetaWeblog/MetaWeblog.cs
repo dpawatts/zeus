@@ -29,12 +29,8 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				bool result = false;
-
-				// TODO: Implement your own logic to add the post and set the result
-				throw new NotImplementedException();
-
-				return result;
+				GetBlogService().UpdatePost(GetPost(postid), post.dateCreated, post.title, post.description, publish);
+				return true;
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -43,7 +39,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				return PopulatePost(Zeus.Context.Persister.Get<ContentTypes.Post>(Convert.ToInt32(postid)));
+				return PopulatePost(GetPost(postid));
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -93,12 +89,8 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				bool result = false;
-
-				// TODO: Implement your own logic to delete the post and set the result
-				throw new NotImplementedException();
-
-				return result;
+				Zeus.Context.Persister.Delete(GetPost(postid));
+				return true;
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -150,6 +142,11 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		private static Blog GetBlog(string id)
 		{
 			return Zeus.Context.Persister.Get<Blog>(Convert.ToInt32(id));
+		}
+
+		private static ContentTypes.Post GetPost(string id)
+		{
+			return Zeus.Context.Persister.Get<ContentTypes.Post>(Convert.ToInt32(id));
 		}
 
 		private static IBlogService GetBlogService()

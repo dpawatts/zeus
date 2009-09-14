@@ -87,6 +87,18 @@ namespace Zeus.AddIns.Blogs.Services
 			return post;
 		}
 
+		public void UpdatePost(Post post, DateTime dateCreated, string title, string text, bool publish)
+		{
+			if (!string.IsNullOrEmpty(title))
+				post.Title = title;
+			if (!string.IsNullOrEmpty(text))
+				post.Text = text;
+			post.Created = dateCreated;
+			post.Published = (publish) ? dateCreated : (DateTime?) null;
+
+			_persister.Save(post);
+		}
+
 		public IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts)
 		{
 			return Find.EnumerateAccessibleChildren(blog)
