@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using CookComputing.XmlRpc;
-using Isis.Web;
 using Isis.Web.Security;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services;
+using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 
 namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 {
@@ -18,7 +18,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				ContentTypes.Post newPost = GetBlogService().AddPost(GetBlog(blogid), post.dateCreated, post.title, post.description, publish);
+				ContentTypes.Post newPost = GetBlogService().AddPost(GetBlog(blogid), post.dateCreated, post.title, post.description, post.categories, publish);
 				return newPost.ID.ToString();
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
@@ -29,7 +29,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				GetBlogService().UpdatePost(GetPost(postid), post.dateCreated, post.title, post.description, publish);
+				GetBlogService().UpdatePost(GetPost(postid), post.dateCreated, post.title, post.description, post.categories, publish);
 				return true;
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
@@ -48,12 +48,16 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				List<CategoryInfo> categoryInfos = new List<CategoryInfo>();
-
-				// TODO: Implement your own logic to get category info and set the categoryInfos
-				throw new NotImplementedException();
-
-				return categoryInfos.ToArray();
+				return GetBlog(blogid).Categories.GetChildren<ContentTypes.Category>()
+					.Select(c => new CategoryInfo
+					{
+						description = c.Title,
+						title = c.Title,
+						htmlUrl = GetLink(c.Url),
+						rssUrl = string.Empty,
+						categoryid = c.ID.ToString()
+					})
+					.ToArray();
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -75,12 +79,11 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				MediaObjectInfo objectInfo = new MediaObjectInfo();
-
-				// TODO: Implement your own logic to add media object and set the objectInfo
-				throw new NotImplementedException();
-
-				return objectInfo;
+				File file = GetBlogService().AddFile(GetBlog(blogid), mediaObject.name, mediaObject.type, mediaObject.bits);
+				return new MediaObjectInfo
+				{
+					url = file.Url
+				};
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
@@ -162,7 +165,8 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 				description = post.Text,
 				title = post.Title,
 				permalink = GetLink(post.Url),
-				postid = post.ID
+				postid = post.ID,
+				categories = post.Categories.Cast<ContentTypes.Category>().Select(c => c.Title).ToArray()
 			};
 		}
 

@@ -54,7 +54,7 @@ namespace Zeus.FileSystem
 
 		public override string Url
 		{
-			get { return "~/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
+			get { return "/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
 		}
 
 		public string FileExtension

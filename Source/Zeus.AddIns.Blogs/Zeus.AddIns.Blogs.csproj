@@ -79,6 +79,8 @@
     <Compile Include="ContentTypes\Post.cs" />
     <Compile Include="ContentTypes\RecentPosts.cs" />
     <Compile Include="BlogsModule.cs" />
+    <Compile Include="ContentTypes\Category.cs" />
+    <Compile Include="ContentTypes\CategoryContainer.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Plugins\ImportAtom.aspx.cs">
       <DependentUpon>ImportAtom.aspx</DependentUpon>

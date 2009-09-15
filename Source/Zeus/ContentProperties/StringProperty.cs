@@ -42,5 +42,10 @@ namespace Zeus.ContentProperties
 		{
 			return new TextBoxEditorAttribute(title, sortOrder) { ContainerName = containerName };
 		}
+
+		public override string GetXhtmlValue()
+		{
+			return (StringValue != null) ? StringValue.Replace(Environment.NewLine, "<br />") : null;
+		}
 	}
 }

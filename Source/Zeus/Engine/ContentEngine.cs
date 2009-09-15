@@ -87,7 +87,8 @@ namespace Zeus.Engine
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
 
-			Url.DefaultExtension = hostSection.Web.Extension;
+			if (hostSection != null && hostSection.Web != null)
+				Url.DefaultExtension = hostSection.Web.Extension;
 		}
 
 		#endregion

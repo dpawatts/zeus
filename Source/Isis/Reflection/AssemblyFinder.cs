@@ -26,7 +26,8 @@ namespace Isis.Reflection
 			if (!_binFolderAssembliesLoaded)
 			{
 				_binFolderAssembliesLoaded = true;
-				LoadMatchingAssemblies(HttpRuntime.BinDirectory);
+				if (HttpContext.Current != null)
+					LoadMatchingAssemblies(HttpRuntime.BinDirectory);
 			}
 
 			List<string> addedAssemblyNames = new List<string>();

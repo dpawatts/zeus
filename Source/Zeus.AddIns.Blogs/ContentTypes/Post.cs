@@ -1,5 +1,6 @@
 using System;
 using Zeus.ContentProperties;
+using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
 
@@ -29,6 +30,12 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		{
 			get { return GetDetail("Text", string.Empty); }
 			set { SetDetail("Text", value); }
+		}
+
+		[LinkedItemsCheckBoxListEditor("Categories", 210, typeof(Category))]
+		public PropertyCollection Categories
+		{
+			get { return GetDetailCollection("Categories", true); }
 		}
 
 		string ISyndicatable.Summary
