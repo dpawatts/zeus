@@ -126,7 +126,7 @@ namespace Zeus.ContentTypes
 					continue;
 				if (!childItem.IsAuthorized(user))
 					continue;
-				if (!contentType.IsAllowedInZone(zone))
+				if (!childItem.IsAllowedInZone(zone))
 					continue;
 				allowedChildren.Add(childItem);
 			}
