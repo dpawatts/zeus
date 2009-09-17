@@ -88,6 +88,8 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AcceptImageSubmitAttribute.cs" />
+    <Compile Include="AcceptParameterAttribute.cs" />
     <Compile Include="ActionResolver.cs" />
     <Compile Include="ContentController.cs" />
     <Compile Include="ContentRoute.cs" />

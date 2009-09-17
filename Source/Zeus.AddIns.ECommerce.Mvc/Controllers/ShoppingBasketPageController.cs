@@ -8,6 +8,7 @@ using Zeus.Persistence;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;
+using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
@@ -53,17 +54,21 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			return Redirect(CurrentItem.Url);
 		}
 
+		[ActionName("Checkout")]
+		[AcceptVerbs(HttpVerbs.Post)]
+		[AcceptImageSubmit(Name = "updateDeliveryMethod")]
 		public ActionResult UpdateDeliveryMethod(int deliveryMethodID)
 		{
-			IShoppingBasket shoppingBasket = GetShoppingBasket();
-			shoppingBasket.DeliveryMethod = _deliveryMethodFinder.Items().Single(dm => dm.ID == deliveryMethodID);
-			_shoppingBasketService.SaveBasket(CurrentShop);
-
+			UpdateDeliveryMethodInternal(deliveryMethodID);
 			return Redirect(CurrentItem.Url);
 		}
 
-		public ActionResult Checkout()
+		[AcceptVerbs(HttpVerbs.Post)]
+		[AcceptImageSubmit(Name = "checkout")]
+		public ActionResult Checkout(int deliveryMethodID)
 		{
+			UpdateDeliveryMethodInternal(deliveryMethodID);
+
 			// Validate that there are items in the shopping basket.
 			if (!GetShoppingBasket().Items.Any())
 				return RedirectToParentPage();
@@ -74,6 +79,13 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		private IShoppingBasket GetShoppingBasket()
 		{
 			return _shoppingBasketService.GetBasket(CurrentShop);
+		}
+
+		private void UpdateDeliveryMethodInternal(int deliveryMethodID)
+		{
+			IShoppingBasket shoppingBasket = GetShoppingBasket();
+			shoppingBasket.DeliveryMethod = _deliveryMethodFinder.Items().Single(dm => dm.ID == deliveryMethodID);
+			_shoppingBasketService.SaveBasket(CurrentShop);
 		}
 	}
 }
