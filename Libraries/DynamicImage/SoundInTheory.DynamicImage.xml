@@ -1428,6 +1428,28 @@
             Gets or sets the y-position of the top side of the mask image.
             </summary>
         </member>
+        <member name="T:SoundInTheory.DynamicImage.Filters.ColorKeyFilter">
+            <summary>
+            Makes a specified color transparent in the output image. Can also use the
+            top-left pixel in the source image as the transparent color.
+            </summary>
+            <!-- No matching elements were found for the following include tag --><include file="../documentation.xml" path="docs/types/type[@name = 'ColorKeyFilter']/*"/>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.Color">
+            <summary>
+            Gets or sets the transparent color.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.ColorTolerance">
+            <summary>
+            Gets or sets the color tolerance for transparency. This value is used to create a range around the Color parameter, within which colors will be considered transparent.
+            </summary>
+        </member>
+        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.UseFirstPixel">
+            <summary>
+            Gets or sets whether the first (top left) pixel of an image will be used as the transparent color.
+            </summary>
+        </member>
         <member name="T:SoundInTheory.DynamicImage.Filters.RotationFilter">
             <summary>
             Rotates an image based on a specified angle. The image rotates around its centre point.
@@ -1732,28 +1754,6 @@
         <member name="P:SoundInTheory.DynamicImage.Filters.BrightnessAdjustmentFilter.Level">
             <summary>
             Gets or sets the brightness level. Values range from -100 to 100.
-            </summary>
-        </member>
-        <member name="T:SoundInTheory.DynamicImage.Filters.ColorKeyFilter">
-            <summary>
-            Makes a specified color transparent in the output image. Can also use the
-            top-left pixel in the source image as the transparent color.
-            </summary>
-            <!-- No matching elements were found for the following include tag --><include file="../documentation.xml" path="docs/types/type[@name = 'ColorKeyFilter']/*"/>
-        </member>
-        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.Color">
-            <summary>
-            Gets or sets the transparent color.
-            </summary>
-        </member>
-        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.ColorTolerance">
-            <summary>
-            Gets or sets the color tolerance for transparency. This value is used to create a range around the Color parameter, within which colors will be considered transparent.
-            </summary>
-        </member>
-        <member name="P:SoundInTheory.DynamicImage.Filters.ColorKeyFilter.UseFirstPixel">
-            <summary>
-            Gets or sets whether the first (top left) pixel of an image will be used as the transparent color.
             </summary>
         </member>
     </members>
