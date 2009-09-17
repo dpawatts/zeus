@@ -17,5 +17,14 @@ namespace Isis.ExtensionMethods.IO
 				return ms.ToArray();
 			}
 		}
+
+		public static void CopyTo(this Stream input, Stream output)
+		{
+			const int size = 4096;
+			byte[] bytes = new byte[4096];
+			int numBytes;
+			while ((numBytes = input.Read(bytes, 0, size)) > 0)
+				output.Write(bytes, 0, numBytes);
+		}
 	}
 }

@@ -191,6 +191,8 @@
     <Compile Include="Engine\IContentAdapter.cs" />
     <Compile Include="Engine\IContentAdapterProvider.cs" />
     <Compile Include="Engine\ZeusModule.cs" />
+    <Compile Include="FileSystem\FileSystemService.cs" />
+    <Compile Include="FileSystem\IFileSystemService.cs" />
     <Compile Include="FileSystem\Images\Image.cs" />
     <Compile Include="FileSystem\Images\ImageCachingService.cs" />
     <Compile Include="FileSystem\Images\ImageCachingServiceInitializer.cs" />
