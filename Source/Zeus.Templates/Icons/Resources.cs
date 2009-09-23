@@ -11,3 +11,5 @@ using System.Web.UI;
 [assembly: WebResource("Zeus.Templates.Icons.page_world.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.report.png", "image/png")]
 [assembly: WebResource("Zeus.Templates.Icons.sitemap.png", "image/png")]
+[assembly: WebResource("Zeus.Templates.Icons.tag_blue.png", "image/png")]
+[assembly: WebResource("Zeus.Templates.Icons.tag_red.png", "image/png")]
