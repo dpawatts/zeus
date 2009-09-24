@@ -1,0 +1,12 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.TagViewModel" />
+
+<div id="title">
+	<h1>Tag - ${Model.CurrentItem.Title}</h1>
+	<h2>There ${Html.IsAre(Model.ReferenceCount)} ${Model.ReferenceCount} ${Html.Pluralize("page", Model.ReferenceCount)} with this tag.</h2>
+</div>
+
+<ul>
+	<li each="var taggedItem in Model.TaggedItems">
+		<a href="${taggedItem.Url}">${taggedItem.Title}</a>
+	</li>
+</ul>

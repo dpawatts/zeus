@@ -14,6 +14,7 @@ namespace Zeus.Templates
 		public void Initialize(ContentEngine engine)
 		{
 			engine.AddComponent("zeus.templates.services.news", typeof(NewsService));
+			engine.AddComponent("zeus.templates.services.tag", typeof(ITagService), typeof(TagService));
 
 			TemplatesSection configSection = ConfigurationManager.GetSection("zeus/templates") as TemplatesSection;
 			if (configSection != null)
@@ -26,6 +27,7 @@ namespace Zeus.Templates
 
 			engine.AddComponent("zeus.templates.services.seoDefinitionAppender", typeof(SeoDefinitionAppender));
 			engine.AddComponent("zeus.templates.services.syndicatableDefinitionAppender", typeof(SyndicatableDefinitionAppender));
+			engine.AddComponent("zeus.templates.services.taggingDefinitionAppender", typeof(TaggingDefinitionAppender));
 		}
 	}
 }

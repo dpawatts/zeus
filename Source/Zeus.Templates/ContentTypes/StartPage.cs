@@ -5,7 +5,7 @@ namespace Zeus.Templates.ContentTypes
 {
 	[ContentType("Start Page", "BaseStartPage", Installer = Installation.InstallerHints.PreferredStartPage)]
 	[RestrictParents(typeof(RootItem))]
-	public class StartPage : BasePage, IFileSystemContainer, ITagRoot
+	public class StartPage : BasePage, IFileSystemContainer
 	{
 		protected override string IconName
 		{

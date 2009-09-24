@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using Zeus.Configuration;
 
 namespace Zeus.Templates.Configuration
 {
@@ -17,6 +16,13 @@ namespace Zeus.Templates.Configuration
 		{
 			get { return (SeoElement)base["seo"]; }
 			set { base["seo"] = value; }
+		}
+
+		[ConfigurationProperty("tagging")]
+		public TaggingElement Tagging
+		{
+			get { return (TaggingElement)base["tagging"]; }
+			set { base["tagging"] = value; }
 		}
 	}
 }

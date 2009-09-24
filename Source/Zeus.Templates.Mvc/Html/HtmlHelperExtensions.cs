@@ -46,5 +46,12 @@ namespace Zeus.Templates.Mvc.Html
 				word = word + "s";
 			return word;
 		}
+
+		public static string IsAre(this HtmlHelper html, int count)
+		{
+			if (count != 1)
+				return "are";
+			return "is";
+		}
 	}
 }

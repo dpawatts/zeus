@@ -6,6 +6,7 @@ using Zeus.Admin;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.DynamicContent;
+using Zeus.FileSystem;
 using Zeus.Globalization;
 using Zeus.Installation;
 using Zeus.Integrity;
@@ -52,6 +53,9 @@ namespace Zeus.Engine
 			Bind<IContentAdapterProvider>().To<ContentAdapterProvider>().InSingletonScope();
 			Bind(typeof(IPluginFinder<>)).To(typeof(PluginFinder<>)).InSingletonScope();
 			Bind<ITypeFinder>().To<TypeFinder>().InSingletonScope();
+
+			// File System
+			Bind<IFileSystemService>().To<FileSystemService>();
 
 			// Globalization
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();
