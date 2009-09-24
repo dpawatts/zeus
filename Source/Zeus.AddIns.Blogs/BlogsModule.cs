@@ -1,5 +1,6 @@
 using Ninject.Modules;
 using Zeus.AddIns.Blogs.Services;
+using Zeus.AddIns.Blogs.Services.Tracking;
 
 namespace Zeus.AddIns.Blogs
 {
@@ -9,6 +10,8 @@ namespace Zeus.AddIns.Blogs
 		{
 			Bind<IBlogService>().To<BlogService>().InSingletonScope();
 			Bind<ICommentService>().To<CommentService>().InSingletonScope();
+			Bind<IPingbackService>().To<PingbackService>().InSingletonScope();
+			Bind<ITrackingService>().To<TrackingService>().InSingletonScope();
 		}
 	}
 }

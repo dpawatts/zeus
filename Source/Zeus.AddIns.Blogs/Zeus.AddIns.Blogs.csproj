@@ -59,6 +59,9 @@
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -75,6 +78,8 @@
     <Compile Include="ContentTypes\BlogYear.cs" />
     <Compile Include="ContentTypes\Comment.cs" />
     <Compile Include="ContentTypes\ArchiveLinks.cs" />
+    <Compile Include="ContentTypes\Pingback.cs" />
+    <Compile Include="ContentTypes\FeedbackItem.cs" />
     <Compile Include="ContentTypes\RecentPostsSummary.cs" />
     <Compile Include="ContentTypes\Post.cs" />
     <Compile Include="ContentTypes\RecentPosts.cs" />
@@ -96,16 +101,21 @@
     <Compile Include="Services\IBlogService.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\ICommentService.cs" />
-    <Compile Include="Web\BlogAdapter.cs" />
+    <Compile Include="Services\Tracking\IPingbackService.cs" />
+    <Compile Include="Services\Tracking\ITrackingService.cs" />
+    <Compile Include="Services\Tracking\Notifier.cs" />
+    <Compile Include="Services\Tracking\TrackingService.cs" />
+    <Compile Include="Services\Tracking\Verifier.cs" />
+    <Compile Include="Web\PostAdapter.cs" />
+    <Compile Include="Web\HtmlUtility.cs" />
     <Compile Include="Web\MetaWeblog\IMetaWeblog.cs" />
-    <Compile Include="Web\MetaWeblog\MetaWeblog.cs" />
+    <Compile Include="Web\MetaWeblog\MetaWeblogXmlRpcService.cs" />
     <Compile Include="Web\MetaWeblog\Structures.cs" />
-    <Compile Include="Web\Pingbacks\IWeblogUpdates.cs" />
-    <Compile Include="Web\Pingbacks\PingbackHandler.cs" />
-    <Compile Include="Web\Pingbacks\PingbackSender.cs" />
-    <Compile Include="Web\Pingbacks\WeblogUpdatesPingResponse.cs" />
-    <Compile Include="Web\Trackbacks\TrackbackHandler.cs" />
-    <Compile Include="Web\Trackbacks\TrackbackSender.cs" />
+    <Compile Include="Services\Tracking\IPingbackProxy.cs" />
+    <Compile Include="Web\Pingback\PingbackXmlRpcService.cs" />
+    <Compile Include="Web\Routing\RouteExtensions.cs" />
+    <Compile Include="Web\Routing\XmlRpcRouteHandler.cs" />
+    <Compile Include="Web\XmlRpc\ZeusXmlRpcService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">

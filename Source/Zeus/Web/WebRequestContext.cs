@@ -49,6 +49,11 @@ namespace Zeus.Web
 			CurrentHttpContext.Server.TransferRequest(url, true);
 		}
 
+		public string GetFullyQualifiedUrl(string url)
+		{
+			return Url.HostUrl + url;
+		}
+
 		#region IDisposable Members
 
 		void IDisposable.Dispose()

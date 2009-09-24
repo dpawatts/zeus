@@ -55,7 +55,7 @@ namespace Zeus.Engine
 			Bind<ITypeFinder>().To<TypeFinder>().InSingletonScope();
 
 			// File System
-			Bind<IFileSystemService>().To<FileSystemService>();
+			Bind<IFileSystemService>().To<FileSystemService>().InSingletonScope();
 
 			// Globalization
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();

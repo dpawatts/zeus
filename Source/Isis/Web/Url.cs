@@ -429,6 +429,26 @@ namespace Isis.Web
 			return new Url(url);
 		}
 
+		public static bool TryParse(string url, out Url result)
+		{
+			try
+			{
+				result = Parse(url);
+				return true;
+			}
+			catch
+			{
+				result = null;
+				return false;
+			}
+		}
+
+		public static bool TryParse(string url)
+		{
+			Url result;
+			return TryParse(url, out result);
+		}
+
 		public Url PrependSegment(string segment)
 		{
 			if (string.IsNullOrEmpty(Path) || Path == "/")

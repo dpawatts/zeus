@@ -1,24 +1,10 @@
-using System;
 using Zeus.ContentProperties;
-using Zeus.Design.Editors;
-using Zeus.Integrity;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType("Blog Post Comment")]
-	[RestrictParents(typeof(Post))]
-	public class Comment : BaseBlogPage
+	public class Comment : FeedbackItem
 	{
-		public override string IconUrl
-		{
-			get { return GetIconUrl(typeof(Comment), "Zeus.AddIns.Blogs.Icons.comment.png"); }
-		}
-
-		public override Blog CurrentBlog
-		{
-			get { return (GetParent() is BlogMonth) ? ((BlogMonth)GetParent()).CurrentBlog : (Blog)GetParent(); }
-		}
-
 		[ContentProperty("Author Name", 200)]
 		public virtual string AuthorName
 		{

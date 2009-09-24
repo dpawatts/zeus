@@ -27,6 +27,13 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			get { return GetChild(FILES_NAME) as Folder; }
 		}
 
+		[ContentProperty("Pingbacks Enabled?", 200)]
+		public virtual bool PingbacksEnabled
+		{
+			get { return GetDetail("PingbacksEnabled", true); }
+			set { SetDetail("PingbacksEnabled", value); }
+		}
+
 		void ISelfPopulator.Populate()
 		{
 			CategoryContainer categories = new CategoryContainer

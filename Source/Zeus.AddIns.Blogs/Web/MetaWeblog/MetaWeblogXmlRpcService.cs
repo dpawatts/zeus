@@ -4,17 +4,16 @@ using CookComputing.XmlRpc;
 using Isis.Web.Security;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services;
+using Zeus.AddIns.Blogs.Web.XmlRpc;
 using Zeus.FileSystem;
-using Zeus.FileSystem.Images;
 
 namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 {
-	public class MetaWeblog : XmlRpcService, IMetaWeblog
+	public class MetaWeblogXmlRpcService : ZeusXmlRpcService, IMetaWeblog
 	{
 		#region IMetaWeblog Members
 
-		string IMetaWeblog.AddPost(string blogid, string username, string password,
-			Post post, bool publish)
+		string IMetaWeblog.AddPost(string blogid, string username, string password, Post post, bool publish)
 		{
 			if (ValidateUser(username, password))
 			{
@@ -24,8 +23,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}
 
-		bool IMetaWeblog.UpdatePost(string postid, string username, string password,
-			Post post, bool publish)
+		bool IMetaWeblog.UpdatePost(string postid, string username, string password, Post post, bool publish)
 		{
 			if (ValidateUser(username, password))
 			{
@@ -139,7 +137,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 
 		private static string GetLink(string url)
 		{
-			return Zeus.Context.Current.WebContext.Url.HostUrl + url;
+			return Zeus.Context.Current.WebContext.GetFullyQualifiedUrl(url);
 		}
 
 		private static Blog GetBlog(string id)

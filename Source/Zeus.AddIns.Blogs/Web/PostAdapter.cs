@@ -3,12 +3,12 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Web
 {
-	[Controls(typeof(Blog))]
-	public class BlogAdapter : RequestAdapter
+	[Controls(typeof(Post))]
+	public class PostAdapter : RequestAdapter
 	{
 		public override void InjectCurrentPage(System.Web.IHttpHandler handler)
 		{
-			Engine.WebContext.Response.AddHeader("X-Pingback", "http://localhost:10220/Pingback.aspx");
+			Engine.WebContext.Response.AddHeader("X-Pingback", Engine.WebContext.GetFullyQualifiedUrl("/services/pingbacks"));
 			base.InjectCurrentPage(handler);
 		}
 	}

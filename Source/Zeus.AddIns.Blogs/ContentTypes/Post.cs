@@ -1,4 +1,5 @@
 using System;
+using Isis.ExtensionMethods;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
@@ -32,7 +33,14 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("Text", value); }
 		}
 
-		[LinkedItemsCheckBoxListEditor("Categories", 210, typeof(Category))]
+		[ContentProperty("Excerpt", 210), TextBoxEditor(TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
+		public virtual string Excerpt
+		{
+			get { return GetDetail("Excerpt", string.Empty); }
+			set { SetDetail("Excerpt", value); }
+		}
+
+		[LinkedItemsCheckBoxListEditor("Categories", 220, typeof(Category))]
 		public PropertyCollection Categories
 		{
 			get { return GetDetailCollection("Categories", true); }
@@ -41,6 +49,17 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		string ISyndicatable.Summary
 		{
 			get { return Text; }
+		}
+
+		public string GetExcerpt()
+		{
+			if (!string.IsNullOrEmpty(Excerpt))
+				return Excerpt;
+
+			if (!string.IsNullOrEmpty(Text))
+				return Text.Truncate(300, true);
+
+			return Title;
 		}
 	}
 }

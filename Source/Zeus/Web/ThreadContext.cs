@@ -154,6 +154,11 @@ namespace Zeus.Web
 			throw new NotSupportedException("In thread context. No handler when not running in http web context.");
 		}
 
+		public string GetFullyQualifiedUrl(string url)
+		{
+			throw new NotSupportedException("In thread context. No handler when not running in http web context.");
+		}
+
 		#region IDisposable Members
 
 		void IDisposable.Dispose()

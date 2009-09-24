@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using Ninject;
 using Zeus.AddIns.Blogs.ContentTypes;
+using Zeus.AddIns.Blogs.Services.Tracking;
 using Zeus.ContentTypes;
 using Zeus.FileSystem;
 using Zeus.Persistence;
@@ -19,16 +20,19 @@ namespace Zeus.AddIns.Blogs.Services
 		private readonly IPersister _persister;
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IFileSystemService _fileSystemService;
+		private readonly ITrackingService _trackingService;
 
 		#endregion
 
 		#region Constructor
 
-		public BlogService(IPersister persister, IContentTypeManager contentTypeManager, IFileSystemService fileSystemService)
+		public BlogService(IPersister persister, IContentTypeManager contentTypeManager,
+			IFileSystemService fileSystemService, ITrackingService trackingService)
 		{
 			_persister = persister;
 			_contentTypeManager = contentTypeManager;
 			_fileSystemService = fileSystemService;
+			_trackingService = trackingService;
 		}
 
 		#endregion
@@ -57,6 +61,9 @@ namespace Zeus.AddIns.Blogs.Services
 
 				// Add news item to month.
 				post.AddTo(month);
+
+				if (post.ID == 0)
+					_trackingService.SendNotifications(post.CurrentBlog, post);
 			}
 		}
 
@@ -95,6 +102,8 @@ namespace Zeus.AddIns.Blogs.Services
 			PopulateCategories(post, categories);
 
 			_persister.Save(post);
+
+			_trackingService.SendNotifications(blog, post);
 
 			return post;
 		}
