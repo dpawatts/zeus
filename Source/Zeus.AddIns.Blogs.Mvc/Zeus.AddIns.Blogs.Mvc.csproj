@@ -66,6 +66,8 @@
     <Compile Include="Controllers\BlogYearController.cs" />
     <Compile Include="Controllers\BlogMonthController.cs" />
     <Compile Include="Controllers\ArchiveLinksController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\PingbackController.cs" />
     <Compile Include="Controllers\RecentPostsSummaryController.cs" />
     <Compile Include="Controllers\RecentPostsController.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="ViewModels\BlogYearViewModel.cs" />
     <Compile Include="ViewModels\BlogMonthViewModel.cs" />
     <Compile Include="ViewModels\ArchiveLinksViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\PingbackViewModel.cs" />
     <Compile Include="ViewModels\RecentPostsSummaryViewModel.cs" />
     <Compile Include="ViewModels\RecentPostsViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
@@ -133,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ArchiveLinks\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Comment\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Pingback\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

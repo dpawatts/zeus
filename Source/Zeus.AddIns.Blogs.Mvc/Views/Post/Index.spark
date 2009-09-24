@@ -16,17 +16,7 @@ ${Model.CurrentItem.Text}
 
 	<dl>
 		<for each="var comment in Model.Comments">
-			<dt id="comment${commentIndex + 1}" class="tim?{comment.AuthorName == "Tim Jones" && comment.AuthorUrl == "http://www.roastedamoeba.com"}">
-				<a title="Link to this comment" class="comment-number" href="#comment${commentIndex + 1}">
-					${"#"}${commentIndex + 1}
-				</a>
-				<img src="/assets/images/blog/anon16-rounded.gif" width="16" height="16" alt="" />
-				<a if="!string.IsNullOrEmpty(comment.AuthorUrl)" rel="nofollow" title="${comment.AuthorUrl}" href="${comment.AuthorUrl}">${comment.AuthorName} <em>&#8594; ${comment.AuthorUrl}</em></a>
-				<if condition="string.IsNullOrEmpty(comment.AuthorUrl)">${comment.AuthorName}</if>
-			</dt>
-			<dd class="tim?{comment.AuthorName == "Tim Jones" && comment.AuthorUrl == "http://www.roastedamoeba.com"}">
-				${comment.Text}
-			</dd>
+			${Html.Display(Model, comment)}
 		</for>
 	</dl>
 	

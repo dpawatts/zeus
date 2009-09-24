@@ -1,0 +1,14 @@
+﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.PingbackViewModel"/>
+
+<dt id="comment${Model.CurrentItem.ID}">
+	<a title="Link to this comment" class="comment-number" href="#comment${Model.CurrentItem.ID}">
+		${"#"}1
+	</a>
+	<img src="/assets/images/blog/anon16-rounded.gif" width="16" height="16" alt="" />
+	<a rel="nofollow" title="${Model.CurrentItem.SourceUrl}" href="${Model.CurrentItem.SourceUrl}">
+		${Model.CurrentItem.SourcePageTitle}
+	</a>
+</dt>
+<dd>
+	Pingback from ${Model.CurrentItem.SourcePageTitle}
+</dd>

@@ -21,7 +21,7 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 
 		public override ActionResult Index()
 		{
-			return View(new PostViewModel(CurrentItem, CurrentItem.GetChildren<Comment>()));
+			return View(new PostViewModel(CurrentItem, CurrentItem.GetChildren<FeedbackItem>()));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]

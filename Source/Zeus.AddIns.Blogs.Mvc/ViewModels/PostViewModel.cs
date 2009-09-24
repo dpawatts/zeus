@@ -6,12 +6,12 @@ namespace Zeus.AddIns.Blogs.Mvc.ViewModels
 {
 	public class PostViewModel : ViewModel<Post>
 	{
-		public PostViewModel(Post currentItem, IEnumerable<Comment> comments)
+		public PostViewModel(Post currentItem, IEnumerable<FeedbackItem> comments)
 			: base(currentItem)
 		{
 			Comments = comments;
 		}
 
-		public IEnumerable<Comment> Comments { get; set; }
+		public IEnumerable<FeedbackItem> Comments { get; set; }
 	}
 }
