@@ -10,7 +10,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Fields
 
-		private HiddenField _hiddenFileNameField;
+		private HiddenField _hiddenFileNameField, _hiddenIdentifierField;
 		private string _currentFileName;
 
 		#endregion
@@ -23,16 +23,6 @@ namespace Zeus.Web.UI.WebControls
 			{
 				_currentFileName = value;
 				EnsureChildControls();
-			}
-		}
-
-		public string Identifier
-		{
-			get
-			{
-				if (ViewState["Identifier"] == null)
-					ViewState["Identifier"] = Guid.NewGuid().ToString();
-				return ViewState["Identifier"] as string;
 			}
 		}
 
@@ -73,6 +63,15 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
+		public string Identifier
+		{
+			get
+			{
+				EnsureChildControls();
+				return _hiddenIdentifierField.Value;
+			}
+		}
+
 		public bool Enabled
 		{
 			get { return (bool)(ViewState["Enabled"] ?? true); }
@@ -105,11 +104,17 @@ namespace Zeus.Web.UI.WebControls
 			_hiddenFileNameField = new HiddenField { ID = ID + "hdnFileName" };
 			Controls.Add(_hiddenFileNameField);
 
+			_hiddenIdentifierField = new HiddenField { ID = ID + "hdnIdentifier" };
+			Controls.Add(_hiddenIdentifierField);
+
 			base.CreateChildControls();
 		}
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			if (string.IsNullOrEmpty(_hiddenIdentifierField.Value))
+				_hiddenIdentifierField.Value = Guid.NewGuid().ToString();
+
 			string html = string.Format(@"<div style=""float:left;width:600px;margin-bottom:10px;""><a href=""#"" id=""{0}"">Attach a file</a>
 				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
 			Controls.Add(new LiteralControl(html));
@@ -203,7 +208,7 @@ window.addEvent('domready', function() {{
 		 string.Join(";",  TypeFilter),
 		 GetListClientID(),
 		 GetAnchorClientID(),
-		 Identifier,
+		 _hiddenIdentifierField.Value,
 		 _hiddenFileNameField.ClientID,
 		 MaximumFileSize,
 		 ClientID);

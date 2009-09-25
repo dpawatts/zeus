@@ -7,11 +7,13 @@ using Zeus.Design.Editors;
 using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
 	[ContentType(Name = "BaseProduct")]
 	[RestrictParents(typeof(Category))]
+	[TabPanel("Images", "Images", 200)]
 	public class Product : BasePage
 	{
 		public override string IconUrl
@@ -61,7 +63,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			}
 		}
 
-		[MultiImageUploadEditor("Extra Images", 250)]
+		[MultiImageUploadEditor("Extra Images", 250, ContainerName = "Images")]
 		public PropertyCollection ExtraImages
 		{
 			get { return GetDetailCollection("ExtraImages", true); }
