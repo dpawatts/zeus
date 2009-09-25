@@ -94,6 +94,7 @@
     <Compile Include="ContentController.cs" />
     <Compile Include="ContentRoute.cs" />
     <Compile Include="ControllerMapper.cs" />
+    <Compile Include="Descriptors\MobileDeviceDescriptorFilter.cs" />
     <Compile Include="Html\BaseWidgetHelper.cs" />
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\DisplayHelper.cs" />

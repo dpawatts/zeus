@@ -60,9 +60,8 @@ namespace Zeus.Web.Mvc.Modules
 			var sparkViewFactory = viewEngines.OfType<SparkViewFactory>().First();
 
 			sparkViewFactory.ViewFolder = sparkViewFactory.ViewFolder
-					.Append(new SubViewFolder(viewFolder, areaName))
-					.Append(new SubViewFolder(viewFolder, "Shared\\" + areaName));
-
+				.Append(new SubViewFolder(viewFolder, areaName))
+				.Append(new SubViewFolder(viewFolder, "Shared\\" + areaName));
 		}
 	}
 }
