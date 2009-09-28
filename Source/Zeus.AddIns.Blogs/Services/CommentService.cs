@@ -1,6 +1,10 @@
+using System.Web;
+using Zeus.AddIns.AntiSpam;
+using Zeus.AddIns.AntiSpam.Services;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
+using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Services
 {
@@ -8,11 +12,16 @@ namespace Zeus.AddIns.Blogs.Services
 	{
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IPersister _persister;
+		private readonly ICaptchaService _captchaService;
+		private readonly IWebContext _webContext;
 
-		public CommentService(IContentTypeManager contentTypeManager, IPersister persister)
+		public CommentService(IContentTypeManager contentTypeManager, IPersister persister,
+			ICaptchaService captchaService, IWebContext webContext)
 		{
 			_contentTypeManager = contentTypeManager;
 			_persister = persister;
+			_captchaService = captchaService;
+			_webContext = webContext;
 		}
 
 		public void AddComment(Post post, string name, string url, string text)
@@ -22,6 +31,8 @@ namespace Zeus.AddIns.Blogs.Services
 			comment.AuthorUrl = url;
 			comment.Text = text;
 			comment.AddTo(post);
+
+			_captchaService.Check(new HttpContextWrapper(HttpContext.Current));
 
 			CheckForSpam(comment);
 

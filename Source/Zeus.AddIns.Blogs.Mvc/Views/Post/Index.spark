@@ -32,6 +32,8 @@ ${Model.CurrentItem.Text}
 
 			<p>${Html.Label("text", "Your Comment:")} ${Html.ValidationMessage("text")}<br />
 			${Html.TextArea("text", null, 10, 50, null)}</p>
+			
+			${Html.Captcha(Model.CaptchaError)}
 
 			<p>${Html.SubmitButton("submit", " Post Comment ")}</p>
 		</form>

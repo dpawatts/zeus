@@ -13,5 +13,6 @@ namespace Zeus.AddIns.Blogs.Mvc.ViewModels
 		}
 
 		public IEnumerable<FeedbackItem> Comments { get; set; }
+		public string CaptchaError { get; set; }
 	}
 }

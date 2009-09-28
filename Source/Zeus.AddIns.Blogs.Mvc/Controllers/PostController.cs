@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using Isis.Web;
+using Zeus.AddIns.AntiSpam;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Mvc.ViewModels;
 using Zeus.AddIns.Blogs.Services;
@@ -19,15 +21,31 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 			_commentService = commentService;
 		}
 
+		[NonAction]
 		public override ActionResult Index()
 		{
-			return View(new PostViewModel(CurrentItem, CurrentItem.GetChildren<FeedbackItem>()));
+			throw new NotSupportedException();
+		}
+
+		public ActionResult Index(string captchaError)
+		{
+			return View(new PostViewModel(CurrentItem, CurrentItem.GetChildren<FeedbackItem>())
+			{
+				CaptchaError = captchaError
+			});
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Comment(string name, string url, string text)
 		{
-			_commentService.AddComment(CurrentItem, name, url, text);
+			try
+			{
+				_commentService.AddComment(CurrentItem, name, url, text);
+			}
+			catch (CaptchaException ex)
+			{
+				return Redirect(new Url(CurrentItem.Url).Query("captchaError", ex.CaptchaError));
+			}
 			return Redirect(new Url(CurrentItem.Url).SetFragment(
 				"comment" + CurrentItem.GetChildren<Comment>().Count()));
 		}

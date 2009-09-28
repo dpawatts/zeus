@@ -90,6 +90,14 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Isis %28Isis\Core\Isis%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.AddIns.AntiSpam.Mvc\Zeus.AddIns.AntiSpam.Mvc.csproj">
+      <Project>{69C173C4-CD27-4B22-BEB2-B9AD4719C9B8}</Project>
+      <Name>Zeus.AddIns.AntiSpam.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.AddIns.AntiSpam\Zeus.AddIns.AntiSpam.csproj">
+      <Project>{5AA6D1BA-3F9B-4C34-9858-7C1CE8DDB06F}</Project>
+      <Name>Zeus.AddIns.AntiSpam</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.AddIns.Blogs\Zeus.AddIns.Blogs.csproj">
       <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
       <Name>Zeus.AddIns.Blogs</Name>
