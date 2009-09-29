@@ -10,6 +10,7 @@ using Zeus.FileSystem;
 using Zeus.Globalization;
 using Zeus.Installation;
 using Zeus.Integrity;
+using Zeus.Net;
 using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
@@ -66,6 +67,9 @@ namespace Zeus.Engine
 			// Integrity
 			Bind<IIntegrityManager>().To<IntegrityManager>().InSingletonScope();
 			Bind<IIntegrityEnforcer>().To<IntegrityEnforcer>().InSingletonScope();
+
+			// Net
+			Bind<IHttpClient>().To<HttpClient>().InSingletonScope();
 
 			// Persistence
 			Bind<IItemNotifier>().To<ItemNotifier>().InSingletonScope();

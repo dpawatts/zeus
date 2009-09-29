@@ -1,3 +1,4 @@
+using System.Net;
 using System.Web;
 using Zeus.AddIns.AntiSpam;
 using Zeus.AddIns.AntiSpam.Services;
@@ -13,14 +14,17 @@ namespace Zeus.AddIns.Blogs.Services
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IPersister _persister;
 		private readonly ICaptchaService _captchaService;
+		private readonly IAntiSpamService _antiSpamService;
 		private readonly IWebContext _webContext;
 
 		public CommentService(IContentTypeManager contentTypeManager, IPersister persister,
-			ICaptchaService captchaService, IWebContext webContext)
+			ICaptchaService captchaService, IAntiSpamService antiSpamService,
+			IWebContext webContext)
 		{
 			_contentTypeManager = contentTypeManager;
 			_persister = persister;
 			_captchaService = captchaService;
+			_antiSpamService = antiSpamService;
 			_webContext = webContext;
 		}
 
@@ -53,7 +57,23 @@ namespace Zeus.AddIns.Blogs.Services
 
 		private void CheckForSpam(FeedbackItem feedbackItem)
 		{
-			// TODO
+			AntiSpamComment antiSpamComment = ConvertToAntiSpamComment(feedbackItem);
+			feedbackItem.Spam = _antiSpamService.CheckCommentForSpam(Find.StartPage, antiSpamComment);
+		}
+
+		private AntiSpamComment ConvertToAntiSpamComment(FeedbackItem feedbackItem)
+		{
+			AntiSpamComment antiSpamComment = new AntiSpamComment(IPAddress.Parse(_webContext.Request.UserHostAddress), _webContext.Request.UserAgent)
+			{
+				Author = feedbackItem.AntiSpamAuthorName,
+				AuthorEmail = feedbackItem.AntiSpamAuthorEmail,
+				AuthorUrl = feedbackItem.AntiSpamAuthorUrl,
+				CommentType = feedbackItem.AntiSpamFeedbackType,
+				Content = feedbackItem.AntiSpamContent,
+				Permalink = _webContext.GetFullyQualifiedUrl(feedbackItem.Url),
+				Referrer = string.Empty
+			};
+			return antiSpamComment;
 		}
 	}
 }

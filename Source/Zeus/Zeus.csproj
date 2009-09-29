@@ -215,6 +215,9 @@
     <Compile Include="Installation\Migrations\Migration002.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
     <Compile Include="Linq\ContentItemFilters.cs" />
+    <Compile Include="Net\HttpClient.cs" />
+    <Compile Include="Net\IHttpClient.cs" />
+    <Compile Include="Net\InvalidResponseException.cs" />
     <Compile Include="Net\Mail\IMailSender.cs" />
     <Compile Include="Net\Mail\SmtpMailSender.cs" />
     <Compile Include="Net\Mail\StaticMailSender.cs" />

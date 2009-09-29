@@ -5,7 +5,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType("Recent Blog Posts")]
 	[AllowedZones(AllowedZones.AllNamed)]
-	public class RecentPosts : BaseContentItem
+	public class RecentPosts : BaseWidget
 	{
 		[ContentProperty("Blog", 200)]
 		public Blog Blog

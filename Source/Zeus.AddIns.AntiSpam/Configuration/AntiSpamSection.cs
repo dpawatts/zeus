@@ -10,5 +10,12 @@ namespace Zeus.AddIns.AntiSpam.Configuration
 			get { return (ReCaptchaElement)base["reCaptcha"]; }
 			set { base["reCaptcha"] = value; }
 		}
+
+		[ConfigurationProperty("akismet")]
+		public AkismetElement Akismet
+		{
+			get { return (AkismetElement)base["akismet"]; }
+			set { base["akismet"] = value; }
+		}
 	}
 }

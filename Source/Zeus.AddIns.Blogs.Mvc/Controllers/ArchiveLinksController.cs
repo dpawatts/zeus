@@ -8,7 +8,7 @@ using Zeus.Web;
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
 	[Controls(typeof(ArchiveLinks), AreaName = BlogsWebPackage.AREA_NAME)]
-	public class ArchiveLinksController : ZeusController<ArchiveLinks>
+	public class ArchiveLinksController : WidgetController<ArchiveLinks>
 	{
 		public override ActionResult Index()
 		{

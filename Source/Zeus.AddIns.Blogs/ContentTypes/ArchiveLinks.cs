@@ -5,7 +5,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType("Archive Links")]
 	[AllowedZones(AllowedZones.AllNamed)]
-	public class ArchiveLinks : BaseContentItem
+	public class ArchiveLinks : BaseWidget
 	{
 		[ContentProperty("Blog", 200)]
 		public Blog Blog

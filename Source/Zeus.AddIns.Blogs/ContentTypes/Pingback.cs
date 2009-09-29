@@ -16,5 +16,30 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			get { return GetDetail("SourceUrl", string.Empty); }
 			set { SetDetail("SourceUrl", value); }
 		}
+
+		public override string AntiSpamAuthorName
+		{
+			get { return string.Empty; }
+		}
+
+		public override string AntiSpamAuthorEmail
+		{
+			get { return string.Empty; }
+		}
+
+		public override string AntiSpamAuthorUrl
+		{
+			get { return SourceUrl; }
+		}
+
+		public override string AntiSpamContent
+		{
+			get { return string.Empty; }
+		}
+
+		public override string AntiSpamFeedbackType
+		{
+			get { return "pingback"; }
+		}
 	}
 }

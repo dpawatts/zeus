@@ -34,6 +34,13 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("PingbacksEnabled", value); }
 		}
 
+		[ContentProperty("Comment Moderation Enabled?", 210, Description = "If this box is checked, an administrator must always approve comments before they appear on the site.")]
+		public virtual bool CommentModerationEnabled
+		{
+			get { return GetDetail("CommentModerationEnabled", true); }
+			set { SetDetail("CommentModerationEnabled", value); }
+		}
+
 		void ISelfPopulator.Populate()
 		{
 			CategoryContainer categories = new CategoryContainer

@@ -1,3 +1,4 @@
+using System;
 using Zeus.ContentProperties;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
@@ -31,6 +32,31 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		{
 			get { return GetDetail("Text", string.Empty); }
 			set { SetDetail("Text", value); }
+		}
+
+		public override string AntiSpamAuthorName
+		{
+			get { return AuthorName; }
+		}
+
+		public override string AntiSpamAuthorEmail
+		{
+			get { return AuthorEmail; }
+		}
+
+		public override string AntiSpamAuthorUrl
+		{
+			get { return AuthorUrl; }
+		}
+
+		public override string AntiSpamContent
+		{
+			get { return Text; }
+		}
+
+		public override string AntiSpamFeedbackType
+		{
+			get { return "comment"; }
 		}
 	}
 }
