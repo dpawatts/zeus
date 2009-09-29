@@ -44,7 +44,7 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 
 			// Clear any existing variation configurations.
 			foreach (VariationConfiguration variationConfiguration in product.GetChildren<VariationConfiguration>().ToArray())
-				product.Children.Remove(variationConfiguration);
+				Context.Persister.Delete(variationConfiguration);
 
 			foreach (ListItem listItem in checkBoxList.Items.Cast<ListItem>().Where(li => li.Selected))
 			{
