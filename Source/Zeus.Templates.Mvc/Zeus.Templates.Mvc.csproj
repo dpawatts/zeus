@@ -95,6 +95,7 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\TagCloudController.cs" />
     <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\TagGroupController.cs" />

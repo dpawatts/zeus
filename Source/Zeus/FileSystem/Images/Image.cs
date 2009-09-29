@@ -6,6 +6,7 @@ using Zeus.Design.Editors;
 
 namespace Zeus.FileSystem.Images
 {
+	[ContentType]
 	public class Image : File
 	{
 		[ImageUploadEditor("Image", 100)]
@@ -15,7 +16,7 @@ namespace Zeus.FileSystem.Images
 			set { base.Data = value; }
 		}
 
-		public override string Url
+		/*public override string Url
 		{
 			get
 			{
@@ -23,7 +24,7 @@ namespace Zeus.FileSystem.Images
 					.WithLayer(LayerBuilder.Image.SourceImage(this))
 					.Url;
 			}
-		}
+		}*/
 
 		public static Image FromStream(Stream stream, string filename)
 		{

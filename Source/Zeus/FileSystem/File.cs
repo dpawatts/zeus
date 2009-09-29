@@ -8,7 +8,8 @@ using Zeus.Integrity;
 namespace Zeus.FileSystem
 {
 	[ContentType(Description = "A node that represents a file.")]
-	[ContentTypeAuthorizedRoles(new string[] {})]
+	//[ContentTypeAuthorizedRoles(new string[] {})]
+	[RestrictParents(typeof(Folder))]
 	public class File : FileSystemNode
 	{
 		public override string IconUrl
@@ -52,9 +53,14 @@ namespace Zeus.FileSystem
 			}
 		}
 
-		public override string Url
+		/*public override string Url
 		{
 			get { return "/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
+		}*/
+
+		public override string Extension
+		{
+			get { return FileExtension; }
 		}
 
 		public string FileExtension

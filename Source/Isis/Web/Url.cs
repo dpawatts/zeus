@@ -462,14 +462,10 @@ namespace Isis.Web
 			string newPath;
 			if (string.IsNullOrEmpty(Path) || Path == "/")
 				newPath = "/" + segment + extension;
-			else if (extension != Extension)
-			{
+			else if (extension != Extension && !string.IsNullOrEmpty(extension))
 				newPath = "/" + segment + PathWithoutExtension + extension;
-			}
 			else
-			{
-				newPath = "/" + segment + Path;
-			}
+				newPath = "/" + segment + Path + extension;
 
 			return new Url(Scheme, Authority, newPath, Querystring, Fragment);
 		}
