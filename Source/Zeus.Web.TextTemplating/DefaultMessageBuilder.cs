@@ -18,12 +18,15 @@ namespace Zeus.Web.TextTemplating
 
 		public override void Initialize(Assembly templateAssembly, string templateResourcePath)
 		{
-			var parameters = new Dictionary<string, string>
+			if (_engine.Settings is SparkSettings)
 			{
-				{ "assembly", templateAssembly.ToString() },
-				{ "resourcePath", templateResourcePath }
-			};
-			((SparkSettings) _engine.Settings).AddViewFolder(ViewFolderType.EmbeddedResource, parameters);
+				var parameters = new Dictionary<string, string>
+				{
+					{ "assembly", templateAssembly.ToString() },
+					{ "resourcePath", templateResourcePath }
+				};
+				((SparkSettings) _engine.Settings).AddViewFolder(ViewFolderType.EmbeddedResource, parameters);
+			}
 		}
 
 		protected override void Transform(string templateName, object data, TextWriter output)

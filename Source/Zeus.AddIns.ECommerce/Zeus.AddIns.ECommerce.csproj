@@ -107,7 +107,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOrderMailService.cs" />
     <Compile Include="Services\IShoppingBasketItem.cs" />
-    <Compile Include="Services\IDeliveryCostCalculator.cs" />
     <Compile Include="Services\IShoppingBasket.cs" />
     <Compile Include="Services\IShoppingBasketService.cs" />
     <Compile Include="PaymentGateways\IPaymentGateway.cs" />
@@ -184,8 +183,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\OrderConfirmationVendor.spark" />
-    <None Include="Templates\OrderConfirmationCustomer.spark" />
+    <EmbeddedResource Include="Templates\OrderConfirmationVendor.spark" />
+    <EmbeddedResource Include="Templates\OrderConfirmationCustomer.spark" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentTypes\Widgets\" />
