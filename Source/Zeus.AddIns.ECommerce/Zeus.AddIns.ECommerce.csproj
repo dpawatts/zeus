@@ -105,12 +105,14 @@
     </Compile>
     <Compile Include="Plugins\ECommerceActionPluginAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IOrderMailService.cs" />
     <Compile Include="Services\IShoppingBasketItem.cs" />
     <Compile Include="Services\IDeliveryCostCalculator.cs" />
     <Compile Include="Services\IShoppingBasket.cs" />
     <Compile Include="Services\IShoppingBasketService.cs" />
     <Compile Include="PaymentGateways\IPaymentGateway.cs" />
     <Compile Include="PaymentGateways\PaymentRequest.cs" />
+    <Compile Include="Services\OrderMailService.cs" />
     <Compile Include="Services\ShoppingBasketService.cs" />
     <Compile Include="ZeusECommerceException.cs" />
   </ItemGroup>
@@ -126,6 +128,10 @@
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.TextTemplating\Zeus.Web.TextTemplating.csproj">
+      <Project>{A94D022C-E5B7-45F9-8FDD-2B0EF4D7F31B}</Project>
+      <Name>Zeus.Web.TextTemplating</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
@@ -176,6 +182,10 @@
     <EmbeddedResource Include="Plugins\ViewOrder.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\OrderConfirmationVendor.spark" />
+    <None Include="Templates\OrderConfirmationCustomer.spark" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentTypes\Widgets\" />

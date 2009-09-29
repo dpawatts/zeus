@@ -74,7 +74,14 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			set { SetDetail("ConfirmationEmailFrom", value); }
 		}
 
-		[ContentProperty("Vendor Email", 220, EditorContainerName = "ECommerce", Description = "This is the email address which will receive the vendor's copy of the order confirmation email.")]
+		[ContentProperty("Confirmation Email Text", 221, EditorContainerName = "ECommerce"), TextBoxEditor(TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
+		public string ConfirmationEmailText
+		{
+			get { return GetDetail("ConfirmationEmailText", string.Empty); }
+			set { SetDetail("ConfirmationEmailText", value); }
+		}
+
+		[ContentProperty("Vendor Email", 222, EditorContainerName = "ECommerce", Description = "This is the email address which will receive the vendor's copy of the order confirmation email.")]
 		public string VendorEmail
 		{
 			get { return GetDetail("VendorEmail", string.Empty); }

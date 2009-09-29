@@ -9,6 +9,7 @@ using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.Net.Mail;
 using Zeus.Persistence;
 using Zeus.Web;
+using Zeus.Web.TextTemplating;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
@@ -18,15 +19,16 @@ namespace Zeus.AddIns.ECommerce.Services
 		private readonly IWebContext _webContext;
 		private readonly IFinder<ShoppingBasket> _finder;
 		private readonly IPaymentGateway _paymentGateway;
-		private readonly IMailSender _mailSender;
+		private readonly IOrderMailService _orderMailService;
 
-		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder<ShoppingBasket> finder, IPaymentGateway paymentGateway, IMailSender mailSender)
+		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder<ShoppingBasket> finder,
+			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
 		{
 			_persister = persister;
 			_webContext = webContext;
 			_finder = finder;
 			_paymentGateway = paymentGateway;
-			_mailSender = mailSender;
+			_orderMailService = orderMailService;
 		}
 
 		public bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
@@ -218,13 +220,9 @@ namespace Zeus.AddIns.ECommerce.Services
 				order.Status = OrderStatus.Paid;
 				_persister.Save(order);
 
-				// Send email to vendor.
-				_mailSender.Send(shop.ConfirmationEmailFrom, shop.VendorEmail, "Order Confirmation",
-					"Order #" + order.ID + " has been successfully completed.");
-
-				// Send email to customer.
-				_mailSender.Send(shop.ConfirmationEmailFrom, order.EmailAddress, "Order Confirmation",
-					"Order #" + order.ID + " was successful.");
+				// Send email to customer and vendor.
+				_orderMailService.SendOrderConfirmationToCustomer(shop, order);
+				_orderMailService.SendOrderConfirmationToVendor(shop, order);
 			}
 			else
 			{

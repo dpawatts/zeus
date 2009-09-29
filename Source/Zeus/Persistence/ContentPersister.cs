@@ -141,8 +141,8 @@ namespace Zeus.Persistence
 			{
 				if (detail.EnclosingCollection != null)
 					detail.EnclosingCollection.Remove(detail);
-				object test = detail.EnclosingItem.Details; // TODO: Investigate why this is necessary, on a PersistentGenericMap
-				detail.EnclosingItem.Details.Remove(detail.Name);
+				object test = detail.EnclosingItem.DetailsInternal; // TODO: Investigate why this is necessary, on a PersistentGenericMap
+				detail.EnclosingItem.DetailsInternal.Remove(detail);
 				_linkRepository.Delete(detail);
 			}
 		}
