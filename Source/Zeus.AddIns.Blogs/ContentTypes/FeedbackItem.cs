@@ -26,6 +26,16 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		public abstract string AntiSpamContent { get; }
 		public abstract string AntiSpamFeedbackType { get; }
 
+		public virtual string PostTitle
+		{
+			get { return Parent.Title; }
+		}
+
+		public virtual string PostUrl
+		{
+			get { return Parent.Url; }
+		}
+
 		public override string IconUrl
 		{
 			get { return GetIconUrl(typeof(Comment), "Zeus.AddIns.Blogs.Icons.comment.png"); }

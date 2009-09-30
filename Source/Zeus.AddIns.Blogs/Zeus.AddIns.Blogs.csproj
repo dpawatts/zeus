@@ -6,6 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.AddIns.Blogs</RootNamespace>
@@ -47,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
+    <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -72,6 +77,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\BlogActionPluginAttribute.cs" />
+    <Compile Include="Admin\ModerateComments.aspx.cs">
+      <DependentUpon>ModerateComments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ModerateComments.aspx.designer.cs">
+      <DependentUpon>ModerateComments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ContentTypes\BaseBlogPage.cs" />
     <Compile Include="ContentTypes\Blog.cs" />
     <Compile Include="ContentTypes\BlogMonth.cs" />
@@ -99,11 +112,11 @@
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\IBlogService.cs" />
-    <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="Services\ICommentService.cs" />
     <Compile Include="Services\Tracking\IPingbackService.cs" />
     <Compile Include="Services\Tracking\ITrackingService.cs" />
     <Compile Include="Services\Tracking\Notifier.cs" />
+    <Compile Include="Services\Tracking\PingbackService.cs" />
     <Compile Include="Services\Tracking\TrackingService.cs" />
     <Compile Include="Services\Tracking\Verifier.cs" />
     <Compile Include="Web\PostAdapter.cs" />
@@ -159,6 +172,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Icons\package_come_and_go.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\ModerateComments.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -167,4 +185,23 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1320</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

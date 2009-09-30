@@ -116,12 +116,10 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		{
 			if (ValidateUser(username, password))
 			{
-				UserInfo info = new UserInfo();
+				//UserInfo info = new UserInfo();
 
 				// TODO: Implement your own logic to get user info objects and set the info
 				throw new NotImplementedException();
-
-				return info;
 			}
 			throw new XmlRpcFaultException(0, "User is not valid!");
 		}

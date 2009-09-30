@@ -38,11 +38,6 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
 {
  background: #dcdcdc;
  cursor: default;
-} 
-
-textarea
-{
-	height: 100px;
 }
 
 img.image

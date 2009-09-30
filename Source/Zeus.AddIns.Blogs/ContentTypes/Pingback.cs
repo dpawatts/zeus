@@ -19,7 +19,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public override string AntiSpamAuthorName
 		{
-			get { return string.Empty; }
+			get { return "Pingback"; }
 		}
 
 		public override string AntiSpamAuthorEmail

@@ -25,7 +25,7 @@ namespace Zeus.AddIns.Blogs.Services.Tracking
 			{
 				page = WebClientUtility.GetHtml(sourceUrl);
 			}
-			catch (WebException e)
+			catch (WebException)
 			{
 				//Log.Warn("Could not verify the source of a ping/trackback", e);
 			}
