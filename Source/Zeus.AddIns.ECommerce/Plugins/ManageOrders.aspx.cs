@@ -2,14 +2,11 @@
 using System.Linq;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
-using Isis.Web.Hosting;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 
-[assembly: EmbeddedResourceFile("Zeus.AddIns.ECommerce.Plugins.ManageOrders.aspx", "Zeus.AddIns.ECommerce")]
 namespace Zeus.AddIns.ECommerce.Plugins
 {
-	[ECommerceActionPluginAttribute("ManageOrders", "Manage Orders", 1, "Zeus.AddIns.ECommerce.Plugins.ManageOrders.aspx", "Zeus.AddIns.ECommerce.Icons.basket.png")]
 	public partial class ManageOrders : PreviewFrameAdminPage
 	{
 		#region Methods

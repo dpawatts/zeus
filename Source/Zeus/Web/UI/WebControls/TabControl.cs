@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
+using Zeus.Web.Hosting;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -48,7 +49,7 @@ namespace Zeus.Web.UI.WebControls
 			Page.ClientScript.RegisterClientScriptResource(typeof(TabControl), "Zeus.Web.Resources.jQuery.ui.core.js");
 			Page.ClientScript.RegisterClientScriptResource(typeof(TabControl), "Zeus.Web.Resources.jQuery.ui.tabs.js");
 
-			Page.ClientScript.RegisterEmbeddedCssResource(typeof(TabControl), "Zeus.Web.Resources.jQuery.ui.css");
+			Page.ClientScript.RegisterCssInclude(Utility.GetClientResourceUrl(GetType(), "jQuery/ui.css"));
 
 			string script = string.Format(@"
 				function handlePostbacks(tabID) {{

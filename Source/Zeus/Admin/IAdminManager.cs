@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Security.Principal;
 using System.Web.UI;
 using Zeus.ContentTypes;
-using Zeus.Globalization.ContentTypes;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin
@@ -22,7 +20,8 @@ namespace Zeus.Admin
 
 		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
 
-		IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName);
+		//IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName);
+		IEnumerable<IActionPlugin> GetActionPlugins(string groupName);
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
 		/// <param name="item">The item to edit.</param>
@@ -59,8 +58,6 @@ namespace Zeus.Admin
 		/// <returns>A filter.</returns>
 		Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user);
 
-		string GetEmbeddedResourceUrl(Assembly assembly, string resourcePath);
-
 		/// <summary>Gets the url for the preview frame.</summary>
 		/// <param name="selectedItem">The currently selected item.</param>
 		/// <returns>A url.</returns>
@@ -80,5 +77,6 @@ namespace Zeus.Admin
 		bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user);
 
 		bool TreeTooltipsEnabled { get; }
+		IEnumerable<IGridToolbarPlugin> GetGridToolbarPlugins();
 	}
 }

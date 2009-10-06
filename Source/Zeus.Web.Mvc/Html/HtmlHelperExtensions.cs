@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Isis.Web;
 using Isis.Web.UI;
 using Zeus.ContentProperties;
+using Zeus.Web.Hosting;
 using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Web.Mvc.Html
@@ -17,10 +18,10 @@ namespace Zeus.Web.Mvc.Html
 				WebResourceUtility.GetUrl(type, resourceName));
 		}
 
-		public static string IncludeEmbeddedJavascriptResource(this HtmlHelper html, Assembly assembly, string resourceName)
+		public static string IncludeEmbeddedJavascriptResource(this HtmlHelper html, Assembly assembly, string relativePath)
 		{
 			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>",
-				EmbeddedWebResourceUtility.GetUrl(assembly, resourceName));
+				Utility.GetClientResourceUrl(assembly, relativePath));
 		}
 
 		public static string DisplayProperty<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)

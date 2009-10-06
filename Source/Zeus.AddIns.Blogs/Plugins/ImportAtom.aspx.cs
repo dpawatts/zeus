@@ -1,17 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using Argotic.Extensions;
 using Argotic.Syndication;
-using Isis.Web.Hosting;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.Admin;
 
-[assembly: EmbeddedResourceFile("Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx", "Zeus.AddIns.Blogs.Plugins")]
 namespace Zeus.AddIns.Blogs.Plugins
 {
 	[ActionPluginGroup("ImportExportBlogXml", 200)]
-	[ImportExportBlogXmlActionPluginAttribute("ImportAtomXml", "Import Atom XML", 1, "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx")]
 	public partial class ImportAtom : PreviewFrameAdminPage
 	{
 		protected void btnUploadImport_Click(object sender, EventArgs e)

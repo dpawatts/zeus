@@ -110,7 +110,6 @@
     <Compile Include="Html\PaginationExtensions.cs" />
     <Compile Include="IControllerMapper.cs" />
     <Compile Include="IContentItemContainer.generic.cs" />
-    <Compile Include="Modules\EmbeddedContentRouteHandler.cs" />
     <Compile Include="Modules\IWebPackage.cs" />
     <Compile Include="Modules\IWebPackageManager.cs" />
     <Compile Include="Modules\ModularControllerFactory.cs" />

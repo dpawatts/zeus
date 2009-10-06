@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Security.Principal;
 using System.Web;
 using System.Web.UI;
+using Isis.Reflection;
 using Isis.Web;
-using Isis.Web.Hosting;
 using Isis.Web.Security;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -17,6 +17,7 @@ using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Security;
 using Zeus.Web;
+using Zeus.Web.Hosting;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin
@@ -40,7 +41,8 @@ namespace Zeus.Admin
 		private readonly ILanguageManager _languageManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
-		private readonly IEnumerable<ActionPluginAttribute> _cachedActionPlugins;
+		private readonly IEnumerable<IActionPlugin> _cachedActionPlugins;
+		private readonly IEnumerable<IGridToolbarPlugin> _cachedGridToolbarPlugins;
 
 		#endregion
 
@@ -51,13 +53,13 @@ namespace Zeus.Admin
 			IPersister persister, IVersionManager versionManager, IContentTypeManager contentTypeManager,
 			Web.IWebContext webContext, ILanguageManager languageManager,
 			IPluginFinder<ActionPluginGroupAttribute> actionPluginGroupFinder,
-			IPluginFinder<ActionPluginAttribute> actionPluginFinder)
+			ITypeFinder typeFinder, IEmbeddedResourceManager embeddedResourceManager)
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
-			DeleteItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
-			EditItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Edit.aspx");
-			NewItemUrl = GetEmbeddedResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
+			DeleteItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
+			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Edit.aspx");
+			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
 			EnableVersioning = configSection.Versioning.Enabled;
 			_authorizationService = authorizationService;
 			_authenticationContextService = authenticationContextService;
@@ -68,7 +70,13 @@ namespace Zeus.Admin
 			_languageManager = languageManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
-			_cachedActionPlugins = actionPluginFinder.GetPlugins();
+
+			_cachedActionPlugins = typeFinder.Find(typeof(IActionPlugin))
+				.Where(t => !t.IsInterface && !t.IsAbstract)
+				.Select(t => (IActionPlugin) Activator.CreateInstance(t));
+			_cachedGridToolbarPlugins = typeFinder.Find(typeof(IGridToolbarPlugin))
+				.Where(t => !t.IsInterface && !t.IsAbstract)
+				.Select(t => (IGridToolbarPlugin)Activator.CreateInstance(t));
 		}
 
 		#endregion
@@ -174,9 +182,14 @@ namespace Zeus.Admin
 			return _cachedActionPluginGroups;
 		}
 
-		public IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName)
+		public IEnumerable<IActionPlugin> GetActionPlugins(string groupName)
 		{
 			return _cachedActionPlugins.Where(p => p.GroupName == groupName).OrderBy(p => p.SortOrder);
+		}
+
+		public IEnumerable<IGridToolbarPlugin> GetGridToolbarPlugins()
+		{
+			return _cachedGridToolbarPlugins.OrderBy(p => p.SortOrder);
 		}
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
@@ -208,11 +221,6 @@ namespace Zeus.Admin
 		public Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> GetEditorFilter(IPrincipal user)
 		{
 			return items => items.Authorized(user, _securityManager, Operations.Read).Pages();
-		}
-
-		public string GetEmbeddedResourceUrl(Assembly assembly, string resourcePath)
-		{
-			return EmbeddedResourceUtility.GetUrl(assembly, resourcePath);
 		}
 
 		/// <summary>Gets the url for the preview frame.</summary>

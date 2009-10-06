@@ -77,7 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\BlogActionPluginAttribute.cs" />
+    <Compile Include="ActionPlugins\ImportExportBlogXmlActionPlugin.cs" />
+    <Compile Include="ActionPlugins\ModerateCommentsActionPlugin.cs" />
     <Compile Include="Admin\ModerateComments.aspx.cs">
       <DependentUpon>ModerateComments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -107,7 +108,6 @@
     <Compile Include="Plugins\ImportAtom.aspx.designer.cs">
       <DependentUpon>ImportAtom.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\ImportExportBlogXmlActionPluginAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\CommentService.cs" />

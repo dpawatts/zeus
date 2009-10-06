@@ -16,6 +16,7 @@ using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Serialization;
 using Zeus.Web;
+using Zeus.Web.Hosting;
 using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
 
@@ -100,6 +101,8 @@ namespace Zeus.Engine
 			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
 			Bind<IRequestLifecycleHandler>().To<RequestLifecycleHandler>().InSingletonScope();
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
+			Bind<IEmbeddedResourceBuilder>().To<EmbeddedResourceBuilder>().InSingletonScope();
+			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
 		}
 	}
 }

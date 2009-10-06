@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
 using Isis.Web.UI;
+using Zeus.Web.Hosting;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -124,11 +125,10 @@ namespace Zeus.Web.UI.WebControls
 			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadMooTools", 
 				"http://ajax.googleapis.com/ajax/libs/mootools/1.2.2/mootools.js");
 
-			ScriptManagerUtility.RegisterEmbeddedClientScriptResource(this, GetType(), "FancyFileUploadFxProgressBar",
-				"Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
-
-			ScriptManagerUtility.RegisterEmbeddedClientScriptResource(this, GetType(), "FancyFileUploadSwiffUploader",
-				"Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
+			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadFxProgressBar",
+				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Fx.ProgressBar.js"));
+			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadSwiffUploader",
+				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Swiff.Uploader.js"));
 
 			Page.ClientScript.RegisterClientScriptResource(GetType(),
 				"Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
@@ -203,7 +203,7 @@ window.addEvent('domready', function() {{
 		
 	}});
 
-}});", EmbeddedWebResourceUtility.GetUrl(GetType().Assembly, "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.swf"),
+}});", Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Swiff.Uploader.swf"),
 		 TypeFilterDescription,
 		 string.Join(";",  TypeFilter),
 		 GetListClientID(),

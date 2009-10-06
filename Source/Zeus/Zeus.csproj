@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Coolite.Utilities, Version=1.0.0.2800, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Zeus.Admin\Bin\Coolite.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\Iesi.Collections.dll</HintPath>
@@ -71,6 +79,9 @@
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -84,15 +95,18 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Admin\ActionPluginAttribute.cs" />
+    <Compile Include="Admin\ActionPluginBase.cs" />
     <Compile Include="Admin\AdminFrame.cs" />
     <Compile Include="Admin\AdminManager.cs" />
     <Compile Include="Admin\AdminTargetFrame.cs" />
     <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
+    <Compile Include="Admin\GridToolbarPluginBase.cs" />
     <Compile Include="Admin\CreationPosition.cs" />
     <Compile Include="Admin\GridViewPluginAttribute.cs" />
+    <Compile Include="Admin\IActionPlugin.cs" />
     <Compile Include="Admin\IAdminAssemblyManager.cs" />
     <Compile Include="Admin\IAdminManager.cs" />
+    <Compile Include="Admin\IGridToolbarPlugin.cs" />
     <Compile Include="Admin\ITreeSorter.cs" />
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\NodePosition.cs" />
@@ -186,6 +200,8 @@
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
+    <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
     <Compile Include="Engine\IContentAdapter.cs" />
@@ -267,6 +283,15 @@
     <Compile Include="Web\Handlers\GoogleSiteMapHandler.cs" />
     <Compile Include="Web\Handlers\BaseFileUploadHandler.cs" />
     <Compile Include="Web\Handlers\PostedFileUploadHandler.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourceBuilder.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourceManager.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourcePackageBase.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourcePathProvider.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourceType.cs" />
+    <Compile Include="Web\Hosting\EmbeddedResourceVirtualFile.cs" />
+    <Compile Include="Web\Hosting\IEmbeddedResourceBuilder.cs" />
+    <Compile Include="Web\Hosting\IEmbeddedResourceManager.cs" />
+    <Compile Include="Web\Hosting\IEmbeddedResourcePackage.cs" />
     <Compile Include="Web\HttpRequestSupport.cs" />
     <Compile Include="Web\IAdapterDescriptor.cs" />
     <Compile Include="Web\IHost.cs" />
@@ -276,7 +301,7 @@
     <Compile Include="Web\PathDictionary.cs" />
     <Compile Include="Web\PermanentLinkManager.cs" />
     <Compile Include="Web\RequestAdapter.cs" />
-    <Compile Include="Web\Resources\TinyMCE\Resources.cs" />
+    <Compile Include="Web\Routing\EmbeddedContentRouteHandler.cs" />
     <Compile Include="Web\Security\Items\Role.cs" />
     <Compile Include="Web\Security\Items\SecurityContainer.cs" />
     <Compile Include="Web\Security\Items\RoleContainer.cs" />

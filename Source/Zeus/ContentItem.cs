@@ -16,6 +16,7 @@ using Zeus.Persistence;
 using Zeus.Web;
 using Zeus.Security;
 using System.Security.Principal;
+using Zeus.Web.Hosting;
 
 namespace Zeus
 {
@@ -897,7 +898,7 @@ namespace Zeus
 			{
 				if (IsPage)
 					return Url;
-				return Context.Current.Resolve<IAdminManager>().GetEmbeddedResourceUrl(Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.View.aspx") + "?selected=" + Path;
+				return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.View.aspx") + "?selected=" + Path;
 			}
 		}
 

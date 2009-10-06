@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
+using Zeus.Web.Hosting;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -18,7 +19,7 @@ namespace Zeus.Web.UI.WebControls
 			Page.ClientScript.RegisterJavascriptResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.ui.core.js");
 			Page.ClientScript.RegisterJavascriptResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.ui.datepicker.js");
 
-			Page.ClientScript.RegisterEmbeddedCssResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.ui.css");
+			Page.ClientScript.RegisterCssInclude(Utility.GetClientResourceUrl(GetType(), "jQuery/ui.css"));
 			Page.ClientScript.RegisterCssResource(typeof(DatePicker), "Zeus.Web.Resources.jQuery.DatePicker.css");
 
 			string script = @"if (!jQuery.browser.msie) jQuery('#" + ClientID + @"').datepicker({ 

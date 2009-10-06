@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -57,19 +61,13 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Admin\ActionPlugins\SendActionPlugin.cs" />
     <Compile Include="Admin\CampaignRecipients.aspx.cs">
       <DependentUpon>CampaignRecipients.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\CampaignRecipients.aspx.designer.cs">
       <DependentUpon>CampaignRecipients.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\CampaignReport.aspx.cs">
-      <DependentUpon>CampaignReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\CampaignReport.aspx.designer.cs">
-      <DependentUpon>CampaignReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Sent.aspx.cs">
       <DependentUpon>Sent.aspx</DependentUpon>
@@ -144,11 +142,6 @@
     <EmbeddedResource Include="Resources\email.png" />
     <EmbeddedResource Include="Resources\email_open.png" />
     <EmbeddedResource Include="Resources\report.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Admin\CampaignReport.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\group.png" />

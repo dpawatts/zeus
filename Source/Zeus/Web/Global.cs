@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using System.Web.Hosting;
 using Isis.Web;
-using Isis.Web.Hosting;
+using Zeus.Web.Hosting;
 
 namespace Zeus.Web
 {
@@ -83,7 +83,8 @@ namespace Zeus.Web
 		protected virtual void OnApplicationStart(EventArgs e)
 		{
 			// TODO - add this as a plugin
-			HostingEnvironment.RegisterVirtualPathProvider(new EmbeddedResourcePathProvider());			
+			HostingEnvironment.RegisterVirtualPathProvider(
+				new EmbeddedResourcePathProvider(Zeus.Context.Current.Resolve<IEmbeddedResourceManager>()));
 		}
 	}
 }

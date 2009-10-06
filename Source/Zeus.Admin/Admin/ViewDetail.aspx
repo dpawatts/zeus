@@ -1,8 +1,0 @@
-﻿<%@ Page Language="C#" MasterPageFile="PreviewFrame.Master" AutoEventWireup="true" CodeBehind="ViewDetail.aspx.cs" Inherits="Zeus.Admin.ViewDetail" ValidateRequest="false" %>
-<asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<asp:Button runat="server" ID="btnSave" OnCommand="btnSave_Command" Text="Save" CssClass="save" />
-</asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="Content">
-	<asp:ValidationSummary runat="server" CssClass="validationSummary" />
-	<zeus:ItemEditView runat="server" ID="zeusItemEditView" />
-</asp:Content>

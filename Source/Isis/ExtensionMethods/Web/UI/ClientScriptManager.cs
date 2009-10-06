@@ -36,12 +36,6 @@ namespace Isis.ExtensionMethods.Web.UI
 			RegisterCssInclude(clientScriptManager, cssUrl);
 		}
 
-		public static void RegisterEmbeddedCssResource(this ClientScriptManager clientScriptManager, Type type, string resourceName)
-		{
-			string cssUrl = EmbeddedWebResourceUtility.GetUrl(type.Assembly, resourceName);
-			RegisterCssInclude(clientScriptManager, cssUrl);
-		}
-
 		public static void RegisterJavascriptInclude(this ClientScriptManager clientScriptManager, string javascriptUrl)
 		{
 			RegisterJavascriptInclude(clientScriptManager, javascriptUrl, ResourceInsertPosition.HeaderBottom);
@@ -104,17 +98,6 @@ namespace Isis.ExtensionMethods.Web.UI
 		{
 			string javascriptUrl = clientScriptManager.GetWebResourceUrl(type, resourceName);
 			RegisterJavascriptInclude(clientScriptManager, javascriptUrl, position, prefix, postfix);
-		}
-
-		public static void RegisterEmbeddedJavascriptResource(this ClientScriptManager clientScriptManager, Type type, string resourceName, ResourceInsertPosition position)
-		{
-			string javascriptUrl = EmbeddedWebResourceUtility.GetUrl(type.Assembly, resourceName);
-			RegisterJavascriptInclude(clientScriptManager, javascriptUrl, position);
-		}
-
-		public static void RegisterEmbeddedJavascriptResource(this ClientScriptManager clientScriptManager, Type type, string resourceName)
-		{
-			RegisterEmbeddedJavascriptResource(clientScriptManager, type, resourceName, ResourceInsertPosition.HeaderBottom);
 		}
 	}
 

@@ -8,6 +8,7 @@ using Isis.FrameworkBlocks.DependencyInjection;
 using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
+using Zeus.Web.Routing;
 
 namespace Zeus.Web.Mvc.Modules
 {
@@ -44,14 +45,14 @@ namespace Zeus.Web.Mvc.Modules
 		public void RegisterStandardRoutes(ICollection<RouteBase> routes, Assembly assembly, string areaName)
 		{
 			routes.Add(new Route("{area}/{controller}/{action}",
-													 new RouteValueDictionary(new { controller = "home", action = "index" }),
-													 new RouteValueDictionary(new { area = areaName }),
-													 new MvcRouteHandler()));
+				new RouteValueDictionary(new { controller = "home", action = "index" }),
+				new RouteValueDictionary(new { area = areaName }),
+				new MvcRouteHandler()));
 
 			routes.Add(new Route("content/{area}/{*resource}",
-													 new RouteValueDictionary(),
-													 new RouteValueDictionary(new { area = areaName }),
-													 new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Content")));
+				new RouteValueDictionary(),
+				new RouteValueDictionary(new { area = areaName }),
+				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Content")));
 		}
 
 		public void RegisterStandardViewFolders(ICollection<IViewEngine> viewEngines, Assembly assembly, string areaName)

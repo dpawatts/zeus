@@ -1,15 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Resources;
-using System.Data.Objects.DataClasses;
+using Coolite.Ext.Web;
+using Coolite.Utilities;
 using Isis.ExtensionMethods;
+using Isis.Web.UI;
 using Zeus.Integrity;
+using Zeus.Web.Hosting;
 
 namespace Zeus
 {
@@ -235,6 +235,22 @@ namespace Zeus
 		{
 			value = value.ToLower().Replace(' ', '-');
 			return Regex.Replace(value, @"[^a-zA-Z0-9\-]", string.Empty);
+		}
+
+		public static string GetCooliteIconUrl(Icon icon)
+		{
+			string iconResourceName = string.Format(ScriptManager.ASSEMBLYSLUG + ".icons.{0}", StringUtils.ToCharacterSeparatedFileName(icon.ToString(), '_', "png"));
+			return WebResourceUtility.GetUrl(typeof(ScriptManager), iconResourceName);
+		}
+
+		public static string GetClientResourceUrl(Assembly assembly, string relativePath)
+		{
+			return Context.Current.Resolve<IEmbeddedResourceManager>().GetClientResourceUrl(assembly, relativePath);
+		}
+
+		public static string GetClientResourceUrl(Type type, string relativePath)
+		{
+			return GetClientResourceUrl(type.Assembly, relativePath);
 		}
 	}
 }

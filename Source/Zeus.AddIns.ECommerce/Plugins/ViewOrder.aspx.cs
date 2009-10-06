@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
-using Isis.Web.Hosting;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 
-[assembly: EmbeddedResourceFile("Zeus.AddIns.ECommerce.Plugins.ViewOrder.aspx", "Zeus.AddIns.ECommerce")]
 namespace Zeus.AddIns.ECommerce.Plugins
 {
 	public partial class ViewOrder : PreviewFrameAdminPage

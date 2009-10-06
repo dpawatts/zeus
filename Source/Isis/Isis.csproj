@@ -130,9 +130,6 @@
     <Compile Include="Security\Impersonation.cs" />
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
-    <Compile Include="Web\Configuration\EmbeddedResourceAssembly.cs" />
-    <Compile Include="Web\Configuration\EmbeddedResourceAssemblyCollection.cs" />
-    <Compile Include="Web\Configuration\EmbeddedResourcesSection.cs" />
     <Compile Include="Web\Configuration\SecureWebPagesPatternSettings.cs" />
     <Compile Include="Web\Configuration\ExtendedCalendarSection.cs" />
     <Compile Include="Web\Configuration\IsisWebSectionGroup.cs" />
@@ -145,11 +142,6 @@
     <Compile Include="Web\Handlers\RolesHandler.cs" />
     <Compile Include="Web\Handlers\UsersHandler.cs" />
     <Compile Include="ExtensionMethods\Web\HttpRequest.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceFileAttribute.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceUtility.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourcePathProvider.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceVirtualFile.cs" />
-    <Compile Include="Web\Hosting\EmbeddedResourceVirtualFileCollection.cs" />
     <Compile Include="Web\InvalidQueryStringException.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\MimeUtility.cs" />
@@ -161,13 +153,7 @@
     <Compile Include="ExtensionMethods\Web\SessionState\HttpSessionState.cs" />
     <Compile Include="ExtensionMethods\Web\HttpResponse.cs" />
     <Compile Include="ExtensionMethods\Web\UI\ClientScriptManager.cs" />
-    <Compile Include="Web\UI\EmbeddedWebResourceFileCollection.cs" />
-    <Compile Include="Web\UI\EmbeddedWebResourceAttribute.cs" />
-    <Compile Include="Web\UI\EmbeddedWebResourceFile.cs" />
-    <Compile Include="Web\UI\EmbeddedWebResourceModule.cs" />
-    <Compile Include="Web\UI\EmbeddedWebResourceUtility.cs" />
     <Compile Include="Web\UI\HtmlControls\FieldSet.cs" />
-    <Compile Include="Web\UI\ScriptManagerUtility.cs" />
     <Compile Include="Web\UI\WebControls\Adapters\ChangePasswordAdapter.cs" />
     <Compile Include="Web\UI\WebControls\Adapters\CompositeDataBoundControlAdapter.cs" />
     <Compile Include="Web\UI\WebControls\Adapters\CreateUserWizardAdapter.cs" />

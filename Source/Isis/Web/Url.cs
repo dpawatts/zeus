@@ -249,6 +249,18 @@ namespace Isis.Web
 			return clone;
 		}
 
+		public string SegmentAtIndex(int index)
+		{
+			if (string.IsNullOrEmpty(Path) || Path == "/" || index < 0)
+				return string.Empty;
+
+			string[] segments = PathWithoutExtension.Split(_slashes, StringSplitOptions.RemoveEmptyEntries);
+			if (index >= segments.Length)
+				return string.Empty;
+
+			return segments[index];
+		}
+
 		/// <summary>Removes the segment at the specified location.</summary>
 		/// <param name="index">The segment index to remove</param>
 		/// <returns>An url without the specified segment.</returns>

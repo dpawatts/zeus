@@ -1,5 +1,4 @@
 ﻿using System.Web.UI;
-using Isis.Web.UI;
 
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.Smilies.icon_arrow.gif", "image/gif")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.Smilies.icon_cool.gif", "image/gif")]
@@ -25,10 +24,8 @@ using Isis.Web.UI;
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.Smilies.icon_redface.gif", "image/gif")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.Smilies.icon_rolleyes.gif", "image/gif")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.Smilies.icon_twisted.gif", "image/gif")]
-[assembly: EmbeddedWebResource("Zeus.AddIns.Forums.Web.Resources.BBCodeEditor.js", "Zeus.AddIns.Forums.Web.Resources", "text/javascript")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.comment.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.comment_edit.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.comments.png", "image/png")]
-[assembly: EmbeddedWebResource("Zeus.AddIns.Forums.Web.Resources.spacer.gif", "Zeus.AddIns.Forums.Web.Resources", "image/gif")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.user_comment.png", "image/png")]
 [assembly: WebResource("Zeus.AddIns.Forums.Web.Resources.user_green.png", "image/png")]

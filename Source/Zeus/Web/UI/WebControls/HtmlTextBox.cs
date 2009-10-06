@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods.Web.UI;
+using Zeus.Web.Hosting;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -39,7 +40,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			base.OnPreRender(e);
 
-			Page.ClientScript.RegisterEmbeddedJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.TinyMCE.tiny_mce.js", ResourceInsertPosition.HeaderTop);
+			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.tinymce.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
 				"InitHtmlTextBox" + UniqueID,
