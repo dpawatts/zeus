@@ -11,6 +11,11 @@ namespace Zeus.Design.Editors
 			FormatString = formatString;
 		}
 
+		public ReactiveTextBoxEditorAttribute(string formatString)
+		{
+			FormatString = formatString;
+		}
+
 		public string FormatString { get; set; }
 
 		protected override TextBox CreateEditor()

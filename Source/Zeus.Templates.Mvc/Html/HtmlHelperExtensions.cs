@@ -25,11 +25,6 @@ namespace Zeus.Templates.Mvc.Html
 			return html.PropertyOrDefault(contentItem, SeoUtility.HTML_TITLE, "Title");
 		}
 
-		public static string PageTitle(this HtmlHelper html, ContentItem contentItem)
-		{
-			return html.PropertyOrDefault(contentItem, SeoUtility.PAGE_TITLE, "Title");
-		}
-
 		public static string MetaKeywords(this HtmlHelper html, ContentItem contentItem)
 		{
 			return html.PropertyOrDefault(contentItem, SeoUtility.META_KEYWORDS, "Title");

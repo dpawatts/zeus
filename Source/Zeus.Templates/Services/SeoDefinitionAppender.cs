@@ -18,14 +18,12 @@ namespace Zeus.Templates.Services
 			_templatesConfig = templatesConfig;
 
 			HtmlTitleTitle = "HTML Title";
-			PageTitleTitle = "Page Title";
 			MetaKeywordsTitle = "Meta Keywords";
 			MetaDescriptionTitle = "Meta Description";
 			SeoTabTitle = "SEO";
 		}
 
 		public string HtmlTitleTitle { get; set; }
-		public string PageTitleTitle { get; set; }
 		public string MetaKeywordsTitle { get; set; }
 		public string MetaDescriptionTitle { get; set; }
 		public string SeoTabTitle { get; set; }
@@ -45,7 +43,6 @@ namespace Zeus.Templates.Services
 					contentType.Add(seoTab);
 
 					AddEditableText(contentType, HtmlTitleTitle, SeoUtility.HTML_TITLE, 11, _templatesConfig.Seo.HtmlTitleFormat, "Used in the &lt;title&gt; element on the page", 200, false);
-					AddEditableText(contentType, PageTitleTitle, SeoUtility.PAGE_TITLE, 12, "{Title}", "Used in the &lt;h1&gt; element on the page", 200, false);
 					AddEditableText(contentType, MetaKeywordsTitle, SeoUtility.META_KEYWORDS, 21, _templatesConfig.Seo.MetaKeywordsFormat, null, 400, false);
 					AddEditableText(contentType, MetaDescriptionTitle, SeoUtility.META_DESCRIPTION, 22, _templatesConfig.Seo.MetaDescriptionFormat, null, 1000, true);
 				}
