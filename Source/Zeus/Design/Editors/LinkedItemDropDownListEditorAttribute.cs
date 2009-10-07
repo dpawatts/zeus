@@ -13,17 +13,18 @@ namespace Zeus.Design.Editors
 
 		public LinkedItemDropDownListEditor()
 		{
+			ExcludeSelf = true;
 		}
 
 		public LinkedItemDropDownListEditor(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
+			ExcludeSelf = true;
 		}
 
 		#endregion
 
 		public bool ExcludeSelf { get; set; }
-
 		public Type TypeFilter { get; set; }
 
 		protected override object GetValue(ListControl ddl)
