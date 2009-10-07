@@ -88,7 +88,7 @@ namespace Zeus.FileSystem
 		}
 
 		[ContentProperty("Caption", 200)]
-		public string Caption
+		public virtual string Caption
 		{
 			get { return GetDetail("Caption", string.Empty); }
 			set { SetDetail("Caption", value); }

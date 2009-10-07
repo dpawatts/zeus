@@ -1,6 +1,4 @@
-﻿using Zeus.Web;
-
-namespace Zeus.FileSystem
+﻿namespace Zeus.FileSystem
 {
 	public abstract class FileSystemNode : ContentItem
 	{

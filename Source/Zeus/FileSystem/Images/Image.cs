@@ -16,16 +16,6 @@ namespace Zeus.FileSystem.Images
 			set { base.Data = value; }
 		}
 
-		/*public override string Url
-		{
-			get
-			{
-				return new DynamicImageBuilder()
-					.WithLayer(LayerBuilder.Image.SourceImage(this))
-					.Url;
-			}
-		}*/
-
 		public static Image FromStream(Stream stream, string filename)
 		{
 			byte[] fileBytes = stream.ReadAllBytes();
