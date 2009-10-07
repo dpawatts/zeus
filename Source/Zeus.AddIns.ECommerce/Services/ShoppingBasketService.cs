@@ -142,10 +142,9 @@ namespace Zeus.AddIns.ECommerce.Services
 				shoppingBasket.AddTo(shop.ShoppingBaskets);
 				_persister.Save(shoppingBasket);
 
-				HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name)
-				{
-					Expires = DateTime.Now.AddYears(1)
-				};
+				HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name);
+				if (shop.PersistentShoppingBaskets)
+					cookie.Expires = DateTime.Now.AddYears(1);
 				_webContext.Response.Cookies.Add(cookie);
 			}
 

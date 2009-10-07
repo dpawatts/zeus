@@ -88,6 +88,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			set { SetDetail("VendorEmail", value); }
 		}
 
+		[ContentProperty("Persistent Shopping Baskets", 222, EditorContainerName = "ECommerce", Description = "Check this box if you want shopping baskets to persist, even after the customer closes their browser.")]
+		public bool PersistentShoppingBaskets
+		{
+			get { return GetDetail("PersistentShoppingBaskets", false); }
+			set { SetDetail("PersistentShoppingBaskets", value); }
+		}
+
 		void ISelfPopulator.Populate()
 		{
 			VariationSetContainer variationsSet = new VariationSetContainer
