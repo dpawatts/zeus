@@ -693,6 +693,7 @@
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\error.png" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\progress.gif" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyFileUpload.css" />
+    <EmbeddedResource Include="Web\Resources\FancyFileUpload\mootools.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />

@@ -69,3 +69,5 @@ Fx.ProgressBar = new Class({
 	}
 
 });
+
+if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded(); 

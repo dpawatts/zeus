@@ -486,3 +486,5 @@ Swiff.Uploader.File = new Class({
 	} 
 
 });
+
+if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded(); 
