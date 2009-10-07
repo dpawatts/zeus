@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web.UI;
+using Isis.Web.UI.HtmlControls;
 using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
@@ -94,7 +95,14 @@ namespace Zeus.Design.Editors
 			editor.ID = Name;
 			//editor.ZoneName = DefaultChildZoneName;
 			editor.Init += OnChildEditorInit;
-			panel.Controls.Add(editor);
+
+			FieldSet fieldSet = new FieldSet { ID = Name + "fieldSet", Legend = Title };
+			if (!string.IsNullOrEmpty(Description))
+				fieldSet.Controls.Add(new LiteralControl("<span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
+			fieldSet.Controls.Add(editor);
+
+			panel.Controls.Add(fieldSet);
+
 			return editor;
 		}
 
