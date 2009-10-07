@@ -1,4 +1,5 @@
 ﻿using Zeus.Design.Editors;
+using Zeus.Templates.Design.Editors;
 
 namespace Zeus.Templates.ContentTypes
 {
@@ -6,7 +7,7 @@ namespace Zeus.Templates.ContentTypes
 	public abstract class BasePage : BaseContentItem
 	{
 		[ContentProperty("Page Title", 11, Description = "Used in the &lt;h1&gt; element on the page")]
-		[ReactiveTextBoxEditor("{Title}", MaxLength = 200)]
+		[PageTitleEditor]
 		public virtual string PageTitle
 		{
 			get { return GetDetail("PageTitle", Title); }

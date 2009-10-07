@@ -45,6 +45,12 @@ namespace Zeus
 		/// </summary>
 		public InstallerHints Installer { get; set; }
 
+		/// <summary>
+		/// Gets or sets whether this type is treated as a page. This flag is used,
+		/// for example, to show or hide the SEO tab.
+		/// </summary>
+		public bool IsPage { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -52,6 +58,7 @@ namespace Zeus
 		public ContentTypeAttribute()
 		{
 			RefinementOrder = RefineOrder.First;
+			IsPage = true;
 		}
 
 		/// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
@@ -97,6 +104,7 @@ namespace Zeus
 
 			currentContentType.ContentTypeAttribute = this;
 			currentContentType.IsDefined = true;
+			currentContentType.IsPage = IsPage;
 		}
 	}
 }

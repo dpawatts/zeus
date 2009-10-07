@@ -67,7 +67,9 @@ namespace Zeus.Templates.Services
 
 		private static bool IsPage(ContentType contentType)
 		{
-			return typeof(BasePage).IsAssignableFrom(contentType.ItemType) && contentType.ItemType != typeof(Redirect);
+			return typeof(BasePage).IsAssignableFrom(contentType.ItemType)
+				&& contentType.ItemType != typeof(Redirect)
+				&& contentType.IsPage;
 		}
 
 		#endregion
