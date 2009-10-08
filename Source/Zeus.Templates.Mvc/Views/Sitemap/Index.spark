@@ -1,4 +1,4 @@
-﻿<viewdata model="Zeus.Templates.ContentTypes.Sitemap"/>
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.SitemapViewModel"/>
 
 <p>Below is a list of all the pages on our website.</p>
 

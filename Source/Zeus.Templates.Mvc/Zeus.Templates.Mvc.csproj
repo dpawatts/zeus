@@ -123,6 +123,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssResult.cs" />
     <Compile Include="TemplatesWebPackage.cs" />
+    <Compile Include="ViewModels\SitemapViewModel.cs" />
     <Compile Include="ViewModels\TagCloudViewModel.cs" />
     <Compile Include="ViewModels\TagViewModel.cs" />
     <Compile Include="ViewModels\TagGroupViewModel.cs" />
