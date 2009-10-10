@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="$(var.PRODUCTGUID)" Name="$(var.TEMPLATENAME)" Language="1033" Version="1.0.0.0"
+           Manufacturer="Sound in Theory Ltd" UpgradeCode="$(var.UPGRADEGUID)">
+		<Package InstallerVersion="200" Compressed="yes" />
+		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+		<Icon Id="Product.ico" SourceFile="Zeus.ico" />
+		<Property Id="ARPPRODUCTICON" Value="Product.ico" />
+		<Property Id="ARPHELPLINK" Value="http://www.sitdap.com/" />
+		<Property Id="INSTALLDIR">
+			<RegistrySearch Id='VSInstallDir' Type='raw'
+        Root='HKLM' Key='Software\Microsoft\VisualStudio\9.0' Name='InstallDir' />
+		</Property>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="INSTALLDIR">
+				<Directory Id="PRIVATEASSEMBIES" Name="PrivateAssemblies">
+					<Component Id="WizardComponenet" Guid="04CCE6BD-7A65-45fe-A5A1-6425B84C3D3D">
+						<File Id="Wizard" Name="SolutionFactory.Wizard.dll" Source="SolutionFactory.Wizard.dll" DiskId="1"  />
+						<RegistryValue Root='HKLM' Key='SOFTWARE\SolutionFactory\Wizard' Type='string' Value='InstallKey' KeyPath='yes' />
+					</Component>
+				</Directory>
+				<Directory Id="PersonalFolder">
+					<Directory Id="VS" Name="Visual Studio 2008">
+						<Directory Id="Templates" Name="Templates" >
+							<Directory Id="ProjectTemplates" Name="ProjectTemplates" >
+								<Directory Id="category" Name="$(var.CATEGORY)" >
+									<Directory Id="subcategory" Name="$(var.SUBCATEGORY)" >
+										<Component Id="AddinComponent" Guid="$(var.COMPONENTGUID)" KeyPath="no"  >
+											<RegistryValue Root='HKCU' Key='SOFTWARE\SolutionFactory\$(var.TEMPLATENAME)' Type='string' Value='InstallKey' KeyPath='yes' />
+											<File Id="projectTempate" Name="template.zip" Source="solutiontemplate.zip" DiskId="1"  />
+											<RemoveFile Id="RemoveProjectTemplate"  Name="template.zip" On="uninstall"/>
+											<RemoveFolder Id="RemoveCategoryDir" Directory="category" On="uninstall"/>
+											<RemoveFolder Id="RemoveSubcategoryDir" Directory="subcategory" On="uninstall"/>
+											<RemoveFolder Id="RemoveProjectTemplates" Directory="ProjectTemplates" On="uninstall"/>
+											<RemoveFolder Id="RemoveTemplatesDir" Directory="Templates" On="uninstall"/>
+											<RemoveFolder Id="RemoveVSDir" Directory="VS" On="uninstall"/>
+										</Component>
+									</Directory>
+								</Directory>
+							</Directory>
+						</Directory>
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+		<Feature Id="ProductFeature" Title="$(var.TEMPLATENAME)" Level="1">
+			<ComponentRef Id="AddinComponent" />
+			<ComponentRef Id="WizardComponenet" />
+		</Feature>
+	</Product>
+</Wix>

@@ -1,0 +1,111 @@
+﻿<!--
+File that will ease the usage of the JSLint task.
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <!--
+    The JSLint Task should be declared in a 'UsingTask' before this file is executed.
+  -->
+  
+  
+  <!-- JSLint properties -->
+  <PropertyGroup>
+    <!-- The only 2 values that are true by default -->
+    <JSLint_UseGoodpartsOptions>true</JSLint_UseGoodpartsOptions>
+    <JSLint_browser Condition="$(JSLint_browser)==''">true</JSLint_browser>
+
+
+    <JSLint_adsafe Condition="$(JSLint_adsafe)==''">false</JSLint_adsafe>
+    <JSLint_bitwise Condition="$(JSLint_bitwise)==''">false</JSLint_bitwise>
+    <JSLint_cap Condition="$(JSLint_cap)==''">false</JSLint_cap>
+    <JSLint_debug Condition="$(JSLint_debug)==''">false</JSLint_debug>
+    <JSLint_eqeqeq Condition="$(JSLint_eqeqeq)==''">false</JSLint_eqeqeq>
+    <JSLint_evil Condition="$(JSLint_evil)==''">false</JSLint_evil>
+    <JSLint_forin Condition="$(JSLint_forin)==''">false</JSLint_forin>
+    <JSLint_fragment Condition="$(JSLint_fragment)==''">false</JSLint_fragment>
+    <JSLint_glovar Condition="$(JSLint_glovar)==''">false</JSLint_glovar>
+    <JSLint_laxbreak Condition="$(JSLint_laxbreak)==''">false</JSLint_laxbreak>
+    <JSLint_nomen Condition="$(JSLint_nomen)==''">false</JSLint_nomen>
+    <JSLint_on Condition="$(JSLint_on)==''">false</JSLint_on>
+    <JSLint_passfail Condition="$(JSLint_passfail)==''">false</JSLint_passfail>
+    <JSLint_plusplus Condition="$(JSLint_plusplus)==''">false</JSLint_plusplus>
+    <JSLint_regexp Condition="$(JSLint_regexp)==''">false</JSLint_regexp>
+    <JSLint_rhino Condition="$(JSLint_rhino)==''">false</JSLint_rhino>
+    <JSLint_undef Condition="$(JSLint_undef)==''">false</JSLint_undef>
+    <JSLint_sidebar Condition="$(JSLint_sidebar)==''">false</JSLint_sidebar>
+    <JSLint_white Condition="$(JSLint_white)==''">false</JSLint_white>
+    <JSLint_widget Condition="$(JSLint_widget)==''">false</JSLint_widget>
+  </PropertyGroup>
+  
+  
+
+  <PropertyGroup>
+    <RunJSLintDependsOn>
+      BeforeRunJSLint;
+      CreateJSLintItem;
+      CoreRunJSLint;
+      AfterRunJSLint;
+    </RunJSLintDependsOn>
+  </PropertyGroup>
+  
+  <Target Name="RunJSLint" DependsOnTargets="$(RunJSLintDependsOn)" />
+  <Target Name="BeforeRunJSLint"/>
+  <Target Name="AfterRunJSLint"/>
+  
+  <Target Name="CoreRunJSLint">
+    <Message Text="SedodreamInstallLoc: $(SedodreamInstallLoc)" />
+    <Message Text="JSFiles: @(JSFiles)" />
+    <Message Text="No files detected for JSLint" Condition="@(JSFiles)==''"/>
+    <JSLint Condition="@(JSFiles)!=''" 
+            ScriptFiles="@(JSFiles)" UseGoodpartsOptions="$(JSLint_UseGoodpartsOptions)" browser="$(JSLint_browser)"
+              adsafe="$(JSLint_adsafe)"
+              bitwise="$(JSLint_bitwise)"
+              cap="$(JSLint_cap)"
+              debug="$(JSLint_debug)"
+              eqeqeq="$(JSLint_eqeqeq)"
+              evil="$(JSLint_evil)"
+              forin="$(JSLint_forin)"
+              fragment="$(JSLint_fragment)"
+              glovar="$(JSLint_glovar)"
+              laxbreak="$(JSLint_laxbreak)"
+              nomen="$(JSLint_nomen)"
+              on="$(JSLint_on)"
+              passfail="$(JSLint_passfail)"
+              plusplus="$(JSLint_plusplus)"
+              regexp="$(JSLint_regexp)"
+              rhino="$(JSLint_rhino)"
+              undef="$(JSLint_undef)"
+              sidebar="$(JSLint_sidebar)"
+              white="$(JSLint_white)"
+              widget="$(JSLint_widget)"
+            />
+  </Target>
+
+  <PropertyGroup>
+    <JavascriptFileExtension Condition="$(JavascriptFileExtension)==''">.js</JavascriptFileExtension>
+    <JSIncludeContentFiles Condition="$(JSIncludeContentFiles)==''">true</JSIncludeContentFiles>
+    <JSIncludeNoneFiles Condition="$(JSIncludeNoneFiles)==''">true</JSIncludeNoneFiles>
+    <JSIncludeEmbeddedResourceFiles Condition="$(JSIncludeEmbeddedResourceFiles)==''">true</JSIncludeEmbeddedResourceFiles>
+    <JSIncludeCompileFiles Condition="$(JSIncludeCompileFiles)==''">true</JSIncludeCompileFiles>
+  </PropertyGroup>
+
+
+  
+  
+  <Target Name="CreateJSLintItem">
+    <CreateItem Include="@(Content)" Condition="$(JSIncludeContentFiles)=='true' and %(Content.Extension)=='$(JavascriptFileExtension)'">
+      <Output ItemName="JSFiles" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="@(Compile)" Condition="$(JSIncludeCompileFiles) and %(Compile.Extension)=='.js'">
+      <Output ItemName="JSFiles" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="@(None)" Condition="$(JSIncludeNoneFiles) and %(None.Extension)=='.js'">
+      <Output ItemName="JSFiles" TaskParameter="Include" />
+    </CreateItem>
+    <CreateItem Include="@(EmbeddedResource)" Condition="$(JSIncludeEmbeddedResourceFiles) and %(EmbeddedResource.Extension)=='.js'">
+      <Output ItemName="JSFiles" TaskParameter="Include" />
+    </CreateItem>
+  </Target>
+
+
+</Project>

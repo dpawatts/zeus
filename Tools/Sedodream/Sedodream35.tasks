@@ -1,0 +1,14 @@
+﻿<!--
+  Import file that contains UsingTask statements for all MSBuild tasks included in this package
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Find">
+
+  <PropertyGroup>
+    <SedodreamInstallLoc Condition="$(SedodreamInstallLoc)==''">$(MSBuildExtensionsPath)\Sedodream\</SedodreamInstallLoc>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild35.Tasks.dll" TaskName="CreateLinqCode"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild35.Tasks.dll" TaskName="CreateLinqDbml"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild35.Tasks.dll" TaskName="CreateLinqMap"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild35.Tasks.dll" TaskName="CreateDatabase"/>
+</Project>

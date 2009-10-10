@@ -37,7 +37,7 @@
     </Reference>
     <Reference Include="Coolite.Utilities, Version=1.0.0.2800, Culture=neutral, PublicKeyToken=f06596a209371c29, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Zeus.Admin\Bin\Coolite.Utilities.dll</HintPath>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

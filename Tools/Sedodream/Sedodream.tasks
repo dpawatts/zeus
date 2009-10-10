@@ -1,0 +1,34 @@
+﻿<!--
+  Import file that contains UsingTask statements for all MSBuild tasks included in this package
+-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Find">
+
+	<PropertyGroup>
+		<SedodreamInstallLoc Condition="$(SedodreamInstallLoc)==''">$(MSBuildExtensionsPath)\Sedodream\</SedodreamInstallLoc>
+	</PropertyGroup>
+
+  <PropertyGroup>
+    <SedodreamTasksImported>true</SedodreamTasksImported>
+  </PropertyGroup>
+  
+	<UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="AddMetadata"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="AppendString"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="AspnetRegsql"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="FindUnder"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="GetAssemblyVersion"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="GetDate"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="GetExternalIp"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="GetInternalIp"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="GetRegKey"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="NUnitTask"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="PyScript"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="ReplaceInFile"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="ReplaceInText"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="SedoMove"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="SedoSleep"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="SplitText"/>
+
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="TempFile"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="CreateGuid"/>
+  <UsingTask AssemblyFile="$(SedodreamInstallLoc)Sedodream.MSBuild.Tasks.dll" TaskName="JSLint"/>
+</Project>
