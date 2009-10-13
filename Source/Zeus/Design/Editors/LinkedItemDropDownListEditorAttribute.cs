@@ -47,9 +47,10 @@ namespace Zeus.Design.Editors
 			IQueryable<ContentItem> items = Context.Current.Finder.Items();
 			if (TypeFilter != null)
 				items = ((IQueryable) items).OfType(TypeFilter).OfType<ContentItem>();
+			IEnumerable<ContentItem> itemList = items.ToList();
 			if (ExcludeSelf)
-				items = items.Where(i => i != item);
-			return items.ToList()
+				itemList = itemList.Where(i => i != item);
+			return itemList
 				.OrderBy(i => i.HierarchicalTitle)
 				.Select(i => new ListItem {Value = i.ID.ToString(), Text = i.HierarchicalTitle})
 				.ToArray();

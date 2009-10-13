@@ -203,7 +203,7 @@ function prepare{8}() {{
 		
 	}});
 }};
-Sys.Application.add_load(prepare{8});
+if (typeof (Sys) !== 'undefined') Sys.Application.add_load(prepare{8});
 window.addEvent('domready', prepare{8});
 ", Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Swiff.Uploader.swf"),
 		 TypeFilterDescription,
