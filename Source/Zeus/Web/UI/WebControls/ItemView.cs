@@ -9,7 +9,7 @@ using Zeus.Admin;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor
+	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor, IContentItemContainer
 	{
 		private ITypeDefinition _currentTypeDefinition;
 		private IEditableObject _currentItem;
@@ -112,6 +112,15 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		protected abstract void AddPropertyControls();
+
+		#endregion
+
+		#region IContentItemContainer Members
+
+		ContentItem IContentItemContainer.CurrentItem
+		{
+			get { return (ContentItem) CurrentItem; }
+		}
 
 		#endregion
 	}

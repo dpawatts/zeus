@@ -59,6 +59,12 @@ namespace Zeus.Web.UI.WebControls
 			_labelPanel.Controls.Add(_suffixLabel);
 		}
 
+		protected override void OnInit(EventArgs e)
+		{
+			Page.Validators.Add(this);
+			base.OnInit(e);
+		}
+
 		protected override void OnPreRender(EventArgs e)
 		{
 			base.OnPreRender(e);
@@ -111,15 +117,22 @@ namespace Zeus.Web.UI.WebControls
 					}
 
 					// Ensure that the path isn't longer than 260 characters
-					if (currentItem.Parent != null && currentItem.Parent is ContentItem)
+					if (currentItem.Parent != null)
 					{
-						ContentItem parentDocument = (ContentItem) currentItem.Parent;
+						ContentItem parentDocument = currentItem.Parent;
 						if (parentDocument.Url.Length > 248 || parentDocument.Url.Length + _textBox.Text.Length > 260)
 						{
 							ErrorMessage = string.Format("Name too long, the full url cannot exceed 260 characters: {0}", _textBox.Text);
 							IsValid = false;
 							return;
 						}
+					}
+
+					if (Text.IndexOfAny(new [] { '?', '&', '/', '+', ':', '%' }) >= 0)
+					{
+						ErrorMessage = "Invalid characters in path. Only English alphanumerical characters allowed.";
+						IsValid = false;
+						return;
 					}
 				}
 			}

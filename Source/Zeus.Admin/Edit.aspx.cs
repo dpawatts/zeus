@@ -74,6 +74,7 @@ namespace Zeus.Admin
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
+			Validate();
 			if (!IsValid)
 				return;
 
