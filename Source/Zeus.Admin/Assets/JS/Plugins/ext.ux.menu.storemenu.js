@@ -57,69 +57,82 @@ Ext.ux.menu.StoreMenu = function(config) {
 	
 	
 };
-								   
+
 Ext.extend(Ext.ux.menu.StoreMenu, Ext.menu.Menu, {
 	loadingText: Ext.LoadMask.prototype.msg || 'Loading...',
-	loaded:      false,
+	loaded: false,
 
-	onMenuLoad: function(){
-		if(!this.loaded){
-//			if(this.options) {
-//				this.store.loadData(this.options);
-//			}
-//			else {
-				this.store.load();
-//			}
+	onMenuLoad: function()
+	{
+		if (!this.loaded)
+		{
+			//			if(this.options) {
+			//				this.store.loadData(this.options);
+			//			}
+			//			else {
+			this.store.load();
+			//			}
 		}
 	},
 
-	updateMenuItems: function(loadedState,records) {
-//		var visible = this.isVisible();
-//		this.hide(false);
-		
-		this.removeAll();
-//to sync the height of the shadow		
-		this.el.sync();	
+	updateMenuItems: function(loadedState, records)
+	{
+		//		var visible = this.isVisible();
+		//		this.hide(false);
 
-		if (loadedState) {
-		
-			for(var i=0, len=records.length; i<len; i++){
-//create a real function if a handler or menu is given as a string (because a function cannot really be encoded in JSON
-				if (records[i].json.handler) {
-					eval("records[i].json.handler = "+records[i].json.handler);
-//					records[i].json.handler = new Function(records[i].json.handler);
+		this.removeAll();
+		//to sync the height of the shadow		
+		this.el.sync();
+
+		if (loadedState)
+		{
+
+			for (var i = 0, len = records.length; i < len; i++)
+			{
+				//create a real function if a handler or menu is given as a string (because a function cannot really be encoded in JSON
+				if (records[i].json.handler)
+				{
+					eval("records[i].json.handler = " + records[i].json.handler);
+					//					records[i].json.handler = new Function(records[i].json.handler);
 				}
-				if (records[i].json.menu) {
-					eval("records[i].json.menu = "+records[i].json.menu);
-//					records[i].json.menu = new Function(records[i].json.menu);
+				if (records[i].json.menu)
+				{
+					for (var j = 0, jlen = records[i].json.menu.items.length; j < jlen; j++)
+						if (records[i].json.menu.items[j].handler)
+							eval("records[i].json.menu.items[j].handler = " + records[i].json.menu.items[j].handler);
+					//eval("records[i].json.menu = "+records[i].json.menu);
+					//					records[i].json.menu = new Function(records[i].json.menu);
 				}
 
 				this.add(records[i].json);
 			}
-//			this.hide();
-//			this.show();			
-		
-			
+			//			this.hide();
+			//			this.show();			
+
+
 		}
-		else {
+		else
+		{
 			this.add('<span class="loading-indicator">' + this.loadingText + '</span>');
 		}
 
 		this.loaded = loadedState;
-//		if(visible && loadedState) {
-//			this.show(this.getEl().getXY());
-//			this.show();			
-//		}		
+		//		if(visible && loadedState) {
+		//			this.show(this.getEl().getXY());
+		//			this.show();			
+		//		}		
 	},
 
-	onBeforeLoad: function(store){
+	onBeforeLoad: function(store)
+	{
 		this.store.baseParams = this.baseParams;
 		this.updateMenuItems(false);
 	},
-	
-	onLoad: function(store, records){
-		this.updateMenuItems(true,records);		
+
+	onLoad: function(store, records)
+	{
+		this.updateMenuItems(true, records);
 	}
-	
+
 
 });

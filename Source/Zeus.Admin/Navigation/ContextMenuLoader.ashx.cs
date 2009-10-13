@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Coolite.Ext.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Zeus.Admin.Navigation
@@ -23,7 +24,6 @@ namespace Zeus.Admin.Navigation
 				List<BaseMenuItem> menuItems = CreateMenuItems(selectedItem);
 
 				JArray serializedMenuItems = JArray.FromObject(menuItems.Select(mi => GetObjectForJsonSerialization(mi)));
-
 				context.Response.Write(serializedMenuItems);
 				context.Response.End();
 			}
@@ -37,11 +37,24 @@ namespace Zeus.Admin.Navigation
 			if (baseMenuItem is MenuItem)
 			{
 				MenuItem menuItem = (MenuItem) baseMenuItem;
+				if (menuItem.Menu != null && menuItem.Menu.Primary != null)
+				{
+					return new
+					{
+						text = menuItem.Text,
+						icon = menuItem.IconUrl,
+						handler = menuItem.Handler,
+						menu = new
+						{
+							items = menuItem.Menu.Primary.Items.Select(mi => GetObjectForJsonSerialization(mi))
+						}
+					};
+				}
 				return new
 				{
 					text = menuItem.Text,
 					icon = menuItem.IconUrl,
-					handler = menuItem.Handler
+					handler = menuItem.Handler,
 				};
 			}
 

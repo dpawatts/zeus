@@ -47,7 +47,25 @@ namespace Zeus.Admin.ActionPlugins
 			menuItem.Handler = string.Format("function() {{ zeus.reloadContentPanel('New', '{0}'); }}",
 				GetPageUrl(GetType(), "Zeus.Admin.New.aspx") + "?selected=" + contentItem.Path);
 
-			// TODO: Add child menu items for types that can be created under the current item.
+			// Add child menu items for types that can be created under the current item.
+			IContentTypeManager manager = Context.Current.Resolve<IContentTypeManager>();
+			var childTypes = manager.GetAllowedChildren(manager.GetContentType(contentItem.GetType()), null, Context.Current.WebContext.User);
+			if (childTypes.Any())
+			{
+				Menu childMenu = new Menu();
+				menuItem.Menu.Add(childMenu);
+				foreach (ContentType child in childTypes)
+				{
+					MenuItem childMenuItem = new MenuItem
+					{
+						Text = child.Title,
+						IconUrl = child.IconUrl,
+						Handler = string.Format("function() {{ zeus.reloadContentPanel('New {0}', '{1}'); }}", child.Title,
+							Context.AdminManager.GetEditNewPageUrl(contentItem, child, null, CreationPosition.Below))
+					};
+					childMenu.Items.Add(childMenuItem);
+				}
+			}
 
 			return menuItem;
 		}
