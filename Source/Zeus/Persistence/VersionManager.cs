@@ -13,17 +13,17 @@ namespace Zeus.Persistence
 	{
 		#region Fields
 
-		private IRepository<int, ContentItem> itemRepository;
-		private readonly IFinder<ContentItem> finder;
+		private readonly IRepository<int, ContentItem> _itemRepository;
+		private readonly IFinder _finder;
 
 		#endregion
 
 		#region Constructor
 
-		public VersionManager(IRepository<int, ContentItem> itemRepository, IFinder<ContentItem> finder)
+		public VersionManager(IRepository<int, ContentItem> itemRepository, IFinder finder)
 		{
-			this.itemRepository = itemRepository;
-			this.finder = finder;
+			_itemRepository = itemRepository;
+			_finder = finder;
 		}
 
 		#endregion
@@ -68,7 +68,7 @@ namespace Zeus.Persistence
 					oldVersion["ParentID"] = item.Parent.ID;
 				if (item.TranslationOf != null)
 					oldVersion["TranslationOfID"] = item.TranslationOf.ID;
-				itemRepository.SaveOrUpdate(oldVersion);
+				_itemRepository.SaveOrUpdate(oldVersion);
 
 				if (ItemSavedVersion != null)
 					ItemSavedVersion.Invoke(this, new ItemEventArgs(oldVersion));
@@ -92,7 +92,7 @@ namespace Zeus.Persistence
 				currentItem = args.AffectedItem;
 				replacementItem = args.Destination;
 
-				using (ITransaction transaction = itemRepository.BeginTransaction())
+				using (ITransaction transaction = _itemRepository.BeginTransaction())
 				{
 					ContentItem versionOfCurrentItem = SaveVersion(currentItem);
 					ClearAllDetails(currentItem);
@@ -100,14 +100,14 @@ namespace Zeus.Persistence
 					UpdateCurrentItemData(currentItem, replacementItem);
 
 					currentItem.Updated = Utility.CurrentTime();
-					itemRepository.Update(currentItem);
+					_itemRepository.Update(currentItem);
 
 					if (ItemReplacedVersion != null)
 						ItemReplacedVersion.Invoke(this, new ItemEventArgs(replacementItem));
 					if (replacementItem.VersionOf == currentItem)
-						itemRepository.Delete(replacementItem);
+						_itemRepository.Delete(replacementItem);
 
-					itemRepository.Flush();
+					_itemRepository.Flush();
 					transaction.Commit();
 
 					return versionOfCurrentItem;
@@ -181,7 +181,7 @@ namespace Zeus.Persistence
 
 		private IEnumerable<ContentItem> GetVersionsQuery(ContentItem publishedItem)
 		{
-			return finder.Items()
+			return _finder.QueryItems()
 				.Where(ci => ci.VersionOf == publishedItem || ci.ID == publishedItem.ID)
 				.OrderBy(ci => ci.Version);
 		}

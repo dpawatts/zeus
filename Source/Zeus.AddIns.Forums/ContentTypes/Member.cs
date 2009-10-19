@@ -79,25 +79,25 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		public virtual int PostCount
 		{
 			//get { return Context.Finder.Items<Post>().Count(p => p.Author != null && p.Author == this); }
-			get { return Context.Finder.Items<Post>().ToList().Count(p => p.Author == this); }
+			get { return Context.Finder.QueryItems<Post>().ToList().Count(p => p.Author == this); }
 		}
 
 		public virtual IEnumerable<Forum> ModeratedForums
 		{
 			//get { return Context.Finder.Items<Forum>().Where(f => f.Moderator == this); }
-			get { return Context.Finder.Items<Forum>().ToList().Where(f => f.Moderator == this); }
+			get { return Context.Finder.QueryItems<Forum>().ToList().Where(f => f.Moderator == this); }
 		}
 
 		public virtual IEnumerable<Topic> RecentTopics
 		{
 			//get { return Context.Finder.Items<Topic>().Where(t => t.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
-			get { return Context.Finder.Items<Topic>().ToList().Where(t => t.Author == this).OrderByDescending(t => t.Created).Take(5); }
+			get { return Context.Finder.QueryItems<Topic>().ToList().Where(t => t.Author == this).OrderByDescending(t => t.Created).Take(5); }
 		}
 
 		public virtual IEnumerable<Post> RecentReplies
 		{
 			//get { return Context.Finder.Items<Post>().Where(p => p.Author == this).ToList().OrderByDescending(t => t.Created).Take(5); }
-			get { return Context.Finder.Items<Post>().ToList().Where(p => p.Author == this).OrderByDescending(t => t.Created).Take(5); }
+			get { return Context.Finder.QueryItems<Post>().ToList().Where(p => p.Author == this).OrderByDescending(t => t.Created).Take(5); }
 		}
 	}
 }

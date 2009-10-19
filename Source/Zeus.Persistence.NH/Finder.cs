@@ -1,46 +1,69 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using NHibernate;
+using Zeus.ContentProperties;
+using Zeus.Linq;
 using Zeus.Persistence.NH.Linq;
 
 namespace Zeus.Persistence.NH
 {
-	public class Finder<T> : IFinder<T>
+	public class Finder : IFinder
 	{
 		#region Fields
 
 		private readonly ISessionProvider _sessionProvider;
+		private readonly IContentPropertyManager _contentPropertyManager;
 
 		#endregion
 
 		#region Constructor
 
-		public Finder(ISessionProvider sessionProvider)
+		public Finder(ISessionProvider sessionProvider, IContentPropertyManager contentPropertyManager)
 		{
 			_sessionProvider = sessionProvider;
+			_contentPropertyManager = contentPropertyManager;
 		}
 
 		#endregion
 
 		#region IFinder<T> Members
 
-		public IQueryable<T> Items()
+		public IQueryable<T> Query<T>()
 		{
-			return Items<T>();
+			return _sessionProvider.OpenSession.Session.Linq<T>();
 		}
 
-		public IQueryable<TResult> Items<TResult>()
-			where TResult : T
+		public IQueryable<T> QueryItems<T>()
+			where T : ContentItem
 		{
-			return _sessionProvider.OpenSession.Session.Linq<TResult>();
+			return Query<T>();
 		}
 
-		public IQueryable Items(Type resultType)
+		public IQueryable<ContentItem> QueryItems()
 		{
-			ISession session = _sessionProvider.OpenSession.Session;
-			MethodInfo linqMethod = typeof(ZeusExtensions).GetMethod("Linq").MakeGenericMethod(resultType);
-			return (IQueryable) linqMethod.Invoke(null, new [] { session });
+			return Query<ContentItem>();
+		}
+
+		public IQueryable<PropertyData> QueryDetails()
+		{
+			return QueryDetails<PropertyData>();
+		}
+
+		public IQueryable<T> QueryDetails<T>()
+			where T : PropertyData
+		{
+			return Query<T>();
+		}
+
+		public IQueryable<PropertyCollection> QueryDetailCollections()
+		{
+			return Query<PropertyCollection>();
+		}
+
+		public IQueryable Query(Type resultType)
+		{
+			MethodInfo genericQueryMethod = GetType().GetMethod("Query", Type.EmptyTypes).MakeGenericMethod(resultType);
+			return (IQueryable)genericQueryMethod.Invoke(this, null);
 		}
 
 		#endregion

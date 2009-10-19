@@ -74,7 +74,6 @@
     <Compile Include="IConfigurationBuilder.cs" />
     <Compile Include="INotifyingInterceptor.cs" />
     <Compile Include="ISessionProvider.cs" />
-    <Compile Include="ItemFinder.cs" />
     <Compile Include="Linq\ContentPropertyVisitor.cs" />
     <Compile Include="Linq\ZeusExtensions.cs" />
     <Compile Include="Linq\ZeusQueryProvider.cs" />

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.ContentProperties;
@@ -10,11 +9,11 @@ namespace Zeus.Templates.Services
 {
 	public class TagService : ITagService
 	{
-		private readonly IFinder<LinkProperty> _tagFinder;
+		private readonly IFinder _tagFinder;
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IPersister _persister;
 
-		public TagService(IFinder<LinkProperty> tagFinder, IContentTypeManager contentTypeManager, IPersister persister)
+		public TagService(IFinder tagFinder, IContentTypeManager contentTypeManager, IPersister persister)
 		{
 			_tagFinder = tagFinder;
 			_contentTypeManager = contentTypeManager;
@@ -61,7 +60,7 @@ namespace Zeus.Templates.Services
 
 		public IEnumerable<ContentItem> GetTaggedItems(Tag tag)
 		{
-			return _tagFinder.Items()
+			return _tagFinder.QueryDetails<LinkProperty>()
 				.Where(lp => lp.LinkedItem == tag)
 				.ToList()
 				.Select(lp => lp.EnclosingItem)

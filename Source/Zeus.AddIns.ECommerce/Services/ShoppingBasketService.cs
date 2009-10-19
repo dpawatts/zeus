@@ -6,10 +6,8 @@ using Isis.Collections.Generic;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.PaymentGateways;
-using Zeus.Net.Mail;
 using Zeus.Persistence;
 using Zeus.Web;
-using Zeus.Web.TextTemplating;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
@@ -17,11 +15,11 @@ namespace Zeus.AddIns.ECommerce.Services
 	{
 		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
-		private readonly IFinder<ShoppingBasket> _finder;
+		private readonly IFinder _finder;
 		private readonly IPaymentGateway _paymentGateway;
 		private readonly IOrderMailService _orderMailService;
 
-		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder<ShoppingBasket> finder,
+		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder finder,
 			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
 		{
 			_persister = persister;
@@ -117,7 +115,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				return null;
 
 			string shopperID = cookie.Value;
-			return _finder.Items().SingleOrDefault(sb => sb.Name == shopperID);
+			return _finder.QueryItems<ShoppingBasket>().SingleOrDefault(sb => sb.Name == shopperID);
 		}
 
 		private ShoppingBasket GetCurrentShoppingBasketInternal(Shop shop)

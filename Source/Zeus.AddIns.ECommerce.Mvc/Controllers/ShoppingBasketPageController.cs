@@ -16,12 +16,12 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 	public class ShoppingBasketPageController : ZeusController<ShoppingBasketPage>
 	{
 		private readonly IShoppingBasketService _shoppingBasketService;
-		private readonly IFinder<DeliveryMethod> _deliveryMethodFinder;
+		private readonly IFinder _finder;
 
-		public ShoppingBasketPageController(IShoppingBasketService shoppingBasketService, IFinder<DeliveryMethod> deliveryMethodFinder)
+		public ShoppingBasketPageController(IShoppingBasketService shoppingBasketService, IFinder finder)
 		{
 			_shoppingBasketService = shoppingBasketService;
-			_deliveryMethodFinder = deliveryMethodFinder;
+			_finder = finder;
 		}
 
 		protected Shop CurrentShop
@@ -84,7 +84,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		private void UpdateDeliveryMethodInternal(int deliveryMethodID)
 		{
 			IShoppingBasket shoppingBasket = GetShoppingBasket();
-			shoppingBasket.DeliveryMethod = _deliveryMethodFinder.Items().Single(dm => dm.ID == deliveryMethodID);
+			shoppingBasket.DeliveryMethod = _finder.QueryItems<DeliveryMethod>().Single(dm => dm.ID == deliveryMethodID);
 			_shoppingBasketService.SaveBasket(CurrentShop);
 		}
 	}

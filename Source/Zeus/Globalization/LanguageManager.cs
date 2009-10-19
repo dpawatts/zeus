@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zeus.Configuration;
@@ -13,26 +12,24 @@ namespace Zeus.Globalization
 	public class LanguageManager : ILanguageManager
 	{
 		private readonly IPersister _persister;
-		private readonly IFinder<ContentItem> _finder;
 		private readonly IHost _host;
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly GlobalizationSection _globalizationConfig;
 
 		#region Constructor
 
-		public LanguageManager(IPersister persister, IFinder<ContentItem> finder,
+		public LanguageManager(IPersister persister,
 			IHost host, IContentTypeManager contentTypeManager)
-			: this(persister, finder, host, contentTypeManager, null)
+			: this(persister, host, contentTypeManager, null)
 		{
 
 		}
 
-		public LanguageManager(IPersister persister, IFinder<ContentItem> finder,
+		public LanguageManager(IPersister persister, 
 			IHost host, IContentTypeManager contentTypeManager,
 			GlobalizationSection globalizationConfig)
 		{
 			_persister = persister;
-			_finder = finder;
 			_host = host;
 			_contentTypeManager = contentTypeManager;
 			_globalizationConfig = globalizationConfig;

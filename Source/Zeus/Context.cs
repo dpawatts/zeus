@@ -39,7 +39,7 @@ namespace Zeus
 			get { return Current.UrlParser.CurrentPage; }
 		}
 
-		public static IFinder<ContentItem> Finder
+		public static IFinder Finder
 		{
 			get { return Current.Finder; }
 		}

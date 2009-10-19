@@ -27,9 +27,9 @@ namespace Zeus.Engine
 			get { return Resolve<IAdminManager>(); }
 		}
 
-		public IFinder<ContentItem> Finder
+		public IFinder Finder
 		{
-			get { return Resolve<IFinder<ContentItem>>(); }
+			get { return Resolve<IFinder>(); }
 		}
 
 		public IContentTypeManager ContentTypes

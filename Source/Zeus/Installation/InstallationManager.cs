@@ -7,14 +7,12 @@ using System.Linq;
 using Isis.ApplicationBlocks.DataMigrations;
 using Isis.Web.Security;
 using Zeus.Configuration;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Installation.Migrations;
 using Zeus.Persistence;
 using Zeus.Serialization;
 using Zeus.Web;
 using AuthorizationRule=Zeus.Security.AuthorizationRule;
-using PropertyCollection=System.Data.PropertyCollection;
 
 namespace Zeus.Installation
 {
@@ -29,10 +27,7 @@ namespace Zeus.Installation
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly Importer _importer;
 		private readonly IPersister _persister;
-		private readonly IFinder<ContentItem> _contentItemFinder;
-		private readonly IFinder<PropertyData> _contentDetailFinder;
-		private readonly IFinder<PropertyCollection> _detailCollectionFinder;
-		private readonly IFinder<AuthorizationRule> _authorizationRuleFinder;
+		private readonly IFinder _finder;
 		private readonly IHost _host;
 		private readonly ICredentialContextService _credentialContextService;
 		private readonly AdminSection _adminConfig;
@@ -42,18 +37,13 @@ namespace Zeus.Installation
 		#region Constructor
 
 		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, Importer importer, IPersister persister,
-			IFinder<ContentItem> contentItemFinder, IFinder<PropertyData> contentDetailFinder,
-			IFinder<PropertyCollection> detailCollectionFinder, IFinder<AuthorizationRule> authorizationRuleFinder,
-			ICredentialContextService credentialContextService, AdminSection adminConfig)
+			IFinder finder, ICredentialContextService credentialContextService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
 			_importer = importer;
 			_persister = persister;
-			_contentItemFinder = contentItemFinder;
-			_contentDetailFinder = contentDetailFinder;
-			_detailCollectionFinder = detailCollectionFinder;
-			_authorizationRuleFinder = authorizationRuleFinder;
+			_finder = finder;
 			_credentialContextService = credentialContextService;
 			_adminConfig = adminConfig;
 		}
@@ -115,10 +105,10 @@ namespace Zeus.Installation
 		{
 			try
 			{
-				status.Items = _contentItemFinder.Items().Count();
-				status.Details = _contentDetailFinder.Items().Count();
-				status.DetailCollections = _detailCollectionFinder.Items().Count();
-				status.AuthorizedRoles = _authorizationRuleFinder.Items().Count();
+				status.Items = _finder.QueryItems().Count();
+				status.Details = _finder.QueryDetails().Count();
+				status.DetailCollections = _finder.QueryDetailCollections().Count();
+				status.AuthorizedRoles = _finder.Query<AuthorizationRule>().Count();
 				status.HasSchema = true;
 			}
 			catch (Exception ex)
@@ -154,10 +144,10 @@ namespace Zeus.Installation
 		/// <returns>A string with diagnostic information about the database.</returns>
 		public string CheckDatabase()
 		{
-			int itemCount = _contentItemFinder.Items().Count();
-			int detailCount = _contentDetailFinder.Items().Count();
-			int detailCollectionCount = _detailCollectionFinder.Items().Count();
-			int authorizationRuleCount = _authorizationRuleFinder.Items().Count();
+			int itemCount = _finder.QueryItems().Count();
+			int detailCount = _finder.QueryDetails().Count();
+			int detailCollectionCount = _finder.QueryDetailCollections().Count();
+			int authorizationRuleCount = _finder.Query<AuthorizationRule>().Count();
 
 			return string.Format("Database OK, items: {0}, details: {1}, authorization rules: {2}, detail collections: {3}",
 													 itemCount, detailCount, authorizationRuleCount, detailCollectionCount);

@@ -47,6 +47,39 @@
 									<asp:PlaceHolder runat="server" ID="plcToolbar" />
 								</div>
 							</Body>
+							<BottomBar>
+								<ext:Toolbar runat="server">
+									<Items>
+										<ext:Button runat="server" Text="Blogs" Icon="UserComment">
+											<Menu>
+												<ext:Menu runat="server">
+													<Items>                    
+														<ext:MenuItem runat="server" Text="Moderate Comments" Icon="Comments" />
+													</Items>
+												</ext:Menu>
+											</Menu>
+										</ext:Button>
+										<ext:Button runat="server" Text="Forums" Icon="Comments">
+											<Menu>
+												<ext:Menu runat="server">
+													<Items>                    
+														<ext:MenuItem runat="server" Text="Moderate Posts" Icon="Comments" />
+													</Items>
+												</ext:Menu>
+											</Menu>
+										</ext:Button>
+										<ext:Button runat="server" Text="E-Commerce" Icon="Money">
+											<Menu>
+												<ext:Menu runat="server">
+													<Items>                    
+														<ext:MenuItem runat="server" Text="Manage Orders" Icon="Comments" />
+													</Items>
+												</ext:Menu>
+											</Menu>
+										</ext:Button>
+									</Items>
+								</ext:Toolbar>
+							</BottomBar>
 						</ext:Panel>
 					</North>
 					<West Split="true" MinWidth="175" MaxWidth="400">

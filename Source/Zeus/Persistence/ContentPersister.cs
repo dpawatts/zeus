@@ -11,13 +11,13 @@ namespace Zeus.Persistence
 
 		private readonly IRepository<int, ContentItem> _contentRepository;
 		private readonly IRepository<int, LinkProperty> _linkRepository;
-		private readonly IFinder<LinkProperty> _linkFinder;
+		private readonly IFinder _linkFinder;
 
 		#endregion
 
 		#region Constructor
 
-		public ContentPersister(IRepository<int, ContentItem> contentRepository, IRepository<int, LinkProperty> linkRepository, IFinder<LinkProperty> linkFinder)
+		public ContentPersister(IRepository<int, ContentItem> contentRepository, IRepository<int, LinkProperty> linkRepository, IFinder linkFinder)
 		{
 			_contentRepository = contentRepository;
 			_linkRepository = linkRepository;
@@ -137,7 +137,7 @@ namespace Zeus.Persistence
 
 		private void DeleteInboundLinks(ContentItem itemNoMore)
 		{
-			foreach (LinkProperty detail in _linkFinder.Items().Where(ld => ld.LinkedItem == itemNoMore))
+			foreach (LinkProperty detail in _linkFinder.QueryDetails<LinkProperty>().Where(ld => ld.LinkedItem == itemNoMore))
 			{
 				if (detail.EnclosingCollection != null)
 					detail.EnclosingCollection.Remove(detail);

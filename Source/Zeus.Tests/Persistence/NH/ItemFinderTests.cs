@@ -24,7 +24,6 @@ namespace Zeus.Tests.Persistence.NH
 			IContentTypeManager contentTypeManager = new ContentTypeManager(contentTypeBuilder, itemNotifier);
 			IConfigurationBuilder configurationBuilder = new ConfigurationBuilder(contentTypeManager, ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
 			ISessionProvider sessionProvider = new SessionProvider(configurationBuilder, new NotifyingInterceptor(new ItemNotifier()), new ThreadContext());
-			ItemFinder itemFinder = new ItemFinder(sessionProvider);
 
 			/*var results = itemFinder.Find<NewsContainer>(
 				//ci => ci.Details.Values.OfType<StringDetail>().Any(cd => cd.Name == "Text" && cd.StringValue == "sdfds")
