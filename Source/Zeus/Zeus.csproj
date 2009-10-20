@@ -95,25 +95,31 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Admin\ActionPluginBase.cs" />
+    <Compile Include="Admin\IMainInterface.cs" />
+    <Compile Include="Admin\Plugins\IMainInterfacePlugin.cs" />
+    <Compile Include="Admin\Plugins\MainInterfacePluginBase.cs" />
+    <Compile Include="Admin\Plugins\TreePluginBase.cs" />
+    <Compile Include="Admin\Plugins\ITreePlugin.cs" />
+    <Compile Include="Admin\Plugins\MenuPluginBase.cs" />
     <Compile Include="Admin\AdminFrame.cs" />
     <Compile Include="Admin\AdminManager.cs" />
     <Compile Include="Admin\AdminTargetFrame.cs" />
     <Compile Include="Admin\ActionPluginGroupAttribute.cs" />
     <Compile Include="Admin\GridToolbarPluginBase.cs" />
     <Compile Include="Admin\CreationPosition.cs" />
-    <Compile Include="Admin\GridViewPluginAttribute.cs" />
-    <Compile Include="Admin\IActionPlugin.cs" />
+    <Compile Include="Admin\Plugins\IContextMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\IGridMenuPlugin.cs" />
+    <Compile Include="Admin\Plugins\IGridToolbarPlugin.cs" />
+    <Compile Include="Admin\Plugins\IMainToolbarPlugin.cs" />
     <Compile Include="Admin\IAdminAssemblyManager.cs" />
     <Compile Include="Admin\IAdminManager.cs" />
-    <Compile Include="Admin\IGridToolbarPlugin.cs" />
     <Compile Include="Admin\ITreeSorter.cs" />
     <Compile Include="Admin\Navigator.cs" />
     <Compile Include="Admin\NodePosition.cs" />
+    <Compile Include="Admin\Plugins\IToolbarPlugin.cs" />
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
     <Compile Include="Admin\Targets.cs" />
-    <Compile Include="Admin\ToolbarPluginAttribute.cs" />
     <Compile Include="Admin\TreeSorter.cs" />
     <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
@@ -529,7 +535,6 @@
     <Compile Include="Web\UI\WebControls\ItemView.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Web\UI\WebControls\ItemGridView.cs" />
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
     <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
     <Compile Include="Web\UI\WebControls\Menu.cs" />
@@ -549,11 +554,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Web\UI\WebControls\Images\add.png" />
     <EmbeddedResource Include="Web\UI\WebControls\Images\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\UI\WebControls\ItemGridView.LayoutTemplate.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.js" />

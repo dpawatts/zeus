@@ -8,6 +8,7 @@ using System.Web.UI;
 using Isis.Reflection;
 using Isis.Web;
 using Isis.Web.Security;
+using Zeus.Admin.Plugins;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
@@ -41,8 +42,6 @@ namespace Zeus.Admin
 		private readonly ILanguageManager _languageManager;
 
 		private readonly IEnumerable<ActionPluginGroupAttribute> _cachedActionPluginGroups;
-		private readonly IEnumerable<IActionPlugin> _cachedActionPlugins;
-		private readonly IEnumerable<IGridToolbarPlugin> _cachedGridToolbarPlugins;
 
 		#endregion
 
@@ -58,7 +57,7 @@ namespace Zeus.Admin
 			_configSection = configSection;
 			_securityManager = securityManager;
 			DeleteItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
-			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Edit.aspx");
+			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Plugins.EditItem.Default.aspx");
 			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
 			EnableVersioning = configSection.Versioning.Enabled;
 			_authorizationService = authorizationService;
@@ -70,13 +69,6 @@ namespace Zeus.Admin
 			_languageManager = languageManager;
 
 			_cachedActionPluginGroups = actionPluginGroupFinder.GetPlugins().OrderBy(g => g.SortOrder);
-
-			_cachedActionPlugins = typeFinder.Find(typeof(IActionPlugin))
-				.Where(t => !t.IsInterface && !t.IsAbstract)
-				.Select(t => (IActionPlugin) Activator.CreateInstance(t));
-			_cachedGridToolbarPlugins = typeFinder.Find(typeof(IGridToolbarPlugin))
-				.Where(t => !t.IsInterface && !t.IsAbstract)
-				.Select(t => (IGridToolbarPlugin)Activator.CreateInstance(t));
 		}
 
 		#endregion
@@ -180,16 +172,6 @@ namespace Zeus.Admin
 		public IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups()
 		{
 			return _cachedActionPluginGroups;
-		}
-
-		public IEnumerable<IActionPlugin> GetActionPlugins(string groupName)
-		{
-			return _cachedActionPlugins.Where(p => p.GroupName == groupName).OrderBy(p => p.SortOrder);
-		}
-
-		public IEnumerable<IGridToolbarPlugin> GetGridToolbarPlugins()
-		{
-			return _cachedGridToolbarPlugins.OrderBy(p => p.SortOrder);
 		}
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>

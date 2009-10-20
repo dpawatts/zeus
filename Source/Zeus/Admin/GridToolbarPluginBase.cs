@@ -1,5 +1,6 @@
 using System;
 using Coolite.Ext.Web;
+using Zeus.Admin.Plugins;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Admin

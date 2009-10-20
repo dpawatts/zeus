@@ -1,10 +1,10 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Mailouts.ContentTypes;
-using Zeus.Admin;
+using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.Mailouts.Admin.ActionPlugins
 {
-	public class SendActionPlugin : ActionPluginBase
+	public class SendActionPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -33,18 +33,15 @@ namespace Zeus.AddIns.Mailouts.Admin.ActionPlugins
 			return base.IsEnabled(contentItem);
 		}
 
-		public override MenuItem GetMenuItem(ContentItem contentItem)
+		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Send",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.EmailGo)
+				IconUrl = Utility.GetCooliteIconUrl(Icon.EmailGo),
+				Handler = string.Format("function() {{ zeus.reloadContentPanel('Send', '{0}'); }}",
+					GetPageUrl(GetType(), "Zeus.AddIns.Mailouts.Admin.Send.aspx") + "?selected=" + contentItem.Path)
 			};
-
-			menuItem.Handler = string.Format("function() {{ zeus.reloadContentPanel('Send', '{0}'); }}",
-				GetPageUrl(GetType(), "Zeus.AddIns.Mailouts.Admin.Send.aspx") + "?selected=" + contentItem.Path);
-
-			// TODO: Add child menu items for types that can be created under the current item.
 
 			return menuItem;
 		}

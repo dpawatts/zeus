@@ -1,1 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DeleteUserControl.ascx.cs" Inherits="Zeus.Admin.Delete.DeleteUserControl" %>

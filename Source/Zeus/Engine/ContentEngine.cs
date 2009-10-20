@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using Isis.FrameworkBlocks.DependencyInjection;
 using Isis.Reflection;
@@ -135,6 +136,11 @@ namespace Zeus.Engine
 		public T Resolve<T>()
 		{
 			return _dependencyInjectionManager.Get<T>();
+		}
+
+		public IEnumerable<T> ResolveAll<T>()
+		{
+			return _dependencyInjectionManager.GetAll<T>();
 		}
 
 		/// <summary>Resolves a service configured for the factory.</summary>

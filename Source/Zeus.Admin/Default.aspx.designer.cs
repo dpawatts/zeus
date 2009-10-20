@@ -23,6 +23,24 @@ namespace Zeus.Admin {
         protected global::System.Web.UI.WebControls.Literal ltlAdminName1;
         
         /// <summary>
+        /// extViewPort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.ViewPort extViewPort;
+        
+        /// <summary>
+        /// extBorderLayout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.BorderLayout extBorderLayout;
+        
+        /// <summary>
         /// imgLogo control.
         /// </summary>
         /// <remarks>
@@ -57,15 +75,6 @@ namespace Zeus.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plcToolbar;
-        
-        /// <summary>
-        /// stpNavigation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Coolite.Ext.Web.TreePanel stpNavigation;
         
         /// <summary>
         /// pnlContent control.

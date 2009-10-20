@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Coolite.Ext.Web;
 using Isis.ExtensionMethods.Web.UI;
-using Zeus.Admin.Navigation;
+using Zeus.Admin.Plugins;
 using Zeus.Configuration;
 using System.Configuration;
-using Zeus.Engine;
-using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web.UI;
 
@@ -32,44 +28,9 @@ namespace Zeus.Admin
 			imgLogo.Visible = !((AdminSection) ConfigurationManager.GetSection("zeus/admin")).HideBranding;
 			ltlAdminName1.Text = ltlAdminName2.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
 
-			foreach (ToolbarPluginAttribute toolbarPlugin in Zeus.Context.Current.Resolve<IPluginFinder<ToolbarPluginAttribute>>().GetPlugins())
-				toolbarPlugin.AddTo(plcToolbar);
-
-			if (!Ext.IsAjaxRequest)
-			{
-				TreeNodeBase treeNode = SiteTree.Between(Find.StartPage, Find.RootItem, true)
-					.OpenTo(Find.StartPage)
-					.Filter(items => items.Authorized(Page.User, Zeus.Context.SecurityManager, Operations.Read))
-					.ToTreeNode(true);
-				stpNavigation.Root.Add(treeNode);
-			}
-
-			// Render action plugin user controls.
-			List<string> userControlsToLoad = new List<string>();
-			foreach (ActionPluginGroupAttribute actionPluginGroup in Engine.AdminManager.GetActionPluginGroups())
-			{
-				foreach (IActionPlugin actionPlugin in Engine.AdminManager.GetActionPlugins(actionPluginGroup.Name))
-				{
-					string[] requiredUserControls = actionPlugin.RequiredUserControls;
-					if (requiredUserControls != null)
-						userControlsToLoad.AddRange(requiredUserControls);
-				}
-			}
-
-			// Render grid toolbar plugin user controls - this should actually be done by some form of plugin.
-			foreach (IGridToolbarPlugin toolbarPlugin in Engine.AdminManager.GetGridToolbarPlugins())
-			{
-				string[] requiredUserControls = toolbarPlugin.RequiredUserControls;
-				if (requiredUserControls != null)
-					userControlsToLoad.AddRange(requiredUserControls);
-			}
-
-			foreach (string requiredUserControl in userControlsToLoad.Distinct())
-			{
-				ActionUserControlBase userControl = (ActionUserControlBase)LoadControl(requiredUserControl);
-				userControl.MainInterface = this;
-				Controls.Add(userControl);
-			}
+			// Allow plugins to modify interface.
+			foreach (IMainInterfacePlugin plugin in Engine.ResolveAll<IMainInterfacePlugin>())
+				plugin.ModifyInterface(this);
 		}
 
 		protected override void OnPreRender(EventArgs e)
@@ -83,54 +44,37 @@ namespace Zeus.Admin
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.shared.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.default.css");
 
-			// Render action plugin scripts.
-			foreach (ActionPluginGroupAttribute actionPluginGroup in Engine.AdminManager.GetActionPluginGroups())
-			{
-				foreach (IActionPlugin actionPlugin in Engine.AdminManager.GetActionPlugins(actionPluginGroup.Name))
-				{
-					string[] requiredScripts = actionPlugin.RequiredScripts;
-					if (requiredScripts != null)
-						foreach (string requiredScript in requiredScripts)
-							ScriptManager.GetInstance(this).RegisterClientScriptInclude(actionPlugin.GetType().FullName, requiredScript);
-				}
-			}
+			// Render plugin scripts.
+			foreach (IMainInterfacePlugin plugin in Engine.ResolveAll<IMainInterfacePlugin>())
+				plugin.RegisterScripts(ScriptManager);
 
 			base.OnPreRender(e);
 		}
 
-		#region Move
-
-		protected void OnMoveNode(object sender, AjaxEventArgs e)
-		{
-			ContentItem sourceContentItem = Engine.Persister.Get(Convert.ToInt32(e.ExtraParams["source"]));
-			ContentItem destinationContentItem = Engine.Persister.Get(Convert.ToInt32(e.ExtraParams["destination"]));
-
-			// Check user has permission to create items under the SelectedItem
-			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, User, Operations.Create))
-			{
-				Ext.MessageBox.Alert("Cannot move item", "You are not authorised to move an item to this location.");
-				return;
-			}
-
-			// Change parent if necessary.
-			if (sourceContentItem.Parent.ID != destinationContentItem.ID)
-				Zeus.Context.Persister.Move(sourceContentItem, destinationContentItem);
-
-			// Update sort order based on new pos.
-			int pos = Convert.ToInt32(e.ExtraParams["pos"]);
-			IList<ContentItem> siblings = sourceContentItem.Parent.Children;
-			Utility.MoveToIndex(siblings, sourceContentItem, pos);
-			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
-				Zeus.Context.Persister.Save(updatedItem);
-
-			stbStatusBar.SetStatus(new StatusBarStatusConfig("Moved item", Icon.Cut) { Clear = new StatusBarClearConfig(true) });
-		}
-
-		#endregion
-
 		public StatusBar StatusBar
 		{
 			get { return stbStatusBar; }
+		}
+
+		private ScriptManager ScriptManager
+		{
+			get { return ScriptManager.GetInstance(this); }
+		}
+
+		public ViewPort ViewPort
+		{
+			get { return extViewPort; }
+		}
+
+		public BorderLayout BorderLayout
+		{
+			get { return extBorderLayout; }
+		}
+
+		public void LoadUserControls(string[] virtualPaths)
+		{
+			foreach (string virtualPath in virtualPaths)
+				Controls.Add(LoadControl(virtualPath));
 		}
 	}
 }

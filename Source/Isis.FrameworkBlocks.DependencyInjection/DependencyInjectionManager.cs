@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Ninject;
 
 namespace Isis.FrameworkBlocks.DependencyInjection
@@ -46,6 +47,11 @@ namespace Isis.FrameworkBlocks.DependencyInjection
 		public TService Get<TService>()
 		{
 			return _kernel.Get<TService>();
+		}
+
+		public IEnumerable<TService> GetAll<TService>()
+		{
+			return _kernel.GetAll<TService>();
 		}
 
 		public object Get(Type serviceType)

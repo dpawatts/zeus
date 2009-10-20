@@ -72,42 +72,42 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Default.aspx" />
-    <EmbeddedResource Include="New.aspx" />
+    <EmbeddedResource Include="Plugins\NewItem\Default.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionUserControlBase.cs">
+    <Compile Include="Plugins\PluginUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ActionPlugins\ManageChildrenActionPlugin.cs" />
-    <Compile Include="ActionPlugins\ImportExportActionPlugin.cs" />
-    <Compile Include="ActionPlugins\PermissionsActionPlugin.cs" />
-    <Compile Include="ActionPlugins\PasteActionPlugin.cs" />
-    <Compile Include="ActionPlugins\CopyActionPlugin.cs" />
-    <Compile Include="ActionPlugins\ListVersionsActionPlugin.cs" />
-    <Compile Include="ActionPlugins\LanguageSettingsActionPlugin.cs" />
-    <Compile Include="ActionPlugins\LanguageOverviewActionPlugin.cs" />
-    <Compile Include="ActionPlugins\DeleteLanguageActionPlugin.cs" />
+    <Compile Include="Plugins\Children\ManageChildrenActionPlugin.cs" />
+    <Compile Include="Plugins\ImportExport\ImportExportMenuPlugin.cs" />
+    <Compile Include="Plugins\Permissions\ManagePermissionsActionPlugin.cs" />
+    <Compile Include="Plugins\PasteItem\PasteItemMenuPlugin.cs" />
+    <Compile Include="Plugins\CopyItem\CopyItemMenuPlugin.cs" />
+    <Compile Include="Plugins\Versions\ListVersionsMenuPlugin.cs" />
+    <Compile Include="Plugins\Globalization\LanguageSettings\LanguageSettingsMenuPlugin.cs" />
+    <Compile Include="Plugins\Globalization\LanguageOverview\LanguageOverviewMenuPlugin.cs" />
+    <Compile Include="Plugins\Globalization\DeleteLanguage\DeleteLanguageMenuPlugin.cs" />
     <Compile Include="Assets\Css\Resources.cs" />
     <Compile Include="Assets\Images\Resources.cs" />
     <Compile Include="Assets\JS\Resources.cs" />
-    <Compile Include="Delete\DeleteGridToolbarPlugin.cs" />
-    <Compile Include="Delete\DeleteActionPlugin.cs" />
-    <Compile Include="ActionPlugins\EditActionPlugin.cs" />
-    <Compile Include="ActionPlugins\LanguageActionPluginBase.cs" />
-    <Compile Include="ActionPlugins\NewActionPlugin.cs" />
+    <Compile Include="Plugins\DeleteItem\DeleteGridToolbarPlugin.cs" />
+    <Compile Include="Plugins\DeleteItem\DeleteItemMenuPlugin.cs" />
+    <Compile Include="Plugins\EditItem\EditItemMenuPlugin.cs" />
+    <Compile Include="Plugins\Globalization\LanguageMenuPluginBase.cs" />
+    <Compile Include="Plugins\NewItem\NewItemMenuPlugin.cs" />
     <Compile Include="AdminAssemblyManager.cs" />
     <Compile Include="AdminModule.cs" />
     <Compile Include="AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AvailableZones.ascx.cs">
+    <Compile Include="Plugins\EditItem\AvailableZones.ascx.cs">
       <DependentUpon>AvailableZones.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AvailableZones.ascx.designer.cs">
+    <Compile Include="Plugins\EditItem\AvailableZones.ascx.designer.cs">
       <DependentUpon>AvailableZones.ascx</DependentUpon>
     </Compile>
     <Compile Include="AffectedItems.ascx.cs">
@@ -117,21 +117,21 @@
     <Compile Include="AffectedItems.ascx.designer.cs">
       <DependentUpon>AffectedItems.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Children.aspx.cs">
-      <DependentUpon>Children.aspx</DependentUpon>
+    <Compile Include="Plugins\Children\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Children.aspx.designer.cs">
-      <DependentUpon>Children.aspx</DependentUpon>
+    <Compile Include="Plugins\Children\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Delete\DeleteUserControl.ascx.cs">
+    <Compile Include="Plugins\DeleteItem\DeleteUserControl.ascx.cs">
       <DependentUpon>DeleteUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Delete\DeleteUserControl.ascx.designer.cs">
+    <Compile Include="Plugins\DeleteItem\DeleteUserControl.ascx.designer.cs">
       <DependentUpon>DeleteUserControl.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Delete\AffectedItems.ashx.cs">
+    <Compile Include="Plugins\DeleteItem\AffectedItems.ashx.cs">
       <DependentUpon>AffectedItems.ashx</DependentUpon>
     </Compile>
     <Compile Include="DynamicContent\Default.aspx.cs">
@@ -141,47 +141,60 @@
     <Compile Include="DynamicContent\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Globalization\LanguageSettings.aspx.cs">
-      <DependentUpon>LanguageSettings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Globalization\LanguageSettings.aspx.designer.cs">
-      <DependentUpon>LanguageSettings.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Globalization\DeleteLanguage.aspx.cs">
-      <DependentUpon>DeleteLanguage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Globalization\DeleteLanguage.aspx.designer.cs">
-      <DependentUpon>DeleteLanguage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Globalization\LanguageOverview.aspx.cs">
-      <DependentUpon>LanguageOverview.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Globalization\LanguageOverview.aspx.designer.cs">
-      <DependentUpon>LanguageOverview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ImportExport\ContentTypeNotFoundException.cs" />
-    <Compile Include="ImportExport\Default.aspx.cs">
+    <Compile Include="Plugins\Globalization\LanguageSettings\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ImportExport\Default.aspx.designer.cs">
+    <Compile Include="Plugins\Globalization\LanguageSettings\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ImportExport\FallbackXmlReader.cs" />
-    <Compile Include="ImportExport\InvalidXmlException.cs" />
-    <Compile Include="Navigation\ContextMenuLoader.ashx.cs">
+    <Compile Include="Plugins\Globalization\DeleteLanguage\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Globalization\DeleteLanguage\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Globalization\LanguageOverview\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Globalization\LanguageOverview\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\ImportExport\ContentTypeNotFoundException.cs" />
+    <Compile Include="Plugins\ImportExport\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\ImportExport\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\ImportExport\FallbackXmlReader.cs" />
+    <Compile Include="Plugins\ImportExport\InvalidXmlException.cs" />
+    <Compile Include="MenuLoaderBase.cs" />
+    <Compile Include="Plugins\MoveItem\MoveUserControl.ascx.cs">
+      <DependentUpon>MoveUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\MoveItem\MoveUserControl.ascx.designer.cs">
+      <DependentUpon>MoveUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\MoveItem\MoveItemTreePlugin.cs" />
+    <Compile Include="MainInterfacePluginInitializer.cs" />
+    <Compile Include="Plugins\ContextMenu\ContextMenuMainInterfacePlugin.cs" />
+    <Compile Include="Plugins\Tree\TreeMainInterfacePlugin.cs" />
+    <Compile Include="Plugins\Tree\TreePluginInitializer.cs" />
+    <Compile Include="Plugins\ContextMenu\ContextMenuLoader.ashx.cs">
       <DependentUpon>ContextMenuLoader.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Delete\ReferencingItems.ashx.cs">
+    <Compile Include="Plugins\DeleteItem\ReferencingItems.ashx.cs">
       <DependentUpon>ReferencingItems.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Navigation\SiteTreeLoader.ashx.cs">
-      <DependentUpon>SiteTreeLoader.ashx</DependentUpon>
+    <Compile Include="Plugins\Tree\TreeLoader.ashx.cs">
+      <DependentUpon>TreeLoader.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Navigation\SiteTree.cs" />
+    <Compile Include="Plugins\Tree\SiteTree.cs" />
     <Compile Include="RecycleBin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -195,18 +208,20 @@
     <Compile Include="RecycleBin\RecycleBinContainer.cs" />
     <Compile Include="RecycleBin\RecycleBinHandler.cs" />
     <Compile Include="RecycleBin\RecycleBinInitializer.cs" />
-    <Compile Include="Security\Default.aspx.cs">
+    <Compile Include="Plugins\Permissions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Security\Default.aspx.designer.cs">
+    <Compile Include="Plugins\Permissions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Versions\Default.aspx.cs">
+    <Compile Include="Plugins\ContextMenu\ContextMenuPluginInitializer.cs" />
+    <Compile Include="Plugins\ContextMenu\ContextMenuTreePlugin.cs" />
+    <Compile Include="Plugins\Versions\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Versions\Default.aspx.designer.cs">
+    <Compile Include="Plugins\Versions\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="View.aspx.cs">
@@ -216,19 +231,19 @@
     <Compile Include="View.aspx.designer.cs">
       <DependentUpon>View.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Copy.aspx.cs">
-      <DependentUpon>Copy.aspx</DependentUpon>
+    <Compile Include="Plugins\CopyItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Copy.aspx.designer.cs">
-      <DependentUpon>Copy.aspx</DependentUpon>
+    <Compile Include="Plugins\CopyItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paste.aspx.cs">
-      <DependentUpon>Paste.aspx</DependentUpon>
+    <Compile Include="Plugins\PasteItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paste.aspx.designer.cs">
-      <DependentUpon>Paste.aspx</DependentUpon>
+    <Compile Include="Plugins\PasteItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="PreviewFrameAdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -254,12 +269,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Move.aspx.cs">
-      <DependentUpon>Move.aspx</DependentUpon>
+    <Compile Include="Plugins\MoveItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Move.aspx.designer.cs">
-      <DependentUpon>Move.aspx</DependentUpon>
+    <Compile Include="Plugins\MoveItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -268,12 +283,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
+    <Compile Include="Plugins\EditItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
+    <Compile Include="Plugins\EditItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Install\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -285,12 +300,12 @@
     <Compile Include="Navigation\TreeLoader.ashx.cs">
       <DependentUpon>TreeLoader.ashx</DependentUpon>
     </Compile>
-    <Compile Include="New.aspx.cs">
-      <DependentUpon>New.aspx</DependentUpon>
+    <Compile Include="Plugins\NewItem\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="New.aspx.designer.cs">
-      <DependentUpon>New.aspx</DependentUpon>
+    <Compile Include="Plugins\NewItem\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Popup.master.cs">
       <DependentUpon>Popup.master</DependentUpon>
@@ -312,10 +327,13 @@
     <Compile Include="Web\UI\WebControls\ToolbarButton.cs" />
     <Compile Include="Web\UI\WebControls\Tree.cs" />
     <Compile Include="EmbeddedResourcePackage.cs" />
-    <Compile Include="IMainInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coolite.Ext.UX\Coolite.Ext.UX.csproj">
+      <Project>{FD6CEDDE-9B2F-49CC-954F-A93F27F41E7E}</Project>
+      <Name>Coolite.Ext.UX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
       <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
       <Name>Isis.FrameworkBlocks.WebSecurity</Name>
@@ -330,7 +348,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Edit.aspx" />
+    <EmbeddedResource Include="Plugins\EditItem\Default.aspx" />
     <EmbeddedResource Include="PreviewFrame.master" />
   </ItemGroup>
   <ItemGroup>
@@ -372,7 +390,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FileManager\Default.aspx" />
-    <EmbeddedResource Include="Move.aspx" />
+    <EmbeddedResource Include="Plugins\MoveItem\Default.aspx" />
     <EmbeddedResource Include="Navigation\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
@@ -423,25 +441,29 @@
     <EmbeddedResource Include="Resources\application_view_detail.png" />
     <EmbeddedResource Include="Resources\eye.png" />
     <EmbeddedResource Include="Resources\lock.png" />
-    <EmbeddedResource Include="Security\Default.aspx" />
+    <EmbeddedResource Include="Plugins\Permissions\Default.aspx" />
     <EmbeddedResource Include="Resources\group.png" />
     <EmbeddedResource Include="Resources\user.png" />
-    <EmbeddedResource Include="Children.aspx" />
-    <EmbeddedResource Include="Delete\Resources\Ext.ux.zeus.DeleteConfirmation.js" />
-    <EmbeddedResource Include="Delete\DeleteUserControl.ascx" />
+    <EmbeddedResource Include="Plugins\Children\Default.aspx" />
+    <EmbeddedResource Include="Plugins\DeleteItem\Resources\Ext.ux.zeus.DeleteConfirmation.js" />
+    <EmbeddedResource Include="Plugins\DeleteItem\DeleteUserControl.ascx" />
+    <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemContextMenuPlugin.js" />
     <Content Include="DynamicContent\Default.aspx" />
-    <EmbeddedResource Include="Versions\Default.aspx" />
-    <EmbeddedResource Include="Globalization\LanguageOverview.aspx" />
+    <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
+    <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />
     <EmbeddedResource Include="Resources\page_world.png" />
     <EmbeddedResource Include="Resources\world_delete.png" />
     <EmbeddedResource Include="Resources\world_edit.png" />
     <EmbeddedResource Include="Resources\world_go.png" />
-    <EmbeddedResource Include="Globalization\DeleteLanguage.aspx" />
-    <EmbeddedResource Include="Globalization\LanguageSettings.aspx" />
+    <EmbeddedResource Include="Plugins\Globalization\DeleteLanguage\Default.aspx" />
+    <EmbeddedResource Include="Plugins\Globalization\LanguageSettings\Default.aspx" />
     <EmbeddedResource Include="RecycleBin\Default.aspx" />
-    <EmbeddedResource Include="ImportExport\Default.aspx" />
-    <EmbeddedResource Include="Copy.aspx" />
-    <EmbeddedResource Include="Paste.aspx" />
+    <EmbeddedResource Include="Plugins\ImportExport\Default.aspx" />
+    <EmbeddedResource Include="Plugins\CopyItem\Default.aspx" />
+    <EmbeddedResource Include="Plugins\PasteItem\Default.aspx" />
+    <EmbeddedResource Include="Plugins\ContextMenu\Resources\Ext.ux.zeus.ContextMenuPlugin.js" />
+    <EmbeddedResource Include="Plugins\MoveItem\MoveUserControl.ascx" />
+    <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemGridMenuPlugin.js" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />
@@ -470,7 +492,7 @@
     <EmbeddedResource Include="Assets\JS\Plugins\jquery.cookies.js" />
     <EmbeddedResource Include="Assets\JS\Plugins\thickbox.js" />
     <EmbeddedResource Include="Assets\JS\view.js" />
-    <EmbeddedResource Include="AvailableZones.ascx" />
+    <EmbeddedResource Include="Plugins\EditItem\AvailableZones.ascx" />
     <EmbeddedResource Include="FileManager\Upload.aspx" />
     <EmbeddedResource Include="Login.aspx" />
     <EmbeddedResource Include="Popup.master" />
@@ -479,19 +501,16 @@
     <EmbeddedResource Include="Resources\page_edit.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Navigation\SiteTreeLoader.ashx" />
+    <EmbeddedResource Include="Plugins\Tree\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Navigation\ContextMenuLoader.ashx" />
+    <EmbeddedResource Include="Plugins\ContextMenu\ContextMenuLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Delete\ReferencingItems.ashx" />
+    <EmbeddedResource Include="Plugins\DeleteItem\ReferencingItems.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Delete\AffectedItems.ashx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tree\ContextMenu\" />
+    <EmbeddedResource Include="Plugins\DeleteItem\AffectedItems.ashx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

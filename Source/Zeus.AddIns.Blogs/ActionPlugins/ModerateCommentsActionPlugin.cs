@@ -1,11 +1,10 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Blogs.ContentTypes;
-using Zeus.Admin;
-using Zeus.Security;
+using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.Blogs.ActionPlugins
 {
-	public class ModerateCommentsActionPlugin : ActionPluginBase
+	public class ModerateCommentsActionPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -26,16 +25,15 @@ namespace Zeus.AddIns.Blogs.ActionPlugins
 			return base.IsApplicable(contentItem);
 		}
 
-		public override MenuItem GetMenuItem(ContentItem contentItem)
+		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Moderate Comments",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Comments)
+				IconUrl = Utility.GetCooliteIconUrl(Icon.Comments),
+				Handler = string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
+					GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.ModerateComments.aspx") + "?selected=" + contentItem.Path)
 			};
-
-			menuItem.Handler = string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
-				GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.ModerateComments.aspx") + "?selected=" + contentItem.Path);
 
 			return menuItem;
 		}

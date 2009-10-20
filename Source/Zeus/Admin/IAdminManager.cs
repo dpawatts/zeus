@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Web.UI;
+using Zeus.Admin.Plugins;
 using Zeus.ContentTypes;
 using Zeus.Web.UI.WebControls;
 
@@ -19,9 +20,6 @@ namespace Zeus.Admin
 		string CurrentAdminLanguageBranch { get; set; }
 
 		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
-
-		//IEnumerable<ActionPluginAttribute> GetActionPlugins(string groupName);
-		IEnumerable<IActionPlugin> GetActionPlugins(string groupName);
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
 		/// <param name="item">The item to edit.</param>
@@ -77,6 +75,5 @@ namespace Zeus.Admin
 		bool UpdateItem(ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user);
 
 		bool TreeTooltipsEnabled { get; }
-		IEnumerable<IGridToolbarPlugin> GetGridToolbarPlugins();
 	}
 }

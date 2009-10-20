@@ -61,17 +61,5 @@ frameManager.prototype = {
 		Ext.getCmp("pnlContent").setTitle(title);
 		document.getElementById("pnlContent_IFrame").src = url;
 		//Coolite.AjaxMethods.ReloadContentPanel(title, url);
-	},
-	showContextMenu: function(node, e) {
-		stpNavigation.selectPath(node.getPath());
-		var contextMenu = new Ext.ux.menu.StoreMenu({
-			url: '/admin/Navigation/ContextMenuLoader.ashx',
-			baseParams: {
-				node: node.id
-			},
-			width: "auto"
-		});
-
-		contextMenu.showAt(e.getXY());
 	}
 };

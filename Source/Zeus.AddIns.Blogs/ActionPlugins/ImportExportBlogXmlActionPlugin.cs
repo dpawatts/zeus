@@ -1,11 +1,11 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Blogs.ContentTypes;
-using Zeus.Admin;
+using Zeus.Admin.Plugins;
 using Zeus.Security;
 
 namespace Zeus.AddIns.Blogs.ActionPlugins
 {
-	public class ImportExportBlogXmlActionPlugin : ActionPluginBase
+	public class ImportExportBlogXmlActionPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -31,16 +31,15 @@ namespace Zeus.AddIns.Blogs.ActionPlugins
 			return base.IsApplicable(contentItem);
 		}
 
-		public override MenuItem GetMenuItem(ContentItem contentItem)
+		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Import Atom XML",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageIn)
+				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageIn),
+				Handler = string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
+					GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path)
 			};
-
-			menuItem.Handler = string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
-				GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path);
 
 			return menuItem;
 		}

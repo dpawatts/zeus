@@ -28,9 +28,9 @@
 	</div></noscript>
 	
 	<form runat="server">
-		<ext:ViewPort runat="server">
+		<ext:ViewPort runat="server" ID="extViewPort">
 			<Body>
-				<ext:BorderLayout runat="server">
+				<ext:BorderLayout runat="server" ID="extBorderLayout">
 					<North Margins-Bottom="5">
 						<ext:Panel runat="server">
 							<Body>
@@ -83,54 +83,7 @@
 						</ext:Panel>
 					</North>
 					<West Split="true" MinWidth="175" MaxWidth="400">
-						<ext:TreePanel runat="server" ID="stpNavigation" Width="200" Icon="SitemapColor" Title="Site" AutoScroll="true" PathSeparator="|" EnableDD="true">
-							<TopBar>
-								<ext:Toolbar runat="server">
-									<Items>
-										<ext:ToolbarFill runat="server" />
-										<ext:ToolbarButton runat="server" Icon="Reload">
-											<ToolTips>
-												<ext:ToolTip Html="Refresh" />
-											</ToolTips>
-											<Listeners>
-												<Click Handler="#{stpNavigation}.getLoader().load(#{stpNavigation}.getRootNode());" />
-											</Listeners>
-										</ext:ToolbarButton>
-										<ext:ToolbarButton runat="server" IconCls="icon-expand-all">
-											<ToolTips>
-												<ext:ToolTip Html="Expand All" />
-											</ToolTips>
-											<Listeners>
-												<Click Handler="#{stpNavigation}.expandAll();" />
-											</Listeners>
-										</ext:ToolbarButton>
-										<ext:ToolbarButton runat="server" IconCls="icon-collapse-all">
-											<ToolTips>
-												<ext:ToolTip Html="Collapse All" />
-											</ToolTips>
-											<Listeners>
-												<Click Handler="#{stpNavigation}.collapseAll();" />
-											</Listeners>
-										</ext:ToolbarButton>
-									</Items>
-								</ext:Toolbar>
-							</TopBar>
-							<Listeners>
-								<ContextMenu Fn="zeus.showContextMenu" />
-							</Listeners>
-							<AjaxEvents>
-								<MoveNode Url="/admin/default.aspx" OnEvent="OnMoveNode" Before="#{stbStatusBar}.showBusy();">
-									<ExtraParams>
-										<ext:Parameter Name="source" Value="node.id" Mode="Raw" />
-										<ext:Parameter Name="destination" Value="newParent.id" Mode="Raw" />
-										<ext:Parameter Name="pos" Value="index" Mode="Raw" />
-									</ExtraParams>
-								</MoveNode>
-							</AjaxEvents>
-							<Loader>
-								<ext:TreeLoader DataUrl="/admin/Navigation/SiteTreeLoader.ashx" PreloadChildren="true" />
-							</Loader>
-						</ext:TreePanel>
+						
 					</West>
 					<Center>
 						<ext:Panel runat="server" ID="pnlContent" Title="Preview" Icon="Page">
