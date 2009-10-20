@@ -135,10 +135,6 @@
       <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
       <Name>Isis.FrameworkBlocks.WebSecurity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis %28Isis\Core\Isis%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.AddIns.AntiSpam\Zeus.AddIns.AntiSpam.csproj">
       <Project>{5AA6D1BA-3F9B-4C34-9858-7C1CE8DDB06F}</Project>
       <Name>Zeus.AddIns.AntiSpam</Name>

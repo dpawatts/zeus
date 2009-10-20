@@ -84,10 +84,6 @@
     <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis %28Isis\Core\Isis%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.AddIns.AntiSpam.Mvc\Zeus.AddIns.AntiSpam.Mvc.csproj">
       <Project>{69C173C4-CD27-4B22-BEB2-B9AD4719C9B8}</Project>
       <Name>Zeus.AddIns.AntiSpam.Mvc</Name>

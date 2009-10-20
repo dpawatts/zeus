@@ -590,10 +590,6 @@
       <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
       <Name>Isis.FrameworkBlocks.WebSecurity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis %28Isis\Core\Isis%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
       <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>
       <Name>Zeus.ObjectEditor</Name>

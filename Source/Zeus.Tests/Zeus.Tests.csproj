@@ -94,10 +94,6 @@
     <Compile Include="TypeAssert.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis %28Isis\Core\Isis%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.Persistence.NH\Zeus.Persistence.NH.csproj">
       <Project>{E0C2BF09-ECCD-4EC2-B2AE-D376A4A32498}</Project>
       <Name>Zeus.Persistence.NH</Name>

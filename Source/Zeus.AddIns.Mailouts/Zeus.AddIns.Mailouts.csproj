@@ -107,10 +107,6 @@
     <Compile Include="Services\MailoutService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Isis\Isis.csproj">
-      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
-      <Name>Isis %28Isis\Core\Isis%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
       <Name>Zeus.Admin</Name>
