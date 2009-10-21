@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using Isis.FrameworkBlocks.DependencyInjection;
+using Isis.DependencyInjection;
 using Isis.Reflection;
 using Isis.Web;
-using Isis.Web.Security;
 using Zeus.Admin;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -13,6 +12,7 @@ using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Web;
+using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
 
 namespace Zeus.Engine

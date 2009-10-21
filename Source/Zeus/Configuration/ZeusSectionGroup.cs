@@ -34,9 +34,14 @@ namespace Zeus.Configuration
 			get { return (FileSystemSection) Sections["fileSystem"]; }
 		}
 
-		public MembershipSection Membership
+		public AuthenticationSection Authentication
 		{
-			get { return (MembershipSection) Sections["membership"]; }
+			get { return (AuthenticationSection)Sections["authentication"]; }
+		}
+
+		public AuthorizationSection Authorization
+		{
+			get { return (AuthorizationSection)Sections["authorization"]; }
 		}
 	}
 }

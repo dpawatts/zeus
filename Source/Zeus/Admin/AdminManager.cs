@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.UI;
 using Isis.Reflection;
 using Isis.Web;
-using Isis.Web.Security;
 using Zeus.Admin.Plugins;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -19,6 +18,7 @@ using Zeus.Persistence;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Hosting;
+using Zeus.Web.Security;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin

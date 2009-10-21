@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using Isis.FrameworkBlocks.DependencyInjection;
+using Isis.DependencyInjection;
 using Ninject.Modules;
 using System.Web.Mvc;
 using Zeus.Web.Mvc.Html;

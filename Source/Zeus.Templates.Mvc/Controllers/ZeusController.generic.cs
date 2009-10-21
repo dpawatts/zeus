@@ -1,5 +1,5 @@
-using Isis.Web.Security;
 using Zeus.Web.Mvc;
+using Zeus.Web.Security;
 
 namespace Zeus.Templates.Mvc.Controllers
 {

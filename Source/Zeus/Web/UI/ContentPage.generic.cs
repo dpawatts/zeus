@@ -1,5 +1,5 @@
 ﻿using System;
-using Isis.Web.Security;
+using Zeus.Web.Security;
 
 namespace Zeus.Web.UI
 {

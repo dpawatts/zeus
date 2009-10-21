@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Isis.Web.Security;
 using Zeus.AddIns.Forums.Configuration;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Services
 {

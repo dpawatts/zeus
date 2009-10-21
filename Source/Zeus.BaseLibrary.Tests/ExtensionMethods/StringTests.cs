@@ -1,12 +1,12 @@
 using Isis.ExtensionMethods;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Isis.Tests.ExtensionMethods
+namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 {
-	[TestFixture]
+	[TestClass]
 	public class StringTests
 	{
-		[Test]
+		[TestMethod]
 		public void Test_Left_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -14,7 +14,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("This i", leftPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Left_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -22,7 +22,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("This is a test string.", leftPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Left_EmptyString()
 		{
 			const string myString = "";
@@ -30,7 +30,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("", leftPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Right_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -38,7 +38,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("tring.", rightPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Right_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -46,7 +46,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("This is a test string.", rightPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_ToPascalCase()
 		{
 			const string myString = "ThisIsAnIdentifier";
@@ -54,7 +54,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("thisIsAnIdentifier", result);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Truncate_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -62,7 +62,7 @@ namespace Isis.Tests.ExtensionMethods
 			Assert.AreEqual("Thi...", leftPart);
 		}
 
-		[Test]
+		[TestMethod]
 		public void Test_Truncate_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";

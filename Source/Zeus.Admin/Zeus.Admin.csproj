@@ -334,13 +334,13 @@
       <Project>{FD6CEDDE-9B2F-49CC-954F-A93F27F41E7E}</Project>
       <Name>Coolite.Ext.UX</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
-      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
-      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+      <Name>Zeus %28Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

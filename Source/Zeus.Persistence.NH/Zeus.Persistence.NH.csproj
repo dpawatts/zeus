@@ -86,9 +86,13 @@
     <Compile Include="Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+      <Name>Zeus %28Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

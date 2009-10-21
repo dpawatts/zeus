@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Isis.ExtensionMethods;
 using Isis.ExtensionMethods.Web.UI;
-using Isis.Web.Security;
 using Isis.Web.UI;
 using Zeus.Security;
+using Zeus.Web.Security;
 
 namespace Zeus.Admin.Plugins.Permissions
 {

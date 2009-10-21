@@ -1,6 +1,6 @@
-using Isis.Web.Security;
 using Ninject;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Services
 {

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Isis.Collections.Generic;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Isis.Tests.Collections.Generic
+namespace Zeus.BaseLibrary.Tests.Collections.Generic
 {
-	[TestFixture]
+	[TestClass]
 	public class CartesianProductUtilityTests
 	{
-		[Test]
+		/*[TestMethod]
 		public void CanCombine2By2Groups()
 		{
 			IEnumerable<char> group1 = new[] { 'a', 'b' }, group2 = new[] { 'c', 'd' };
@@ -20,7 +20,7 @@ namespace Isis.Tests.Collections.Generic
 			Assert.AreElementsEqual(new[] { 'b', 'd' }, cartesianProduct.ElementAt(3));
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanCombine2By3Groups()
 		{
 			IEnumerable<char> group1 = new[] { 'a', 'b', 'c' }, group2 = new[] { 'd', 'e', 'f' };
@@ -35,6 +35,6 @@ namespace Isis.Tests.Collections.Generic
 			Assert.AreElementsEqual(new[] { 'c', 'd' }, cartesianProduct.ElementAt(6));
 			Assert.AreElementsEqual(new[] { 'c', 'e' }, cartesianProduct.ElementAt(7));
 			Assert.AreElementsEqual(new[] { 'c', 'f' }, cartesianProduct.ElementAt(8));
-		}
+		}*/
 	}
 }

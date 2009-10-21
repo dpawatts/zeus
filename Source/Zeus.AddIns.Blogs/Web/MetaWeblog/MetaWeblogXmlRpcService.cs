@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using CookComputing.XmlRpc;
-using Isis.Web.Security;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services;
 using Zeus.AddIns.Blogs.Web.XmlRpc;
 using Zeus.FileSystem;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Web.Routing;
-using Isis.FrameworkBlocks.DependencyInjection;
+using Isis.DependencyInjection;
 using Ninject;
 
 namespace Zeus.Web.Hosting

@@ -1,30 +1,30 @@
 ﻿using Isis.ExtensionMethods;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Isis.Tests.ExtensionMethods
+namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 {
-	[TestFixture]
+	[TestClass]
 	public class Int32Tests
 	{
-		[Test]
+		[TestMethod]
 		public void ToOrdinal_1()
 		{
 			Assert.AreEqual("1st", 1.ToOrdinal());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToOrdinal_2()
 		{
 			Assert.AreEqual("2nd", 2.ToOrdinal());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToOrdinal_3()
 		{
 			Assert.AreEqual("3rd", 3.ToOrdinal());
 		}
 
-		[Test]
+		[TestMethod]
 		public void ToOrdinal_4()
 		{
 			Assert.AreEqual("4th", 4.ToOrdinal());

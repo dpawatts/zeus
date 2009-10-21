@@ -1,22 +1,22 @@
 ﻿using System.Linq;
 using Isis.ExtensionMethods.Linq;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Isis.Tests.ExtensionMethods.Linq
+namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 {
-	[TestFixture]
+	[TestClass]
 	public class QueryableTests
 	{
-		[Test]
+		[TestMethod]
 		public void CanFilterByType()
 		{
 			IQueryable myArray = new object[]
 			{
-			  1,
-        "myString",
+				1,
+				"myString",
 				3.0,
 				4.0f,
-        "anotherString"
+				"anotherString"
 			}.AsQueryable();
 
 			var filteredArray = myArray.OfType(typeof(string));

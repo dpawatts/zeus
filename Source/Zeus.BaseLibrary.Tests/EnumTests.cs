@@ -1,12 +1,12 @@
-﻿using Isis.ExtensionMethods;
-using MbUnit.Framework;
+﻿using Isis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Isis.Tests
+namespace Zeus.BaseLibrary.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class EnumTests
 	{
-		[Test]
+		[TestMethod]
 		public void CanGetDescription()
 		{
 			Assert.AreEqual("First Value", EnumHelper.GetEnumValueDescription(typeof(MyEnum), "FirstValue"));

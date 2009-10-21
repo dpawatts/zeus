@@ -65,7 +65,7 @@ namespace Zeus.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.LoginStatus logOut;
+        protected global::Zeus.Web.UI.WebControls.LoginStatus logOut;
         
         /// <summary>
         /// plcToolbar control.

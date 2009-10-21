@@ -1,6 +1,5 @@
 using Isis.Reflection;
 using Isis.Web;
-using Isis.Web.Security;
 using Ninject.Modules;
 using Zeus.Admin;
 using Zeus.ContentProperties;

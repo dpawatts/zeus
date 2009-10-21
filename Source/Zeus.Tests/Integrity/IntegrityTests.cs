@@ -1,5 +1,5 @@
 using Isis.Reflection;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Zeus.ContentProperties;
@@ -13,7 +13,7 @@ using Zeus.Web;
 
 namespace Zeus.Tests.Integrity
 {
-	[TestFixture]
+	[TestClass]
 	public class IntegrityTests : ItemTestsBase
 	{
 		private IPersister persister;
@@ -28,7 +28,7 @@ namespace Zeus.Tests.Integrity
 
 		#region SetUp
 
-		[SetUp]
+		[TestInitialize]
 		public override void SetUp()
 		{
 			base.SetUp();
@@ -97,7 +97,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Move
 
-		[Test]
+		[TestMethod]
 		public void CanMoveItem()
 		{
 			StartPage startPage = new StartPage();
@@ -106,7 +106,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canMove, "The page couldn't be moved to the destination.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanMoveItemEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -115,7 +115,7 @@ namespace Zeus.Tests.Integrity
 			moving.Raise(persister, new CancelDestinationEventArgs(page, startPage));
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveItemOntoItself()
 		{
 			Page page = new Page();
@@ -123,7 +123,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved onto itself.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveItemOntoItselfEvent()
 		{
 			Page page = new Page();
@@ -134,7 +134,7 @@ namespace Zeus.Tests.Integrity
 			});
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveItemBelowItself()
 		{
 			Page page = new Page();
@@ -144,7 +144,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved below itself.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveItemBelowItselfEvent()
 		{
 			Page page = new Page();
@@ -156,7 +156,7 @@ namespace Zeus.Tests.Integrity
 			});
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveIfNameIsOccupied()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -167,7 +167,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved even though the name was occupied.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveIfNameIsOccupiedEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -180,7 +180,7 @@ namespace Zeus.Tests.Integrity
 			});
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveIfTypeIsntAllowed()
 		{
 			StartPage startPage = new StartPage();
@@ -190,7 +190,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The start page could be moved even though a page isn't an allowed destination.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotMoveIfTypeIsntAllowedEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -206,7 +206,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Copy
 
-		[Test]
+		[TestMethod]
 		public void CanCopyItem()
 		{
 			StartPage startPage = new StartPage();
@@ -215,7 +215,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canCopy, "The page couldn't be copied to the destination.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanCopyItemEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -224,7 +224,7 @@ namespace Zeus.Tests.Integrity
 			copying.Raise(persister, new CancelDestinationEventArgs(page, startPage));
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotCopyIfNameIsOccupied()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -235,7 +235,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canCopy, "The page could be copied even though the name was occupied.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotCopyIfNameIsOccupiedEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -248,7 +248,7 @@ namespace Zeus.Tests.Integrity
 			});
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotCopyIfTypeIsntAllowed()
 		{
 			StartPage startPage = new StartPage();
@@ -258,7 +258,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canCopy, "The start page could be copied even though a page isn't an allowed destination.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotCopyIfTypeIsntAllowedEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -274,7 +274,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Delete
 
-		[Test]
+		[TestMethod]
 		public void CanDelete()
 		{
 			Page page = new Page();
@@ -289,7 +289,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanDeleteEvent()
 		{
 			Page page = new Page();
@@ -303,7 +303,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotDeleteStartPage()
 		{
 			StartPage startPage = new StartPage();
@@ -318,7 +318,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotDeleteStartPageEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -338,7 +338,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Save
 
-		[Test]
+		[TestMethod]
 		public void CanSave()
 		{
 			StartPage startPage = new StartPage();
@@ -347,7 +347,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canSave, "Couldn't save");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanSaveEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -355,7 +355,7 @@ namespace Zeus.Tests.Integrity
 			saving.Raise(persister, new CancelItemEventArgs(startPage));
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotSaveNotLocallyUniqueItem()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -367,7 +367,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canSave, "Could save even though the item isn't the only sibling with the same name.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void LocallyUniqueItemThatWithoutNameYet()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -379,7 +379,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(isUnique, "Shouldn't have been locally unique.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotSaveNotLocallyUniqueItemEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -393,7 +393,7 @@ namespace Zeus.Tests.Integrity
 			});
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotSaveUnallowedItem()
 		{
 			Page page = CreateOneItem<Page>(1, "John", null);
@@ -403,7 +403,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canSave, "Could save even though the start page isn't below a page.");
 		}
 
-		[Test]
+		[TestMethod]
 		public void CannotSaveUnallowedItemEvent()
 		{
 			Page page = CreateOneItem<Page>(1, "John", null);
@@ -419,7 +419,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Security
 
-		[Test]
+		[TestMethod]
 		public void UserCanEditAccessibleDetail()
 		{
 			ContentType definition = definitions.GetContentType(typeof(Page));
@@ -428,7 +428,7 @@ namespace Zeus.Tests.Integrity
 				Count);
 		}
 
-		[Test]
+		[TestMethod]
 		public void UserCannotEditInaccessibleDetail()
 		{
 			ContentType definition = definitions.GetContentType(typeof(Page));

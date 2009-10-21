@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Zeus.Tests
 {
@@ -44,7 +44,7 @@ namespace Zeus.Tests
 			}
 			catch (TargetInvocationException ex)
 			{
-				Assert.IsInstanceOfType(typeof(T), ex.InnerException);
+				Assert.IsInstanceOfType(ex.InnerException, typeof(T));
 			}
 			catch (T ex)
 			{
@@ -79,7 +79,7 @@ namespace Zeus.Tests
 		}
 	}
 
-	[TestFixture]
+	[TestClass]
 	public class ExceptionAssertTests
 	{
 		//[Test, ExpectedException(typeof(MbUnit.Core.Exceptions.AssertionException))]
@@ -97,7 +97,7 @@ namespace Zeus.Tests
 		//                throw new Exception("rebuke me");
 		//            });
 		//}
-		[Test]
+		[TestMethod]
 		public void PassesOnExceptionTrown()
 		{
 			ExceptionAssert.Throws(
@@ -107,7 +107,7 @@ namespace Zeus.Tests
 					throw new ArgumentException("catch me");
 				});
 		}
-		[Test]
+		[TestMethod]
 		public void ReturnsTheException()
 		{
 			Exception ex = ExceptionAssert.Throws(
@@ -133,7 +133,7 @@ namespace Zeus.Tests
 		//                throw new Exception("rebuke me");
 		//            });
 		//}
-		[Test]
+		[TestMethod]
 		public void PassesOnExceptionTrown_generic()
 		{
 			ExceptionAssert.Throws<ArgumentException>(
@@ -142,7 +142,7 @@ namespace Zeus.Tests
 					throw new ArgumentException("catch me");
 				});
 		}
-		[Test]
+		[TestMethod]
 		public void ReturnsTheException_generic()
 		{
 			ArgumentException ex = ExceptionAssert.Throws<ArgumentException>(

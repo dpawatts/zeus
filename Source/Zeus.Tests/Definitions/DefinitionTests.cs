@@ -1,17 +1,17 @@
 ﻿using Isis.Reflection;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zeus.Engine;
 using Zeus.Tests.Definitions.Items;
 using Zeus.ContentTypes;
 
 namespace Zeus.Tests.Definitions
 {
-	[TestFixture]
+	[TestClass]
 	public class DefinitionTests
 	{
 		private ContentTypeManager _definitionManager;
 
-		[SetUp]
+		[TestMethod]
 		public void SetUp()
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();
@@ -20,7 +20,7 @@ namespace Zeus.Tests.Definitions
 			_definitionManager = new ContentTypeManager(contentTypeBuilder, null);
 		}
 
-		[Test]
+		[TestMethod]
 		public void CanCreateNewItemInstance()
 		{
 			TestTextPage item = _definitionManager.CreateInstance<TestTextPage>(null);

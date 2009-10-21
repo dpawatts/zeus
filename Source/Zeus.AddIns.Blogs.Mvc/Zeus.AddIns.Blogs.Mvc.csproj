@@ -96,6 +96,10 @@
       <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
       <Name>Zeus.AddIns.Blogs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.Templates.Mvc\Zeus.Templates.Mvc.csproj">
       <Project>{0ADE208D-2C8D-46AE-A433-2F21505B628C}</Project>
       <Name>Zeus.Templates.Mvc</Name>
@@ -110,7 +114,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+      <Name>Zeus %28Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

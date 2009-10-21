@@ -4,14 +4,17 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using Isis.ApplicationBlocks.DataMigrations;
-using Isis.Web.Security;
+using FluentMigrator;
+using FluentMigrator.Runner;
+using FluentMigrator.Runner.Processors;
+using Microsoft.SqlServer.Management.Smo;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Installation.Migrations;
 using Zeus.Persistence;
 using Zeus.Serialization;
 using Zeus.Web;
+using Zeus.Web.Security;
 using AuthorizationRule=Zeus.Security.AuthorizationRule;
 
 namespace Zeus.Installation
@@ -55,7 +58,14 @@ namespace Zeus.Installation
 		/// <summary>Executes sql create database scripts.</summary>
 		public void Install()
 		{
-			MigrationManager.Migrate(GetConnectionString(), typeof(Migration001).Assembly, "Zeus.Installation.Migrations");
+			IMigrationProcessorFactory processorFactory = ProcessorFactory.GetFactory("SqlServer");
+			IMigrationProcessor processor = processorFactory.Create(GetConnectionString());
+
+			MigrationVersionRunner runner = new MigrationVersionRunner(
+				new MigrationConventions(),
+				processor, 
+				new MigrationLoader(new MigrationConventions()), typeof(AddTables).Assembly, "Zeus.Installation.Migrations");
+			runner.MigrateUp();
 		}
 
 		public DatabaseStatus GetStatus()
@@ -79,7 +89,11 @@ namespace Zeus.Installation
 
 		public string CreateDatabase(string server, string name)
 		{
-			return MigrationManager.CreateDatabase(server, name);
+			Server dbServer = new Server(server);
+			Database db = new Database(dbServer, name);
+			db.Create();
+
+			return string.Format(@"Server={0};Database={1};Integrated Security=True", server, name);
 		}
 
 		private void UpdateItems(DatabaseStatus status)

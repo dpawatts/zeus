@@ -1,14 +1,14 @@
 using System.Configuration;
-using MbUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zeus.Configuration;
 using Zeus.DynamicContent;
 
 namespace Zeus.Tests.DynamicContent
 {
-	[TestFixture]
+	[TestClass]
 	public class DynamicContentManagerTests
 	{
-		[Test]
+		[TestMethod]
 		public void CanRenderDynamicContent()
 		{
 			DynamicContentSection configSection = ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection;

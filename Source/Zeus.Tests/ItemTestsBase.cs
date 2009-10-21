@@ -1,25 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Principal;
-using MbUnit.Framework;
 using Rhino.Mocks;
 using Zeus.Tests.Fakes;
 using Zeus.Web;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Zeus.Tests
 {
+	[TestClass]
 	public abstract class ItemTestsBase
 	{
 		protected MockRepository mocks;
 
-		[SetUp]
+		[TestInitialize]
 		public virtual void SetUp()
 		{
 			RequestItem.Accessor = new StaticContextAccessor();
 			mocks = new MockRepository();
 		}
 
-		[TearDown]
+		[TestCleanup]
 		public virtual void TearDown()
 		{
 			if (mocks != null)

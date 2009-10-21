@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using Isis.Web.Security;
 using Zeus.Configuration;
+using Zeus.Web.Security;
 
 namespace Zeus.Admin
 {

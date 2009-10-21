@@ -39,6 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Coolite\Coolite.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\Iesi.Collections.dll</HintPath>
@@ -132,10 +140,17 @@
     <Compile Include="Collections\HierarchyBuilder.cs" />
     <Compile Include="Collections\HierarchyNode.cs" />
     <Compile Include="Collections\BranchHierarchyBuilder.cs" />
+    <Compile Include="Configuration\AuthenticationSection.cs" />
+    <Compile Include="Configuration\AuthorizationRule.cs" />
+    <Compile Include="Configuration\AuthorizationRuleAction.cs" />
+    <Compile Include="Configuration\AuthorizationRuleCollection.cs" />
+    <Compile Include="Configuration\AuthorizationSection.cs" />
     <Compile Include="Configuration\AuthorizedRoleCollection.cs" />
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
+    <Compile Include="Configuration\CredentialCollection.cs" />
+    <Compile Include="Configuration\MachineKeySectionWrapper.cs" />
     <Compile Include="Configuration\RecycleBinElement.cs" />
     <Compile Include="Configuration\ContentTypesSection.cs" />
     <Compile Include="Configuration\ContentTypeRule.cs" />
@@ -154,6 +169,7 @@
     <Compile Include="Configuration\InstallerElement.cs" />
     <Compile Include="Configuration\SiteElement.cs" />
     <Compile Include="Configuration\SiteElementCollection.cs" />
+    <Compile Include="Configuration\UserElement.cs" />
     <Compile Include="Configuration\VersioningElement.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
@@ -206,7 +222,48 @@
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
+    <Compile Include="Installation\Migrations\1_AddTables.cs" />
+    <Compile Include="Installation\Migrations\MigrationExtensions.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="Web\Security\AuthenticationContextService.cs" />
+    <Compile Include="Web\Security\AuthenticationEventArgs.cs" />
+    <Compile Include="Web\Security\AuthenticationLocation.cs" />
+    <Compile Include="Web\Security\AuthenticationModule.cs" />
+    <Compile Include="Web\Security\AuthenticationService.cs" />
+    <Compile Include="Web\Security\AuthenticationTicket.cs" />
+    <Compile Include="Web\Security\AuthorizationLocation.cs" />
+    <Compile Include="Web\Security\AuthorizationModule.cs" />
+    <Compile Include="Web\Security\AuthorizationRule.cs" />
+    <Compile Include="Web\Security\AuthorizationRuleAction.cs" />
+    <Compile Include="Web\Security\AuthorizationRuleCollection.cs" />
+    <Compile Include="Web\Security\AuthorizationService.cs" />
+    <Compile Include="Web\Security\CredentialContextService.cs" />
+    <Compile Include="Web\Security\CredentialLocation.cs" />
+    <Compile Include="Web\Security\CredentialService.cs" />
+    <Compile Include="Web\Security\DefaultCredentialRepository.cs" />
+    <Compile Include="Web\Security\DefaultUser.cs" />
+    <Compile Include="Web\Security\IAuthenticationContextInitializer.cs" />
+    <Compile Include="Web\Security\IAuthenticationContextService.cs" />
+    <Compile Include="Web\Security\IAuthenticationService.cs" />
+    <Compile Include="Web\Security\IAuthorizationInitializer.cs" />
+    <Compile Include="Web\Security\IAuthorizationService.cs" />
+    <Compile Include="Web\Security\ICredentialContextService.cs" />
+    <Compile Include="Web\Security\ICredentialRepository.cs" />
+    <Compile Include="Web\Security\ICredentialService.cs" />
+    <Compile Include="Web\Security\IUser.cs" />
+    <Compile Include="Web\Security\SecurityLocation.cs" />
+    <Compile Include="Web\Security\UserCreateStatus.cs" />
+    <Compile Include="Web\Security\WebIdentity.cs" />
+    <Compile Include="Web\Security\WebPrincipal.cs" />
+    <Compile Include="Web\Security\WebSecurityEngine.cs" />
+    <Compile Include="Web\UI\WebControls\LoginName.cs" />
+    <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
+    <Compile Include="Web\UI\WebControls\LoginView.cs" />
     <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
@@ -234,7 +291,6 @@
     <Compile Include="Globalization\TranslatableAttribute.cs" />
     <Compile Include="Installation\DatabaseStatus.cs" />
     <Compile Include="Installation\InstallerHints.cs" />
-    <Compile Include="Installation\Migrations\Migration002.cs" />
     <Compile Include="Integrity\AllowedChildrenAttribute.cs" />
     <Compile Include="Linq\ContentItemFilters.cs" />
     <Compile Include="Net\HttpClient.cs" />
@@ -331,7 +387,6 @@
     <Compile Include="DynamicContent\DynamicPageProperty.cs" />
     <Compile Include="DynamicContent\IDynamicContentManager.cs" />
     <Compile Include="Configuration\AdminSection.cs" />
-    <Compile Include="Configuration\MembershipSection.cs" />
     <Compile Include="Configuration\FileSystemSection.cs" />
     <Compile Include="Configuration\DatabaseSection.cs" />
     <Compile Include="Configuration\HostSection.cs" />
@@ -444,7 +499,6 @@
     <Compile Include="Find.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="Installation\InstallationManager.cs" />
-    <Compile Include="Installation\Migrations\Migration001.cs" />
     <Compile Include="Integrity\AllowedTypes.cs" />
     <Compile Include="Integrity\AllowedZonesAttribute.cs" />
     <Compile Include="Integrity\AvailableZoneAttribute.cs" />
@@ -578,17 +632,9 @@
     <EmbeddedResource Include="Web\Resources\jQuery\ui.sortable.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Isis.ApplicationBlocks.DataMigrations\Isis.ApplicationBlocks.DataMigrations.csproj">
-      <Project>{53264600-A2A8-499B-A32F-9E9EB45CEF86}</Project>
-      <Name>Isis.ApplicationBlocks.DataMigrations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Isis.FrameworkBlocks.DependencyInjection\Isis.FrameworkBlocks.DependencyInjection.csproj">
-      <Project>{9BA0268A-F699-438F-BD66-AB70361940E0}</Project>
-      <Name>Isis.FrameworkBlocks.DependencyInjection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
-      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
-      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
       <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>
@@ -642,6 +688,10 @@
     <EmbeddedResource Include="Web\Resources\jQuery\ui.tabs.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Web\Resources\TinyMCE\langs\en.js" />
     <EmbeddedResource Include="Web\Resources\tinymce.js" />
     <EmbeddedResource Include="Web\Resources\Icons\folder.png" />

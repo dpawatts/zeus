@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using MbUnit.Framework;
 using Rhino.Mocks;
 using Zeus.Persistence;
 using Zeus.Tests.Definitions.Items;

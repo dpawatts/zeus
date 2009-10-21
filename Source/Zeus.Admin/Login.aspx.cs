@@ -1,8 +1,8 @@
 using System;
 using System.Configuration;
 using Isis.ExtensionMethods.Web.UI;
-using Isis.Web.Security;
 using Zeus.Configuration;
+using Zeus.Web.Security;
 using Zeus.Web.UI;
 
 namespace Zeus.Admin

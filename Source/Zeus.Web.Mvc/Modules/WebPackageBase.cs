@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Isis.FrameworkBlocks.DependencyInjection;
+using Isis.DependencyInjection;
 using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;

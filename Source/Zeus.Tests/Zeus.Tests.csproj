@@ -12,6 +12,7 @@
     <AssemblyName>Zeus.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,14 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio, Version=3.0.5.546, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Gallio.dll</HintPath>
-    </Reference>
-    <Reference Include="MbUnit, Version=3.0.5.546, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\MbUnit.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHibernate, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\NHibernate.dll</HintPath>
@@ -92,15 +86,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityUtilities.cs" />
     <Compile Include="TypeAssert.cs" />
+    <Compile Include="Web\Security\AuthenticatedUser.cs" />
+    <Compile Include="Web\Security\AuthenticationServiceTests.cs" />
+    <Compile Include="Web\Security\MembershipServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.Persistence.NH\Zeus.Persistence.NH.csproj">
       <Project>{E0C2BF09-ECCD-4EC2-B2AE-D376A4A32498}</Project>
       <Name>Zeus.Persistence.NH</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+      <Name>Zeus %28Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

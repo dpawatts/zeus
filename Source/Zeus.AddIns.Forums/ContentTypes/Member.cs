@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isis.Web.Security;
 using Isis.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.ContentTypes
 {

@@ -131,10 +131,6 @@
     <Compile Include="Web\XmlRpc\ZeusXmlRpcService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Isis.FrameworkBlocks.WebSecurity\Isis.FrameworkBlocks.WebSecurity.csproj">
-      <Project>{8B13CE61-5866-47B7-BC17-041DBE7E6365}</Project>
-      <Name>Isis.FrameworkBlocks.WebSecurity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.AddIns.AntiSpam\Zeus.AddIns.AntiSpam.csproj">
       <Project>{5AA6D1BA-3F9B-4C34-9858-7C1CE8DDB06F}</Project>
       <Name>Zeus.AddIns.AntiSpam</Name>
@@ -143,13 +139,17 @@
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
       <Name>Zeus.Admin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Zeus\Core\Zeus%29</Name>
+      <Name>Zeus %28Core\Zeus%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

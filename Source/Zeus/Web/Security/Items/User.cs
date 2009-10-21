@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Isis.Web.Security;
 using Isis.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;

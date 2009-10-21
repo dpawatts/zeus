@@ -1,4 +1,3 @@
-using Isis.Web.Security;
 using Ninject;
 using Zeus.Security;
 
