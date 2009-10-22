@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.RegularExpressions;
-using Isis.Net;
-using Isis.Web;
+using Zeus.BaseLibrary.Net;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.AddIns.Blogs.Services.Tracking
 {

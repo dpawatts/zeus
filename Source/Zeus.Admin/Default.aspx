@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Default" %>
-<%@ Register TagPrefix="isis" Namespace="Isis.Web.UI.WebControls" Assembly="Isis.FrameworkBlocks.WebSecurity" %>
+<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -38,8 +38,8 @@
 									<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
 									<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
 									<div id="headerRight">
-										<isis:LoginStatus runat="server" ID="logOut" />
-										<p id="loggedAs">You are logged in as <isis:LoginName runat="server" /></p>
+										<zeus:LoginStatus runat="server" ID="logOut" />
+										<p id="loggedAs">You are logged in as <zeus:LoginName runat="server" /></p>
 									</div>
 								</div>
 

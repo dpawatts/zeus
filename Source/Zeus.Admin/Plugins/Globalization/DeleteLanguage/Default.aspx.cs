@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.Admin.Plugins.Globalization.DeleteLanguage
 {

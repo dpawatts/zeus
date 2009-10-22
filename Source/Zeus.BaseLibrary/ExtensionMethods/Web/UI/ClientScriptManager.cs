@@ -2,9 +2,8 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-using Isis.Web.UI;
 
-namespace Isis.ExtensionMethods.Web.UI
+namespace Zeus.BaseLibrary.ExtensionMethods.Web.UI
 {
 	public static class ClientScriptManagerExtensionMethods
 	{

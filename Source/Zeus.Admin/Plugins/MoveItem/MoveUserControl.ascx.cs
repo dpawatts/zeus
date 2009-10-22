@@ -29,8 +29,6 @@ namespace Zeus.Admin.Plugins.MoveItem
 			Utility.MoveToIndex(siblings, sourceContentItem, pos);
 			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
 				Zeus.Context.Persister.Save(updatedItem);
-
-			MainInterface.StatusBar.SetStatus(new StatusBarStatusConfig("Moved item", Icon.Cut) { Clear = new StatusBarClearConfig(true) });
 		}
 	}
 }

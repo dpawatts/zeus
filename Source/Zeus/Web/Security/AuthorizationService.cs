@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
-using Isis.Reflection;
 
 namespace Zeus.Web.Security
 {

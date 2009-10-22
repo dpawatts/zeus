@@ -33,13 +33,10 @@ namespace Zeus.FileSystem.Images
 
 		private static void DeleteCachedImages(ContentItem contentItem)
 		{
-			if (DynamicImageCacheManager.Enabled)
+			if (contentItem is Image)
 			{
-				if (contentItem is Image)
-				{
-					ZeusImageSource source = new ZeusImageSource { ContentID = contentItem.ID };
-					DynamicImageCacheManager.Remove(source);
-				}
+				ZeusImageSource source = new ZeusImageSource { ContentID = contentItem.ID };
+				DynamicImageCacheManager.Remove(source);
 			}
 		}
 

@@ -2,7 +2,7 @@ using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using CookComputing.XmlRpc;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.AddIns.Blogs.Services.Tracking
 {

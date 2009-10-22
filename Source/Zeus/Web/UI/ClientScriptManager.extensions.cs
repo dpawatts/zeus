@@ -1,5 +1,5 @@
 using System.Web.UI;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Web.UI

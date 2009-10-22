@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	public interface IAssemblyFinder
 	{

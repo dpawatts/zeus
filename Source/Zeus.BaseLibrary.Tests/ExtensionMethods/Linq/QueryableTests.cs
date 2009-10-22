@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Isis.ExtensionMethods.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 {

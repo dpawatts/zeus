@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	/// <summary>
 	/// Provides strong-typed reflection of the <typeparamref name="TTarget"/> 

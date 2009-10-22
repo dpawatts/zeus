@@ -1,7 +1,7 @@
 ﻿using System;
 using Coolite.Ext.Web;
-using Isis.ExtensionMethods.Web.UI;
 using Zeus.Admin.Plugins;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using System.Configuration;
 using Zeus.Security;

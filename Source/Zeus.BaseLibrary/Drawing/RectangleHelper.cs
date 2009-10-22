@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Isis.Drawing
+namespace Zeus.BaseLibrary.Drawing
 {
 	public static class RectangleHelper
 	{

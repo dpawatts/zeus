@@ -3,7 +3,7 @@ using System.Collections;
 using System.Security.Principal;
 using System.Web;
 
-namespace Isis.Web
+namespace Zeus.BaseLibrary.Web
 {
 	public class WebContext : IWebContext
 	{

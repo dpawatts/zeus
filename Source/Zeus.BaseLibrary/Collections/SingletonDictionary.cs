@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Isis.Collections
+namespace Zeus.BaseLibrary.Collections
 {
 	/// <summary>
 	/// Provides a singleton dictionary for a certain key and vlaue type.

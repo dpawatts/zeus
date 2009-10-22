@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Isis.Web.Configuration;
 using Zeus.Configuration;
 
 namespace Zeus.Web.Security
@@ -22,7 +21,7 @@ namespace Zeus.Web.Security
 			// If an <authorization> section exists in the current web.config, and it hasn't yet
 			// been registered with the AuthorizationService, add it now.
 			IAuthorizationService authorizationService = WebSecurityEngine.Get<IAuthorizationService>();
-			AuthorizationSection authorizationSection = System.Web.Configuration.WebConfigurationManager.GetSection("isis.web/authorization") as AuthorizationSection;
+			AuthorizationSection authorizationSection = System.Web.Configuration.WebConfigurationManager.GetSection("zeus.web/authorization") as AuthorizationSection;
 			string locationPath = context.Request.Path.ToLower();
 			if (authorizationSection != null && !authorizationService.LocationExists(locationPath))
 			{

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Isis.Collections;
 using Zeus.Admin;
 using Zeus.Collections;
 using Zeus.ContentProperties;
@@ -182,7 +181,7 @@ namespace Zeus
 		/// <summary>The default file extension for this content item, e.g. ".aspx".</summary>
 		public virtual string Extension
 		{
-			get { return Isis.Web.Url.DefaultExtension; }
+			get { return BaseLibrary.Web.Url.DefaultExtension; }
 		}
 
 		/// <summary>Gets whether this item is a page. This is used for site map purposes.</summary>
@@ -251,8 +250,8 @@ namespace Zeus
 			get
 			{
 				if (IsPage)
-					return Isis.Web.Url.ToAbsolute("~/admin/assets/images/icons/page.png");
-				return Isis.Web.Url.ToAbsolute("~/admin/assets/images/icons/page_white.png");
+					return BaseLibrary.Web.Url.ToAbsolute("~/admin/assets/images/icons/page.png");
+				return BaseLibrary.Web.Url.ToAbsolute("~/admin/assets/images/icons/page_white.png");
 			}
 		}
 

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Isis.Collections;
+using Zeus.BaseLibrary.Collections;
 using Zeus.Persistence;
 using Zeus.Engine;
-using System.Web;
 using Zeus.Web;
 
 namespace Zeus
@@ -47,7 +46,7 @@ namespace Zeus
 		/// <summary>
 		/// Gets Zeus persistence manager used for database persistence of content.
 		/// </summary>
-		public static Persistence.IPersister Persister
+		public static IPersister Persister
 		{
 			get { return Current.Persister; }
 		}

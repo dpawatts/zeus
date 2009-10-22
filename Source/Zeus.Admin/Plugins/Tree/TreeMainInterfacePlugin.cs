@@ -54,9 +54,15 @@ namespace Zeus.Admin.Plugins.Tree
 				PreloadChildren = true
 			});
 
-			// Call tree modification plugins.
+			// Call tree modification plugins and load tree plugin user controls.
 			foreach (ITreePlugin treePlugin in Context.Current.ResolveAll<ITreePlugin>())
+			{
+				string[] requiredUserControls = treePlugin.RequiredUserControls;
+				if (requiredUserControls != null)
+					mainInterface.LoadUserControls(requiredUserControls);
+
 				treePlugin.ModifyTree(treePanel, mainInterface);
+			}
 
 			if (!Ext.IsAjaxRequest)
 			{

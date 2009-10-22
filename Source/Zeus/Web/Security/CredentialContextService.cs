@@ -5,10 +5,10 @@ namespace Zeus.Web.Security
 {
 	public class CredentialContextService : ICredentialContextService
 	{
-		private readonly Isis.Web.IWebContext _webContext;
+		private readonly BaseLibrary.Web.IWebContext _webContext;
 		private CredentialLocation _rootLocation;
 
-		public CredentialContextService(Isis.Web.IWebContext webContext)
+		public CredentialContextService(BaseLibrary.Web.IWebContext webContext)
 		{
 			_webContext = webContext;
 			_rootLocation = new CredentialLocation { Repository = new DefaultCredentialRepository() };

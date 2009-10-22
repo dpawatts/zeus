@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Coolite.Ext.Web;
-using Isis.ExtensionMethods.Linq;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentProperties;
 
 namespace Zeus.Admin.Plugins.DeleteItem

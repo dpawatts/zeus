@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Isis.IO
+namespace Zeus.BaseLibrary.IO
 {
 	public class ProgressChangedEventArgs : EventArgs
 	{

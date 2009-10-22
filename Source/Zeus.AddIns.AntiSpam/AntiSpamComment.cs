@@ -1,6 +1,6 @@
 using System.Collections.Specialized;
 using System.Net;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.AddIns.AntiSpam
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Linq;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors

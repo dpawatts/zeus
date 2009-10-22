@@ -1,6 +1,6 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
 
 namespace Zeus.Admin.Web.UI.WebControls
 {

@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Web.UI;
-using Isis.Web.UI;
 
 // NOTE: Shared assembly information is specified in SharedAssemblyInfo.cs
 

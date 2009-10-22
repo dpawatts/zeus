@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
-using Isis.Web;
-using Isis.Web.Configuration;
+using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 
 namespace Zeus.Web.Security
@@ -46,7 +45,7 @@ namespace Zeus.Web.Security
 			HttpContextBase context = new HttpContextWrapper(application.Context);
 
 			IAuthenticationContextService authenticationContextService = WebSecurityEngine.Get<IAuthenticationContextService>();
-			AuthenticationSection authenticationConfig = System.Web.Configuration.WebConfigurationManager.GetSection("isis.web/authentication") as AuthenticationSection;
+			AuthenticationSection authenticationConfig = System.Web.Configuration.WebConfigurationManager.GetSection("zeus/authentication") as AuthenticationSection;
 			string locationPath = context.Request.Path.ToLower();
 			if (authenticationConfig != null && !authenticationContextService.ContainsLocation(locationPath))
 			{

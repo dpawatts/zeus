@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Isis.Net
+namespace Zeus.BaseLibrary.Net
 {
 	public class WebClientUtility
 	{

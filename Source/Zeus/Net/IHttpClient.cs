@@ -1,5 +1,5 @@
 using System.Net;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Net
 {

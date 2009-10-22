@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Admin.Plugins.EditItem
 {

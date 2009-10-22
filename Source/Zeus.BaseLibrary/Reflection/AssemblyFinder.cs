@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	public class AssemblyFinder : IAssemblyFinder
 	{

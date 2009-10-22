@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Isis.IO
+namespace Zeus.BaseLibrary.IO
 {
 	public static class FileHelper
 	{

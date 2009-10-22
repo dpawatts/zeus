@@ -1,6 +1,4 @@
-﻿using Isis.Web.Security;
-
-namespace Isis.FrameworkBlocks.WebAuthentication.Tests.Security
+﻿namespace Zeus.Tests.Web.Security
 {
 	/*public class AuthenticatedUser : IMembershipUser
 	{

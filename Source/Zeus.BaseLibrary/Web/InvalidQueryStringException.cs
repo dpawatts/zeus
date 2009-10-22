@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Isis.Web
+namespace Zeus.BaseLibrary.Web
 {
 	/// <summary>
 	/// Thrown when attempting to decrypt or deserialize an invalid encrypted queryString.

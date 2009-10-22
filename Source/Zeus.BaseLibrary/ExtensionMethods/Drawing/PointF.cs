@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Isis.ExtensionMethods.Drawing
+namespace Zeus.BaseLibrary.ExtensionMethods.Drawing
 {
 	public static class PointFExtensionMethods
 	{

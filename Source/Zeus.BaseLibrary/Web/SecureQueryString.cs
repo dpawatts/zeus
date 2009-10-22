@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Isis.Web
+namespace Zeus.BaseLibrary.Web
 {
 	/// <summary>
 	/// Provides a secure means for transfering data within a query string.
@@ -73,8 +73,8 @@ namespace Isis.Web
 					buffer,
 					0,
 					buffer.Length
-				)
-			);
+					)
+				);
 		}
 
 		/// <summary>
@@ -94,8 +94,8 @@ namespace Isis.Web
 						buffer,
 						0,
 						buffer.Length
-					)
-				);
+						)
+					);
 			}
 			catch (CryptographicException)
 			{

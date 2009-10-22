@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Isis;
 
-namespace Isis.ExtensionMethods.Reflection
+namespace Zeus.BaseLibrary.ExtensionMethods.Reflection
 {
 	public static class MemberInfoExtensionMethods
 	{

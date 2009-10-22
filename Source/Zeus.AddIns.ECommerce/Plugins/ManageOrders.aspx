@@ -1,9 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageOrders.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ManageOrders" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
+<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<h2>Manage Orders</h2>
 
-	<isis:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order">
+	<zeus:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order">
 		<LayoutTemplate>
 			<table class="tb">
 				<tr class="titles">
@@ -27,5 +28,5 @@
 				</td>
 			</tr>
 		</ItemTemplate>
-	</isis:TypedListView>
+	</zeus:TypedListView>
 </asp:Content>

@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Data.SqlClient;
 
-namespace Isis.ExtensionMethods.Data.Common
+namespace Zeus.BaseLibrary.ExtensionMethods.Data.Common
 {
 	public static class DbCommandExtensionMethods
 	{

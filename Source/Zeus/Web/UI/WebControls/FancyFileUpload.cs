@@ -1,9 +1,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Web.UI;
-using Isis.Web.UI;
-using Zeus.Web.Hosting;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.Web.UI.WebControls
 {

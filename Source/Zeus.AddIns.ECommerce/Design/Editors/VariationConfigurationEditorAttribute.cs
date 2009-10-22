@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.Collections.Generic;
-using Isis.ExtensionMethods.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Zeus.BaseLibrary.Collections.Generic;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 

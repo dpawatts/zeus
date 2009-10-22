@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using Isis;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 
 namespace Zeus

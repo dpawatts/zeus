@@ -1,7 +1,7 @@
 using System.IO;
-using Isis.ExtensionMethods.IO;
-using Isis.Web;
 using SoundInTheory.DynamicImage.Fluent;
+using Zeus.BaseLibrary.ExtensionMethods.IO;
+using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
 
 namespace Zeus.FileSystem.Images

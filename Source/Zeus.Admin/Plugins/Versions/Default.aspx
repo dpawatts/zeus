@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Versions.Default" %>
+<%@ Import Namespace="Zeus.BaseLibrary.Web.UI"%>
 <%@ Import Namespace="Zeus.Admin.Plugins.Versions"%>
-<%@ Import Namespace="Isis.Web.UI"%>
-<%@ Register TagPrefix="isis" Namespace="Isis.Web.UI.WebControls" Assembly="Isis" %>
+<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
 	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
@@ -20,9 +20,9 @@
 				<asp:TemplateField HeaderText="Version" ItemStyle-CssClass="Version">
 					<ItemTemplate><%# Eval("Version") %></ItemTemplate>
 				</asp:TemplateField>
-				<isis:TemplateField HeaderText="Language" Visible='<%# GlobalizationEnabled %>'>
+				<zeus:TemplateField HeaderText="Language" Visible='<%# GlobalizationEnabled %>'>
 					<ItemTemplate><%# GetLanguage(Eval("Language") as string) %></ItemTemplate>
-				</isis:TemplateField>
+				</zeus:TemplateField>
 				<asp:TemplateField HeaderText="Title">
 					<ItemTemplate>
 						<a href="<%# GetPreviewUrl((Zeus.ContentItem)Container.DataItem) %>" title="<%# Eval("ID") %>"><img alt="icon" src='<%# Eval("IconUrl") %>'/><%# string.IsNullOrEmpty(((Zeus.ContentItem)Container.DataItem).Title) ? "(untitled)" : ((Zeus.ContentItem)Container.DataItem).Title %></a>

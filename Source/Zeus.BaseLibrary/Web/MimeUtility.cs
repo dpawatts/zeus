@@ -1,21 +1,21 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace Isis.Web
+namespace Zeus.BaseLibrary.Web
 {
 	public static class MimeUtility
 	{
 		[DllImport("urlmon.dll", CharSet = CharSet.Auto)]
 		private extern static UInt32 FindMimeFromData(
-				UInt32 pBC,
-				[MarshalAs(UnmanagedType.LPStr)] string pwzUrl,
-				[MarshalAs(UnmanagedType.LPArray)] byte[] pBuffer,
-				UInt32 cbSize,
-				[MarshalAs(UnmanagedType.LPStr)] string pwzMimeProposed,
-				UInt32 dwMimeFlags,
-				out UInt32 ppwzMimeOut,
-				UInt32 dwReserverd
-		);
+			UInt32 pBC,
+			[MarshalAs(UnmanagedType.LPStr)] string pwzUrl,
+			[MarshalAs(UnmanagedType.LPArray)] byte[] pBuffer,
+			UInt32 cbSize,
+			[MarshalAs(UnmanagedType.LPStr)] string pwzMimeProposed,
+			UInt32 dwMimeFlags,
+			out UInt32 ppwzMimeOut,
+			UInt32 dwReserverd
+			);
 
 		public static string GetMimeType(byte[] fileData)
 		{

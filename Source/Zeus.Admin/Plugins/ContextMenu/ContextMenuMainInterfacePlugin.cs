@@ -1,5 +1,5 @@
 using System.Web.UI;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
 using ScriptManager=Coolite.Ext.Web.ScriptManager;
 
 [assembly: WebResource("Zeus.Admin.Plugins.ContextMenu.Resources.Ext.ux.zeus.ContextMenuPlugin.js", "text/javascript")]

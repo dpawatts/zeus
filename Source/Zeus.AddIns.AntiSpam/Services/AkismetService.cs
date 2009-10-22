@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
 using System.Web;
-using Isis.Web;
 using Zeus.AddIns.AntiSpam.Configuration;
+using Zeus.BaseLibrary.Web;
 using Zeus.Net;
 
 namespace Zeus.AddIns.AntiSpam.Services

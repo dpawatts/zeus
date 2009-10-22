@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Isis.ExtensionMethods.Web.UI;
-using Isis.Web;
 using Zeus.Admin.Web.UI.WebControls;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Security;

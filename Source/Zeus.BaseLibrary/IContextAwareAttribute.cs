@@ -1,4 +1,4 @@
-﻿namespace Isis
+﻿namespace Zeus.BaseLibrary
 {
 	/// <summary>
 	/// Implemented by attributes which would like to know the type or assembly

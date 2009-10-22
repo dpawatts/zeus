@@ -6,7 +6,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Isis.ExtensionMethods
+namespace Zeus.BaseLibrary.ExtensionMethods
 {
 	public static class StringExtensionMethods
 	{
@@ -130,7 +130,7 @@ namespace Isis.ExtensionMethods
 
 			Type t = Type.GetType(typeName);
 			if (t == null)
-				throw new IsisException("Couldn't find any type with the name '{0}'", typeName);
+				throw new Exception(string.Format("Couldn't find any type with the name '{0}'", typeName));
 
 			return t;
 		}
@@ -164,10 +164,10 @@ namespace Isis.ExtensionMethods
 		public static int LuhnChecksum(this string value)
 		{
 			return value
-				.Where(Char.IsDigit)
-				.Reverse()
-				.SelectMany((c, i) => ((c - '0') << (i & 1)).ToString())
-				.Sum(c => c - '0') % 10;
+			       	.Where(Char.IsDigit)
+			       	.Reverse()
+			       	.SelectMany((c, i) => ((c - '0') << (i & 1)).ToString())
+			       	.Sum(c => c - '0') % 10;
 		}
 	}
 }

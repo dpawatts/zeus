@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Isis.Collections.Generic;
 using MvcContrib.Pagination;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
+using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;

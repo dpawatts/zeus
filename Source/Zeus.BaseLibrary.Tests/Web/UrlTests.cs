@@ -1,5 +1,5 @@
-using Isis.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.BaseLibrary.Tests.Web
 {

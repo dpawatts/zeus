@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	public interface ITypeFinder
 	{

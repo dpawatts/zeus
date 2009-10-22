@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Isis
+namespace Zeus.BaseLibrary
 {
 	public static class ConvertUtility
 	{
@@ -24,7 +24,7 @@ namespace Isis
 				if (!destinationType.IsAssignableFrom(value.GetType()))
 				{
 					if (!(value is IConvertible))
-						throw new IsisException("Cannot convert object of type '{0}' because it does not implement IConvertible", value.GetType());
+						throw new Exception(string.Format("Cannot convert object of type '{0}' because it does not implement IConvertible", value.GetType()));
 					return System.Convert.ChangeType(value, destinationType);
 				}
 			}

@@ -1,6 +1,6 @@
 using System.Web.UI;
 using Coolite.Ext.Web;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Security;
 
 [assembly: WebResource("Zeus.Admin.Plugins.DeleteItem.Resources.Ext.ux.zeus.DeleteConfirmation.js", "text/javascript")]

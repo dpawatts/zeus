@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Caching;
 using System.Xml;
 
-namespace Isis.Xml
+namespace Zeus.BaseLibrary.Xml
 {
 	/// <summary>
 	/// Summary description for XmlCachedDocument.
@@ -21,7 +21,7 @@ namespace Isis.Xml
 		{
 			HttpContext pContext = HttpContext.Current;
 
-			string sKey = "Isis.Xml.CachedXmlDocument: " + sFilename.ToLower();
+			string sKey = "Zeus.BaseLibrary.Xml.CachedXmlDocument: " + sFilename.ToLower();
 
 			// see if object is in cache
 			object pObject = pContext.Cache.Get(sKey);

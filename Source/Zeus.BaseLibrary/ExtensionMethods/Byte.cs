@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-namespace Isis.ExtensionMethods
+
+namespace Zeus.BaseLibrary.ExtensionMethods
 {
 	public static class ByteExtensionMethods
 	{

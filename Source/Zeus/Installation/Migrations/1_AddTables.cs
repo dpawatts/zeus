@@ -36,7 +36,7 @@ namespace Zeus.Installation.Migrations
 				.WithColumn("ItemID").AsInt32().NotNullable()
 				.WithColumn("Operation").AsString(50).NotNullable()
 				.WithColumn("Role").AsString(50).Nullable()
-				.WithColumn("User").AsString(50).Nullable()
+				.WithColumn("[User]").AsString(50).Nullable()
 				.WithColumn("Allowed").AsBoolean().NotNullable();
 
 			Create.Table("zeusLanguageSettings")

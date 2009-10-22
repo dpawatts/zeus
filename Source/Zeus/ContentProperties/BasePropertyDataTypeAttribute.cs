@@ -1,5 +1,5 @@
 using System;
-using Isis;
+using Zeus.BaseLibrary;
 
 namespace Zeus.ContentProperties
 {

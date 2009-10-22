@@ -1,5 +1,5 @@
 using System.Linq;
-using Isis.ExtensionMethods.Linq;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;

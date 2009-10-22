@@ -1,5 +1,4 @@
-﻿using Isis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Zeus.BaseLibrary.Tests
 {

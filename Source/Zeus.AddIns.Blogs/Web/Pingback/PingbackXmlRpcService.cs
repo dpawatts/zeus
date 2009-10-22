@@ -1,9 +1,9 @@
 using CookComputing.XmlRpc;
-using Isis.Web;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services;
 using Zeus.AddIns.Blogs.Services.Tracking;
 using Zeus.AddIns.Blogs.Web.XmlRpc;
+using Zeus.BaseLibrary.Web;
 using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Web.Pingback
@@ -46,8 +46,8 @@ namespace Zeus.AddIns.Blogs.Web.Pingback
 
 			// Does the sourceURI actually contain the permalink?
 			Url sourceUrl, targetUrl;
-			Isis.Web.Url.TryParse(sourceURI, out sourceUrl);
-			Isis.Web.Url.TryParse(targetURI, out targetUrl);
+			Url.TryParse(sourceURI, out sourceUrl);
+			Url.TryParse(targetURI, out targetUrl);
 
 			string pageTitle;
 			if (sourceUrl == null || targetUrl == null || !Verifier.SourceContainsTarget(sourceUrl, targetUrl, out pageTitle))

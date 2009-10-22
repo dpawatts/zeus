@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Web.Routing;
-using Isis.DependencyInjection;
 using Ninject;
+using Zeus.BaseLibrary.DependencyInjection;
 
 namespace Zeus.Web.Hosting
 {

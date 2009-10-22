@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Isis.Drawing
+namespace Zeus.BaseLibrary.Drawing
 {
 	public class FastBitmap : IDisposable, ICloneable
 	{

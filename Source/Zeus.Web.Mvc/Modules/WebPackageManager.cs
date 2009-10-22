@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Isis.DependencyInjection;
 using Ninject;
+using Zeus.BaseLibrary.DependencyInjection;
 
 namespace Zeus.Web.Mvc.Modules
 {

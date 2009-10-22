@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Isis.DependencyInjection;
 using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
+using Zeus.BaseLibrary.DependencyInjection;
 using Zeus.Web.Routing;
 
 namespace Zeus.Web.Mvc.Modules

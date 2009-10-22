@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.XPath;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 
 namespace Zeus.Serialization

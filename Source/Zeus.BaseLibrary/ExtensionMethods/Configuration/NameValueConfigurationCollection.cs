@@ -1,7 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Configuration;
 
-namespace Isis.ExtensionMethods.Configuration
+namespace Zeus.BaseLibrary.ExtensionMethods.Configuration
 {
 	public static class NameValueConfigurationCollectionExtensionMethods
 	{

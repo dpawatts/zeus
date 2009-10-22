@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing.Imaging;
 
-namespace Isis.Drawing.Imaging
+namespace Zeus.BaseLibrary.Drawing.Imaging
 {
 	public static class ImageCodecInfoHelper
 	{

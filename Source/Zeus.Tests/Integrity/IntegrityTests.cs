@@ -1,7 +1,7 @@
-using Isis.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
+using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Displayers;

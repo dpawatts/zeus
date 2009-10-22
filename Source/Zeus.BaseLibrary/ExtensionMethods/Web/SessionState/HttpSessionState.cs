@@ -1,6 +1,6 @@
 ﻿using System.Web.SessionState;
 
-namespace Isis.ExtensionMethods.Web.SessionState
+namespace Zeus.BaseLibrary.ExtensionMethods.Web.SessionState
 {
 	public static class HttpSessionStateExtensionMethods
 	{

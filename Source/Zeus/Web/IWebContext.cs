@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Security.Principal;
-using System.Web;
-using Isis.Web;
+﻿using System.Web;
 
 namespace Zeus.Web
 {
-	public interface IWebContext : Isis.Web.IWebContext
+	public interface IWebContext : BaseLibrary.Web.IWebContext
 	{
 		/// <summary>A page instance stored in the request context.</summary>
 		ContentItem CurrentPage { get; set; }

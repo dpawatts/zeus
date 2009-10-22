@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Isis;
-using Isis.Reflection;
+using Zeus.BaseLibrary;
+using Zeus.BaseLibrary.Reflection;
 
 namespace Zeus.Engine
 {

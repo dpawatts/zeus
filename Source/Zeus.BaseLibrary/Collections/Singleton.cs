@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Isis.Collections
+namespace Zeus.BaseLibrary.Collections
 {
 	/// <summary>
 	/// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.

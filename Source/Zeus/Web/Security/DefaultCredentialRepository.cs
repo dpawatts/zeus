@@ -21,7 +21,7 @@ namespace Zeus.Web.Security
 
 		public IEnumerable<IUser> GetAllUsers()
 		{
-			AuthenticationSection configSection = WebConfigurationManager.GetSection("isis.web/authentication") as AuthenticationSection;
+			AuthenticationSection configSection = WebConfigurationManager.GetSection("zeus/authentication") as AuthenticationSection;
 			if (configSection == null || configSection.Credentials.Count == 0)
 				return new List<IUser>();
 

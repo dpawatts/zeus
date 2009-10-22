@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Coolite.Ext.Web;
 using Coolite.Utilities;
-using Isis.ExtensionMethods;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
 using Zeus.Web.Hosting;
 

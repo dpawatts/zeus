@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Isis.ExtensionMethods;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
 using Zeus.AddIns.ECommerce.Services;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;

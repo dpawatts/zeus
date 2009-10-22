@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Isis.ExtensionMethods.Text
+namespace Zeus.BaseLibrary.ExtensionMethods.Text
 {
 	public static class StringBuilderExtensionMethods
 	{

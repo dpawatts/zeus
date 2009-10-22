@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Isis.ExtensionMethods.Collections.Generic
+namespace Zeus.BaseLibrary.ExtensionMethods.Collections.Generic
 {
 	public static class IListExtensionMethods
 	{

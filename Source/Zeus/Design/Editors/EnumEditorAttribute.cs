@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using Isis;
+using Zeus.BaseLibrary;
 using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors

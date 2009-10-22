@@ -1,7 +1,7 @@
 ﻿using System;
-using Isis.ExtensionMethods.Web.UI;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.Plugins
 {

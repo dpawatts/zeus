@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Isis.Web;
 using Zeus.AddIns.Blogs.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.AddIns.Blogs.Services.Tracking
 {

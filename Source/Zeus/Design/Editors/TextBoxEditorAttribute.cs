@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors

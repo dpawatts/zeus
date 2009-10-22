@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
-namespace Isis.ExtensionMethods
+namespace Zeus.BaseLibrary.ExtensionMethods
 {
 	public static class ObjectExtensionMethods
 	{

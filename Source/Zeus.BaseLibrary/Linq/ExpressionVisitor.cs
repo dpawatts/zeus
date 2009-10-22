@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Isis.Linq
+namespace Zeus.BaseLibrary.Linq
 {
 	public static class ExpressionExtensions
 	{

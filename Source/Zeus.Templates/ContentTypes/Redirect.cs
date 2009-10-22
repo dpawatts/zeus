@@ -13,7 +13,7 @@ namespace Zeus.Templates.ContentTypes
 	{
 		public override string Url
 		{
-			get { return Isis.Web.Url.ToAbsolute(GetRedirectItem().Url); }
+			get { return BaseLibrary.Web.Url.ToAbsolute(GetRedirectItem().Url); }
 		}
 
 		protected virtual ContentItem GetRedirectItem()

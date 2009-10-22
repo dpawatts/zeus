@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Import / Export Items" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.ImportExport.Default" %>
-<%@ Import Namespace="Isis.Web.UI"%>
+<%@ Import Namespace="Zeus.Web.UI"%>
 <%@ Register Src="/admin/AffectedItems.ascx" TagName="AffectedItems" TagPrefix="admin" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>

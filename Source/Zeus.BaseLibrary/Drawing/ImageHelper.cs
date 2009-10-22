@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 
-namespace Isis.Drawing
+namespace Zeus.BaseLibrary.Drawing
 {
 	public static class ImageHelper
 	{

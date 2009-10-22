@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using Isis.DependencyInjection;
-using Isis.Reflection;
-using Isis.Web;
 using Zeus.Admin;
+using Zeus.BaseLibrary.DependencyInjection;
+using Zeus.BaseLibrary.Reflection;
+using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Globalization;

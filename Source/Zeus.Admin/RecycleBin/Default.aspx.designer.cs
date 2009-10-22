@@ -47,6 +47,6 @@ namespace Zeus.Admin.RecycleBin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Isis.Web.UI.WebControls.RealTypedGridView<Zeus.ContentItem> grvRecycleBinItems;
+        protected global::Zeus.Web.UI.WebControls.RealTypedGridView<Zeus.ContentItem> grvRecycleBinItems;
     }
 }

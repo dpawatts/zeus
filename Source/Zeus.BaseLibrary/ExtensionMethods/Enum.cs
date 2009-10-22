@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Reflection;
-using System.ComponentModel;
-using System.Collections.Generic;
-using Isis.ExtensionMethods.Reflection;
 
-namespace Isis.ExtensionMethods
+namespace Zeus.BaseLibrary.ExtensionMethods
 {
 	public static class EnumExtensionMethods
 	{

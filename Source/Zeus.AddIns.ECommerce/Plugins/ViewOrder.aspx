@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageOrders.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ViewOrder" %>
 <%@ Import Namespace="Zeus.AddIns.ECommerce.ContentTypes.Data"%>
-<%@ Import Namespace="Isis.ExtensionMethods"%>
+<%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<admin:ToolbarButton runat="server" ID="btnProcess" Text="Process" ImageResourceName="Zeus.AddIns.ECommerce.Icons.basket_go.png" CssClass="positive" OnClick="btnProcess_Click" />

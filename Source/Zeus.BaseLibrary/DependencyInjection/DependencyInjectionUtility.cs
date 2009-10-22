@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Ninject;
 
-namespace Isis.DependencyInjection
+namespace Zeus.BaseLibrary.DependencyInjection
 {
 	public static class DependencyInjectionUtility
 	{

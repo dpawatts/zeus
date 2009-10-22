@@ -1,9 +1,7 @@
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Isis.ExtensionMethods.Text;
-using Isis.Web;
-using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.BaseLibrary.ExtensionMethods.Text;
 
 namespace Zeus.AddIns.Forums.Mvc.Html
 {

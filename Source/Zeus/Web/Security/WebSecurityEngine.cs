@@ -1,4 +1,4 @@
-using Isis.DependencyInjection;
+using Zeus.BaseLibrary.DependencyInjection;
 
 namespace Zeus.Web.Security
 {

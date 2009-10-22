@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Isis.ExtensionMethods.Collections.Generic
+namespace Zeus.BaseLibrary.ExtensionMethods.Collections.Generic
 {
 	public static class IDictionaryExtensionMethods
 	{

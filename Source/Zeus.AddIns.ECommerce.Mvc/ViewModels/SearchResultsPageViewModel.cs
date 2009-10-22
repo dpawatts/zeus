@@ -1,5 +1,5 @@
-using Isis.Collections.Generic;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.Web.Mvc.ViewModels;
 using MvcContrib.Pagination;
 

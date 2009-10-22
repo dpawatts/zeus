@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.XPath;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Engine;

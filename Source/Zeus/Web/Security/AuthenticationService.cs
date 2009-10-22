@@ -1,8 +1,8 @@
 ﻿using System.Web;
 using System;
-using Isis.ExtensionMethods;
-using Isis.ExtensionMethods.Collections;
-using Isis.Web;
+using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods.Collections;
+using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Properties;
 
@@ -12,14 +12,14 @@ namespace Zeus.Web.Security
 	{
 		#region Fields
 
-		private readonly Isis.Web.IWebContext _webContext;
+		private readonly BaseLibrary.Web.IWebContext _webContext;
 		private readonly AuthenticationLocation _config;
 
 		#endregion
 
 		#region Constructor
 
-		public AuthenticationService(Isis.Web.IWebContext webContext, AuthenticationLocation config)
+		public AuthenticationService(BaseLibrary.Web.IWebContext webContext, AuthenticationLocation config)
 		{
 			_webContext = webContext;
 			_config = config;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Xml;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentTypes;
 using Zeus.Web;
 

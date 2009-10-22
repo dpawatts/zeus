@@ -1,6 +1,6 @@
 using System;
 using System.Configuration;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using Zeus.Web.Security;
 using Zeus.Web.UI;

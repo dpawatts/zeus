@@ -1,5 +1,5 @@
 using System;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.AddIns.Blogs.Services.Tracking
 {

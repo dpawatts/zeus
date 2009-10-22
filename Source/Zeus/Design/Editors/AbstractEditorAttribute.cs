@@ -4,7 +4,7 @@ using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Security;
 using Zeus.Web.UI.WebControls;

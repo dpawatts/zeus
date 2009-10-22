@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.IO;
 
-namespace Isis.ExtensionMethods.Reflection
+namespace Zeus.BaseLibrary.ExtensionMethods.Reflection
 {
 	public static class AssemblyExtensionMethods
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Web;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
-namespace Isis.ExtensionMethods.Web
+namespace Zeus.BaseLibrary.ExtensionMethods.Web
 {
 	public static class HttpResponseExtensionMethods
 	{

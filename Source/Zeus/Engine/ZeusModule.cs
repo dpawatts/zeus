@@ -1,7 +1,7 @@
-using Isis.Reflection;
-using Isis.Web;
 using Ninject.Modules;
 using Zeus.Admin;
+using Zeus.BaseLibrary.Reflection;
+using Zeus.BaseLibrary.Web;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.DynamicContent;
@@ -25,14 +25,6 @@ namespace Zeus.Engine
 	{
 		public override void Load()
 		{
-			// Isis web security
-			Bind<Isis.Web.IWebContext>().To<WebContext>().InSingletonScope();
-			Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
-			Bind<ICredentialContextService>().To<CredentialContextService>().InSingletonScope();
-			Bind<IAuthenticationContextService>().To<AuthenticationContextService>().InSingletonScope();
-			Bind<IAuthenticationContextInitializer>().To<SecurityInitializer>().InSingletonScope();
-			Bind<IAuthorizationInitializer>().To<SecurityInitializer>().InSingletonScope();
-
 			// Admin
 			Bind<IAdminManager>().To<AdminManager>().InSingletonScope();
 			Bind<Navigator>().To<Navigator>().InSingletonScope();
@@ -102,6 +94,14 @@ namespace Zeus.Engine
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
 			Bind<IEmbeddedResourceBuilder>().To<EmbeddedResourceBuilder>().InSingletonScope();
 			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
+
+			// Web security
+			Bind<BaseLibrary.Web.IWebContext>().To<WebContext>().InSingletonScope();
+			Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
+			Bind<ICredentialContextService>().To<CredentialContextService>().InSingletonScope();
+			Bind<IAuthenticationContextService>().To<AuthenticationContextService>().InSingletonScope();
+			Bind<IAuthenticationContextInitializer>().To<SecurityInitializer>().InSingletonScope();
+			Bind<IAuthorizationInitializer>().To<SecurityInitializer>().InSingletonScope();
 		}
 	}
 }

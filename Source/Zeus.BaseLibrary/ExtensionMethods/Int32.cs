@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Isis.ExtensionMethods
+namespace Zeus.BaseLibrary.ExtensionMethods
 {
 	public static class Int32ExtensionMethods
 	{

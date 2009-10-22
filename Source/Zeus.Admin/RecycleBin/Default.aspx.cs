@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Integrity;
 
 namespace Zeus.Admin.RecycleBin

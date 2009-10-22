@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using Isis.ExtensionMethods.Reflection;
+using Zeus.BaseLibrary.ExtensionMethods.Reflection;
 
-namespace Isis
+namespace Zeus.BaseLibrary
 {
 	public static class EnumHelper
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Web.UI;
 using System.Web.UI.HtmlControls;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.Web.UI.WebControls
 {

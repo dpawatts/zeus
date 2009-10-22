@@ -1,6 +1,6 @@
 using System.Web.UI;
-using Isis.Web.UI.HtmlControls;
 using Zeus.ContentTypes;
+using Zeus.Web.UI.HtmlControls;
 
 namespace Zeus.Web.UI
 {
@@ -21,7 +21,7 @@ namespace Zeus.Web.UI
 		/// <returns>The newly added fieldset.</returns>
 		public override Control AddTo(Control container)
 		{
-			FieldSet fieldSet = new FieldSet { ID = Name, Legend = Legend };
+			HtmlFieldSet fieldSet = new HtmlFieldSet { ID = Name, Legend = Legend };
 			container.Controls.Add(fieldSet);
 			return fieldSet;
 		}

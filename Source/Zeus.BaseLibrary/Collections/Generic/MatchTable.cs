@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Isis.Collections.Generic
+namespace Zeus.BaseLibrary.Collections.Generic
 {
 	/// <summary>
 	/// Copied from http://code.google.com/p/mb-unit/source/browse/trunk/v3/src/MbUnit/MbUnit/Framework/MatchTable.cs

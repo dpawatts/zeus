@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Isis.Collections.Generic
+namespace Zeus.BaseLibrary.Collections.Generic
 {
 	public static class PageableExtensions
 	{

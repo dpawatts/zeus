@@ -1,5 +1,5 @@
 using System;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 

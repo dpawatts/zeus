@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.Design.Displayers
 {

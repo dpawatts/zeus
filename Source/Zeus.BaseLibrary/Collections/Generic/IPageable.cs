@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MvcContrib.Pagination;
 
-namespace Isis.Collections.Generic
+namespace Zeus.BaseLibrary.Collections.Generic
 {
 	public interface IPageable<T> : IEnumerable<T>
 	{

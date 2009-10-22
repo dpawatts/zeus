@@ -7,10 +7,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Isis.Linq;
-using Isis.ExtensionMethods.Data.Common;
+using Ninject.Activation;
+using Zeus.BaseLibrary.ExtensionMethods.Data.Common;
+using Zeus.BaseLibrary.Linq;
 
-namespace Isis.ExtensionMethods.Data.Linq
+namespace Zeus.BaseLibrary.ExtensionMethods.Data.Linq
 {
 	public static class TableExtensionMethods
 	{
@@ -104,23 +105,23 @@ namespace Isis.ExtensionMethods.Data.Linq
 			// that a MemberInitExpression be returned - in our case we'll return the same one we are passed since we are building
 			// a DbCommand and not 'really using' the evaluator Lambda.
 			evaluator.Visit<MemberInitExpression>(delegate(MemberInitExpression expression)
-			                                      	{
-			                                      		if (memberInitCount > 1)
-			                                      		{
-			                                      			throw new NotImplementedException("Currently only one MemberInitExpression is allowed for the evaluator parameter.");
-			                                      		}
-			                                      		memberInitCount++;
+			{
+				if (memberInitCount > 1)
+				{
+					throw new NotImplementedException("Currently only one MemberInitExpression is allowed for the evaluator parameter.");
+				}
+				memberInitCount++;
 
-			                                      		setSB.Append(GetDbSetStatement<TEntity>(expression, table, updateCommand));
+				setSB.Append(GetDbSetStatement<TEntity>(expression, table, updateCommand));
 
-			                                      		return expression; // just return passed in expression to keep 'visitor' happy.
-			                                      	});
+				return expression; // just return passed in expression to keep 'visitor' happy.
+			});
 
 			// Complete the command text by concatenating bits together.
 			updateCommand.CommandText = string.Format("UPDATE {0}\r\n{1}\r\n\r\n{2}",
-			                                          table.GetDbName(),									// Database table name
-			                                          setSB.ToString(),									// SET fld = {}, fld2 = {}, ...
-			                                          GetBatchJoinQuery<TEntity>(table, entities));	// Subquery join created from entities command text
+				table.GetDbName(),									// Database table name
+				setSB.ToString(),									// SET fld = {}, fld2 = {}, ...
+				GetBatchJoinQuery<TEntity>(table, entities));	// Subquery join created from entities command text
 			return updateCommand;
 		}
 
@@ -208,8 +209,8 @@ namespace Isis.ExtensionMethods.Data.Linq
 						Expression.Lambda(assignment.Expression, entityParam));
 
 					setSB.AppendFormat("[{0}] = {1}, ",
-					                   dbCol.MappedName,
-					                   GetDbSetAssignment(table, selectExpression, updateCommand, name));
+						dbCol.MappedName,
+						GetDbSetAssignment(table, selectExpression, updateCommand, name));
 				}
 			}
 
@@ -264,7 +265,7 @@ namespace Isis.ExtensionMethods.Data.Linq
 			var selectCmd = table.Context.GetCommand(selectQuery);
 			var selectStmt = selectCmd.CommandText;
 			selectStmt = selectStmt.Substring(7,									// Remove 'SELECT ' from front ( 7 )
-			                                  selectStmt.IndexOf("\r\nFROM ") - 7)		// Return only the selection field expression
+				selectStmt.IndexOf("\r\nFROM ") - 7)		// Return only the selection field expression
 				.Replace("[t0].", "")							// Remove table alias from the select
 				.Replace(" AS [value]", "")					// If the select is not a direct field (constant or expression), remove the field alias
 				.Replace("@p", "@p" + bindingName);			// Replace parameter name so doesn't conflict with existing ones.
@@ -349,10 +350,10 @@ namespace Isis.ExtensionMethods.Data.Linq
 			PropertyInfo modelProperty = services != null ? services.GetType().GetProperty("Model", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.GetProperty) : null;
 
 			return string.Format("-- Context: {0}({1}) Model: {2} Build: {3}\r\n",
-			                     providerType.Name,
-			                     modeProperty != null ? modeProperty.GetValue(provider, null) : "unknown",
-			                     modelProperty != null ? modelProperty.GetValue(services, null).GetType().Name : "unknown",
-			                     "3.5.21022.8");
+				providerType.Name,
+				modeProperty != null ? modeProperty.GetValue(provider, null) : "unknown",
+				modelProperty != null ? modelProperty.GetValue(services, null).GetType().Name : "unknown",
+				"3.5.21022.8");
 		}
 	}
 }

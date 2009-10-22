@@ -2,7 +2,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
-using Isis.Web;
+using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Net
 {

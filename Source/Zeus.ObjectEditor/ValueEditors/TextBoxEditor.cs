@@ -1,8 +1,8 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Isis;
-using Isis.ExtensionMethods;
+using Zeus.BaseLibrary;
+using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.ObjectEditor.ValueEditors
 {

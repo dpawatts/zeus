@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Isis.Reflection;
 using Ninject;
+using Zeus.BaseLibrary.Reflection;
 using Zeus.Web;
 
 namespace Zeus.Engine

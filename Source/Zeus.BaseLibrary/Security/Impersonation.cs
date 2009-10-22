@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace Isis.Security
+namespace Zeus.BaseLibrary.Security
 {
 	public static class Impersonation
 	{

@@ -2,7 +2,7 @@
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Displayers;

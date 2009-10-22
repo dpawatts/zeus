@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using System.Web.UI;
 
-namespace Isis.Web.UI
+namespace Zeus.BaseLibrary.Web.UI
 {
 	public static class WebResourceUtility
 	{

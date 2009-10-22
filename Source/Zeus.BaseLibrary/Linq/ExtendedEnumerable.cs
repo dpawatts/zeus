@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace Isis.Linq
+namespace Zeus.BaseLibrary.Linq
 {
 	public static class ExtendedEnumerable
 	{

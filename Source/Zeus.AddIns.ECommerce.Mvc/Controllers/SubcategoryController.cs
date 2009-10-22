@@ -1,7 +1,7 @@
 using System;
-using Isis.Collections.Generic;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
+using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;

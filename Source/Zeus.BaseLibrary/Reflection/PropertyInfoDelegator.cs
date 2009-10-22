@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Globalization;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	/// <summary>
 	/// http://www.codeproject.com/KB/aspnet/TypedRepeater.aspx

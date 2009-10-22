@@ -1,21 +1,20 @@
 using System;
 using System.Linq;
 using System.Web.Configuration;
-using Isis.Reflection;
 using AuthenticationSection=Zeus.Configuration.AuthenticationSection;
 
 namespace Zeus.Web.Security
 {
 	public class AuthenticationContextService : IAuthenticationContextService
 	{
-		private readonly Isis.Web.IWebContext _webContext;
+		private readonly BaseLibrary.Web.IWebContext _webContext;
 		private readonly AuthenticationLocation _rootLocation;
 
-		public AuthenticationContextService(Isis.Web.IWebContext webContext, IAuthenticationContextInitializer[] authenticationContextInitializers)
+		public AuthenticationContextService(BaseLibrary.Web.IWebContext webContext, IAuthenticationContextInitializer[] authenticationContextInitializers)
 		{
 			_webContext = webContext;
 
-			AuthenticationSection authSection = WebConfigurationManager.GetSection("isis.web/authentication") as AuthenticationSection;
+			AuthenticationSection authSection = WebConfigurationManager.GetSection("zeus/authentication") as AuthenticationSection;
 			if (authSection == null)
 				authSection = new AuthenticationSection();
 			_rootLocation = authSection.ToAuthenticationLocation();

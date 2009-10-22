@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Isis.Web
+namespace Zeus.BaseLibrary.Web
 {
 	public class Url
 	{
@@ -373,7 +373,7 @@ namespace Isis.Web
 						clone.Querystring = string.Join(Amp, queries, 0, queries.Length - 1);
 					else
 						clone.Querystring = string.Join(Amp, queries, 0, i) + Amp +
-													string.Join(Amp, queries, i + 1, queries.Length - i - 1);
+						                    string.Join(Amp, queries, i + 1, queries.Length - i - 1);
 					return clone;
 				}
 			}

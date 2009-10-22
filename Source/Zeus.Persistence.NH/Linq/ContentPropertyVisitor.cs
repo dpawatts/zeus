@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Isis.ExtensionMethods;
 using NHibernate.Linq.Visitors;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 
 namespace Zeus.Persistence.NH.Linq

@@ -2,7 +2,7 @@
 using System.Web;
 using System.IO;
 
-namespace Isis.Web.Handlers
+namespace Zeus.BaseLibrary.Web.Handlers
 {
 	public class FlashVideoStreamingHandler  : IHttpHandler
 	{

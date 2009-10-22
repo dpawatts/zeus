@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
 
 namespace Zeus.Web.Security.Items

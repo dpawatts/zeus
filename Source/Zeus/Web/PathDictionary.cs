@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Isis.Collections;
+using Zeus.BaseLibrary.Collections;
 
 namespace Zeus.Web
 {

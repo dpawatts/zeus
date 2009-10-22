@@ -30,6 +30,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -261,9 +281,27 @@
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
+    <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
+    <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />
+    <Compile Include="Web\UI\WebControls\DropDownList.cs" />
+    <Compile Include="Web\UI\WebControls\ExtendedListView.cs" />
+    <Compile Include="Web\UI\WebControls\FakePropertyInfo.cs" />
     <Compile Include="Web\UI\WebControls\LoginName.cs" />
     <Compile Include="Web\UI\WebControls\LoginStatus.cs" />
     <Compile Include="Web\UI\WebControls\LoginView.cs" />
+    <Compile Include="Web\UI\WebControls\SimpleTemplateContainer.cs" />
+    <Compile Include="Web\UI\WebControls\TemplateField.cs" />
+    <Compile Include="Web\UI\WebControls\TypedGridView.cs" />
+    <Compile Include="Web\UI\WebControls\TypedGridViewControlBuilder.cs" />
+    <Compile Include="Web\UI\WebControls\TypedGridViewFakeType.cs" />
+    <Compile Include="Web\UI\WebControls\TypedGridViewRow.cs" />
+    <Compile Include="Web\UI\WebControls\TypedListView.cs" />
+    <Compile Include="Web\UI\WebControls\TypedListViewControlBuilder.cs" />
+    <Compile Include="Web\UI\WebControls\TypedListViewDataItem.cs" />
+    <Compile Include="Web\UI\WebControls\TypedListViewFakeType.cs" />
+    <Compile Include="Web\UI\WebControls\TypedTemplateField.cs" />
+    <Compile Include="Web\UI\WebControls\TypedTemplateFieldControlBuilder.cs" />
+    <Compile Include="Web\UI\WebControls\TypedTemplateFieldFakeType.cs" />
     <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
@@ -465,7 +503,6 @@
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
     <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
-    <Compile Include="Web\UI\WebControls\MenuItem.cs" />
     <Compile Include="Web\UI\WebControls\SortableCheckBoxList.cs" />
     <Compile Include="Web\UI\WebControls\TimePicker.cs" />
     <Compile Include="Web\UI\WebControls\HtmlTextBox.cs" />
@@ -517,7 +554,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
-    <Compile Include="Web\UI\WebControls\Zone.cs" />
     <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
     <Compile Include="Persistence\IItemNotifier.cs" />
@@ -560,25 +596,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\ContentDataSource.cs" />
-    <Compile Include="Web\UI\WebControls\ContentDataSourceAxis.cs" />
-    <Compile Include="Web\UI\WebControls\ContentDataSourceView.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
     <Compile Include="Web\UI\WebControls\ComboBox.cs" />
-    <Compile Include="Web\UI\WebControls\BaseContentDataSource.generic.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Web\UI\WebControls\BaseContentDataSourceView.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\UI\WebControls\DatePicker.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
-    <Compile Include="Web\UI\WebControls\CurrentItemDataSource.cs" />
-    <Compile Include="Web\UI\WebControls\CurrentItemDataSourceView.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Web\UI\WebControls\IItemView.cs" />
     <Compile Include="Web\UI\WebControls\ItemDetailView.cs">
       <SubType>Code</SubType>
@@ -591,7 +612,6 @@
     </Compile>
     <Compile Include="Web\UI\WebControls\ItemViewMode.cs" />
     <Compile Include="Web\UI\WebControls\LocallyUniqueValidator.cs" />
-    <Compile Include="Web\UI\WebControls\Menu.cs" />
     <Compile Include="Web\UI\WebControls\NameEditor.cs" />
     <Compile Include="Web\UI\WebControls\P.cs" />
     <Compile Include="Web\UI\WebControls\TabItem.cs" />

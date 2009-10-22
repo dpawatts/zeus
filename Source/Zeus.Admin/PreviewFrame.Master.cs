@@ -1,5 +1,5 @@
 ﻿using System;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Web.UI;
 
 namespace Zeus.Admin

@@ -3,8 +3,8 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Net;
 using System.Text;
-using Isis.ExtensionMethods;
 using Zeus.AddIns.ECommerce.PaymentGateways.SagePay.Configuration;
+using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 {

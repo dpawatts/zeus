@@ -1,9 +1,9 @@
 using System;
 using System.Web.Mvc;
-using Isis.Web;
 using Zeus.AddIns.Forums.ContentTypes;
 using Zeus.AddIns.Forums.Mvc.ViewModels;
 using Zeus.AddIns.Forums.Services;
+using Zeus.BaseLibrary.Web;
 using Zeus.Templates.ContentTypes;
 using Zeus.Templates.Mvc.Controllers;
 

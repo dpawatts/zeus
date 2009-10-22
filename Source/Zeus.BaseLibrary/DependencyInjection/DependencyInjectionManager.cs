@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ninject;
 
-namespace Isis.DependencyInjection
+namespace Zeus.BaseLibrary.DependencyInjection
 {
 	public class DependencyInjectionManager
 	{

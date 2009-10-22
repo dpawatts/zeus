@@ -1,10 +1,4 @@
-﻿using Isis.Web;
-using Rhino.Mocks;
-using Isis.Web.Security;
-using System.Web;
-using Isis.Web.Configuration;
-
-namespace Isis.FrameworkBlocks.WebAuthentication.Tests.Security
+﻿namespace Zeus.Tests.Web.Security
 {
 	/*[TestFixture]
 	public class AuthenticationServiceTests

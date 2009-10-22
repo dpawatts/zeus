@@ -1,5 +1,5 @@
-using Isis.ExtensionMethods;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 {

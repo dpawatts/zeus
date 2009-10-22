@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
-namespace Isis.IO
+namespace Zeus.BaseLibrary.IO
 {
 	public class StreamWithProgress : Stream
 	{

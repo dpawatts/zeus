@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Isis.Web;
 using MvcContrib.Pagination;
 using Zeus.AddIns.Forums.ContentTypes;
 using Zeus.AddIns.Forums.Mvc.ViewModels;
+using Zeus.BaseLibrary.Web;
 using Zeus.Web;
 using Zeus.Web.Mvc;
 

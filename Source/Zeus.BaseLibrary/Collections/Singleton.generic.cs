@@ -1,4 +1,4 @@
-namespace Isis.Collections
+namespace Zeus.BaseLibrary.Collections
 {
 	/// <summary>
 	/// A statically compiled "singleton" used to store objects throughout the 

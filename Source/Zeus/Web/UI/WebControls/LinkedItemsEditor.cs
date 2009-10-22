@@ -41,7 +41,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			LinkProperty linkDetail = detail as LinkProperty;
 
-			DropDownList ddl = new DropDownList { CssClass = "linkedItem", ID = ID + "_ddl_" + id };
+			System.Web.UI.WebControls.DropDownList ddl = new System.Web.UI.WebControls.DropDownList { CssClass = "linkedItem", ID = ID + "_ddl_" + id };
 			IEnumerable<ContentItem> first = ((IEnumerable) Zeus.Context.Current.Finder.Query(TypeFilterInternal)).Cast<ContentItem>();
 			IEnumerable<ContentItem> contentItems = first.ToArray().Cast<ContentItem>();
 			ddl.Items.AddRange(contentItems.Select(ci => new ListItem(ci.Title, ci.ID.ToString())).ToArray());

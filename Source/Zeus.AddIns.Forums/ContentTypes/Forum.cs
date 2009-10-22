@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Isis.Web;
-using Isis.Web.UI;
+using Zeus.BaseLibrary.Web;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Integrity;

@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.ContentProperties;
 using Zeus.Web.UI.WebControls;
+using DropDownList=System.Web.UI.WebControls.DropDownList;
 
 namespace Zeus.Design.Editors
 {

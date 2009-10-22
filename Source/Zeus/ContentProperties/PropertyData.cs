@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Isis.ExtensionMethods;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;

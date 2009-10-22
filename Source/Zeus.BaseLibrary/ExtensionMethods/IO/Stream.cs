@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Isis.ExtensionMethods.IO
+namespace Zeus.BaseLibrary.ExtensionMethods.IO
 {
 	public static class StreamExtensionMethods
 	{

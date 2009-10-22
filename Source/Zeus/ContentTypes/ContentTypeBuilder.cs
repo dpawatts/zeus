@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isis.Reflection;
+using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentProperties;
 using Zeus.Design.Displayers;
 using Zeus.Design.Editors;

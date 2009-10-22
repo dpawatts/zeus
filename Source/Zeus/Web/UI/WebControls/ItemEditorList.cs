@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.Compilation;
 using Zeus.Web.UI.HtmlControls;
 using System.Linq;
-using Isis.Linq;
 
 [assembly: WebResource("Zeus.Web.UI.WebControls.Images.add.png", "image/png")]
 [assembly: WebResource("Zeus.Web.UI.WebControls.Images.delete.png", "image/png")]
@@ -16,7 +15,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Fields
 
-		private DropDownList types;
+		private System.Web.UI.WebControls.DropDownList types;
 		private PlaceHolder itemEditorsContainer;
 		private ContentItem parentItem;
 		private List<string> addedTypes = new List<string>();
@@ -125,7 +124,7 @@ namespace Zeus.Web.UI.WebControls
 			itemEditorsContainer = new PlaceHolder();
 			updatePanel.ContentTemplateContainer.Controls.Add(itemEditorsContainer);
 
-			types = new DropDownList { ID = "ddlTypes" };
+			types = new System.Web.UI.WebControls.DropDownList { ID = "ddlTypes" };
 			AddNewItemDdl(updatePanel);
 		}
 
@@ -204,7 +203,7 @@ namespace Zeus.Web.UI.WebControls
 
 		private void AddNewItemDdl(UpdatePanel container)
 		{
-			types = new DropDownList { ID = "ddlTypes" };
+			types = new System.Web.UI.WebControls.DropDownList { ID = "ddlTypes" };
 
 			string labelText = AddNewText ?? "Add New Child";
 			container.ContentTemplateContainer.Controls.Add(new Label { Text = labelText, AssociatedControlID = types.ID, CssClass = "editorLabel" });

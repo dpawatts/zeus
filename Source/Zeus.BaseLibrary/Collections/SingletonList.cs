@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Isis.Collections
+namespace Zeus.BaseLibrary.Collections
 {
 	/// <summary>
 	/// Provides a singleton list for a certain type.

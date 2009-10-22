@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Isis.Reflection
+namespace Zeus.BaseLibrary.Reflection
 {
 	public class TypeFinder : ITypeFinder
 	{
@@ -37,7 +37,7 @@ namespace Isis.Reflection
 						loaderErrors += ", " + loaderEx.Message;
 					}
 
-					throw new IsisException("Error getting types from assembly " + assembly.FullName + loaderErrors, ex);
+					throw new Exception(string.Format("Error getting types from assembly " + assembly.FullName + loaderErrors, ex));
 				}
 			}
 			return types;

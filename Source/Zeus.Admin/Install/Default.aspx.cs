@@ -5,7 +5,7 @@ using System.Data;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI.WebControls;
-using Isis.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Installation;

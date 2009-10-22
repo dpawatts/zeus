@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Isis.ExtensionMethods.Collections
+namespace Zeus.BaseLibrary.ExtensionMethods.Collections
 {
 	public static class ICollectionExtensionMethods
 	{
