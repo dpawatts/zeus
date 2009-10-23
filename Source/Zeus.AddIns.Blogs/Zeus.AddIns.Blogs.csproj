@@ -97,6 +97,7 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -134,6 +135,25 @@
     <Compile Include="ContentTypes\Category.cs" />
     <Compile Include="ContentTypes\CategoryContainer.cs" />
     <Compile Include="Icons\Resources.cs" />
+    <Compile Include="Mvc\BlogsWebPackage.cs" />
+    <Compile Include="Mvc\Controllers\ArchiveLinksController.cs" />
+    <Compile Include="Mvc\Controllers\BlogController.cs" />
+    <Compile Include="Mvc\Controllers\BlogMonthController.cs" />
+    <Compile Include="Mvc\Controllers\BlogYearController.cs" />
+    <Compile Include="Mvc\Controllers\CommentController.cs" />
+    <Compile Include="Mvc\Controllers\PingbackController.cs" />
+    <Compile Include="Mvc\Controllers\PostController.cs" />
+    <Compile Include="Mvc\Controllers\RecentPostsController.cs" />
+    <Compile Include="Mvc\Controllers\RecentPostsSummaryController.cs" />
+    <Compile Include="Mvc\ViewModels\ArchiveLinksViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\BlogMonthViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\BlogViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\BlogYearViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CommentViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PingbackViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\RecentPostsSummaryViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\RecentPostsViewModel.cs" />
     <Compile Include="Plugins\ImportAtom.aspx.cs">
       <DependentUpon>ImportAtom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -180,6 +200,10 @@
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus %28Core\Zeus%29</Name>
@@ -218,6 +242,19 @@
     <Content Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ArchiveLinks\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\BlogMonth\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\BlogYear\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Blog\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Comment\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Pingback\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Post\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\RecentPostsSummary\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\RecentPosts\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Shared\PostListing.spark" />
+    <EmbeddedResource Include="Mvc\Views\Shared\PreviousPosts.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

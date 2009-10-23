@@ -75,6 +75,19 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Argotic.Common">
+      <HintPath>..\..\Libraries\Argotic\Argotic.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Argotic.Core">
+      <HintPath>..\..\Libraries\Argotic\Argotic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Argotic.Extensions">
+      <HintPath>..\..\Libraries\Argotic\Argotic.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -93,6 +106,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -113,6 +128,16 @@
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
+    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Form.cs" />
+    <Compile Include="ContentTypes\Forms\FormPage.cs" />
+    <Compile Include="ContentTypes\Forms\IQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Option.cs" />
+    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\Question.cs" />
+    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
+    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="ContentTypes\Tag.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />
@@ -132,7 +157,45 @@
     <Compile Include="ContentTypes\StartPage.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
+    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Icons\Resources.cs" />
+    <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
+    <Compile Include="Mvc\Controllers\FileController.cs" />
+    <Compile Include="Mvc\Controllers\Forms\FormPageController.cs" />
+    <Compile Include="Mvc\Controllers\News\LatestNewsSummaryController.cs" />
+    <Compile Include="Mvc\Controllers\News\NewsContainerController.cs" />
+    <Compile Include="Mvc\Controllers\News\NewsItemController.cs" />
+    <Compile Include="Mvc\Controllers\PageController.cs" />
+    <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
+    <Compile Include="Mvc\Controllers\RssFeedController.cs" />
+    <Compile Include="Mvc\Controllers\SitemapController.cs" />
+    <Compile Include="Mvc\Controllers\StartPageController.cs" />
+    <Compile Include="Mvc\Controllers\TagCloudController.cs" />
+    <Compile Include="Mvc\Controllers\TagController.cs" />
+    <Compile Include="Mvc\Controllers\TagGroupController.cs" />
+    <Compile Include="Mvc\Controllers\TextItemController.cs" />
+    <Compile Include="Mvc\Controllers\WidgetController.generic.cs" />
+    <Compile Include="Mvc\Controllers\ZeusController.generic.cs" />
+    <Compile Include="Mvc\Html\FileExtensions.cs" />
+    <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
+    <Compile Include="Mvc\Html\ImageExtensions.cs" />
+    <Compile Include="Mvc\Html\NavigationExtensions.cs" />
+    <Compile Include="Mvc\Html\ValidationExtensions.cs" />
+    <Compile Include="Mvc\Html\WidgetExtensions.cs" />
+    <Compile Include="Mvc\Html\WidgetHelper.cs" />
+    <Compile Include="Mvc\RssResult.cs" />
+    <Compile Include="Mvc\TemplatesWebPackage.cs" />
+    <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\LatestNewsSummaryViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\NewsItemViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\StartPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\TagCloudViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\TagGroupViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\TagViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\TextItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoUtility.cs" />
     <Compile Include="Services\TaggingDefinitionAppender.cs" />
@@ -152,6 +215,10 @@
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
@@ -208,6 +275,22 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\FeedLink\Header.spark" />
+    <EmbeddedResource Include="Mvc\Views\FeedLink\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\FormPage\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\FormPage\Submit.spark" />
+    <EmbeddedResource Include="Mvc\Views\LatestNewsSummary\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\NewsItem\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Sitemap\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\StartPage\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\TagCloud\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\TagGroup\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Tag\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\TextItem\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

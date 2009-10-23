@@ -75,6 +75,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -85,6 +89,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -110,6 +115,20 @@
     <Compile Include="ContentTypes\Post.cs" />
     <Compile Include="ContentTypes\Topic.cs" />
     <Compile Include="ForumModule.cs" />
+    <Compile Include="Mvc\Controllers\BaseForumController.cs" />
+    <Compile Include="Mvc\Controllers\ForumController.cs" />
+    <Compile Include="Mvc\Controllers\MemberController.cs" />
+    <Compile Include="Mvc\Controllers\MessageBoardController.cs" />
+    <Compile Include="Mvc\Controllers\TopicController.cs" />
+    <Compile Include="Mvc\ForumsWebPackage.cs" />
+    <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
+    <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForumViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\MemberViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\MessageBoardPostViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\MessageBoardSearchResultsViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\MessageBoardViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\TopicViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ForumService.cs" />
     <Compile Include="Services\IForumService.cs" />
@@ -237,6 +256,25 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Mvc\Content\css\forum.css" />
+    <Content Include="Mvc\Content\images\avatarBig.gif" />
+    <Content Include="Mvc\Content\images\door.gif" />
+    <Content Include="Mvc\Content\images\drawingPin.gif" />
+    <Content Include="Mvc\Content\images\forumLogo.gif" />
+    <Content Include="Mvc\Content\images\newPost.gif" />
+    <Content Include="Mvc\Content\images\post.gif" />
+    <Content Include="Mvc\Content\images\postBg.gif" />
+    <Content Include="Mvc\Content\images\sticky.gif" />
+    <Content Include="Mvc\Content\images\trash.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\Forum\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\MessageBoard\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Shared\ForumHeader.spark" />
+    <EmbeddedResource Include="Mvc\Views\Topic\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

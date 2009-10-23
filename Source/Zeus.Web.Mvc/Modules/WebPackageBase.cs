@@ -52,12 +52,12 @@ namespace Zeus.Web.Mvc.Modules
 			routes.Add(new Route("content/{area}/{*resource}",
 				new RouteValueDictionary(),
 				new RouteValueDictionary(new { area = areaName }),
-				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Content")));
+				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Mvc.Content")));
 		}
 
 		public void RegisterStandardViewFolders(ICollection<IViewEngine> viewEngines, Assembly assembly, string areaName)
 		{
-			var viewFolder = new EmbeddedViewFolder(assembly, assembly.GetName().Name + ".Views");
+			var viewFolder = new EmbeddedViewFolder(assembly, assembly.GetName().Name + ".Mvc.Views");
 			var sparkViewFactory = viewEngines.OfType<SparkViewFactory>().First();
 
 			sparkViewFactory.ViewFolder = sparkViewFactory.ViewFolder

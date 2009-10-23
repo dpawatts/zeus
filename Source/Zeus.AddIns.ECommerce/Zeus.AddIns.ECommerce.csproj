@@ -65,6 +65,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=1.1.0.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -88,6 +96,7 @@
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -125,6 +134,26 @@
     <Compile Include="Design\Editors\VariationConfigurationEditorAttribute.cs" />
     <Compile Include="ECommerceModule.cs" />
     <Compile Include="Icons\Resources.cs" />
+    <Compile Include="Mvc\Controllers\CategoryController.cs" />
+    <Compile Include="Mvc\Controllers\CheckoutPageController.cs" />
+    <Compile Include="Mvc\Controllers\ProductController.cs" />
+    <Compile Include="Mvc\Controllers\SearchResultsPageController.cs" />
+    <Compile Include="Mvc\Controllers\ShopController.cs" />
+    <Compile Include="Mvc\Controllers\ShoppingBasketPageController.cs" />
+    <Compile Include="Mvc\Controllers\SubcategoryController.cs" />
+    <Compile Include="Mvc\ECommerceWebPackage.cs" />
+    <Compile Include="Mvc\Html\ShoppingBasketExtensions.cs" />
+    <Compile Include="Mvc\ViewModels\CategoryNoSubcategoriesViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CategoryViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CheckoutPageFailedViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CheckoutPageFormModel.cs" />
+    <Compile Include="Mvc\ViewModels\CheckoutPageReceiptViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CheckoutPageSummaryViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CheckoutPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ProductViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\SearchResultsPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ShoppingBasketPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\SubcategoryViewModel.cs" />
     <Compile Include="PaymentGateways\PaymentCardType.cs" />
     <Compile Include="PaymentGateways\PaymentResponse.cs" />
     <Compile Include="Plugins\ViewOrder.aspx.cs">
@@ -164,6 +193,10 @@
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
+      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
+      <Name>Zeus.Web.Mvc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.Web.TextTemplating\Zeus.Web.TextTemplating.csproj">
       <Project>{A94D022C-E5B7-45F9-8FDD-2B0EF4D7F31B}</Project>
