@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.XPath;
 using Ninject;
 using Zeus.ContentTypes;
+using Zeus.Web;
 
 namespace Zeus.Serialization
 {
@@ -87,7 +88,7 @@ namespace Zeus.Serialization
 			item.Updated = ToNullableDateTime(attributes["updated"]).Value;
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
 			if (!string.IsNullOrEmpty(attributes["zoneName"]))
-				item.ZoneName = attributes["zoneName"];
+				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
 			HandleTranslationRelation(item, attributes["translationOf"], journal);
 			if (!string.IsNullOrEmpty(attributes["language"]))
 				item.Language = attributes["language"];

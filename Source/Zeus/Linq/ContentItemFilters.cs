@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using Zeus.Security;
+using Zeus.Web;
 
 namespace Zeus.Linq
 {
@@ -22,25 +23,25 @@ namespace Zeus.Linq
 		}
 
 		public static IQueryable<T> InZone<T>(this IQueryable<T> source, string zoneName)
-			where T : ContentItem
+			where T : WidgetContentItem
 		{
 			return source.Where(ci => ci.ZoneName == zoneName);
 		}
 
 		public static IEnumerable<T> InZone<T>(this IEnumerable<T> source, string zoneName)
-			where T : ContentItem
+			where T : WidgetContentItem
 		{
 			return source.Where(ci => ci.ZoneName == zoneName);
 		}
 
 		public static IEnumerable<T> InZones<T>(this IEnumerable<T> source, params string[] zoneNames)
-			where T : ContentItem
+			where T : WidgetContentItem
 		{
 			return source.Where(ci => zoneNames.Any(zn => ci.ZoneName == zn));
 		}
 
 		public static IEnumerable<T> InZones<T>(this IEnumerable<T> source)
-			where T : ContentItem
+			where T : WidgetContentItem
 		{
 			return source.Where(ci => !string.IsNullOrEmpty(ci.ZoneName));
 		}

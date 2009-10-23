@@ -5,6 +5,7 @@ using Zeus.ContentTypes;
 using System.Text;
 using System.Collections.Generic;
 using Zeus.Configuration;
+using Zeus.Web;
 
 namespace Zeus.Persistence.NH
 {
@@ -19,6 +20,10 @@ namespace Zeus.Persistence.NH
 </hibernate-mapping>
 ";
 		private const string _classFormat = @"<subclass name=""{0}"" extends=""{1}"" discriminator-value=""{2}"" lazy=""false""/>";
+
+		private const string _widgetClassFormat = @"<subclass name=""{0}"" extends=""{1}"" discriminator-value=""{2}"" lazy=""false"">
+				<property name=""ZoneName"" access=""property"" length=""50"" />
+			</subclass>";
 
 		public NHibernate.Cfg.Configuration Configuration
 		{
@@ -58,7 +63,10 @@ namespace Zeus.Persistence.NH
 			// For each definition, add a <subclass> element to mapping file.
 			StringBuilder mappings = new StringBuilder();
 			foreach (Type type in EnumerateDefinedTypes())
-				mappings.AppendFormat(_classFormat, GetName(type), GetName(type.BaseType), GetDiscriminator(type));
+			{
+				string format = (typeof(WidgetContentItem).IsAssignableFrom(type)) ? _widgetClassFormat : _classFormat;
+				mappings.AppendFormat(format, GetName(type), GetName(type.BaseType), GetDiscriminator(type));
+			}
 			_configuration.AddXml(string.Format(_mappingFormat, mappings));
 		}
 

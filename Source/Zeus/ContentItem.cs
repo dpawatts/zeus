@@ -43,10 +43,10 @@ namespace Zeus
 
 		#region Public Properties (persisted)
 
-		/// <summary>Gets or sets zone name which is associated with data items and their placement on a page.</summary>
+		/*/// <summary>Gets or sets zone name which is associated with data items and their placement on a page.</summary>
 		// TODO: Remove this and put it in WidgetContentItem
 		[Copy]
-		public virtual string ZoneName { get; set; }
+		public virtual string ZoneName { get; set; }*/
 
 		/// <summary>Gets or sets item ID.</summary>
 		public virtual int ID { get; set; }
@@ -619,25 +619,6 @@ namespace Zeus
 				return (TAncestor) contentItem;
 
 			return FindFirstAncestorRecursive<TAncestor>(contentItem.Parent);
-		}
-
-		/// <summary>Gets children the current user is allowed to access belonging to a certain zone, i.e. get only children with a certain zone name. </summary>
-		/// <param name="childZoneName">The name of the zone.</param>
-		/// <returns>A list of items that have the specified zone name.</returns>
-		/// <remarks>This method is used by Zeus when when non-page items are added to a zone on a page and in edit mode when displaying which items are placed in a certain zone. Keep this in mind when overriding this method.</remarks>
-		public virtual IEnumerable<ContentItem> GetChildren(string childZoneName)
-		{
-			return GetChildren().Authorized(Operations.Read).InZone(childZoneName);
-		}
-
-		public virtual IEnumerable<ContentItem> GetChildren(params string[] zoneNames)
-		{
-			return GetChildren().Authorized(Operations.Read).InZones(zoneNames);
-		}
-
-		public virtual IEnumerable<ContentItem> GetChildrenInZones()
-		{
-			return GetChildren().Authorized(Operations.Read).InZones();
 		}
 
 		/// <summary>

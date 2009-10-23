@@ -217,7 +217,7 @@ namespace Zeus.Admin.Plugins.EditItem
 				ContentItem parentItem = Zeus.Context.Current.Resolve<Navigator>().Navigate(SelectedItem.Path);
 				ContentItem contentItem = Zeus.Context.Current.ContentTypes.CreateInstance(CurrentItemType, parentItem);
 				contentItem.Language = SelectedLanguageCode;
-				contentItem.ZoneName = Page.Request["zoneName"];
+				((WidgetContentItem) contentItem).ZoneName = Page.Request["zoneName"];
 				e.AffectedItem = contentItem;
 			}
 		}

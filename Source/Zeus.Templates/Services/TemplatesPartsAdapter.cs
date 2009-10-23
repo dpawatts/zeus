@@ -12,9 +12,9 @@ namespace Zeus.Templates.Services
 	[Controls(typeof(BasePage))]
 	public class TemplatesPartsAdapter : PartsAdapter
 	{
-		public override IEnumerable<ContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
+		public override IEnumerable<WidgetContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
 		{
-			List<ContentItem> items = base.GetItemsInZones(parentItem, zoneNames).ToList();
+			List<WidgetContentItem> items = base.GetItemsInZones(parentItem, zoneNames).ToList();
 			ContentItem grandParentItem = parentItem;
 			foreach (string zoneName in zoneNames)
 				if (zoneName.StartsWith("Recursive") && grandParentItem is BasePage)

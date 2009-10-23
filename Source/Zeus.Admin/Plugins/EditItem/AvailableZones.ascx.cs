@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using Zeus.BaseLibrary.Web;
+using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
@@ -43,10 +44,10 @@ namespace Zeus.Admin.Plugins.EditItem
 			return Zeus.Context.Current.AdminManager.GetEditExistingItemUrl((ContentItem) dataItem);
 		}
 
-		protected IEnumerable<ContentItem> GetItemsInZone(object dataItem)
+		protected IEnumerable<WidgetContentItem> GetItemsInZone(object dataItem)
 		{
 			Integrity.AvailableZoneAttribute a = (Integrity.AvailableZoneAttribute) dataItem;
-			return CurrentItem.GetChildren(a.ZoneName);
+			return Zeus.Context.Current.ContentManager.GetWidgets(CurrentItem, a.ZoneName);
 		}
 
 		protected string GetZoneString(string key)

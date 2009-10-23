@@ -57,7 +57,8 @@ namespace Zeus.Serialization
 			itemElement.WriteAttribute("name", item.Name);
 			itemElement.WriteAttribute("parent", item.Parent != null ? item.Parent.ID.ToString() : string.Empty);
 			itemElement.WriteAttribute("title", item.Title);
-			itemElement.WriteAttribute("zoneName", item.ZoneName);
+			if (item is WidgetContentItem)
+				itemElement.WriteAttribute("zoneName", ((WidgetContentItem) item).ZoneName);
 			itemElement.WriteAttribute("created", item.Created);
 			itemElement.WriteAttribute("updated", item.Updated);
 			itemElement.WriteAttribute("published", item.Published);

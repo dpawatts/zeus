@@ -48,9 +48,6 @@ namespace Zeus.Design.Editors
 		/// <summary>The name that will be assigned to new child items.</summary>
 		//public string DefaultChildName { get; set; }
 
-		/// <summary>The zone name that will be assigned to new child items.</summary>
-		public string DefaultChildZoneName { get; set; }
-
 		protected virtual IContentTypeManager Definitions
 		{
 			get { return Context.ContentTypes; }
@@ -139,7 +136,7 @@ namespace Zeus.Design.Editors
 			catch (KeyNotFoundException ex)
 			{
 				Trace.TraceWarning(
-					"EditableItemAttribute.CreateChild: No item of the type {0} was found among the item definitions.", childItemType);
+					"ChildEditorAttribute.CreateChild: No item of the type {0} was found among the item definitions.", childItemType);
 				throw new ZeusException(
 					string.Format(
 						"No item of the type {0} was found among item definitions. This could happen if the referenced item type an abstract class or a class that doesn't inherit from Zeus.ContentItem.",
@@ -147,7 +144,6 @@ namespace Zeus.Design.Editors
 					ex);
 			}
 			child.Name = Name;
-			child.ZoneName = DefaultChildZoneName;
 			child.AddTo(item);
 			return child;
 		}

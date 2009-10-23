@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Zeus.Web;
 using Zeus.Web.Mvc.Html;
 using Zeus.Web.UI;
 
@@ -20,10 +21,10 @@ namespace Zeus.Templates.Mvc.Html
 
 		protected string[] ZoneNames { get; set; }
 
-		protected override IEnumerable<ContentItem> GetItems()
+		protected override IEnumerable<WidgetContentItem> GetItems()
 		{
 			if (PartsAdapter == null)
-				return CurrentItem.GetChildren(ZoneNames);
+				return Engine.ContentManager.GetWidgets(CurrentItem, ZoneNames);
 
 			return PartsAdapter.GetItemsInZones(CurrentItem, ZoneNames);
 		}

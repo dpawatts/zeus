@@ -17,12 +17,12 @@ namespace Zeus.Web.Parts
 		/// <param name="parentItem">The item whose items to get.</param>
 		/// <param name="zoneNames">The zone(s) in which the items should be contained.</param>
 		/// <returns>A list of items in the zone.</returns>
-		public virtual IEnumerable<ContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
+		public virtual IEnumerable<WidgetContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
 		{
 			if (parentItem == null)
-				return new List<ContentItem>();
+				return new List<WidgetContentItem>();
 
-			return parentItem.GetChildren(zoneNames);
+			return Engine.ContentManager.GetWidgets(parentItem, zoneNames);
 		}
 
 		/// <summary>Retrieves allowed item definitions.</summary>

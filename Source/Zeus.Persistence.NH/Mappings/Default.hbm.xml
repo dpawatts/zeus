@@ -88,7 +88,7 @@
 		<property name="Expires"	  access="property" />
 
 		<property name="Name"       access="property" length="250" />
-		<property name="ZoneName"	  access="property" length="50" />
+
 		<property name="Title"		  access="property" length="250" />
 		<property name="SortOrder"	access="property" not-null="true" />
 		<property name="Visible"	  access="property" not-null="true" />

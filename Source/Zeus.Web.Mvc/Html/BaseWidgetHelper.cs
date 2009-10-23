@@ -54,6 +54,6 @@ namespace Zeus.Web.Mvc.Html
 			return partialResult.ToString();
 		}
 
-		protected abstract IEnumerable<ContentItem> GetItems();
+		protected abstract IEnumerable<WidgetContentItem> GetItems();
 	}
 }

@@ -19,10 +19,10 @@ namespace Zeus.Web.Mvc.Html
 
 		protected string ZoneName { get; set; }
 
-		protected override IEnumerable<ContentItem> GetItems()
+		protected override IEnumerable<WidgetContentItem> GetItems()
 		{
 			if (PartsAdapter == null)
-				return CurrentItem.GetChildren(ZoneName);
+				return Engine.ContentManager.GetWidgets(CurrentItem, ZoneName);
 
 			return PartsAdapter.GetItemsInZones(CurrentItem, ZoneName);
 		}

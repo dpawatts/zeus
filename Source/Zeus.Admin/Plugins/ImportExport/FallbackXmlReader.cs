@@ -8,6 +8,7 @@ using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Engine;
 using Zeus.Security;
+using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.ImportExport
 {
@@ -136,7 +137,7 @@ namespace Zeus.Admin.Plugins.ImportExport
 			item.Updated = Convert.ToDateTime(attributes["updated"]);
 			item.Visible = Convert.ToBoolean(attributes["visible"]);
 			if (!string.IsNullOrEmpty(attributes["zoneName"]))
-				item.ZoneName = attributes["zoneName"];
+				((WidgetContentItem) item).ZoneName = attributes["zoneName"];
 			if (!string.IsNullOrEmpty(attributes["language"]))
 				item.Language = attributes["language"];
 		}

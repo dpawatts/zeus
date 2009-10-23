@@ -191,6 +191,7 @@
     <Compile Include="Configuration\SiteElementCollection.cs" />
     <Compile Include="Configuration\UserElement.cs" />
     <Compile Include="Configuration\VersioningElement.cs" />
+    <Compile Include="ContentManager.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
     <Compile Include="ContentProperties\IntegerPropertyDataTypeAttribute.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Design\Displayers\ImageDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\ImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
+    <Compile Include="IContentManager.cs" />
     <Compile Include="Installation\Migrations\1_AddTables.cs" />
     <Compile Include="Installation\Migrations\MigrationExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -250,6 +252,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="Web\PageContentItem.cs" />
     <Compile Include="Web\Security\AuthenticationContextService.cs" />
     <Compile Include="Web\Security\AuthenticationEventArgs.cs" />
     <Compile Include="Web\Security\AuthenticationLocation.cs" />
@@ -302,6 +305,7 @@
     <Compile Include="Web\UI\WebControls\TypedTemplateField.cs" />
     <Compile Include="Web\UI\WebControls\TypedTemplateFieldControlBuilder.cs" />
     <Compile Include="Web\UI\WebControls\TypedTemplateFieldFakeType.cs" />
+    <Compile Include="Web\WidgetContentItem.cs" />
     <Compile Include="ZeusEmbeddedResourcePackage.cs" />
     <Compile Include="Engine\AbstractContentAdapter.cs" />
     <Compile Include="Engine\ContentAdapterProvider.cs" />
@@ -337,7 +341,6 @@
     <Compile Include="Net\Mail\IMailSender.cs" />
     <Compile Include="Net\Mail\SmtpMailSender.cs" />
     <Compile Include="Net\Mail\StaticMailSender.cs" />
-    <Compile Include="ObjectEditor\Editors\PropertyEditor.cs" />
     <Compile Include="Persistence\CopyAttribute.cs" />
     <Compile Include="Persistence\IVersionManager.cs" />
     <Compile Include="Persistence\NotVersionableAttribute.cs" />
@@ -489,12 +492,6 @@
     <Compile Include="Web\Security\CredentialRepository.cs" />
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
-    <Compile Include="Web\UI\ContentUserControl.generic.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web\UI\ContentUserControl.generic2.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Web\UI\FieldSetAttribute.cs" />
     <Compile Include="Web\UI\WebControls\Breadcrumbs.cs" />
     <Compile Include="Web\UI\WebControls\BreadcrumbItem.cs" />
@@ -586,9 +583,6 @@
     <Compile Include="Web\PageNotFoundEventArgs.cs" />
     <Compile Include="Web\TemplateNotFoundException.cs" />
     <Compile Include="Web\Tree.cs" />
-    <Compile Include="Web\UI\ContentPage.generic.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Web\UI\Control.extensions.cs" />
     <Compile Include="Web\UI\HtmlControls\HtmlFieldSet.cs" />
     <Compile Include="Web\UI\IContentItemContainer.cs" />
@@ -655,10 +649,6 @@
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zeus.ObjectEditor\Zeus.ObjectEditor.csproj">
-      <Project>{06AC1AC0-3061-4078-8890-9017A016264F}</Project>
-      <Name>Zeus.ObjectEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
