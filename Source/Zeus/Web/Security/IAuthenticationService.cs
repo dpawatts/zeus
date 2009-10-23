@@ -1,4 +1,5 @@
 using System.Web;
+using System.Web.Security;
 
 namespace Zeus.Web.Security
 {
@@ -9,9 +10,9 @@ namespace Zeus.Web.Security
 		bool AccessingLoginPage();
 		void RedirectFromLoginPage(string userName, bool createPersistentCookie);
 		void SignOut();
-		AuthenticationTicket Decrypt(string encryptedTicket);
-		string Encrypt(AuthenticationTicket ticket);
-		AuthenticationTicket ExtractTicketFromCookie();
+		FormsAuthenticationTicket Decrypt(string encryptedTicket);
+		string Encrypt(FormsAuthenticationTicket ticket);
+		FormsAuthenticationTicket ExtractTicketFromCookie();
 
 		/// <summary>
 		/// 
@@ -19,9 +20,9 @@ namespace Zeus.Web.Security
 		/// <param name="ticket"></param>
 		/// <param name="cookie">The existing cookie. Can be null if cookie is being created for the first time.</param>
 		/// <returns></returns>
-		void CreateOrUpdateCookieFromTicket(AuthenticationTicket ticket, HttpCookie cookie);
+		void CreateOrUpdateCookieFromTicket(FormsAuthenticationTicket ticket, HttpCookie cookie);
 
-		AuthenticationTicket RenewTicketIfOld(AuthenticationTicket old);
+		FormsAuthenticationTicket RenewTicketIfOld(FormsAuthenticationTicket old);
 		void SetAuthCookie(string userName, bool createPersistentCookie);
 		string GetLoginPage(string extraQueryString, bool reuseReturnUrl);
 

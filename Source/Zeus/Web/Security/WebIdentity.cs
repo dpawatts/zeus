@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Security.Principal;
+using System.Web.Security;
 
 namespace Zeus.Web.Security
 {
 	[Serializable]
 	public class WebIdentity : IIdentity
 	{
-		public WebIdentity(AuthenticationTicket ticket)
+		public WebIdentity(FormsAuthenticationTicket ticket)
 		{
 			this.Ticket = ticket;
 		}
@@ -26,7 +27,7 @@ namespace Zeus.Web.Security
 			get { return this.Ticket.Name; }
 		}
 
-		public AuthenticationTicket Ticket
+		public FormsAuthenticationTicket Ticket
 		{
 			get;
 			private set;

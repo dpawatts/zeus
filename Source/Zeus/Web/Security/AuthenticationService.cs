@@ -5,6 +5,7 @@ using Zeus.BaseLibrary.ExtensionMethods.Collections;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Properties;
+using System.Web.Security;
 
 namespace Zeus.Web.Security
 {
@@ -139,75 +140,19 @@ namespace Zeus.Web.Security
 
 		#region AuthCookie methods
 
-		public AuthenticationTicket Decrypt(string encryptedTicket)
+		public FormsAuthenticationTicket Decrypt(string encryptedTicket)
 		{
-			if (string.IsNullOrEmpty(encryptedTicket) || encryptedTicket.Length > 0x1000)
-				throw new ArgumentException(string.Format(Resources.WebSecurityInvalidArgumentValue, "encryptedTicket"));
-
-			byte[] buf = null;
-			if (encryptedTicket.Length % 2 == 0)
-			{
-				try
-				{
-					buf = MachineKeySectionWrapper.HexStringToByteArray(encryptedTicket);
-				}
-// ReSharper disable EmptyGeneralCatchClause
-				catch
-// ReSharper restore EmptyGeneralCatchClause
-				{
-				}
-			}
-
-			if (buf.IsNullOrEmpty())
-				throw new ArgumentException(string.Format(Resources.WebSecurityInvalidArgumentValue, "encryptedTicket"));
-
-// ReSharper disable PossibleNullReferenceException
-			buf = MachineKeySectionWrapper.EncryptOrDecryptData(false, buf, null, 0, buf.Length);
-// ReSharper restore PossibleNullReferenceException
-			if (buf == null)
-				return null;
-
-			int length = buf.Length;
-			if (buf.Length <= 20)
-				return null;
-			length -= 20;
-			byte[] buffer2 = MachineKeySectionWrapper.HashData(buf, null, 0, length);
-			if (buffer2 == null)
-				return null;
-			if (buffer2.Length != 20)
-				return null;
-			for (int i = 0; i < 20; i++)
-				if (buffer2[i] != buf[length + i])
-					return null;
-			return buf.ToDeserializedObject<AuthenticationTicket>();
+			return FormsAuthentication.Decrypt(encryptedTicket);
 		}
 
-		public string Encrypt(AuthenticationTicket ticket)
+		public string Encrypt(FormsAuthenticationTicket ticket)
 		{
-			if (ticket == null)
-				throw new ArgumentNullException("ticket");
-
-			byte[] buf = ticket.ToSerializedBytes();
-			if (buf == null)
-				return null;
-
-			byte[] src = MachineKeySectionWrapper.HashData(buf, null, 0, buf.Length);
-			if (src == null)
-				return null;
-
-			byte[] dst = new byte[src.Length + buf.Length];
-			Buffer.BlockCopy(buf, 0, dst, 0, buf.Length);
-			Buffer.BlockCopy(src, 0, dst, buf.Length, src.Length);
-			buf = dst;
-
-			buf = MachineKeySectionWrapper.EncryptOrDecryptData(true, buf, null, 0, buf.Length);
-
-			return MachineKeySectionWrapper.ByteArrayToHexString(buf, 0);
+			return FormsAuthentication.Encrypt(ticket);
 		}
 
-		public AuthenticationTicket ExtractTicketFromCookie()
+		public FormsAuthenticationTicket ExtractTicketFromCookie()
 		{
-			AuthenticationTicket ticket = null;
+			FormsAuthenticationTicket ticket = null;
 			string encryptedTicket = null;
 			HttpCookie cookie = _webContext.Request.Cookies[_config.Name];
 			if (cookie != null)
@@ -238,7 +183,7 @@ namespace Zeus.Web.Security
 			if (userName == null)
 				userName = string.Empty;
 
-			AuthenticationTicket ticket = new AuthenticationTicket(1, userName,
+			FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, userName,
 				DateTime.Now, DateTime.Now.AddMinutes(_config.Timeout.TotalMinutes),
 				createPersistentCookie, string.Empty, _config.CookiePath);
 
@@ -251,7 +196,7 @@ namespace Zeus.Web.Security
 		/// <param name="ticket"></param>
 		/// <param name="cookie">The existing cookie. Can be null if cookie is being created for the first time.</param>
 		/// <returns></returns>
-		public void CreateOrUpdateCookieFromTicket(AuthenticationTicket ticket, HttpCookie cookie)
+		public void CreateOrUpdateCookieFromTicket(FormsAuthenticationTicket ticket, HttpCookie cookie)
 		{
 			string cookieValue = Encrypt(ticket);
 			if (string.IsNullOrEmpty(cookieValue))
@@ -273,7 +218,7 @@ namespace Zeus.Web.Security
 			_webContext.Response.Cookies.Add(cookie);
 		}
 
-		public AuthenticationTicket RenewTicketIfOld(AuthenticationTicket old)
+		public FormsAuthenticationTicket RenewTicketIfOld(FormsAuthenticationTicket old)
 		{
 			if (old == null)
 				return null;
@@ -284,7 +229,7 @@ namespace Zeus.Web.Security
 			if (span2 > span)
 				return old;
 
-			return new AuthenticationTicket(old.Version, old.Name, now, now + (old.Expiration - old.IssueDate), old.IsPersistent, old.UserData, old.CookiePath);
+			return new FormsAuthenticationTicket(old.Version, old.Name, now, now + (old.Expiration - old.IssueDate), old.IsPersistent, old.UserData, old.CookiePath);
 		}
 
 		public void SetAuthCookie(string userName, bool createPersistentCookie)

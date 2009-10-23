@@ -2,6 +2,7 @@
 using System.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
+using System.Web.Security;
 
 namespace Zeus.Web.Security
 {
@@ -81,7 +82,7 @@ namespace Zeus.Web.Security
 				return;
 			}
 
-			AuthenticationTicket tOld;
+			FormsAuthenticationTicket tOld;
 			try
 			{
 				tOld = CurrentAuthenticationService.ExtractTicketFromCookie();
@@ -94,7 +95,7 @@ namespace Zeus.Web.Security
 			if (tOld == null || tOld.Expired)
 				return;
 
-			AuthenticationTicket ticket = tOld;
+			FormsAuthenticationTicket ticket = tOld;
 			if (CurrentAuthenticationService.Config.SlidingExpiration)
 				ticket = CurrentAuthenticationService.RenewTicketIfOld(tOld);
 
