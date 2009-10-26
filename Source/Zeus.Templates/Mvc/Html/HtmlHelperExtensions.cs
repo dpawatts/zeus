@@ -4,9 +4,14 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public static class HtmlHelperExtensions
 	{
-		public static string Label(this HtmlHelper html, string @for, string text)
+		public static string Label(this HtmlHelper html, string @for, string text, bool required = false)
 		{
-			return string.Format(@"<label for=""{0}"">{1}</label>", @for.Replace(".", "_"), text);
+			string format = @"<label for=""{0}"">{1}";
+			if (required)
+				format += "<span>*</span>";
+			format += "</label>";
+
+			return string.Format(format, @for.Replace(".", "_"), text);
 		}
 
 		public static string PropertyOrDefault(this HtmlHelper html, ContentItem contentItem, string propertyName, string fallbackPropertyName)

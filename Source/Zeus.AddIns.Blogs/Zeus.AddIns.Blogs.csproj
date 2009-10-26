@@ -209,7 +209,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
-      <Name>Zeus %28Core\Zeus%29</Name>
+      <Name>Zeus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
