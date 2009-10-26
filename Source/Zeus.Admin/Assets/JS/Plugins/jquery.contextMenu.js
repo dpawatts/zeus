@@ -16,7 +16,6 @@
 //
 if (jQuery) (function($) {
 	$.extend($.fn, {
-
 		contextMenu: function(o, callback) {
 			// Defaults
 			if (o.menuCallback == undefined) return false;

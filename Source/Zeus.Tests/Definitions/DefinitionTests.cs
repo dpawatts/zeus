@@ -11,7 +11,7 @@ namespace Zeus.Tests.Definitions
 	{
 		private ContentTypeManager _definitionManager;
 
-		[TestMethod]
+		[TestInitialize]
 		public void SetUp()
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();

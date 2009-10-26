@@ -1,4 +1,6 @@
-﻿Ext.namespace('Ext.ux.zeus');
+﻿/// <reference assembly="Coolite.Ext.Web" name="Coolite.Ext.Web.Build.Resources.Coolite.coolite.intellisense.js" />
+
+Ext.namespace('Ext.ux.zeus');
 
 Ext.ux.zeus.DeleteConfirmation = function()
 {
