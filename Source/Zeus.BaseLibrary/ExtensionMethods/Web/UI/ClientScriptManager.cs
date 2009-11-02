@@ -9,6 +9,11 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Web.UI
 	{
 		public static void RegisterCssInclude(this ClientScriptManager clientScriptManager, string cssUrl)
 		{
+			RegisterCssInclude(clientScriptManager, cssUrl, ResourceInsertPosition.HeaderTop);
+		}
+
+		public static void RegisterCssInclude(this ClientScriptManager clientScriptManager, string cssUrl, ResourceInsertPosition position)
+		{
 			if (cssUrl.StartsWith("~"))
 				cssUrl = VirtualPathUtility.ToAbsolute(cssUrl);
 
@@ -21,9 +26,22 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Web.UI
 				link.Attributes["rel"] = "stylesheet";
 				link.Attributes["title"] = "Default Style";
 
-				int index = (int)(page.Items["__CssResourceIndex"] ?? 0);
-				page.Header.Controls.AddAt(index, link);
-				page.Items["__CssResourceIndex"] = ++index;
+				switch (position)
+				{
+					case ResourceInsertPosition.HeaderTop:
+						{
+							int index = (int)(page.Items["__CssResourceIndex"] ?? 0);
+							page.Header.Controls.AddAt(index, link);
+							page.Items["__CssResourceIndex"] = ++index;
+						}
+						break;
+					case ResourceInsertPosition.HeaderBottom:
+						page.Header.Controls.Add(link);
+						break;
+					case ResourceInsertPosition.BodyBottom:
+						page.Form.Controls.Add(link);
+						break;
+				}
 
 				page.Items[cssUrl] = new object();
 			}
@@ -31,8 +49,13 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Web.UI
 
 		public static void RegisterCssResource(this ClientScriptManager clientScriptManager, Type type, string resourceName)
 		{
+			RegisterCssResource(clientScriptManager, type, resourceName, ResourceInsertPosition.HeaderTop);
+		}
+
+		public static void RegisterCssResource(this ClientScriptManager clientScriptManager, Type type, string resourceName, ResourceInsertPosition position)
+		{
 			string cssUrl = clientScriptManager.GetWebResourceUrl(type, resourceName);
-			RegisterCssInclude(clientScriptManager, cssUrl);
+			RegisterCssInclude(clientScriptManager, cssUrl, position);
 		}
 
 		public static void RegisterJavascriptInclude(this ClientScriptManager clientScriptManager, string javascriptUrl)

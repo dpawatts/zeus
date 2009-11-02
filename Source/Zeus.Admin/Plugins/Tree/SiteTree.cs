@@ -74,6 +74,8 @@ namespace Zeus.Admin.Plugins.Tree
 			TreeNodeBase node = (hasAsyncChildren) ? new AsyncTreeNode() as TreeNodeBase : new TreeNode();
 			node.Text = ((INode) item).Contents;
 			node.IconFile = item.IconUrl;
+			node.IconCls = "zeus-tree-icon";
+			node.Cls = "zeus-tree-node";
 			node.NodeID = item.ID.ToString();
 			node.Href = "javascript:window.top.zeus.refreshPreview('" + Url.ToAbsolute(((INode)item).PreviewUrl) + "');";
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Web.UI.WebControls;
+using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
-using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.Plugins
 {
@@ -21,7 +21,7 @@ namespace Zeus.AddIns.ECommerce.Plugins
 
 		private void ReBind()
 		{
-			lsvOrders.DataSource = SelectedItem.GetChildren<Order>().OrderByDescending(o => o.Created);
+			lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
 			lsvOrders.DataBind();
 		}
 
@@ -41,6 +41,12 @@ namespace Zeus.AddIns.ECommerce.Plugins
 			order.Status = OrderStatus.Processed;
 			Engine.Persister.Save(order);
 
+			ReBind();
+		}
+
+		protected void lsvOrders_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+		{
+			dpgSearchResultsPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
 			ReBind();
 		}
 	}

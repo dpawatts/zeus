@@ -5,6 +5,7 @@ using System.Data;
 using System.Collections;
 using System.Reflection;
 using System.Text;
+using System.Web.Mvc;
 
 namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 {
@@ -208,6 +209,17 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 			using (IEnumerator<TSource> e1 = source.GetEnumerator())
 				while (e1.MoveNext())
 					yield return e1.Current;
+		}
+
+		public static IEnumerable<SelectListItem> ToSelectListItems<TSource>(this IEnumerable<TSource> source, TSource defaultValue = default(TSource))
+			where TSource : IEquatable<TSource>
+		{
+			return source.Select(e => new SelectListItem
+			{
+				Text = e.ToString(),
+				Value = e.ToString(),
+				Selected = (e.Equals(defaultValue))
+			});
 		}
 	}
 }

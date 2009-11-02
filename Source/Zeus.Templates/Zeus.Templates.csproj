@@ -84,6 +84,10 @@
     <Reference Include="Argotic.Extensions">
       <HintPath>..\..\Libraries\Argotic\Argotic.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
     <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MVC\MvcContrib.dll</HintPath>
@@ -107,10 +111,7 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\MVC\System.Web.Mvc.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -141,6 +142,9 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="ContentTypes\ReferenceData\Country.cs" />
+    <Compile Include="ContentTypes\ReferenceData\CountryList.cs" />
+    <Compile Include="ContentTypes\SystemNode.cs" />
     <Compile Include="ContentTypes\Tag.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />

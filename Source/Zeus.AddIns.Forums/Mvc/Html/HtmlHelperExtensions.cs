@@ -62,7 +62,7 @@ namespace Zeus.AddIns.Forums.Mvc.Html
 
 			// Message textarea
 			sb.AppendLine(@"<div>");
-			sb.AppendLine(html.TextArea(name, new { onselect = "storeCaret(this);", onclick = "storeCaret(this);", onkeyup = "storeCaret(this);" }));
+			sb.AppendLine(html.TextArea(name, new { onselect = "storeCaret(this);", onclick = "storeCaret(this);", onkeyup = "storeCaret(this);" }).ToString());
 			sb.AppendLine(@"</div>");
 
 			return sb.ToString();

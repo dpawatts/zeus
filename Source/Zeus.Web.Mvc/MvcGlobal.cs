@@ -54,7 +54,7 @@ namespace Zeus.Web.Mvc
 
 			RegisterRoutes(RouteTable.Routes, engine);
 
-			ModelBinders.Binders.DefaultBinder = new FluentValidationModelBinder(new AttributedValidatorFactory());
+			//ModelBinders.Binders.DefaultBinder = new FluentValidationModelBinder(new AttributedValidatorFactory());
 
 			base.OnApplicationStart(e);
 		}

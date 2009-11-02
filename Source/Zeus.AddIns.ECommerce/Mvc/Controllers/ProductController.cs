@@ -52,7 +52,10 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 			Shop shop = (Shop) CurrentItem.CurrentCategory.Parent;
 			_shoppingBasketService.AddItem(shop, CurrentItem, variations);
 
-			return Redirect(CurrentItem.Url);
+			// Redirect to shopping basket page, if one exists.
+			ShoppingBasketPage shoppingBasketPage = shop.ShoppingBasketPage;
+			if (shoppingBasketPage != null)
+				return Redirect(shoppingBasketPage.Url);
 		}
 	}
 }

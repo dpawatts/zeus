@@ -159,7 +159,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			NameValueCollection responseData = new NameValueCollection();
 			foreach (string responseItem in responseItems)
 			{
-				string[] responseItemKeyValue = responseItem.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
+				string[] responseItemKeyValue = responseItem.Split(new[] { '=' }, StringSplitOptions.None);
 				responseData.Add(responseItemKeyValue[0], responseItemKeyValue[1]);
 			}
 			return responseData;

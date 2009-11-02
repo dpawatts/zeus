@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using Zeus.BaseLibrary.ExtensionMethods.Reflection;
 
@@ -28,6 +29,12 @@ namespace Zeus.BaseLibrary
 				_cachedEnumDescriptions.Add(cacheKey, description);
 			}
 			return _cachedEnumDescriptions[cacheKey];
+		}
+
+		public static IEnumerable<string> GetDescriptions(Type enumType)
+		{
+			string[] names = Enum.GetNames(enumType);
+			return names.Select(s => GetEnumValueDescription(enumType, s));
 		}
 	}
 }

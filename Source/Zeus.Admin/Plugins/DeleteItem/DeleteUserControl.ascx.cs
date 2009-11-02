@@ -13,31 +13,22 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			if (string.IsNullOrEmpty(ids))
 				return;
 
-			try
-			{
-				string[] nodeIDsTemp = ids.Split(',');
-				var nodeIDs = nodeIDsTemp.Select(s => Convert.ToInt32(s));
-				if (!nodeIDs.Any())
-					return;
+			string[] nodeIDsTemp = ids.Split(',');
+			var nodeIDs = nodeIDsTemp.Select(s => Convert.ToInt32(s));
+			if (!nodeIDs.Any())
+				return;
 
-				ContentItem parent = Engine.Persister.Get(nodeIDs.First()).Parent;
-				foreach (int id in nodeIDs)
-				{
-					ContentItem item = Engine.Persister.Get(id);
-					Zeus.Context.Persister.Delete(item);
-				}
-
-				if (parent != null)
-					Refresh(parent);
-				else
-					Refresh(Zeus.Context.UrlParser.StartPage);
-			}
-			catch (Exception ex)
+			ContentItem parent = Engine.Persister.Get(nodeIDs.First()).Parent;
+			foreach (int id in nodeIDs)
 			{
-				//Engine.Resolve<IErrorHandler>().Notify(ex);
-				//csvException.IsValid = false;
-				//csvException.Text = ex.ToString();
+				ContentItem item = Engine.Persister.Get(id);
+				Zeus.Context.Persister.Delete(item);
 			}
+
+			if (parent != null)
+				Refresh(parent);
+			else
+				Refresh(Zeus.Context.UrlParser.StartPage);
 		}
 	}
 }

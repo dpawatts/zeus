@@ -16,6 +16,12 @@ namespace Zeus.BaseLibrary.Linq
 			return GetMonthNames(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
 		}
 
+		public static IEnumerable<int> RangeDescending(int start, int count)
+		{
+			for (int i = 0; i < count; ++i)
+				yield return start - i;
+		}
+
 		private static IEnumerable<MonthName> GetMonthNames(IEnumerable<string> monthNames)
 		{
 			int index = 1;

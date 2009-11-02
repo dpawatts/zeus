@@ -2,6 +2,9 @@ using Coolite.Ext.Web;
 using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web.Hosting;
+using Zeus.BaseLibrary.Web.UI;
+
+[assembly: System.Web.UI.WebResource("Zeus.Admin.Plugins.Tree.Resources.TreeCssInitializer.js", "text/javascript")]
 
 namespace Zeus.Admin.Plugins.Tree
 {
@@ -76,6 +79,9 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public override void RegisterScripts(ScriptManager scriptManager)
 		{
+			scriptManager.RegisterClientScriptInclude("TreeCssInitializer",
+				WebResourceUtility.GetUrl(GetType(), "Zeus.Admin.Plugins.Tree.Resources.TreeCssInitializer.js"));
+
 			// Call tree modification plugins.
 			foreach (ITreePlugin treePlugin in Context.Current.ResolveAll<ITreePlugin>())
 			{

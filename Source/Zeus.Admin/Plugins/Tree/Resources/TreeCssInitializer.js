@@ -1,0 +1,1 @@
+﻿Ext.util.CSS.createStyleSheet(".x-tree-node .x-tree-node-inline-icon { height: auto !important; vertical-align: middle; } .x-tree-node-anchor { vertical-align: middle; }");

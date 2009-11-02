@@ -79,6 +79,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</HintPath>
     </Reference>
+    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -111,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\Generic\CartesianProductUtilityTests.cs" />
+    <Compile Include="Linq\ExtendedEnumerableTests.cs" />
     <Compile Include="ExtensionMethods\Linq\EnumerableTests.cs" />
     <Compile Include="EnumTests.cs" />
     <Compile Include="ExtensionMethods\Int32Tests.cs" />

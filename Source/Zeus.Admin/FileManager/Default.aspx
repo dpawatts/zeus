@@ -78,6 +78,9 @@
 			jQuery("span[data-type='File'] a").click(function() {
 				return file_onClick(this);
 			});
+			jQuery("span[data-type='Image'] a").click(function() {
+				return file_onClick(this);
+			});
 		<% } else { %>
 			jQuery("ul.simpleTree span a").click(function() {
 				return file_onClick(this);
