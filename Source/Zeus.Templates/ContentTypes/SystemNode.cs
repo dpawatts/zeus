@@ -11,15 +11,15 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(RootItem))]
 	public class SystemNode : BaseContentItem
 	{
-		public override string Title
+		public SystemNode()
 		{
-			get { return "System"; }
-			set { base.Title = value; }
+			Name = "system";
+			Title = "System";
 		}
 
 		public override string IconUrl
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Application); }
+			get { return Utility.GetCooliteIconUrl(Icon.Computer); }
 		}
 	}
 }

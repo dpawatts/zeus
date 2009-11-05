@@ -54,6 +54,7 @@ namespace Zeus.Web.Mvc
 
 			RegisterRoutes(RouteTable.Routes, engine);
 
+			ModelMetadataProviders.Current = new CustomDataAnnotationsModelMetadataProvider();
 			//ModelBinders.Binders.DefaultBinder = new FluentValidationModelBinder(new AttributedValidatorFactory());
 
 			base.OnApplicationStart(e);

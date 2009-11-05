@@ -1,9 +1,7 @@
 using System.Linq;
-using MvcContrib;
-using MvcContrib.UI;
-using MvcContrib.UI.Tags;
+using System.Web.Mvc;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Single Select (radio buttons)")]
 	public class SingleSelectQuestion : OptionSelectQuestion
@@ -20,20 +18,27 @@ namespace Zeus.Templates.Mvc.ContentTypes.Forms
 			get { return "ss_" + ID; }
 		}
 
-		public override IElement CreateHtmlElement()
+		public override TagBuilder CreateHtmlElement()
 		{
-			var list = new RadioList
+			var radioButtons = Options.Select(o =>
 			{
-				Name = ElementID
-			};
+				TagBuilder tagBuilder = new TagBuilder("input");
+				tagBuilder.MergeAttribute("type", HtmlHelper.GetInputTypeString(InputType.Radio), true);
+				tagBuilder.MergeAttribute("name", ElementID, true);
+				tagBuilder.MergeAttribute("id", "ss_el_" + o.ID, true);
+				tagBuilder.MergeAttribute("value", o.ID.ToString(), true);
 
-			foreach (var field in base.Options)
-			{
-				var radioField = new RadioField { Id = "ss_el_" + field.ID, Value = field.ID, Label = field.Title };
-				list.Add(radioField);
-			}
+				TagBuilder labelBuilder = new TagBuilder("label");
+				labelBuilder.MergeAttribute("for", "ss_el_" + o.ID, true);
+				labelBuilder.SetInnerText(o.Title);
 
-			return new Element("span", new Hash(@class => "alternatives")) { InnerText = list.ToString() };
+				return tagBuilder.ToString() + labelBuilder.ToString();
+			});
+
+			TagBuilder result = new TagBuilder("span");
+			result.MergeAttribute("class", "alternatives");
+			result.SetInnerText(string.Join(string.Empty, radioButtons));
+			return result;
 		}
 
 		public override string GetAnswerText(string value)

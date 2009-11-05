@@ -3,9 +3,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
-using Zeus.Templates.Mvc.ContentTypes.Forms;
+using Zeus.Templates.ContentTypes.Forms;
 
-namespace Zeus.Templates.Mvc.Design.Editors
+namespace Zeus.Templates.Design.Editors
 {
 	public class QuestionOptionsEditorAttribute : AbstractEditorAttribute
 	{

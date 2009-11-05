@@ -1,7 +1,6 @@
 using Zeus.Integrity;
-using Zeus.Templates.ContentTypes;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType]
 	[RestrictParents(typeof(OptionSelectQuestion))]

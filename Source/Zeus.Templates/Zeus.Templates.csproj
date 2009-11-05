@@ -88,10 +88,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
     </Reference>
-    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\MVC\MvcContrib.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -142,6 +138,7 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="ContentTypes\ReferenceData\ReferenceDataNode.cs" />
     <Compile Include="ContentTypes\ReferenceData\Country.cs" />
     <Compile Include="ContentTypes\ReferenceData\CountryList.cs" />
     <Compile Include="ContentTypes\SystemNode.cs" />
@@ -187,6 +184,7 @@
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Html\ImageExtensions.cs" />
     <Compile Include="Mvc\Html\NavigationExtensions.cs" />
+    <Compile Include="Mvc\Html\ReferenceDataExtensions.cs" />
     <Compile Include="Mvc\Html\ValidationExtensions.cs" />
     <Compile Include="Mvc\Html\WidgetExtensions.cs" />
     <Compile Include="Mvc\Html\WidgetHelper.cs" />

@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using Zeus.Net.Mail;
 using System.Web.Mvc;
+using Zeus.Templates.ContentTypes.Forms;
 using Zeus.Templates.Mvc.ContentTypes.Forms;
 using Zeus.Templates.Mvc.ViewModels;
 using Zeus.Web;

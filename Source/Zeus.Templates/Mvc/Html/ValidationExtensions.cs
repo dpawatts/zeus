@@ -20,7 +20,7 @@ namespace Zeus.Templates.Mvc.Html
 			{
 				TagBuilder messageBuilder = new TagBuilder("p");
 				messageBuilder.SetInnerText(message);
-				divBuilder.InnerHtml += messageBuilder.ToString(TagRenderMode.Normal) + "<br /><br />" + Environment.NewLine;
+				divBuilder.InnerHtml += messageBuilder.ToString(TagRenderMode.Normal) + Environment.NewLine;
 			}
 
 			StringBuilder builder = new StringBuilder();

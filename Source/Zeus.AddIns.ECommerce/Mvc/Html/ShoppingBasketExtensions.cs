@@ -21,12 +21,11 @@ namespace Zeus.AddIns.ECommerce.Mvc.Html
 			string innerText = string.Format("You have <span>{0}</span> items in your shopping basket (<span>{1:C2}</span>)",
 				shoppingBasket.TotalItemCount, shoppingBasket.SubTotalPrice);
 
-			return new MvcContrib.UI.Tags.Link
-			{
-				Href = shoppingBasketPage.Url,
-				Id = "basket",
-				InnerText = innerText
-			}.ToString();
+			TagBuilder linkTag = new TagBuilder("a");
+			linkTag.MergeAttribute("href", shoppingBasketPage.Url, true);
+			linkTag.MergeAttribute("id", "basket", true);
+			linkTag.SetInnerText(innerText);
+			return linkTag.ToString();
 		}
 	}
 }

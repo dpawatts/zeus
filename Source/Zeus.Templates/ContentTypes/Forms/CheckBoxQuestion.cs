@@ -1,6 +1,6 @@
-using MvcContrib.UI;
+using System.Web.Mvc;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Yes / No Question (checkbox)")]
 	public class CheckBoxQuestion : Question
@@ -15,13 +15,13 @@ namespace Zeus.Templates.Mvc.ContentTypes.Forms
 			return value;
 		}
 
-		public override IElement CreateHtmlElement()
+		public override TagBuilder CreateHtmlElement()
 		{
-			return new MvcContrib.UI.Tags.CheckBoxField
-			{
-				Id = ElementID,
-				Name = ElementID
-			};
+			TagBuilder tagBuilder = new TagBuilder("input");
+			tagBuilder.MergeAttribute("type", HtmlHelper.GetInputTypeString(InputType.CheckBox), true);
+			tagBuilder.MergeAttribute("id", ElementID, true);
+			tagBuilder.MergeAttribute("name", ElementID, true);
+			return tagBuilder;
 		}
 	}
 }

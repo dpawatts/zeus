@@ -1,9 +1,7 @@
 using System.Linq;
-using MvcContrib;
-using MvcContrib.UI;
-using MvcContrib.UI.Tags;
+using System.Web.Mvc;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Multiple Select (checkboxes)")]
 	public class MultipleSelectQuestion : OptionSelectQuestion
@@ -20,21 +18,27 @@ namespace Zeus.Templates.Mvc.ContentTypes.Forms
 			get { return "ms_" + ID; }
 		}
 
-		public override IElement CreateHtmlElement()
+		public override TagBuilder CreateHtmlElement()
 		{
-			var list = new CheckBoxList
+			var checkboxes = Options.Select(o =>
 			{
-				Name = ElementID
-			};
+				TagBuilder tagBuilder = new TagBuilder("input");
+				tagBuilder.MergeAttribute("type", HtmlHelper.GetInputTypeString(InputType.CheckBox), true);
+				tagBuilder.MergeAttribute("name", ElementID, true);
+				tagBuilder.MergeAttribute("id", "ms_el_" + o.ID, true);
+				tagBuilder.MergeAttribute("value", o.ID.ToString(), true);
 
-			foreach (var field in base.Options)
-			{
-				var radioField = new CheckBoxField { Id = "ms_el_" + field.ID, Value = field.ID, Label = field.Title };
+				TagBuilder labelBuilder = new TagBuilder("label");
+				labelBuilder.MergeAttribute("for", "ms_el_" + o.ID, true);
+				labelBuilder.SetInnerText(o.Title);
 
-				list.Add(radioField);
-			}
+				return tagBuilder.ToString() + labelBuilder.ToString();
+			});
 
-			return new Element("span", new Hash(@class => "alternatives")) { InnerText = list.ToString() };
+			TagBuilder result = new TagBuilder("span");
+			result.MergeAttribute("class", "alternatives");
+			result.SetInnerText(string.Join(string.Empty, checkboxes));
+			return result;
 		}
 
 		public override string GetAnswerText(string value)

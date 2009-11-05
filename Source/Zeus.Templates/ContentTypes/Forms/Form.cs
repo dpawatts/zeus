@@ -4,6 +4,7 @@ using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Templates.ContentTypes.Forms;
 using Zeus.Web.UI;
 
 namespace Zeus.Templates.Mvc.ContentTypes.Forms

@@ -1,10 +1,10 @@
-using MvcContrib.UI;
+using System.Web.Mvc;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	public interface IQuestion
 	{
-		IElement CreateHtmlElement();
+		TagBuilder CreateHtmlElement();
 		string QuestionText { get; }
 		string ElementID { get; }
 		string GetAnswerText(string value);

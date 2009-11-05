@@ -1,6 +1,6 @@
-using MvcContrib.UI;
+using System.Web.Mvc;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Text Question (textbox)")]
 	public class TextQuestion : Question
@@ -29,17 +29,16 @@ namespace Zeus.Templates.Mvc.ContentTypes.Forms
 			return value;
 		}
 
-		public override IElement CreateHtmlElement()
+		public override TagBuilder CreateHtmlElement()
 		{
-			var textArea = new MvcContrib.UI.Tags.TextArea
-			{
-				Id = ElementID,
-				Name = ElementID,
-				Rows = Rows
-			};
+			TagBuilder tagBuilder = new TagBuilder("textarea");
+			tagBuilder.MergeAttribute("type", HtmlHelper.GetInputTypeString(InputType.Text), true);
+			tagBuilder.MergeAttribute("id", ElementID, true);
+			tagBuilder.MergeAttribute("name", ElementID, true);
+			tagBuilder.MergeAttribute("rows", Rows.ToString(), true);
 			if (Columns != null)
-				textArea.Cols = Columns.Value;
-			return textArea;
+				tagBuilder.MergeAttribute("cols", Columns.Value.ToString(), true);
+			return tagBuilder;
 		}
 	}
 }
