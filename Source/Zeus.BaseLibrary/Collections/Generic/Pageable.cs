@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MvcContrib.Pagination;
 
 namespace Zeus.BaseLibrary.Collections.Generic
 {

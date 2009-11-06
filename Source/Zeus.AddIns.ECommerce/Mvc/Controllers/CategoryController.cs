@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using MvcContrib.Pagination;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.Mvc.ViewModels;
 using Zeus.BaseLibrary.Collections.Generic;

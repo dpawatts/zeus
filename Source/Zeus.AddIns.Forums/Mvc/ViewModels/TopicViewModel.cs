@@ -1,5 +1,5 @@
-using MvcContrib.Pagination;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.BaseLibrary.Collections.Generic;
 
 namespace Zeus.AddIns.Forums.Mvc.ViewModels
 {

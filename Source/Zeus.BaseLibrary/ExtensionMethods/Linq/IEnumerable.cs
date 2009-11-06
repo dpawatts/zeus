@@ -211,14 +211,14 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 					yield return e1.Current;
 		}
 
-		public static IEnumerable<SelectListItem> ToSelectListItems<TSource>(this IEnumerable<TSource> source, TSource defaultValue = default(TSource))
+		public static IEnumerable<SelectListItem> ToSelectListItems<TSource>(this IEnumerable<TSource> source, object defaultValue = null)
 			where TSource : IEquatable<TSource>
 		{
 			return source.Select(e => new SelectListItem
 			{
 				Text = e.ToString(),
 				Value = e.ToString(),
-				Selected = (e.Equals(defaultValue))
+				Selected = e.Equals(defaultValue)
 			});
 		}
 	}
