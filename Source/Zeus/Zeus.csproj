@@ -288,6 +288,7 @@
     <Compile Include="Web\Security\AuthorizationRuleAction.cs" />
     <Compile Include="Web\Security\AuthorizationRuleCollection.cs" />
     <Compile Include="Web\Security\AuthorizationService.cs" />
+    <Compile Include="Web\Security\ICredentialContextInitializer.cs" />
     <Compile Include="Web\Security\CredentialContextService.cs" />
     <Compile Include="Web\Security\CredentialLocation.cs" />
     <Compile Include="Web\Security\CredentialService.cs" />

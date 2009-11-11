@@ -128,7 +128,11 @@ namespace Zeus
 		internal IList<PropertyData> DetailsInternal
 		{
 			get { return _detailsInternal; }
-			set { _detailsInternal = value; }
+			set
+			{
+				_detailsInternal = value;
+				_properties = null;
+			}
 		}
 
 		public PropertyDataDictionary Details
@@ -146,7 +150,11 @@ namespace Zeus
 		internal IList<PropertyCollection> DetailCollectionsInternal
 		{
 			get { return _detailCollectionsInternal; }
-			set { _detailCollectionsInternal = value; }
+			set
+			{
+				_detailCollectionsInternal = value;
+				_propertyCollections = null;
+			}
 		}
 
 		public PropertyCollectionDictionary DetailCollections

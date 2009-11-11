@@ -16,6 +16,8 @@ namespace Zeus.Web.Mvc
 			defaultMetadata.HideSurroundingChrome = defaultMetadata.HideSurroundingChrome || attributes.Where(x => x is HideSurroundingChromeAttribute).Any();
 			if (string.IsNullOrEmpty(defaultMetadata.Description) && attributes.Where(x => x is DescriptionAttribute).Any())
 				defaultMetadata.Description = attributes.OfType<DescriptionAttribute>().First().Description;
+			if (modelType.IsEnum || (Nullable.GetUnderlyingType(modelType) != null && Nullable.GetUnderlyingType(modelType).IsEnum))
+				defaultMetadata.TemplateHint = "Enum";
 			return defaultMetadata;
 		}
 	}
