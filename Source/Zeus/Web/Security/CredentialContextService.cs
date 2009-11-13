@@ -1,18 +1,19 @@
-using System;
 using System.Linq;
+using Ninject;
 
 namespace Zeus.Web.Security
 {
 	public class CredentialContextService : ICredentialContextService
 	{
 		private readonly BaseLibrary.Web.IWebContext _webContext;
-		private readonly ICredentialContextInitializer[] _credentialContextInitializers;
 		private CredentialLocation _rootLocation;
 
-		public CredentialContextService(BaseLibrary.Web.IWebContext webContext, ICredentialContextInitializer[] credentialContextInitializers)
+		[Optional]
+		public ICredentialContextInitializer[] CredentialContextInitializers { get; set; }
+
+		public CredentialContextService(BaseLibrary.Web.IWebContext webContext)
 		{
 			_webContext = webContext;
-			_credentialContextInitializers = credentialContextInitializers;
 			_rootLocation = new CredentialLocation { Repository = new DefaultCredentialRepository() };
 
 			Initialize();
@@ -20,8 +21,9 @@ namespace Zeus.Web.Security
 
 		private void Initialize()
 		{
-			foreach (ICredentialContextInitializer initializer in _credentialContextInitializers)
-				initializer.Initialize(this);
+			if (CredentialContextInitializers != null)
+				foreach (ICredentialContextInitializer initializer in CredentialContextInitializers)
+					initializer.Initialize(this);
 		}
 
 		public void AddLocation(CredentialLocation location)
