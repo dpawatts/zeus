@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI.WebControls;
+using Zeus.Admin;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Web.Hosting;
 
@@ -44,7 +45,7 @@ namespace Zeus.Web.UI.WebControls
 			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.tinymce.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
 				"InitHtmlTextBox" + UniqueID,
-				string.Format(@"htmlEditor_init('/Admin/FileManager/default.aspx?rootPath={4}',
+				string.Format(@"htmlEditor_init('{5}?rootPath={4}',
 					{{
 						elements: '{0}',
 						content_css: '/Assets/Css/Editor.css',
@@ -57,7 +58,8 @@ namespace Zeus.Web.UI.WebControls
 						 (!DomainAbsoluteUrls).ToString().ToLower(),
 						 Page.Request.Url.GetLeftPart(UriPartial.Authority),
 						 RootHtmlElementID,
-						 Page.Server.UrlEncode(UploadFolder)),
+						 Page.Server.UrlEncode(UploadFolder),
+						 Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(Zeus.Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.FileManager.Default.aspx")),
 						 true);
 		}
 

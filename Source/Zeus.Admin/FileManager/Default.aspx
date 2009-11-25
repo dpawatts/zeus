@@ -1,4 +1,4 @@
-﻿<%@ Page Title="File Manager" Language="C#" MasterPageFile="~/Admin/Popup.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.FileManager.Default" %>
+﻿<%@ Page Title="File Manager" Language="C#" MasterPageFile="~/admin/Popup.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.FileManager.Default" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
 	<script type="text/javascript">

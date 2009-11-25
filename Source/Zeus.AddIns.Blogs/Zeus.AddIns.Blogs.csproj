@@ -240,7 +240,9 @@
     <EmbeddedResource Include="Mvc\Views\Blog\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Comment\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Pingback\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\Post\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Post\Index.spark">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mvc\Views\RecentPostsSummary\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\RecentPosts\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Shared\PostListing.spark" />
