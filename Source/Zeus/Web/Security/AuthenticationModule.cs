@@ -139,7 +139,7 @@ namespace Zeus.Web.Security
 				return;
 
 			// Add new ReturnUrl parameter, which will remove any existing parameter of this name.
-			Url redirectUrl = new Url(CurrentAuthenticationService.Config.LoginUrl);
+			Url redirectUrl = new Url(CurrentAuthenticationService.LoginUrl);
 			redirectUrl.SetQueryParameter("ReturnUrl", new Url(context.Request.Url).PathAndQuery);
 			context.Response.Redirect(redirectUrl.ToString(), false);
 		}

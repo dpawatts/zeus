@@ -7,6 +7,8 @@ namespace Zeus.Web.Security
 	{
 		bool Enabled { get; }
 		AuthenticationLocation Config { get; }
+		string LoginUrl { get; }
+
 		bool AccessingLoginPage();
 		void RedirectFromLoginPage(string userName, bool createPersistentCookie);
 		void SignOut();

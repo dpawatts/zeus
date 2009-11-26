@@ -95,14 +95,14 @@ namespace Zeus.Web.UI.WebControls
 						{
 							string logoutPageUrl = this.LogoutPageUrl;
 							if (string.IsNullOrEmpty(logoutPageUrl))
-								logoutPageUrl = CurrentAuthenticationService.Config.LoginUrl;
+								logoutPageUrl = CurrentAuthenticationService.LoginUrl;
 							else
 								logoutPageUrl = base.ResolveClientUrl(logoutPageUrl);
 							this.Page.Response.Redirect(logoutPageUrl, false);
 							return;
 						}
 					case System.Web.UI.WebControls.LogoutAction.RedirectToLoginPage:
-						this.Page.Response.Redirect(CurrentAuthenticationService.Config.LoginUrl, false);
+						this.Page.Response.Redirect(CurrentAuthenticationService.LoginUrl, false);
 						return;
 				}
 			}

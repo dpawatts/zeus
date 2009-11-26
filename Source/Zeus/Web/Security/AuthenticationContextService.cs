@@ -35,8 +35,21 @@ namespace Zeus.Web.Security
 
 		public IAuthenticationService GetCurrentService()
 		{
+			// If the current HTTP request is for a Zeus page, then check if that page or any of its ancestors
+			// implement the ILoginContext interface. If so, use the LoginUrl from that page.
 			AuthenticationLocation location = (AuthenticationLocation) _rootLocation.GetChild(_webContext.Url.Path);
-			return new AuthenticationService(_webContext, location);
+			string loginUrl = location.LoginUrl;
+			ContentItem currentPage = Context.CurrentPage;
+			while (currentPage != null)
+			{
+				if (currentPage is ILoginContext)
+				{
+					loginUrl = ((ILoginContext) currentPage).LoginUrl;
+					break;
+				}
+				currentPage = currentPage.GetParent();
+			}
+			return new AuthenticationService(_webContext, location, loginUrl);
 		}
 	}
 }

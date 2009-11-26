@@ -15,15 +15,17 @@ namespace Zeus.Web.Security
 
 		private readonly BaseLibrary.Web.IWebContext _webContext;
 		private readonly AuthenticationLocation _config;
+		private readonly string _loginUrl;
 
 		#endregion
 
 		#region Constructor
 
-		public AuthenticationService(BaseLibrary.Web.IWebContext webContext, AuthenticationLocation config)
+		public AuthenticationService(BaseLibrary.Web.IWebContext webContext, AuthenticationLocation config, string loginUrl)
 		{
 			_webContext = webContext;
 			_config = config;
+			_loginUrl = loginUrl;
 		}
 
 		#endregion
@@ -40,13 +42,18 @@ namespace Zeus.Web.Security
 			get { return _config; }
 		}
 
+		public string LoginUrl
+		{
+			get { return _loginUrl; }
+		}
+
 		#endregion
 
 		#region Methods
 
 		public bool AccessingLoginPage()
 		{
-			string loginUrl = Url.ToAbsolute(_config.LoginUrl);
+			string loginUrl = Url.ToAbsolute(_loginUrl);
 			return _webContext.Request.Path.Equals(loginUrl, StringComparison.InvariantCultureIgnoreCase);
 		}
 
@@ -63,7 +70,7 @@ namespace Zeus.Web.Security
 		public string GetLoginPage(string extraQueryString, bool reuseReturnUrl)
 		{
 			HttpContext current = HttpContext.Current;
-			string loginUrl = _config.LoginUrl;
+			string loginUrl = _loginUrl;
 			if (loginUrl.IndexOf('?') >= 0)
 			{
 				loginUrl = new Url(loginUrl).SetQueryParameter("ReturnUrl", null).ToString();
