@@ -45,6 +45,8 @@ namespace Zeus.ContentProperties
 
 		public override IEditor GetDefaultEditor(string title, int sortOrder, Type propertyType, string containerName)
 		{
+			if (propertyType.IsEnum)
+				return new EnumEditorAttribute(title, sortOrder, propertyType) { ContainerName = containerName };
 			return new TextBoxEditorAttribute(title, sortOrder, 10) { ContainerName = containerName };
 		}
 	}
