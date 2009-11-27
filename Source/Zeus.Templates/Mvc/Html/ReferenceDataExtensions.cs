@@ -22,13 +22,14 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static IEnumerable<SelectListItem> EnumList(this HtmlHelper html, Type enumType, object selectedValue)
 		{
+			string selectedValueString = (selectedValue != null) ? selectedValue.ToString() : null;
 			enumType = Nullable.GetUnderlyingType(enumType) ?? enumType;
 			return Enum.GetNames(enumType).Select(name =>
 				new SelectListItem
 				{
 					Value = name,
 					Text = EnumHelper.GetEnumValueDescription(enumType, name),
-					Selected = name == selectedValue
+					Selected = (name == selectedValueString)
 				});
 		}
 	}
