@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
@@ -27,7 +29,10 @@ namespace Zeus.Web.Mvc.Modules
 					return areaController;
 			}
 
-			return InstantiateController(controllerKey);
+			IController controller = InstantiateController(controllerKey);
+			if (controller == null)
+				throw new HttpException(404, string.Format(CultureInfo.CurrentUICulture, "The controller for path '{0}' was not found or does not implement IController.", requestContext.HttpContext.Request.Path));
+			return controller;
 		}
 
 		private IController InstantiateController(string controllerName)

@@ -8,7 +8,7 @@ using Zeus.Integrity;
 
 namespace Zeus.AddIns.Forums.ContentTypes
 {
-	[ContentType]
+	[ContentType(Name = "ForumPost")]
 	[RestrictParents(typeof(Topic))]
 	[Translatable(false)]
 	public class Post : ContentItem

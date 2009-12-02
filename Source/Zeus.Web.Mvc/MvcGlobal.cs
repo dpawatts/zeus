@@ -1,19 +1,14 @@
 using System;
-using System.Linq;
-using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Spark.FileSystem;
-using Spark.Web.Mvc;
 using Zeus.Configuration;
 using Zeus.Engine;
-using Zeus.Web.Mvc.Modules;
 
 namespace Zeus.Web.Mvc
 {
 	public class MvcGlobal : Global
 	{
-		public static void RegisterRoutes(RouteCollection routes, ContentEngine engine)
+		private static void RegisterRoutes(RouteCollection routes, ContentEngine engine)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -22,13 +17,16 @@ namespace Zeus.Web.Mvc
 
 			// This route detects content item paths and executes their controller
 			routes.Add(new ContentRoute(engine));
+		}
 
+		private static void RegisterFallbackRoute(RouteCollection routes)
+		{
 			// This controller fallbacks to a controller unrelated to Zeus
 			routes.MapRoute(
-				 "Default",                                              // Route name
-				 "{controller}/{action}/{id}",                           // URL with parameters
-				 new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
-			);
+				"Default",                                              // Route name
+				"{controller}/{action}/{id}",                           // URL with parameters
+				new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
+				);
 		}
 
 		public override void Init()
@@ -44,16 +42,17 @@ namespace Zeus.Web.Mvc
 		{
 			ContentEngine engine = Zeus.Context.Initialize(false);
 
+			RegisterRoutes(RouteTable.Routes, engine);
+
 			SparkApplication app = new SparkApplication();
 			app.RegisterViewEngine(ViewEngines.Engines);
 			app.RegisterPackages(engine, RouteTable.Routes, ViewEngines.Engines);
 
 			ControllerBuilder.Current.SetControllerFactory(engine.Resolve<IControllerFactory>());
 
-			RegisterRoutes(RouteTable.Routes, engine);
+			RegisterFallbackRoute(RouteTable.Routes);
 
 			ModelMetadataProviders.Current = new CustomDataAnnotationsModelMetadataProvider();
-			//ModelBinders.Binders.DefaultBinder = new FluentValidationModelBinder(new AttributedValidatorFactory());
 
 			base.OnApplicationStart(e);
 		}

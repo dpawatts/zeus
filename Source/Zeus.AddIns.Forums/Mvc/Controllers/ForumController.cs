@@ -30,11 +30,11 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 
 		public ActionResult Index(int? p)
 		{
-			return View(new ForumViewModel(CurrentItem)
-			{
-				CurrentUserIsForumModerator = (CurrentUser != null && CurrentItem.Moderator != null && CurrentUser.Username == CurrentItem.Moderator.User.Username),
-				Topics = CurrentItem.GetChildren<Topic>().OrderByDescending(t => t.Updated).OrderBy(t => t.Sticky ? 0 : 1).AsPagination(p ?? 1, CurrentMessageBoard.TopicsPerPage)
-			});
+			ForumViewModel viewModel = new ForumViewModel(CurrentItem,
+				CurrentItem.GetChildren<Topic>().OrderByDescending(t => t.Updated).OrderBy(t => t.Sticky ? 0 : 1).AsPagination(p ?? 1, CurrentMessageBoard.TopicsPerPage),
+				(CurrentUser != null && CurrentItem.Moderator != null && CurrentUser.Username == CurrentItem.Moderator.User.Username),
+				new Url(CurrentItem.Url).AppendSegment("newTopic"));
+			return View(viewModel);
 		}
 
 		public ActionResult ToggleStickyTopic(int? p, int? t)
@@ -51,6 +51,32 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 			ForumService.TrashTopic(topic, CurrentMember);
 
 			return RedirectToAction("Index");
+		}
+
+		[HttpGet]
+		public ActionResult NewTopic()
+		{
+			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"));
+			return View("Posting", viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult NewTopicPreview(PostFormViewModel form)
+		{
+			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"));
+			viewModel.PreviewMessage = BBCodeHelper.ConvertToHtml(form.Message);
+			viewModel.PreviewVisible = true;
+			return View("Posting", viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult NewTopic(PostFormViewModel form)
+		{
+			if (!ModelState.IsValid)
+				return View();
+
+			Topic topic = ForumService.CreateTopic(CurrentItem, CurrentMember, form.Subject, form.Message);
+			return Redirect(topic.Url);
 		}
 	}
 }

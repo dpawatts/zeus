@@ -30,6 +30,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 			throw new InvalidOperationException();
 		}
 
+		[HttpGet]
 		public ActionResult Index(int? p, int? post)
 		{
 			var allPosts = CurrentItem.GetChildren<Post>().ToList();
@@ -49,6 +50,51 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 			}
 
 			return View(viewModel);
+		}
+
+		[HttpGet]
+		public ActionResult Reply()
+		{
+			return View("Posting", GetPostViewModel());
+		}
+
+		[HttpGet]
+		public ActionResult Quote(int p)
+		{
+			Post currentPost = Context.Persister.Get<Post>(p);
+
+			PostingViewModel viewModel = GetPostViewModel();
+			viewModel.Message = "[quote]" + currentPost.Message + "[/quote]";
+			return View("Posting", viewModel);
+		}
+
+		private PostingViewModel GetPostViewModel()
+		{
+			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("reply"));
+			viewModel.CurrentTopicPosts = CurrentItem.GetChildren<Post>();
+			viewModel.Subject = CurrentItem.Title;
+			viewModel.TopicSummaryVisible = true;
+			return viewModel;
+		}
+
+		[HttpPost]
+		public ActionResult ReplyPreview(PostFormViewModel form)
+		{
+			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("reply"));
+			viewModel.CurrentTopicPosts = CurrentItem.GetChildren<Post>();
+			viewModel.PreviewMessage = BBCodeHelper.ConvertToHtml(form.Message);
+			viewModel.PreviewVisible = true;
+			return View("Posting", viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult Reply(PostFormViewModel form)
+		{
+			if (!ModelState.IsValid)
+				return View();
+
+			Post post = ForumService.CreateReply(CurrentItem, CurrentMember, form.Subject, form.Message);
+			return Redirect(post.Url);
 		}
 	}
 }

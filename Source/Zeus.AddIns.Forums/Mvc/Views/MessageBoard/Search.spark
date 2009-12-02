@@ -1,0 +1,71 @@
+﻿<viewdata model="Zeus.AddIns.Forums.Mvc.ViewModels.MessageBoardSearchResultsViewModel"/>
+
+<content name="headStyles">
+	<link rel="stylesheet" href="/content/forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</content>
+
+<div id="innerWrap" class="full clearfix">
+	<div id="forum">
+		<use file="ForumHeader" />
+		
+		<p id="fSResults">Search found ${Model.SearchResultCount} match<if condition="Model.SearchResultCount > 1">es</if>: ${Model.SearchText}</p>
+
+		<div id="fRungTwo">
+			<table class="fPages">
+				<colspan>
+					<col id="fPLeft" />
+					<col id="fPMiddle" />
+					<col id="fPRight" />
+				</colspan>
+				<tr>
+					<td><p>${Html.PagerPartShowing(Model.SearchResults)}</p></td>
+					<td>
+						${Html.PagerPartLinks(Model.SearchResults)}
+					</td>
+					<td>
+						# using (Html.BeginForm<MessageBoardController>(c => c.Search(null, null, null, null), FormMethod.Get, new { id = "pageGoForm" })) {
+						${Html.Hidden("f")}
+						${Html.Hidden("t")}
+						${Html.Hidden("q")}
+						<label for="pageGo">Go to Page</label>
+						${Html.DropDownList("p", new SelectList(Enumerable.Range(1, Model.SearchResults.TotalPages)), new { onchange = "$('#pageGoForm').submit();" })}
+						<% } %>
+					</td>
+				</tr>
+			</table>
+		</div> <!-- fRungTwo -->
+		
+		<div each="Post post in Model.SearchResults" class="fPost clearfix">
+			<a name="post${post.ID}"></a>
+			<div class="pTopBar clearfix">
+				<p>${post.Created}</p>
+
+				<ul>
+					<li><a href="${post.QuoteUrl}">quote</a></li>
+					<li>|</li>
+					<if condition="post.Author == Model.CurrentMember">
+						<li><a href="${post.EditUrl}">edit</a></li>
+						<li>|</li>
+					</if>
+					<!--li><a href="#">delete</a></li>
+					<li>|</li-->
+					<li><a href="${post.Url}">permalink</a></li>
+				</ul>
+			</div> <!-- pTopBar -->
+			<div class="postLeft">
+				<a href="${post.Author.Url}">${post.Author.Title}</a>
+				<img if="post.Author.Avatar != null" src="${Html.ImageUrl(post.Author.ID, "Avatar", 80, 200, false)}" border="0" alt="Avatar"/>
+
+				<p>Posts: ${post.Author.PostCount}</p>
+			</div> <!-- postLeft -->
+			<div class="postRight">
+				<h3>${post.Title}</h3>
+				<p>${post.HtmlMessage}</p>
+
+				<div if="!string.IsNullOrEmpty(post.Author.Signature)" class="sig">
+					<p>${post.Author.Signature}</p>
+				</div> <!-- sig -->
+			</div> <!-- postRight -->
+		</div> <!-- post -->
+	</div> <!-- forum -->
+</div> <!-- innerWrap -->

@@ -1,0 +1,80 @@
+﻿<viewdata model="Zeus.AddIns.Forums.Mvc.ViewModels.PostingViewModel"/>
+<use namespace="Zeus.AddIns.Forums.Mvc.Html" />
+
+<content name="headStyles">
+	<link rel="stylesheet" href="/Content/Forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+</content>
+
+<content name="headScripts">
+	<script type="text/javascript" src="/Content/Forums/scripts/BBCodeEditor.js"></script>
+
+	<script type="text/javascript">
+		var onload_functions = new Array();
+
+		var form_name = 'postingForm';
+		var text_name = 'message';
+		//var load_draft = false;
+		//var upload = false;
+
+		// Define the bbCode tags
+		//var bbcode = new Array();
+		var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]');
+		//var imageTag = false;
+
+		// Helpline messages
+		var help_line = {
+			b: 'Bold text: [b]text[/b]',
+			i: 'Italic text: [i]text[/i]',
+			u: 'Underline text: [u]text[/u]',
+			q: 'Quote text: [quote]text[/quote]',
+			c: 'Code display: [code]code[/code]',
+			l: 'List: [list]text[/list]',
+			o: 'Ordered list: [list=]text[/list]',
+			p: 'Insert image: [img]http://image_url[/img]',
+			w: 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]',
+			a: 'Inline uploaded attachment: [attachment=]filename.ext[/attachment]',
+			s: 'Font colour: [color=red]text[/color]  Tip: you can also use color=#FF0000',
+			f: 'Font size: [size=85]small text[/size]',
+			e: 'List: Add list element',
+			d: 'Flash: [flash=width,height]http://url[/flash]'
+		};
+	</script>
+</content>
+
+<div id="innerWrap" class="full clearfix">
+	<div id="forum">
+		<use file="ForumHeader" />
+
+		<div id="forumReply">
+			<form action="${Model.PostingFormUrl}" id="postingForm" name="postingForm" method="post">
+				<p><label for="subject">Subject:</label>
+				${Html.TextBox("subject")} <span class="error">${Html.ValidationMessage("subject")}</span></p>
+				<div id="bbEditWrap">
+					${Html.BBCodeTextBox("message")}<br />
+					<p class="error">${Html.ValidationMessage("message")}</p>
+				</div> <!-- bbEditWrap -->
+				<div id="replyControls">
+					${Html.SubmitButton("btnCancel", "Cancel")}
+					${Html.SubmitButton("btnPreview", "Preview", new { onclick = "$('#postingForm').attr('action', '" + Model.PostingFormUrl + "Preview'); $('#postingForm').submit();" })}
+					${Html.SubmitButton("btnSubmit", "Submit")}
+				</div> <!-- replyControls -->
+			</form>
+		</div>
+		<if condition="Model.PreviewVisible">
+			<h3 class="redTitle">Preview</h3>
+			<div id="fPreview">
+				${Model.PreviewMessage}
+			</div> <!-- fPreview -->
+		</if>
+		<if condition="Model.TopicSummaryVisible">
+			<h3 class="redTitle">Topic Summary</h3>
+			<div id="fSummary">
+				<div each="var post in Model.CurrentTopicPosts" class="clearfix">
+					<p id="fSummaryLeft">Posted by ${post.Author.Title}</p>
+					<p id="fSummaryRight">Posted on ${post.Created}</p>
+					${post.HtmlMessage}
+				</div>
+			</div> <!-- fSummary -->
+		</if>
+	</div> <!-- forum -->
+</div> <!-- innerWrap -->

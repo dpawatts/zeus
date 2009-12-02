@@ -76,6 +76,15 @@ namespace Zeus.Admin {
         protected global::System.Web.UI.WebControls.PlaceHolder plcToolbar;
         
         /// <summary>
+        /// extTopToolbar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Toolbar extTopToolbar;
+        
+        /// <summary>
         /// pnlContent control.
         /// </summary>
         /// <remarks>

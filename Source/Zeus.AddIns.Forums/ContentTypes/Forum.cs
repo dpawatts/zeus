@@ -66,17 +66,6 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			}
 		}
 
-		public string NewTopicUrl
-		{
-			get
-			{
-				return new Url(MessageBoard.PostUrl)
-					.AppendQuery("f", ID)
-					.AppendQuery("mode", "newTopic")
-					.ToString();
-			}
-		}
-
 		public IEnumerable<Topic> Topics
 		{
 			get { return GetChildren<Topic>(); }

@@ -49,7 +49,7 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string ImageTag(this HtmlHelper helper, Image image, string imageUrl)
 		{
-			TagBuilder imageTag = new TagBuilder("image");
+			TagBuilder imageTag = new TagBuilder("img");
 			imageTag.MergeAttribute("src", imageUrl, true);
 			imageTag.MergeAttribute("alt", image.Caption, true);
 			imageTag.MergeAttribute("border", "0", true);

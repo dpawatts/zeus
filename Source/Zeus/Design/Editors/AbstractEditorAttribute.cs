@@ -150,7 +150,7 @@ namespace Zeus.Design.Editors
 				_label.AssociatedControlID = editor.ID;
 			AddValidators(panel, editor);
 			if (!string.IsNullOrEmpty(Description))
-				panel.Controls.Add(new LiteralControl("<span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
+				panel.Controls.Add(new LiteralControl("<br style=\"clear:both\" /><span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
 
 			return editor;
 		}

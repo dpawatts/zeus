@@ -80,6 +80,7 @@
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -124,9 +125,10 @@
     <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MemberViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\MessageBoardPostViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostingViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardSearchResultsViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TopicViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ForumService.cs" />
@@ -153,7 +155,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\BBCodeEditor.js" />
+    <EmbeddedResource Include="Mvc\Content\scripts\BBCodeEditor.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\Smilies\icon_arrow.gif" />
@@ -258,20 +260,26 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Mvc\Content\css\forum.css" />
-    <Content Include="Mvc\Content\images\avatarBig.gif" />
-    <Content Include="Mvc\Content\images\door.gif" />
-    <Content Include="Mvc\Content\images\drawingPin.gif" />
-    <Content Include="Mvc\Content\images\forumLogo.gif" />
-    <Content Include="Mvc\Content\images\newPost.gif" />
-    <Content Include="Mvc\Content\images\post.gif" />
-    <Content Include="Mvc\Content\images\postBg.gif" />
-    <Content Include="Mvc\Content\images\sticky.gif" />
-    <Content Include="Mvc\Content\images\trash.gif" />
+    <EmbeddedResource Include="Mvc\Content\css\forum.css" />
+    <EmbeddedResource Include="Mvc\Content\images\avatarBig.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\door.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\drawingPin.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\forumLogo.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\newPost.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\post.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\postBg.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\sticky.gif" />
+    <EmbeddedResource Include="Mvc\Content\images\trash.gif" />
+    <EmbeddedResource Include="Mvc\Views\MessageBoard\Search.spark" />
+    <EmbeddedResource Include="Mvc\Views\Shared\Posting.spark" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\Forum\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\MessageBoard\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Forum\Index.spark">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\Views\MessageBoard\Index.spark">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mvc\Views\Shared\ForumHeader.spark" />
     <EmbeddedResource Include="Mvc\Views\Topic\Index.spark" />
   </ItemGroup>

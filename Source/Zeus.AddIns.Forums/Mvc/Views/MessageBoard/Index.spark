@@ -2,7 +2,7 @@
 <use namespace="Zeus.AddIns.Forums.ContentTypes" />
 
 <content name="headStyles">
-	<link rel="stylesheet" href="/content/forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+	<link rel="stylesheet" href="/Content/Forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 </content>
 
 <div id="forum">

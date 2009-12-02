@@ -141,6 +141,8 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="ContentTypes\ReferenceData\Currency.cs" />
+    <Compile Include="ContentTypes\ReferenceData\CurrencyList.cs" />
     <Compile Include="ContentTypes\ReferenceData\ReferenceDataNode.cs" />
     <Compile Include="ContentTypes\ReferenceData\Country.cs" />
     <Compile Include="ContentTypes\ReferenceData\CountryList.cs" />
@@ -206,6 +208,8 @@
     <Compile Include="Mvc\ViewModels\TextItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoUtility.cs" />
+    <Compile Include="Services\CurrencyService.cs" />
+    <Compile Include="Services\ICurrencyService.cs" />
     <Compile Include="Services\TaggingDefinitionAppender.cs" />
     <Compile Include="Services\FakeMailSender.cs" />
     <Compile Include="Services\ITagService.cs" />

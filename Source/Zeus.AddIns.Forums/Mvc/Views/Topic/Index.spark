@@ -2,10 +2,9 @@
 <use namespace="System.Web.Mvc" />
 <use namespace="Microsoft.Web.Mvc" />
 <use namespace="Zeus.Web.Mvc.Html" />
-<use namespace="Zeus.AddIns.Forums.ContentTypes" />
 
 <content name="headStyles">
-	<link rel="stylesheet" href="/content/forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+	<link rel="stylesheet" href="/Content/Forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 </content>
 
 <div id="forum">
@@ -32,17 +31,17 @@
 	</div> <!-- fRungTwo -->
 	<div id="fRungThree">
 		<ul>
-			<li><a href="${Model.CurrentItem.ReplyUrl}">Reply</a></li>
+			<li><a href="${Html.Url(Model.CurrentItem).AppendSegment("reply")}">Reply</a></li>
 		</ul>
 	</div> <!-- fRungThree -->
 	
-	<div each="Post post in Model.Posts" class="fPost clearfix">
+	<div each="var post in Model.Posts" class="fPost clearfix">
 		<a name="post${post.ID}"></a>
 		<div class="pTopBar clearfix">
 			<p>${post.Created}</p>
 
 			<ul>
-				<li><a href="${post.QuoteUrl}">quote</a></li>
+				<li><a href="${Html.Url(Model.CurrentItem).AppendSegment("quote").Query("p", post.ID)}">quote</a></li>
 				<li>|</li>
 				<if condition="Model.ForumService.CanEditPost(post, Model.CurrentMember)">
 					<li><a href="${post.EditUrl}">edit</a></li>
@@ -56,7 +55,7 @@
 		<div class="postLeft">
 			<if condition="post.Author != null">
 				<a href="${post.Author.Url}">${post.Author.Title}</a>
-				<img if="post.Author.Avatar != null" src="${Html.ImageUrl(post.Author, author => author.Avatar, 80, 200, false)}" border="0" alt="Avatar"/>
+				<img if="post.Author.Avatar != null" src="${Html.ImageUrl(post.Author.Avatar, 80, 200, false)}" border="0" alt="Avatar"/>
 				<p>Posts: ${post.Author.PostCount}</p>
 			</if>
 			<else>

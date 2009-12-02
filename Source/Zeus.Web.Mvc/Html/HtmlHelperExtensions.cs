@@ -56,6 +56,11 @@ namespace Zeus.Web.Mvc.Html
 			return new Url(contentItem.Url);
 		}
 
+		public static Url Url(this HtmlHelper html, string url)
+		{
+			return new Url(url);
+		}
+
 		public static Url CurrentUrl(this HtmlHelper html)
 		{
 			return new Url(html.ViewContext.HttpContext.Request.RawUrl);

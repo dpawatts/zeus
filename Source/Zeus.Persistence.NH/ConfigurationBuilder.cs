@@ -64,10 +64,11 @@ namespace Zeus.Persistence.NH
 			StringBuilder mappings = new StringBuilder();
 			foreach (Type type in EnumerateDefinedTypes())
 			{
-				string format = (typeof(WidgetContentItem).IsAssignableFrom(type)) ? _widgetClassFormat : _classFormat;
+				string format = (typeof(WidgetContentItem) == type) ? _widgetClassFormat : _classFormat;
 				mappings.AppendFormat(format, GetName(type), GetName(type.BaseType), GetDiscriminator(type));
 			}
-			_configuration.AddXml(string.Format(_mappingFormat, mappings));
+			string configurationXml = string.Format(_mappingFormat, mappings);
+			_configuration.AddXml(configurationXml);
 		}
 
 		/// <summary>Adds mappings to the configuration.</summary>
