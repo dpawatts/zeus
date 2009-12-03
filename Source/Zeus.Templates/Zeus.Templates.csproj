@@ -167,6 +167,7 @@
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="TemplatesModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="SeoUtility.cs" />
     <Compile Include="Services\CurrencyService.cs" />
     <Compile Include="Services\ICurrencyService.cs" />
+    <Compile Include="Services\PageNotFoundHandler.cs" />
     <Compile Include="Services\TaggingDefinitionAppender.cs" />
     <Compile Include="Services\FakeMailSender.cs" />
     <Compile Include="Services\ITagService.cs" />

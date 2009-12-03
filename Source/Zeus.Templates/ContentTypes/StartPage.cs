@@ -11,5 +11,12 @@ namespace Zeus.Templates.ContentTypes
 		{
 			get { return "page_world"; }
 		}
+
+		[ContentProperty("404 Page", 25, Description = "This page will be used if a user requests a page that does not exist.")]
+		public virtual BasePage PageNotFoundPage
+		{
+			get { return GetDetail<BasePage>("PageNotFoundPage", null); }
+			set { SetDetail("PageNotFoundPage", value); }
+		}
 	}
 }
