@@ -85,6 +85,7 @@
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core">
@@ -133,6 +134,7 @@
     <Compile Include="Collections\Singleton.generic.cs" />
     <Compile Include="Collections\SingletonDictionary.cs" />
     <Compile Include="Collections\SingletonList.cs" />
+    <Compile Include="ComponentModel\DataAnnotations\CompareAttribute.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionManager.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionUtility.cs" />
     <Compile Include="Net\WebClientUtility.cs" />
