@@ -1,4 +1,5 @@
-﻿using System.Web.UI;
+﻿using System.Collections.Generic;
+using System.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Web.UI.WebControls;
@@ -18,6 +19,8 @@ namespace Zeus.Design.Editors
 			PropertyCollection detailCollection = item.GetDetailCollection(Name, true);
 			BaseDetailCollectionEditor detailCollectionEditor = (BaseDetailCollectionEditor) editor;
 
+			List<PropertyData> propertyDataToDelete = new List<PropertyData>();
+
 			// First pass saves or creates items.
 			for (int i = 0; i < detailCollectionEditor.Editors.Count; i++)
 			{
@@ -32,12 +35,15 @@ namespace Zeus.Design.Editors
 						else
 							detailCollection.Add(newDetail);
 				}
+				else
+				{
+					propertyDataToDelete.Add(detailCollection.Details[i]);
+				}
 			}
 
 			// Do a second pass to delete the items, this is so we don't mess with the indices on the first pass.
-			for (int i = 0; i < detailCollectionEditor.Editors.Count; i++)
-				if (detailCollectionEditor.DeletedIndexes.Contains(i))
-					detailCollection.RemoveAt(i);
+			foreach (PropertyData propertyData in propertyDataToDelete)
+				detailCollection.Remove(propertyData);
 
 			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors.Count > 0;
 		}
