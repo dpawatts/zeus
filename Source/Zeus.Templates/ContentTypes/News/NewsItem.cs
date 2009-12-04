@@ -2,6 +2,7 @@ using System;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
+using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
 
@@ -9,6 +10,7 @@ namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Item")]
 	[RestrictParents(typeof(NewsContainer), typeof(NewsMonth))]
+	[AllowedChildren(typeof(Image))]
 	public class NewsItem : BaseNewsPage, IFileSystemContainer, ISyndicatable
 	{
 		protected override string IconName
