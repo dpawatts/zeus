@@ -37,7 +37,7 @@ namespace Zeus.Templates.ContentTypes.Forms
 
 			TagBuilder result = new TagBuilder("span");
 			result.MergeAttribute("class", "alternatives");
-			result.SetInnerText(string.Join(string.Empty, radioButtons));
+			result.SetInnerText(string.Join(string.Empty, radioButtons.ToArray()));
 			return result;
 		}
 

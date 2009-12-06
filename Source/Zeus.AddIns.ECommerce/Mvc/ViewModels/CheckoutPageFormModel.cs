@@ -1,7 +1,6 @@
 using System;
 using FluentValidation;
 using FluentValidation.Attributes;
-using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.BaseLibrary.ExtensionMethods;
 

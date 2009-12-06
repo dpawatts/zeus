@@ -1,4 +1,5 @@
-﻿using Zeus.Integrity;
+﻿using Zeus.BaseLibrary;
+using Zeus.Integrity;
 using Zeus.Design.Editors;
 using Coolite.Ext.Web;
 using System;
@@ -23,7 +24,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 
 			string tempIconName = "Flag" + alpha2.Substring(0, 1) + alpha2.Substring(1).ToLower();
 			Icon icon;
-			if (Enum.TryParse<Icon>(tempIconName, out icon))
+			if (EnumHelper.TryParse(tempIconName, out icon))
 				Icon = icon;
 		}
 

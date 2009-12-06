@@ -36,5 +36,19 @@ namespace Zeus.BaseLibrary
 			string[] names = Enum.GetNames(enumType);
 			return names.Select(s => GetEnumValueDescription(enumType, s));
 		}
+
+		public static bool TryParse<T>(string stringValue, out T value)
+		{
+			try
+			{
+				value = (T) Enum.Parse(typeof (T), stringValue);
+				return true;
+			}
+			catch (ArgumentException)
+			{
+				value = default(T);
+				return false;
+			}
+		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Zeus.Web.Mvc
 		{
 			var defaultMetadata = base.CreateMetadata(attributes, containerType, modelAccessor, modelType, propertyName);
 			defaultMetadata.IsRequired = defaultMetadata.IsRequired || attributes.Where(x => x is RequiredAttribute).Any();
-			defaultMetadata.HideSurroundingChrome = defaultMetadata.HideSurroundingChrome || attributes.Where(x => x is HideSurroundingChromeAttribute).Any();
+			defaultMetadata.HideSurroundingHtml = defaultMetadata.HideSurroundingHtml || attributes.Where(x => x is HideSurroundingChromeAttribute).Any();
 			if (string.IsNullOrEmpty(defaultMetadata.Description) && attributes.Where(x => x is DescriptionAttribute).Any())
 				defaultMetadata.Description = attributes.OfType<DescriptionAttribute>().First().Description;
 			if (modelType.IsEnum || (Nullable.GetUnderlyingType(modelType) != null && Nullable.GetUnderlyingType(modelType).IsEnum))
