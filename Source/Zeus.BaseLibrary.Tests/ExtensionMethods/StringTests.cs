@@ -69,5 +69,44 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			string leftPart = myString.Truncate(300);
 			Assert.AreEqual("This is a test string.", leftPart);
 		}
+
+		[TestMethod]
+		public void CanGetLeftBefore()
+		{
+			// Arrange.
+			const string value = "This is my string.";
+
+			// Act.
+			string result = value.LeftBefore("string");
+
+			// Assert.
+			Assert.AreEqual("This is my ", result);
+		}
+
+		[TestMethod]
+		public void CanGetRightAfter()
+		{
+			// Arrange.
+			const string value = "This is my string.";
+
+			// Act.
+			string result = value.RightAfter("my");
+
+			// Assert.
+			Assert.AreEqual(" string.", result);
+		}
+
+		[TestMethod]
+		public void CanGetRightAfterLast()
+		{
+			// Arrange.
+			const string value = "This is my string.";
+
+			// Act.
+			string result = value.RightAfterLast("i");
+
+			// Assert.
+			Assert.AreEqual("ng.", result);
+		}
 	}
 }

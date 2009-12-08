@@ -7,6 +7,7 @@ using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Security;
 using Zeus.Web;
+using Zeus.Web.Hosting;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Admin.Plugins.EditItem
@@ -70,6 +71,12 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			LoadZones();
 			base.OnLoad(e);
+		}
+
+		protected string GetSessionKeepAliveUrl()
+		{
+			return Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
+				typeof(KeepAlive).Assembly, "Zeus.Admin.Plugins.EditItem.KeepAlive.aspx");
 		}
 
 		protected void btnSave_Click(object sender, EventArgs e)

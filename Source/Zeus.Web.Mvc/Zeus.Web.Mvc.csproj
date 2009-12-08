@@ -110,6 +110,7 @@
     <Compile Include="Html\DisplayHelper.cs" />
     <Compile Include="Html\ItemHelper.cs" />
     <Compile Include="Html\MembershipExtensions.cs" />
+    <Compile Include="Html\StringExtensions.cs" />
     <Compile Include="Html\TemplateRenderer.cs" />
     <Compile Include="Html\ZoneExtensions.cs" />
     <Compile Include="Html\ZoneHelper.cs" />

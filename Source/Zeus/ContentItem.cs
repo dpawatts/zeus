@@ -845,6 +845,8 @@ namespace Zeus
 
 		protected virtual bool Equals(string name)
 		{
+			if (Name == null)
+				return false;
 			return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
 		}
 

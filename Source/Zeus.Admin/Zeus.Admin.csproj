@@ -99,6 +99,13 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Plugins\EditItem\KeepAlive.aspx.cs">
+      <DependentUpon>KeepAlive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\EditItem\KeepAlive.aspx.designer.cs">
+      <DependentUpon>KeepAlive.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\PluginUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -482,6 +489,7 @@
     <EmbeddedResource Include="Plugins\MoveItem\MoveUserControl.ascx" />
     <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemGridMenuPlugin.js" />
     <EmbeddedResource Include="Plugins\Tree\Resources\TreeCssInitializer.js" />
+    <EmbeddedResource Include="Plugins\EditItem\KeepAlive.aspx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />

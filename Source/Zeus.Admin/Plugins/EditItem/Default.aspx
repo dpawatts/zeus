@@ -48,6 +48,25 @@
 				jQuery(".showInfo").click();
 			if (cookie.read(".zonesBox"))
 				jQuery(".showZones").click();
+
+			setTimeout(jQuery.zeusKeepAlive.sessionSaver,
+				jQuery.zeusKeepAlive.sessionSaverInterval);
 		});
+		
+		(function($)
+		{
+			$.zeusKeepAlive =
+			{
+  			sessionSaverUrl: '<%= GetSessionKeepAliveUrl() %>',
+  			sessionSaverInterval: (60000 * 5),
+  			sessionSaver: function()
+  			{
+  				$.post($.zeusKeepAlive.sessionSaverUrl);
+  				setTimeout($.zeusKeepAlive.sessionSaver,
+						$.zeusKeepAlive.sessionSaverInterval);
+  			}
+			};
+		})(jQuery);
+
    </script>
 </asp:Content>

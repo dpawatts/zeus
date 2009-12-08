@@ -169,5 +169,142 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 			       	.SelectMany((c, i) => ((c - '0') << (i & 1)).ToString())
 			       	.Sum(c => c - '0') % 10;
 		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string before the 
+		/// first occurrence of another string.
+		/// </summary>
+		/// <param name="str">Required. String expression from which the leftmost characters are returned.</param>
+		/// <param name="search">The string where the beginning of it marks the 
+		/// characters to return.  If the string is not found, the whole string is 
+		/// returned.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string LeftBefore(this string str, string search)
+		{
+			return LeftBefore(str, search, StringComparison.InvariantCulture);
+		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string before the 
+		/// first occurrence of another string.
+		/// </summary>
+		/// <param name="original">Required. String expression from which the leftmost characters are returned.</param>
+		/// <param name="search">The string where the beginning of it marks the 
+		/// characters to return.  If the string is not found, the whole string is 
+		/// returned.</param>
+		/// <param name="comparisonType">Determines whether or not to use case sensitive search.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string LeftBefore(this string original, string search, StringComparison comparisonType)
+		{
+			if (original == null)
+				throw new ArgumentNullException("original", "The original string may not be null.");
+
+			if (search == null)
+				throw new ArgumentNullException("search", "Search string may not be null.");
+
+			//Shortcut.
+			if (search.Length > original.Length || search.Length == 0)
+				return original;
+
+			int searchIndex = original.IndexOf(search, 0, comparisonType);
+
+			if (searchIndex < 0)
+				return original;
+
+			return Left(original, searchIndex);
+		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string after the 
+		/// first occurrence of another string.
+		/// </summary>
+		/// <param name="original">Required. String expression from which the rightmost characters are returned.</param>
+		/// <param name="search">The string where the end of it marks the 
+		/// characters to return.  If the string is not found, the whole string is 
+		/// returned.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string RightAfter(this string original, string search)
+		{
+			return RightAfter(original, search, StringComparison.InvariantCulture);
+		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string after the 
+		/// first occurrence of another string.
+		/// </summary>
+		/// <param name="original">Required. String expression from which the rightmost characters are returned.</param>
+		/// <param name="search">The string where the end of it marks the 
+		/// characters to return.  If the string is not found, the whole string is 
+		/// returned.</param>
+		/// <param name="comparisonType">Determines whether or not to use case sensitive search.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string RightAfter(this string original, string search, StringComparison comparisonType)
+		{
+			if (original == null)
+				throw new ArgumentNullException("original", "The original string may not be null.");
+			if (search == null)
+				throw new ArgumentNullException("search", "The searchString string may not be null.");
+
+			//Shortcut.
+			if (search.Length > original.Length || search.Length == 0)
+				return original;
+
+			int searchIndex = original.IndexOf(search, 0, comparisonType);
+
+			if (searchIndex < 0)
+				return original;
+
+			return Right(original, original.Length - (searchIndex + search.Length));
+		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string after the 
+		/// last occurrence of another string.
+		/// </summary>
+		/// <param name="original">Required. String expression from which the rightmost characters are returned.</param>
+		/// <param name="search">The string where the end of it marks the 
+		/// characters to return.  If the string is not found, the whole string is 
+		/// returned.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string RightAfterLast(this string original, string search)
+		{
+			return RightAfterLast(original, search, original.Length - 1, StringComparison.InvariantCulture);
+		}
+
+		/// <summary>
+		/// Returns a string containing every character within a string after the
+		/// last occurrence of another string.
+		/// </summary>
+		/// <param name="original">Required. String expression from which the rightmost characters are returned.</param>
+		/// <param name="search">The string where the end of it marks the
+		/// characters to return.  If the string is not found, the whole string is
+		/// returned.</param>
+		/// <param name="startIndex">The start index.</param>
+		/// <param name="comparisonType">Determines whether or not to use case sensitive search.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentNullException">Thrown if str or searchstring is null.</exception>
+		public static string RightAfterLast(this string original, string search, int startIndex, StringComparison comparisonType)
+		{
+			if (original == null)
+				throw new ArgumentNullException("original", "The original string may not be null.");
+			if (search == null)
+				throw new ArgumentNullException("search", "The searchString string may not be null.");
+
+			//Shortcut.
+			if (search.Length > original.Length || search.Length == 0)
+				return original;
+
+			int searchIndex = original.LastIndexOf(search, startIndex, comparisonType);
+
+			if (searchIndex < 0)
+				return original;
+
+			return Right(original, original.Length - (searchIndex + search.Length));
+		}
 	}
 }

@@ -6,6 +6,7 @@ using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
 using Zeus.Web;
+using Zeus.Web.Mvc.Html;
 
 namespace Zeus.AddIns.Blogs.Services
 {
@@ -33,7 +34,7 @@ namespace Zeus.AddIns.Blogs.Services
 			Comment comment = _contentTypeManager.CreateInstance<Comment>(post);
 			comment.AuthorName = name;
 			comment.AuthorUrl = url;
-			comment.Text = text;
+			comment.Text = StringExtensions.ConvertUrlsToHyperLinks(null, text);
 			comment.AddTo(post);
 
 			_captchaService.Check(new HttpContextWrapper(HttpContext.Current));
