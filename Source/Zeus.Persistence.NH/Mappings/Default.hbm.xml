@@ -48,6 +48,10 @@
 		<subclass name="Zeus.ContentProperties.DateTimeProperty, Zeus" discriminator-value="DateTime">
 			<property name="DateTimeValue" type="DateTime" />
 		</subclass>
+		
+		<subclass name="Zeus.ContentProperties.TimeSpanProperty, Zeus" discriminator-value="Time">
+			<property name="TimeSpanValue" type="TimeAsTimeSpan" />
+		</subclass>
 
 		<subclass name="Zeus.ContentProperties.StringProperty, Zeus" discriminator-value="String">
 			<property name="StringValue" type="StringClob" length="1073741823" />

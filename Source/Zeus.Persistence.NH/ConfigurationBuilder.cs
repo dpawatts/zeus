@@ -37,7 +37,7 @@ namespace Zeus.Persistence.NH
 			if (databaseSectionConfig == null)
 				databaseSectionConfig = new DatabaseSection();
 
-			var configuration = MsSqlConfiguration.MsSql2005
+			var configuration = MsSqlConfiguration.MsSql2008
 				//.ConnectionString(c => c.FromConnectionStringWithKey(databaseSectionConfig.ConnectionStringName))
 				.Cache(c => c.ProviderClass(databaseSectionConfig.CacheProviderClass));
 

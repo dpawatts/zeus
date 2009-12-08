@@ -8,6 +8,7 @@ namespace Zeus.ContentProperties
 		Integer,
 		Link,
 		Object,
-		String
+		String,
+		TimeSpan
 	}
 }

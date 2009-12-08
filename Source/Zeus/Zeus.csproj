@@ -194,6 +194,7 @@
     <Compile Include="ContentManager.cs" />
     <Compile Include="ContentProperties\BasePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ContentPropertyManager.cs" />
+    <Compile Include="ContentProperties\TimeSpanProperty.cs" />
     <Compile Include="ContentProperties\IntegerPropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\DoublePropertyDataTypeAttribute.cs" />
     <Compile Include="ContentProperties\ObjectPropertyDataTypeAttribute.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Design\Editors\MultiImageUploadEditorAttribute.cs" />
     <Compile Include="IContentManager.cs" />
     <Compile Include="Installation\Migrations\1_AddTables.cs" />
+    <Compile Include="Installation\Migrations\2_AddTimeSpanDetail.cs" />
     <Compile Include="Installation\Migrations\MigrationExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
