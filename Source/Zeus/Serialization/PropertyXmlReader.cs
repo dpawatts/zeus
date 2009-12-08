@@ -23,7 +23,7 @@ namespace Zeus.Serialization
 
 			string name = attributes["name"];
 
-			if (type != typeof(ContentItem))
+			if (!typeof(ContentItem).IsAssignableFrom(type))
 			{
 				item[name] = Parse(navigator.Value, type);
 			}
