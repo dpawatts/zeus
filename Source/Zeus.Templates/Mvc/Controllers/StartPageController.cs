@@ -5,8 +5,8 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(StartPage), AreaName = TemplatesWebPackage.AREA_NAME)]
-	public class StartPageController : ZeusController<StartPage>
+	[Controls(typeof(WebsiteNode), AreaName = TemplatesWebPackage.AREA_NAME)]
+	public class StartPageController : ZeusController<WebsiteNode>
 	{
 		public override ActionResult Index()
 		{

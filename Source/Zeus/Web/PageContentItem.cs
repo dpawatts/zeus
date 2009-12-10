@@ -1,7 +1,42 @@
+﻿using Coolite.Ext.Web;
+using Zeus.ContentTypes;
+using Zeus.Design.Editors;
+
 namespace Zeus.Web
 {
-	public class PageContentItem
+	[UI.TabPanel("Content", "Content", 10)]
+	[DefaultContainer("Content")]
+	public abstract class PageContentItem : ContentItem
 	{
-		
+		[TextBoxEditor("Title", 10, Required = true, Shared = false)]
+		public override string Title
+		{
+			get { return base.Title; }
+			set { base.Title = value; }
+		}
+
+		[NameEditor("URL", 20, Required = true, Shared = false)]
+		public override string Name
+		{
+			get { return base.Name; }
+			set { base.Name = value; }
+		}
+
+		[ContentProperty("Visible in Menu", 25)]
+		public override bool Visible
+		{
+			get { return base.Visible; }
+			set { base.Visible = value; }
+		}
+
+		public override string IconUrl
+		{
+			get { return Utility.GetCooliteIconUrl(Icon.Page); }
+		}
+
+		public override bool IsPage
+		{
+			get { return true; }
+		}
 	}
 }

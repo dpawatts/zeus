@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -9,7 +10,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Subcategory), "Zeus.AddIns.ECommerce.Icons.page_red.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.PageRed); }
 		}
 	}
 }

@@ -1,21 +1,22 @@
+using Coolite.Ext.Web;
 using Zeus.FileSystem;
 using Zeus.Integrity;
 
-namespace Zeus.Templates.ContentTypes
+namespace Zeus.Web
 {
 	[ContentType("Start Page", "BaseStartPage", Installer = Installation.InstallerHints.PreferredStartPage)]
 	[RestrictParents(typeof(RootItem))]
-	public class StartPage : BasePage, IFileSystemContainer
+	public class WebsiteNode : PageContentItem, IFileSystemContainer
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "page_world"; }
+			get { return Utility.GetCooliteIconUrl(Icon.PageWorld); }
 		}
 
 		[ContentProperty("404 Page", 25, Description = "This page will be used if a user requests a page that does not exist.")]
-		public virtual BasePage PageNotFoundPage
+		public virtual PageContentItem PageNotFoundPage
 		{
-			get { return GetDetail<BasePage>("PageNotFoundPage", null); }
+			get { return GetDetail<PageContentItem>("PageNotFoundPage", null); }
 			set { SetDetail("PageNotFoundPage", value); }
 		}
 	}

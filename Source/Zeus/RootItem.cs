@@ -1,15 +1,16 @@
+using Coolite.Ext.Web;
 using Zeus.ContentTypes;
 using Zeus.Integrity;
 
-namespace Zeus.Templates.ContentTypes
+namespace Zeus
 {
 	[ContentType("Root Item", Installer = Installation.InstallerHints.PreferredRootPage)]
 	[RestrictParents(AllowedTypes.None)]
-	public class RootItem : BaseContentItem, IRootItem
+	public class RootItem : ContentItem, IRootItem
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "page_gear"; }
+			get { return Utility.GetCooliteIconUrl(Icon.PageGear); }
 		}
 	}
 }

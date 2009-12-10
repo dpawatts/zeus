@@ -4,7 +4,7 @@ namespace Zeus.Persistence
 {
 	public interface IPersister
 	{
-		/// <summary>Gets the repository implementation used by this persister. Please note that using the using the repository circumvent events exposed by the persister and is not run in a transaction. Do net expect the behaviour to be exactly the same.</summary>
+		/// <summary>Gets the store implementation used by this persister. Please note that using the using the store circumvent events exposed by the persister and is not run in a transaction. Do net expect the behaviour to be exactly the same.</summary>
 		IRepository<int, ContentItem> Repository { get; }
 
 		/// <summary>Occurs before an item is saved</summary>

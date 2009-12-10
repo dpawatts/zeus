@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Coolite.Ext.Web;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
@@ -21,7 +22,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Shop), "Zeus.AddIns.ECommerce.Icons.money.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Money); }
 		}
 
 		public VariationSetContainer VariationsSet

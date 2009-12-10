@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Coolite.Ext.Web;
+﻿using Coolite.Ext.Web;
 using Zeus.Integrity;
 
-namespace Zeus.Templates.ContentTypes
+namespace Zeus
 {
 	[ContentType("System Node")]
 	[RestrictParents(typeof(RootItem))]
-	public class SystemNode : BaseContentItem
+	public class SystemNode : ContentItem
 	{
 		public SystemNode()
 		{

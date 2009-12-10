@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Integrity;
@@ -35,9 +36,9 @@ namespace Zeus.Templates.ContentTypes
 			set { SetDetail("CheckChildrenForNavigationState", value); }
 		}
 
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "page_go"; }
+			get { return Utility.GetCooliteIconUrl(Icon.PageGo); }
 		}
 	}
 }

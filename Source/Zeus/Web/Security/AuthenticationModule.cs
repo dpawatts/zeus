@@ -102,7 +102,7 @@ namespace Zeus.Web.Security
 			IUser membershipUser = null;
 			try
 			{
-				membershipUser = WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().GetUser(ticket.Name);	
+				membershipUser = WebSecurityEngine.Get<ICredentialService>().GetUser(ticket.Name);	
 			}
 			catch
 			{

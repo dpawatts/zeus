@@ -159,6 +159,7 @@
     <Compile Include="Security\Impersonation.cs" />
     <Compile Include="ExtensionMethods\String.cs" />
     <Compile Include="ExtensionMethods\Type.cs" />
+    <Compile Include="Security\NonceUtility.cs" />
     <Compile Include="Web\Handlers\FlashVideoStreamingHandler.cs" />
     <Compile Include="ExtensionMethods\Web\HttpRequest.cs" />
     <Compile Include="Web\InvalidQueryStringException.cs" />

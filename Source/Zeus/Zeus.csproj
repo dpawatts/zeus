@@ -248,13 +248,26 @@
     <Compile Include="Installation\Migrations\1_AddTables.cs" />
     <Compile Include="Installation\Migrations\2_AddTimeSpanDetail.cs" />
     <Compile Include="Installation\Migrations\MigrationExtensions.cs" />
+    <Compile Include="Net\Mail\FakeMailSender.cs" />
+    <Compile Include="Net\Mail\MailSender.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="RootItem.cs" />
+    <Compile Include="Security\Role.cs" />
+    <Compile Include="Security\RoleContainer.cs" />
+    <Compile Include="Security\SecurityContainer.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Security\UserContainer.cs" />
+    <Compile Include="SystemNode.cs" />
+    <Compile Include="Web\IWebsiteMemberService.cs" />
     <Compile Include="Web\PageContentItem.cs" />
+    <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="Web\Security\UserVerificationResult.cs" />
+    <Compile Include="Web\WebsiteMember.cs" />
+    <Compile Include="Web\WebsiteMemberContainer.cs" />
     <Compile Include="Web\Security\AuthenticationContextService.cs" />
     <Compile Include="Web\Security\AuthenticationEventArgs.cs" />
     <Compile Include="Web\Security\AuthenticationLocation.cs" />
@@ -267,19 +280,13 @@
     <Compile Include="Web\Security\AuthorizationRuleCollection.cs" />
     <Compile Include="Web\Security\AuthorizationService.cs" />
     <Compile Include="Web\Security\ILoginContext.cs" />
-    <Compile Include="Web\Security\ICredentialContextInitializer.cs" />
-    <Compile Include="Web\Security\CredentialContextService.cs" />
-    <Compile Include="Web\Security\CredentialLocation.cs" />
     <Compile Include="Web\Security\CredentialService.cs" />
-    <Compile Include="Web\Security\DefaultCredentialRepository.cs" />
-    <Compile Include="Web\Security\DefaultUser.cs" />
     <Compile Include="Web\Security\IAuthenticationContextInitializer.cs" />
     <Compile Include="Web\Security\IAuthenticationContextService.cs" />
     <Compile Include="Web\Security\IAuthenticationService.cs" />
     <Compile Include="Web\Security\IAuthorizationInitializer.cs" />
     <Compile Include="Web\Security\IAuthorizationService.cs" />
-    <Compile Include="Web\Security\ICredentialContextService.cs" />
-    <Compile Include="Web\Security\ICredentialRepository.cs" />
+    <Compile Include="Web\Security\ICredentialStore.cs" />
     <Compile Include="Web\Security\ICredentialService.cs" />
     <Compile Include="Web\Security\IUser.cs" />
     <Compile Include="Web\Security\SecurityLocation.cs" />
@@ -287,6 +294,8 @@
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
+    <Compile Include="Web\WebsiteMemberService.cs" />
+    <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />
     <Compile Include="Web\UI\WebControls\DropDownList.cs" />
@@ -408,9 +417,6 @@
     <Compile Include="Web\PermanentLinkManager.cs" />
     <Compile Include="Web\RequestAdapter.cs" />
     <Compile Include="Web\Routing\EmbeddedContentRouteHandler.cs" />
-    <Compile Include="Web\Security\Items\Role.cs" />
-    <Compile Include="Web\Security\Items\SecurityContainer.cs" />
-    <Compile Include="Web\Security\Items\RoleContainer.cs" />
     <Compile Include="Web\Security\IWebSecurityManager.cs" />
     <Compile Include="Web\Site.cs" />
     <Compile Include="Web\UI\ClientScriptManager.extensions.cs" />
@@ -492,7 +498,7 @@
     <Compile Include="Web\RequestItem.cs" />
     <Compile Include="Web\RequestLifecycleHandler.cs" />
     <Compile Include="Web\Resources\Resources.cs" />
-    <Compile Include="Web\Security\CredentialRepository.cs" />
+    <Compile Include="Web\Security\CredentialStore.cs" />
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
     <Compile Include="Web\UI\FieldSetAttribute.cs" />
@@ -572,8 +578,6 @@
     <Compile Include="Web\Compilation\HasValueExpressionBuilder.cs" />
     <Compile Include="Web\Security\Details\RolesEditorAttribute.cs" />
     <Compile Include="Security\ISecurityEnforcer.cs" />
-    <Compile Include="Web\Security\Items\User.cs" />
-    <Compile Include="Web\Security\Items\UserContainer.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Web\Compilation\CurrentPageExpressionBuilder.cs" />
     <Compile Include="Web\Compilation\ZeusExpressionBuilder.cs" />

@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -10,7 +11,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(ShoppingBasketPage), "Zeus.AddIns.ECommerce.Icons.basket.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Basket); }
 		}
 
 		[XhtmlStringContentProperty("Extra Information", 210)]

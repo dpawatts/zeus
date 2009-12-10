@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
@@ -16,6 +17,11 @@ namespace Zeus.Web.Security.Items
 		{
 			get { return base.Name; }
 			set { base.Name = value; }
+		}
+
+		public string Identifier
+		{
+			get { return Name; }
 		}
 
 		[TextBoxEditor("UserName", 20, Required = true)]
@@ -50,46 +56,18 @@ namespace Zeus.Web.Security.Items
 			get { return Roles.Cast<Role>().Select(r => r.Name).ToArray(); }
 		}
 
-		[ContentProperty("PasswordQuestion", 120)]
-		public virtual string PasswordQuestion
+		[ContentProperty("Nonce", 141)]
+		public virtual string Nonce
 		{
-			get { return (string) (GetDetail("PasswordQuestion") ?? string.Empty); }
-			set { SetDetail("PasswordQuestion", value, string.Empty); }
+			get { return GetDetail("Nonce", string.Empty); }
+			set { SetDetail("Nonce", value); }
 		}
 
-		[ContentProperty("PasswordAnswer", 130)]
-		public virtual string PasswordAnswer
+		[ContentProperty("Verified", 142)]
+		public virtual bool Verified
 		{
-			get { return (string) (GetDetail("PasswordAnswer") ?? string.Empty); }
-			set { SetDetail("PasswordAnswer", value, string.Empty); }
-		}
-
-		[ContentProperty("Is Online", 140)]
-		public virtual bool IsOnline
-		{
-			get { return (bool) (GetDetail("IsOnline") ?? false); }
-			set { SetDetail("IsOnline", value, false); }
-		}
-
-		[ContentProperty("Is Approved", 142)]
-		public virtual bool IsApproved
-		{
-			get { return (bool) (GetDetail("IsApproved") ?? false); }
-			set { SetDetail("IsApproved", value, false); }
-		}
-
-		[ContentProperty("Is Locked Out", 144)]
-		public virtual bool IsLockedOut
-		{
-			get { return (bool) (GetDetail("IsLockedOut") ?? false); }
-			set { SetDetail("IsLockedOut", value, false); }
-		}
-
-		[ContentProperty("Comment", 150)]
-		public virtual string Comment
-		{
-			get { return (string) (GetDetail("Comment") ?? string.Empty); }
-			set { SetDetail("Comment", value, string.Empty); }
+			get { return GetDetail("Verified", false); }
+			set { SetDetail("Verified", value); }
 		}
 
 		[ContentProperty("Last Login Date", 160)]
@@ -113,16 +91,9 @@ namespace Zeus.Web.Security.Items
 			set { SetDetail("LastPasswordChangedDate", value, Published.Value); }
 		}
 
-		[ContentProperty("Last Lockout Date", 166)]
-		public virtual DateTime? LastLockoutDate
-		{
-			get { return (DateTime?) GetDetail("LastLockoutDate"); }
-			set { SetDetail("LastLockoutDate", value < new DateTime(2000, 1, 1) ? null : value); }
-		}
-
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(User), "Zeus.Web.Resources.Icons.user.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.User); }
 		}
 
 		string IUser.Username

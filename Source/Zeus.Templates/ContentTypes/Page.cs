@@ -1,11 +1,12 @@
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[ContentType]
-	[RestrictParents(typeof(StartPage), typeof(Page), typeof(Redirect))]
+	[RestrictParents(typeof(WebsiteNode), typeof(Page), typeof(Redirect))]
 	public class Page : BasePage
 	{
 		[XhtmlStringContentProperty("Content", 30, Shared = false),

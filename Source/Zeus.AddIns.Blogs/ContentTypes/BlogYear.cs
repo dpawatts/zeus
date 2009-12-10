@@ -1,4 +1,5 @@
 using System;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -15,7 +16,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(BlogYear), "Zeus.AddIns.Blogs.Icons.calendar.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Calendar); }
 		}
 
 		public override string Name

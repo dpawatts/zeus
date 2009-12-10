@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Coolite.Ext.Web;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
 using Zeus.Web;
@@ -10,9 +11,9 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(BasePage))]
 	public class RssFeed : BasePage, IFeed, INode
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "feed"; }
+			get { return Utility.GetCooliteIconUrl(Icon.Feed); }
 		}
 
 		[ContentProperty("Feed root", 90)]

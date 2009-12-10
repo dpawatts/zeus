@@ -1,10 +1,11 @@
 using System;
+using Coolite.Ext.Web;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.FileSystem;
-using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
+using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.Templates.ContentTypes.News
 {
@@ -13,9 +14,9 @@ namespace Zeus.Templates.ContentTypes.News
 	[AllowedChildren(typeof(Image))]
 	public class NewsItem : BaseNewsPage, IFileSystemContainer, ISyndicatable
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "newspaper_link"; }
+			get { return Utility.GetCooliteIconUrl(Icon.NewspaperLink); }
 		}
 
 		public override NewsContainer CurrentNewsContainer

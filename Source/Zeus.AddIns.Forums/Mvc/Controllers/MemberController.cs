@@ -8,8 +8,8 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(Member), AreaName = ForumsWebPackage.AREA_NAME)]
-	public class MemberController : BaseForumController<Member>
+	[Controls(typeof(ContentTypes.Member), AreaName = ForumsWebPackage.AREA_NAME)]
+	public class MemberController : BaseForumController<ContentTypes.Member>
 	{
 		protected override MessageBoard CurrentMessageBoard
 		{

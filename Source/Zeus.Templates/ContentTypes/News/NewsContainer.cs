@@ -1,15 +1,17 @@
 using System;
+using Coolite.Ext.Web;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Section")]
-	[RestrictParents(typeof(StartPage))]
+	[RestrictParents(typeof(WebsiteNode))]
 	public class NewsContainer : BaseNewsPage
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "newspaper"; }
+			get { return Utility.GetCooliteIconUrl(Icon.Newspaper); }
 		}
 
 		public override NewsContainer CurrentNewsContainer

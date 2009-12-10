@@ -130,7 +130,7 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 
 		private static bool ValidateUser(string username, string password)
 		{
-			return WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().ValidateUser(username, password);
+			return WebSecurityEngine.Get<ICredentialService>().ValidateUser(username, password);
 		}
 
 		private static string GetLink(string url)

@@ -1,7 +1,7 @@
 using System;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
-using Zeus.Templates.ContentTypes.News;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
@@ -16,7 +16,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(BlogMonth), "Zeus.AddIns.Blogs.Icons.calendar_view_month.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.CalendarViewMonth); }
 		}
 
 		[TextBoxEditor("Name", 20)]

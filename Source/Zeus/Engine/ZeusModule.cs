@@ -89,8 +89,8 @@ namespace Zeus.Engine
 			Bind<IHost>().To<Host>().InSingletonScope();
 			Bind<IUrlParser>().To<MultipleSitesUrlParser>().InSingletonScope();
 			Bind<IPermanentLinkManager>().To<PermanentLinkManager>().InSingletonScope();
-			Bind<ICredentialRepository>().To<CredentialRepository>().InSingletonScope();
-			Bind<IWebSecurityManager>().To<CredentialRepository>().InSingletonScope();
+			Bind<ICredentialStore>().To<CredentialStore>().InSingletonScope();
+			Bind<IWebSecurityManager>().To<CredentialStore>().InSingletonScope();
 			Bind<PermissionDeniedHandler>().To<PermissionDeniedHandler>().InSingletonScope(); // FIX
 			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
 			Bind<IRequestLifecycleHandler>().To<RequestLifecycleHandler>().InSingletonScope();
@@ -101,10 +101,12 @@ namespace Zeus.Engine
 			// Web security
 			Bind<BaseLibrary.Web.IWebContext>().To<WebContext>().InSingletonScope();
 			Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
-			Bind<ICredentialContextService>().To<CredentialContextService>().InSingletonScope();
+			Bind<ICredentialStore>().To<CredentialStore>().InSingletonScope();
+			Bind<ICredentialService>().To<CredentialService>().InSingletonScope();
 			Bind<IAuthenticationContextService>().To<AuthenticationContextService>().InSingletonScope();
 			Bind<IAuthenticationContextInitializer>().To<SecurityInitializer>().InSingletonScope();
 			Bind<IAuthorizationInitializer>().To<SecurityInitializer>().InSingletonScope();
+			Bind<IWebsiteMemberService>().To<WebsiteMemberService>().InSingletonScope();
 		}
 	}
 }

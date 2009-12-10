@@ -2,7 +2,7 @@
 
 namespace Zeus.Tests.Definitions.Items
 {
-	[ContentType("Text page", "StartPage")]
+	[ContentType("Text page", "websiteNode")]
 	public class TestTextPage : ContentItem
 	{
 		[HtmlTextBoxEditor("Text", 100)]

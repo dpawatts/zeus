@@ -95,6 +95,7 @@
     <Compile Include="ExtensionMethods\Linq\QueryableTests.cs" />
     <Compile Include="ExtensionMethods\StringTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\NonceUtilityTests.cs" />
     <Compile Include="Web\UrlTests.cs" />
   </ItemGroup>
   <ItemGroup>

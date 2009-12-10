@@ -31,8 +31,8 @@ namespace Zeus.Installation
 		private readonly Importer _importer;
 		private readonly IPersister _persister;
 		private readonly IFinder _finder;
+		private readonly ICredentialService _credentialService;
 		private readonly IHost _host;
-		private readonly ICredentialContextService _credentialContextService;
 		private readonly AdminSection _adminConfig;
 
 		#endregion
@@ -40,14 +40,14 @@ namespace Zeus.Installation
 		#region Constructor
 
 		public InstallationManager(IHost host, IContentTypeManager contentTypeManager, Importer importer, IPersister persister,
-			IFinder finder, ICredentialContextService credentialContextService, AdminSection adminConfig)
+			IFinder finder, ICredentialService credentialService, AdminSection adminConfig)
 		{
 			_host = host;
 			_contentTypeManager = contentTypeManager;
 			_importer = importer;
 			_persister = persister;
 			_finder = finder;
-			_credentialContextService = credentialContextService;
+			_credentialService = credentialService;
 			_adminConfig = adminConfig;
 		}
 
@@ -82,7 +82,8 @@ namespace Zeus.Installation
 		public void CreateAdministratorUser(string username, string password)
 		{
 			UserCreateStatus createStatus;
-			_credentialContextService.GetCurrentService().CreateUser(username, password, new[] { _adminConfig.AdministratorRole }, out createStatus);
+			_credentialService.CreateUser(username, password, string.Empty, new[] { _adminConfig.AdministratorRole },
+				true, out createStatus);
 			if (createStatus != UserCreateStatus.Success)
 				throw new ZeusException("Could not create user: " + createStatus);
 		}
@@ -106,7 +107,7 @@ namespace Zeus.Installation
 				status.RootItem = _persister.Get(status.RootItemID);
 				status.IsInstalled = status.RootItem != null && status.StartPage != null;
 
-				status.HasUsers = _credentialContextService.GetCurrentService().GetUser("administrator") != null;
+				status.HasUsers = _credentialService.GetUser("administrator") != null;
 			}
 			catch (Exception ex)
 			{

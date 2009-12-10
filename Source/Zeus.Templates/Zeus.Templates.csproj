@@ -108,7 +108,6 @@
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
-    <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
     <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
     <Compile Include="ContentTypes\Forms\Form.cs" />
@@ -120,12 +119,12 @@
     <Compile Include="ContentTypes\Forms\Question.cs" />
     <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
     <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
+    <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\ReferenceData\Currency.cs" />
     <Compile Include="ContentTypes\ReferenceData\CurrencyList.cs" />
     <Compile Include="ContentTypes\ReferenceData\ReferenceDataNode.cs" />
     <Compile Include="ContentTypes\ReferenceData\Country.cs" />
     <Compile Include="ContentTypes\ReferenceData\CountryList.cs" />
-    <Compile Include="ContentTypes\SystemNode.cs" />
     <Compile Include="ContentTypes\Tag.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />
@@ -139,10 +138,8 @@
     <Compile Include="ContentTypes\News\NewsYear.cs" />
     <Compile Include="ContentTypes\Page.cs" />
     <Compile Include="ContentTypes\Redirect.cs" />
-    <Compile Include="ContentTypes\RootItem.cs" />
     <Compile Include="ContentTypes\RssFeed.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
-    <Compile Include="ContentTypes\StartPage.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
@@ -192,11 +189,9 @@
     <Compile Include="Services\ICurrencyService.cs" />
     <Compile Include="Services\PageNotFoundHandler.cs" />
     <Compile Include="Services\TaggingDefinitionAppender.cs" />
-    <Compile Include="Services\FakeMailSender.cs" />
     <Compile Include="Services\ITagService.cs" />
     <Compile Include="Services\Syndication\IFeed.cs" />
     <Compile Include="Services\Syndication\ISyndicatable.cs" />
-    <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\SeoDefinitionAppender.cs" />
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />

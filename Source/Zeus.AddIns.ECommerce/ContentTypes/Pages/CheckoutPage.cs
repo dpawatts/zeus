@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -10,7 +11,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(CheckoutPage), "Zeus.AddIns.ECommerce.Icons.money_pound.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.MoneyPound); }
 		}
 
 		[XhtmlStringContentProperty("Extra Information", 210)]

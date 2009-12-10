@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes
@@ -6,9 +7,9 @@ namespace Zeus.Templates.ContentTypes
 	[RestrictParents(typeof(BasePage))]
 	public class TagGroup : BasePage
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "tag_blue"; }
+			get { return Utility.GetCooliteIconUrl(Icon.TagBlue); }
 		}
 	}
 }

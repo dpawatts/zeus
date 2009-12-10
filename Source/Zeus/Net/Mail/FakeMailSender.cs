@@ -1,7 +1,6 @@
 using System.Diagnostics;
-using Zeus.Net.Mail;
 
-namespace Zeus.Templates.Services
+namespace Zeus.Net.Mail
 {
 	public class FakeMailSender : IMailSender
 	{

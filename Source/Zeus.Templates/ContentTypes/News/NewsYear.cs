@@ -1,4 +1,5 @@
 using System;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Web.UI.WebControls;
@@ -14,9 +15,9 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return (NewsContainer) Parent; }
 		}
 
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "newspaper"; }
+			get { return Utility.GetCooliteIconUrl(Icon.Newspaper); }
 		}
 
 		public override string Name

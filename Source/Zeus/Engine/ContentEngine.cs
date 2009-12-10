@@ -130,12 +130,6 @@ namespace Zeus.Engine
 			invoker.InitializePlugins(this, invoker.GetPluginDefinitions());
 
 			_dependencyInjectionManager.Initialize();
-
-			CredentialLocation rootCredentialLocation = new CredentialLocation
-    	{
-    		Repository = Resolve<ICredentialRepository>()
-    	};
-			Resolve<ICredentialContextService>().SetRootLocation(rootCredentialLocation);
 		}
 
 		public T Resolve<T>()

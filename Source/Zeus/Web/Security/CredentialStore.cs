@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Security;
+using Zeus.Security.ContentTypes;
 using Zeus.Web.Security.Items;
 
 namespace Zeus.Web.Security
 {
-	public class CredentialRepository : ICredentialRepository, IWebSecurityManager
+	public class CredentialStore : ICredentialStore, IWebSecurityManager
 	{
 		#region Fields
 
@@ -19,7 +21,7 @@ namespace Zeus.Web.Security
 
 		#region Constructor
 
-		public CredentialRepository(IPersister persister, IHost host)
+		public CredentialStore(IPersister persister, IHost host)
 		{
 			_persister = persister;
 			_host = host;
@@ -54,12 +56,12 @@ namespace Zeus.Web.Security
 			return roleContainer.GetChildren().Authorized(user, Context.SecurityManager, Operations.Read).Cast<Role>();
 		}
 
-		void ICredentialRepository.CreateUser(string username, string password, string[] roles)
+		void ICredentialStore.CreateUser(string username, string password, string[] roles, bool verified)
 		{
 			UserContainer userContainer = GetUserContainer(true);
 			RoleContainer roleContainer = GetRoleContainer(true);
 
-			User user = new User {Name = username, Password = password};
+			User user = new User { Name = username, Password = password, Verified = verified };
 			foreach (string role in roles)
 				user.Roles.Add(roleContainer.GetRole(role));
 			user.AddTo(userContainer);
@@ -67,18 +69,42 @@ namespace Zeus.Web.Security
 			Context.Persister.Save(user);
 		}
 
-		IUser ICredentialRepository.GetUser(string username)
+		IUser ICredentialStore.GetUser(string username)
 		{
 			return GetUser(username);
 		}
 
-		IEnumerable<string> ICredentialRepository.GetAllRoles()
+		public IUser GetUserByNonce(string nonce)
+		{
+			UserContainer users = GetUserContainer(false);
+			if (users == null)
+				return null;
+			return users.GetChildren<User>().SingleOrDefault(u => u.Nonce == nonce);
+		}
+
+		public void SaveNonce(IUser user, string nonce)
+		{
+			User typedUser = (User) user;
+			typedUser.Nonce = nonce;
+			typedUser.Verified = false;
+			_persister.Save(typedUser);
+		}
+
+		public void VerifyUser(IUser user)
+		{
+			User typedUser = (User) user;
+			typedUser.Nonce = null;
+			typedUser.Verified = true;
+			_persister.Save(typedUser);
+		}
+
+		IEnumerable<string> ICredentialStore.GetAllRoles()
 		{
 			RoleContainer roles = GetRoleContainer(false);
 			return roles == null ? null : roles.GetRoleNames();
 		}
 
-		IEnumerable<IUser> ICredentialRepository.GetAllUsers()
+		IEnumerable<IUser> ICredentialStore.GetAllUsers()
 		{
 			UserContainer users = GetUserContainer(false);
 			return users == null ? null : users.GetChildren().Cast<IUser>();

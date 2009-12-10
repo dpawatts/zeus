@@ -21,9 +21,9 @@ namespace Zeus.Admin
 
 			try
 			{
-				if (WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().ValidateUser(UserName.Text, Password.Text))
+				if (WebSecurityEngine.Get<ICredentialService>().ValidateUser(UserName.Text, Password.Text))
 				{
-					string username = WebSecurityEngine.Get<ICredentialContextService>().GetCurrentService().GetUser(UserName.Text).Username;
+					string username = WebSecurityEngine.Get<ICredentialService>().GetUser(UserName.Text).Username;
 					WebSecurityEngine.Get<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(username, false);
 				}
 				else

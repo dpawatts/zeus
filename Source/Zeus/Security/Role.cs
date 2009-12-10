@@ -1,4 +1,4 @@
-﻿using Zeus.BaseLibrary.Web.UI;
+﻿using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -23,7 +23,7 @@ namespace Zeus.Web.Security.Items
 
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(User), "Zeus.Web.Resources.Icons.bullet_key.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.BulletKey); }
 		}
 	}
 }

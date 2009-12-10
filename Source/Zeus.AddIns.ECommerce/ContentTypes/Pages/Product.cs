@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using Coolite.Ext.Web;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.Design.Editors;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
-using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
+using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
@@ -18,7 +19,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Product), "Zeus.AddIns.ECommerce.Icons.package.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Package); }
 		}
 
 		[ContentProperty("Product Code", 200)]

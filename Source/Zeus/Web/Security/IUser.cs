@@ -2,6 +2,16 @@
 {
 	public interface IUser
 	{
+		string Identifier
+		{
+			get;
+		}
+
+		bool Verified
+		{
+			get;
+		}
+
 		string Username
 		{
 			get;

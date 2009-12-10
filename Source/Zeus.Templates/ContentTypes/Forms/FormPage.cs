@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -26,9 +27,9 @@ namespace Zeus.Templates.Mvc.ContentTypes.Forms
 			}
 		}
 
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "report"; }
+			get { return Utility.GetCooliteIconUrl(Icon.Report); }
 		}
 	}
 }

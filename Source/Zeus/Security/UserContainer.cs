@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
+using Zeus.Security.ContentTypes;
 
 namespace Zeus.Web.Security.Items
 {
@@ -21,7 +23,7 @@ namespace Zeus.Web.Security.Items
 
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(UserContainer), "Zeus.Web.Resources.Icons.group.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Group); }
 		}
 	}
 }

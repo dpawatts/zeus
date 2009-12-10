@@ -1,11 +1,11 @@
-﻿using Zeus.BaseLibrary.Web.UI;
-using Zeus.ContentTypes;
+﻿using Coolite.Ext.Web;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
 
-namespace Zeus.Web.Security.Items
+namespace Zeus.Security.ContentTypes
 {
 	[ContentType("Security Container")]
-	[RestrictParents(typeof(IRootItem))]
+	[RestrictParents(typeof(SystemNode))]
 	public class SecurityContainer : ContentItem
 	{
 		public const string ContainerName = "security";
@@ -19,7 +19,7 @@ namespace Zeus.Web.Security.Items
 
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(SecurityContainer), "Zeus.Web.Resources.Icons.folder_key.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.FolderKey); }
 		}
 	}
 }
