@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Web.UI.WebControls;
-using Zeus.Design.Editors;
-using Zeus.Engine;
-using Zeus.ContentTypes;
-using System.Web.UI;
 using System.Collections.Generic;
-using Zeus.Admin;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Zeus.ContentTypes;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor, IContentItemContainer
+	public abstract class ItemView : WebControl, INamingContainer, IEditableObjectEditor
 	{
 		private ITypeDefinition _currentTypeDefinition;
 		private IEditableObject _currentItem;
@@ -112,15 +109,6 @@ namespace Zeus.Web.UI.WebControls
 		}
 
 		protected abstract void AddPropertyControls();
-
-		#endregion
-
-		#region IContentItemContainer Members
-
-		ContentItem IContentItemContainer.CurrentItem
-		{
-			get { return (ContentItem) CurrentItem; }
-		}
 
 		#endregion
 	}

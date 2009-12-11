@@ -43,11 +43,6 @@ namespace Zeus
 
 		#region Public Properties (persisted)
 
-		/*/// <summary>Gets or sets zone name which is associated with data items and their placement on a page.</summary>
-		// TODO: Remove this and put it in WidgetContentItem
-		[Copy]
-		public virtual string ZoneName { get; set; }*/
-
 		/// <summary>Gets or sets item ID.</summary>
 		public virtual int ID { get; set; }
 

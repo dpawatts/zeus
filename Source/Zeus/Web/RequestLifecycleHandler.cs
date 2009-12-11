@@ -25,7 +25,7 @@ namespace Zeus.Web
 		protected bool initialized = false;
 		protected bool checkInstallation = false;
 		protected RewriteMethod rewriteMethod = RewriteMethod.RewriteRequest;
-		protected string installerUrl = "~/Admin/Install/Begin/Default.aspx";
+		protected string installerUrl = "~/admin/install/default.aspx";
 		private readonly AdminSection _adminConfig;
 
 		/// <summary>Creates a new instance of the RequestLifeCycleHandler class.</summary>

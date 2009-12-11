@@ -10,7 +10,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 {
 	[ContentType("Reference Data", Description = "Container for all types of reference data, such as a list of countries.")]
 	[RestrictParents(typeof(SystemNode))]
-	public class ReferenceDataNode : BaseContentItem
+	public class ReferenceDataNode : BaseContentItem, ISelfPopulator
 	{
 		public ReferenceDataNode()
 		{

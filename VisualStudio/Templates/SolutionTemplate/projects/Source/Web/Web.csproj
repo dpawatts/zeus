@@ -62,9 +62,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.dll</HintPath>
     </Reference>
-    <Reference Include="SoundInTheory.DynamicImage.Caching.Linq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
+    <Reference Include="SoundInTheory.DynamicImage.Caching.Sql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Linq.dll</HintPath>
+      <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Sql.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

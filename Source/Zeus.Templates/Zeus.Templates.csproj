@@ -155,7 +155,7 @@
     <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
     <Compile Include="Mvc\Controllers\RssFeedController.cs" />
     <Compile Include="Mvc\Controllers\SitemapController.cs" />
-    <Compile Include="Mvc\Controllers\StartPageController.cs" />
+    <Compile Include="Mvc\Controllers\WebsiteNodeController.cs" />
     <Compile Include="Mvc\Controllers\TagCloudController.cs" />
     <Compile Include="Mvc\Controllers\TagController.cs" />
     <Compile Include="Mvc\Controllers\TagGroupController.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Mvc\ViewModels\NewsItemViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\StartPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\WebsiteNodeViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TagCloudViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TagGroupViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TagViewModel.cs" />
@@ -256,7 +256,7 @@
     <EmbeddedResource Include="Mvc\Views\NewsItem\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Sitemap\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\StartPage\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\WebsiteNode\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\TagCloud\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\TagGroup\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Tag\Index.spark" />

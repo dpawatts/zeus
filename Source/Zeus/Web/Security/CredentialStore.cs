@@ -33,7 +33,7 @@ namespace Zeus.Web.Security
 
 		#region Properties
 
-		protected int SecurityContainerParentID
+		protected int RootItemID
 		{
 			get { return _host.CurrentSite.RootItemID; }
 		}
@@ -136,11 +136,23 @@ namespace Zeus.Web.Security
 
 		private SecurityContainer GetSecurityContainer(bool create)
 		{
-			ContentItem parent = _persister.Get(SecurityContainerParentID);
-			SecurityContainer m = parent.GetChild(SecurityContainer.ContainerName) as SecurityContainer;
+			ContentItem root = _persister.Get(RootItemID);
+			SystemNode systemNode = root.GetChildren<SystemNode>().FirstOrDefault();
+			if (systemNode == null && create)
+				systemNode = CreateSystemNode(root);
+			if (systemNode == null)
+				return null;
+			SecurityContainer m = systemNode.GetChild(SecurityContainer.ContainerName) as SecurityContainer;
 			if (m == null && create)
-				m = CreateSecurityContainer(parent);
+				m = CreateSecurityContainer(systemNode);
 			return m;
+		}
+
+		private SystemNode CreateSystemNode(ContentItem parent)
+		{
+			SystemNode systemNode = Context.ContentTypes.CreateInstance<SystemNode>(parent);
+			_persister.Save(systemNode);
+			return systemNode;
 		}
 
 		private SecurityContainer CreateSecurityContainer(ContentItem parent)

@@ -35,7 +35,7 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		public override bool Enabled
+		/*public override bool Enabled
 		{
 			get { return base.Enabled; }
 			set
@@ -46,7 +46,7 @@ namespace Zeus.Web.UI.WebControls
 						((WebControl)propertyControl).Enabled = value;
 				base.Enabled = value;
 			}
-		}
+		}*/
 
 		protected override void AddPropertyControls()
 		{

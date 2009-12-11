@@ -133,7 +133,6 @@ namespace Zeus.Web.UI.WebControls
 function prepare{8}() {{
 	if ({8}up)
 		return;
-	debugger;
 	{8}up = new FancyUpload3.Attach('{3}', '{4}', {{
 		path: '{0}',
 		url: '/PostedFileUpload.axd',

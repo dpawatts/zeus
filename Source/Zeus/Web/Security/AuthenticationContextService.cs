@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Web.Configuration;
+using Zeus.Configuration;
 using AuthenticationSection=Zeus.Configuration.AuthenticationSection;
 
 namespace Zeus.Web.Security
@@ -8,11 +9,15 @@ namespace Zeus.Web.Security
 	public class AuthenticationContextService : IAuthenticationContextService
 	{
 		private readonly BaseLibrary.Web.IWebContext _webContext;
+		private readonly AdminSection _adminConfig;
 		private readonly AuthenticationLocation _rootLocation;
 
-		public AuthenticationContextService(BaseLibrary.Web.IWebContext webContext, IAuthenticationContextInitializer[] authenticationContextInitializers)
+		public AuthenticationContextService(BaseLibrary.Web.IWebContext webContext,
+			IAuthenticationContextInitializer[] authenticationContextInitializers,
+			AdminSection adminConfig)
 		{
 			_webContext = webContext;
+			_adminConfig = adminConfig;
 
 			AuthenticationSection authSection = WebConfigurationManager.GetSection("zeus/authentication") as AuthenticationSection;
 			if (authSection == null)
@@ -37,17 +42,22 @@ namespace Zeus.Web.Security
 		{
 			// If the current HTTP request is for a Zeus page, then check if that page or any of its ancestors
 			// implement the ILoginContext interface. If so, use the LoginUrl from that page.
+			// BUT only if we're not currently in installation mode.
 			AuthenticationLocation location = (AuthenticationLocation) _rootLocation.GetChild(_webContext.Url.Path);
 			string loginUrl = location.LoginUrl;
-			ContentItem currentPage = Context.CurrentPage;
-			while (currentPage != null)
+			// If site is currently in Install mode, don't do anything.
+			if (_adminConfig.Installer.Mode == InstallationMode.Normal)
 			{
-				if (currentPage is ILoginContext)
+				ContentItem currentPage = Context.CurrentPage;
+				while (currentPage != null)
 				{
-					loginUrl = ((ILoginContext) currentPage).LoginUrl;
-					break;
+					if (currentPage is ILoginContext)
+					{
+						loginUrl = ((ILoginContext) currentPage).LoginUrl;
+						break;
+					}
+					currentPage = currentPage.GetParent();
 				}
-				currentPage = currentPage.GetParent();
 			}
 			return new AuthenticationService(_webContext, location, loginUrl);
 		}

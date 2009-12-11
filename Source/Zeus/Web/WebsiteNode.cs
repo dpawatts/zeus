@@ -4,7 +4,7 @@ using Zeus.Integrity;
 
 namespace Zeus.Web
 {
-	[ContentType("Start Page", "BaseStartPage", Installer = Installation.InstallerHints.PreferredStartPage)]
+	[ContentType("Website", "BaseStartPage", Installer = Installation.InstallerHints.PreferredStartPage)]
 	[RestrictParents(typeof(RootItem))]
 	public class WebsiteNode : PageContentItem, IFileSystemContainer
 	{
