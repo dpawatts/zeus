@@ -39,6 +39,22 @@
 								</Directory>
 							</Directory>
 						</Directory>
+						<Directory Id="CodeSnippets" Name="Code Snippets">
+							<Directory Id="category2" Name="$(var.CATEGORY)">
+								<Directory Id="MyCodeSnippets" Name="My Code Snippets">
+									<Component Id="AddinComponent" Guid="$(var.COMPONENTGUID)" KeyPath="no"  >
+										<RegistryValue Root='HKCU' Key='SOFTWARE\SolutionFactory\$(var.TEMPLATENAME)' Type='string' Value='InstallKey' KeyPath='yes' />
+										<File Id="ZeusProperty" Name="zeusprop.snippet" Source="zeusprop.snippet" DiskId="1"  />
+										<RemoveFile Id="RemoveCodeSnippets"  Name="zeusprop.snippet" On="uninstall"/>
+										<RemoveFolder Id="RemoveCategoryDir" Directory="category" On="uninstall"/>
+										<RemoveFolder Id="RemoveSubcategoryDir" Directory="subcategory" On="uninstall"/>
+										<RemoveFolder Id="RemoveProjectTemplates" Directory="ProjectTemplates" On="uninstall"/>
+										<RemoveFolder Id="RemoveTemplatesDir" Directory="Templates" On="uninstall"/>
+										<RemoveFolder Id="RemoveVSDir" Directory="VS" On="uninstall"/>
+									</Component>
+								</Directory>
+							</Directory>
+						</Directory>
 					</Directory>
 				</Directory>
 			</Directory>

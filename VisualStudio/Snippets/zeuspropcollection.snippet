@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+		<Title>zeuspropcollection</Title>
+		<Shortcut>zeuspropcollection</Shortcut>
+      <Description>Create a new Zeus Property Collection</Description>
+      <Author>Tim Jones</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>name</ID>
+          <ToolTip>Content Property Name</ToolTip>
+          <Default>MyThings</Default>
+        </Literal>
+        <Literal>
+          <ID>sortOrder</ID>
+          <ToolTip>Sort Order</ToolTip>
+          <Default>100</Default>
+        </Literal>
+        <Literal>
+          <ID>displayname</ID>
+          <ToolTip>Content Property Display Name</ToolTip>
+          <Default>My Things</Default>
+        </Literal>
+	  </Declarations>
+      <Code Language="csharp">
+        <![CDATA[[StringCollectionEditor("$displayname$", $sortOrder$)]
+		public virtual PropertyCollection $name$
+		{
+			get { return GetDetailCollection("$name$", true); }
+		}
+$end$]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
