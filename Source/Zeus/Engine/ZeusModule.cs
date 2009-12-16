@@ -106,7 +106,6 @@ namespace Zeus.Engine
 			Bind<IAuthenticationContextService>().To<AuthenticationContextService>().InSingletonScope();
 			Bind<IAuthenticationContextInitializer>().To<SecurityInitializer>().InSingletonScope();
 			Bind<IAuthorizationInitializer>().To<SecurityInitializer>().InSingletonScope();
-			Bind<IWebsiteMemberService>().To<WebsiteMemberService>().InSingletonScope();
 		}
 	}
 }

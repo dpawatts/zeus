@@ -11,6 +11,13 @@ namespace Zeus.Templates.Configuration
 			set { base["mailConfiguration"] = value; }
 		}
 
+		[ConfigurationProperty("antiSpam")]
+		public AntiSpamElement AntiSpam
+		{
+			get { return (AntiSpamElement) base["antiSpam"]; }
+			set { base["antiSpam"] = value; }
+		}
+
 		[ConfigurationProperty("seo")]
 		public SeoElement Seo
 		{
@@ -23,6 +30,13 @@ namespace Zeus.Templates.Configuration
 		{
 			get { return (TaggingElement)base["tagging"]; }
 			set { base["tagging"] = value; }
+		}
+
+		[ConfigurationProperty("userRegistration")]
+		public UserRegistrationElement UserRegistration
+		{
+			get { return (UserRegistrationElement) base["userRegistration"]; }
+			set { base["userRegistration"] = value; }
 		}
 	}
 }

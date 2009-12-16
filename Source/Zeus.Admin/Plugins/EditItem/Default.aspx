@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.EditItem.Default" ValidateRequest="false" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
+<%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register TagPrefix="zeus" TagName="AvailableZones" Src="~/admin/Plugins/EditItem/AvailableZones.ascx" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<asp:Panel runat="server" ID="pnlPageView" CssClass="rightAligned">

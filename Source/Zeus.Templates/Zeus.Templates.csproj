@@ -6,6 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.Templates</RootNamespace>
@@ -76,7 +77,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.Caching.Sql.dll</HintPath>
     </Reference>
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -103,10 +115,16 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Configuration\AkismetElement.cs" />
+    <Compile Include="Configuration\AntiSpamElement.cs" />
+    <Compile Include="Configuration\ReCaptchaElement.cs" />
+    <Compile Include="Configuration\UserRegistrationElement.cs" />
     <Compile Include="Configuration\TaggingElement.cs" />
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
+    <Compile Include="ContentTypes\ForgottenPasswordPage.cs" />
+    <Compile Include="ContentTypes\RegistrationPage.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
     <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
@@ -128,6 +146,7 @@
     <Compile Include="ContentTypes\Tag.cs" />
     <Compile Include="ContentTypes\DefaultTemplateAttribute.cs" />
     <Compile Include="ContentTypes\TagGroup.cs" />
+    <Compile Include="ContentTypes\Widgets\LoginWidget.cs" />
     <Compile Include="ContentTypes\Widgets\TagCloud.cs" />
     <Compile Include="ContentTypes\Widgets\FeedLink.cs" />
     <Compile Include="ContentTypes\News\BaseNewsPage.cs" />
@@ -141,8 +160,34 @@
     <Compile Include="ContentTypes\RssFeed.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
-    <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
+    <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
+    <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
+    <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
+    <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetConfirmationViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ForgottenPasswordPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\IConfirmPassword.cs" />
+    <Compile Include="Mvc\ViewModels\LoginWidgetFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\LoginWidgetViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PasswordConfirmMatchesPasswordAttribute.cs" />
+    <Compile Include="Mvc\ViewModels\RegistrationPageConfirmationViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\RegistrationPageFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\RegistrationPageVerifyViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\RegistrationPageViewModel.cs" />
+    <Compile Include="Services\AntiSpam\AkismetService.cs" />
+    <Compile Include="Services\AntiSpam\AntiSpamComment.cs" />
+    <Compile Include="Services\AntiSpam\CaptchaException.cs" />
+    <Compile Include="Services\AntiSpam\IAntiSpamComment.cs" />
+    <Compile Include="Services\AntiSpam\IAntiSpamService.cs" />
+    <Compile Include="Services\AntiSpam\ICaptchaService.cs" />
+    <Compile Include="Services\AntiSpam\ReCaptchaService.cs" />
+    <Compile Include="Services\AntiSpam\SpamStatus.cs" />
     <Compile Include="TemplatesModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
@@ -197,7 +242,6 @@
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />
     <Compile Include="Services\TagService.cs" />
     <Compile Include="Services\TemplatesPartsAdapter.cs" />
-    <Compile Include="TemplatesInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
@@ -262,6 +306,39 @@
     <EmbeddedResource Include="Mvc\Views\Tag\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\TextItem\Index.spark" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\LoginWidget\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\RegistrationPage\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\RegistrationPage\RegisterConfirmation.spark" />
+    <EmbeddedResource Include="Mvc\Views\RegistrationPage\Verify.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\RequestReset.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Views\Layouts\Application.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Assets\css\ie.css" />
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Assets\css\core.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Assets\nifty\niftyCorners.css" />
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Assets\nifty\niftycube.js" />
+    <EmbeddedResource Include="Mvc\DefaultTemplate\Assets\nifty\niftyLayout.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\Reset.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\ResetConfirmation.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\ResetError.spark" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -270,4 +347,23 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2963</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

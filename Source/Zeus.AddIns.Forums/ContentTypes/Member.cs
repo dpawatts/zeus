@@ -5,6 +5,7 @@ using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.FileSystem.Images;
 using Zeus.Integrity;
+using Zeus.Security;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 using Zeus.Web.Security;
@@ -22,10 +23,10 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			get { return WebResourceUtility.GetUrl(typeof(Member), "Zeus.AddIns.Forums.Web.Resources.user_green.png"); }
 		}
 
-		[LinkedItemDropDownListEditor("User", 10, TypeFilter = typeof(IUser))]
-		public virtual IUser User
+		[LinkedItemDropDownListEditor("User", 10, TypeFilter = typeof(User))]
+		public virtual User User
 		{
-			get { return GetDetail<IUser>("User", null); }
+			get { return GetDetail<User>("User", null); }
 			set { SetDetail("User", value); }
 		}
 

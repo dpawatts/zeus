@@ -169,6 +169,7 @@
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
+    <Compile Include="Configuration\CredentialsSection.cs" />
     <Compile Include="Configuration\CredentialCollection.cs" />
     <Compile Include="Configuration\MachineKeySectionWrapper.cs" />
     <Compile Include="Configuration\RecycleBinElement.cs" />
@@ -233,7 +234,10 @@
     <Compile Include="ContentTypes\RefineOrder.cs" />
     <Compile Include="ContentTypes\ReplacesContentTypesAttribute.cs" />
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
+    <Compile Include="DataContentItem.cs" />
     <Compile Include="Design\Editors\ChildEditorAttribute.cs" />
+    <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
+    <Compile Include="Design\Editors\PasswordEditorAttribute.cs" />
     <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
     <Compile Include="Design\Editors\FileUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\ReactiveTextBoxEditorAttribute.cs" />
@@ -262,12 +266,13 @@
     <Compile Include="Security\User.cs" />
     <Compile Include="Security\UserContainer.cs" />
     <Compile Include="SystemNode.cs" />
-    <Compile Include="Web\IWebsiteMemberService.cs" />
     <Compile Include="Web\PageContentItem.cs" />
     <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="Web\Security\PasswordResetRequestValidity.cs" />
+    <Compile Include="Web\Security\PasswordResetRequest.cs" />
+    <Compile Include="Web\Security\PasswordResetRequestResult.cs" />
+    <Compile Include="Web\Security\PasswordResetResult.cs" />
     <Compile Include="Web\Security\UserVerificationResult.cs" />
-    <Compile Include="Web\WebsiteMember.cs" />
-    <Compile Include="Web\WebsiteMemberContainer.cs" />
     <Compile Include="Web\Security\AuthenticationContextService.cs" />
     <Compile Include="Web\Security\AuthenticationEventArgs.cs" />
     <Compile Include="Web\Security\AuthenticationLocation.cs" />
@@ -288,13 +293,11 @@
     <Compile Include="Web\Security\IAuthorizationService.cs" />
     <Compile Include="Web\Security\ICredentialStore.cs" />
     <Compile Include="Web\Security\ICredentialService.cs" />
-    <Compile Include="Web\Security\IUser.cs" />
     <Compile Include="Web\Security\SecurityLocation.cs" />
     <Compile Include="Web\Security\UserCreateStatus.cs" />
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
-    <Compile Include="Web\WebsiteMemberService.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />
@@ -1019,6 +1022,9 @@
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\form_utils.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\mctabs.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\validate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\Profile\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

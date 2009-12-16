@@ -43,5 +43,10 @@ namespace Zeus.Configuration
 		{
 			get { return (AuthorizationSection)Sections["authorization"]; }
 		}
+
+		public CredentialsSection Credentials
+		{
+			get { return (CredentialsSection) Sections["credentials"]; }
+		}
 	}
 }

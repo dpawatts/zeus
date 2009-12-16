@@ -5,6 +5,7 @@ namespace Zeus.Web.Security
 		Success,
 		InvalidUserName,
 		InvalidPassword,
-		DuplicateUserName
+		DuplicateUserName,
+		DuplicateEmail
 	}
 }

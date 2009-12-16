@@ -1,0 +1,14 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.RegistrationPageConfirmationViewModel"/>
+
+<div id="registrationConfirmation">
+	<p>
+		Thanks for registering.
+		<if condition="Model.EmailVerificationRequired">
+			You will receive an email to ${Model.Email} shortly.
+			Please click on the link sent in this email to confirm your registration.
+		</if>
+		<else>
+			You may now login.
+		</else>
+	</p>
+</div>

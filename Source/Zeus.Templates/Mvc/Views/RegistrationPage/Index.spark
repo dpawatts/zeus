@@ -1,0 +1,30 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.RegistrationPageViewModel"/>
+
+<div id="registration">
+	<form method="post" action="${Html.Url(Model.CurrentItem).AppendSegment("register")}">
+		<div class="genericForm clearfix">
+			${Html.ValidationSummaryBox("Please correct the following errors before continuing:")}
+			<br />
+			
+			${Html.Label("Username", "Username")}
+			${Html.TextBox("Username")}
+			<br />
+
+			${Html.Label("Email", "Email Address")}
+			${Html.TextBox("Email")}
+			<br />
+
+			${Html.Label("Password", "Password")}
+			${Html.Password("Password")}
+			<br />
+
+			${Html.Label("ConfirmPassword", "Confirm Password")}
+			${Html.Password("ConfirmPassword")}
+			<br />
+			
+			${Html.Captcha(Model.CaptchaError)}
+
+			<input type="submit" class="submit" name="registrationSubmit" value="Register" id="registrationSubmit" />
+		</div>
+	</form>
+</div>

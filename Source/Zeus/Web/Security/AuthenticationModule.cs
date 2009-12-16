@@ -3,6 +3,7 @@ using System.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using System.Web.Security;
+using Zeus.Security;
 
 namespace Zeus.Web.Security
 {
@@ -99,7 +100,7 @@ namespace Zeus.Web.Security
 			if (CurrentAuthenticationService.Config.SlidingExpiration)
 				ticket = CurrentAuthenticationService.RenewTicketIfOld(tOld);
 
-			IUser membershipUser = null;
+			User membershipUser = null;
 			try
 			{
 				membershipUser = WebSecurityEngine.Get<ICredentialService>().GetUser(ticket.Name);	

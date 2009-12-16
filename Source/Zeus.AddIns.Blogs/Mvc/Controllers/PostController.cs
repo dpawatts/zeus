@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using Zeus.AddIns.AntiSpam;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Mvc.ViewModels;
 using Zeus.AddIns.Blogs.Services;
 using Zeus.BaseLibrary.Web;
 using Zeus.Templates.Mvc.Controllers;
+using Zeus.Templates.Services.AntiSpam;
 using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers

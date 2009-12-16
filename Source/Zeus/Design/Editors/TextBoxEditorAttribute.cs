@@ -79,6 +79,8 @@ namespace Zeus.Design.Editors
 			set;
 		}
 
+		public bool ReadOnly { get; set; }
+
 		#endregion
 
 		protected override void DisableEditor(Control editor)
@@ -169,6 +171,8 @@ namespace Zeus.Design.Editors
 			if (Required)
 				tb.CssClass += " required";
 			tb.CssClass += " " + GetDataTypeName(false);
+			if (ReadOnly)
+				tb.ReadOnly = true;
 			ModifyEditor(tb);
 			container.Controls.Add(tb);
 

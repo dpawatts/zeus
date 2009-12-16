@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Zeus.Security;
 
 namespace Zeus.Web.Security
 {
@@ -6,10 +7,12 @@ namespace Zeus.Web.Security
 	{
 		void CreateUser(string username, string password, string[] roles, bool verified);
 		IEnumerable<string> GetAllRoles();
-		IEnumerable<IUser> GetAllUsers();
-		IUser GetUser(string username);
-		IUser GetUserByNonce(string nonce);
-		void SaveNonce(IUser user, string nonce);
-		void VerifyUser(IUser user);
+		IEnumerable<User> GetAllUsers();
+		User GetUser(string username);
+		User GetUserByNonce(string nonce);
+		void SaveNonce(User user, string nonce);
+		void VerifyUser(User user);
+		PasswordResetRequest GetPasswordResetRequestByNonce(string nonce);
+		User GetUserByEmail(string email);
 	}
 }

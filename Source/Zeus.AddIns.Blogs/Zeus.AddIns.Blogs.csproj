@@ -177,10 +177,6 @@
     <Compile Include="Web\XmlRpc\ZeusXmlRpcService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Zeus.AddIns.AntiSpam\Zeus.AddIns.AntiSpam.csproj">
-      <Project>{5AA6D1BA-3F9B-4C34-9858-7C1CE8DDB06F}</Project>
-      <Name>Zeus.AddIns.AntiSpam</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
       <Name>Zeus.Admin</Name>

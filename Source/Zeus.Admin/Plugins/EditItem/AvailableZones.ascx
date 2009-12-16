@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AvailableZones.ascx.cs" Inherits="Zeus.Admin.Plugins.EditItem.AvailableZones" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI.WebControls" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.HtmlControls" Assembly="Zeus" %>
 <zeus:HtmlFieldSet runat="server" Legend="Zones" class="zonesBox">
 	<asp:ListView ID="rptZones" runat="server">

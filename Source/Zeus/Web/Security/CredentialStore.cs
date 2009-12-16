@@ -63,18 +63,18 @@ namespace Zeus.Web.Security
 
 			User user = new User { Name = username, Password = password, Verified = verified };
 			foreach (string role in roles)
-				user.Roles.Add(roleContainer.GetRole(role));
+				user.RolesInternal.Add(roleContainer.GetRole(role));
 			user.AddTo(userContainer);
 
 			Context.Persister.Save(user);
 		}
 
-		IUser ICredentialStore.GetUser(string username)
+		User ICredentialStore.GetUser(string username)
 		{
 			return GetUser(username);
 		}
 
-		public IUser GetUserByNonce(string nonce)
+		public User GetUserByNonce(string nonce)
 		{
 			UserContainer users = GetUserContainer(false);
 			if (users == null)
@@ -82,7 +82,26 @@ namespace Zeus.Web.Security
 			return users.GetChildren<User>().SingleOrDefault(u => u.Nonce == nonce);
 		}
 
-		public void SaveNonce(IUser user, string nonce)
+		public PasswordResetRequest GetPasswordResetRequestByNonce(string nonce)
+		{
+			UserContainer users = GetUserContainer(false);
+			if (users == null)
+				return null;
+			User user = users.GetChildren<User>().SingleOrDefault(u => u.GetChildren<PasswordResetRequest>().Any(prr => prr.Nonce == nonce));
+			if (user == null)
+				return null;
+			return user.GetChildren<PasswordResetRequest>().First(prr => prr.Nonce == nonce);
+		}
+
+		public User GetUserByEmail(string email)
+		{
+			UserContainer users = GetUserContainer(false);
+			if (users == null)
+				return null;
+			return users.GetChildren<User>().SingleOrDefault(u => u.Email == email);
+		}
+
+		public void SaveNonce(User user, string nonce)
 		{
 			User typedUser = (User) user;
 			typedUser.Nonce = nonce;
@@ -90,7 +109,7 @@ namespace Zeus.Web.Security
 			_persister.Save(typedUser);
 		}
 
-		public void VerifyUser(IUser user)
+		public void VerifyUser(User user)
 		{
 			User typedUser = (User) user;
 			typedUser.Nonce = null;
@@ -104,10 +123,10 @@ namespace Zeus.Web.Security
 			return roles == null ? null : roles.GetRoleNames();
 		}
 
-		IEnumerable<IUser> ICredentialStore.GetAllUsers()
+		IEnumerable<User> ICredentialStore.GetAllUsers()
 		{
 			UserContainer users = GetUserContainer(false);
-			return users == null ? null : users.GetChildren().Cast<IUser>();
+			return users == null ? null : users.GetChildren().Cast<User>();
 		}
 
 		private User GetUser(string username)

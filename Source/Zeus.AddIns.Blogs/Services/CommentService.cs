@@ -1,10 +1,9 @@
 using System.Net;
 using System.Web;
-using Zeus.AddIns.AntiSpam;
-using Zeus.AddIns.AntiSpam.Services;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.ContentTypes;
 using Zeus.Persistence;
+using Zeus.Templates.Services.AntiSpam;
 using Zeus.Web;
 using Zeus.Web.Mvc.Html;
 
@@ -37,7 +36,9 @@ namespace Zeus.AddIns.Blogs.Services
 			comment.Text = StringExtensions.ConvertUrlsToHyperLinks(null, text);
 			comment.AddTo(post);
 
-			_captchaService.Check(new HttpContextWrapper(HttpContext.Current));
+			string error;
+			if (!_captchaService.Check(new HttpContextWrapper(HttpContext.Current), out error))
+				throw new CaptchaException(error, error);
 
 			CheckForSpam(comment);
 

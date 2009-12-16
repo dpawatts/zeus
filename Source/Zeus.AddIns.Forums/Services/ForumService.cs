@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Zeus.AddIns.Forums.Configuration;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.Security;
 using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Services
@@ -26,7 +27,7 @@ namespace Zeus.AddIns.Forums.Services
 				}
 		}
 
-		public Member GetMember(MessageBoard messageBoard, IUser user, bool create)
+		public Member GetMember(MessageBoard messageBoard, User user, bool create)
 		{
 			Member member = null;
 			if (user != null)

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Linq;
 using Coolite.Ext.Web;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Web.Security;
 using Zeus.Web.Security.Details;
+using Zeus.Web.Security.Items;
 
-namespace Zeus.Web.Security.Items
+namespace Zeus.Security
 {
 	[ContentType]
 	[RestrictParents(typeof(UserContainer))]
-	public class User : ContentItem, IUser
+	public class User : ContentItem
 	{
 		public override string Title
 		{
@@ -24,14 +25,21 @@ namespace Zeus.Web.Security.Items
 			get { return Name; }
 		}
 
-		[TextBoxEditor("UserName", 20, Required = true)]
+		[TextBoxEditor("Username", 20, Required = true)]
 		public override string Name
 		{
 			get { return base.Name; }
 			set { base.Name = value; }
 		}
 
-		[ContentProperty("Password", 30)]
+		public string Username
+		{
+			get { return Name; }
+			set { Name = value; }
+		}
+
+		[ContentProperty("Change Password", 30, Description = "Passwords are encrypted and cannot be viewed, but they can be changed.")]
+		[PasswordEditor]
 		public virtual string Password
 		{
 			get { return (string) (GetDetail("Password") ?? string.Empty); }
@@ -45,15 +53,15 @@ namespace Zeus.Web.Security.Items
 			set { SetDetail("Email", value, string.Empty); }
 		}
 
-		[RolesEditor(Title = "Roles", SortOrder = 50)]
-		public virtual PropertyCollection Roles
+		[RolesEditor(Title="Roles", Name="Roles", SortOrder = 50)]
+		public virtual PropertyCollection RolesInternal
 		{
 			get { return GetDetailCollection("Roles", true); }
 		}
 
-		string[] IUser.Roles
+		public string[] Roles
 		{
-			get { return Roles.Cast<Role>().Select(r => r.Name).ToArray(); }
+			get { return RolesInternal.Cast<Role>().Select(r => r.Name).ToArray(); }
 		}
 
 		[ContentProperty("Nonce", 141)]
@@ -94,26 +102,6 @@ namespace Zeus.Web.Security.Items
 		public override string IconUrl
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.User); }
-		}
-
-		string IUser.Username
-		{
-			get { return Name; }
-			set { Name = value; }
-		}
-
-		string IUser.Password
-		{
-			get { return Password; }
-			set { Password = value; }
-		}
-
-		public virtual string[] GetRoles()
-		{
-			string[] roles = new string[Roles.Count];
-			for (int i = 0; i < roles.Length; i++)
-				roles[i] = Roles[i] as string;
-			return roles;
 		}
 	}
 }

@@ -1,3 +1,4 @@
+using Zeus.Security;
 using Zeus.Web.Mvc;
 using Zeus.Web.Security;
 
@@ -6,7 +7,7 @@ namespace Zeus.Templates.Mvc.Controllers
 	public abstract class ZeusController<T> : ContentController<T>
 		where T : ContentItem
 	{
-		public IUser CurrentUser
+		public User CurrentUser
 		{
 			get
 			{

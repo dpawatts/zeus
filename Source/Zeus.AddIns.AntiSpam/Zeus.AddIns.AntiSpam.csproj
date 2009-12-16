@@ -78,20 +78,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntiSpamModule.cs" />
     <Compile Include="CaptchaException.cs" />
     <Compile Include="AntiSpamComment.cs" />
-    <Compile Include="Configuration\AntiSpamSection.cs" />
-    <Compile Include="Configuration\AkismetElement.cs" />
-    <Compile Include="Configuration\ReCaptchaElement.cs" />
     <Compile Include="IAntiSpamComment.cs" />
-    <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AkismetService.cs" />
-    <Compile Include="Services\IAntiSpamService.cs" />
-    <Compile Include="Services\ICaptchaService.cs" />
-    <Compile Include="Services\ReCaptchaService.cs" />
-    <Compile Include="Services\SpamStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
