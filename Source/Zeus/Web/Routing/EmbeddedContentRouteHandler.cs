@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Web;
@@ -39,8 +41,30 @@ namespace Zeus.Web.Routing
 
 			public bool IsReusable { get { return false; } }
 
+			private static readonly IDictionary<Assembly, DateTime> _assemblyLastModifiedCache =
+				new Dictionary<Assembly, DateTime>();
+
+			private static DateTime GetAssemblyLastModified(Assembly assembly)
+			{
+				DateTime lastModified;
+				if (!_assemblyLastModifiedCache.TryGetValue(assembly, out lastModified))
+				{
+					AssemblyName x = assembly.GetName();
+					lastModified = new DateTime(File.GetLastWriteTime(new Uri(x.CodeBase).LocalPath).Ticks);
+					_assemblyLastModifiedCache.Add(assembly, lastModified);
+				}
+				return lastModified;
+			}
+
 			public void ProcessRequest(HttpContext context)
 			{
+				HttpCachePolicy cache = context.Response.Cache;
+				cache.SetCacheability(HttpCacheability.Public);
+				cache.SetOmitVaryStar(true);
+				cache.SetExpires(DateTime.Now + TimeSpan.FromDays(365.0));
+				cache.SetValidUntilExpires(true);
+				cache.SetLastModified(GetAssemblyLastModified(_routeHandler._assembly));
+
 				var resource = _requestContext.RouteData.GetRequiredString("resource");
 				switch (Path.GetExtension(resource))
 				{
