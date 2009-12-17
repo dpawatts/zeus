@@ -6,7 +6,6 @@ using Zeus.Admin;
 
 namespace Zeus.AddIns.Blogs.Plugins
 {
-	[ActionPluginGroup("ImportExportBlogXml", 200)]
 	public partial class ImportAtom : PreviewFrameAdminPage
 	{
 		protected void btnUploadImport_Click(object sender, EventArgs e)

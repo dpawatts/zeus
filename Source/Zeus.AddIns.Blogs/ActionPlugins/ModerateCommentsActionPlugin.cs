@@ -1,9 +1,11 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Blogs.ContentTypes;
+using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.Blogs.ActionPlugins
 {
+	[ActionPluginGroup("Blog", 200)]
 	public class ModerateCommentsActionPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName

@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="ActionPlugins\ImportExportBlogXmlActionPlugin.cs" />
     <Compile Include="ActionPlugins\ModerateCommentsActionPlugin.cs" />
+    <Compile Include="Admin\EmbeddedResourcePackage.cs" />
     <Compile Include="Admin\ModerateComments.aspx.cs">
       <DependentUpon>ModerateComments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
