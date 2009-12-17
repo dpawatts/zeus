@@ -1,11 +1,8 @@
 ﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.BlogMonthViewModel"/>
-<use import="PostListing" />
+<use import="ListPosts" />
 
-<div id="title">
-	<h1>
-		<span>Blog &#8250; </span>
-		${Model.Date.ToString("MMMM yyyy")} Archives
-	</h1>
-</div>
+<content name="head">
+	<link rel="stylesheet" type="text/css" href="/assets/blogs/css/core.css" />
+</content>
 
-${PostListing(Model.Posts)}
+${ListPosts(Model.Posts)}
