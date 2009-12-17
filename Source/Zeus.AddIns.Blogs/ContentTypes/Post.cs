@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Coolite.Ext.Web;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
@@ -8,7 +10,7 @@ using Zeus.Templates.Services.Syndication;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
-	[ContentType("Blog Post")]
+	[ContentType("Blog Post", "BlogPost")]
 	[RestrictParents(typeof(Blog), typeof(BlogMonth))]
 	public class Post : BaseBlogPage, ISyndicatable
 	{
@@ -28,6 +30,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		}
 
 		[XhtmlStringContentProperty("Text", 200)]
+		[HtmlTextBoxEditor(Required = true)]
 		public virtual string Text
 		{
 			get { return GetDetail("Text", string.Empty); }
@@ -41,10 +44,27 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("Excerpt", value); }
 		}
 
+		[ContentProperty("Open For Comments", 215)]
+		public virtual bool OpenForComments
+		{
+			get { return GetDetail("OpenForComments", true); }
+			set { SetDetail("OpenForComments", value); }
+		}
+
 		[LinkedItemsCheckBoxListEditor("Categories", 220, typeof(Category))]
 		public PropertyCollection Categories
 		{
 			get { return GetDetailCollection("Categories", true); }
+		}
+
+		public IEnumerable<FeedbackItem> Comments
+		{
+			get { return GetChildren<FeedbackItem>(); }
+		}
+
+		public IEnumerable<FeedbackItem> ApprovedComments
+		{
+			get { return Comments.Where(fi => fi.Approved); }
 		}
 
 		string ISyndicatable.Summary

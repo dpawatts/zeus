@@ -1,13 +1,14 @@
 using Coolite.Ext.Web;
-using Zeus.ContentProperties;
 using Zeus.ContentTypes;
-using Zeus.Design.Editors;
 using Zeus.FileSystem;
+using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType]
+	[RestrictParents(typeof(PageContentItem))]
 	public class Blog : BasePage, ISelfPopulator, IFileSystemContainer
 	{
 		private const string CATEGORY_CONTAINER_NAME = "categories";

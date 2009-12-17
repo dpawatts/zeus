@@ -1,0 +1,31 @@
+﻿<use import="ListCategories" />
+<use namespace="System.Collections.Generic" />
+<use namespace="System.Linq" />
+<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
+
+<macro name="ListPosts" posts="IEnumerable<Post>">
+	<if condition="posts.Any()">
+		<for each="Post post in posts">
+			<h2 id="post-${post.ID}">
+				<a title="Permanent link to this post" href="${post.Url}" rel="bookmark">${post.Title}</a>
+			</h2>
+			
+			<h3>${post.Date.ToString("dd MMMM, yyyy")} at ${post.Date.ToString("HH:mm")}</h3>
+
+			${post.GetExcerpt()}
+			
+			<p class="meta">
+				<span class="tags">${ListCategories(post.Categories.Cast<Category>())}</span> |
+				<span class="comments"><a href="${post.Url}#comments">${Html.Pluralize("No Comments", "1 Comment", "{0} Comments", post.ApprovedComments.Count())}</a></span>
+			</p>
+		</for>
+		
+		<ul class="postnav">
+			<li class="left">&laquo; Earlier Posts&nbsp;</li>
+			<li class="right">&nbsp;Later Posts &raquo;</li>
+		</ul>
+	</if>
+	<else>
+		<p>No blog entries match this filter.</p>
+	</else>
+</macro>

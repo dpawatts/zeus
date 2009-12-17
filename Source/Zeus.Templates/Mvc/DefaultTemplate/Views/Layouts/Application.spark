@@ -21,11 +21,13 @@
 	<link rel="stylesheet" type="text/css" href="/assets/nifty/niftyCorners.css" />
 	<script type="text/javascript" src="/assets/nifty/niftycube.js"></script>
 	<script type="text/javascript">
-	window.onload = function() {
-		Nifty("ul#nav a","small transparent top");
-		Nifty("#side","transparent");
-	}
+		window.onload = function() {
+			Nifty("ul#nav a","small transparent top");
+			Nifty("#side","transparent");
+		}
 	</script>
+	
+	<use content="head" />
 </head>
 <body>
 	<div id="preloadImages"></div>
@@ -41,7 +43,7 @@
 		</div>
 
 		<div id="main">
-			<h2>${Model.CurrentItem.PageTitle}</h2>	
+			<h2 class="pagetitle">${Model.CurrentItem.PageTitle}</h2>	
 			<use:view />
 		</div>
 

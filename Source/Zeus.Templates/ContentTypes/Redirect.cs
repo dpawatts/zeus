@@ -2,6 +2,7 @@ using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes
 {
@@ -9,7 +10,7 @@ namespace Zeus.Templates.ContentTypes
 	/// Redirects to somewhere else. Used as a placeholder in the menu.
 	/// </summary>
 	[ContentType("Redirect", "Redirect", "Redirects to another page or an external address.", "", 40)]
-	[RestrictParents(typeof(BasePage))]
+	[RestrictParents(typeof(PageContentItem))]
 	public class Redirect : BasePage
 	{
 		public override string Url

@@ -1,43 +1,65 @@
 ﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.PostViewModel"/>
+<use import="ListCategories" />
 <use namespace="System.Linq" />
+<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
 
-<div id="title">
-	<h1>${Model.CurrentItem.Title}</h1>
-	<h2>Published on ${Model.CurrentItem.Date.ToString("dd MMMM, yyyy")} at ${Model.CurrentItem.Date.ToString("HH:mm")}</h2>
-</div>
+<content name="head">
+	<link rel="stylesheet" type="text/css" href="/assets/blogs/css/core.css" />
+</content>
+
+<h3>Published on ${Model.CurrentItem.Date.ToString("dd MMMM, yyyy")} at ${Model.CurrentItem.Date.ToString("HH:mm")}</h3>
 
 ${Model.CurrentItem.Text}
 
+<p class="meta">
+	<span class="tags">${ListCategories(Model.CurrentItem.Categories.Cast<Category>())}</span> |
+	<span class="comments"><a href="${Model.CurrentItem.Url}#comments" title="Read the comments to this post">Comments</a></span>
+</p>
+
 <div id="comments">
-	<h3 id="chead">
-		${Model.Comments.Count()} ${Html.Pluralize("Comment", Model.Comments.Count())}
-		<a href="#add-com">Add your own</a>
-	</h3>
+	<if condition="Model.Comments.Any()">
+		<h2>${Html.Pluralize("No Responses", "One Response", "{0} Responses", Model.Comments.Count())} to &#8220;${Model.CurrentItem.Title}&#8221;</h2>
+		<div class="comment_area">
+			<ol>
+				<for each="var comment in Model.Comments">
+					${Html.Display(Model, comment)}
+				</for>
+			</ol>
+		</div>
+	</if>
+</div>
 
-	<dl>
-		<for each="var comment in Model.Comments">
-			${Html.Display(Model, comment)}
-		</for>
-	</dl>
+<div if="Model.CurrentItem.OpenForComments" class="comment_area">
+	<h2>Leave a Reply</h2>
 	
-	<h3 id="add-com">Add a New Comment</h3>
-
-	<div id="comments-form">
-		<form action="${Html.Url(Model.CurrentItem).AppendSegment("comment")}" method="post">
-			<p>${Html.Label("name", "Your Name:")} ${Html.ValidationMessage("name")}<br />
-			${Html.TextBox("name")}</p>
+	<form action="${Html.Url(Model.CurrentItem).AppendSegment("comment")}" method="post">
+		<div>
+			${Html.ValidationSummaryBox("Please correct the following errors before continuing:")}
+			<br />
 			
-			<p>${Html.Label("url", "Your URL:")}<br />
-			${Html.TextBox("url")}</p>
+			${Html.Label("commentForm.Name", "Your Name:")}
+			${Html.TextBox("commentForm.Name")}
+			<br />
+			
+			${Html.Label("commentForm.Email", "Your Email:")}
+			${Html.TextBox("commentForm.Email")} (will not be published)
+			<br />
+			
+			${Html.Label("commentForm.Url", "Your URL:")}
+			${Html.TextBox("commentForm.Url")}
+			<br />
 
-			<p>${Html.Label("text", "Your Comment:")} ${Html.ValidationMessage("text")}<br />
-			${Html.TextArea("text", null, 10, 50, null)}</p>
+			${Html.Label("commentForm.Text", "Your Comment:")}
+			${Html.TextArea("commentForm.Text", null, 10, 50, null)}
+			<br /><br />
 			
 			${Html.Captcha(Model.CaptchaError)}
 
-			<p>${Html.SubmitButton("submit", " Post Comment ")}</p>
-		</form>
+			${Html.SubmitButton("submit", "Post Comment", new { @class = "submit" })}
+		</div>
+	</form>
 
-		<p class="note"><strong class="alert">Comment Guidelines:</strong> Basic XHTML is allowed (a href, strong, em, code).  Line breaks and paragraphs are automatically generated.  Off-topic or inappropriate comments will be edited or deleted.  Email addresses will never be published.  Thanks.</p>
-	</div>
+	<p class="note"><strong class="alert">Comment Guidelines:</strong> Basic XHTML is allowed (a href, strong, em, code).  Line breaks and paragraphs are automatically generated.  Off-topic or inappropriate comments will be edited or deleted.  Email addresses will never be published.  Thanks.</p>
 </div>
+
+<h2 if="!Model.CurrentItem.OpenForComments">Comments are closed.</h2>

@@ -1,0 +1,137 @@
+/*  
+Theme Name: Plane Jane
+Theme URI: http://jimmitchell.org/projects/themes/plane_jane v2
+Description: Plane Jane v2 - A Fireballish theme for Wordpress
+Version: 2.5
+Author: Jim Mitchell
+Author URI: http://jimmitchell.org/
+
+The CSS, XHTML and design is released under GPL:
+http://www.opensource.org/licenses/gpl-license.php
+*/
+
+.meta {
+	font-size: 9px;
+	border-top: 1px solid #5D6772;
+	margin: 15px 0 30px 0;
+	padding-top: 5px;
+}
+
+.meta span {
+	padding-left: 14px;
+	padding-top: 0px;
+	background: #474F57 url(../images/doc.png) no-repeat left center;
+}
+
+.meta span.tags {
+	background-image: url(../images/folder.png);
+}
+
+.meta span.comments {
+	background-image: url(../images/comment.png);
+}
+
+.meta span.trackback {
+	background-image: url(../images/trackback.png);
+}
+
+.meta span.delicious {
+	background-image: url(../images/delicious.png);
+}
+
+.postnav {
+	width: 100%;
+	float: left;
+	font-size: .8em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.postnav li.left {
+	display: block;
+	float: left;
+}
+
+.postnav li.right {
+	display: block;
+	float: right;
+}
+
+#mo_archive, #cat_archive {
+	margin-bottom: 25px;
+	float: left;
+}
+
+#mo_archive ul, #cat_archive ul {
+list-style: none;
+}
+
+/* comments & trackbacks --------------------------------- */
+
+.comment_area, .trackback_area {
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+.comment_area ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.comment_area li {
+	margin-bottom: 35px;
+}
+
+.comment_area form li {
+	margin-bottom: 0;
+}
+
+.comment_area p {
+	padding: 0;
+	margin-bottom: 0;
+}
+
+.commenter {
+	border-bottom: 1px solid #5D6772;
+	font-weight: bold;
+	color: #dddddd;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+.comment_info {
+	font-size: .8em;
+	font-weight: normal;
+	color: #999999;
+}
+
+.comment_number {
+	font-family: georgia, times, serif;
+	font-size: 2.46em;
+	color: #4F5962;
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+.submit {
+	font-weight: bold;
+	font-size: 1.16em;
+	color: #dddddd;
+	padding-left: 0;
+}
+
+.comment_area textarea {
+	width: 95%;
+}
+
+.trackback_area ol {
+	list-style: none;
+	padding: 5px;
+	padding-left: 15px;
+}
+
+.trackback_area li {
+	line-height: 180%;
+}

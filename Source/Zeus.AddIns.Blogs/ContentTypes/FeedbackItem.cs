@@ -1,3 +1,4 @@
+using Zeus.BaseLibrary.Web;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -20,6 +21,13 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("Spam", value); }
 		}
 
+		[ContentProperty("Number", 220)]
+		public virtual int Number
+		{
+			get { return GetDetail("Number", 1); }
+			set { SetDetail("Number", value); }
+		}
+
 		public abstract string AntiSpamAuthorName { get; }
 		public abstract string AntiSpamAuthorEmail { get; }
 		public abstract string AntiSpamAuthorUrl { get; }
@@ -39,6 +47,11 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		public override string IconUrl
 		{
 			get { return GetIconUrl(typeof(Comment), "Zeus.AddIns.Blogs.Icons.comment.png"); }
+		}
+
+		public override string Url
+		{
+			get { return new Url(Parent.Url).SetFragment("comment" + Number); }
 		}
 	}
 }

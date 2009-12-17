@@ -53,6 +53,11 @@ namespace Zeus.Web.Mvc.Modules
 				new RouteValueDictionary(),
 				new RouteValueDictionary(new { area = areaName }),
 				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Mvc.Content")));
+
+			routes.Add(new Route("assets/{area}/{*resource}",
+				new RouteValueDictionary(),
+				new RouteValueDictionary(new { area = areaName }),
+				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Mvc.Assets")));
 		}
 
 		public void RegisterStandardViewFolders(ICollection<IViewEngine> viewEngines, Assembly assembly, string areaName)

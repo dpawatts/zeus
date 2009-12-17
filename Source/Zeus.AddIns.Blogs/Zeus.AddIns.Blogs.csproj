@@ -77,6 +77,9 @@
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -134,6 +137,8 @@
     <Compile Include="Mvc\Controllers\BlogMonthController.cs" />
     <Compile Include="Mvc\Controllers\BlogYearController.cs" />
     <Compile Include="Mvc\Controllers\CommentController.cs" />
+    <Compile Include="Mvc\Controllers\CategoryContainerController.cs" />
+    <Compile Include="Mvc\Controllers\CategoryController.cs" />
     <Compile Include="Mvc\Controllers\PingbackController.cs" />
     <Compile Include="Mvc\Controllers\PostController.cs" />
     <Compile Include="Mvc\Controllers\RecentPostsController.cs" />
@@ -143,10 +148,13 @@
     <Compile Include="Mvc\ViewModels\BlogViewModel.cs" />
     <Compile Include="Mvc\ViewModels\BlogYearViewModel.cs" />
     <Compile Include="Mvc\ViewModels\CommentViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CategoryContainerViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PingbackViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostViewModel.cs" />
     <Compile Include="Mvc\ViewModels\RecentPostsSummaryViewModel.cs" />
     <Compile Include="Mvc\ViewModels\RecentPostsViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CommentFormViewModel.cs" />
     <Compile Include="Plugins\ImportAtom.aspx.cs">
       <DependentUpon>ImportAtom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,13 +234,31 @@
     <EmbeddedResource Include="Mvc\Views\Blog\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Comment\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Pingback\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\Post\Index.spark">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\Views\Post\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\RecentPostsSummary\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\RecentPosts\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\Shared\PostListing.spark" />
+    <EmbeddedResource Include="Mvc\Views\Shared\ListPosts.spark" />
     <EmbeddedResource Include="Mvc\Views\Shared\PreviousPosts.spark" />
+    <EmbeddedResource Include="Mvc\Views\CategoryContainer\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\Category\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\images\back.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\comment.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\delicious.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\doc.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\external-link.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\folder.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\next.png" />
+    <EmbeddedResource Include="Mvc\Assets\images\trackback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\css\core.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\Shared\ListCategories.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

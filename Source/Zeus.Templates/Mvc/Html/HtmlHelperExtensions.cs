@@ -52,6 +52,15 @@ namespace Zeus.Templates.Mvc.Html
 			return word;
 		}
 
+		public static string Pluralize(this HtmlHelper html, string zeroItems, string oneItem, string multipleItems, int count)
+		{
+			if (count < 1)
+				return zeroItems;
+			if (count == 1)
+				return oneItem;
+			return string.Format(multipleItems, count);
+		}
+
 		public static string IsAre(this HtmlHelper html, int count)
 		{
 			if (count != 1)

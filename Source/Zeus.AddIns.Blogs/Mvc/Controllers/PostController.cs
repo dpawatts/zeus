@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
 using System.Web.Mvc;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Mvc.ViewModels;
 using Zeus.AddIns.Blogs.Services;
-using Zeus.BaseLibrary.Web;
 using Zeus.Templates.Mvc.Controllers;
 using Zeus.Templates.Services.AntiSpam;
 using Zeus.Web;
@@ -21,33 +18,31 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 			_commentService = commentService;
 		}
 
-		[NonAction]
 		public override ActionResult Index()
 		{
-			throw new NotSupportedException();
-		}
-
-		public ActionResult Index(string captchaError)
-		{
-			return View(new PostViewModel(CurrentItem, CurrentItem.GetChildren<FeedbackItem>())
-			{
-				CaptchaError = captchaError
-			});
+			return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem)));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Comment(string name, string url, string text)
+		public ActionResult Comment(CommentFormViewModel commentForm)
 		{
+			if (!ModelState.IsValid)
+				return Index();
+
+			Comment comment;
 			try
 			{
-				_commentService.AddComment(CurrentItem, name, url, text);
+				comment = _commentService.AddComment(CurrentItem, commentForm.Name, commentForm.Email, commentForm.Url, commentForm.Text);
 			}
 			catch (CaptchaException ex)
 			{
-				return Redirect(new Url(CurrentItem.Url).Query("captchaError", ex.CaptchaError));
+				return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem))
+				{
+					CaptchaError = ex.CaptchaError
+				});
 			}
-			return Redirect(new Url(CurrentItem.Url).SetFragment(
-				"comment" + CurrentItem.GetChildren<Comment>().Count()));
+
+			return Redirect(comment.Url);
 		}
 	}
 }

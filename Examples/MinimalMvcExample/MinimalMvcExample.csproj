@@ -102,6 +102,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.Blogs\Zeus.AddIns.Blogs.csproj">
+      <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
+      <Name>Zeus.AddIns.Blogs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
       <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
       <Name>Zeus.AddIns.ECommerce</Name>
