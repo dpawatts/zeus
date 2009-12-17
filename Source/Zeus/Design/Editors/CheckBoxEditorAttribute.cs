@@ -24,6 +24,8 @@ namespace Zeus.Design.Editors
 		/// <summary>Gets or sets the text on the checkbox. This differs from the title property since the text is after the checkbox.</summary>
 		public string CheckBoxText { get; set; }
 
+		public bool DefaultValue { get; set; }
+
 		/// <summary>Creates a checkbox.</summary>
 		/// <param name="container">The container the checkbox will be added to.</param>
 		/// <returns>A checkbox.</returns>
@@ -31,7 +33,15 @@ namespace Zeus.Design.Editors
 		{
 			CheckBox cb = new CheckBox();
 			cb.Text = CheckBoxText;
+			cb.Checked = DefaultValue;
 			return cb;
+		}
+
+		protected override void SetEditorValue(Control editor, object value)
+		{
+			CheckBox checkBox = (CheckBox) editor;
+			if (value != null)
+				checkBox.Checked = (bool) value;
 		}
 
 		protected override void DisableEditor(Control editor)

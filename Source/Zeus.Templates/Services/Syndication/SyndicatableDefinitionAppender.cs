@@ -54,7 +54,8 @@ namespace Zeus.Templates.Services.Syndication
 					{
 						Name = SyndicatableDetailName,
 						ContainerName = ContainerName,
-						SortOrder = SortOrder
+						SortOrder = SortOrder,
+						DefaultValue = true
 					};
 
 					contentType.Add(ecb);

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Coolite.Ext.Web;
+using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
 using Zeus.Web;
@@ -8,8 +9,8 @@ using Zeus.Web;
 namespace Zeus.Templates.ContentTypes
 {
 	[ContentType("Feed", Description = "An RSS feed that outputs XML with the latest feed data.")]
-	[RestrictParents(typeof(BasePage))]
-	public class RssFeed : BasePage, IFeed, INode
+	[RestrictParents(typeof(PageContentItem))]
+	public class RssFeed : PageContentItem, IFeed, INode
 	{
 		public override string IconUrl
 		{
@@ -31,6 +32,7 @@ namespace Zeus.Templates.ContentTypes
 		}
 
 		[ContentProperty("Tagline", 110)]
+		[TextBoxEditor(Required = true)]
 		public virtual string Tagline
 		{
 			get { return (string)(GetDetail("Tagline") ?? string.Empty); }
