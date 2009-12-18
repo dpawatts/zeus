@@ -761,6 +761,7 @@
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyFileUpload.css" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\mootools.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
+    <EmbeddedResource Include="Web\Resources\miframe.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advlink.css" />

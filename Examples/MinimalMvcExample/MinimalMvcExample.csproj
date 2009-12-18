@@ -94,8 +94,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentTypes\CustomPage.cs" />
-    <Compile Include="Controllers\CustomPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,11 +134,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\CustomPage\Index.spark" />
-    <None Include="Views\FallbackContent\Index.spark" />
-    <None Include="Views\Shared\_global.spark" />
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="ContentTypes\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Views\Layouts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

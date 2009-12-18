@@ -73,4 +73,5 @@
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js", "text/javascript", PerformSubstitution = true)]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.progress.gif", "image/gif")]
 
+[assembly: WebResource("Zeus.Web.Resources.miframe.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.tinymce.js", "text/javascript")]

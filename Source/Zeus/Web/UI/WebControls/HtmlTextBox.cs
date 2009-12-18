@@ -41,8 +41,9 @@ namespace Zeus.Web.UI.WebControls
 		{
 			base.OnPreRender(e);
 
-			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
-			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.tinymce.js", ResourceInsertPosition.HeaderTop);
+			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderBottom);
+			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.miframe.js", ResourceInsertPosition.HeaderBottom);
+			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.tinymce.js", ResourceInsertPosition.HeaderBottom);
 			Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
 				"InitHtmlTextBox" + UniqueID,
 				string.Format(@"htmlEditor_init('{5}?rootPath={4}',
