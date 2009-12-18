@@ -1,11 +1,13 @@
 ﻿using Coolite.Ext.Web;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
+using Zeus.Globalization;
 
 namespace Zeus.Web
 {
 	[UI.TabPanel("Content", "Content", 10)]
 	[DefaultContainer("Content")]
+	[Translatable]
 	public abstract class PageContentItem : ContentItem
 	{
 		[TextBoxEditor("Title", 10, Required = true, Shared = false)]

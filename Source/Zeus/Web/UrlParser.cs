@@ -109,7 +109,7 @@ namespace Zeus.Web
 					startPage = current;
 
 					if (item.VersionOf != null)
-						url = url.AppendQuery("page", item.ID);
+						url = url.AppendQuery(PathData.PageQueryKey, item.ID);
 
 					// Prepend language identifier, if this is not the default language.
 					if (_languageManager.Enabled && !LanguageSelection.IsHostLanguageMatch(ContentLanguage.PreferredCulture.Name))
@@ -132,7 +132,8 @@ namespace Zeus.Web
 
 			// If we didn't find the start page, it means the specified
 			// item is not part of the current site.
-			return item.FindPath(PathData.DefaultAction).RewrittenUrl;
+			return "/?" + PathData.PageQueryKey + "=" + item.ID;
+			//return item.FindPath(PathData.DefaultAction).RewrittenUrl;
 		}
 
 		protected virtual bool IsStartPage(ContentItem item)

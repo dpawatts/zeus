@@ -106,6 +106,14 @@
     <Compile Include="Plugins\EditItem\KeepAlive.aspx.designer.cs">
       <DependentUpon>KeepAlive.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\Globalization\LanguageChooserUserControl.ascx.cs">
+      <DependentUpon>LanguageChooserUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\Globalization\LanguageChooserUserControl.ascx.designer.cs">
+      <DependentUpon>LanguageChooserUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Globalization\LanguageChooserTreePlugin.cs" />
     <Compile Include="Plugins\PluginUserControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -490,6 +498,7 @@
     <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemGridMenuPlugin.js" />
     <EmbeddedResource Include="Plugins\Tree\Resources\TreeCssInitializer.js" />
     <EmbeddedResource Include="Plugins\EditItem\KeepAlive.aspx" />
+    <EmbeddedResource Include="Plugins\Globalization\LanguageChooserUserControl.ascx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />

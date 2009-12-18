@@ -5,13 +5,16 @@ using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
+using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web;
 using Zeus.Web.UI;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 {
 	[ContentType(Name = "BaseShop")]
 	[TabPanel("ECommerce", "E-Commerce", 100)]
+	[RestrictParents(typeof(PageContentItem))]
 	public class Shop : BasePage, ISelfPopulator
 	{
 		private const string VARIATION_CONTAINER_NAME = "variations";

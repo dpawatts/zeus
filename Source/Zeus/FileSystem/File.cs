@@ -68,6 +68,11 @@ namespace Zeus.FileSystem
 			get { return System.IO.Path.GetExtension(FileName); }
 		}
 
+		public override bool IsPage
+		{
+			get { return true; }
+		}
+
 		[FileUploadEditor("File", 100)]
 		public virtual byte[] Data
 		{

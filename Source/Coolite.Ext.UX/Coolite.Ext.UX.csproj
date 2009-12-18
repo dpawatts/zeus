@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=9ad232b50c3e6444, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,6 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IconCombo\IconCombo.cs" />
+    <Compile Include="Extensions\IconCombo\IconComboListItem.cs" />
+    <Compile Include="Extensions\IconCombo\IconComboListItemCollectionJsonConverter.cs" />
     <Compile Include="Extensions\StoreMenuCommand\StoreGridCommand.cs" />
     <Compile Include="Extensions\StoreMenu\StoreMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Extensions\StoreMenu\resources\ext.ux.menu.storemenu-min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Extensions\IconCombo\resources\ext.ux.IconCombo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Extensions\IconCombo\resources\ext.ux.IconCombo.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
