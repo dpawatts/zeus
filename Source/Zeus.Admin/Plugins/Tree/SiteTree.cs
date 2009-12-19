@@ -77,7 +77,8 @@ namespace Zeus.Admin.Plugins.Tree
 			node.IconCls = "zeus-tree-icon";
 			node.Cls = "zeus-tree-node";
 			node.NodeID = item.ID.ToString();
-			node.Href = "javascript:window.top.zeus.refreshPreview('" + Url.ToAbsolute(((INode)item).PreviewUrl) + "');";
+			if (item.IsPage)
+				node.Href = "javascript:window.top.zeus.refreshPreview('" + Url.ToAbsolute(((INode)item).PreviewUrl) + "');";
 
 			if (!hasAsyncChildren)
 				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children)

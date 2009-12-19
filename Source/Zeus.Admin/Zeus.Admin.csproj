@@ -106,6 +106,15 @@
     <Compile Include="Plugins\EditItem\KeepAlive.aspx.designer.cs">
       <DependentUpon>KeepAlive.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\FileManager\FileManagerUserControl.ascx.cs">
+      <DependentUpon>FileManagerUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\FileManager\FileManagerUserControl.ascx.designer.cs">
+      <DependentUpon>FileManagerUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\FileManager\FileManagerMainInterfacePlugin.cs" />
+    <Compile Include="Plugins\FileManager\FileManagerContextMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\LanguageChooserUserControl.ascx.cs">
       <DependentUpon>LanguageChooserUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -499,6 +508,7 @@
     <EmbeddedResource Include="Plugins\Tree\Resources\TreeCssInitializer.js" />
     <EmbeddedResource Include="Plugins\EditItem\KeepAlive.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageChooserUserControl.ascx" />
+    <EmbeddedResource Include="Plugins\FileManager\FileManagerUserControl.ascx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />

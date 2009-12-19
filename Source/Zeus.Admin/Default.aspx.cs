@@ -24,13 +24,19 @@ namespace Zeus.Admin
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			imgLogo.Src = ClientScript.GetWebResourceUrl(typeof(Default), "Zeus.Admin.Assets.Images.Theme.logo.gif");
+			imgLogo.Src = ClientScript.GetWebResourceUrl(typeof (Default), "Zeus.Admin.Assets.Images.Theme.logo.gif");
 			imgLogo.Visible = !((AdminSection) ConfigurationManager.GetSection("zeus/admin")).HideBranding;
 			ltlAdminName1.Text = ltlAdminName2.Text = ((AdminSection) ConfigurationManager.GetSection("zeus/admin")).Name;
 
 			// Allow plugins to modify interface.
 			foreach (IMainInterfacePlugin plugin in Engine.ResolveAll<IMainInterfacePlugin>())
+			{
+				string[] requiredUserControls = plugin.RequiredUserControls;
+				if (requiredUserControls != null)
+					LoadUserControls(requiredUserControls);
+
 				plugin.ModifyInterface(this);
+			}
 		}
 
 		protected override void OnPreRender(EventArgs e)
