@@ -38,7 +38,7 @@ namespace Zeus.Admin.Plugins.Globalization.LanguageOverview
 			TableHeaderRow headerRow = new TableHeaderRow { CssClass = "titles" };
 			headerRow.Cells.Add(new TableHeaderCell { Text = "Page" });
 			foreach (Language language in languages)
-				headerRow.Cells.Add(new TableHeaderCell { Text = "<img src=\"" + language.FlagIcon.Url + "\" /> " + language.Title });
+				headerRow.Cells.Add(new TableHeaderCell { Text = "<img src=\"" + language.IconUrl + "\" /> " + language.Title });
 			tblPageTranslations.Rows.Add(headerRow);
 		}
 

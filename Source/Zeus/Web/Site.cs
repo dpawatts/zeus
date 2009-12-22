@@ -63,7 +63,7 @@ namespace Zeus.Web
 		{
 			StringDictionary dictionary = new StringDictionary();
 			foreach (HostNameElement element in _hostNames)
-				if (!(element.Name == "*"))
+				if (element.Name != "*")
 					dictionary.Add(element.Name, element.Language);
 			return dictionary;
 		}

@@ -109,6 +109,13 @@ namespace Zeus.ContentTypes
 
 		#region Methods
 
+		public void AddProperty(IContentProperty property)
+		{
+			var properties = Properties.ToList();
+			properties.Add(property);
+			Properties = properties;
+		}
+
 		public IContentProperty GetProperty(string name)
 		{
 			return Properties.SingleOrDefault(p => p.Name == name);
