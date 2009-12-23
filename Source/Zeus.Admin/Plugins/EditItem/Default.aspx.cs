@@ -255,6 +255,7 @@ namespace Zeus.Admin.Plugins.EditItem
 		protected override void OnPreRender(EventArgs e)
 		{
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
+			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
 			CheckRelatedVersions((ContentItem) zeusItemEditView.CurrentItem);
 			ddlLanguages.SelectedValue = SelectedLanguageCode;
 			base.OnPreRender(e);
