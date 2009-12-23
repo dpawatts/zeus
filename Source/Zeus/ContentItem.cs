@@ -760,7 +760,7 @@ namespace Zeus
 		/// <returns></returns>
 		public virtual bool IsEmpty()
 		{
-			return !DetailsInternal.Any() && !DetailCollectionsInternal.Any();
+			return string.IsNullOrEmpty(Title) && !DetailsInternal.Any() && !DetailCollectionsInternal.Any();
 		}
 
 		/// <summary>
