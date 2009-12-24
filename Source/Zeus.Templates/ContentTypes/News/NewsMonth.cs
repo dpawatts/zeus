@@ -20,6 +20,11 @@ namespace Zeus.Templates.ContentTypes.News
 			get { return Utility.GetCooliteIconUrl(Icon.Newspaper); }
 		}
 
+		public override bool IsPage
+		{
+			get { return false; }
+		}
+
 		[TextBoxEditor("Name", 20)]
 		public override string Name
 		{
