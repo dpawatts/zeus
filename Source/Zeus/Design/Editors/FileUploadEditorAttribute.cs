@@ -31,6 +31,12 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
+		public static string GetUploadedFilePath(FancyFileUpload fileUpload)
+		{
+			string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier);
+			return Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
+		}
+
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload) editor;
@@ -46,8 +52,7 @@ namespace Zeus.Design.Editors
 			{
 				// Populate File object.
 				file.FileName = fileUpload.FileName;
-				string uploadFolder = BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier);
-				string uploadedFile = Path.Combine(uploadFolder, HttpUtility.UrlDecode(fileUpload.FileName));
+				string uploadedFile = GetUploadedFilePath(fileUpload);
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
 					file.Data = fs.ReadAllBytes();
@@ -57,7 +62,7 @@ namespace Zeus.Design.Editors
 
 				// Delete temp folder.
 				System.IO.File.Delete(uploadedFile);
-				Directory.Delete(uploadFolder);
+				Directory.Delete(BaseFileUploadHandler.GetUploadFolder(fileUpload.Identifier));
 
 				result = true;
 			}

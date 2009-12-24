@@ -6,6 +6,9 @@ namespace Zeus.Design.Editors
 	[AttributeUsage(AttributeTargets.Property)]
 	public class ImageUploadEditorAttribute : FileUploadEditorAttribute
 	{
+		public int? MinimumWidth { get; set; }
+		public int? MinimumHeight { get; set; }
+
 		/// <summary>Initializes a new instance of the ImageUploadEditorAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
@@ -17,7 +20,7 @@ namespace Zeus.Design.Editors
 
 		protected override FancyFileUpload CreateEditor()
 		{
-			return new FancyImageUpload();
+			return new FancyImageUpload { MinimumWidth = MinimumWidth, MinimumHeight = MinimumHeight };
 		}
 	}
 }
