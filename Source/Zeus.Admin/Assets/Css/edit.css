@@ -69,9 +69,14 @@ input[type="text"].required, textarea.required, select.required {
 	border: 1px solid #E6ACAC;
 }
 
-input[type="text"].colour, input[type="text"].price, input[type="text"].integer, input[type="text"].number, input[type="text"].date
+input[type="text"].colour, input[type="text"].price, input[type="text"].integer, input[type="text"].number
 {
 	width: 60px;
+}
+
+input[type="text"].date
+{
+	width: 80px;
 }
 
 .checkBoxList {

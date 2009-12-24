@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public class TabItem : Panel
+	public class TabItem : Panel, INamingContainer
 	{
 		public TabItem()
 		{

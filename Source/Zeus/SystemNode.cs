@@ -5,7 +5,7 @@ namespace Zeus
 {
 	[ContentType("System Node")]
 	[RestrictParents(typeof(RootItem))]
-	public class SystemNode : ContentItem
+	public class SystemNode : DataContentItem
 	{
 		public SystemNode()
 		{

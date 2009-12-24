@@ -10,7 +10,7 @@ namespace Zeus.Web.Security.Items
 {
 	[ContentType("User Container")]
 	[RestrictParents(typeof(SecurityContainer))]
-	public class UserContainer : ContentItem
+	public class UserContainer : DataContentItem
 	{
 		public const string ContainerName = "users";
 		public const string ContainerTitle = "Users";

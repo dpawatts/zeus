@@ -6,7 +6,7 @@ namespace Zeus
 {
 	[ContentType("Root Item", Installer = Installation.InstallerHints.PreferredRootPage)]
 	[RestrictParents(AllowedTypes.None)]
-	public class RootItem : ContentItem, IRootItem
+	public class RootItem : DataContentItem, IRootItem
 	{
 		public override string IconUrl
 		{

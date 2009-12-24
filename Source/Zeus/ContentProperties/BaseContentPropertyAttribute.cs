@@ -59,7 +59,17 @@ namespace Zeus.ContentProperties
 
 		public PropertyData CreatePropertyData(ContentItem enclosingItem, object value)
 		{
-			PropertyData propertyData = (PropertyData) Activator.CreateInstance(GetPropertyDataType());
+			Type propertyDataType = GetPropertyDataType();
+			object untypedPropertyData;
+			try
+			{
+				untypedPropertyData = Activator.CreateInstance(propertyDataType);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Could not create instance of type '" + propertyDataType.FullName + "' for content property with name '" + Name + "'", ex);
+			}
+			PropertyData propertyData = (PropertyData) untypedPropertyData;
 			propertyData.Name = Name;
 			propertyData.EnclosingItem = enclosingItem;
 			propertyData.Value = value;

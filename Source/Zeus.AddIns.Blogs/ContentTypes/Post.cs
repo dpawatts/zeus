@@ -29,6 +29,13 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			get { return Published ?? Created; }
 		}
 
+		[DateEditor("Date Published", 100, Required = true)]
+		public override DateTime? Published
+		{
+			get { return base.Published; }
+			set { base.Published = value; }
+		}
+
 		[XhtmlStringContentProperty("Text", 200)]
 		[HtmlTextBoxEditor(Required = true)]
 		public virtual string Text

@@ -6,7 +6,7 @@ namespace Zeus.Web.Security.Items
 {
 	[ContentType]
 	[RestrictParents(typeof(RoleContainer))]
-	public class Role : ContentItem
+	public class Role : DataContentItem
 	{
 		public override string Title
 		{

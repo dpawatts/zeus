@@ -3,12 +3,13 @@ using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web;
 using Zeus.Web.UI;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Form Page", "FormPage", "A page with a form that can be submitted and sent to an email address.", "", 240)]
-	[RestrictParents(typeof(BasePage))]
+	[RestrictParents(typeof(PageContentItem))]
 	[TabPanel("FormPanel", "Form", 100)]
 	[DefaultTemplate("Form")]
 	public class FormPage : BasePage

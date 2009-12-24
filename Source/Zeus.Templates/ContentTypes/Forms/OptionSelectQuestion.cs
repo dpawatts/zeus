@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Zeus.Templates.Design.Editors;
-using Zeus.Templates.Mvc.ContentTypes.Forms;
 
 namespace Zeus.Templates.ContentTypes.Forms
 {

@@ -56,12 +56,12 @@ table.tb .check {
 	text-align: center;
 }
 
-table.tb .edit, .add {
+table.tb .edit, table.tb .add {
 	width: 48px;
 	padding: 0;
 }
 
-table.tb .edit a, .add a {
+table.tb .edit a, table.tb .add a {
 	display: block;
 	height: 23px;
 	width: 54px;
@@ -72,11 +72,11 @@ table.tb .edit a {
 	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.edit.gif") %>) top left no-repeat;
 }
 
-.add a {
+table.tb .add a {
 	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.add.gif") %>) top left no-repeat;
 }
 
-table.tb .edit a:hover, .add a:hover {
+table.tb .edit a:hover, table.tb .add a:hover {
 	background-position: bottom left;
 }
 

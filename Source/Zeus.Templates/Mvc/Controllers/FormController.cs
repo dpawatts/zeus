@@ -3,52 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using Zeus.BaseLibrary.Web;
 using Zeus.Net.Mail;
 using System.Web.Mvc;
 using Zeus.Templates.ContentTypes.Forms;
-using Zeus.Templates.Mvc.ContentTypes.Forms;
 using Zeus.Templates.Mvc.ViewModels;
 using Zeus.Web;
 
-namespace Zeus.Templates.Mvc.Controllers.Forms
+namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(FormPage), AreaName = "Templates")]
-	public class FormPageController : ZeusController<FormPage>
+	[Controls(typeof(Form), AreaName = TemplatesWebPackage.AREA_NAME)]
+	public class FormController : ZeusController<Form>
 	{
 		private readonly IMailSender _mailSender;
 
-		public FormPageController(IMailSender mailSender)
+		public FormController(IMailSender mailSender)
 		{
 			_mailSender = mailSender;
 		}
 
 		public override ActionResult Index()
 		{
+			if (Request.QueryString["sent"] == "true")
+				return PartialView("Submit", new FormSubmitViewModel(CurrentItem));
+
 			var elements = GetQuestions();
-			return View(new FormViewModel(CurrentItem.Form, elements));
+			return PartialView("Index", new FormViewModel(CurrentItem, elements));
 		}
 
 		private IEnumerable<IQuestion> GetQuestions()
 		{
-			return CurrentItem.Form.GetChildren().OfType<IQuestion>();
+			return CurrentItem.GetChildren().OfType<IQuestion>();
 		}
 
 		public ActionResult Submit(FormCollection collection)
 		{
-			var sb = new StringBuilder(CurrentItem.Form.MailBody);
+			var sb = new StringBuilder(CurrentItem.MailBody + Environment.NewLine + Environment.NewLine);
 			foreach (IQuestion q in GetQuestions())
 			{
 				sb.AppendFormat("{0}: {1}{2}", q.QuestionText, q.GetAnswerText(collection[q.ElementID]), Environment.NewLine);
 			}
-			var mm = new MailMessage(CurrentItem.Form.MailFrom, CurrentItem.Form.MailTo)
+			var mm = new MailMessage(CurrentItem.MailFrom, CurrentItem.MailTo)
 			{
-				Subject = CurrentItem.Form.MailSubject,
+				Subject = CurrentItem.MailSubject,
 				Body = sb.ToString()
 			};
 
 			_mailSender.Send(mm);
 
-			return View(new FormViewModel(CurrentItem.Form, null));
+			return Redirect(new Url(CurrentItem.Parent.Url).Query("sent", true));
 		}
 	}
 }

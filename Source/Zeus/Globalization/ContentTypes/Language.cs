@@ -13,7 +13,7 @@ namespace Zeus.Globalization.ContentTypes
 	[RestrictParents(typeof(LanguageContainer))]
 	[Translatable(false)]
 	[AllowedChildren(typeof(Image))]
-	public class Language : ContentItem
+	public class Language : DataContentItem
 	{
 		[TextBoxEditor("Name", 10, Required = true)]
 		public override string Title

@@ -9,7 +9,7 @@ namespace Zeus.Globalization.ContentTypes
 	[ContentTypeAuthorizedRoles(RoleNames.Administrators)]
 	[RestrictParents(typeof(IRootItem))]
 	[Translatable(false)]
-	public class LanguageContainer : ContentItem
+	public class LanguageContainer : DataContentItem
 	{
 		public LanguageContainer()
 		{

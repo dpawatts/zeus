@@ -161,11 +161,14 @@
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
     <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
+    <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetConfirmationViewModel.cs" />
@@ -192,7 +195,7 @@
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
-    <Compile Include="Mvc\Controllers\Forms\FormPageController.cs" />
+    <Compile Include="Mvc\Controllers\FormPageController.cs" />
     <Compile Include="Mvc\Controllers\News\LatestNewsSummaryController.cs" />
     <Compile Include="Mvc\Controllers\News\NewsContainerController.cs" />
     <Compile Include="Mvc\Controllers\News\NewsItemController.cs" />
@@ -294,8 +297,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\FeedLink\Header.spark" />
     <EmbeddedResource Include="Mvc\Views\FeedLink\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\FormPage\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\FormPage\Submit.spark" />
+    <EmbeddedResource Include="Mvc\Views\Form\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\Form\Submit.spark" />
     <EmbeddedResource Include="Mvc\Views\LatestNewsSummary\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\NewsItem\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
@@ -338,6 +341,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\ForgottenPasswordPage\ResetError.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\FormPage\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

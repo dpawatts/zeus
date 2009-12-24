@@ -3,11 +3,9 @@ using System.Web.UI.WebControls;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
-using Zeus.Templates.ContentTypes;
-using Zeus.Templates.ContentTypes.Forms;
 using Zeus.Web.UI;
 
-namespace Zeus.Templates.Mvc.ContentTypes.Forms
+namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Form", "Form", "A form that can be sumitted and sent to an email address.", "", 250)]
 	[AllowedZones("Content", "ColumnLeft", "ColumnRight")]

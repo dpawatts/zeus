@@ -12,7 +12,7 @@ namespace Zeus.Security
 {
 	[ContentType]
 	[RestrictParents(typeof(UserContainer))]
-	public class User : ContentItem
+	public class User : DataContentItem
 	{
 		public override string Title
 		{

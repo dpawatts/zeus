@@ -8,7 +8,7 @@ namespace Zeus.Web.Security.Items
 {
 	[ContentType("Role Container")]
 	[RestrictParents(typeof(SecurityContainer))]
-	public class RoleContainer : ContentItem
+	public class RoleContainer : DataContentItem
 	{
 		public const string ContainerName = "roles";
 		public const string ContainerTitle = "Roles";
