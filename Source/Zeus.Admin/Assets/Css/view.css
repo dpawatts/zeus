@@ -82,7 +82,7 @@ table.tb .edit a:hover, table.tb .add a:hover {
 
 /* Delete buttons */
 
-.delete {
+table.tb .delete {
 	font-size: 14px;
 	display: block;
 	height: 22px;
@@ -96,7 +96,7 @@ table.tb .edit a:hover, table.tb .add a:hover {
 	font-weight: bold;
 	
 }
-.deleteOn {
+table.tb .deleteOn {
 	font-size: 14px;
 	display: block;
 	height: 22px;
@@ -110,7 +110,7 @@ table.tb .edit a:hover, table.tb .add a:hover {
 	font-weight: bold;
 }
 
-.delete:hover {
+table.tb .delete:hover {
 	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.trashOpen.gif") %>) bottom left no-repeat;
 	color: #8b8c8d;
 }
