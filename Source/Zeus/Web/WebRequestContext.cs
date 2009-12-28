@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using Zeus.BaseLibrary.Web;
 
 namespace Zeus.Web
@@ -28,6 +29,11 @@ namespace Zeus.Web
 		public virtual string PhysicalPath
 		{
 			get { return Request.PhysicalPath; }
+		}
+
+		public HttpContextBase HttpContext
+		{
+			get { return new HttpContextWrapper(CurrentHttpContext); }
 		}
 
 		public virtual void Close()

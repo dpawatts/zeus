@@ -11,6 +11,6 @@ namespace Zeus.Templates.Services.Syndication
 		string Title { get; }
 		string Url { get; }
 		string Summary { get; }
-		DateTime? Published { get; }
+		DateTime Published { get; }
 	}
 }

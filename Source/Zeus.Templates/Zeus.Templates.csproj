@@ -161,12 +161,15 @@
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
     <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
     <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
+    <Compile Include="Mvc\Feed.cs" />
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
+    <Compile Include="Mvc\SyndicationResultBase.cs" />
     <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />

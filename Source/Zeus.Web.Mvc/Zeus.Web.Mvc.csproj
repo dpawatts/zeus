@@ -116,6 +116,7 @@
     <Compile Include="Html\ZoneHelper.cs" />
     <Compile Include="ModelStateDictionaryExtensions.cs" />
     <Compile Include="ModelStateToTempDataAttribute.cs" />
+    <Compile Include="NotModifiedResult.cs" />
     <Compile Include="RequireSslAttribute.cs" />
     <Compile Include="SparkView.cs" />
     <Compile Include="FallbackContentController.cs" />

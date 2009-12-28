@@ -15,6 +15,8 @@ namespace Zeus.Web
 		/// <summary>The physical path on disk to the requested page.</summary>
 		string PhysicalPath { get; }
 
+		HttpContextBase HttpContext { get; }
+
 		/// <summary>Closes any endable resources at the end of the request.</summary>
 		void Close();
 

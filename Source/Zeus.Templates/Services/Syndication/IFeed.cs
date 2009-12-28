@@ -16,6 +16,8 @@ namespace Zeus.Templates.Services.Syndication
 		string Url { get; }
 		DateTime? Published { get; }
 
+		bool Rfc3229DeltaEncodingEnabled { get; set; }
+
 		IEnumerable<ISyndicatable> GetItems();
 	}
 }

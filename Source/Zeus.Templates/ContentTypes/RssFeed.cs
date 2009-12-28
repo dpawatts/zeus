@@ -3,6 +3,7 @@ using System.Linq;
 using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Linq;
 using Zeus.Templates.Services.Syndication;
 using Zeus.Web;
 
@@ -46,6 +47,13 @@ namespace Zeus.Templates.ContentTypes
 			set { SetDetail("Author", value, string.Empty); }
 		}
 
+		[ContentProperty("RFC 3229 Delta Encoding Enabled", 130)]
+		public virtual bool Rfc3229DeltaEncodingEnabled
+		{
+			get { return GetDetail("Rfc3229DeltaEncodingEnabled", true); }
+			set { SetDetail("Rfc3229DeltaEncodingEnabled", value); }
+		}
+
 		public override string Url
 		{
 			get { return base.Url + "?hungry=yes"; }
@@ -56,6 +64,7 @@ namespace Zeus.Templates.ContentTypes
 			return Find.EnumerateAccessibleChildren(FeedRoot ?? Find.StartPage)
 				.OfType<ISyndicatable>()
 				.OfType<ContentItem>()
+				.Navigable()
 				.Where(ci => ci.GetDetail(SyndicatableDefinitionAppender.SyndicatableDetailName, true))
 				.OrderByDescending(ci => ci.Published)
 				.Take(NumberOfItems)

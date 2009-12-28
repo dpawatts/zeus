@@ -36,6 +36,11 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { base.Published = value; }
 		}
 
+		DateTime ISyndicatable.Published
+		{
+			get { return (Published != null) ? Published.Value : DateTime.MinValue; }
+		}
+
 		[XhtmlStringContentProperty("Text", 200)]
 		[HtmlTextBoxEditor(Required = true)]
 		public virtual string Text

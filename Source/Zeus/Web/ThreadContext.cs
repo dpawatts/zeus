@@ -134,6 +134,11 @@ namespace Zeus.Web
 			get { throw new NotSupportedException("In thread context. No handler when not running in http web context."); }
 		}
 
+		public HttpContextBase HttpContext
+		{
+			get { throw new NotImplementedException(); }
+		}
+
 		public virtual void RewritePath(string path)
 		{
 			throw new NotSupportedException("In thread context. No handler when not running in http web context.");

@@ -63,6 +63,11 @@ namespace Zeus.Templates.ContentTypes.News
 			Utility.Insert(this, newParent, "Date DESC");
 		}
 
+		DateTime ISyndicatable.Published
+		{
+			get { return (Published != null) ? Published.Value : DateTime.MinValue; }
+		}
+
 		string ISyndicatable.Summary
 		{
 			get { return Introduction; }
