@@ -2,20 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Routing;
+using Zeus.Configuration;
 using Zeus.Web.Routing;
 
 namespace Zeus.Web.Hosting
 {
 	public abstract class EmbeddedResourcePackageBase : IEmbeddedResourcePackage
 	{
-		public abstract void Register(ICollection<RouteBase> routes, ResourceSettings resourceSettings);
+		public abstract void Register(RouteCollection routes, ResourceSettings resourceSettings);
 
-		protected void RegisterStandardArea(ICollection<RouteBase> routes, ResourceSettings resourceSettings, string areaName)
+		protected void RegisterStandardArea(RouteCollection routes, ResourceSettings resourceSettings, string areaName)
 		{
 			RegisterStandardArea(routes, resourceSettings, areaName, "Content");
 		}
 
-		protected void RegisterStandardArea(ICollection<RouteBase> routes, ResourceSettings resourceSettings, string areaName, string clientResourcePrefix)
+		protected void RegisterStandardArea(RouteCollection routes, ResourceSettings resourceSettings, string areaName, string clientResourcePrefix)
 		{
 			Assembly assembly = GetType().Assembly;
 			resourceSettings.AssemblyPathPrefixes.Add(areaName, assembly);
@@ -23,12 +24,12 @@ namespace Zeus.Web.Hosting
 			RegisterStandardRoutes(routes, assembly, areaName, clientResourcePrefix);
 		}
 
-		protected void RegisterStandardRoutes(ICollection<RouteBase> routes, Assembly assembly, string areaName)
+		protected void RegisterStandardRoutes(RouteCollection routes, Assembly assembly, string areaName)
 		{
 			RegisterStandardRoutes(routes, assembly, areaName, "Content");
 		}
 
-		protected void RegisterStandardRoutes(ICollection<RouteBase> routes, Assembly assembly, string areaName, string clientResourcePrefix)
+		protected void RegisterStandardRoutes(RouteCollection routes, Assembly assembly, string areaName, string clientResourcePrefix)
 		{
 			routes.Add(new Route("content/{area}/{*resource}",
 				new RouteValueDictionary(),

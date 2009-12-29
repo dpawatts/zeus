@@ -4,9 +4,9 @@ using Argotic.Syndication;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.Admin;
 
-namespace Zeus.AddIns.Blogs.Plugins
+namespace Zeus.AddIns.Blogs.Admin.Plugins.ImportExportBlogXml
 {
-	public partial class ImportAtom : PreviewFrameAdminPage
+	public partial class Default : PreviewFrameAdminPage
 	{
 		protected void btnUploadImport_Click(object sender, EventArgs e)
 		{

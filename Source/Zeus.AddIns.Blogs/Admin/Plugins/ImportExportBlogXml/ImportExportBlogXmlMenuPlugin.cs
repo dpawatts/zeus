@@ -3,9 +3,9 @@ using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.Admin.Plugins;
 using Zeus.Security;
 
-namespace Zeus.AddIns.Blogs.ActionPlugins
+namespace Zeus.AddIns.Blogs.Admin.Plugins.ImportExportBlogXml
 {
-	public class ImportExportBlogXmlActionPlugin : MenuPluginBase, IContextMenuPlugin
+	public class ImportExportBlogXmlMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -34,12 +34,12 @@ namespace Zeus.AddIns.Blogs.ActionPlugins
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
-			{
-				Text = "Import Atom XML",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageIn),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path)
-			};
+				{
+					Text = "Import Atom XML",
+					IconUrl = Utility.GetCooliteIconUrl(Icon.PackageIn),
+					Handler = string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
+						GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path)
+				};
 
 			return menuItem;
 		}

@@ -3,10 +3,10 @@ using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
-namespace Zeus.AddIns.Blogs.ActionPlugins
+namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 {
 	[ActionPluginGroup("Blog", 200)]
-	public class ModerateCommentsActionPlugin : MenuPluginBase, IContextMenuPlugin
+	public class ModerateCommentsMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
@@ -30,12 +30,12 @@ namespace Zeus.AddIns.Blogs.ActionPlugins
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
-			{
-				Text = "Moderate Comments",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Comments),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.ModerateComments.aspx") + "?selected=" + contentItem.Path)
-			};
+				{
+					Text = "Moderate Comments",
+					IconUrl = Utility.GetCooliteIconUrl(Icon.Comments),
+					Handler = string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
+						GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments.Default.aspx") + "?selected=" + contentItem.Path)
+				};
 
 			return menuItem;
 		}

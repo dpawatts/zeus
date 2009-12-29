@@ -7,7 +7,7 @@ namespace Zeus.Admin
 {
 	public class ZeusAdminEmbeddedResourcePackage : EmbeddedResourcePackageBase
 	{
-		public override void Register(ICollection<RouteBase> routes, ResourceSettings resourceSettings)
+		public override void Register(RouteCollection routes, ResourceSettings resourceSettings)
 		{
 			RegisterStandardArea(routes, resourceSettings, "admin", "Assets");
 		}

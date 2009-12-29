@@ -7,7 +7,7 @@ namespace Zeus
 {
 	public class ZeusEmbeddedResourcePackage : EmbeddedResourcePackageBase
 	{
-		public override void Register(ICollection<RouteBase> routes, ResourceSettings resourceSettings)
+		public override void Register(RouteCollection routes, ResourceSettings resourceSettings)
 		{
 			RegisterStandardArea(routes, resourceSettings, "zeus", "Web.Resources");
 		}

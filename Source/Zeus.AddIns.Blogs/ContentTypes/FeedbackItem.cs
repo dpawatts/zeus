@@ -1,3 +1,4 @@
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -46,7 +47,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Comment), "Zeus.AddIns.Blogs.Icons.comment.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Comment); }
 		}
 
 		public override string Url

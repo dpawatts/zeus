@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.AddIns.Blogs.Admin {
+namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
     
     
-    public partial class ModerateComments {
+    public partial class Default {
         
         /// <summary>
         /// scriptManager control.
@@ -41,6 +41,15 @@ namespace Zeus.AddIns.Blogs.Admin {
         protected global::Coolite.Ext.Web.GridPanel gpaComments;
         
         /// <summary>
+        /// btnApprove control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnApprove;
+        
+        /// <summary>
         /// btnSpam control.
         /// </summary>
         /// <remarks>
@@ -48,5 +57,23 @@ namespace Zeus.AddIns.Blogs.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Coolite.Ext.Web.Button btnSpam;
+        
+        /// <summary>
+        /// cboFilterType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.ComboBox cboFilterType;
+        
+        /// <summary>
+        /// cboFilterStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.ComboBox cboFilterStatus;
     }
 }

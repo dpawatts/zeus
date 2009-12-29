@@ -5,6 +5,6 @@ namespace Zeus.Web.Hosting
 {
 	public interface IEmbeddedResourcePackage
 	{
-		void Register(ICollection<RouteBase> routes, ResourceSettings resourceSettings);
+		void Register(RouteCollection routes, ResourceSettings resourceSettings);
 	}
 }
