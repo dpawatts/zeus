@@ -26,7 +26,7 @@ namespace Zeus.Admin.Plugins.Permissions
 			{
 				Text = "Permissions",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.Lock),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Permissions', '{0}'); }}",
+				Handler = string.Format("function() {{ top.zeus.reloadContentPanel('Permissions', '{0}'); }}",
 					GetPageUrl(GetType(), "Zeus.Admin.Plugins.Permissions.Default.aspx") + "?selected=" + contentItem.Path)
 			};
 

@@ -48,7 +48,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			{
 				Text = "Delete",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PageDelete),
-				Handler = string.Format("function() {{ Ext.ux.zeus.DeleteConfirmation.show('{0}', '{1}', '{2}'); }}",
+				Handler = string.Format("function() {{ top.Ext.ux.zeus.DeleteConfirmation.show('{0}', '{1}', '{2}'); }}",
 					contentItem.Title.Replace("'", "\\'"), contentItem.ID, contentItem.IconUrl)
 			};
 

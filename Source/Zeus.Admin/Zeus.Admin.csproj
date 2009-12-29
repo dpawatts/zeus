@@ -99,6 +99,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Plugins\Children\GridPluginInitializer.cs" />
     <Compile Include="Plugins\EditItem\KeepAlive.aspx.cs">
       <DependentUpon>KeepAlive.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

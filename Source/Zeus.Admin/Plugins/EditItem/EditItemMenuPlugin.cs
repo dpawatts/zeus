@@ -26,7 +26,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			{
 				Text = "Edit",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PageEdit),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Edit', '{0}'); }}",
+				Handler = string.Format("function() {{ top.zeus.reloadContentPanel('Edit', '{0}'); }}",
 					GetPageUrl(GetType(), "Zeus.Admin.Plugins.EditItem.Default.aspx") + "?selected=" + contentItem.Path)
 			};
 

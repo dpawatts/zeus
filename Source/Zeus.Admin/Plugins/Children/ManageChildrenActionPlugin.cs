@@ -26,7 +26,7 @@ namespace Zeus.Admin.Plugins.Children
 			{
 				Text = "Manage Children",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.ApplicationViewDetail),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Manage Children', '{0}'); }}",
+				Handler = string.Format("function() {{ top.zeus.reloadContentPanel('Manage Children', '{0}'); }}",
 					GetPageUrl(GetType(), "Zeus.Admin.Plugins.Children.Default.aspx") + "?selected=" + contentItem.Path)
 			};
 

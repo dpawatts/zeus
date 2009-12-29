@@ -13,8 +13,8 @@
 		{
 			var button = toolbar.items.items[0];
 			button.menu = new Ext.ux.menu.StoreMenu({
-				baseParams: { node: "1" },
-				url: "/admin/Navigation/ContextMenuLoader.ashx",
+				baseParams: { node: record.data.ID },
+				url: "/admin/Plugins/ContextMenu/ContextMenuLoader.ashx",
 				xtype:"storemenu"
 			});
 			button.el.child(button.menuClassTarget).addClass("x-btn-with-menu");

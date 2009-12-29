@@ -36,7 +36,7 @@ namespace Zeus.Admin.Plugins.ImportExport
 			{
 				Text = "Import / Export",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageGo),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Import / Export', '{0}'); }}",
+				Handler = string.Format("function() {{ topzeus.reloadContentPanel('Import / Export', '{0}'); }}",
 					GetPageUrl(GetType(), "Zeus.Admin.Plugins.ImportExport.Default.aspx") + "?selected=" + contentItem.Path)
 			};
 
