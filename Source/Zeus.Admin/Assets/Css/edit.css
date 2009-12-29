@@ -28,6 +28,11 @@ input[type="text"], textarea, div.editDetail > select
 	padding: 3px;
 }
 
+input[type="text"].x-form-text
+{
+	width: auto;
+}
+
 input[type="text"], textarea
 {
 	font-size: 13px;

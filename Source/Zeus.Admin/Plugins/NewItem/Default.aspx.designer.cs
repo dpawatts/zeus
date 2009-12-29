@@ -29,7 +29,7 @@ namespace Zeus.Admin.Plugins.NewItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.TabControl tbcTabs;
+        protected global::Coolite.Ext.Web.TabPanel tbcTabs;
         
         /// <summary>
         /// tbpType control.
@@ -38,7 +38,7 @@ namespace Zeus.Admin.Plugins.NewItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.TabItem tbpType;
+        protected global::Coolite.Ext.Web.Tab tbpType;
         
         /// <summary>
         /// lsvChildTypes control.
@@ -56,7 +56,7 @@ namespace Zeus.Admin.Plugins.NewItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.TabItem tbpPosition;
+        protected global::Coolite.Ext.Web.Tab tbpPosition;
         
         /// <summary>
         /// lblPosition control.
@@ -83,7 +83,7 @@ namespace Zeus.Admin.Plugins.NewItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zeus.Web.UI.WebControls.TabItem tbpZone;
+        protected global::Coolite.Ext.Web.Tab tbpZone;
         
         /// <summary>
         /// lblZone control.

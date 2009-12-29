@@ -467,7 +467,6 @@
     <Compile Include="Design\Editors\ListBoxEditorAttribute.cs" />
     <Compile Include="Design\Editors\ListEditorAttribute.cs" />
     <Compile Include="Design\Editors\EnumEditorAttribute.cs" />
-    <Compile Include="Design\Editors\SortableLinkedItemsCheckBoxListEditorAttribute.cs" />
     <Compile Include="Design\Displayers\DateDisplayerAttribute.cs" />
     <Compile Include="Design\Editors\DateEditorAttribute.cs" />
     <Compile Include="DestinationEventArgs.cs" />
@@ -512,7 +511,6 @@
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
     <Compile Include="Web\ILink.cs" />
     <Compile Include="Web\UI\WebControls\LinkedItemsEditor.cs" />
-    <Compile Include="Web\UI\WebControls\SortableCheckBoxList.cs" />
     <Compile Include="Web\UI\WebControls\TimePicker.cs" />
     <Compile Include="Web\UI\WebControls\HtmlTextBox.cs" />
     <Compile Include="Design\Displayers\IDisplayer.cs" />

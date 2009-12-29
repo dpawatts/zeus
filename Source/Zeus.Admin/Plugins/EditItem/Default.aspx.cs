@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq;
+using Coolite.Ext.UX;
+using Coolite.Ext.Web;
 using Zeus.Admin.Web.UI.WebControls;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
+using Zeus.Globalization;
+using Zeus.Globalization.ContentTypes;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Hosting;
@@ -54,14 +58,23 @@ namespace Zeus.Admin.Plugins.EditItem
 				}
 			}
 
-			hlCancel.NavigateUrl = CancelUrl();
-			plcLanguages.Visible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
+			bool languagesVisible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
+			txiLanguages.Visible = ddlLanguages.Visible = languagesVisible;
 
 			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
 			{
 				btnSaveUnpublished.Visible = false;
 				btnPreview.Visible = false;
 				btnSave.Text = "Save";
+			}
+
+			if (!Ext.IsAjaxRequest && GlobalizationEnabled)
+			{
+				foreach (Language language in Engine.Resolve<ILanguageManager>().GetAvailableLanguages())
+				{
+					IconComboListItem listItem = new IconComboListItem(language.Title, language.Name, language.IconUrl);
+					ddlLanguages.Items.Add(listItem);
+				}
 			}
 
 			base.OnInit(e);
@@ -164,7 +177,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			uscZones.DataSource = definition.AvailableZones;
 			uscZones.DataBind();
 
-			hplZones.Visible = definition.AvailableZones.Count > 0;
+			btnZones.Visible = definition.AvailableZones.Count > 0;
 		}
 
 		private void CheckRelatedVersions(ContentItem item)
@@ -257,13 +270,18 @@ namespace Zeus.Admin.Plugins.EditItem
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
 			CheckRelatedVersions((ContentItem) zeusItemEditView.CurrentItem);
-			ddlLanguages.SelectedValue = SelectedLanguageCode;
+			ddlLanguages.SelectedItem.Value = SelectedLanguageCode;
 			base.OnPreRender(e);
 		}
 
-		protected void ddlLanguages_LanguageChanged(object sender, LanguageChangedEventArgs e)
+		protected void ddlLanguages_ValueChanged(object sender, EventArgs e)
 		{
-			Response.Redirect(new Url(Request.RawUrl).SetQueryParameter("language", e.LanguageCode));
+			Response.Redirect(new Url(Request.RawUrl).SetQueryParameter("language", ddlLanguages.SelectedItem.Value));
+		}
+
+		protected void btnCancel_Click(object sender, EventArgs e)
+		{
+			Response.Redirect(CancelUrl());
 		}
 	}
 }

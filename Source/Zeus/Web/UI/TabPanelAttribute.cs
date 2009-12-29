@@ -1,7 +1,7 @@
-﻿using System;
+﻿using System.Web.UI.WebControls;
+using Coolite.Ext.Web;
 using Zeus.ContentTypes;
 using System.Web.UI;
-using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Web.UI
 {
@@ -18,18 +18,21 @@ namespace Zeus.Web.UI
 		public override Control AddTo(Control container)
 		{
 			// If the current container doesn't already contain a TabControl, create one now.
-			TabControl tabControl = container.FindControl("TabControl") as TabControl;
+			TabPanel tabControl = container.FindControl("TabControl") as TabPanel;
 			if (tabControl == null)
 			{
-				tabControl = new TabControl();
+				tabControl = new TabPanel();
 				tabControl.ID = "TabControl";
 				container.Controls.Add(tabControl);
 			}
 
-			TabItem tabItem = new TabItem();
+			Tab tabItem = new Tab();
+			tabItem.AutoScroll = true;
+			tabItem.AutoHeight = true;
 			tabItem.ID = "tabItem" + Name;
-			tabItem.ToolTip = Title;
-			tabControl.Controls.Add(tabItem);
+			tabItem.Title = Title;
+			tabItem.BodyStyle = "padding:5px";
+			tabControl.Tabs.Add(tabItem);
 			return tabItem;
 		}
 	}

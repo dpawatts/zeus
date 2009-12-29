@@ -10,14 +10,18 @@
 	<form runat="server" id="frmForm" enctype="multipart/form-data">
 	<asp:ScriptManager runat="server" />
 	<div>
-		<div id="toolbar" class="clearfix">
-			<asp:ContentPlaceHolder ID="Toolbar" runat="server" />
-		</div>
+		<asp:ContentPlaceHolder ID="ToolbarContainer" runat="server">
+			<div id="toolbar" class="clearfix">
+				<asp:ContentPlaceHolder ID="Toolbar" runat="server" />
+			</div>
+		</asp:ContentPlaceHolder>
 		<asp:ContentPlaceHolder ID="Outside" runat="server" />
-		<div id="content">
-			<h2 runat="server" id="h2Title" />
-			<asp:ContentPlaceHolder ID="Content" runat="server" />
-		</div>
+		<asp:ContentPlaceHolder ID="ContentContainer" runat="server">
+			<div id="content">
+				<h2 runat="server" id="h2Title" />
+				<asp:ContentPlaceHolder ID="Content" runat="server" />
+			</div>
+		</asp:ContentPlaceHolder>
 	</div>
 	</form>
 </body>

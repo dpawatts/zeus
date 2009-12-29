@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using Coolite.Ext.Web;
 using Zeus.ContentTypes;
-using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
 {
-	public class DateEditorAttribute : TextBoxEditorAttribute
+	public class DateEditorAttribute : AbstractEditorAttribute
 	{
 		public DateEditorAttribute(string title, int sortOrder)
-			: base(title, sortOrder, 10)
+			: base(title, sortOrder)
 		{
 		}
 
@@ -18,16 +17,42 @@ namespace Zeus.Design.Editors
 			
 		}
 
-		protected override TextBox CreateEditor()
+		protected override void DisableEditor(Control editor)
 		{
-			return new DatePicker();
+			((DateField) editor).Enabled = false;
+			((DateField) editor).ReadOnly = true;
+		}
+
+		protected override Control AddEditor(Control container)
+		{
+			DateField tb = new DateField();
+			tb.ID = Name;
+			if (Required)
+			{
+				tb.AllowBlank = false;
+				tb.Cls = "required";
+			}
+			container.Controls.Add(tb);
+
+			return tb;
 		}
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			DatePicker tb = editor as DatePicker;
+			DateField tb = (DateField) editor;
 			if (item[Name] != null)
-				tb.Text = ((DateTime) item[Name]).ToShortDateString();
+				tb.SelectedDate = (DateTime) item[Name];
+		}
+
+		public override bool UpdateItem(IEditableObject item, Control editor)
+		{
+			DateField tb = editor as DateField;
+			if (!AreEqual(tb.SelectedDate, item[Name]))
+			{
+				item[Name] = tb.SelectedDate;
+				return true;
+			}
+			return false;
 		}
 	}
 }

@@ -4,10 +4,12 @@ using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Security;
 using Zeus.Web.UI.WebControls;
+using Label = System.Web.UI.WebControls.Label;
 
 namespace Zeus.Design.Editors
 {
@@ -151,7 +153,6 @@ namespace Zeus.Design.Editors
 			AddValidators(panel, editor);
 			if (!string.IsNullOrEmpty(Description))
 				panel.Controls.Add(new LiteralControl("<br style=\"clear:both\" /><span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
-
 			return editor;
 		}
 
@@ -175,7 +176,10 @@ namespace Zeus.Design.Editors
 			HtmlGenericControl detailContainer = new HtmlGenericControl("div");
 			detailContainer.ID = "editDetail" + Name;
 			detailContainer.Attributes["class"] = "editDetail";
-			container.Controls.Add(detailContainer);
+			if (container is ContentPanel)
+				((ContentPanel) container).BodyControls.Add(detailContainer);
+			else
+				container.Controls.Add(detailContainer);
 			return detailContainer;
 		}
 

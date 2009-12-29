@@ -67,7 +67,7 @@ namespace Zeus.Design.Editors
 		{
 			CheckBoxList cbl = CreateEditor();
 			cbl.CssClass += " checkBoxList";
-			cbl.RepeatLayout = RepeatLayout.Flow;
+			cbl.RepeatLayout = RepeatLayout.Table;
 			container.Controls.Add(cbl);
 
 			container.Controls.Add(new LiteralControl("<br style=\"clear:both\" />"));

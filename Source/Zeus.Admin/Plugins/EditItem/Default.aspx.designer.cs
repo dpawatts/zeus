@@ -14,87 +14,6 @@ namespace Zeus.Admin.Plugins.EditItem {
     public partial class Default {
         
         /// <summary>
-        /// pnlPageView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPageView;
-        
-        /// <summary>
-        /// plcLanguages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder plcLanguages;
-        
-        /// <summary>
-        /// ddlLanguages control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.LanguageDropDownList ddlLanguages;
-        
-        /// <summary>
-        /// hplZones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hplZones;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSave;
-        
-        /// <summary>
-        /// btnSaveUnpublished control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSaveUnpublished;
-        
-        /// <summary>
-        /// btnPreview control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnPreview;
-        
-        /// <summary>
-        /// hlCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarHyperLink hlCancel;
-        
-        /// <summary>
-        /// uscZones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected AvailableZones uscZones;
-        
-        /// <summary>
         /// hlNewerVersion control.
         /// </summary>
         /// <remarks>
@@ -129,5 +48,77 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Zeus.Web.UI.WebControls.ItemEditView zeusItemEditView;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnSave;
+        
+        /// <summary>
+        /// btnSaveUnpublished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnSaveUnpublished;
+        
+        /// <summary>
+        /// btnPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnPreview;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnCancel;
+        
+        /// <summary>
+        /// txiLanguages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.ToolbarTextItem txiLanguages;
+        
+        /// <summary>
+        /// ddlLanguages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.UX.IconCombo ddlLanguages;
+        
+        /// <summary>
+        /// btnZones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.Button btnZones;
+        
+        /// <summary>
+        /// uscZones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected AvailableZones uscZones;
     }
 }

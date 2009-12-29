@@ -32,6 +32,15 @@ namespace Zeus.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlForm frmForm;
         
         /// <summary>
+        /// ToolbarContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ToolbarContainer;
+        
+        /// <summary>
         /// Toolbar control.
         /// </summary>
         /// <remarks>
@@ -48,6 +57,15 @@ namespace Zeus.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder Outside;
+        
+        /// <summary>
+        /// ContentContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentContainer;
         
         /// <summary>
         /// h2Title control.

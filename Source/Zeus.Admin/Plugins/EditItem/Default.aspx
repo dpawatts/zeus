@@ -3,52 +3,73 @@
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register TagPrefix="zeus" TagName="AvailableZones" Src="~/admin/Plugins/EditItem/AvailableZones.ascx" %>
+<%@ Register TagPrefix="ext" Namespace="Coolite.Ext.UX" Assembly="Coolite.Ext.UX" %>
 <asp:Content runat="server" ContentPlaceHolderID="head">
 	<ext:ScriptContainer runat="server" />
 	<ext:StyleContainer runat="server" />
 </asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<asp:Panel runat="server" ID="pnlPageView" CssClass="rightAligned">
-		<asp:PlaceHolder runat="server" ID="plcLanguages" Visible="false">
-			<b>Page view:</b> <admin:LanguageDropDownList runat="server" ID="ddlLanguages" OnLanguageChanged="ddlLanguages_LanguageChanged" />
-		</asp:PlaceHolder>
-		<asp:HyperLink runat="server" ID="hplZones" CssClass="showZones command" NavigateUrl="javascript:void(0);">Zones</asp:HyperLink>
-	</asp:Panel>
-	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save and publish" ImageResourceName="Zeus.Admin.Assets.Images.Icons.page_save.png" CssClass="positive" OnClick="btnSave_Click" />
-	<admin:ToolbarButton runat="server" ID="btnSaveUnpublished" Text="Save an unpublished version" ImageResourceName="Zeus.Admin.Assets.Images.Icons.book_next.png" CssClass="positive" OnClick="btnSaveUnpublished_Click" />
-	<admin:ToolbarButton runat="server" ID="btnPreview" Text="Save and preview" ImageResourceName="Zeus.Admin.Assets.Images.Icons.zoom.png" CssClass="positive" OnClick="btnPreview_Click" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
-</asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ToolbarContainer"></asp:Content>
+<asp:Content runat="server" ContentPlaceHolderID="ContentContainer"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Outside">
+	<ext:ScriptManager runat="server" Theme="Gray" />
+
+	<ext:ViewPort runat="server">
+		<Body>
+			<ext:FitLayout runat="server">
+				<Items>
+					<ext:Panel runat="server" Border="false" BodyStyle="padding:5px" AutoScroll="true">
+						<TopBar>
+							<ext:Toolbar runat="server">
+								<Items>
+									<ext:Button runat="server" ID="btnSave" Text="Save and publish" Icon="PageSave" OnClick="btnSave_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnSaveUnpublished" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnPreview" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
+									<ext:ToolbarFill runat="server" />
+									<ext:ToolbarTextItem runat="server" ID="txiLanguages" Text="Page view: " />
+									<ext:IconCombo runat="server" ID="ddlLanguages" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
+									<ext:Button runat="server" ID="btnZones" Text="Zones" Cls="showZones" />
+								</Items>
+							</ext:Toolbar>
+						</TopBar>
+						<Body>
+							<asp:HyperLink ID="hlNewerVersion" runat="server" Text="There is a newer version of this item that hasn't been published. Edit the newer version &amp;raquo;" CssClass="info" Visible="false" />
+							<asp:HyperLink ID="hlOlderVersion" runat="server" Text="This is a version of another item that is the master version. Edit the master version &amp;raquo;" CssClass="info" Visible="false" />
+							
+							<asp:ValidationSummary runat="server" CssClass="info validator" />
+							<asp:CustomValidator ID="csvException" runat="server" Display="None" />
+							
+							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
+								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
+						</Body>
+					</ext:Panel>
+				</Items>
+			</ext:FitLayout>
+		</Body>
+	</ext:ViewPort>
+	
 	<div class="right">
 		<zeus:AvailableZones runat="server" ID="uscZones" />
 	</div>
-</asp:Content>
-<asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ScriptManager runat="server" Theme="Gray" />
-	
-	<asp:HyperLink ID="hlNewerVersion" runat="server" Text="There is a newer version of this item that hasn't been published. Edit the newer version &amp;raquo;" CssClass="info" Visible="false" />
-	<asp:HyperLink ID="hlOlderVersion" runat="server" Text="This is a version of another item that is the master version. Edit the master version &amp;raquo;" CssClass="info" Visible="false" />
-	
-	<asp:ValidationSummary runat="server" CssClass="info validator" />
-	<asp:CustomValidator ID="csvException" runat="server" Display="None" />
-	
-	<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
-		OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
 	
 	<script type="text/javascript">
-		jQuery(document).ready(function() {
+		jQuery(document).ready(function()
+		{
 			jQuery(".right fieldset").hide();
 
-			jQuery(".showInfo").toggle(function() {
+			jQuery(".showInfo").toggle(function()
+			{
 				zeustoggle.show(this, ".infoBox");
-			}, function() {
+			}, function()
+			{
 				zeustoggle.hide(this, ".infoBox");
 			});
 
-			jQuery(".showZones").toggle(function() {
+			jQuery(".showZones").toggle(function()
+			{
 				zeustoggle.show(this, ".zonesBox");
-			}, function() {
+			}, function()
+			{
 				zeustoggle.hide(this, ".zonesBox");
 			});
 
@@ -59,20 +80,22 @@
 
 			setTimeout(jQuery.zeusKeepAlive.sessionSaver,
 				jQuery.zeusKeepAlive.sessionSaverInterval);
+
+			window.top.zeus.setPreviewTitle('<%= Title.Replace("'", "\\'") %>');
 		});
-		
+
 		(function($)
 		{
 			$.zeusKeepAlive =
 			{
-  			sessionSaverUrl: '<%= GetSessionKeepAliveUrl() %>',
-  			sessionSaverInterval: (60000 * 5),
-  			sessionSaver: function()
-  			{
-  				$.post($.zeusKeepAlive.sessionSaverUrl);
-  				setTimeout($.zeusKeepAlive.sessionSaver,
+				sessionSaverUrl: '<%= GetSessionKeepAliveUrl() %>',
+				sessionSaverInterval: (60000 * 5),
+				sessionSaver: function()
+				{
+					$.post($.zeusKeepAlive.sessionSaverUrl);
+					setTimeout($.zeusKeepAlive.sessionSaver,
 						$.zeusKeepAlive.sessionSaverInterval);
-  			}
+				}
 			};
 		})(jQuery);
 
