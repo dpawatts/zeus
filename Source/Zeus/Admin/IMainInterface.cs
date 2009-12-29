@@ -1,4 +1,5 @@
 using Coolite.Ext.Web;
+using System.Web.UI;
 
 namespace Zeus.Admin
 {
@@ -9,5 +10,6 @@ namespace Zeus.Admin
 		BorderLayout BorderLayout { get; }
 
 		void LoadUserControls(string[] virtualPaths);
+		void AddControl(Control control);
 	}
 }

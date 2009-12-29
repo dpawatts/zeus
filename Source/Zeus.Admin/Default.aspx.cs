@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI;
 using Coolite.Ext.Web;
 using Zeus.Admin.Plugins;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
@@ -6,6 +7,7 @@ using Zeus.Configuration;
 using System.Configuration;
 using Zeus.Security;
 using Zeus.Web.UI;
+using ScriptManager = Coolite.Ext.Web.ScriptManager;
 
 namespace Zeus.Admin
 {
@@ -81,6 +83,11 @@ namespace Zeus.Admin
 		{
 			foreach (string virtualPath in virtualPaths)
 				Controls.Add(LoadControl(virtualPath));
+		}
+
+		public void AddControl(Control control)
+		{
+			Controls.Add(control);
 		}
 	}
 }

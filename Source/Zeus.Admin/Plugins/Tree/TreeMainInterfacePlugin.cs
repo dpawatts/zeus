@@ -50,6 +50,28 @@ namespace Zeus.Admin.Plugins.Tree
 			collapseAllButton.Listeners.Click.Handler = string.Format("{0}.collapseAll();", treePanel.ClientID);
 			topToolbar.Items.Add(collapseAllButton);
 
+			topToolbar.Items.Add(new ToolbarSeparator());
+
+			Window helpWindow = new Window
+				{
+					Modal = true,
+					Icon = Icon.Help,
+					Title = "Help",
+					ShowOnLoad = false,
+					Html = "This is the site tree. You can use this to view all the pages on your site. Right-click any item to edit or delete it, as well as create additional pages.<br /><br />The main branches of the root node tree are the main sections of the admin system. Each section is broken down into smaller sections, accessed by expanding the + sign. (Wherever you see a + sign, the section can be broken down into further sections).<br /><br />When you receive your admin system, you will notice the first main section (after the Root Node) will be divided into the main sections of your website. (Example sections may include: Homepage, About Us, News, Links and Contact pages.) To see these pages, as they appear on the website, simply click the relevant node – it will then appear in the right hand pane.",
+					BodyStyle = "padding:5px",
+					Width = 300,
+					Height = 200,
+					AutoScroll = true
+				};
+			mainInterface.AddControl(helpWindow);
+
+			ToolbarButton helpButton = new ToolbarButton();
+			helpButton.Icon = Icon.Help;
+			helpButton.ToolTips.Add(new ToolTip { Html = "Help" });
+			helpButton.Listeners.Click.Handler = string.Format("{0}.show();", helpWindow.ClientID);
+			topToolbar.Items.Add(helpButton);
+
 			// Data loader.
 			treePanel.Loader.Add(new Coolite.Ext.Web.TreeLoader
 			{
