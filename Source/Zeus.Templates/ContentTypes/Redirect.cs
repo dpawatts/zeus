@@ -23,7 +23,7 @@ namespace Zeus.Templates.ContentTypes
 			return Context.Current.LanguageManager.GetTranslation(RedirectItem, ContentLanguage.PreferredCulture.Name) ?? RedirectItem;
 		}
 
-		[LinkedItemDropDownListEditor("Redirect to", 30, Required = true, TypeFilter = typeof(BasePage), ContainerName = "Content")]
+		[LinkedItemDropDownListEditor("Redirect to", 30, Required = true, TypeFilter = typeof(ContentItem), ContainerName = "Content")]
 		public virtual ContentItem RedirectItem
 		{
 			get { return GetDetail<ContentItem>("RedirectItem", null); }

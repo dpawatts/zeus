@@ -60,13 +60,18 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public TreeNodeBase ToTreeNode(bool rootOnly)
 		{
+			return ToTreeNode(rootOnly, true);
+		}
+
+		public TreeNodeBase ToTreeNode(bool rootOnly, bool withLinks)
+		{
 			IHierarchyNavigator<ContentItem> navigator = new ItemHierarchyNavigator(_treeBuilder, _filter);
-			TreeNodeBase rootNode = BuildNodesRecursive(navigator, rootOnly);
+			TreeNodeBase rootNode = BuildNodesRecursive(navigator, rootOnly, withLinks);
 			//rootNode.ChildrenOnly = _excludeRoot;
 			return rootNode;
 		}
 
-		private TreeNodeBase BuildNodesRecursive(IHierarchyNavigator<ContentItem> navigator, bool rootOnly)
+		private static TreeNodeBase BuildNodesRecursive(IHierarchyNavigator<ContentItem> navigator, bool rootOnly, bool withLinks)
 		{
 			ContentItem item = navigator.Current;
 
@@ -77,13 +82,13 @@ namespace Zeus.Admin.Plugins.Tree
 			node.IconCls = "zeus-tree-icon";
 			node.Cls = "zeus-tree-node";
 			node.NodeID = item.ID.ToString();
-			if (item.IsPage)
+			if (item.IsPage && withLinks)
 				node.Href = "javascript:window.top.zeus.refreshPreview('" + Url.ToAbsolute(((INode)item).PreviewUrl) + "');";
 
 			if (!hasAsyncChildren)
 				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children)
 				{
-					TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly);
+					TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly, withLinks);
 					((TreeNode) node).Nodes.Add(childNode);
 				}
 			if (!item.GetChildren().Any())

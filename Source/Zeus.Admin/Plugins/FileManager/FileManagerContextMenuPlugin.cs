@@ -35,7 +35,7 @@ namespace Zeus.Admin.Plugins.FileManager
 			{
 				Text = "File Manager",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.Folder),
-				Handler = "function() {{ imageChooser.show(); }}"
+				Handler = "function() {{ fileManager.show(); }}"
 			};
 
 			return menuItem;

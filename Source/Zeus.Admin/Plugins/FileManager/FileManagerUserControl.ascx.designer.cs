@@ -39,5 +39,14 @@ namespace Zeus.Admin.Plugins.FileManager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Coolite.Ext.Web.TreePanel treePanel;
+        
+        /// <summary>
+        /// imageChooserView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Coolite.Ext.Web.DataView imageChooserView;
     }
 }

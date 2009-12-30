@@ -9,7 +9,7 @@
 
 <h3>Published on ${Model.CurrentItem.Date.ToString("dd MMMM, yyyy")} at ${Model.CurrentItem.Date.ToString("HH:mm")}</h3>
 
-${Model.CurrentItem.Text}
+${Html.DisplayProperty(Model.CurrentItem, ci => ci.Text)}
 
 <p class="meta">
 	<span class="tags">${ListCategories(Model.CurrentItem.Categories.Cast<Category>())}</span> |

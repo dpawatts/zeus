@@ -162,25 +162,23 @@ var freeTextArea_settings = {
 		});
 	}
 };
-		
-var fileBrowserUrl;
-var srcField;
 
-function fileBrowserCallBack(field_name, url, destinationType, win)
+function fileBrowserCallBack(fieldName, url, destinationType, win)
 {
-	srcField = win.document.forms[0].elements[field_name];
-	var fileSelectorWindow = window.open(fileBrowserUrl + '&availableModes=All&tbid=' + srcField.id + '&destinationType=' + destinationType + '&selectedUrl=' + encodeURIComponent(url), 'FileBrowser', 'height=600,width=400,resizable=yes,status=yes,scrollbars=yes');
-	fileSelectorWindow.focus();
-}
+	var srcField = win.document.forms[0].elements[fieldName];
+	var insertFileUrl = function(data) {
+		srcField.value = data.url;
+	};
 
-function onFileSelected(selectedUrl)
-{
-	srcField.value = selectedUrl;
+	top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
 }
 
 function htmlEditor_init(fileBrowser, overrides)
 {
 	fileBrowserUrl = fileBrowser;
 	jQuery.extend(freeTextArea_settings, overrides);
-	tinyMCE.init(freeTextArea_settings);
+	Ext.onReady(function()
+	{
+		tinyMCE.init(freeTextArea_settings);
+	});
 }

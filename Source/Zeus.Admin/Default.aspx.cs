@@ -54,7 +54,10 @@ namespace Zeus.Admin
 
 			// Render plugin scripts.
 			foreach (IMainInterfacePlugin plugin in Engine.ResolveAll<IMainInterfacePlugin>())
+			{
 				plugin.RegisterScripts(ScriptManager);
+				plugin.RegisterStyles(ScriptManager);
+			}
 
 			base.OnPreRender(e);
 		}

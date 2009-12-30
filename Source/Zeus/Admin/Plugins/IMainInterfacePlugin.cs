@@ -8,5 +8,6 @@ namespace Zeus.Admin.Plugins
 
 		void ModifyInterface(IMainInterface mainInterface);
 		void RegisterScripts(ScriptManager scriptManager);
+		void RegisterStyles(ScriptManager scriptManager);
 	}
 }
