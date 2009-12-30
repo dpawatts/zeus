@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using Coolite.Ext.Web;
 using Zeus.ContentProperties;
 using System.Web.UI;
-using Zeus.Web.UI.HtmlControls;
+using ImageButton = System.Web.UI.WebControls.ImageButton;
+using Label = System.Web.UI.WebControls.Label;
+using WebControl = System.Web.UI.WebControls.WebControl;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -167,14 +170,14 @@ namespace Zeus.Web.UI.WebControls
 
 			int index = int.Parse(b.CommandArgument);
 			DeletedIndexes.Add(index);
-			((HtmlFieldSet) Editors[index].Parent).CssClass = "deleted";
+			((FieldSet) Editors[index].Parent).CssClass = "deleted";
 		}
 
 		private void AddToContainer(Control container, Control itemEditor)
 		{
-			HtmlFieldSet fs = new HtmlFieldSet { Legend = Title };
+			FieldSet fs = new FieldSet { Title = Title };
 			container.Controls.Add(fs);
-			fs.Controls.Add(itemEditor);
+			fs.BodyControls.Add(itemEditor);
 		}
 
 		protected abstract string Title

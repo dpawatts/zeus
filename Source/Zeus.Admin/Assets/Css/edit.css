@@ -93,25 +93,6 @@ input[type="text"].date
 	margin-right: 3px;
 }
 
-fieldset
-{
-	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.FieldsetGradient.png") %>) repeat-x bottom left;
-	border: solid 1px #CECECE;
-	margin-bottom: 10px;
-	padding-bottom: 10px;
-}
-
-fieldset legend
-{
-	margin-left: 10px;
-	margin-right: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-weight: bold;
-	font-size: 14px;
-	color: #808285;
-}
-
 .add 
 {
 	margin-left: 5px;

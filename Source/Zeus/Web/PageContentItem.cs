@@ -5,19 +5,20 @@ using Zeus.Globalization;
 
 namespace Zeus.Web
 {
-	[UI.TabPanel("Content", "Content", 10)]
+	[UI.FieldSet("Titles", "Page Identification", 10)]
+	[UI.FieldSet("Content", "Content", 20)]
 	[DefaultContainer("Content")]
 	[Translatable]
 	public abstract class PageContentItem : ContentItem
 	{
-		[TextBoxEditor("Title", 10, Required = true, Shared = false)]
+		[TextBoxEditor("Title", 10, Required = true, Shared = false, ContainerName = "Titles")]
 		public override string Title
 		{
 			get { return base.Title; }
 			set { base.Title = value; }
 		}
 
-		[ContentProperty("Page Title", 11, Description = "Used in the &lt;h1&gt; element on the page")]
+		[ContentProperty("Page Title", 11, Description = "Used in the &lt;h1&gt; element on the page", EditorContainerName = "Titles")]
 		[PageTitleEditor]
 		public virtual string PageTitle
 		{
@@ -25,7 +26,7 @@ namespace Zeus.Web
 			set { SetDetail("PageTitle", value); }
 		}
 
-		[NameEditor("URL", 20, Required = true, Shared = false)]
+		[NameEditor("URL", 20, Required = true, Shared = false, ContainerName = "Titles")]
 		public override string Name
 		{
 			get { return base.Name; }

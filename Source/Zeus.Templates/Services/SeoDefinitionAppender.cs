@@ -40,7 +40,11 @@ namespace Zeus.Templates.Services
 			{
 				if (IsPage(contentType))
 				{
-					TabPanelAttribute seoTab = new TabPanelAttribute("SEO", SeoTabTitle, 20);
+					FieldSetAttribute seoTab = new FieldSetAttribute("SEO", SeoTabTitle, 15)
+					{
+						Collapsible = true,
+						Collapsed = true
+					};
 					contentType.Add(seoTab);
 
 					AddEditableText(contentType, HtmlTitleTitle, SeoUtility.HTML_TITLE, 11, _templatesConfig.Seo.HtmlTitleFormat, "Used in the &lt;title&gt; element on the page", 200, false);

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using Coolite.Ext.Web;
 using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Web.Compilation;
-using Zeus.Web.UI.HtmlControls;
 using System.Linq;
+using ImageButton = System.Web.UI.WebControls.ImageButton;
+using Label = System.Web.UI.WebControls.Label;
+using ListItem = System.Web.UI.WebControls.ListItem;
+using WebControl = System.Web.UI.WebControls.WebControl;
 
 [assembly: WebResource("Zeus.Web.UI.WebControls.Images.add.png", "image/png")]
 [assembly: WebResource("Zeus.Web.UI.WebControls.Images.delete.png", "image/png")]
@@ -259,7 +263,7 @@ namespace Zeus.Web.UI.WebControls
 
 			int index = int.Parse(b.CommandArgument);
 			DeletedIndexes.Add(index);
-			((HtmlFieldSet) ItemEditors[index].Parent).CssClass = "deleted";
+			((FieldSet) ItemEditors[index].Parent).CssClass = "deleted";
 			ItemEditors[index].Enabled = false;
 			ItemEditors[index].CssClass += " deleted";
 		}
@@ -275,11 +279,11 @@ namespace Zeus.Web.UI.WebControls
 
 		protected virtual void AddToContainer(Control container, ItemEditView itemEditor, ContentItem item)
 		{
-			HtmlFieldSet fs = new HtmlFieldSet();
+			FieldSet fs = new FieldSet();
 			string status = (item.ID != 0) ? "ID #" + item.ID : "(Unsaved)";
-			fs.Legend = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status;
+			fs.Title = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status;
 			container.Controls.Add(fs);
-			fs.Controls.Add(itemEditor);
+			fs.BodyControls.Add(itemEditor);
 		}
 
 		public ContentItem ParentItem

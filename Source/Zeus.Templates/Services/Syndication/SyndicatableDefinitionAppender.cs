@@ -47,7 +47,7 @@ namespace Zeus.Templates.Services.Syndication
 			{
 				if (typeof(ISyndicatable).IsAssignableFrom(contentType.ItemType))
 				{
-					TabPanelAttribute seoTab = new TabPanelAttribute("Syndication", "Syndication", 30);
+					FieldSetAttribute seoTab = new FieldSetAttribute("Syndication", "Syndication", 30);
 					contentType.Add(seoTab);
 
 					CheckBoxEditorAttribute ecb = new CheckBoxEditorAttribute(CheckBoxText, string.Empty, 10)
