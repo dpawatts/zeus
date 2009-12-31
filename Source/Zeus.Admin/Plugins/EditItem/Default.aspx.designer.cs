@@ -120,5 +120,68 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected AvailableZones uscZones;
+
+				/// <summary>
+				/// btnSave control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.Button btnSave2;
+
+				/// <summary>
+				/// btnSaveUnpublished control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.Button btnSaveUnpublished2;
+
+				/// <summary>
+				/// btnPreview control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.Button btnPreview2;
+
+				/// <summary>
+				/// btnCancel control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.Button btnCancel2;
+
+				/// <summary>
+				/// txiLanguages control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.ToolbarTextItem txiLanguages2;
+
+				/// <summary>
+				/// ddlLanguages control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.UX.IconCombo ddlLanguages2;
+
+				/// <summary>
+				/// btnZones control.
+				/// </summary>
+				/// <remarks>
+				/// Auto-generated field.
+				/// To modify move field declaration from designer file to code-behind file.
+				/// </remarks>
+				protected global::Coolite.Ext.Web.Button btnZones2;
     }
 }

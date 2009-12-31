@@ -42,6 +42,20 @@
 							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
 								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
 						</Body>
+						<BottomBar>
+							<ext:Toolbar runat="server">
+								<Items>
+									<ext:Button runat="server" ID="btnSave2" Text="Save and publish" Icon="PageSave" OnClick="btnSave_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnSaveUnpublished2" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnPreview2" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnCancel2" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
+									<ext:ToolbarFill runat="server" />
+									<ext:ToolbarTextItem runat="server" ID="txiLanguages2" Text="Page view: " />
+									<ext:IconCombo runat="server" ID="ddlLanguages2" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
+									<ext:Button runat="server" ID="btnZones2" Text="Zones" Cls="showZones" />
+								</Items>
+							</ext:Toolbar>
+						</BottomBar>
 					</ext:Panel>
 				</Items>
 			</ext:FitLayout>

@@ -59,13 +59,13 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 
 			bool languagesVisible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
-			txiLanguages.Visible = ddlLanguages.Visible = languagesVisible;
+			txiLanguages.Visible = ddlLanguages.Visible = txiLanguages2.Visible = ddlLanguages2.Visible = languagesVisible;
 
 			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
 			{
-				btnSaveUnpublished.Visible = false;
-				btnPreview.Visible = false;
-				btnSave.Text = "Save";
+				btnSaveUnpublished.Visible = btnSaveUnpublished2.Visible = false;
+				btnPreview.Visible = btnPreview2.Visible = false;
+				btnSave.Text = btnSave2.Text = "Save";
 			}
 
 			if (!Ext.IsAjaxRequest && GlobalizationEnabled)
@@ -177,7 +177,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			uscZones.DataSource = definition.AvailableZones;
 			uscZones.DataBind();
 
-			btnZones.Visible = definition.AvailableZones.Count > 0;
+			btnZones.Visible = btnZones2.Visible = definition.AvailableZones.Count > 0;
 		}
 
 		private void CheckRelatedVersions(ContentItem item)
