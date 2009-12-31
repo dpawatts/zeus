@@ -1,10 +1,11 @@
 using Coolite.Ext.Web;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[ContentType]
-	[RestrictParents(typeof(BasePage))]
+	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
 	public class Sitemap : BasePage
 	{
 		public override string IconUrl

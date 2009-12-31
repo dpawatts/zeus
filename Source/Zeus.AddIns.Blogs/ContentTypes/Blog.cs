@@ -8,8 +8,8 @@ using Zeus.Web;
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
 	[ContentType]
-	[RestrictParents(typeof(PageContentItem))]
-	public class Blog : BasePage, ISelfPopulator, IFileSystemContainer
+	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
+	public class Blog : BasePage, ISelfPopulator, IFileSystemContainer, ITagGroupContainer
 	{
 		private const string CATEGORY_CONTAINER_NAME = "categories";
 		private const string FILES_NAME = "files";
