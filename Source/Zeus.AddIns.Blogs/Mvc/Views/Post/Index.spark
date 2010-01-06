@@ -29,7 +29,7 @@ ${Html.DisplayProperty(Model.CurrentItem, ci => ci.Text)}
 	</if>
 </div>
 
-<div if="Model.CurrentItem.OpenForComments" class="comment_area">
+<div if="Model.CurrentItem.OpenForComments" id="addComment" class="comment_area">
 	<h2>Leave a Reply</h2>
 	
 	<form action="${Html.Url(Model.CurrentItem).AppendSegment("comment")}" method="post">

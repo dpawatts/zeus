@@ -170,6 +170,7 @@
     <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
     <Compile Include="Mvc\Feed.cs" />
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
+    <Compile Include="Mvc\Html\TaggingExtensions.cs" />
     <Compile Include="Mvc\SyndicationResultBase.cs" />
     <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />

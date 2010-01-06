@@ -9,6 +9,8 @@ using Zeus.AddIns.Blogs.Services.Tracking;
 using Zeus.ContentTypes;
 using Zeus.FileSystem;
 using Zeus.Persistence;
+using Zeus.Templates.ContentTypes;
+using Zeus.Templates.Services;
 using File=Zeus.FileSystem.File;
 
 namespace Zeus.AddIns.Blogs.Services
@@ -21,18 +23,21 @@ namespace Zeus.AddIns.Blogs.Services
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IFileSystemService _fileSystemService;
 		private readonly ITrackingService _trackingService;
+		private readonly ITagService _tagService;
 
 		#endregion
 
 		#region Constructor
 
 		public BlogService(IPersister persister, IContentTypeManager contentTypeManager,
-			IFileSystemService fileSystemService, ITrackingService trackingService)
+			IFileSystemService fileSystemService, ITrackingService trackingService,
+			ITagService tagService)
 		{
 			_persister = persister;
 			_contentTypeManager = contentTypeManager;
 			_fileSystemService = fileSystemService;
 			_trackingService = trackingService;
+			_tagService = tagService;
 		}
 
 		#endregion
@@ -46,24 +51,39 @@ namespace Zeus.AddIns.Blogs.Services
 
 		private void OnPersisterItemSaving(object sender, CancelItemEventArgs e)
 		{
-			if (e.AffectedItem is Post && e.AffectedItem.TranslationOf == null)
+			if (e.AffectedItem is Post)
 			{
-				// Move blog post to correct year / month, creating those nodes if necessary.
-				Post post = (Post)e.AffectedItem;
+				Post post = (Post) e.AffectedItem;
+				if (e.AffectedItem.TranslationOf == null)
+				{
+					// Move blog post to correct year / month, creating those nodes if necessary.
 
-				// Get or create year item.
-				BlogYear year = (BlogYear)post.CurrentBlog.GetChild(post.Date.ToString("yyyy"))
-												?? CreateItem<BlogYear>(post.CurrentBlog, post.Date.ToString("yyyy"), post.Date.ToString("yyyy"));
+					// Get or create year item.
+					BlogYear year = (BlogYear) post.CurrentBlog.GetChild(post.Date.ToString("yyyy"))
+					                ?? CreateItem<BlogYear>(post.CurrentBlog, post.Date.ToString("yyyy"), post.Date.ToString("yyyy"));
 
-				// Get or create month item.
-				BlogMonth month = (BlogMonth)year.GetChild(post.Date.ToString("MM"))
-													?? CreateItem<BlogMonth>(year, post.Date.ToString("MM"), post.Date.ToString("MMMM"));
+					// Get or create month item.
+					BlogMonth month = (BlogMonth) year.GetChild(post.Date.ToString("MM"))
+					                  ?? CreateItem<BlogMonth>(year, post.Date.ToString("MM"), post.Date.ToString("MMMM"));
 
-				// Add news item to month.
-				post.AddTo(month);
+					// Add news item to month.
+					post.AddTo(month);
 
-				if (post.ID == 0)
-					_trackingService.SendNotifications(post.CurrentBlog, post);
+					if (post.ID == 0)
+						_trackingService.SendNotifications(post.CurrentBlog, post);
+				}
+
+				// Extract tags from text.
+				List<string> tags = ParseTags(post.Text);
+				TagGroup tagGroup = _tagService.GetCurrentTagGroup(post);
+				if (tagGroup != null)
+				{
+					foreach (string tagName in tags)
+					{
+						Tag tag = _tagService.EnsureTag(tagGroup, tagName);
+						_tagService.AddTagToItem(tag, post);
+					}
+				}
 			}
 		}
 
@@ -199,7 +219,7 @@ namespace Zeus.AddIns.Blogs.Services
 		/// </summary>
 		/// <param name="html"></param>
 		/// <returns></returns>
-		public static List<string> ParseTags(string html)
+		private static List<string> ParseTags(string html)
 		{
 			Regex relRegex = new Regex(@"\s+rel\s*=\s*(""[^""]*?\btag\b.*?""|'[^']*?\btag\b.*?')", RegexOptions.IgnoreCase | RegexOptions.Singleline);
 			Regex hrefRegex = new Regex(@"\s+href\s*=\s*(""(?<url>[^""]*?)""|'(?<url>[^']*?)')", RegexOptions.IgnoreCase | RegexOptions.Singleline);

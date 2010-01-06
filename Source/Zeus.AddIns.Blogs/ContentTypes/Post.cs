@@ -49,7 +49,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("Text", value); }
 		}
 
-		[ContentProperty("Excerpt", 210), TextBoxEditor(TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine)]
+		[ContentProperty("Excerpt", 210), TextBoxEditor(TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine, MaxLength = 300)]
 		public virtual string Excerpt
 		{
 			get { return GetDetail("Excerpt", string.Empty); }
@@ -87,12 +87,12 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 		public string GetExcerpt()
 		{
 			if (!string.IsNullOrEmpty(Excerpt))
-				return Excerpt;
+				return "<p>" + Excerpt + "</p>";
 
 			if (!string.IsNullOrEmpty(Text))
 				return Text.Truncate(300, true);
 
-			return Title;
+			return "<p>" + Title + "</p>";
 		}
 	}
 }

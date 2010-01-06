@@ -1,9 +1,9 @@
 ﻿<use import="ListCategories" />
-<use namespace="System.Collections.Generic" />
+<use namespace="Zeus.BaseLibrary.Collections.Generic" />
 <use namespace="System.Linq" />
 <use namespace="Zeus.AddIns.Blogs.ContentTypes" />
 
-<macro name="ListPosts" posts="IEnumerable<Post>">
+<macro name="ListPosts" posts="IPageable<Post>">
 	<if condition="posts.Any()">
 		<for each="Post post in posts">
 			<h2 id="post-${post.ID}">
@@ -19,6 +19,13 @@
 				<span class="comments"><a href="${post.Url}#comments">${Html.Pluralize("No Comments", "1 Comment", "{0} Comments", post.ApprovedComments.Count())}</a></span>
 			</p>
 		</for>
+		
+		<if condition="posts.PagedItems.HasNextPage">
+			<a href="${Html.CurrentUrl().Query("p", posts.PagedItems.PageNumber + 1)}">Older Posts</a>
+		</if>
+		<if condition="posts.PagedItems.HasPreviousPage">
+			<a href="${Html.CurrentUrl().Query("p", posts.PagedItems.PageNumber - 1)}">Newer Posts</a>
+		</if>
 	</if>
 	<else>
 		<p>No blog entries match this filter.</p>

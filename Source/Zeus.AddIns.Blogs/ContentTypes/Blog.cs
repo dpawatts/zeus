@@ -11,8 +11,8 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
 	public class Blog : BasePage, ISelfPopulator, IFileSystemContainer, ITagGroupContainer
 	{
-		private const string CATEGORY_CONTAINER_NAME = "categories";
-		private const string FILES_NAME = "files";
+		private const string CategoryContainerName = "categories";
+		private const string FilesName = "files";
 
 		public override string IconUrl
 		{
@@ -21,12 +21,12 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public CategoryContainer Categories
 		{
-			get { return GetChild(CATEGORY_CONTAINER_NAME) as CategoryContainer; }
+			get { return GetChild(CategoryContainerName) as CategoryContainer; }
 		}
 
 		public Folder Files
 		{
-			get { return GetChild(FILES_NAME) as Folder; }
+			get { return GetChild(FilesName) as Folder; }
 		}
 
 		[ContentProperty("Pingbacks Enabled?", 200)]
@@ -43,18 +43,25 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			set { SetDetail("CommentModerationEnabled", value); }
 		}
 
+		[ContentProperty("Page Size", 220, Description = "Posts per page for the post listing pages.")]
+		public virtual int PageSize
+		{
+			get { return GetDetail("PageSize", 10); }
+			set { SetDetail("PageSize", value); }
+		}
+
 		void ISelfPopulator.Populate()
 		{
 			CategoryContainer categories = new CategoryContainer
 			{
-				Name = CATEGORY_CONTAINER_NAME,
+				Name = CategoryContainerName,
 				Title = "Categories"
 			};
 			categories.AddTo(this);
 
 			Folder files = new Folder
 			{
-				Name = FILES_NAME,
+				Name = FilesName,
 				Title = "Files"
 			};
 			files.AddTo(this);

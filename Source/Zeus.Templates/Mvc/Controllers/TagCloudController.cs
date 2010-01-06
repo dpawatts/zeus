@@ -31,9 +31,6 @@ namespace Zeus.Templates.Mvc.Controllers
 			double logDiff = Math.Log(maxReferenceCount) - logMin;
 			int diffFontSize = CurrentItem.MaxFontSize - CurrentItem.MinFontSize;
 
-			//weight = (Math.log(occurencesOfCurrentTag)-Math.log(minOccurs))/(Math.log(maxOccurs)-Math.log(minOccurs));
-//fontSizeOfCurrentTag = minFontSize + Math.round((maxFontSize-minFontSize)*weight)
-
 			var tagCloudEntries = activeTagsCounts.Select(atc =>
 			{
 				double weight = (Math.Log(atc.ReferenceCount) - logMin)/logDiff;

@@ -34,10 +34,22 @@ namespace Zeus.Templates.Services
 			return tag;
 		}
 
+		public void AddTagToItem(Tag tag, ContentItem item)
+		{
+			PropertyCollection tags = item.GetDetailCollection("Tags", true);
+			if (!tags.Contains(tag))
+				tags.Add(tag);
+		}
+
 		public IEnumerable<Tag> GetActiveTags(TagGroup tagGroup)
 		{
 			return tagGroup.GetChildren<Tag>().Where(t => GetTaggedItems(t).Any())
 				.OrderBy(t => t.Title);
+		}
+
+		public IEnumerable<Tag> GetTags(ContentItem contentItem)
+		{
+			return contentItem.GetDetailCollection("Tags", true).Cast<Tag>();
 		}
 
 		public TagGroup GetCurrentTagGroup(ContentItem currentItem)
