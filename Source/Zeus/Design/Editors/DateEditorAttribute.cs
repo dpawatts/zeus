@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Coolite.Ext.Web;
 using Zeus.ContentTypes;
 
@@ -7,6 +8,8 @@ namespace Zeus.Design.Editors
 {
 	public class DateEditorAttribute : AbstractEditorAttribute
 	{
+		public bool IncludeTime { get; set; }
+
 		public DateEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
 		{
@@ -19,12 +22,20 @@ namespace Zeus.Design.Editors
 
 		protected override void DisableEditor(Control editor)
 		{
-			((DateField) editor).Enabled = false;
-			((DateField) editor).ReadOnly = true;
+			MultiField placeHolder = (MultiField) editor;
+			placeHolder.Fields[0].Enabled = false;
+			((DateField) placeHolder.Fields[0]).ReadOnly = true;
+			if (IncludeTime)
+			{
+				placeHolder.Fields[1].Enabled = false;
+				((TimeField) placeHolder.Fields[1]).ReadOnly = true;
+			}
 		}
 
 		protected override Control AddEditor(Control container)
 		{
+			MultiField placeHolder = new MultiField();
+
 			DateField tb = new DateField();
 			tb.ID = Name;
 			if (Required)
@@ -32,27 +43,62 @@ namespace Zeus.Design.Editors
 				tb.AllowBlank = false;
 				tb.Cls = "required";
 			}
-			container.Controls.Add(tb);
+			placeHolder.Fields.Add(tb);
 
-			return tb;
+			if (IncludeTime)
+			{
+				TimeField timeField = new TimeField();
+				timeField.ID = Name + "Time";
+				timeField.Width = 70;
+				if (Required)
+				{
+					timeField.AllowBlank = false;
+					timeField.Cls += " required";
+				}
+				placeHolder.Fields.Add(timeField);
+			}
+
+			container.Controls.Add(placeHolder);
+			container.Controls.Add(new LiteralControl("<br />"));
+
+			return placeHolder;
 		}
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			DateField tb = (DateField) editor;
+			MultiField placeHolder = (MultiField) editor;
+			DateField tb = (DateField) placeHolder.Fields[0];
 			if (item[Name] != null)
+			{
 				tb.SelectedDate = (DateTime) item[Name];
+				if (IncludeTime)
+					((TimeField) placeHolder.Fields[1]).SelectedTime = ((DateTime) item[Name]).TimeOfDay;
+			}
 		}
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			DateField tb = editor as DateField;
-			if (!AreEqual(tb.SelectedDate, item[Name]))
+			MultiField placeHolder = (MultiField) editor;
+			DateField tb = (DateField) placeHolder.Fields[0];
+			bool result = false;
+			DateTime? currentDate = item[Name] as DateTime?;
+			if ((currentDate != null && tb.SelectedDate.Date != currentDate.Value) || currentDate == null)
 			{
-				item[Name] = tb.SelectedDate;
-				return true;
+				currentDate = tb.SelectedDate.Date.Add((currentDate ?? DateTime.Now).TimeOfDay);
+				item[Name] = currentDate;
+				result = true;
 			}
-			return false;
+			if (IncludeTime)
+			{
+				TimeField timeField = (TimeField) placeHolder.Fields[1];
+				if ((currentDate != null && timeField.SelectedTime != currentDate.Value.TimeOfDay) || currentDate == null)
+				{
+					DateTime newDate = (currentDate ?? DateTime.Now).Date.Add(timeField.SelectedTime);
+					item[Name] = newDate;
+					result = true;
+				}
+			}
+			return result;
 		}
 	}
 }

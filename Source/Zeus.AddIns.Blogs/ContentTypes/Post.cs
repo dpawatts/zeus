@@ -29,7 +29,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 			get { return Published ?? Created; }
 		}
 
-		[DateEditor("Date Published", 100, Required = true)]
+		[DateEditor("Date Published", 100, IncludeTime = true)]
 		public override DateTime? Published
 		{
 			get { return base.Published; }
