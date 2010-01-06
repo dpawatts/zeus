@@ -53,10 +53,10 @@ namespace Zeus.Security
 			set { SetDetail("Email", value, string.Empty); }
 		}
 
-		[RolesEditor(Title="Roles", Name="Roles", SortOrder = 50)]
+		[RolesEditor(Title="Roles", SortOrder = 50)]
 		public virtual PropertyCollection RolesInternal
 		{
-			get { return GetDetailCollection("Roles", true); }
+			get { return GetDetailCollection("RolesInternal", true); }
 		}
 
 		public string[] Roles
