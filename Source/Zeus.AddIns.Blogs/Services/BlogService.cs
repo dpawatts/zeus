@@ -8,6 +8,7 @@ using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services.Tracking;
 using Zeus.ContentTypes;
 using Zeus.FileSystem;
+using Zeus.Linq;
 using Zeus.Persistence;
 using Zeus.Templates.ContentTypes;
 using Zeus.Templates.Services;
@@ -175,9 +176,18 @@ namespace Zeus.AddIns.Blogs.Services
 		public IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts)
 		{
 			return Find.EnumerateAccessibleChildren(blog)
-				//.Where(p => p.IsPublished())
+				.Navigable()
 				.OfType<Post>().OrderByDescending(p => p.Date)
 				.Take(numberOfPosts);
+		}
+
+		public IEnumerable<Post> GetPostsInCategory(Blog blog, Category category)
+		{
+			return Find.EnumerateAccessibleChildren(blog)
+				.Navigable()
+				.OfType<Post>()
+				.Where(post => post.Categories.Cast<Category>().Contains(category))
+				.OrderByDescending(post => post.Date);
 		}
 
 		/// <summary>

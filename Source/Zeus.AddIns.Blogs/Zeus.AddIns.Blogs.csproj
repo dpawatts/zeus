@@ -123,6 +123,8 @@
     <Compile Include="ContentTypes\BlogYear.cs" />
     <Compile Include="ContentTypes\Comment.cs" />
     <Compile Include="ContentTypes\ArchiveLinks.cs" />
+    <Compile Include="ContentTypes\CategoryListWidget.cs" />
+    <Compile Include="ContentTypes\ArchiveCalendarWidget.cs" />
     <Compile Include="ContentTypes\Pingback.cs" />
     <Compile Include="ContentTypes\FeedbackItem.cs" />
     <Compile Include="ContentTypes\RecentPostsSummary.cs" />
@@ -139,6 +141,8 @@
     <Compile Include="Mvc\Controllers\CommentController.cs" />
     <Compile Include="Mvc\Controllers\CategoryContainerController.cs" />
     <Compile Include="Mvc\Controllers\CategoryController.cs" />
+    <Compile Include="Mvc\Controllers\CategoryListWidgetController.cs" />
+    <Compile Include="Mvc\Controllers\ArchiveCalendarWidgetController.cs" />
     <Compile Include="Mvc\Controllers\PingbackController.cs" />
     <Compile Include="Mvc\Controllers\PostController.cs" />
     <Compile Include="Mvc\Controllers\RecentPostsController.cs" />
@@ -150,6 +154,8 @@
     <Compile Include="Mvc\ViewModels\CommentViewModel.cs" />
     <Compile Include="Mvc\ViewModels\CategoryContainerViewModel.cs" />
     <Compile Include="Mvc\ViewModels\CategoryViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\CategoryListWidgetViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ArchiveCalendarWidgetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PingbackViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostViewModel.cs" />
     <Compile Include="Mvc\ViewModels\RecentPostsSummaryViewModel.cs" />
@@ -248,6 +254,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\Shared\ListCategories.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\CategoryListWidget\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ArchiveCalendarWidget\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\js\jquery.archiveCalendar.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\ArchiveCalendarWidget\Header.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

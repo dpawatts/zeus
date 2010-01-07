@@ -1,11 +1,12 @@
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
+using Zeus.Web;
 using Zeus.Web.UI;
 
 namespace Zeus.Templates.ContentTypes
 {
 	[TabPanel("General", "General", 100)]
-	public abstract class BaseWidget : ContentItem
+	public abstract class BaseWidget : WidgetContentItem
 	{
 		[TextBoxEditor("Title", 10, ContainerName = "General")]
 		public override string Title
@@ -22,11 +23,6 @@ namespace Zeus.Templates.ContentTypes
 		protected virtual string IconName
 		{
 			get { return "page_white"; }
-		}
-
-		public override bool IsPage
-		{
-			get { return false; }
 		}
 	}
 }

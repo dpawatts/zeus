@@ -1,4 +1,5 @@
 using Coolite.Ext.Web;
+using Zeus.Design.Editors;
 using Zeus.Persistence;
 
 namespace Zeus.Web
@@ -12,6 +13,13 @@ namespace Zeus.Web
 		public override string IconUrl
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.PageWhite); }
+		}
+
+		[TextBoxEditor("Title", 10)]
+		public override string Title
+		{
+			get { return base.Title; }
+			set { base.Title = value; }
 		}
 
 		public override bool IsPage

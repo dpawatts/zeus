@@ -11,5 +11,6 @@ namespace Zeus.AddIns.Blogs.Services
 		void UpdatePost(Post post, DateTime dateCreated, string title, string text, string[] categories, bool publish);
 		IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts);
 		File AddFile(Blog blog, string name, string mimeType, byte[] data);
+		IEnumerable<Post> GetPostsInCategory(Blog blog, Category category);
 	}
 }

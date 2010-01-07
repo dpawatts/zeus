@@ -18,12 +18,15 @@ namespace Zeus.Web.UI
 		public override Control AddTo(Control container)
 		{
 			// If the current container doesn't already contain a TabControl, create one now.
-			TabPanel tabControl = container.FindControl("TabControl") as TabPanel;
+			CustomTabPanel tabControl = container.FindControl("TabControl") as CustomTabPanel;
 			if (tabControl == null)
 			{
-				tabControl = new TabPanel();
+				tabControl = new CustomTabPanel();
 				tabControl.ID = "TabControl";
-				container.Controls.Add(tabControl);
+				if (container is ContentPanel)
+					((ContentPanel) container).BodyControls.Add(tabControl);
+				else
+					container.Controls.Add(tabControl);
 			}
 
 			Tab tabItem = new Tab();
@@ -35,5 +38,10 @@ namespace Zeus.Web.UI
 			tabControl.Tabs.Add(tabItem);
 			return tabItem;
 		}
+	}
+
+	public class CustomTabPanel : TabPanel, INamingContainer
+	{
+		
 	}
 }
