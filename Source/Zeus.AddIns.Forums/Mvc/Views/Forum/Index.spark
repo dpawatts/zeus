@@ -4,47 +4,34 @@
 <use namespace="Zeus.Web.Mvc.Html" />
 <use namespace="Zeus.AddIns.Forums.ContentTypes" />
 
-<content name="headStyles">
-	<link rel="stylesheet" href="/Content/Forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
+<content name="head">
+	<link rel="stylesheet" href="/assets/forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
 </content>
 
 <div id="forum">
-	# Html.RenderPartial("ForumHeader");
+	<use file="ForumHeader" />
 
-	<div id="fRungTwo">
-		<table class="fPages">
-			<colspan>
-				<col id="fPLeft" />
-				<col id="fPMiddle" />
-				<col id="fPRight" />
-			</colspan>
-			<tr>
-				<td><p>${Html.PagerPartShowing(Model.Topics)}</p></td>
-				<td>${Html.PagerPartLinks(Model.Topics)}</td>
-				<td>
-					# using (Html.BeginForm<ForumController>(c => c.Index(null), FormMethod.Get, new { id = "pageGoForm" })) {
-					<label for="pageGo">Go to Page</label>
-					${Html.DropDownList("p", new SelectList(System.Linq.Enumerable.Range(1, Model.Topics.TotalPages)), new { onchange = "$('#pageGoForm').submit();" })}
-					# }
-				</td>
-			</tr>
-		</table>
-	</div> <!-- fRungTwo -->
+	<table class="fPages">
+		<colspan>
+			<col id="fPLeft" />
+			<col id="fPMiddle" />
+			<col id="fPRight" />
+		</colspan>
+		<tr>
+			<td><p>${Html.PagerPartShowing(Model.Topics)}</p></td>
+			<td>${Html.PagerPartLinks(Model.Topics)}</td>
+			<td>
+				# using (Html.BeginForm<ForumController>(c => c.Index(null), FormMethod.Get, new { id = "pageGoForm" })) {
+				<label for="pageGo">Go to Page</label>
+				${Html.DropDownList("p", new SelectList(System.Linq.Enumerable.Range(1, Model.Topics.TotalPages)), new { onchange = "$('#pageGoForm').submit();" })}
+				# }
+			</td>
+		</tr>
+	</table>
 	
-	<div id="fRungThree">
-		<ul>
-			<li><a href="${Model.NewTopicUrl}">New Post</a></li>
-		</ul>
-	</div> <!-- fRungThree -->
+	<a href="${Model.NewTopicUrl}">New Post</a>
 	
 	<table id="forumTable">
-		<colgroup>
-			<col id="forumOne" />
-			<col id="forumTwo" />
-			<col id="forumThree" />
-			<col id="forumFour" />
-			<col id="forumFive" />
-		</colgroup>
 		<tr>
 			<th><!-- --></th>
 			<th>Topic Name</th>
@@ -55,7 +42,7 @@
 		<tr each="Topic topic in Model.Topics">
 			<td>
 				<if condition="topic.Sticky">
-					<img src="/content/forums/images/sticky.gif" border="0" alt="New Post" />
+					<img src="/content/forums/images/sticky.gif" border="0" alt="Sticky Post" />
 				</if>
 				<else>
 					<img src="/content/forums/images/post.gif" border="0" alt="New Post"/>

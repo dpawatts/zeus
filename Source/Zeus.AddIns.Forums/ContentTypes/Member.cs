@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.BaseLibrary.Web.UI;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
-using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Security;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
-using Zeus.Web.Security;
+using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.AddIns.Forums.ContentTypes
 {
@@ -20,7 +19,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	{
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(Member), "Zeus.AddIns.Forums.Web.Resources.user_green.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.UserGreen); }
 		}
 
 		[LinkedItemDropDownListEditor("User", 10, TypeFilter = typeof(User))]

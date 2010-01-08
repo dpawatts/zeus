@@ -162,6 +162,7 @@
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Mvc\Controllers\BBCodePreviewController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
     <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Mvc\Controllers\RegistrationPageController.cs" />
     <Compile Include="Mvc\Feed.cs" />
     <Compile Include="Mvc\Html\AntiSpamExtensions.cs" />
+    <Compile Include="Mvc\Html\MarkItUpExtensions.cs" />
     <Compile Include="Mvc\Html\TaggingExtensions.cs" />
     <Compile Include="Mvc\SyndicationResultBase.cs" />
     <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
@@ -349,6 +351,52 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\FormPage\Index.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\markitup\jquery.markitup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-container.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-bbcode.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-dotclear.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-html.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-json.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-markdown.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-textile.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-wiki.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor-xml.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\bg-editor.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\handle.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\menu.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\images\submenu.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\markitup\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\bold.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\clean.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\code.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\fonts.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\italic.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\link.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\list-bullet.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\list-item.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\list-numeric.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\picture.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\preview.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\quotes.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\stroke.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\images\underline.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\set.js" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\sets\bbcode\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\typewatch\jquery.typewatch.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\images\handle.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\images\menu.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\images\submenu.png" />
+    <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\style.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

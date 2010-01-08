@@ -1,6 +1,5 @@
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web;
-using Zeus.BaseLibrary.Web.UI;
-using Zeus.ContentProperties;
 using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -9,7 +8,7 @@ using Zeus.Web;
 namespace Zeus.AddIns.Forums.ContentTypes
 {
 	[ContentType("Message Board")]
-	[RestrictParents(typeof(IMessageBoardContainer))]
+	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
 	[Template("~/UI/Views/Forums/MessageBoard.aspx")]
 	[Template("search", "~/UI/Views/Forums/SearchResults.aspx")]
 	[Translatable(false)]
@@ -17,7 +16,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	{
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(MessageBoard), "Zeus.AddIns.Forums.Web.Resources.comments.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Comments); }
 		}
 
 		public string PostUrl

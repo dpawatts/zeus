@@ -14,14 +14,22 @@ namespace Zeus.Web.Mvc.Html
 	{
 		public static string IncludeJavascriptResource(this HtmlHelper html, Type type, string resourceName)
 		{
-			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>",
-				WebResourceUtility.GetUrl(type, resourceName));
+			return html.Javascript(WebResourceUtility.GetUrl(type, resourceName));
 		}
 
 		public static string IncludeEmbeddedJavascriptResource(this HtmlHelper html, Assembly assembly, string relativePath)
 		{
-			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>",
-				Utility.GetClientResourceUrl(assembly, relativePath));
+			return html.Javascript(Utility.GetClientResourceUrl(assembly, relativePath));
+		}
+
+		public static string Javascript(this HtmlHelper html, string url)
+		{
+			return string.Format(@"<script type=""text/javascript"" src=""{0}""></script>", url);
+		}
+
+		public static string Css(this HtmlHelper html, string url)
+		{
+			return string.Format(@"<link rel=""stylesheet"" type=""text/css"" href=""{0}"" />", url);
 		}
 
 		public static string DisplayProperty<TItem>(this HtmlHelper helper, TItem contentItem, Expression<Func<TItem, object>> expression)

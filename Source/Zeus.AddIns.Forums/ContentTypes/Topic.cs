@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
@@ -18,7 +19,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	{
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(Forum), "Zeus.AddIns.Forums.Web.Resources.comment.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Comment); }
 		}
 
 		[LinkedItemDropDownListEditor("Author", 20, TypeFilter = typeof(Member))]

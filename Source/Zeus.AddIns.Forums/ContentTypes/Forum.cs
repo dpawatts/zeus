@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI.WebControls;
-using Zeus.BaseLibrary.Web;
-using Zeus.BaseLibrary.Web.UI;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Integrity;
@@ -19,7 +18,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	{
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(Forum), "Zeus.AddIns.Forums.Web.Resources.comment.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.Comment); }
 		}
 
 		[ContentProperty("Description", 20, EditorContainerName = "Content")]

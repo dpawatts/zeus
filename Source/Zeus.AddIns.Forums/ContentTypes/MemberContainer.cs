@@ -1,4 +1,4 @@
-using Zeus.BaseLibrary.Web.UI;
+using Coolite.Ext.Web;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -15,7 +15,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 
 		public override string IconUrl
 		{
-			get { return WebResourceUtility.GetUrl(typeof(MessageBoard), "Zeus.AddIns.Forums.Web.Resources.user_comment.png"); }
+			get { return Utility.GetCooliteIconUrl(Icon.UserComment); }
 		}
 
 		[TextBoxEditor("Title", 10)]

@@ -6,6 +6,7 @@
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.AddIns.Forums</RootNamespace>
@@ -51,6 +52,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -89,7 +94,6 @@
     <Compile Include="Configuration\BadWordCollection.cs" />
     <Compile Include="Configuration\BadWordElement.cs" />
     <Compile Include="Configuration\ForumSection.cs" />
-    <Compile Include="ContentTypes\IMessageBoardContainer.cs" />
     <Compile Include="ContentTypes\MemberContainer.cs" />
     <Compile Include="ContentTypes\Forum.cs" />
     <Compile Include="ContentTypes\Member.cs" />
@@ -137,7 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Content\scripts\BBCodeEditor.js" />
+    <EmbeddedResource Include="Mvc\Assets\js\BBCodeEditor.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\Smilies\icon_arrow.gif" />
@@ -224,26 +228,22 @@
     <EmbeddedResource Include="Web\Resources\user_green.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Content\css\forum.css" />
-    <EmbeddedResource Include="Mvc\Content\images\avatarBig.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\door.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\drawingPin.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\forumLogo.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\newPost.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\post.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\postBg.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\sticky.gif" />
-    <EmbeddedResource Include="Mvc\Content\images\trash.gif" />
+    <EmbeddedResource Include="Mvc\Assets\css\forum.css" />
+    <EmbeddedResource Include="Mvc\Assets\images\avatarBig.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\door.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\drawingPin.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\forumLogo.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\newPost.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\post.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\postBg.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\sticky.gif" />
+    <EmbeddedResource Include="Mvc\Assets\images\trash.gif" />
     <EmbeddedResource Include="Mvc\Views\MessageBoard\Search.spark" />
     <EmbeddedResource Include="Mvc\Views\Shared\Posting.spark" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mvc\Views\Forum\Index.spark">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Mvc\Views\MessageBoard\Index.spark">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\Views\Forum\Index.spark" />
+    <EmbeddedResource Include="Mvc\Views\MessageBoard\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Shared\ForumHeader.spark" />
     <EmbeddedResource Include="Mvc\Views\Topic\Index.spark" />
   </ItemGroup>
@@ -255,4 +255,23 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51122</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
