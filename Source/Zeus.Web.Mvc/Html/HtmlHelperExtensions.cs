@@ -5,13 +5,22 @@ using System.Web.Mvc;
 using Zeus.BaseLibrary.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentProperties;
-using Zeus.Web.Hosting;
 using Zeus.Web.Mvc.ViewModels;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Web.Mvc.Html
 {
 	public static class HtmlHelperExtensions
 	{
+		public static string RegisterJQuery(this HtmlHelper htmlHelper)
+		{
+			if (htmlHelper.ViewContext.HttpContext.Items["RegisterJQuery"] != null)
+				return string.Empty;
+
+			htmlHelper.ViewContext.HttpContext.Items["RegisterJQuery"] = true;
+			return htmlHelper.IncludeJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.jQuery.jquery.js");
+		}
+
 		public static string IncludeJavascriptResource(this HtmlHelper html, Type type, string resourceName)
 		{
 			return html.Javascript(WebResourceUtility.GetUrl(type, resourceName));

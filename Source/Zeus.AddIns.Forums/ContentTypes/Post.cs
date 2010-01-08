@@ -2,10 +2,10 @@ using System;
 using System.Web.UI.WebControls;
 using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
 using Zeus.Integrity;
+using Zeus.Templates.Services;
 
 namespace Zeus.AddIns.Forums.ContentTypes
 {
@@ -17,13 +17,6 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		public override string IconUrl
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.Comment); }
-		}
-
-		[ContentProperty("Subject", 10)]
-		public override string Title
-		{
-			get { return base.Title; }
-			set { base.Title = value; }
 		}
 
 		[ContentProperty("Author", 20)]
@@ -50,7 +43,14 @@ namespace Zeus.AddIns.Forums.ContentTypes
 
 		public string HtmlMessage
 		{
-			get { return BBCodeHelper.ConvertToHtml(Message); }
+			get { return Context.Current.Resolve<BBCodeService>().GetHtml(Message); }
+		}
+
+		[ContentProperty("Number", 50)]
+		public virtual int Number
+		{
+			get { return GetDetail("Number", 1); }
+			set { SetDetail("Number", value); }
 		}
 
 		public Topic Topic

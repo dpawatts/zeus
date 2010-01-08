@@ -23,17 +23,12 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 			get { return new Url(CurrentMessageBoard.Url).AppendSegment("search"); }
 		}
 
-		#region Index action
-
 		public override ActionResult Index()
 		{
 			return View(new MessageBoardViewModel(CurrentItem, CurrentItem.GetChildren<Forum>()));
 		}
 
-		#endregion
-
-		#region Search action
-
+		[HttpGet]
 		public ActionResult Search(int? f, int? t, string q, int? p)
 		{
 			var results = Find.EnumerateAccessibleChildren(CurrentMessageBoard).OfType<Post>();
@@ -50,7 +45,5 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 				SearchText = q
 			});
 		}
-
-		#endregion
 	}
 }

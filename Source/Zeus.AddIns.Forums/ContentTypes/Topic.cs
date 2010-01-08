@@ -36,6 +36,13 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			set { SetDetail("Sticky", value); }
 		}
 
+		[LinkedItemDropDownListEditor("First Post", 40, TypeFilter = typeof(Post))]
+		public virtual Post FirstPost
+		{
+			get { return GetDetail<Post>("FirstPost", null); }
+			set { SetDetail("FirstPost", value); }
+		}
+
 		public virtual int PostCount
 		{
 			get { return Posts.Count(); }

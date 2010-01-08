@@ -19,7 +19,7 @@
 			<td>
 				<div class="nameLeftOuter">
 					<a href="${forum.Url}">${forum.Title}</a>
-					<p class="fDesc">${forum.Description}</p>
+					<p if="!string.IsNullOrEmpty(forum.Description)" class="fDesc">${forum.Description}</p>
 				</div>
 			</td>
 			<td>${forum.TopicCount}</td>

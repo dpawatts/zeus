@@ -1,42 +1,9 @@
 ﻿<viewdata model="Zeus.AddIns.Forums.Mvc.ViewModels.PostingViewModel"/>
-<use namespace="Zeus.AddIns.Forums.Mvc.Html" />
+<use namespace="Zeus.Templates.Mvc.Html" />
 
 <content name="head">
 	<link rel="stylesheet" href="/assets/forums/css/forum.css" type="text/css" media="screen" title="Default Style" charset="utf-8"/>
-
-	<script type="text/javascript" src="/assets/forums/js/BBCodeEditor.js"></script>
-
-	<script type="text/javascript">
-		var onload_functions = new Array();
-
-		var form_name = 'postingForm';
-		var text_name = 'postingForm.Message';
-		//var load_draft = false;
-		//var upload = false;
-
-		// Define the bbCode tags
-		//var bbcode = new Array();
-		var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]');
-		//var imageTag = false;
-
-		// Helpline messages
-		var help_line = {
-			b: 'Bold text: [b]text[/b]',
-			i: 'Italic text: [i]text[/i]',
-			u: 'Underline text: [u]text[/u]',
-			q: 'Quote text: [quote]text[/quote]',
-			c: 'Code display: [code]code[/code]',
-			l: 'List: [list]text[/list]',
-			o: 'Ordered list: [list=]text[/list]',
-			p: 'Insert image: [img]http://image_url[/img]',
-			w: 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]',
-			a: 'Inline uploaded attachment: [attachment=]filename.ext[/attachment]',
-			s: 'Font colour: [color=red]text[/color]  Tip: you can also use color=#FF0000',
-			f: 'Font size: [size=85]small text[/size]',
-			e: 'List: Add list element',
-			d: 'Flash: [flash=width,height]http://url[/flash]'
-		};
-	</script>
+	${Html.MarkItUpResources()}
 </content>
 
 <div id="forum">
@@ -44,28 +11,23 @@
 
 	<form action="${Model.PostingFormUrl}" method="post" id="postingForm" name="postingForm">
 		<div>
+			${Html.Hidden("p", ViewContext.HttpContext.Request.QueryString["p"])}
 			${Html.ValidationSummaryBox("Please correct the following errors before continuing:")}
 			<br />
 			
-			${Html.Label("postingForm.Subject", "Subject:")}
-			${Html.TextBox("postingForm.Subject")}
-			<br />
+			<if condition="Model.CanEditSubject">
+				${Html.Label("postingForm.Subject", "Topic Subject:")}
+				${Html.TextBox("postingForm.Subject")}
+				<br />
+			</if>
 		
-			${Html.BBCodeTextBox("postingForm.Message")}
+			${Html.MarkItUpTextArea("postingForm.Message", "postingForm_Message")}
 			<br />
 
 			${Html.SubmitButton("btnCancel", "Cancel")}
-			${Html.SubmitButton("btnPreview", "Preview", new { onclick = "$('#postingForm').attr('action', '" + Model.PostingFormUrl + "Preview'); $('#postingForm').submit();" })}
 			${Html.SubmitButton("btnSubmit", "Submit")}
 		</div>
 	</form>
-	
-	<if condition="Model.PreviewVisible">
-		<h3 class="redTitle">Preview</h3>
-		<div id="fPreview">
-			${Model.PreviewMessage}
-		</div> <!-- fPreview -->
-	</if>
 	
 	<if condition="Model.TopicSummaryVisible">
 		<h3 class="redTitle">Topic Summary</h3>

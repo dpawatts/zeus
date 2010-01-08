@@ -5,6 +5,7 @@ using System.Web.Routing;
 using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
+using Zeus.Templates.Web.Routing;
 using Zeus.Web.Mvc.Modules;
 using Zeus.Web.Routing;
 
@@ -24,6 +25,8 @@ namespace Zeus.Templates.Mvc
 				new RouteValueDictionary(),
 				new RouteValueDictionary(),
 				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Mvc.DefaultTemplate.Assets")));
+
+			routes.Add(new Route("services/templates/bbcode", new BBCodeRouteHandler()));
 
 			var viewFolder = new EmbeddedViewFolder(assembly, assembly.GetName().Name + ".Mvc.DefaultTemplate.Views");
 			var sparkViewFactory = viewEngines.OfType<SparkViewFactory>().First();

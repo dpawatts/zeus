@@ -20,14 +20,14 @@ namespace Zeus.Templates.Services.AntiSpam
 		private static readonly string _version = typeof(AkismetService).Assembly.GetName().Version.ToString();
 		private readonly AkismetElement _configuration;
 		private readonly IHttpClient _httpClient;
-		private readonly Web.IWebContext _webContext;
+		private readonly Zeus.Web.IWebContext _webContext;
 		private readonly Url _verifyUrl, _checkUrl, _submitHamUrl, _submitSpamUrl;
 		private readonly string _userAgent;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="AkismetService"/> class.
 		/// </summary>
-		public AkismetService(AkismetElement configuration, IHttpClient httpClient, Web.IWebContext webContext)
+		public AkismetService(AkismetElement configuration, IHttpClient httpClient, Zeus.Web.IWebContext webContext)
 		{
 			_configuration = configuration;
 			_httpClient = httpClient;

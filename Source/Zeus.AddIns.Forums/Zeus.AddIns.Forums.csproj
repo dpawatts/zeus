@@ -90,7 +90,6 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="BBCodeHelper.cs" />
     <Compile Include="Configuration\BadWordCollection.cs" />
     <Compile Include="Configuration\BadWordElement.cs" />
     <Compile Include="Configuration\ForumSection.cs" />
@@ -107,7 +106,6 @@
     <Compile Include="Mvc\Controllers\MessageBoardController.cs" />
     <Compile Include="Mvc\Controllers\TopicController.cs" />
     <Compile Include="Mvc\ForumsWebPackage.cs" />
-    <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MemberViewModel.cs" />
@@ -120,7 +118,6 @@
     <Compile Include="Services\ForumService.cs" />
     <Compile Include="Services\IForumService.cs" />
     <Compile Include="Web\Resources\Resources.cs" />
-    <Compile Include="Web\UI\WebControls\BBCodeEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
@@ -139,9 +136,6 @@
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Mvc\Assets\js\BBCodeEditor.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\Smilies\icon_arrow.gif" />

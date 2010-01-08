@@ -55,7 +55,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult Reply()
 		{
-			return View("Posting", GetPostViewModel());
+			PostingViewModel viewModel = GetPostViewModel();
+			viewModel.Subject = CurrentItem.Title;
+			return View("Posting", viewModel);
 		}
 
 		[HttpGet]
@@ -64,6 +66,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 			Post currentPost = Context.Persister.Get<Post>(p);
 
 			PostingViewModel viewModel = GetPostViewModel();
+			viewModel.Subject = CurrentItem.Title;
 			viewModel.Message = "[quote]" + currentPost.Message + "[/quote]";
 			return View("Posting", viewModel);
 		}
@@ -78,23 +81,36 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult ReplyPreview(PostFormViewModel form)
-		{
-			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("reply"));
-			viewModel.CurrentTopicPosts = CurrentItem.GetChildren<Post>();
-			viewModel.PreviewMessage = BBCodeHelper.ConvertToHtml(form.Message);
-			viewModel.PreviewVisible = true;
-			return View("Posting", viewModel);
-		}
-
-		[HttpPost]
-		public ActionResult Reply(PostFormViewModel form)
+		public ActionResult Reply(PostFormViewModel postingForm)
 		{
 			if (!ModelState.IsValid)
 				return View();
 
-			Post post = ForumService.CreateReply(CurrentItem, CurrentMember, form.Subject, form.Message);
+			Post post = ForumService.CreateReply(CurrentItem, CurrentMember, postingForm.Subject, postingForm.Message);
 			return Redirect(post.Url);
+		}
+
+		[HttpGet]
+		public ActionResult Edit(int p)
+		{
+			Post currentPost = Context.Persister.Get<Post>(p);
+
+			PostingViewModel viewModel = GetPostViewModel();
+			viewModel.PostingFormUrl = new Url(CurrentItem.Url).AppendSegment("edit");
+			viewModel.Subject = currentPost.Title;
+			viewModel.Message = currentPost.Message;
+			return View("Posting", viewModel);
+		}
+
+		[HttpPost]
+		public ActionResult Edit(int p, PostFormViewModel postingForm)
+		{
+			if (!ModelState.IsValid)
+				return View();
+
+			Post currentPost = Context.Persister.Get<Post>(p);
+			ForumService.EditPost(currentPost, CurrentMember, postingForm.Subject, postingForm.Message);
+			return Redirect(currentPost.Url);
 		}
 	}
 }

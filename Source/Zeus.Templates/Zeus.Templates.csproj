@@ -61,6 +61,10 @@
     <Reference Include="Argotic.Extensions">
       <HintPath>..\..\Libraries\Argotic\Argotic.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="CodeKicker.BBCode, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\CodeKicker.BBCode.dll</HintPath>
+    </Reference>
     <Reference Include="Coolite.Ext.Web, Version=0.8.1.2802, Culture=neutral, PublicKeyToken=f58c952e9aa5b80a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Coolite\Coolite.Ext.Web.dll</HintPath>
@@ -162,7 +166,6 @@
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
-    <Compile Include="Mvc\Controllers\BBCodePreviewController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
     <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Services\AntiSpam\ICaptchaService.cs" />
     <Compile Include="Services\AntiSpam\ReCaptchaService.cs" />
     <Compile Include="Services\AntiSpam\SpamStatus.cs" />
+    <Compile Include="Services\BBCodeService.cs" />
     <Compile Include="TemplatesModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
@@ -252,6 +256,7 @@
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />
     <Compile Include="Services\TagService.cs" />
     <Compile Include="Services\TemplatesPartsAdapter.cs" />
+    <Compile Include="Web\Routing\BBCodeRouteHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">

@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using Zeus.AddIns.Forums.Configuration;
 using Zeus.AddIns.Forums.ContentTypes;
 using Zeus.Security;
-using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Services
 {
@@ -40,11 +39,6 @@ namespace Zeus.AddIns.Forums.Services
 				Context.Persister.Save(member);
 			}
 			return member;
-		}
-
-		public string GetPostPreview(string message)
-		{
-			return BBCodeHelper.ConvertToHtml(CleanBadWords(message));
 		}
 
 		public void ToggleTopicStickiness(Topic topic, Member member)
@@ -84,6 +78,7 @@ namespace Zeus.AddIns.Forums.Services
 		{
 			// Create post.
 			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
+			SetCommonPostProperties(topic, post);
 			post.AddTo(topic);
 
 			// Save post.
@@ -100,12 +95,19 @@ namespace Zeus.AddIns.Forums.Services
 
 			// Then create post.
 			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
+			SetCommonPostProperties(topic, post);
 			post.AddTo(topic);
 
 			// Save topic, which will also save post.
 			Context.Persister.Save(topic);
 
 			return topic;
+		}
+
+		private static void SetCommonPostProperties(Topic topic, Post post)
+		{
+			post.Number = topic.GetChildren<Post>().Max(fi => fi.Number) + 1;
+			post.Title = "Post #" + post.Number;
 		}
 
 		public Post EditPost(Post post, Member member, string newSubject, string newMessage)
@@ -115,7 +117,8 @@ namespace Zeus.AddIns.Forums.Services
 				throw new ZeusException("Post can only be edited by original author.");
 
 			// Update properties
-			post.Title = CleanBadWords(newSubject);
+			if (post.Topic.FirstPost == post)
+				post.Topic.Title = CleanBadWords(newSubject);
 			post.Message = CleanBadWords(newMessage);
 
 			post.Topic.Updated = DateTime.Now;

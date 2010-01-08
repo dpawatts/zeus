@@ -56,26 +56,20 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult NewTopic()
 		{
-			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"));
+			var viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"))
+			{
+				CanEditSubject = true
+			};
 			return View("Posting", viewModel);
 		}
 
 		[HttpPost]
-		public ActionResult NewTopicPreview(PostFormViewModel form)
-		{
-			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"));
-			viewModel.PreviewMessage = BBCodeHelper.ConvertToHtml(form.Message);
-			viewModel.PreviewVisible = true;
-			return View("Posting", viewModel);
-		}
-
-		[HttpPost]
-		public ActionResult NewTopic(PostFormViewModel form)
+		public ActionResult NewTopic(PostFormViewModel postingForm)
 		{
 			if (!ModelState.IsValid)
 				return View();
 
-			Topic topic = ForumService.CreateTopic(CurrentItem, CurrentMember, form.Subject, form.Message);
+			Topic topic = ForumService.CreateTopic(CurrentItem, CurrentMember, postingForm.Subject, postingForm.Message);
 			return Redirect(topic.Url);
 		}
 	}
