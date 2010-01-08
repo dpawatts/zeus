@@ -1,5 +1,4 @@
 using CookComputing.XmlRpc;
-using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.AddIns.Blogs.Services;
 using Zeus.AddIns.Blogs.Services.Tracking;
 using Zeus.AddIns.Blogs.Web.XmlRpc;
@@ -36,7 +35,7 @@ namespace Zeus.AddIns.Blogs.Web.Pingback
 			if (testPost == null)
 				throw new XmlRpcFaultException(32, "The specified target URI does not exist.");
 
-			Post post = testPost as Post;
+			ContentTypes.Post post = testPost as ContentTypes.Post;
 			if (post == null)
 				throw new XmlRpcFaultException(33, "The specified target URI cannot be used as a target.");
 

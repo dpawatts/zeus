@@ -76,7 +76,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 
 		public IEnumerable<FeedbackItem> ApprovedComments
 		{
-			get { return Comments.Where(fi => fi.Approved); }
+			get { return Comments.Where(fi => fi.Status == FeedbackItemStatus.Approved); }
 		}
 
 		string ISyndicatable.Summary

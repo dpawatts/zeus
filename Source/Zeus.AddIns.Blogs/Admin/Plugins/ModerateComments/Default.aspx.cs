@@ -42,13 +42,13 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			switch (cboFilterStatus.SelectedItem.Value)
 			{
 				case "Pending" :
-					feedbackItems = feedbackItems.Where(fi => !fi.Approved);
+					feedbackItems = feedbackItems.Where(fi => fi.Status == FeedbackItemStatus.Pending);
 					break;
 				case "Approved":
-					feedbackItems = feedbackItems.Where(fi => fi.Approved);
+					feedbackItems = feedbackItems.Where(fi => fi.Status == FeedbackItemStatus.Approved);
 					break;
 				case "Spam":
-					feedbackItems = feedbackItems.Where(fi => fi.Spam);
+					feedbackItems = feedbackItems.Where(fi => fi.Status == FeedbackItemStatus.Spam);
 					break;
 			}
 			switch (cboFilterType.SelectedItem.Value)
@@ -82,8 +82,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 				
 				// Send to anti-spam service as not spam.
 				//Engine.Resolve<IAntiSpamService>().
-				feedbackItem.Approved = false;
-				feedbackItem.Spam = false;
+				feedbackItem.Status = FeedbackItemStatus.Spam;
 				Engine.Persister.Save(feedbackItem);
 			}
 
@@ -104,7 +103,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 
 				// Handle values.
 				FeedbackItem feedbackItem = Engine.Persister.Get<FeedbackItem>(feedbackID);
-				feedbackItem.Approved = true;
+				feedbackItem.Status = FeedbackItemStatus.Approved;
 				Engine.Persister.Save(feedbackItem);
 			}
 

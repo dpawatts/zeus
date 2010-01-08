@@ -1,7 +1,7 @@
 using System;
 using CookComputing.XmlRpc;
 
-namespace Zeus.AddIns.Blogs.Web.MetaWeblog
+namespace Zeus.AddIns.Blogs.Web.XmlRpc
 {
 	#region Structs
 
@@ -72,12 +72,15 @@ namespace Zeus.AddIns.Blogs.Web.MetaWeblog
 		public string name;
 		public string type;
 		public byte[] bits;
+		public bool overwrite;
 	}
 
 	[Serializable]
 	public struct MediaObjectInfo
 	{
+		public string file;
 		public string url;
+		public string type;
 	}
 
 	#endregion

@@ -171,6 +171,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\CommentService.cs" />
+    <Compile Include="ContentTypes\FeedbackItemStatus.cs" />
     <Compile Include="Services\IBlogService.cs" />
     <Compile Include="Services\ICommentService.cs" />
     <Compile Include="Services\Tracking\IPingbackService.cs" />
@@ -181,13 +182,15 @@
     <Compile Include="Services\Tracking\Verifier.cs" />
     <Compile Include="Web\PostAdapter.cs" />
     <Compile Include="Web\HtmlUtility.cs" />
-    <Compile Include="Web\MetaWeblog\IMetaWeblog.cs" />
-    <Compile Include="Web\MetaWeblog\MetaWeblogXmlRpcService.cs" />
-    <Compile Include="Web\MetaWeblog\Structures.cs" />
+    <Compile Include="Web\XmlRpc\IBloggerApi.cs" />
+    <Compile Include="Web\XmlRpc\IMetaWeblogApi.cs" />
+    <Compile Include="Web\XmlRpc\BlogXmlRpcService.cs" />
+    <Compile Include="Web\XmlRpc\Structures.cs" />
     <Compile Include="Services\Tracking\IPingbackProxy.cs" />
     <Compile Include="Web\Pingback\PingbackXmlRpcService.cs" />
     <Compile Include="Web\Routing\RouteExtensions.cs" />
     <Compile Include="Web\Routing\XmlRpcRouteHandler.cs" />
+    <Compile Include="Web\XmlRpc\IWordPressApi.cs" />
     <Compile Include="Web\XmlRpc\ZeusXmlRpcService.cs" />
   </ItemGroup>
   <ItemGroup>

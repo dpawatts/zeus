@@ -47,9 +47,9 @@ namespace Zeus.AddIns.Blogs.Services
 			if (!_captchaService.Check(new HttpContextWrapper(HttpContext.Current), out error))
 				throw new CaptchaException(error, error);
 
-			CheckForSpam(comment);
-
 			SetCommonFeedbackItemProperties(post, comment);
+
+			CheckForSpam(comment);
 
 			// Set user cookie so we know they were the author - this is not
 			// particularly secure, but it's how WordPress does it.
@@ -68,11 +68,32 @@ namespace Zeus.AddIns.Blogs.Services
 			comment.SourceUrl = sourceUrl;
 			comment.AddTo(post);
 
-			CheckForSpam(comment);
-
 			SetCommonFeedbackItemProperties(post, comment);
 
+			CheckForSpam(comment);
+
 			_persister.Save(comment);
+		}
+
+		public void DeleteComment(FeedbackItem feedbackItem)
+		{
+			_persister.Delete(feedbackItem);
+		}
+
+		public void EditComment(FeedbackItem feedbackItem, DateTime created, string name, string email, string url, string text, FeedbackItemStatus status)
+		{
+			if (feedbackItem is Comment)
+			{
+				Comment comment = (Comment) feedbackItem;
+				comment.AuthorName = name;
+				comment.AuthorUrl = url;
+				comment.AuthorEmail = email;
+				comment.Text = StringExtensions.ConvertUrlsToHyperLinks(null, text);
+			}
+
+			feedbackItem.Status = status;
+
+			_persister.Save(feedbackItem);
 		}
 
 		public IEnumerable<FeedbackItem> GetDisplayedComments(Post post)
@@ -83,20 +104,26 @@ namespace Zeus.AddIns.Blogs.Services
 			HttpCookie authorNameCookie = _webContext.Request.Cookies[CommentAuthorNameCookieName];
 			string authorName = (authorNameCookie != null) ? authorNameCookie.Value : null;
 
-			return post.Comments.Where(fi => fi.Approved || ((fi is Comment) && ((Comment) fi).AuthorEmail == authorEmail && ((Comment) fi).AuthorName == authorName));
+			return post.Comments.Where(fi => fi.Status == FeedbackItemStatus.Approved || ((fi is Comment) && ((Comment) fi).AuthorEmail == authorEmail && ((Comment) fi).AuthorName == authorName));
+		}
+
+		public IEnumerable<FeedbackItem> GetAllComments(Post post)
+		{
+			return post.Comments;
 		}
 
 		private static void SetCommonFeedbackItemProperties(Post post, FeedbackItem feedbackItem)
 		{
 			feedbackItem.Number = post.GetChildren<FeedbackItem>().Max(fi => fi.Number) + 1;
 			feedbackItem.Title = "Feedback Item #" + feedbackItem.Number;
-			feedbackItem.Approved = !post.CurrentBlog.CommentModerationEnabled && !feedbackItem.Spam;
+			feedbackItem.Status = (!post.CurrentBlog.CommentModerationEnabled) ? FeedbackItemStatus.Approved : FeedbackItemStatus.Pending;
 		}
 
 		private void CheckForSpam(FeedbackItem feedbackItem)
 		{
 			AntiSpamComment antiSpamComment = ConvertToAntiSpamComment(feedbackItem);
-			feedbackItem.Spam = _antiSpamService.CheckCommentForSpam(Find.StartPage, antiSpamComment);
+			if (_antiSpamService.CheckCommentForSpam(Find.StartPage, antiSpamComment))
+				feedbackItem.Status = FeedbackItemStatus.Spam;
 		}
 
 		private AntiSpamComment ConvertToAntiSpamComment(FeedbackItem feedbackItem)

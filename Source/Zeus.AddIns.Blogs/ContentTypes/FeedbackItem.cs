@@ -8,18 +8,11 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 	[RestrictParents(typeof(Post))]
 	public abstract class FeedbackItem : BaseContentItem
 	{
-		[ContentProperty("Approved?", 200)]
-		public virtual bool Approved
+		[ContentProperty("Status", 200)]
+		public virtual FeedbackItemStatus Status
 		{
-			get { return GetDetail("Approved", false); }
-			set { SetDetail("Approved", value); }
-		}
-
-		[ContentProperty("Spam?", 210)]
-		public virtual bool Spam
-		{
-			get { return GetDetail("Spam", false); }
-			set { SetDetail("Spam", value); }
+			get { return GetDetail("Status", FeedbackItemStatus.Pending); }
+			set { SetDetail("Status", value); }
 		}
 
 		[ContentProperty("Number", 220)]
