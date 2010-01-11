@@ -5,10 +5,12 @@ namespace Zeus.Templates.Mvc.ViewModels
 {
 	public class LoginWidgetViewModel : ViewModel<LoginWidget>
 	{
-		public LoginWidgetViewModel(LoginWidget currentItem)
+		public bool LoggedIn { get; set; }
+
+		public LoginWidgetViewModel(LoginWidget currentItem, bool loggedIn)
 			: base(currentItem)
 		{
-			
+			LoggedIn = loggedIn;
 		}
 	}
 }

@@ -56,12 +56,18 @@ namespace Zeus.Web.Security
 			return roleContainer.GetChildren().Authorized(user, Context.SecurityManager, Operations.Read).Cast<Role>();
 		}
 
-		void ICredentialStore.CreateUser(string username, string password, string[] roles, bool verified)
+		void ICredentialStore.CreateUser(string username, string password, string[] roles, string email, bool verified)
 		{
 			UserContainer userContainer = GetUserContainer(true);
 			RoleContainer roleContainer = GetRoleContainer(true);
 
-			User user = new User { Name = username, Password = password, Verified = verified };
+			User user = new User
+			{
+				Name = username,
+				Password = password,
+				Email = email,
+				Verified = verified
+			};
 			foreach (string role in roles)
 				user.RolesInternal.Add(roleContainer.GetRole(role));
 			user.AddTo(userContainer);

@@ -15,6 +15,7 @@ namespace Zeus.Web
 		public ControlsAttribute(Type itemType)
 		{
 			this.itemType = itemType;
+			Priority = 10;
 		}
 
 		/// <summary>The type of item beeing adapted.</summary>
@@ -43,6 +44,11 @@ namespace Zeus.Web
 
 		public string AreaName { get; set; }
 
+		/// <summary>
+		/// Allows multiple controllers to control the same type, but only the one with the highest priority will be used.
+		/// </summary>
+		public int Priority { get; set; }
+
 		/// <summary>Compares the path against the referenced item type to determine whether this is the correct adapter.</summary>
 		/// <param name="path">The request path.</param>
 		/// <param name="requiredType">The type of adapter needed.</param>
@@ -62,7 +68,7 @@ namespace Zeus.Web
 			return InheritanceDepth(other.ItemType) - InheritanceDepth(ItemType);
 		}
 
-		int InheritanceDepth(Type type)
+		private static int InheritanceDepth(Type type)
 		{
 			if (type == null || type == typeof(object))
 				return 0;

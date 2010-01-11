@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Ninject;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.ContentTypes;
 
@@ -12,7 +13,7 @@ namespace Zeus.Web.Mvc
 		private readonly IDictionary<Type, string> _controllerMap = new Dictionary<Type, string>();
 		private readonly IDictionary<Type, string> _areaMap = new Dictionary<Type, string>();
 
-		public ControllerMapper(ITypeFinder typeFinder, IContentTypeManager definitionManager)
+		public ControllerMapper(ITypeFinder typeFinder, IContentTypeManager definitionManager, IKernel kernel)
 		{
 			IList<ControlsAttribute> controllerDefinitions = FindControllers(typeFinder);
 			foreach (ContentType id in definitionManager.GetContentTypes())
@@ -22,6 +23,11 @@ namespace Zeus.Web.Mvc
 				{
 					ControllerMap[id.ItemType] = controllerDefinition.ControllerName;
 					AreaMap[id.ItemType] = controllerDefinition.AreaName;
+
+					kernel.Bind<IController>().To(controllerDefinition.AdapterType)
+						.InTransientScope()
+						.Named(GetControllerName(controllerDefinition.AdapterType, controllerDefinition.AreaName));
+
 					IList<IPathFinder> finders = PathDictionary.GetFinders(id.ItemType);
 					if (0 == finders.Where(f => f is ActionResolver).Count())
 					{
@@ -32,6 +38,19 @@ namespace Zeus.Web.Mvc
 					}
 				}
 			}
+		}
+
+		private static string GetControllerName(Type type, string areaName)
+		{
+			string name = type.Name.ToLowerInvariant();
+
+			if (name.EndsWith("controller"))
+				name = name.Substring(0, name.IndexOf("controller"));
+
+			if (!string.IsNullOrEmpty(areaName))
+				name = areaName.ToLowerInvariant() + "." + name;
+
+			return name;
 		}
 
 		public string GetControllerName(Type type)
@@ -60,14 +79,11 @@ namespace Zeus.Web.Mvc
 
 		private static IAdapterDescriptor GetControllerFor(Type itemType, IList<ControlsAttribute> controllerDefinitions)
 		{
+			List<ControlsAttribute> controllers = new List<ControlsAttribute>();
 			foreach (ControlsAttribute controllerDefinition in controllerDefinitions)
-			{
 				if (controllerDefinition.ItemType.IsAssignableFrom(itemType))
-				{
-					return controllerDefinition;
-				}
-			}
-			return null;
+					controllers.Add(controllerDefinition);
+			return controllers.OrderByDescending(c => c.Priority).FirstOrDefault();
 		}
 
 		private static IList<ControlsAttribute> FindControllers(ITypeFinder typeFinder)

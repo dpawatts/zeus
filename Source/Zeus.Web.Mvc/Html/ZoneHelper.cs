@@ -1,18 +1,19 @@
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Zeus.Web.UI;
 
 namespace Zeus.Web.Mvc.Html
 {
 	public class ZoneHelper : BaseWidgetHelper
 	{
-		public ZoneHelper(IContentItemContainer container, string actionName, string zoneName)
-			: base(container, actionName)
+		public ZoneHelper(ViewContext viewContext, IContentItemContainer container, string actionName, string zoneName)
+			: base(viewContext, container, actionName)
 		{
 			ZoneName = zoneName;
 		}
 
-		public ZoneHelper(IContentItemContainer container, ContentItem item, string actionName, string zoneName)
-			: base(container, item, actionName)
+		public ZoneHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName, string zoneName)
+			: base(viewContext, container, item, actionName)
 		{
 			ZoneName = zoneName;
 		}

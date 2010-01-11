@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Zeus.Web;
 using Zeus.Web.Mvc.Html;
 using Zeus.Web.UI;
@@ -7,14 +8,14 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public class WidgetHelper : BaseWidgetHelper
 	{
-		public WidgetHelper(IContentItemContainer container, string actionName, string[] zoneNames)
-			: base(container, actionName)
+		public WidgetHelper(ViewContext viewContext, IContentItemContainer container, string actionName, string[] zoneNames)
+			: base(viewContext, container, actionName)
 		{
 			ZoneNames = zoneNames;
 		}
 
-		public WidgetHelper(IContentItemContainer container, ContentItem item, string actionName, string[] zoneNames)
-			: base(container, item, actionName)
+		public WidgetHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName, string[] zoneNames)
+			: base(viewContext, container, item, actionName)
 		{
 			ZoneNames = zoneNames;
 		}

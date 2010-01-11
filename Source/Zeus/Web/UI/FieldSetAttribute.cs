@@ -26,7 +26,7 @@ namespace Zeus.Web.UI
 		{
 			FieldSet fieldSet = new FieldSet
 			{
-				ID = Name,
+				ID = "FieldSet" + Name,
 				Title = Legend,
 				Collapsible = Collapsible,
 				Collapsed = Collapsed

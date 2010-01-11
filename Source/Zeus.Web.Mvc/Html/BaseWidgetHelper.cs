@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.Web.UI;
 
@@ -9,14 +10,14 @@ namespace Zeus.Web.Mvc.Html
 	{
 		private readonly ITemplateRenderer _templateRenderer = Context.Current.Resolve<ITemplateRenderer>();
 
-		protected BaseWidgetHelper(IContentItemContainer container, string actionName)
-			: base(container)
+		protected BaseWidgetHelper(ViewContext viewContext, IContentItemContainer container, string actionName)
+			: base(viewContext, container)
 		{
 			ActionName = actionName;
 		}
 
-		protected BaseWidgetHelper(IContentItemContainer container, ContentItem item, string actionName)
-			: base(container, item)
+		protected BaseWidgetHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName)
+			: base(viewContext, container, item)
 		{
 			ActionName = actionName;
 		}
@@ -40,7 +41,7 @@ namespace Zeus.Web.Mvc.Html
 			foreach (var child in GetItems())
 			{
 				ContentItem model = child;
-				string partial = _templateRenderer.RenderTemplate(model, Container, ActionName);
+				string partial = _templateRenderer.RenderTemplate(ViewContext, model, Container, ActionName);
 
 				if (TagBuilder == null)
 				{

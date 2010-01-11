@@ -7,7 +7,7 @@ namespace Zeus.Templates.ContentTypes
 {
 	[ContentType("Forgotten Password Page")]
 	[RestrictParents(typeof(ILoginContext))]
-	public class ForgottenPasswordPage : PageContentItem
+	public class ForgottenPasswordPage : BasePage
 	{
 		[ContentProperty("Password Reset Email Sender", 100, Description = "Email address which should be used as the sender email for the email which will be sent to users who want to reset their password.")]
 		public virtual string PasswordResetEmailSender

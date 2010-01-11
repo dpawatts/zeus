@@ -21,7 +21,7 @@ namespace Zeus.Design.Editors
 
 		protected override void ModifyEditor(TextBox tb)
 		{
-			// do nothing
+			tb.CssClass = string.Empty;
 		}
 
 		protected override TextBox CreateEditor()

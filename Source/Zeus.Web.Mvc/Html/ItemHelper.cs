@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using Zeus.Engine;
 using Zeus.Web.Parts;
 using Zeus.Web.UI;
@@ -6,18 +7,21 @@ namespace Zeus.Web.Mvc.Html
 {
 	public abstract class ItemHelper
 	{
+		public ViewContext ViewContext { get; set; }
 		private readonly IContentItemContainer _itemContainer;
 		private PartsAdapter _partsAdapter;
 
-		protected ItemHelper(IContentItemContainer itemContainer)
+		protected ItemHelper(ViewContext viewContext, IContentItemContainer itemContainer)
 		{
+			ViewContext = viewContext;
 			_itemContainer = itemContainer;
 			CurrentItem = itemContainer.CurrentItem;
 		}
 
-		protected ItemHelper(IContentItemContainer itemContainer, ContentItem item)
+		protected ItemHelper(ViewContext viewContext, IContentItemContainer itemContainer, ContentItem item)
 		{
 			_itemContainer = itemContainer;
+			ViewContext = viewContext;
 			CurrentItem = item;
 		}
 

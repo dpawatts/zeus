@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using Zeus.Web.UI;
 
 namespace Zeus.Web.Mvc.Html
@@ -6,15 +7,15 @@ namespace Zeus.Web.Mvc.Html
 	{
 		private readonly ITemplateRenderer _templateRenderer = Context.Current.Resolve<ITemplateRenderer>();
 
-		public DisplayHelper(IContentItemContainer container, ContentItem item)
-			: base(container, item)
+		public DisplayHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item)
+			: base(viewContext, container, item)
 		{
 			
 		}
 
 		public override string ToString()
 		{
-			return _templateRenderer.RenderTemplate(CurrentItem, Container, "Index");
+			return _templateRenderer.RenderTemplate(ViewContext, CurrentItem, Container, "Index");
 		}
 	}
 }

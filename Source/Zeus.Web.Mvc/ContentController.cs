@@ -81,7 +81,6 @@ namespace Zeus.Web.Mvc
 
 		/// <summary>Defaults to the current item's TemplateUrl and pass the item itself as view data.</summary>
 		/// <returns>A reference to the item's template.</returns>
-		[HttpGet]
 		public virtual ActionResult Index()
 		{
 			return View(CurrentItem);

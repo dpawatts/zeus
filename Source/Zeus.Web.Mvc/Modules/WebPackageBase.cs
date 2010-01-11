@@ -26,11 +26,11 @@ namespace Zeus.Web.Mvc.Modules
 
 		public void RegisterStandardComponents(IKernel container, Assembly assembly, string areaName)
 		{
-			DependencyInjectionUtility.RegisterAllComponentsTransient<IController>(
-				container, assembly, t => GetControllerName(t, areaName));
+			/*DependencyInjectionUtility.RegisterAllComponentsTransient<IController>(
+				container, assembly, t => GetControllerName(t, areaName));*/
 		}
 
-		private static string GetControllerName(Type type, string areaName)
+		/*private static string GetControllerName(Type type, string areaName)
 		{
 			string name = type.Name.ToLowerInvariant();
 
@@ -40,7 +40,7 @@ namespace Zeus.Web.Mvc.Modules
 			name = areaName.ToLowerInvariant() + "." + name;
 
 			return name;
-		}
+		}*/
 
 		public void RegisterStandardRoutes(ICollection<RouteBase> routes, Assembly assembly, string areaName)
 		{

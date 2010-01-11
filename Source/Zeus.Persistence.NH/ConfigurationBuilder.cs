@@ -53,7 +53,7 @@ namespace Zeus.Persistence.NH
 
 			_configuration = new NHibernate.Cfg.Configuration().AddProperties(properties);
 
-			AddMapping(_configuration, "Zeus.Persistence.NH.Mappings.Default.hbm.xml, Zeus.Persistence.NH");
+			AddMapping(_configuration, "Zeus.Persistence.NH.Mappings.Default.hbm.xml");
 			//_configuration.AddAssembly(Assembly.GetExecutingAssembly());
 
 			//persistenceModel.Configure(_configuration);
@@ -76,13 +76,7 @@ namespace Zeus.Persistence.NH
 		protected virtual void AddMapping(NHibernate.Cfg.Configuration cfg, string name)
 		{
 			if (!string.IsNullOrEmpty(name))
-			{
-				string[] pathAssemblyPair = name.Split(',');
-				if (pathAssemblyPair.Length != 2) throw new ArgumentException("Expected the property DefaultMapping to be in the format [manifest resource path],[assembly name] but was: " + name);
-
-				Assembly a = Assembly.Load(pathAssemblyPair[1]);
-				cfg.AddInputStream(a.GetManifestResourceStream(pathAssemblyPair[0]));
-			}
+				cfg.AddInputStream(GetType().Assembly.GetManifestResourceStream(name));
 		}
 
 		private IEnumerable<Type> EnumerateDefinedTypes()

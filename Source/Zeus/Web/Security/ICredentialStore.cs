@@ -5,7 +5,7 @@ namespace Zeus.Web.Security
 {
 	public interface ICredentialStore
 	{
-		void CreateUser(string username, string password, string[] roles, bool verified);
+		void CreateUser(string username, string password, string[] roles, string email, bool verified);
 		IEnumerable<string> GetAllRoles();
 		IEnumerable<User> GetAllUsers();
 		User GetUser(string username);

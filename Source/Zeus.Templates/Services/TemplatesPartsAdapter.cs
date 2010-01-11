@@ -9,7 +9,7 @@ namespace Zeus.Templates.Services
 	/// <summary>
 	/// Implements "Recursive" zones functionality.
 	/// </summary>
-	[Controls(typeof(BasePage))]
+	[Controls(typeof(PageContentItem))]
 	public class TemplatesPartsAdapter : PartsAdapter
 	{
 		public override IEnumerable<WidgetContentItem> GetItemsInZones(ContentItem parentItem, params string[] zoneNames)
@@ -17,7 +17,7 @@ namespace Zeus.Templates.Services
 			List<WidgetContentItem> items = base.GetItemsInZones(parentItem, zoneNames).ToList();
 			ContentItem grandParentItem = parentItem;
 			foreach (string zoneName in zoneNames)
-				if (zoneName.StartsWith("Recursive") && grandParentItem is BasePage)
+				if (zoneName.StartsWith("Recursive") && grandParentItem is PageContentItem)
 				{
 					if (parentItem.VersionOf == null)
 						items.AddRange(GetItemsInZones(parentItem.Parent, zoneName));

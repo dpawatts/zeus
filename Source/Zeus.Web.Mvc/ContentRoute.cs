@@ -93,7 +93,7 @@ namespace Zeus.Web.Mvc
 			if (values.ContainsKey(ContentItemKey))
 			{
 				item = values[ContentItemKey] as ContentItem;
-				values.Remove(ContentItemKey);
+				//values.Remove(ContentItemKey);
 			}
 			else
 				item = requestContext.RouteData.Values[ContentItemKey] as ContentItem;

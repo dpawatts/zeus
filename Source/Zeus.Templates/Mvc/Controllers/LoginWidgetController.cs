@@ -13,7 +13,7 @@ namespace Zeus.Templates.Mvc.Controllers
 		[ModelStateToTempData]
 		public override ActionResult Index()
 		{
-			return PartialView("Index", new LoginWidgetViewModel(CurrentItem));
+			return PartialView("Index", new LoginWidgetViewModel(CurrentItem, User.Identity.IsAuthenticated));
 		}
 
 		[HttpPost]
@@ -26,8 +26,15 @@ namespace Zeus.Templates.Mvc.Controllers
 				return Redirect(CurrentItem.Parent.Url + "#loginBox");
 			}
 
-			Engine.Resolve<IAuthenticationContextService>().GetCurrentService().RedirectFromLoginPage(loginForm.Username, false);
-			return new EmptyResult();
+			Engine.Resolve<IAuthenticationContextService>().GetCurrentService().SetAuthCookie(loginForm.Username, false);
+			return Redirect(CurrentItem.Parent.Url);
+		}
+
+		[HttpGet]
+		public ActionResult Logout()
+		{
+			Engine.Resolve<IAuthenticationContextService>().GetCurrentService().SignOut();
+			return Redirect(CurrentItem.Parent.Url);
 		}
 	}
 }

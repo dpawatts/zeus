@@ -12,8 +12,7 @@ namespace Zeus.Templates.ContentTypes
 	[AllowedChildren(typeof(File), typeof(Image))]
 	public class Page : BasePage
 	{
-		[XhtmlStringContentProperty("Content", 30, Shared = false),
-		HtmlTextBoxEditor(ContainerName = "Content")]
+		[XhtmlStringContentProperty("Content", 30, Shared = false), HtmlTextBoxEditor(ContainerName = "Content")]
 		public virtual string Content
 		{
 			get { return GetDetail("Content", string.Empty); }

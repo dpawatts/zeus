@@ -12,7 +12,14 @@ namespace Zeus.BaseLibrary.DependencyInjection
 		{
 			// Create kernel.
 			_kernel = new StandardKernel();
-			_kernel.Load("*.dll");
+			try
+			{
+				_kernel.Load("*.dll");
+			}
+			catch (TypeLoadException ex)
+			{
+				
+			}
 		}
 
 		public void Initialize()

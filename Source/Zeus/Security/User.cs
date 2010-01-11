@@ -74,7 +74,7 @@ namespace Zeus.Security
 		[ContentProperty("Verified", 142)]
 		public virtual bool Verified
 		{
-			get { return GetDetail("Verified", false); }
+			get { return GetDetail("Verified", true); }
 			set { SetDetail("Verified", value); }
 		}
 

@@ -67,7 +67,7 @@ namespace Zeus.Web.Security
 			}
 
 			// Create user.
-			_store.CreateUser(FormatUsername(username), EncryptPassword(password), roles, isVerified);
+			_store.CreateUser(FormatUsername(username), EncryptPassword(password), roles, email, isVerified);
 			createStatus = UserCreateStatus.Success;
 
 			return GetUser(username);
@@ -100,7 +100,7 @@ namespace Zeus.Web.Security
 		{
 			// Get user from store.
 			User user = _store.GetUser(FormatUsername(username));
-			return (user != null && user.Password == EncryptPassword(password));
+			return (user != null && user.Password == EncryptPassword(password) && user.Verified);
 		}
 
 		private static string FormatUsername(string username)

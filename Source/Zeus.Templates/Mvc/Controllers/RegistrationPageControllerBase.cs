@@ -58,7 +58,7 @@ namespace Zeus.Templates.Mvc.Controllers
 			}
 
 			// Allow inherited classes to create profile.
-			CreateProfile(user);
+			CreateProfile(user, registrationForm);
 
 			// Send verification email.
 			if (_templatesConfig.UserRegistration.EmailVerificationRequired)
@@ -72,7 +72,7 @@ namespace Zeus.Templates.Mvc.Controllers
 				registrationForm.Email));
 		}
 
-		protected virtual void CreateProfile(User user)
+		protected virtual void CreateProfile(User user, TFormViewModel registrationForm)
 		{
 
 		}
@@ -89,7 +89,7 @@ namespace Zeus.Templates.Mvc.Controllers
 				return View(new RegistrationPageVerifyViewModel(
 					CurrentItem, false, result.GetDescription()));
 			return View(new RegistrationPageVerifyViewModel(
-				CurrentItem, false, null));
+				CurrentItem, true, null));
 		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Zeus.Web.Mvc.Html
 {
 	public interface ITemplateRenderer
 	{
-		string RenderTemplate(ContentItem item, IContentItemContainer container, string action);
+		string RenderTemplate(ViewContext viewContext, ContentItem item, IContentItemContainer container, string action);
 	}
 
 	public class TemplateRenderer : ITemplateRenderer
@@ -27,7 +27,7 @@ namespace Zeus.Web.Mvc.Html
 			_engine = engine;
 		}
 
-		public string RenderTemplate(ContentItem item, IContentItemContainer container, string action)
+		public string RenderTemplate(ViewContext viewContext, ContentItem item, IContentItemContainer container, string action)
 		{
 			var routeData = new RouteData();
 
@@ -48,6 +48,7 @@ namespace Zeus.Web.Mvc.Html
 				{
 					HttpContext = new HttpContextWrapper(scope.CurrentContext),
 					ViewData = viewDataContainer.ViewData,
+					TempData = viewContext.TempData
 				},
 				viewDataContainer);
 
