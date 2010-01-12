@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Zeus.AddIns.Forums.ContentTypes;
@@ -7,7 +6,6 @@ using Zeus.AddIns.Forums.Mvc.ViewModels;
 using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.BaseLibrary.Web;
 using Zeus.Web;
-using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
@@ -34,7 +32,8 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		public ActionResult Index(int? p, int? post)
 		{
 			var allPosts = CurrentItem.GetChildren<Post>().ToList();
-			var viewModel = new TopicViewModel(CurrentItem, allPosts.AsPagination(p ?? 1, CurrentMessageBoard.PostsPerPage));
+			var viewModel = new TopicViewModel(CurrentItem, allPosts.AsPagination(p ?? 1, CurrentMessageBoard.PostsPerPage),
+				new Url(CurrentItem.Forum.Url).AppendSegment("newTopic"));
 
 			// Increment view count.
 			++CurrentItem.ViewCount;
@@ -55,7 +54,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult Reply()
 		{
-			PostingViewModel viewModel = GetPostViewModel();
+			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
 			viewModel.Subject = CurrentItem.Title;
 			return View("Posting", viewModel);
 		}
@@ -65,18 +64,19 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		{
 			Post currentPost = Context.Persister.Get<Post>(p);
 
-			PostingViewModel viewModel = GetPostViewModel();
+			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
 			viewModel.Subject = CurrentItem.Title;
 			viewModel.Message = "[quote]" + currentPost.Message + "[/quote]";
 			return View("Posting", viewModel);
 		}
 
-		private PostingViewModel GetPostViewModel()
+		private ReplyTopicPostingViewModel GetPostViewModel()
 		{
-			PostingViewModel viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("reply"));
-			viewModel.CurrentTopicPosts = CurrentItem.GetChildren<Post>();
+			ReplyTopicPostingViewModel viewModel = new ReplyTopicPostingViewModel(CurrentItem,
+				new Url(CurrentItem.Url).AppendSegment("reply"),
+				new Url(CurrentItem.Forum.Url).AppendSegment("newTopic"),
+				CurrentItem.GetChildren<Post>());
 			viewModel.Subject = CurrentItem.Title;
-			viewModel.TopicSummaryVisible = true;
 			return viewModel;
 		}
 
@@ -95,7 +95,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		{
 			Post currentPost = Context.Persister.Get<Post>(p);
 
-			PostingViewModel viewModel = GetPostViewModel();
+			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
 			viewModel.PostingFormUrl = new Url(CurrentItem.Url).AppendSegment("edit");
 			viewModel.Subject = currentPost.Title;
 			viewModel.Message = currentPost.Message;

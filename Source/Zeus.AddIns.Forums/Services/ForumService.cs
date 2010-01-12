@@ -5,16 +5,19 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Zeus.AddIns.Forums.Configuration;
 using Zeus.AddIns.Forums.ContentTypes;
+using Zeus.ContentTypes;
 using Zeus.Security;
 
 namespace Zeus.AddIns.Forums.Services
 {
 	public class ForumService : IForumService
 	{
+		private readonly IContentTypeManager _contentTypeManager;
 		private readonly Dictionary<string, string> _badWordReplacements;
 
-		public ForumService()
+		public ForumService(IContentTypeManager contentTypeManager)
 		{
+			_contentTypeManager = contentTypeManager;
 			_badWordReplacements = new Dictionary<string, string>();
 
 			ForumSection forumConfig = ConfigurationManager.GetSection("zeus.addIns/forums") as ForumSection;
@@ -34,8 +37,9 @@ namespace Zeus.AddIns.Forums.Services
 
 			if (member == null && user != null && create)
 			{
-				member = new Member { User = user };
-				member.AddTo(messageBoard.GetChildren<MemberContainer>().First());
+				member = _contentTypeManager.CreateInstance<Member>(messageBoard.Members);
+				member.User = user;
+				member.AddTo(messageBoard.Members);
 				Context.Persister.Save(member);
 			}
 			return member;
@@ -77,7 +81,10 @@ namespace Zeus.AddIns.Forums.Services
 		public Post CreateReply(Topic topic, Member member, string subject, string message)
 		{
 			// Create post.
-			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
+			Post post = _contentTypeManager.CreateInstance<Post>(topic);
+			post.Author = member;
+			post.Title = CleanBadWords(subject);
+			post.Message = CleanBadWords(message);
 			SetCommonPostProperties(topic, post);
 			post.AddTo(topic);
 
@@ -90,11 +97,15 @@ namespace Zeus.AddIns.Forums.Services
 		public Topic CreateTopic(Forum forum, Member member, string subject, string message)
 		{
 			// Create topic first.
-			Topic topic = new Topic { Title = CleanBadWords(subject), Author = member };
+			Topic topic = _contentTypeManager.CreateInstance<Topic>(forum);
+			topic.Title = CleanBadWords(subject);
+			topic.Author = member;
 			topic.AddTo(forum);
 
 			// Then create post.
-			Post post = new Post { Author = member, Title = CleanBadWords(subject), Message = CleanBadWords(message) };
+			Post post = _contentTypeManager.CreateInstance<Post>(topic);
+			post.Author = member;
+			post.Message = CleanBadWords(message);
 			SetCommonPostProperties(topic, post);
 			post.AddTo(topic);
 
@@ -106,7 +117,9 @@ namespace Zeus.AddIns.Forums.Services
 
 		private static void SetCommonPostProperties(Topic topic, Post post)
 		{
-			post.Number = topic.GetChildren<Post>().Max(fi => fi.Number) + 1;
+			var currentPosts = topic.GetChildren<Post>();
+			int currentNumber = currentPosts.Any() ? currentPosts.Max(fi => fi.Number) : 0;
+			post.Number = currentNumber + 1;
 			post.Title = "Post #" + post.Number;
 		}
 

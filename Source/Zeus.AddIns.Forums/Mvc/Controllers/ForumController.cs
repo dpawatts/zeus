@@ -56,7 +56,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult NewTopic()
 		{
-			var viewModel = new PostingViewModel(CurrentMessageBoard, new Url(CurrentItem.Url).AppendSegment("newTopic"))
+			var viewModel = new NewTopicPostingViewModel(CurrentItem, new Url(CurrentItem.Url).AppendSegment("newTopic"))
 			{
 				CanEditSubject = true
 			};
@@ -67,7 +67,7 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		public ActionResult NewTopic(PostFormViewModel postingForm)
 		{
 			if (!ModelState.IsValid)
-				return View();
+				return NewTopic();
 
 			Topic topic = ForumService.CreateTopic(CurrentItem, CurrentMember, postingForm.Subject, postingForm.Message);
 			return Redirect(topic.Url);

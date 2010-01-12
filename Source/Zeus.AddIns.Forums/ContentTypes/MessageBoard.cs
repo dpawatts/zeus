@@ -1,5 +1,7 @@
+using System;
 using Coolite.Ext.Web;
 using Zeus.BaseLibrary.Web;
+using Zeus.ContentTypes;
 using Zeus.Globalization;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -12,8 +14,15 @@ namespace Zeus.AddIns.Forums.ContentTypes
 	[Template("~/UI/Views/Forums/MessageBoard.aspx")]
 	[Template("search", "~/UI/Views/Forums/SearchResults.aspx")]
 	[Translatable(false)]
-	public class MessageBoard : BasePage
+	public class MessageBoard : BasePage, ISelfPopulator
 	{
+		private const string MemberContainerName = "members";
+
+		public MemberContainer Members
+		{
+			get { return GetChild(MemberContainerName) as MemberContainer; }
+		}
+
 		public override string IconUrl
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.Comments); }
@@ -43,6 +52,30 @@ namespace Zeus.AddIns.Forums.ContentTypes
 		{
 			get { return GetDetail("SearchResultsPerPage", 20); }
 			set { SetDetail("SearchResultsPerPage", value); }
+		}
+
+		[ContentProperty("Forgotten Password Page", 100)]
+		public virtual PageContentItem ForgottenPasswordPage
+		{
+			get { return GetDetail<PageContentItem>("ForgottenPasswordPage", null); }
+			set { SetDetail("ForgottenPasswordPage", value); }
+		}
+
+		[ContentProperty("Registration Page", 110)]
+		public virtual PageContentItem RegistrationPage
+		{
+			get { return GetDetail<PageContentItem>("RegistrationPage", null); }
+			set { SetDetail("RegistrationPage", value); }
+		}
+
+		void ISelfPopulator.Populate()
+		{
+			MemberContainer members = new MemberContainer
+			{
+				Name = MemberContainerName,
+				Title = "Members"
+			};
+			members.AddTo(this);
 		}
 	}
 }

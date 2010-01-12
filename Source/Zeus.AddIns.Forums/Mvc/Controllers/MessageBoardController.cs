@@ -7,6 +7,7 @@ using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.Web;
 using Zeus.Web;
+using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {

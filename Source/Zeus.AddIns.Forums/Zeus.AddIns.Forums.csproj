@@ -109,10 +109,12 @@
     <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MemberViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\NewTopicPostingViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostingViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardSearchResultsViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\ReplyTopicPostingViewModel.cs" />
     <Compile Include="Mvc\ViewModels\TopicViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ForumService.cs" />

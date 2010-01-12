@@ -13,6 +13,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 {
 	[ContentType]
 	[RestrictParents(typeof(MemberContainer))]
+	[AllowedChildren(typeof(Image))]
 	[Template("~/UI/Views/Forums/Member.aspx")]
 	[Template("edit-profile", "~/UI/Views/Forums/EditProfile.aspx")]
 	public class Member : BasePage

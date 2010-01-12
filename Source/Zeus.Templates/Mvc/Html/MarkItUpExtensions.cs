@@ -7,10 +7,11 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public static class MarkItUpExtensions
 	{
-		public static string MarkItUpResources(this HtmlHelper helper)
+		public static string MarkItUpResources(this HtmlHelper helper, bool ensureJQuery)
 		{
 			StringBuilder result = new StringBuilder();
-			result.Append(helper.RegisterJQuery());
+			if (ensureJQuery)
+				result.Append(helper.RegisterJQuery());
 			result.Append(helper.Javascript("/assets/templates/typewatch/jquery.typewatch.js"));
 			result.Append(helper.Javascript("/assets/templates/markitup/jquery.markitup.js"));
 			result.Append(helper.Javascript("/assets/templates/markitup/sets/bbcode/set.js"));
