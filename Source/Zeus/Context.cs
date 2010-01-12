@@ -56,6 +56,11 @@ namespace Zeus
 			get { return Current.SecurityManager; }
 		}
 
+		public static Web.Security.IWebSecurityService WebSecurity
+		{
+			get { return Current.WebSecurity; }
+		}
+
 		public static IUrlParser UrlParser
 		{
 			get { return Current.UrlParser; }

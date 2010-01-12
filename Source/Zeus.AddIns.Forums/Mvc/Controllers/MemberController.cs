@@ -5,12 +5,18 @@ using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.FileSystem.Images;
 using Zeus.Web;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(ContentTypes.Member), AreaName = ForumsWebPackage.AREA_NAME)]
-	public class MemberController : BaseForumController<ContentTypes.Member>
+	[Controls(typeof(Member), AreaName = ForumsWebPackage.AREA_NAME)]
+	public class MemberController : BaseForumController<Member>
 	{
+		public MemberController(IWebSecurityService webSecurityService)
+			: base(webSecurityService)
+		{
+		}
+
 		protected override MessageBoard CurrentMessageBoard
 		{
 			get { return CurrentItem.Parent.Parent as MessageBoard; }

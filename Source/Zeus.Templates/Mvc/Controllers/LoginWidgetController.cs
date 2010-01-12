@@ -10,6 +10,13 @@ namespace Zeus.Templates.Mvc.Controllers
 	[Controls(typeof(LoginWidget), AreaName = TemplatesWebPackage.AREA_NAME)]
 	public class LoginWidgetController : ZeusController<LoginWidget>
 	{
+		private readonly IWebSecurityService _webSecurityService;
+
+		public LoginWidgetController(IWebSecurityService webSecurityService)
+		{
+			_webSecurityService = webSecurityService;
+		}
+
 		[ModelStateToTempData]
 		public override ActionResult Index()
 		{
@@ -20,20 +27,20 @@ namespace Zeus.Templates.Mvc.Controllers
 		[ModelStateToTempData]
 		public ActionResult Login(LoginWidgetFormViewModel loginForm)
 		{
-			if (!ModelState.IsValid || !Engine.Resolve<ICredentialService>().ValidateUser(loginForm.Username, loginForm.Password))
+			if (!ModelState.IsValid || !_webSecurityService.ValidateUser(loginForm.Username, loginForm.Password))
 			{
 				TempData["Login.Failed"] = "Invalid username or password";
 				return Redirect(CurrentItem.Parent.Url + "#loginBox");
 			}
 
-			Engine.Resolve<IAuthenticationContextService>().GetCurrentService().SetAuthCookie(loginForm.Username, false);
+			_webSecurityService.SetAuthCookie(loginForm.Username, false);
 			return Redirect(CurrentItem.Parent.Url);
 		}
 
 		[HttpGet]
 		public ActionResult Logout()
 		{
-			Engine.Resolve<IAuthenticationContextService>().GetCurrentService().SignOut();
+			_webSecurityService.SignOut();
 			return Redirect(CurrentItem.Parent.Url);
 		}
 	}

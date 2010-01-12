@@ -268,6 +268,7 @@
     <Compile Include="SystemNode.cs" />
     <Compile Include="Web\PageContentItem.cs" />
     <Compile Include="Web\Hosting\ResourceSettings.cs" />
+    <Compile Include="Web\Security\IWebSecurityService.cs" />
     <Compile Include="Web\Security\PasswordResetRequestValidity.cs" />
     <Compile Include="Web\Security\PasswordResetRequest.cs" />
     <Compile Include="Web\Security\PasswordResetRequestResult.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Web\Security\WebIdentity.cs" />
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
+    <Compile Include="Web\Security\WebSecurityService.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />

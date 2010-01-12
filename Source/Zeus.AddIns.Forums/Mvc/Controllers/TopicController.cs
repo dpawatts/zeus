@@ -6,12 +6,18 @@ using Zeus.AddIns.Forums.Mvc.ViewModels;
 using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.BaseLibrary.Web;
 using Zeus.Web;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
 	[Controls(typeof(Topic), AreaName = ForumsWebPackage.AREA_NAME)]
 	public class TopicController : BaseForumController<Topic>
 	{
+		public TopicController(IWebSecurityService webSecurityService)
+			: base(webSecurityService)
+		{
+		}
+
 		protected override MessageBoard CurrentMessageBoard
 		{
 			get { return CurrentItem.Forum.MessageBoard; }

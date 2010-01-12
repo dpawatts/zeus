@@ -58,6 +58,11 @@ namespace Zeus.Engine
 			get { return Resolve<ISecurityManager>(); }
 		}
 
+		public IWebSecurityService WebSecurity
+		{
+			get { return Resolve<IWebSecurityService>(); }
+		}
+
 		public IHost Host
 		{
 			get { return Resolve<IHost>(); }
