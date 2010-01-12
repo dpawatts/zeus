@@ -33,6 +33,13 @@ namespace Zeus.AddIns.Forums.ContentTypes
 			get { return new Url(Url).AppendSegment("post"); }
 		}
 
+		[ContentProperty("Allow Anonymous Posts", 39, EditorContainerName = "Content")]
+		public virtual bool AllowAnonymousPosts
+		{
+			get { return GetDetail("AllowAnonymousPosts", false); }
+			set { SetDetail("AllowAnonymousPosts", value); }
+		}
+
 		[ContentProperty("Topics Per Page", 40, EditorContainerName = "Content")]
 		public virtual int TopicsPerPage
 		{

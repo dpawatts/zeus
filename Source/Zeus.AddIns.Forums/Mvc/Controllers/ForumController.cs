@@ -56,6 +56,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult NewTopic()
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingNewTopicNotLoggedInViewModel(CurrentItem));
+
 			var viewModel = new NewTopicPostingViewModel(CurrentItem, new Url(CurrentItem.Url).AppendSegment("newTopic"))
 			{
 				CanEditSubject = true
@@ -66,6 +69,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpPost]
 		public ActionResult NewTopic(PostFormViewModel postingForm)
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingNewTopicNotLoggedInViewModel(CurrentItem));
+
 			if (!ModelState.IsValid)
 				return NewTopic();
 

@@ -107,9 +107,12 @@
     <Compile Include="Mvc\Controllers\TopicController.cs" />
     <Compile Include="Mvc\ForumsWebPackage.cs" />
     <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostingNewTopicNotLoggedInViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostingNotLoggedInViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MemberViewModel.cs" />
     <Compile Include="Mvc\ViewModels\NewTopicPostingViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\PostingReplyTopicNotLoggedInViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostingViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardSearchResultsViewModel.cs" />
     <Compile Include="Mvc\ViewModels\MessageBoardViewModel.cs" />

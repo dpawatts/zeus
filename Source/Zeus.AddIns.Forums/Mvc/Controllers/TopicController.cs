@@ -54,6 +54,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult Reply()
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingReplyTopicNotLoggedInViewModel(CurrentItem));
+
 			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
 			viewModel.Subject = CurrentItem.Title;
 			return View("Posting", viewModel);
@@ -62,6 +65,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult Quote(int p)
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingReplyTopicNotLoggedInViewModel(CurrentItem));
+
 			Post currentPost = Context.Persister.Get<Post>(p);
 
 			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
@@ -83,6 +89,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpPost]
 		public ActionResult Reply(PostFormViewModel postingForm)
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingReplyTopicNotLoggedInViewModel(CurrentItem));
+
 			if (!ModelState.IsValid)
 				return View();
 
@@ -93,6 +102,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpGet]
 		public ActionResult Edit(int p)
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingReplyTopicNotLoggedInViewModel(CurrentItem));
+
 			Post currentPost = Context.Persister.Get<Post>(p);
 
 			ReplyTopicPostingViewModel viewModel = GetPostViewModel();
@@ -105,6 +117,9 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		[HttpPost]
 		public ActionResult Edit(int p, PostFormViewModel postingForm)
 		{
+			if (!CurrentMessageBoard.AllowAnonymousPosts && !User.Identity.IsAuthenticated)
+				return View("PostingNotLoggedIn", new PostingReplyTopicNotLoggedInViewModel(CurrentItem));
+
 			if (!ModelState.IsValid)
 				return View();
 
