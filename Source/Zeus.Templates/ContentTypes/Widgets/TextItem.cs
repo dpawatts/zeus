@@ -1,18 +1,13 @@
 using Zeus.ContentProperties;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes.Widgets
 {
 	[ContentType("Text Item")]
 	[AllowedZones(AllowedZones.AllNamed)]
-	public class TextItem : BaseContentItem
+	public class TextItem : WidgetContentItem
 	{
-		public override string Title
-		{
-			get { return base.Title; }
-			set { base.Title = value; }
-		}
-
 		[XhtmlStringContentProperty("Text", 100)]
 		public virtual string Text
 		{
