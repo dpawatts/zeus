@@ -39,10 +39,10 @@ namespace Zeus.Web.UI.WebControls
 		/// file is the one used within the editor (the editable area). This option can also be a comma 
 		/// separated list of URLs. 
 		/// </summary>
-		public string OverrideCssUrl
+		public string CustomCssUrl
 		{
-			get { return (string) (ViewState["OverrideCssUrl"] ?? "/Assets/Css/Editor.css"); }
-			set { ViewState["OverrideCssUrl"] = value; }
+			get { return (string) (ViewState["CustomCssUrl"] ?? "/Assets/Css/Editor.css"); }
+			set { ViewState["CustomCssUrl"] = value; }
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace Zeus.Web.UI.WebControls
 				Page.Server.UrlEncode(UploadFolder),
 				Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
 					Zeus.Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.FileManager.Default.aspx"),
-				!string.IsNullOrEmpty(OverrideCssUrl) ? ", content_css: '" + OverrideCssUrl + "'" : null,
+				!string.IsNullOrEmpty(CustomCssUrl) ? ", content_css: '" + CustomCssUrl + "'" : null,
 				!string.IsNullOrEmpty(CustomStyleList) ? ", theme_advanced_styles: '" + CustomStyleList + "'" : null);
 
 			// If this control is within an ExtJS Tab that is initially hidden, we need to register the script in the TabChanged
