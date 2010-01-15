@@ -18,6 +18,8 @@ namespace Zeus.Design.Editors
 
 		public bool DomainAbsoluteUrls { get; set; }
 		public string RootHtmlElementID { get; set; }
+		public string OverrideCssUrl { get; set; }
+		public string CustomStyleList { get; set; }
 
 		protected override void ModifyEditor(TextBox tb)
 		{
@@ -26,7 +28,13 @@ namespace Zeus.Design.Editors
 
 		protected override TextBox CreateEditor()
 		{
-			return new HtmlTextBox { DomainAbsoluteUrls = DomainAbsoluteUrls, RootHtmlElementID = RootHtmlElementID };
+			return new HtmlTextBox
+			{
+				DomainAbsoluteUrls = DomainAbsoluteUrls,
+				RootHtmlElementID = RootHtmlElementID,
+				OverrideCssUrl = OverrideCssUrl,
+				CustomStyleList = CustomStyleList
+			};
 		}
 	}
 }

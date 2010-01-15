@@ -129,12 +129,14 @@
 );
 
 var freeTextArea_settings = {
-	mode: 'exact',
+	mode: 'none',
 	theme: 'advanced',
-	plugins: 'style,layer,table,advimage,advlink,iespell,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,inlinepopups,dynamiccontent',
+	plugins: 'style,layer,table,advimage,advlink,iespell,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,inlinepopups',
 	theme_advanced_buttons1_add_before: '',
-	theme_advanced_buttons1_add: 'styleprops,sup,|,print,fullscreen,|,search,replace,iespell,|,forecolorpicker,|,dynamiccontent',
+	theme_advanced_buttons1: 'bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect',
+	theme_advanced_buttons1_add: 'styleprops,sup,|,print,fullscreen,|,search,replace,iespell,|,forecolorpicker',
 	theme_advanced_buttons2_add_before: 'cut,copy,paste,pastetext,pasteword,|',
+	//theme_advanced_buttons2: '',
 	theme_advanced_buttons2_add: '|,table,media,insertlayer,inlinepopups',
 	theme_advanced_buttons3: '',
 	theme_advanced_buttons3_add_before: '',
@@ -152,8 +154,8 @@ var freeTextArea_settings = {
 	noneditable_noneditable_class: 'nonEditable',
 	custom_elements: '~dynamiccontent', // Notice the ~ prefix to force a span element for the element
 	width: "500px",
-	height: "400px",
-	setup: function(ed)
+	height: "400px"
+	,setup: function(ed)
 	{
 		ed.onPostRender.add(function(ed, cm)
 		{
@@ -173,12 +175,13 @@ function fileBrowserCallBack(fieldName, url, destinationType, win)
 	top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
 }
 
-function htmlEditor_init(fileBrowser, overrides)
+function htmlEditor_init(fileBrowser, overrides, textBoxID)
 {
 	fileBrowserUrl = fileBrowser;
 	jQuery.extend(freeTextArea_settings, overrides);
 	Ext.onReady(function()
 	{
 		tinyMCE.init(freeTextArea_settings);
+		tinyMCE.execCommand('mceAddControl', true, textBoxID);
 	});
 }
