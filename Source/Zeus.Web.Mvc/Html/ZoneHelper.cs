@@ -6,14 +6,14 @@ namespace Zeus.Web.Mvc.Html
 {
 	public class ZoneHelper : BaseWidgetHelper
 	{
-		public ZoneHelper(ViewContext viewContext, IContentItemContainer container, string actionName, string zoneName)
-			: base(viewContext, container, actionName)
+		public ZoneHelper(HtmlHelper htmlHelper, IContentItemContainer container, string actionName, string zoneName)
+			: base(htmlHelper, container, actionName)
 		{
 			ZoneName = zoneName;
 		}
 
-		public ZoneHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName, string zoneName)
-			: base(viewContext, container, item, actionName)
+		public ZoneHelper(HtmlHelper htmlHelper, IContentItemContainer container, ContentItem item, string actionName, string zoneName)
+			: base(htmlHelper, container, item, actionName)
 		{
 			ZoneName = zoneName;
 		}

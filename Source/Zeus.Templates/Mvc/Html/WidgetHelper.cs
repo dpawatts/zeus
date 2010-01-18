@@ -8,14 +8,14 @@ namespace Zeus.Templates.Mvc.Html
 {
 	public class WidgetHelper : BaseWidgetHelper
 	{
-		public WidgetHelper(ViewContext viewContext, IContentItemContainer container, string actionName, string[] zoneNames)
-			: base(viewContext, container, actionName)
+		public WidgetHelper(HtmlHelper htmlHelper, IContentItemContainer container, string actionName, string[] zoneNames)
+			: base(htmlHelper, container, actionName)
 		{
 			ZoneNames = zoneNames;
 		}
 
-		public WidgetHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName, string[] zoneNames)
-			: base(viewContext, container, item, actionName)
+		public WidgetHelper(HtmlHelper htmlHelper, IContentItemContainer container, ContentItem item, string actionName, string[] zoneNames)
+			: base(htmlHelper, container, item, actionName)
 		{
 			ZoneNames = zoneNames;
 		}

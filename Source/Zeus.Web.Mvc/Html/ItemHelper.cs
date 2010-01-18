@@ -7,21 +7,21 @@ namespace Zeus.Web.Mvc.Html
 {
 	public abstract class ItemHelper
 	{
-		public ViewContext ViewContext { get; set; }
+		public HtmlHelper HtmlHelper { get; set; }
 		private readonly IContentItemContainer _itemContainer;
 		private PartsAdapter _partsAdapter;
 
-		protected ItemHelper(ViewContext viewContext, IContentItemContainer itemContainer)
+		protected ItemHelper(HtmlHelper htmlHelper, IContentItemContainer itemContainer)
 		{
-			ViewContext = viewContext;
+			HtmlHelper = htmlHelper;
 			_itemContainer = itemContainer;
 			CurrentItem = itemContainer.CurrentItem;
 		}
 
-		protected ItemHelper(ViewContext viewContext, IContentItemContainer itemContainer, ContentItem item)
+		protected ItemHelper(HtmlHelper htmlHelper, IContentItemContainer itemContainer, ContentItem item)
 		{
 			_itemContainer = itemContainer;
-			ViewContext = viewContext;
+			HtmlHelper = htmlHelper;
 			CurrentItem = item;
 		}
 

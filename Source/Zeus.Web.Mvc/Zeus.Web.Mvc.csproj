@@ -51,10 +51,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\MVC\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
@@ -109,6 +105,7 @@
     <Compile Include="Html\DisplayExtensions.cs" />
     <Compile Include="Html\DisplayHelper.cs" />
     <Compile Include="Html\ItemHelper.cs" />
+    <Compile Include="Html\ITemplateRenderer.cs" />
     <Compile Include="Html\MembershipExtensions.cs" />
     <Compile Include="Html\StringExtensions.cs" />
     <Compile Include="Html\TemplateRenderer.cs" />

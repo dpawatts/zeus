@@ -16,7 +16,7 @@ namespace Zeus.Templates.Mvc.Html
 		public static WidgetHelper WidgetHeaders<TItem>(this HtmlHelper html, IContentItemContainer<TItem> container, params string[] zoneNames)
 			where TItem : ContentItem
 		{
-			return new WidgetHelper(html.ViewContext, container, "header", zoneNames);
+			return new WidgetHelper(html, container, "header", zoneNames);
 		}
 	}
 }

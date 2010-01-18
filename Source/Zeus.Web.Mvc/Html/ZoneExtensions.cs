@@ -28,7 +28,7 @@ namespace Zeus.Web.Mvc.Html
 		public static ZoneHelper Zone<TItem>(this HtmlHelper html, IContentItemContainer<TItem> container, string zoneName, ContentItem item)
 			where TItem : ContentItem
 		{
-			return new ZoneHelper(html.ViewContext, container, item, "Index", zoneName);
+			return new ZoneHelper(html, container, item, "Index", zoneName);
 		}
 	}
 }

@@ -27,6 +27,8 @@
 		}
 	</script>
 	
+	${Html.RegisterJQuery()}
+	${Html.WidgetHeaders(Model, "RecursiveSidebar")}
 	<use content="head" />
 </head>
 <body>
@@ -48,6 +50,8 @@
 		</div>
 
 		<div id="side">
+			${Html.Zone(Model, "RecursiveSidebar")}
+			
 			<h2>Search</h2>
 			<form method="get" id="searchform" action="#">
 				<div>

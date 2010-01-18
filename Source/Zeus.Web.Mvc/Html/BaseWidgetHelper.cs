@@ -10,14 +10,14 @@ namespace Zeus.Web.Mvc.Html
 	{
 		private readonly ITemplateRenderer _templateRenderer = Context.Current.Resolve<ITemplateRenderer>();
 
-		protected BaseWidgetHelper(ViewContext viewContext, IContentItemContainer container, string actionName)
-			: base(viewContext, container)
+		protected BaseWidgetHelper(HtmlHelper htmlHelper, IContentItemContainer container, string actionName)
+			: base(htmlHelper, container)
 		{
 			ActionName = actionName;
 		}
 
-		protected BaseWidgetHelper(ViewContext viewContext, IContentItemContainer container, ContentItem item, string actionName)
-			: base(viewContext, container, item)
+		protected BaseWidgetHelper(HtmlHelper htmlHelper, IContentItemContainer container, ContentItem item, string actionName)
+			: base(htmlHelper, container, item)
 		{
 			ActionName = actionName;
 		}
@@ -41,7 +41,7 @@ namespace Zeus.Web.Mvc.Html
 			foreach (var child in GetItems())
 			{
 				ContentItem model = child;
-				string partial = _templateRenderer.RenderTemplate(ViewContext, model, Container, ActionName);
+				string partial = _templateRenderer.RenderTemplate(HtmlHelper, model, Container, ActionName);
 
 				if (TagBuilder == null)
 				{
