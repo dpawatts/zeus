@@ -60,6 +60,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.BaseLibrary", "Zeus.Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.BaseLibrary.Tests", "Zeus.BaseLibrary.Tests\Zeus.BaseLibrary.Tests.csproj", "{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Templates.Tests", "Zeus.Templates.Tests\Zeus.Templates.Tests.csproj", "{34EDBA77-B394-419F-9A68-05EA97DA9F98}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Zeus.vsmdi
@@ -289,6 +291,15 @@ Global
 		{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}.Release|x86.ActiveCfg = Release|x86
 		{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}.Release|x86.Build.0 = Release|x86
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Documentation|x86.ActiveCfg = Debug|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -313,5 +324,6 @@ Global
 		{2F01CC7A-40AE-4475-9948-E2B2EA405C13} = {4FFD8740-F10F-453F-97FD-DAE6C34FF0CD}
 		{A7A33508-F0F0-46FC-882D-150BB333BC0C} = {203A0F4D-1D96-4F4C-995E-6F9505DD1D24}
 		{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
+		{34EDBA77-B394-419F-9A68-05EA97DA9F98} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
 	EndGlobalSection
 EndGlobal
