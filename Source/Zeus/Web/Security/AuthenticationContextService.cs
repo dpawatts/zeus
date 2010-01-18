@@ -46,7 +46,8 @@ namespace Zeus.Web.Security
 			AuthenticationLocation location = (AuthenticationLocation) _rootLocation.GetChild(_webContext.Url.Path);
 			string loginUrl = location.LoginUrl;
 			// If site is currently in Install mode, don't do anything.
-			if (_adminConfig.Installer.Mode == InstallationMode.Normal)
+			if (_adminConfig.Installer.Mode == InstallationMode.Normal
+				&& !_webContext.Url.Path.ToLower().StartsWith("/" + _adminConfig.Path.ToLower()))
 			{
 				ContentItem currentPage = Context.CurrentPage;
 				while (currentPage != null)
