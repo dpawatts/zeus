@@ -8,7 +8,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(RecentPosts), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(RecentPosts), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class RecentPostsController : WidgetController<RecentPosts>
 	{
 		private readonly IBlogService _blogService;

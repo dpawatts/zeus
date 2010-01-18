@@ -10,7 +10,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(SearchResultsPage), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(SearchResultsPage), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	public class SearchResultsPageController : ZeusController<SearchResultsPage>
 	{
 		[ActionName("NotUsed")]

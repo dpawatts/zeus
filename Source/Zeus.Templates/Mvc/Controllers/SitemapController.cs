@@ -5,7 +5,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(Sitemap), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(Sitemap), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class SitemapController : ZeusController<Sitemap>
 	{
 		public override ActionResult Index()

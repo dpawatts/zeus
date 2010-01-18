@@ -5,7 +5,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(FeedLink), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(FeedLink), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class FeedLinkController : WidgetController<FeedLink>
 	{
 		public override ActionResult Index()

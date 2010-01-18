@@ -9,7 +9,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(ArchiveCalendarWidget), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(ArchiveCalendarWidget), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class ArchiveCalendarWidgetController : WidgetController<ArchiveCalendarWidget>
 	{
 		public override ActionResult Index()

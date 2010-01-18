@@ -9,7 +9,7 @@ using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(Member), AreaName = ForumsWebPackage.AREA_NAME)]
+	[Controls(typeof(Member), AreaName = ForumsAreaRegistration.AREA_NAME)]
 	public class MemberController : BaseForumController<Member>
 	{
 		public MemberController(IWebSecurityService webSecurityService)

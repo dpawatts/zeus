@@ -11,7 +11,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(Category), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(Category), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class CategoryController : ZeusController<Category>
 	{
 		private readonly IBlogService _blogService;

@@ -8,7 +8,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(Post), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(Post), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class PostController : ZeusController<Post>
 	{
 		private readonly ICommentService _commentService;

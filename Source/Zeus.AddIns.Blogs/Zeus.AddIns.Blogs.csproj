@@ -76,6 +76,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -133,7 +141,7 @@
     <Compile Include="BlogsModule.cs" />
     <Compile Include="ContentTypes\Category.cs" />
     <Compile Include="ContentTypes\CategoryContainer.cs" />
-    <Compile Include="Mvc\BlogsWebPackage.cs" />
+    <Compile Include="Mvc\BlogsAreaRegistration.cs" />
     <Compile Include="Mvc\Controllers\ArchiveLinksController.cs" />
     <Compile Include="Mvc\Controllers\BlogController.cs" />
     <Compile Include="Mvc\Controllers\BlogMonthController.cs" />

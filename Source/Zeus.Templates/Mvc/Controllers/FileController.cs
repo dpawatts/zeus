@@ -4,7 +4,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(File), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(File), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class FileController : ZeusController<File>
 	{
 		public override ActionResult Index()

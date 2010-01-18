@@ -60,6 +60,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -105,7 +113,7 @@
     <Compile Include="Mvc\Controllers\MemberController.cs" />
     <Compile Include="Mvc\Controllers\MessageBoardController.cs" />
     <Compile Include="Mvc\Controllers\TopicController.cs" />
-    <Compile Include="Mvc\ForumsWebPackage.cs" />
+    <Compile Include="Mvc\ForumsAreaRegistration.cs" />
     <Compile Include="Mvc\ViewModels\BaseForumViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostingNewTopicNotLoggedInViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PostingNotLoggedInViewModel.cs" />

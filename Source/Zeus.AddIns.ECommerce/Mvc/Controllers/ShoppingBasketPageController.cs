@@ -12,7 +12,7 @@ using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(ShoppingBasketPage), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(ShoppingBasketPage), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	public class ShoppingBasketPageController : ZeusController<ShoppingBasketPage>
 	{
 		private readonly IShoppingBasketService _shoppingBasketService;

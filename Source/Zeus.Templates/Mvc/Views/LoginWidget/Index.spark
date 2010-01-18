@@ -1,15 +1,20 @@
 ﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.LoginWidgetViewModel"/>
-<a if="Model.CurrentItem.RegistrationPage != null" href="${Model.CurrentItem.RegistrationPage.Url}" class="blockButton"><span>register</span></a>
-<a href="#" class="blockButton" id="bottomSignIn"><span>Sign in</span></a>
-<div id="loginBox" class="open?{TempData.ContainsKey('Login.Failed')}">
-	<h4>Sign in to <span>Catch the Lingo</span></h4>
-	<a href="#" id="closeBoxLogin">close</a>
-	<form method="post" action="${Html.Url(Model.CurrentItem).AppendSegment("login")}">
-		${Html.TextBox("LoginForm.Username", "Username")}
-		${Html.Password("LoginForm.Password", "Password")}
-		<p if="TempData.ContainsKey('Login.Failed')" id="wrongLogin">wrong username or password<br />entered, please try again</p>
-		<a if="Model.CurrentItem.ForgottenPasswordPage != null" href="${Model.CurrentItem.ForgottenPasswordPage.Url}" id="loginLost">Lost your details?</a>
-		<input type="image" name="loginSubmit" value="Submit" src="/assets/images/bottomBar/submit.gif" id="loginSubmit" />
-	</form>
-</div>
-<!-- loginBox -->
+<if condition="!Model.LoggedIn">
+	<a if="Model.CurrentItem.RegistrationPage != null" href="${Model.CurrentItem.RegistrationPage.Url}" class="blockButton"><span>register</span></a>
+	<a href="#" class="blockButton" id="bottomSignIn"><span>Sign in</span></a>
+	<div id="loginBox" class="open?{TempData.ContainsKey('Login.Failed')}">
+		<h4>Sign in to <span>Catch the Lingo</span></h4>
+		<a href="#" id="closeBoxLogin">close</a>
+		<form method="post" action="${Html.Url(Model.CurrentItem).AppendSegment("login")}">
+			${Html.TextBox("LoginForm.Username", "Username")}
+			${Html.Password("LoginForm.Password", "Password")}
+			<p if="TempData.ContainsKey('Login.Failed')" id="wrongLogin">${TempData["Login.Failed"]}<br />Please try again</p>
+			<a if="Model.CurrentItem.ForgottenPasswordPage != null" href="${Model.CurrentItem.ForgottenPasswordPage.Url}" id="loginLost">Lost your details?</a>
+			<input type="image" name="loginSubmit" value="Submit" src="/assets/images/bottomBar/submit.gif" id="loginSubmit" />
+		</form>
+	</div>
+	<!-- loginBox -->
+</if>
+<else>
+	<a href="${Html.Url(Model.CurrentItem).AppendSegment("logout")}" class="blockButton"><span>logout</span></a>
+</else>

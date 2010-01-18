@@ -1,35 +1,33 @@
-using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Ninject;
 using Spark.FileSystem;
 using Spark.Web.Mvc;
 using Zeus.Templates.Web.Routing;
-using Zeus.Web.Mvc.Modules;
+using Zeus.Web.Mvc;
 using Zeus.Web.Routing;
 
 namespace Zeus.Templates.Mvc
 {
-	public class TemplatesWebPackage : WebPackageBase
+	public class TemplatesAreaRegistration : StandardAreaRegistration
 	{
 		public const string AREA_NAME = "Templates";
 
-		public override void Register(IKernel container, ICollection<RouteBase> routes, ICollection<IViewEngine> viewEngines)
+		public override string AreaName
 		{
-			RegisterStandardArea(container, routes, viewEngines, AREA_NAME);
+			get { return AREA_NAME; }
+		}
 
-			var assembly = GetType().Assembly;
-
-			routes.Add(new Route("assets/{*resource}",
+		protected override void RegisterArea(AreaRegistrationContext context, Assembly assembly, SparkViewFactory sparkViewFactory)
+		{
+			context.Routes.Add(new Route("assets/default/{*resource}",
 				new RouteValueDictionary(),
 				new RouteValueDictionary(),
 				new EmbeddedContentRouteHandler(assembly, assembly.GetName().Name + ".Mvc.DefaultTemplate.Assets")));
 
-			routes.Add(new Route("services/templates/bbcode", new BBCodeRouteHandler()));
+			context.Routes.Add(new Route("services/templates/bbcode", new BBCodeRouteHandler()));
 
 			var viewFolder = new EmbeddedViewFolder(assembly, assembly.GetName().Name + ".Mvc.DefaultTemplate.Views");
-			var sparkViewFactory = viewEngines.OfType<SparkViewFactory>().First();
 
 			sparkViewFactory.ViewFolder = sparkViewFactory.ViewFolder
 				.Append(viewFolder);

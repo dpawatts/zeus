@@ -5,7 +5,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(Page), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(Page), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class PageController : ZeusController<Page>
 	{
 		public override ActionResult Index()

@@ -8,7 +8,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(Subcategory), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(Subcategory), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	public class SubcategoryController : ZeusController<Subcategory>
 	{
 		[ActionName("NotUsed")]

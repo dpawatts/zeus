@@ -9,7 +9,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(Category), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(Category), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	public class CategoryController : ZeusController<Category>
 	{
 		[NonAction]

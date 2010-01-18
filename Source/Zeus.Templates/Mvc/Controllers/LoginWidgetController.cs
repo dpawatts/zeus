@@ -7,8 +7,8 @@ using Zeus.Web.Security;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(LoginWidget), AreaName = TemplatesWebPackage.AREA_NAME)]
-	public class LoginWidgetController : ZeusController<LoginWidget>
+	[Controls(typeof(LoginWidget), AreaName = TemplatesAreaRegistration.AREA_NAME)]
+	public class LoginWidgetController : WidgetController<LoginWidget>
 	{
 		private readonly IWebSecurityService _webSecurityService;
 

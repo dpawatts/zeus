@@ -8,7 +8,7 @@ using IWebContext = Zeus.Web.IWebContext;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(ForgottenPasswordPage), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(ForgottenPasswordPage), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class ForgottenPasswordPageController : ZeusController<ForgottenPasswordPage>
 	{
 		private readonly ICredentialService _credentialService;

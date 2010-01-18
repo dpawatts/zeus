@@ -5,13 +5,13 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
 
-namespace Zeus.Web.Mvc.Modules
+namespace Zeus.Web.Mvc
 {
-	public class ModularControllerFactory : IControllerFactory
+	public class ControllerFactory : IControllerFactory
 	{
 		private readonly IKernel _kernel;
 
-		public ModularControllerFactory(IKernel kernel)
+		public ControllerFactory(IKernel kernel)
 		{
 			_kernel = kernel;
 		}

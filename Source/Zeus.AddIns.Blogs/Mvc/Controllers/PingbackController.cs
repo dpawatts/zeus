@@ -6,7 +6,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(Pingback), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(Pingback), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class PingbackController : ZeusController<Pingback>
 	{
 		public override ActionResult Index()

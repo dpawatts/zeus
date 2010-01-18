@@ -6,7 +6,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers.News
 {
-	[Controls(typeof(NewsItem), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(NewsItem), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class NewsItemController : ZeusController<NewsItem>
 	{
 		public override ActionResult Index()

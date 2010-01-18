@@ -1,8 +1,11 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Spark.Web.Mvc;
+using Spark.Web.Mvc.Descriptors;
 using Zeus.Configuration;
 using Zeus.Engine;
+using Zeus.Web.Mvc.Descriptors;
 
 namespace Zeus.Web.Mvc
 {
@@ -40,18 +43,29 @@ namespace Zeus.Web.Mvc
 
 		protected override void OnApplicationStart(EventArgs e)
 		{
+			// Create and initialize Zeus engine.
 			ContentEngine engine = Zeus.Context.Initialize(false);
 
+			// Create Spark view engine and register it with MVC.
+			var sparkServiceContainer = SparkEngineStarter.CreateContainer();
+			sparkServiceContainer.AddFilter(new MobileDeviceDescriptorFilter());
+			SparkEngineStarter.RegisterViewEngine(ViewEngines.Engines,
+				sparkServiceContainer);
+
+			// Register areas (blogs, forums, etc). Mostly used for static assets
+			// such as CSS and JS files.
+			AreaRegistration.RegisterAllAreas();
+
+			// Register the primary routes used by Zeus.
 			RegisterRoutes(RouteTable.Routes, engine);
 
-			SparkApplication app = new SparkApplication();
-			app.RegisterViewEngine(ViewEngines.Engines);
-			app.RegisterPackages(engine, RouteTable.Routes, ViewEngines.Engines);
-
+			// Set the controller factory to a custom one which uses the NinjectActionInvoker.
 			ControllerBuilder.Current.SetControllerFactory(engine.Resolve<IControllerFactory>());
 
+			// This must be the last route to be registered.
 			RegisterFallbackRoute(RouteTable.Routes);
 
+			// Use a custom model metadata provider.
 			ModelMetadataProviders.Current = new CustomDataAnnotationsModelMetadataProvider();
 
 			base.OnApplicationStart(e);

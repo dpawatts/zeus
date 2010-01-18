@@ -10,7 +10,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(BlogYear), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(BlogYear), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class BlogYearController : ZeusController<BlogYear>
 	{
 		[NonAction]

@@ -82,6 +82,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\MVC\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -165,6 +168,10 @@
     <Compile Include="Web\InvalidQueryStringException.cs" />
     <Compile Include="Web\IWebContext.cs" />
     <Compile Include="Web\MimeUtility.cs" />
+    <Compile Include="Web\Routing\DebugHttpHandler.cs" />
+    <Compile Include="Web\Routing\DebugRoute.cs" />
+    <Compile Include="Web\Routing\DebugRouteHandler.cs" />
+    <Compile Include="Web\Routing\RouteDebugger.cs" />
     <Compile Include="Web\SecureQueryString.cs" />
     <Compile Include="ExtensionMethods\Web\SessionState\HttpSessionState.cs" />
     <Compile Include="ExtensionMethods\Web\HttpResponse.cs" />

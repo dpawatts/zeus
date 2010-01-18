@@ -51,6 +51,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
@@ -115,6 +119,10 @@
     <ProjectReference Include="..\..\Source\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
       <Name>Zeus.Admin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
+      <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
+      <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.Persistence.NH\Zeus.Persistence.NH.csproj">
       <Project>{E0C2BF09-ECCD-4EC2-B2AE-D376A4A32498}</Project>

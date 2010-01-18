@@ -7,7 +7,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(TagGroup), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(TagGroup), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class TagGroupController : ZeusController<TagGroup>
 	{
 		private readonly ITagService _tagService;

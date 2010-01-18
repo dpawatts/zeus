@@ -8,7 +8,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(CategoryListWidget), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(CategoryListWidget), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class CategoryListWidgetController : WidgetController<CategoryListWidget>
 	{
 		private readonly IBlogService _blogService;

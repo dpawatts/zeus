@@ -4,7 +4,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(RssFeed), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(RssFeed), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class RssFeedController : FeedControllerBase<RssFeed>
 	{
 		public override ActionResult Index()

@@ -7,7 +7,7 @@ using Zeus.Web.Security;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(RegistrationPage), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(RegistrationPage), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class RegistrationPageController : RegistrationPageControllerBase<RegistrationPageFormViewModel>
 	{
 		public RegistrationPageController(TemplatesSection templatesConfig, IWebContext webContext,

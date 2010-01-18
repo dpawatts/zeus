@@ -12,7 +12,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(Form), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(Form), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class FormController : ZeusController<Form>
 	{
 		private readonly IMailSender _mailSender;

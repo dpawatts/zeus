@@ -8,7 +8,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
-	[Controls(typeof(CategoryContainer), AreaName = BlogsWebPackage.AREA_NAME)]
+	[Controls(typeof(CategoryContainer), AreaName = BlogsAreaRegistration.AREA_NAME)]
 	public class CategoryContainerController : ZeusController<CategoryContainer>
 	{
 		public override ActionResult Index()

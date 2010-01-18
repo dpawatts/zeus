@@ -5,7 +5,7 @@ using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	[Controls(typeof(TextItem), AreaName = TemplatesWebPackage.AREA_NAME)]
+	[Controls(typeof(TextItem), AreaName = TemplatesAreaRegistration.AREA_NAME)]
 	public class TextItemController : WidgetController<TextItem>
 	{
 		public override ActionResult Index()

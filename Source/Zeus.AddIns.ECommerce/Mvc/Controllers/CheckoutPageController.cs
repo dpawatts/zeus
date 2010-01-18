@@ -13,7 +13,7 @@ using Zeus.Web.Mvc;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(CheckoutPage), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(CheckoutPage), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	[RequireSsl]
 	public class CheckoutPageController : ZeusController<CheckoutPage>
 	{

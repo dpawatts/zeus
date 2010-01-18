@@ -231,7 +231,7 @@
     <Compile Include="Mvc\Html\WidgetExtensions.cs" />
     <Compile Include="Mvc\Html\WidgetHelper.cs" />
     <Compile Include="Mvc\RssResult.cs" />
-    <Compile Include="Mvc\TemplatesWebPackage.cs" />
+    <Compile Include="Mvc\TemplatesAreaRegistration.cs" />
     <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LatestNewsSummaryViewModel.cs" />

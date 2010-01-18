@@ -133,7 +133,7 @@
     <Compile Include="Mvc\Controllers\ShopController.cs" />
     <Compile Include="Mvc\Controllers\ShoppingBasketPageController.cs" />
     <Compile Include="Mvc\Controllers\SubcategoryController.cs" />
-    <Compile Include="Mvc\ECommerceWebPackage.cs" />
+    <Compile Include="Mvc\ECommerceAreaRegistration.cs" />
     <Compile Include="Mvc\Html\ShoppingBasketExtensions.cs" />
     <Compile Include="Mvc\ViewModels\CategoryNoSubcategoriesViewModel.cs" />
     <Compile Include="Mvc\ViewModels\CategoryViewModel.cs" />

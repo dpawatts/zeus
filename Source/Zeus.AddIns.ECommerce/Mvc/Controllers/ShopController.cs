@@ -6,7 +6,7 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {
-	[Controls(typeof(Shop), AreaName = ECommerceWebPackage.AREA_NAME)]
+	[Controls(typeof(Shop), AreaName = ECommerceAreaRegistration.AREA_NAME)]
 	public class ShopController : ZeusController<Shop>
 	{
 		public override ActionResult Index()

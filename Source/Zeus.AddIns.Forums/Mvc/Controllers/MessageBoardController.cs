@@ -11,7 +11,7 @@ using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[Controls(typeof(MessageBoard), AreaName = ForumsWebPackage.AREA_NAME)]
+	[Controls(typeof(MessageBoard), AreaName = ForumsAreaRegistration.AREA_NAME)]
 	public class MessageBoardController : BaseForumController<MessageBoard>
 	{
 		public MessageBoardController(IWebSecurityService webSecurityService)
