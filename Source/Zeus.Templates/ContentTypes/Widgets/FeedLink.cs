@@ -1,15 +1,17 @@
+using Coolite.Ext.Web;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes.Widgets
 {
 	[ContentType("Feed Link", Description = "An RSS feed subscription link. An RSS link is also added to the page header, enabling subscription through the browser's built-in RSS handling.")]
-	[RestrictParents(typeof(BasePage))]
+	[RestrictParents(typeof(PageContentItem))]
 	[AllowedZones(AllowedZones.AllNamed)]
-	public class FeedLink : BaseWidget
+	public class FeedLink : WidgetContentItem
 	{
-		protected override string IconName
+		public override string IconUrl
 		{
-			get { return "feed_link"; }
+			get { return Utility.GetCooliteIconUrl(Icon.FeedLink); }
 		}
 
 		[ContentProperty("Feed", 200)]

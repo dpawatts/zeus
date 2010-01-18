@@ -18,6 +18,7 @@ namespace Zeus.Web.Mvc.Html
 		{
 			RouteValueDictionary routeValues = new RouteValueDictionary();
 			routeValues.Add(ContentRoute.ContentItemKey, item);
+			routeValues.Add(ContentRoute.AreaKey, _controllerMapper.GetAreaName(item.GetType()));
 
 			return htmlHelper.Action(action,
 				_controllerMapper.GetControllerName(item.GetType()),
