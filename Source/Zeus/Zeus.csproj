@@ -312,7 +312,6 @@
     <Compile Include="Web\Mvc\IControllerMapper.cs" />
     <Compile Include="Web\Mvc\ModelStateDictionaryExtensions.cs" />
     <Compile Include="Web\Mvc\MvcGlobal.cs" />
-    <Compile Include="Web\Mvc\MvcModule.cs" />
     <Compile Include="Web\Mvc\NinjectActionInvoker.cs" />
     <Compile Include="Web\Mvc\NotModifiedResult.cs" />
     <Compile Include="Web\Mvc\StandardAreaRegistration.cs" />
@@ -355,7 +354,6 @@
     <Compile Include="Web\TextTemplating\DefaultMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
-    <Compile Include="Web\TextTemplating\TextTemplatingModule.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />

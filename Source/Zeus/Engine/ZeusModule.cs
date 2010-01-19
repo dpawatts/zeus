@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using Ninject.Modules;
 using Zeus.Admin;
 using Zeus.BaseLibrary.Reflection;
@@ -16,7 +17,10 @@ using Zeus.Security;
 using Zeus.Serialization;
 using Zeus.Web;
 using Zeus.Web.Hosting;
+using Zeus.Web.Mvc;
+using Zeus.Web.Mvc.Html;
 using Zeus.Web.Security;
+using Zeus.Web.TextTemplating;
 using IWebContext=Zeus.Web.IWebContext;
 
 namespace Zeus.Engine
@@ -98,7 +102,15 @@ namespace Zeus.Engine
 			Bind<IEmbeddedResourceBuilder>().To<EmbeddedResourceBuilder>().InSingletonScope();
 			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
 
-			// Web security
+			// Web / Text Templating
+			Bind<IMessageBuilder>().To<DefaultMessageBuilder>().InSingletonScope();
+
+			// Web / MVC
+			Bind<ITemplateRenderer>().To<TemplateRenderer>().InSingletonScope();
+			Bind<IControllerMapper>().To<ControllerMapper>().InSingletonScope();
+			Bind<IControllerFactory>().To<ControllerFactory>().InSingletonScope();
+
+			// Web / Security
 			Bind<BaseLibrary.Web.IWebContext>().To<WebContext>().InSingletonScope();
 			Bind<IAuthorizationService>().To<AuthorizationService>().InSingletonScope();
 			Bind<ICredentialStore>().To<CredentialStore>().InSingletonScope();
