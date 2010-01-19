@@ -87,7 +87,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.dll</HintPath>
     </Reference>
+    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.dll</HintPath>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Spark\Spark.Web.Mvc2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -106,6 +117,10 @@
     </Reference>
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\MVC\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -266,6 +281,43 @@
     <Compile Include="Security\User.cs" />
     <Compile Include="Security\UserContainer.cs" />
     <Compile Include="SystemNode.cs" />
+    <Compile Include="Web\Mvc\AcceptImageSubmitAttribute.cs" />
+    <Compile Include="Web\Mvc\AcceptParameterAttribute.cs" />
+    <Compile Include="Web\Mvc\ActionFilters\ExportModelStateToTempDataAttribute.cs" />
+    <Compile Include="Web\Mvc\ActionFilters\ImportModelStateFromTempDataAttribute.cs" />
+    <Compile Include="Web\Mvc\ActionFilters\ModelStateTempDataTransferAttribute.cs" />
+    <Compile Include="Web\Mvc\ActionFilters\RequireSslAttribute.cs" />
+    <Compile Include="Web\Mvc\ActionResolver.cs" />
+    <Compile Include="Web\Mvc\ContentController.cs" />
+    <Compile Include="Web\Mvc\ContentRoute.cs" />
+    <Compile Include="Web\Mvc\ControllerFactory.cs" />
+    <Compile Include="Web\Mvc\ControllerMapper.cs" />
+    <Compile Include="Web\Mvc\CustomDataAnnotationsModelMetadataProvider.cs" />
+    <Compile Include="Web\Mvc\Descriptors\MobileDeviceDescriptorFilter.cs" />
+    <Compile Include="Web\Mvc\HideSurroundingChromeAttribute.cs" />
+    <Compile Include="Web\Mvc\Html\BaseWidgetHelper.cs" />
+    <Compile Include="Web\Mvc\Html\DisplayExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\DisplayHelper.cs" />
+    <Compile Include="Web\Mvc\Html\HtmlHelperExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\ItemHelper.cs" />
+    <Compile Include="Web\Mvc\Html\ITemplateRenderer.cs" />
+    <Compile Include="Web\Mvc\Html\MembershipExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\PaginationExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\StringExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\TemplateRenderer.cs" />
+    <Compile Include="Web\Mvc\Html\ValidationExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\ZoneExtensions.cs" />
+    <Compile Include="Web\Mvc\Html\ZoneHelper.cs" />
+    <Compile Include="Web\Mvc\IContentItemContainer.generic.cs" />
+    <Compile Include="Web\Mvc\IControllerMapper.cs" />
+    <Compile Include="Web\Mvc\ModelStateDictionaryExtensions.cs" />
+    <Compile Include="Web\Mvc\MvcGlobal.cs" />
+    <Compile Include="Web\Mvc\MvcModule.cs" />
+    <Compile Include="Web\Mvc\NinjectActionInvoker.cs" />
+    <Compile Include="Web\Mvc\NotModifiedResult.cs" />
+    <Compile Include="Web\Mvc\StandardAreaRegistration.cs" />
+    <Compile Include="Web\Mvc\ViewModels\ViewModel.cs" />
+    <Compile Include="Web\Mvc\ViewPageResult.cs" />
     <Compile Include="Web\PageContentItem.cs" />
     <Compile Include="Web\Hosting\ResourceSettings.cs" />
     <Compile Include="Web\Security\IWebSecurityService.cs" />
@@ -300,6 +352,10 @@
     <Compile Include="Web\Security\WebPrincipal.cs" />
     <Compile Include="Web\Security\WebSecurityEngine.cs" />
     <Compile Include="Web\Security\WebSecurityService.cs" />
+    <Compile Include="Web\TextTemplating\DefaultMessageBuilder.cs" />
+    <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
+    <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
+    <Compile Include="Web\TextTemplating\TextTemplatingModule.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />

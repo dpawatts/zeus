@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
@@ -10,6 +9,7 @@ using Zeus.Templates.Mvc.Controllers;
 using System.Web.Mvc;
 using Zeus.Web;
 using Zeus.Web.Mvc;
+using Zeus.Web.Mvc.ActionFilters;
 
 namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 {

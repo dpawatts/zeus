@@ -1,7 +1,7 @@
 using System.Web;
 using System.Web.Mvc;
 
-namespace Zeus.Web.Mvc
+namespace Zeus.Web.Mvc.ActionFilters
 {
 	public class RequireSslAttribute : ActionFilterAttribute
 	{

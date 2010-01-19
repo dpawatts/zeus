@@ -214,10 +214,6 @@
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zeus.Web.Mvc\Zeus.Web.Mvc.csproj">
-      <Project>{71840644-3821-463D-81B7-7ED0221D2119}</Project>
-      <Name>Zeus.Web.Mvc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>

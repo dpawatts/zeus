@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zeus.Web.TextTemplating;
 
-namespace Zeus.Web.TextTemplating.Tests
+namespace Zeus.Tests.Web.TextTemplating
 {
 	[TestClass]
 	public class DefaultMessageBuilderTests

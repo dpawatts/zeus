@@ -88,7 +88,12 @@ namespace Zeus.Web.Mvc
 
 		protected virtual ActionResult RedirectToParentPage()
 		{
-			return Redirect(CurrentPage.Url);
+			return RedirectToParentPage(string.Empty);
+		}
+
+		protected virtual ActionResult RedirectToParentPage(string fragment)
+		{
+			return Redirect(CurrentPage.Url + fragment);
 		}
 
 		/// <summary>
@@ -97,14 +102,34 @@ namespace Zeus.Web.Mvc
 		/// <returns></returns>
 		protected virtual ViewPageResult ViewParentPage()
 		{
-			if (CurrentItem.IsPage)
+			if (CurrentItem != null && CurrentItem.IsPage)
 			{
 				throw new InvalidOperationException(
 					"The current page is already being rendered. ViewPage should only be used from content items to render their parent page.");
 			}
 
-			return new ViewPageResult(CurrentPage, Engine.Resolve<IControllerMapper>(), Engine.Resolve<IWebContext>(),
-																ActionInvoker);
+			return ViewPage(CurrentPage);
+		}
+
+		/// <summary>
+		/// Returns a <see cref="ViewPageResult"/> which calls the default action for the controller that handles the current page.
+		/// </summary>
+		/// <returns></returns>
+		protected internal virtual ViewPageResult ViewPage(ContentItem thePage)
+		{
+			if (thePage == null)
+				throw new ArgumentNullException("thePage");
+
+			if (!thePage.IsPage)
+				throw new InvalidOperationException("Item " + thePage.GetType().Name +
+				                                    " is not a page type and cannot be rendered on its own.");
+
+			if (thePage == CurrentItem)
+				throw new InvalidOperationException(
+					"The page passed into ViewPage was the current page. This would cause an infinite loop.");
+
+			return new ViewPageResult(thePage, Engine.Resolve<IControllerMapper>(), Engine.Resolve<IWebContext>(),
+				ActionInvoker);
 		}
 
 		#region Nested type: SessionAndPerRequestTempDataProvider

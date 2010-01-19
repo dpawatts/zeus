@@ -1,4 +1,3 @@
-using System;
 using System.Web.Mvc;
 using Zeus.AddIns.Forums.ContentTypes;
 using Zeus.AddIns.Forums.Mvc.ViewModels;
@@ -6,18 +5,18 @@ using Zeus.AddIns.Forums.Services;
 using Zeus.BaseLibrary.Web;
 using Zeus.Templates.ContentTypes;
 using Zeus.Templates.Mvc.Controllers;
-using Zeus.Web.Mvc;
+using Zeus.Web.Mvc.ActionFilters;
 using Zeus.Web.Security;
 
 namespace Zeus.AddIns.Forums.Mvc.Controllers
 {
-	[ModelStateToTempData]
+	[ImportModelStateFromTempData]
 	public abstract class BaseForumController<T> : ZeusController<T>
 		where T : BasePage
 	{
 		private readonly IWebSecurityService _webSecurityService;
 
-		public BaseForumController(IWebSecurityService webSecurityService)
+		protected BaseForumController(IWebSecurityService webSecurityService)
 		{
 			_webSecurityService = webSecurityService;
 		}
@@ -42,23 +41,24 @@ namespace Zeus.AddIns.Forums.Mvc.Controllers
 		}
 
 		[HttpPost]
+		[ExportModelStateToTempData]
 		public ActionResult Login(string username, string password)
 		{
 			if (!ModelState.IsValid || !_webSecurityService.ValidateUser(username, password))
 			{
-				TempData["ForumLogin.Failed"] = "Invalid username or password";
-				return Redirect(CurrentItem.Url + "#fWrongLogin");
+				ModelState.AddModelError("ForumLogin.Failed", "Invalid username or password");
+				return RedirectToParentPage("#fWrongLogin");
 			}
 
 			_webSecurityService.SetAuthCookie(username, false);
-			return Redirect(CurrentItem.Url);
+			return RedirectToParentPage();
 		}
 
 		[HttpGet]
 		public ActionResult Logout()
 		{
 			_webSecurityService.SignOut();
-			return Redirect(CurrentItem.Url);
+			return RedirectToParentPage();
 		}
 
 		protected override void OnActionExecuted(ActionExecutedContext filterContext)

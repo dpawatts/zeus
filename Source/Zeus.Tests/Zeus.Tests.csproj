@@ -112,6 +112,7 @@
     <Compile Include="Web\Security\AuthenticatedUser.cs" />
     <Compile Include="Web\Security\AuthenticationServiceTests.cs" />
     <Compile Include="Web\Security\MembershipServiceTests.cs" />
+    <Compile Include="Web\TextTemplating\DefaultMessageBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
@@ -129,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Web\TextTemplating\Templates\TestTransform.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

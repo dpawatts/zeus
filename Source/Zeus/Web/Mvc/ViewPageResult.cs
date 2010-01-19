@@ -29,9 +29,7 @@ namespace Zeus.Web.Mvc
 		public override void ExecuteResult(ControllerContext context)
 		{
 			SetupZeusForNewPageRequest();
-
 			ControllerBase controller = BuildController(context);
-
 			_actionInvoker.InvokeAction(controller.ControllerContext, "Index");
 		}
 
@@ -45,13 +43,17 @@ namespace Zeus.Web.Mvc
 			var routeData = context.RouteData;
 			routeData.Values[ContentRoute.ContentItemKey] = _thePage;
 			routeData.Values[ContentRoute.ContentItemIdKey] = _thePage.ID;
+			routeData.Values[ContentRoute.ActionKey] = "Index";
+			routeData.Values[ContentRoute.ControllerKey] = _controllerMapper.GetControllerName(_thePage.GetType());
+			routeData.Values[ContentRoute.AreaKey] = _controllerMapper.GetAreaName(_thePage.GetType());
 
-			var requestContext = new RequestContext(new HttpContextWrapper(HttpContext.Current), routeData);
+			var requestContext = new RequestContext(context.HttpContext, routeData);
 
-			var controller = (ControllerBase)ControllerBuilder.Current.GetControllerFactory()
-				.CreateController(requestContext, _controllerMapper.GetControllerName(_thePage.GetType()));
+			var controller = (ControllerBase) ControllerBuilder.Current.GetControllerFactory()
+																				.CreateController(requestContext, _controllerMapper.GetControllerName(_thePage.GetType()));
 
 			controller.ControllerContext = new ControllerContext(requestContext, controller);
+			controller.ViewData.ModelState.Merge(context.Controller.ViewData.ModelState);
 
 			return controller;
 		}

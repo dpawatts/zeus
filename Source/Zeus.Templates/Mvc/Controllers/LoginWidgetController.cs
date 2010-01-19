@@ -2,7 +2,7 @@
 using Zeus.Templates.ContentTypes.Widgets;
 using Zeus.Templates.Mvc.ViewModels;
 using Zeus.Web;
-using Zeus.Web.Mvc;
+using Zeus.Web.Mvc.ActionFilters;
 using Zeus.Web.Security;
 
 namespace Zeus.Templates.Mvc.Controllers
@@ -17,31 +17,31 @@ namespace Zeus.Templates.Mvc.Controllers
 			_webSecurityService = webSecurityService;
 		}
 
-		[ModelStateToTempData]
+		[ImportModelStateFromTempData]
 		public override ActionResult Index()
 		{
 			return PartialView("Index", new LoginWidgetViewModel(CurrentItem, User.Identity.IsAuthenticated));
 		}
 
 		[HttpPost]
-		[ModelStateToTempData]
+		[ExportModelStateToTempData]
 		public ActionResult Login(LoginWidgetFormViewModel loginForm)
 		{
 			if (!ModelState.IsValid || !_webSecurityService.ValidateUser(loginForm.Username, loginForm.Password))
 			{
-				TempData["Login.Failed"] = "Invalid username or password";
-				return Redirect(CurrentItem.Parent.Url + "#loginBox");
+				ModelState.AddModelError("Login.Failed", "Invalid username or password");
+				return RedirectToParentPage("#loginBox");
 			}
 
 			_webSecurityService.SetAuthCookie(loginForm.Username, false);
-			return Redirect(CurrentItem.Parent.Url);
+			return RedirectToParentPage();
 		}
 
 		[HttpGet]
 		public ActionResult Logout()
 		{
 			_webSecurityService.SignOut();
-			return Redirect(CurrentItem.Parent.Url);
+			return RedirectToParentPage();
 		}
 	}
 }
