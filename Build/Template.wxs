@@ -83,6 +83,7 @@
 		</Directory>
 		<Feature Id="ProductFeature" Title="$(var.TEMPLATENAME)" Level="1">
 			<ComponentRef Id="VisualStudio2008ProjectTemplate" />
+			<ComponentRef Id="VisualStudio2008ItemTemplate" />
 			<ComponentRef Id="VisualStudio2008CodeSnippets" />
 			<ComponentRef Id="WizardComponent" />
 		</Feature>
