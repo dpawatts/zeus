@@ -47,11 +47,11 @@
 
 										<File Id="itemTemplate" Name="Zeus Page Template.zip" Source="Zeus Page Template.zip" DiskId="1" />
 
-										<RemoveFile Id="RemoveProjectTemplate" Name="Zeus Page Template.zip" On="uninstall"/>
-										<RemoveFolder Id="RemoveCategoryDir" Directory="category3" On="uninstall"/>
+										<RemoveFile Id="RemoveItemTemplate" Name="Zeus Page Template.zip" On="uninstall"/>
+										<RemoveFolder Id="RemoveCategory2Dir" Directory="category3" On="uninstall"/>
 										<RemoveFolder Id="RemoveItemTemplates" Directory="ItemTemplates" On="uninstall"/>
-										<RemoveFolder Id="RemoveTemplatesDir" Directory="Templates" On="uninstall"/>
-										<RemoveFolder Id="RemoveVSDir" Directory="VS" On="uninstall"/>
+										<RemoveFolder Id="RemoveTemplatesDir2" Directory="Templates" On="uninstall"/>
+										<RemoveFolder Id="RemoveVSDir3" Directory="VS" On="uninstall"/>
 									</Component>
 								</Directory>
 							</Directory>
