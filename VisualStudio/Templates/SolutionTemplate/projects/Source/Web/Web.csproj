@@ -132,7 +132,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Browsers\Devices\Mobile.browser" />
     <Folder Include="ContentTypes\" />
     <Folder Include="Controllers\" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,7 +144,7 @@
     </Compile>
     <Content Include="web.config" />
     <Compile Include="WebsiteModule.cs" />
-    <Compile Include="WebsiteWebPackage.cs" />
+    <Compile Include="WebsiteAreaRegistration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

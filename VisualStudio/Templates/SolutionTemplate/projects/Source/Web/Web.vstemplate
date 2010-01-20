@@ -12,17 +12,12 @@
   </TemplateData>
   <TemplateContent>
     <Project File="Web.csproj" TargetFileName="Web.csproj" ReplaceParameters="true">
-      <Folder Name="App_Browsers" TargetFolderName="App_Browsers">
-        <Folder Name="Devices" TargetFolderName="Devices">
-          <ProjectItem TargetFileName="Mobile.browser" ReplaceParameters="false">Mobile.browser</ProjectItem>
-        </Folder>
-      </Folder>
       <ProjectItem TargetFileName="Default.aspx" ReplaceParameters="true">Default.aspx</ProjectItem>
       <ProjectItem TargetFileName="Global.asax" ReplaceParameters="true">Global.asax</ProjectItem>
       <ProjectItem TargetFileName="Global.asax.cs" ReplaceParameters="true">Global.asax.cs</ProjectItem>
       <ProjectItem TargetFileName="web.config" ReplaceParameters="true">web.config</ProjectItem>
       <ProjectItem TargetFileName="WebsiteModule.cs" ReplaceParameters="true">WebsiteModule.cs</ProjectItem>
-      <ProjectItem TargetFileName="WebsiteWebPackage.cs" ReplaceParameters="true">WebsiteWebPackage.cs</ProjectItem>
+      <ProjectItem TargetFileName="WebsiteAreaRegistration.cs" ReplaceParameters="true">WebsiteAreaRegistration.cs</ProjectItem>
       <Folder Name="ContentTypes" TargetFolderName="ContentTypes" />
       <Folder Name="Controllers" TargetFolderName="Controllers" />
       <Folder Name="Properties" TargetFolderName="Properties">
