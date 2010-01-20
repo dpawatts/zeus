@@ -14,20 +14,22 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="INSTALLDIR">
 				<Directory Id="PRIVATEASSEMBIES" Name="PrivateAssemblies">
-					<Component Id="WizardComponenet" Guid="04CCE6BD-7A65-45fe-A5A1-6425B84C3D3D">
+					<Component Id="WizardComponent" Guid="04CCE6BD-7A65-45fe-A5A1-6425B84C3D3D">
 						<File Id="Wizard" Name="SolutionFactory.Wizard.dll" Source="SolutionFactory.Wizard.dll" DiskId="1"  />
 						<RegistryValue Root='HKLM' Key='SOFTWARE\SolutionFactory\Wizard' Type='string' Value='InstallKey' KeyPath='yes' />
 					</Component>
 				</Directory>
 				<Directory Id="PersonalFolder">
 					<Directory Id="VS" Name="Visual Studio 2008">
-						<Directory Id="Templates" Name="Templates" >
-							<Directory Id="ProjectTemplates" Name="ProjectTemplates" >
+						<Directory Id="Templates" Name="Templates">
+							<Directory Id="ProjectTemplates" Name="ProjectTemplates">
 								<Directory Id="category" Name="$(var.CATEGORY)" >
-									<Directory Id="subcategory" Name="$(var.SUBCATEGORY)" >
-										<Component Id="AddinComponent" Guid="$(var.COMPONENTGUID)" KeyPath="no"  >
+									<Directory Id="subcategory" Name="$(var.SUBCATEGORY)">
+										<Component Id="VisualStudio2008ProjectTemplate" Guid="$(var.COMPONENTGUID)" KeyPath="no">
 											<RegistryValue Root='HKCU' Key='SOFTWARE\SolutionFactory\$(var.TEMPLATENAME)' Type='string' Value='InstallKey' KeyPath='yes' />
-											<File Id="projectTempate" Name="template.zip" Source="solutiontemplate.zip" DiskId="1"  />
+
+											<File Id="projectTemplate" Name="template.zip" Source="solutiontemplate.zip" DiskId="1" />
+
 											<RemoveFile Id="RemoveProjectTemplate"  Name="template.zip" On="uninstall"/>
 											<RemoveFolder Id="RemoveCategoryDir" Directory="category" On="uninstall"/>
 											<RemoveFolder Id="RemoveSubcategoryDir" Directory="subcategory" On="uninstall"/>
@@ -39,13 +41,35 @@
 								</Directory>
 							</Directory>
 						</Directory>
+						<Directory Id="CodeSnippets" Name="Code Snippets">
+							<Directory Id="category2" Name="$(var.CATEGORY)">
+								<Directory Id="MyCodeSnippets" Name="My Code Snippets">
+									<Component Id="VisualStudio2008CodeSnippets" Guid="$(var.COMPONENTGUID2)" KeyPath="no">
+										<RegistryValue Root='HKCU' Key='SOFTWARE\SolutionFactory\$(var.TEMPLATENAME)CodeSnippets' Type='string' Value='InstallKey' KeyPath='yes' />
+
+										<File Id="codeSnippet1" Name="zeusprop.snippet" Source="zeusprop.snippet" DiskId="1" />
+										<File Id="codeSnippet2" Name="zeuspropcollection.snippet" Source="zeuspropcollection.snippet" DiskId="1" />
+										<File Id="codeSnippet3" Name="zeuspropimage.snippet" Source="zeuspropimage.snippet" DiskId="1" />
+
+										<RemoveFile Id="removeCodeSnippet1" Name="zeusprop.snippet" On="uninstall"/>
+										<RemoveFile Id="removeCodeSnippet2" Name="zeuspropcollection.snippet" On="uninstall"/>
+										<RemoveFile Id="removeCodeSnippet3" Name="zeuspropimage.snippet" On="uninstall"/>
+										<RemoveFolder Id="RemoveMyCodeSnippets" Directory="MyCodeSnippets" On="uninstall"/>
+										<RemoveFolder Id="RemoveCategory2Dir" Directory="category2" On="uninstall"/>
+										<RemoveFolder Id="RemoveCodeSnippetsDir" Directory="CodeSnippets" On="uninstall"/>
+										<RemoveFolder Id="RemoveVSDir2" Directory="VS" On="uninstall"/>
+									</Component>
+								</Directory>
+							</Directory>
+						</Directory>
 					</Directory>
 				</Directory>
 			</Directory>
 		</Directory>
 		<Feature Id="ProductFeature" Title="$(var.TEMPLATENAME)" Level="1">
-			<ComponentRef Id="AddinComponent" />
-			<ComponentRef Id="WizardComponenet" />
+			<ComponentRef Id="VisualStudio2008ProjectTemplate" />
+			<ComponentRef Id="VisualStudio2008CodeSnippets" />
+			<ComponentRef Id="WizardComponent" />
 		</Feature>
 	</Product>
 </Wix>

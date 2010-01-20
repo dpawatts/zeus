@@ -30,22 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Isis, Version=2.0.3547.23441, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.dll</HintPath>
-    </Reference>
-    <Reference Include="Isis.FrameworkBlocks.WebSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Isis.FrameworkBlocks.WebSecurity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcContrib, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\MvcContrib.dll</HintPath>
-    </Reference>
     <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\NHibernate.ByteCode.Castle.dll</HintPath>
@@ -65,10 +49,6 @@
     <Reference Include="SoundInTheory.DynamicImage.Caching.Sql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\SoundInTheory.DynamicImage.Caching.Sql.dll</HintPath>
-    </Reference>
-    <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Spark.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -106,9 +86,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Zeus.Admin.dll</HintPath>
     </Reference>
-    <Reference Include="Zeus.ObjectEditor">
+    <Reference Include="Zeus.BaseLibrary">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Zeus.ObjectEditor.dll</HintPath>
+      <HintPath>..\..\Libraries\Zeus.BaseLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Zeus.Persistence.NH">
       <SpecificVersion>False</SpecificVersion>
@@ -117,18 +97,6 @@
     <Reference Include="Zeus.Templates">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Zeus.Templates.dll</HintPath>
-    </Reference>
-    <Reference Include="Zeus.Templates.Mvc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Zeus.Templates.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Zeus.Web.Mvc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Zeus.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Zeus.Web.Mvc.Pdf">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Zeus.Web.Mvc.Pdf.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
