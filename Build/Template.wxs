@@ -40,6 +40,21 @@
 									</Directory>
 								</Directory>
 							</Directory>
+							<Directory Id="ItemTemplates" Name="ItemTemplates">
+								<Directory Id="category3" Name="$(var.CATEGORY)" >
+									<Component Id="VisualStudio2008ItemTemplate" Guid="$(var.COMPONENTGUID3)" KeyPath="no">
+										<RegistryValue Root='HKCU' Key='SOFTWARE\SolutionFactory\$(var.TEMPLATENAME)ItemTemplate' Type='string' Value='InstallKey' KeyPath='yes' />
+
+										<File Id="itemTemplate" Name="Zeus Page Template.zip" Source="Zeus Page Template.zip" DiskId="1" />
+
+										<RemoveFile Id="RemoveProjectTemplate" Name="Zeus Page Template.zip" On="uninstall"/>
+										<RemoveFolder Id="RemoveCategoryDir" Directory="category3" On="uninstall"/>
+										<RemoveFolder Id="RemoveItemTemplates" Directory="ItemTemplates" On="uninstall"/>
+										<RemoveFolder Id="RemoveTemplatesDir" Directory="Templates" On="uninstall"/>
+										<RemoveFolder Id="RemoveVSDir" Directory="VS" On="uninstall"/>
+									</Component>
+								</Directory>
+							</Directory>
 						</Directory>
 						<Directory Id="CodeSnippets" Name="Code Snippets">
 							<Directory Id="category2" Name="$(var.CATEGORY)">
