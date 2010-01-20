@@ -135,6 +135,7 @@
     <Compile Include="Plugins\Permissions\ManagePermissionsActionPlugin.cs" />
     <Compile Include="Plugins\PasteItem\PasteItemMenuPlugin.cs" />
     <Compile Include="Plugins\CopyItem\CopyItemMenuPlugin.cs" />
+    <Compile Include="Plugins\Preview\PreviewMenuPlugin.cs" />
     <Compile Include="Plugins\Versions\ListVersionsMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\LanguageSettings\LanguageSettingsMenuPlugin.cs" />
     <Compile Include="Plugins\Globalization\LanguageOverview\LanguageOverviewMenuPlugin.cs" />

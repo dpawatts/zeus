@@ -30,14 +30,19 @@ namespace Zeus.Admin.Plugins.Versions
 			return base.IsApplicable(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.reloadContentPanel('Versions', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.Admin.Plugins.Versions.Default.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Versions",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.BookPrevious),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Versions', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.Admin.Plugins.Versions.Default.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

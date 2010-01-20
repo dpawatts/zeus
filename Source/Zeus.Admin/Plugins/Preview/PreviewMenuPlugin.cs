@@ -1,45 +1,51 @@
 using Coolite.Ext.Web;
-using Zeus.FileSystem;
 using Zeus.Security;
+using Zeus.Web;
 
-namespace Zeus.Admin.Plugins.FileManager
+namespace Zeus.Admin.Plugins.Preview
 {
-	public class FileManagerContextMenuPlugin : MenuPluginBase, IContextMenuPlugin
+	[ActionPluginGroup("Preview", 5)]
+	public class PreviewMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
 		{
-			get { return "NewEditDelete"; }
+			get { return "Preview"; }
 		}
 
 		protected override string RequiredSecurityOperation
 		{
-			get { return Operations.Administer; }
+			get { return Operations.Read; }
 		}
 
 		public override int SortOrder
 		{
-			get { return 4; }
+			get { return 1; }
 		}
 
 		public override bool IsApplicable(ContentItem contentItem)
 		{
-			if (!(contentItem is Folder))
+			if (!(contentItem is PageContentItem))
 				return false;
 
 			return base.IsApplicable(contentItem);
 		}
 
+		public override bool IsDefault(ContentItem contentItem)
+		{
+			return true;
+		}
+
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
-			return "function() {{ fileManager.show(); }}";
+			return string.Format("function() {{ top.zeus.reloadContentPanel('Preview', '{0}'); }}", contentItem.Url);
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
-				Text = "File Manager",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.Folder),
+				Text = "Preview",
+				IconUrl = Utility.GetCooliteIconUrl(Icon.Magnifier),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

@@ -28,6 +28,11 @@ namespace Zeus.Admin.Plugins
 			return true;
 		}
 
+		public virtual bool IsDefault(ContentItem contentItem)
+		{
+			return false;
+		}
+
 		public virtual bool IsEnabled(ContentItem contentItem)
 		{
 			if (!string.IsNullOrEmpty(RequiredSecurityOperation))

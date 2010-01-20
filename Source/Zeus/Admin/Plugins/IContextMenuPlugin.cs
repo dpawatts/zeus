@@ -10,7 +10,9 @@ namespace Zeus.Admin.Plugins
 		int SortOrder { get; }
 
 		bool IsApplicable(ContentItem contentItem);
+		bool IsDefault(ContentItem contentItem);
 		bool IsEnabled(ContentItem contentItem);
+		string GetJavascriptHandler(ContentItem contentItem);
 		MenuItem GetMenuItem(ContentItem contentItem);
 	}
 }

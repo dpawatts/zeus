@@ -27,14 +27,20 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			return base.IsApplicable(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments.Default.aspx") + "?selected=" +
+				contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 				{
 					Text = "Moderate Comments",
 					IconUrl = Utility.GetCooliteIconUrl(Icon.Comments),
-					Handler = string.Format("function() {{ zeus.reloadContentPanel('Moderate Comments', '{0}'); }}",
-						GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments.Default.aspx") + "?selected=" + contentItem.Path)
+					Handler = GetJavascriptHandler(contentItem)
 				};
 
 			return menuItem;

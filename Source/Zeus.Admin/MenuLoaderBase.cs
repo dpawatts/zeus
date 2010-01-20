@@ -40,7 +40,7 @@ namespace Zeus.Admin
 				{
 					return new
 					{
-						text = menuItem.Text,
+						text = GetMenuItemText(menuItem),
 						icon = menuItem.IconUrl,
 						handler = menuItem.Handler,
 						menu = new
@@ -51,13 +51,21 @@ namespace Zeus.Admin
 				}
 				return new
 				{
-					text = menuItem.Text,
+					text = GetMenuItemText(menuItem),
 					icon = menuItem.IconUrl,
 					handler = menuItem.Handler,
 				};
 			}
 
 			return null;
+		}
+
+		private static string GetMenuItemText(MenuItem menuItem)
+		{
+			if (menuItem.ControlStyle.Font.Bold)
+				return "<b>" + menuItem.Text + "</b>";
+
+			return menuItem.Text;
 		}
 
 		private List<BaseMenuItem> CreateMenuItems(ContentItem currentItem)
@@ -78,11 +86,17 @@ namespace Zeus.Admin
 						if (!IsEnabled(plugin, currentItem))
 							menuItem.Enabled = false;
 
+						// Check if this is the default plugin for this content item.
+						if (IsDefault(plugin, currentItem))
+							menuItem.ControlStyle.Font.Bold = true;
+
 						result.Add(menuItem);
+
+						first = false;
 					}
-					first = false;
 				}
-				first = true;
+				if (result.Any())
+					first = true;
 			}
 
 			return result;
@@ -90,6 +104,7 @@ namespace Zeus.Admin
 
 		protected abstract IEnumerable<TPlugin> GetPlugins(string groupName);
 		protected abstract bool IsApplicable(TPlugin plugin, ContentItem item);
+		protected abstract bool IsDefault(TPlugin plugin, ContentItem item);
 		protected abstract MenuItem GetMenuItem(TPlugin plugin, ContentItem item);
 		protected abstract bool IsEnabled(TPlugin plugin, ContentItem item);
 

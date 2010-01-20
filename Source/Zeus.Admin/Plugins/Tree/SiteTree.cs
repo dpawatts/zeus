@@ -82,8 +82,12 @@ namespace Zeus.Admin.Plugins.Tree
 			node.IconCls = "zeus-tree-icon";
 			node.Cls = "zeus-tree-node";
 			node.NodeID = item.ID.ToString();
-			if (item.IsPage && withLinks)
-				node.Href = "javascript:window.top.zeus.refreshPreview('" + Url.ToAbsolute(((INode)item).PreviewUrl) + "');";
+			if (withLinks)
+			{
+				// Allow plugin to set the href (it will be based on whatever is the default context menu plugin).
+				foreach (ITreePlugin treePlugin in Context.Current.ResolveAll<ITreePlugin>())
+					treePlugin.ModifyTreeNode(node, item);
+			}
 
 			if (!hasAsyncChildren)
 				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children)

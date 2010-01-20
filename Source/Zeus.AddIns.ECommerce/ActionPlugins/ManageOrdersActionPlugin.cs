@@ -25,14 +25,19 @@ namespace Zeus.AddIns.ECommerce.ActionPlugins
 			return base.IsApplicable(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.reloadContentPanel('Manage Orders', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.AddIns.ECommerce.Plugins.ManageOrders.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Manage Orders",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.Basket),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Manage Orders', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.AddIns.ECommerce.Plugins.ManageOrders.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

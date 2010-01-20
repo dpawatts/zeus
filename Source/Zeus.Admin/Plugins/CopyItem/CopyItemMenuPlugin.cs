@@ -14,14 +14,19 @@ namespace Zeus.Admin.Plugins.CopyItem
 			get { return 2; }
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.memorize('{0}', '{1}'); }}",
+				contentItem.Path, GetPageUrl(GetType(), "Zeus.Admin.Plugins.CopyItem.Default.aspx"));
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Copy",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PageCopy),
-				Handler = string.Format("function() {{ zeus.memorize('{0}', '{1}'); }}",
-					contentItem.Path, GetPageUrl(GetType(), "Zeus.Admin.Plugins.CopyItem.Default.aspx"))
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

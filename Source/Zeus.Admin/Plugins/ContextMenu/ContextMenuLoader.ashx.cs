@@ -18,6 +18,11 @@ namespace Zeus.Admin.Plugins.ContextMenu
 			return plugin.IsApplicable(item);
 		}
 
+		protected override bool IsDefault(IContextMenuPlugin plugin, ContentItem item)
+		{
+			return plugin.IsDefault(item);
+		}
+
 		protected override MenuItem GetMenuItem(IContextMenuPlugin plugin, ContentItem item)
 		{
 			return plugin.GetMenuItem(item);

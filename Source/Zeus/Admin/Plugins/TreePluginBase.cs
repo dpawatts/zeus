@@ -18,6 +18,11 @@ namespace Zeus.Admin.Plugins
 
 		public abstract void ModifyTree(TreePanel treePanel, IMainInterface mainInterface);
 
+		public virtual void ModifyTreeNode(TreeNodeBase treeNode, ContentItem contentItem)
+		{
+			
+		}
+
 		protected string GetPageUrl(Type type, string resourcePath)
 		{
 			return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(type.Assembly, resourcePath);

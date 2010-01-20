@@ -42,14 +42,19 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			return base.IsEnabled(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ top.Ext.ux.zeus.DeleteConfirmation.show('{0}', '{1}', '{2}'); }}",
+				contentItem.Title.Replace("'", "\\'"), contentItem.ID, contentItem.IconUrl);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Delete",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PageDelete),
-				Handler = string.Format("function() {{ top.Ext.ux.zeus.DeleteConfirmation.show('{0}', '{1}', '{2}'); }}",
-					contentItem.Title.Replace("'", "\\'"), contentItem.ID, contentItem.IconUrl)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

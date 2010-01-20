@@ -31,14 +31,19 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ImportExportBlogXml
 			return base.IsApplicable(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 				{
 					Text = "Import Atom XML",
 					IconUrl = Utility.GetCooliteIconUrl(Icon.PackageIn),
-					Handler = string.Format("function() {{ zeus.reloadContentPanel('Import Atom XML', '{0}'); }}",
-						GetPageUrl(GetType(), "Zeus.AddIns.Blogs.Plugins.ImportAtom.aspx") + "?selected=" + contentItem.Path)
+					Handler = GetJavascriptHandler(contentItem)
 				};
 
 			return menuItem;

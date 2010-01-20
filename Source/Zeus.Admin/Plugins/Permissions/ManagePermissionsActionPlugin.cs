@@ -20,14 +20,19 @@ namespace Zeus.Admin.Plugins.Permissions
 			get { return 3; }
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ top.zeus.reloadContentPanel('Permissions', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.Admin.Plugins.Permissions.Default.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Permissions",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.Lock),
-				Handler = string.Format("function() {{ top.zeus.reloadContentPanel('Permissions', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.Admin.Plugins.Permissions.Default.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

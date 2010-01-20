@@ -30,14 +30,19 @@ namespace Zeus.Admin.Plugins.ImportExport
 			return base.IsEnabled(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ top.zeus.reloadContentPanel('Import / Export', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.Admin.Plugins.ImportExport.Default.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Import / Export",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PackageGo),
-				Handler = string.Format("function() {{ top.zeus.reloadContentPanel('Import / Export', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.Admin.Plugins.ImportExport.Default.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;

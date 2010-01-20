@@ -55,14 +55,24 @@ namespace Zeus.Admin.Plugins.NewItem
 			return true;
 		}
 
+		string IContextMenuPlugin.GetJavascriptHandler(ContentItem contentItem)
+		{
+			return GetJavascriptHandler(contentItem, "Ext.ux.zeus.NewItemContextMenuPlugin");
+		}
+
+		private string GetJavascriptHandler(ContentItem contentItem, string clientPluginClass)
+		{
+			return string.Format("function() {{ new top.{0}('New', '{1}').execute(); }}", clientPluginClass,
+				GetPageUrl(GetType(), "Zeus.Admin.Plugins.NewItem.Default.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		private MenuItem GetMenuItem(ContentItem contentItem, string clientPluginClass)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "New",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.PageAdd),
-				Handler = string.Format("function() {{ new top.{0}('New', '{1}').execute(); }}", clientPluginClass,
-					GetPageUrl(GetType(), "Zeus.Admin.Plugins.NewItem.Default.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem, clientPluginClass)
 			};
 
 			// Add child menu items for types that can be created under the current item.

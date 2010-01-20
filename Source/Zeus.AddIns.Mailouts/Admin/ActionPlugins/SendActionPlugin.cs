@@ -33,14 +33,19 @@ namespace Zeus.AddIns.Mailouts.Admin.ActionPlugins
 			return base.IsEnabled(contentItem);
 		}
 
+		public string GetJavascriptHandler(ContentItem contentItem)
+		{
+			return string.Format("function() {{ zeus.reloadContentPanel('Send', '{0}'); }}",
+				GetPageUrl(GetType(), "Zeus.AddIns.Mailouts.Admin.Send.aspx") + "?selected=" + contentItem.Path);
+		}
+
 		public MenuItem GetMenuItem(ContentItem contentItem)
 		{
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Send",
 				IconUrl = Utility.GetCooliteIconUrl(Icon.EmailGo),
-				Handler = string.Format("function() {{ zeus.reloadContentPanel('Send', '{0}'); }}",
-					GetPageUrl(GetType(), "Zeus.AddIns.Mailouts.Admin.Send.aspx") + "?selected=" + contentItem.Path)
+				Handler = GetJavascriptHandler(contentItem)
 			};
 
 			return menuItem;
