@@ -4,8 +4,8 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Coolite.Ext.Web;
-using Coolite.Utilities;
+using Ext.Net;
+using Ext.Net.Utilities;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
@@ -239,8 +239,8 @@ namespace Zeus
 
 		public static string GetCooliteIconUrl(Icon icon)
 		{
-			string iconResourceName = string.Format(ScriptManager.ASSEMBLYSLUG + ".icons.{0}", StringUtils.ToCharacterSeparatedFileName(icon.ToString(), '_', "png"));
-			return WebResourceUtility.GetUrl(typeof(ScriptManager), iconResourceName);
+			string iconResourceName = string.Format(ResourceManager.ASSEMBLYSLUG + ".icons.{0}", StringUtils.ToCharacterSeparatedFileName(icon.ToString(), '_', "png"));
+			return WebResourceUtility.GetUrl(typeof(ResourceManager), iconResourceName);
 		}
 
 		public static string GetClientResourceUrl(Assembly assembly, string relativePath)

@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="AvailableZones.ascx.cs" Inherits="Zeus.Admin.Plugins.EditItem.AvailableZones" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI.WebControls" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" %>
-<%@ Register TagPrefix="ext" Namespace="Coolite.Ext.Web" Assembly="Coolite.Ext.Web" %>
+<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 <ext:FieldSet runat="server" Title="Zones" class="zonesBox">
-	<Body>
+	<Content>
 		<asp:ListView ID="rptZones" runat="server">
 			<LayoutTemplate>
 				<dl>
@@ -28,5 +28,5 @@
 				</asp:ListView>
 			</ItemTemplate>
 		</asp:ListView>
-	</Body>
+	</Content>
 </ext:FieldSet>

@@ -1,5 +1,5 @@
 using System.Web.UI;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentTypes;
 
 namespace Zeus.Web.UI

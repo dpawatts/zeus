@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentProperties;
 using System.Web.UI;
 using ImageButton = System.Web.UI.WebControls.ImageButton;
@@ -177,7 +177,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			FieldSet fs = new FieldSet { Title = Title };
 			container.Controls.Add(fs);
-			fs.BodyControls.Add(itemEditor);
+			fs.ContentControls.Add(itemEditor);
 		}
 
 		protected abstract string Title

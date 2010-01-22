@@ -1,6 +1,4 @@
-﻿using Coolite.Ext.Web;
-using Zeus.Templates.Design.Editors;
-using Zeus.Web;
+﻿using Zeus.Web;
 
 namespace Zeus.Templates.ContentTypes
 {

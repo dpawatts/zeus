@@ -20,7 +20,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ScriptManager scriptManager;
+        protected global::Ext.Net.ResourceManager scriptManager;
         
         /// <summary>
         /// pnlForm control.
@@ -29,7 +29,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.FormPanel pnlForm;
+        protected global::Ext.Net.FormPanel pnlForm;
         
         /// <summary>
         /// chkEnableCache control.
@@ -38,7 +38,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Checkbox chkEnableCache;
+        protected global::Ext.Net.Checkbox chkEnableCache;
         
         /// <summary>
         /// tmeCacheDuration control.
@@ -47,7 +47,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.TimeField tmeCacheDuration;
+        protected global::Ext.Net.TimeField tmeCacheDuration;
         
         /// <summary>
         /// btnSave control.
@@ -56,7 +56,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSave;
+        protected global::Ext.Net.Button btnSave;
         
         /// <summary>
         /// btnCancel control.
@@ -65,7 +65,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnCancel;
+        protected global::Ext.Net.Button btnCancel;
         
         /// <summary>
         /// btnSave2 control.
@@ -74,7 +74,7 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSave2;
+        protected global::Ext.Net.Button btnSave2;
         
         /// <summary>
         /// btnCancel2 control.
@@ -83,6 +83,6 @@ namespace Zeus.Admin.Plugins.PageCaching {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnCancel2;
+        protected global::Ext.Net.Button btnCancel2;
     }
 }

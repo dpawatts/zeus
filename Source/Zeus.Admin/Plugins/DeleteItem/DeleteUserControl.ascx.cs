@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {
-	[AjaxMethodProxyID(Alias = "Delete", IDMode = AjaxMethodProxyIDMode.Alias)]
+	[DirectMethodProxyID(Alias = "Delete", IDMode = DirectMethodProxyIDMode.Alias)]
 	public partial class DeleteUserControl : PluginUserControlBase
 	{
-		[AjaxMethod]
+		[DirectMethod]
 		public void DeleteItems(string ids)
 		{
 			if (string.IsNullOrEmpty(ids))

@@ -1,5 +1,4 @@
-﻿using System.Web.UI.WebControls;
-using Coolite.Ext.Web;
+﻿using Ext.Net;
 using Zeus.ContentTypes;
 using System.Web.UI;
 
@@ -21,21 +20,22 @@ namespace Zeus.Web.UI
 			CustomTabPanel tabControl = container.FindControl("TabControl") as CustomTabPanel;
 			if (tabControl == null)
 			{
-				tabControl = new CustomTabPanel();
-				tabControl.ID = "TabControl";
+				tabControl = new CustomTabPanel { ID = "TabControl" };
 				if (container is ContentPanel)
-					((ContentPanel) container).BodyControls.Add(tabControl);
+					((ContentPanel) container).ContentControls.Add(tabControl);
 				else
 					container.Controls.Add(tabControl);
 			}
 
-			Tab tabItem = new Tab();
-			tabItem.AutoScroll = true;
-			tabItem.AutoHeight = true;
-			tabItem.ID = "tabItem" + Name;
-			tabItem.Title = Title;
-			tabItem.BodyStyle = "padding:5px";
-			tabControl.Tabs.Add(tabItem);
+			Panel tabItem = new Panel
+			{
+				AutoScroll = true,
+				AutoHeight = true,
+				ID = "tabItem" + Name,
+				Title = Title,
+				BodyStyle = "padding:5px"
+			};
+			tabControl.Items.Add(tabItem);
 			return tabItem;
 		}
 	}

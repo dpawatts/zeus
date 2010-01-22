@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.FileSystem;
 using Zeus.Linq;
@@ -11,7 +11,7 @@ using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins.FileManager
 {
-	[AjaxMethodProxyID(Alias = "FileManager", IDMode = AjaxMethodProxyIDMode.Alias)]
+	[DirectMethodProxyID(Alias = "FileManager", IDMode = DirectMethodProxyIDMode.Alias)]
 	public partial class FileManagerUserControl : PluginUserControlBase
 	{
 		public FileManagerUserControl()
@@ -22,7 +22,7 @@ namespace Zeus.Admin.Plugins.FileManager
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			// Data loader.
-			var treeloader = new Coolite.Ext.Web.TreeLoader
+			var treeloader = new Ext.Net.TreeLoader
 				{
 					DataUrl =
 						Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(typeof(FileManagerUserControl).Assembly,
@@ -31,7 +31,7 @@ namespace Zeus.Admin.Plugins.FileManager
 				};
 			treePanel.Loader.Add(treeloader);
 
-			if (Ext.IsAjaxRequest)
+			if (ExtNet.IsAjaxRequest)
 				return;
 
 			ContentItem fileManagerRootFolder = Find.StartPage;

@@ -1,8 +1,6 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Coolite.Ext.Web;
-using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web.UI;
 using ScriptManager = System.Web.UI.ScriptManager;
 

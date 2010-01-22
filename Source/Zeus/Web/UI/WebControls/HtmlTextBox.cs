@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Web.UI.WebControls;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Admin;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public sealed class HtmlTextBox : TextBox
+	public sealed class HtmlTextBox : System.Web.UI.WebControls.TextBox
 	{
 		public HtmlTextBox()
 		{
-			TextMode = TextBoxMode.MultiLine;
+			TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
 		}
 
 		#region Properties
@@ -91,7 +90,7 @@ namespace Zeus.Web.UI.WebControls
 
 			// If this control is within an ExtJS Tab that is initially hidden, we need to register the script in the TabChanged
 			// event instead of on the initial window load.
-			Tab parentTab = this.FindParent<Tab>();
+			Panel parentTab = this.FindParent<Panel>();
 			if (parentTab != null && parentTab.ParentComponent is TabPanel && ((TabPanel) parentTab.ParentComponent).ActiveTab != parentTab)
 			{
 				Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),

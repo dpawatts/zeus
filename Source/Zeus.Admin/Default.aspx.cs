@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Web.UI;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Admin.Plugins;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using System.Configuration;
 using Zeus.Security;
 using Zeus.Web.UI;
-using ScriptManager = Coolite.Ext.Web.ScriptManager;
 
 namespace Zeus.Admin
 {
@@ -67,12 +66,12 @@ namespace Zeus.Admin
 			get { return stbStatusBar; }
 		}
 
-		private ScriptManager ScriptManager
+		private ResourceManager ScriptManager
 		{
-			get { return ScriptManager.GetInstance(this); }
+			get { return ResourceManager.GetInstance(this); }
 		}
 
-		public ViewPort ViewPort
+		public Viewport ViewPort
 		{
 			get { return extViewPort; }
 		}

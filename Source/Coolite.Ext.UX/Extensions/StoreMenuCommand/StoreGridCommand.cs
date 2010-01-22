@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Web.UI;
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Coolite.Ext.UX
 {
@@ -8,7 +8,7 @@ namespace Coolite.Ext.UX
 	{
 		private StoreCommandMenu _menu;
 
-		[ClientConfig("menu", JsonMode.Object)]
+		[ConfigOption("menu", JsonMode.Object)]
 		[Category("Config Options")]
 		[NotifyParentProperty(true)]
 		[DefaultValue(null)]
@@ -30,7 +30,7 @@ namespace Coolite.Ext.UX
 	//[InstanceOf(ClassName = "Ext.ux.menu.StoreMenu")]
 	public class StoreCommandMenu : CommandMenu
 	{
-		[ClientConfig]
+		[ConfigOption]
 		[Category("Config Options")]
 		[DefaultValue("")]
 		public virtual string Xtype
@@ -38,7 +38,7 @@ namespace Coolite.Ext.UX
 			get { return "storemenu"; }
 		}
 
-		[ClientConfig]
+		[ConfigOption]
 		[Category("Config Options")]
 		[DefaultValue("")]
 		[Description("The URL to fetch the menu items from")]
@@ -57,7 +57,7 @@ namespace Coolite.Ext.UX
 
 		private FakeParameterCollection _baseParams;
 
-		[ClientConfig("baseParams", JsonMode.Object)]
+		[ConfigOption("baseParams", JsonMode.Object)]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		[PersistenceMode(PersistenceMode.InnerProperty)]
 		public FakeParameterCollection BaseParams
@@ -76,7 +76,7 @@ namespace Coolite.Ext.UX
 	{
 		[DefaultValue("")]
 		[NotifyParentProperty(true)]
-		[ClientConfig]
+		[ConfigOption]
 		public string Node
 		{
 			get

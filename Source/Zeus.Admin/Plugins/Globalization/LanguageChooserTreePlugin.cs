@@ -1,6 +1,6 @@
 using System.Web.UI.WebControls;
 using Coolite.Ext.UX;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Configuration;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;

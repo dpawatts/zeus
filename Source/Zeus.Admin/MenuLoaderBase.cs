@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Newtonsoft.Json.Linq;
 
 namespace Zeus.Admin
@@ -28,7 +28,7 @@ namespace Zeus.Admin
 			}
 		}
 
-		private static object GetObjectForJsonSerialization(BaseMenuItem baseMenuItem)
+		private static object GetObjectForJsonSerialization(Component baseMenuItem)
 		{
 			if (baseMenuItem is MenuSeparator)
 				return "-";

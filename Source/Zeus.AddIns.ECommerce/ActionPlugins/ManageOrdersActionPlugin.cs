@@ -1,6 +1,5 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
-using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.ECommerce.ActionPlugins

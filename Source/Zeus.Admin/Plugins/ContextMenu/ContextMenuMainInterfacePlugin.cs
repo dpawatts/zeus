@@ -1,6 +1,6 @@
 using System.Web.UI;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
-using ScriptManager=Coolite.Ext.Web.ScriptManager;
 
 [assembly: WebResource("Zeus.Admin.Plugins.ContextMenu.Resources.Ext.ux.zeus.ContextMenuPlugin.js", "text/javascript")]
 
@@ -18,7 +18,7 @@ namespace Zeus.Admin.Plugins.ContextMenu
 			}
 		}
 
-		public override void RegisterScripts(ScriptManager scriptManager)
+		public override void RegisterScripts(ResourceManager scriptManager)
 		{
 			// Render action plugin scripts.
 			scriptManager.RegisterClientScriptInclude("ActionPlugin",

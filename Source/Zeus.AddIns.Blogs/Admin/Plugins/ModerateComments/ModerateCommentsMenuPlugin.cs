@@ -1,4 +1,4 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.AddIns.Blogs.ContentTypes;
 using Zeus.Admin;
 using Zeus.Admin.Plugins;

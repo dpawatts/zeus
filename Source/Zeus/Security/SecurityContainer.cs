@@ -1,5 +1,4 @@
-﻿using Coolite.Ext.Web;
-using Zeus.BaseLibrary.Web.UI;
+﻿using Ext.Net;
 using Zeus.Integrity;
 
 namespace Zeus.Security.ContentTypes

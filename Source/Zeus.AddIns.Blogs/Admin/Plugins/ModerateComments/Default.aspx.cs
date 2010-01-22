@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.AddIns.Blogs.ContentTypes;
-using Zeus.AddIns.Blogs.Services;
 using Zeus.Admin;
 
 namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
@@ -12,7 +11,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!Ext.IsAjaxRequest)
+			if (!ExtNet.IsAjaxRequest)
 			{
 				cboFilterStatus.SelectedItem.Value = cboFilterStatus.Items[0].Value;
 				cboFilterType.SelectedItem.Value = cboFilterType.Items[0].Value;
@@ -26,12 +25,12 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			RefreshData();
 		}
 
-		protected void cboFilterStatus_Select(object sender, AjaxEventArgs e)
+		protected void cboFilterStatus_Select(object sender, DirectEventArgs e)
 		{
 			RefreshData();
 		}
 
-		protected void cboFilterType_Select(object sender, AjaxEventArgs e)
+		protected void cboFilterType_Select(object sender, DirectEventArgs e)
 		{
 			RefreshData();
 		}
@@ -66,7 +65,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			exsDataStore.DataBind();
 		}
 
-		protected void SubmitSpam(object sender, AjaxEventArgs e)
+		protected void SubmitSpam(object sender, DirectEventArgs e)
 		{
 			string json = e.ExtraParams["Values"];
 			if (string.IsNullOrEmpty(json))
@@ -90,7 +89,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			RefreshData();
 		}
 
-		protected void ApproveFeedback(object sender, AjaxEventArgs e)
+		protected void ApproveFeedback(object sender, DirectEventArgs e)
 		{
 			string json = e.ExtraParams["Values"];
 			if (string.IsNullOrEmpty(json))

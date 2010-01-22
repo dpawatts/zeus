@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.Design.Editors;
 using Zeus.ContentProperties;

@@ -1,5 +1,5 @@
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins.Globalization.DeleteLanguage
 {

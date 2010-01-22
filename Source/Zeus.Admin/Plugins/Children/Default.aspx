@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Children.Default" %>
-<%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
-	<ext:ScriptManager runat="server" ID="scriptManager" Theme="Gray" />
+	<ext:ResourceManager runat="server" ID="scriptManager" Theme="Gray" />
 	
 	<script type="text/javascript">
 		var renderIcon = function(value, p, record) {
@@ -15,7 +15,8 @@
 			button.menu = new Ext.ux.menu.StoreMenu({
 				baseParams: { node: record.data.ID },
 				url: "/admin/Plugins/ContextMenu/ContextMenuLoader.ashx",
-				xtype:"storemenu"
+				xtype:"storemenu",
+				items: []
 			});
 			button.el.child(button.menuClassTarget).addClass("x-btn-with-menu");
 			button.menu.on("show", button.onMenuShow, button);
@@ -25,7 +26,7 @@
 	
 	<ext:Store ID="exsDataStore" runat="server" OnRefreshData="exsDataStore_RefreshData">
 		<Reader>
-			<ext:ArrayReader ReaderID="ID">
+			<ext:ArrayReader IDProperty="ID">
 				<Fields>
 					<ext:RecordField Name="ID" Mapping="ID" Type="Int" />
 					<ext:RecordField Name="Title" Mapping="Title" />
@@ -39,44 +40,46 @@
 		</Reader>
 	</ext:Store>
 	
-	<ext:ViewPort runat="server">
-		<Body>
+	<ext:Viewport runat="server">
+		<Content>
 			<ext:FitLayout runat="server">
-				<ext:GridPanel runat="server" ID="gpaChildren" StoreID="exsDataStore" StripeRows="true" Border="false">
-					<TopBar>
-						<ext:Toolbar runat="server" ID="TopToolbar" />
-					</TopBar>
-					<ColumnModel>
-						<Columns>
-							<ext:Column ColumnID="Icon" Header="" Width="30" DataIndex="IconUrl">
-								<Renderer Fn="renderIcon" />
-							</ext:Column>
-							<ext:Column ColumnID="Title" Header="Title" Width="200" Sortable="true" DataIndex="Title" />
-							<ext:Column ColumnID="Name" Header="Identifier" Width="200" Sortable="true" DataIndex="Name" />
-							<ext:Column ColumnID="Created" Header="Created" Width="100" Sortable="true" DataIndex="Created">
-								<Renderer Fn="Ext.util.Format.dateRenderer('d/m/Y H:i')" />
-							</ext:Column>
-							<ext:Column ColumnID="Updated" Header="Updated" Width="100" Sortable="true" DataIndex="Updated">
-								<Renderer Fn="Ext.util.Format.dateRenderer('d/m/Y H:i')" />
-							</ext:Column>
-							<ext:CheckColumn ColumnID="Visible" Header="Visible" Width="50" Sortable="true" DataIndex="Visible" />
-							<ext:CommandColumn>
-								<Commands>
-									<ext:GridCommand Text="Actions" />
-								</Commands>
-								<PrepareToolbar Fn="prepareToolbar" />
-							</ext:CommandColumn>
-						</Columns>
-					</ColumnModel>
-					<SelectionModel>
-						<ext:CheckboxSelectionModel />
-					</SelectionModel>
-					<LoadMask ShowMask="true" />
-					<BottomBar>
-						<ext:PagingToolBar runat="server" PageSize="10" StoreID="exsDataStore" />
-					</BottomBar>
-				</ext:GridPanel>
+				<Items>
+					<ext:GridPanel runat="server" ID="gpaChildren" StoreID="exsDataStore" StripeRows="true" Border="false">
+						<TopBar>
+							<ext:Toolbar runat="server" ID="TopToolbar" />
+						</TopBar>
+						<ColumnModel>
+							<Columns>
+								<ext:Column ColumnID="Icon" Header="" Width="30" DataIndex="IconUrl">
+									<Renderer Fn="renderIcon" />
+								</ext:Column>
+								<ext:Column ColumnID="Title" Header="Title" Width="200" Sortable="true" DataIndex="Title" />
+								<ext:Column ColumnID="Name" Header="Identifier" Width="200" Sortable="true" DataIndex="Name" />
+								<ext:Column ColumnID="Created" Header="Created" Width="100" Sortable="true" DataIndex="Created">
+									<Renderer Fn="Ext.util.Format.dateRenderer('d/m/Y H:i')" />
+								</ext:Column>
+								<ext:Column ColumnID="Updated" Header="Updated" Width="100" Sortable="true" DataIndex="Updated">
+									<Renderer Fn="Ext.util.Format.dateRenderer('d/m/Y H:i')" />
+								</ext:Column>
+								<ext:CheckColumn ColumnID="Visible" Header="Visible" Width="50" Sortable="true" DataIndex="Visible" />
+								<ext:CommandColumn>
+									<Commands>
+										<ext:GridCommand Text="Actions" />
+									</Commands>
+									<PrepareToolbar Fn="prepareToolbar" />
+								</ext:CommandColumn>
+							</Columns>
+						</ColumnModel>
+						<SelectionModel>
+							<ext:CheckboxSelectionModel />
+						</SelectionModel>
+						<LoadMask ShowMask="true" />
+						<BottomBar>
+							<ext:PagingToolBar runat="server" PageSize="10" StoreID="exsDataStore" />
+						</BottomBar>
+					</ext:GridPanel>
+				</Items>
 			</ext:FitLayout>
-		</Body>
-	</ext:ViewPort>
+		</Content>
+	</ext:Viewport>
 </asp:Content>

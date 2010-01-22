@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Coolite.Ext.UX;
-using Coolite.Ext.Web;
-using Zeus.Admin.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
@@ -68,7 +67,7 @@ namespace Zeus.Admin.Plugins.EditItem
 				btnSave.Text = btnSave2.Text = "Save";
 			}
 
-			if (!Ext.IsAjaxRequest && GlobalizationEnabled)
+			if (!ExtNet.IsAjaxRequest && GlobalizationEnabled)
 			{
 				foreach (Language language in Engine.Resolve<ILanguageManager>().GetAvailableLanguages())
 				{

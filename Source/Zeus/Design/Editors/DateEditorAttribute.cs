@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentTypes;
 
 namespace Zeus.Design.Editors

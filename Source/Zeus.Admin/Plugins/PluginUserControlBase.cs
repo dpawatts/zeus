@@ -1,4 +1,4 @@
-﻿using Coolite.Ext.Web;
+﻿using Ext.Net;
 using Zeus.Engine;
 
 namespace Zeus.Admin.Plugins
@@ -18,7 +18,7 @@ namespace Zeus.Admin.Plugins
 
 		protected void Refresh(ContentItem item)
 		{
-			ScriptManager.GetInstance(Page).AddScript("zeus.refresh('{0}', '{1}');", item.ID, item.Url);
+			ResourceManager.GetInstance(Page).AddScript("zeus.refresh('{0}', '{1}');", item.ID, item.Url);
 		}
 	}
 }

@@ -1,12 +1,12 @@
-using Coolite.Ext.Web;
 using System.Web.UI;
+using Ext.Net;
 
 namespace Zeus.Admin
 {
 	public interface IMainInterface
 	{
 		StatusBar StatusBar { get; }
-		ViewPort ViewPort { get; }
+		Viewport ViewPort { get; }
 		BorderLayout BorderLayout { get; }
 
 		void LoadUserControls(string[] virtualPaths);

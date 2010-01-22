@@ -1,11 +1,11 @@
-﻿using Coolite.Ext.Web;
+﻿using Ext.Net;
 
 namespace Zeus.Admin.Plugins.Globalization
 {
-	[AjaxMethodProxyID(Alias = "LanguageChooser", IDMode = AjaxMethodProxyIDMode.Alias)]
+	[DirectMethodProxyID(Alias = "LanguageChooser", IDMode = DirectMethodProxyIDMode.Alias)]
 	public partial class LanguageChooserUserControl : PluginUserControlBase
 	{
-		[AjaxMethod]
+		[DirectMethod]
 		public void ChangeLanguage(string languageCode)
 		{
 			Zeus.Context.AdminManager.CurrentAdminLanguageBranch = languageCode;

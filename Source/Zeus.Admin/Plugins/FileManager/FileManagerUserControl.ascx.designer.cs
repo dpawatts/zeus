@@ -20,7 +20,7 @@ namespace Zeus.Admin.Plugins.FileManager {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Store filesStore;
+			protected global::Ext.Net.Store filesStore;
         
         /// <summary>
         /// imageChooser control.
@@ -29,7 +29,7 @@ namespace Zeus.Admin.Plugins.FileManager {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Window imageChooser;
+			protected global::Ext.Net.Window imageChooser;
         
         /// <summary>
         /// treePanel control.
@@ -38,7 +38,7 @@ namespace Zeus.Admin.Plugins.FileManager {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.TreePanel treePanel;
+			protected global::Ext.Net.TreePanel treePanel;
         
         /// <summary>
         /// imageChooserView control.
@@ -47,6 +47,6 @@ namespace Zeus.Admin.Plugins.FileManager {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.DataView imageChooserView;
+			protected global::Ext.Net.DataView imageChooserView;
     }
 }

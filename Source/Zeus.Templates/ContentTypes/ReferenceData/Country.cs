@@ -1,8 +1,7 @@
-﻿using Zeus.BaseLibrary;
+﻿using Ext.Net;
+using Zeus.BaseLibrary;
 using Zeus.Integrity;
 using Zeus.Design.Editors;
-using Coolite.Ext.Web;
-using System;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData
 {
@@ -38,25 +37,25 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 		public string Numeric
 		{
 			get { return GetDetail<string>("Numeric", null); }
-			set { SetDetail<string>("Numeric", value); }
+			set { SetDetail("Numeric", value); }
 		}
 
 		public string Alpha2
 		{
 			get { return GetDetail<string>("Alpha2", null); }
-			set { SetDetail<string>("Alpha2", value); }
+			set { SetDetail("Alpha2", value); }
 		}
 
 		public string Alpha3
 		{
 			get { return GetDetail<string>("Alpha3", null); }
-			set { SetDetail<string>("Alpha3", value); }
+			set { SetDetail("Alpha3", value); }
 		}
 
 		public Icon Icon
 		{
-			get { return GetDetail<Icon>("Icon", Icon.Map); }
-			set { SetDetail<Icon>("Icon", value); }
+			get { return GetDetail("Icon", Icon.Map); }
+			set { SetDetail("Icon", value); }
 		}
 
 		public override string IconUrl

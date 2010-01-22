@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentTypes;
 using System.Web.UI;
 using System.Web.Compilation;
@@ -283,7 +283,7 @@ namespace Zeus.Web.UI.WebControls
 			string status = (item.ID != 0) ? "ID #" + item.ID : "(Unsaved)";
 			fs.Title = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status;
 			container.Controls.Add(fs);
-			fs.BodyControls.Add(itemEditor);
+			fs.ContentControls.Add(itemEditor);
 		}
 
 		public ContentItem ParentItem

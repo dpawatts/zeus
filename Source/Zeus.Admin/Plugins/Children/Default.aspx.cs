@@ -1,6 +1,6 @@
 ﻿using System;
 using Coolite.Ext.UX;
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins.Children
 {
@@ -11,7 +11,7 @@ namespace Zeus.Admin.Plugins.Children
 			// Render grid toolbar action plugin buttons.
 			foreach (IGridToolbarPlugin toolbarPlugin in Engine.ResolveAll<IGridToolbarPlugin>())
 			{
-				ToolbarButton button = toolbarPlugin.GetToolbarButton(SelectedItem, gpaChildren);
+				Button button = toolbarPlugin.GetToolbarButton(SelectedItem, gpaChildren);
 				TopToolbar.Items.Add(button);
 
 				toolbarPlugin.ModifyGrid(button, gpaChildren);
@@ -22,9 +22,9 @@ namespace Zeus.Admin.Plugins.Children
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!Ext.IsAjaxRequest)
+			if (!ExtNet.IsAjaxRequest)
 			{
-				ScriptManager.GetInstance(this).RegisterClientScriptInclude(typeof(StoreMenu), "Coolite.Ext.UX.Extensions.StoreMenu.resources.ext.ux.menu.storemenu.js");
+				ResourceManager.GetInstance(this).RegisterClientScriptInclude(typeof(StoreMenu), "Coolite.Ext.UX.Extensions.StoreMenu.resources.ext.ux.menu.storemenu.js");
 				RefreshData();
 			}
 		}

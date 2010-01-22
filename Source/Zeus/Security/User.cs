@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
-using Zeus.Web.Security;
 using Zeus.Web.Security.Details;
 using Zeus.Web.Security.Items;
 

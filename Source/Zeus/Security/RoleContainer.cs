@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using Coolite.Ext.Web;
-using Zeus.ContentTypes;
+using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Security.ContentTypes;
 

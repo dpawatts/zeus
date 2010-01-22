@@ -1,11 +1,10 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web.Hosting;
 using Zeus.BaseLibrary.Web.UI;
 
 [assembly: System.Web.UI.WebResource("Zeus.Admin.Plugins.Tree.Resources.TreeCssInitializer.js", "text/javascript")]
-
 namespace Zeus.Admin.Plugins.Tree
 {
 	public class TreeMainInterfacePlugin : MainInterfacePluginBase
@@ -35,17 +34,17 @@ namespace Zeus.Admin.Plugins.Tree
 			treePanel.TopBar.Add(topToolbar);
 			topToolbar.Items.Add(new ToolbarFill());
 
-			ToolbarButton refreshButton = new ToolbarButton { Icon = Icon.Reload };
+			Button refreshButton = new Button { Icon = Icon.Reload };
 			refreshButton.ToolTips.Add(new ToolTip { Html = "Refresh" });
 			refreshButton.Listeners.Click.Handler = string.Format("{0}.getLoader().load({0}.getRootNode());", treePanel.ClientID);
 			topToolbar.Items.Add(refreshButton);
 
-			ToolbarButton expandAllButton = new ToolbarButton { IconCls = "icon-expand-all" };
+			Button expandAllButton = new Button { IconCls = "icon-expand-all" };
 			expandAllButton.ToolTips.Add(new ToolTip { Html = "Expand All" });
 			expandAllButton.Listeners.Click.Handler = string.Format("{0}.expandAll();", treePanel.ClientID);
 			topToolbar.Items.Add(expandAllButton);
 
-			ToolbarButton collapseAllButton = new ToolbarButton { IconCls = "icon-collapse-all" };
+			Button collapseAllButton = new Button { IconCls = "icon-collapse-all" };
 			collapseAllButton.ToolTips.Add(new ToolTip { Html = "Collapse All" });
 			collapseAllButton.Listeners.Click.Handler = string.Format("{0}.collapseAll();", treePanel.ClientID);
 			topToolbar.Items.Add(collapseAllButton);
@@ -57,7 +56,7 @@ namespace Zeus.Admin.Plugins.Tree
 					Modal = true,
 					Icon = Icon.Help,
 					Title = "Help",
-					ShowOnLoad = false,
+					Hidden = true,
 					Html = "This is the site tree. You can use this to view all the pages on your site. Right-click any item to edit or delete it, as well as create additional pages.<br /><br />The main branches of the root node tree are the main sections of the admin system. Each section is broken down into smaller sections, accessed by expanding the + sign. (Wherever you see a + sign, the section can be broken down into further sections).<br /><br />When you receive your admin system, you will notice the first main section (after the Root Node) will be divided into the main sections of your website. (Example sections may include: Homepage, About Us, News, Links and Contact pages.) To see these pages, as they appear on the website, simply click the relevant node – it will then appear in the right hand pane.",
 					BodyStyle = "padding:5px",
 					Width = 300,
@@ -66,14 +65,14 @@ namespace Zeus.Admin.Plugins.Tree
 				};
 			mainInterface.AddControl(helpWindow);
 
-			ToolbarButton helpButton = new ToolbarButton();
+			Button helpButton = new Button();
 			helpButton.Icon = Icon.Help;
 			helpButton.ToolTips.Add(new ToolTip { Html = "Help" });
 			helpButton.Listeners.Click.Handler = string.Format("{0}.show();", helpWindow.ClientID);
 			topToolbar.Items.Add(helpButton);
 
 			// Data loader.
-			var treeLoader = new Coolite.Ext.Web.TreeLoader
+			var treeLoader = new Ext.Net.TreeLoader
 				{
 					DataUrl = Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(GetType().Assembly,
 						"Zeus.Admin.Plugins.Tree.TreeLoader.ashx"),
@@ -92,7 +91,7 @@ namespace Zeus.Admin.Plugins.Tree
 				treePlugin.ModifyTree(treePanel, mainInterface);
 			}
 
-			if (!Ext.IsAjaxRequest)
+			if (!ExtNet.IsAjaxRequest)
 			{
 				TreeNodeBase treeNode = SiteTree.Between(Find.StartPage, Find.RootItem, true)
 					.OpenTo(Find.StartPage)
@@ -102,7 +101,7 @@ namespace Zeus.Admin.Plugins.Tree
 			}
 		}
 
-		public override void RegisterScripts(ScriptManager scriptManager)
+		public override void RegisterScripts(ResourceManager scriptManager)
 		{
 			scriptManager.RegisterClientScriptInclude("TreeCssInitializer",
 				WebResourceUtility.GetUrl(GetType(), "Zeus.Admin.Plugins.Tree.Resources.TreeCssInitializer.js"));

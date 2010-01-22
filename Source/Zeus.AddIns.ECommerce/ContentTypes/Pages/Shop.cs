@@ -1,6 +1,5 @@
-using System;
 using System.Linq;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;

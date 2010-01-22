@@ -1,5 +1,4 @@
-using System.Web.UI;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Security;
 
@@ -29,16 +28,16 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			get { return 1; }
 		}
 
-		public override void ModifyGrid(ToolbarButton button, GridPanel gridPanel)
+		public override void ModifyGrid(Button button, GridPanel gridPanel)
 		{
 			CheckboxSelectionModel selectionModel = (CheckboxSelectionModel) gridPanel.SelectionModel.Primary;
 			selectionModel.Listeners.RowSelect.Handler = string.Format("{0}.enable();", button.ClientID);
 			selectionModel.Listeners.RowDeselect.Handler = string.Format("if (!{0}.hasSelection()) {{{1}.disable();}}", gridPanel.ClientID, button.ClientID);
 		}
 
-		public override ToolbarButton GetToolbarButton(ContentItem contentItem, GridPanel gridPanel)
+		public override Button GetToolbarButton(ContentItem contentItem, GridPanel gridPanel)
 		{
-			ToolbarButton toolbarButton = new ToolbarButton
+			Button toolbarButton = new Button
 			{
 				Text = "Delete",
 				Icon = Icon.Delete,

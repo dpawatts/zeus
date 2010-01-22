@@ -1,4 +1,4 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;

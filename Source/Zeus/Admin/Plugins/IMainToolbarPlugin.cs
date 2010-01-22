@@ -1,10 +1,10 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins
 {
 	public interface IMainToolbarPlugin : IToolbarPlugin
 	{
-		ToolbarButton GetToolbarButton();
+		Button GetToolbarButton();
 		bool IsEnabled();
 	}
 }

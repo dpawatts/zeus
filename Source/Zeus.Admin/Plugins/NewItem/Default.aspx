@@ -1,18 +1,18 @@
 ﻿<%@ Page Title="Add New Item" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.NewItem.Default" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI.WebControls" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
-<%@ Register TagPrefix="ext" Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" %>
+<%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
 <%@ Import Namespace="Zeus.ContentTypes" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
-	<ext:ScriptManager runat="server" Theme="Gray" />
+	<ext:ResourceManager runat="server" Theme="Gray" />
 	
 	<ext:TabPanel runat="server" ID="tbcTabs" BodyStyle="padding:5px">
-		<Tabs>
-			<ext:Tab runat="server" ID="tbpType" Title="Type">
-				<Body>
+		<Items>
+			<ext:Panel runat="server" ID="tbpType" Title="Type">
+				<Content>
 					<asp:ListView runat="server" ID="lsvChildTypes">
 						<LayoutTemplate>
 							<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
@@ -28,11 +28,11 @@
 							<p>You cannot add an item below this location.</p>
 						</EmptyDataTemplate>
 					</asp:ListView>
-				</Body>
-			</ext:Tab>
+				</Content>
+			</ext:Panel>
 			
-			<ext:Tab runat="server" ID="tbpPosition" Title="Position">
-				<Body>
+			<ext:Panel runat="server" ID="tbpPosition" Title="Position">
+				<Content>
 					<asp:Label ID="lblPosition" runat="server" Text="Select at what position to create the item" />
 					<asp:RadioButtonList runat="server" ID="rblPosition" AutoPostBack="true" OnSelectedIndexChanged="rblPosition_OnSelectedIndexChanged" CssClass="position">
 						<asp:ListItem Value="0">
@@ -81,17 +81,17 @@
 							</blockquote>
 						</asp:ListItem>
 					</asp:RadioButtonList>
-				</Body>
-			</ext:Tab>
+				</Content>
+			</ext:Panel>
 			
-			<ext:Tab runat="server" ID="tbpZone" Title="Zone">
-				<Body>
+			<ext:Panel runat="server" ID="tbpZone" Title="Zone">
+				<Content>
 					<asp:Label ID="lblZone" runat="server" Text="Create new item in zone" />
 					<asp:RadioButtonList runat="server" ID="rblZone" CssClass="zones" DataTextField="Title" DataValueField="ZoneName" AutoPostBack="true" OnSelectedIndexChanged="rblZone_OnSelectedIndexChanged">
 						<asp:ListItem Value="" Selected="true">Default</asp:ListItem>
 					</asp:RadioButtonList>
-				</Body>
-			</ext:Tab>
-		</Tabs>
+				</Content>
+			</ext:Panel>
+		</Items>
 	</ext:TabPanel>
 </asp:Content>

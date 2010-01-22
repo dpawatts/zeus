@@ -1,6 +1,5 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Security;
-using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.Preview
 {

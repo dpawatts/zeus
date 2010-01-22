@@ -1,4 +1,4 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins
 {
@@ -7,7 +7,7 @@ namespace Zeus.Admin.Plugins
 		string[] RequiredUserControls { get; }
 
 		void ModifyInterface(IMainInterface mainInterface);
-		void RegisterScripts(ScriptManager scriptManager);
-		void RegisterStyles(ScriptManager scriptManager);
+		void RegisterScripts(ResourceManager scriptManager);
+		void RegisterStyles(ResourceManager scriptManager);
 	}
 }

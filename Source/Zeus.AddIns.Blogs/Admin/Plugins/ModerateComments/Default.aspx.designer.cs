@@ -20,7 +20,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ScriptManager scriptManager;
+        protected global::Ext.Net.ResourceManager scriptManager;
         
         /// <summary>
         /// exsDataStore control.
@@ -29,7 +29,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Store exsDataStore;
+        protected global::Ext.Net.Store exsDataStore;
         
         /// <summary>
         /// gpaComments control.
@@ -38,7 +38,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.GridPanel gpaComments;
+        protected global::Ext.Net.GridPanel gpaComments;
         
         /// <summary>
         /// btnApprove control.
@@ -47,7 +47,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnApprove;
+        protected global::Ext.Net.Button btnApprove;
         
         /// <summary>
         /// btnSpam control.
@@ -56,7 +56,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSpam;
+        protected global::Ext.Net.Button btnSpam;
         
         /// <summary>
         /// cboFilterType control.
@@ -65,7 +65,7 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ComboBox cboFilterType;
+        protected global::Ext.Net.ComboBox cboFilterType;
         
         /// <summary>
         /// cboFilterStatus control.
@@ -74,6 +74,6 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ComboBox cboFilterStatus;
+        protected global::Ext.Net.ComboBox cboFilterStatus;
     }
 }

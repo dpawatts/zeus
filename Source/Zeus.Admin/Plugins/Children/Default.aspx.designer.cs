@@ -19,7 +19,7 @@ namespace Zeus.Admin.Plugins.Children
 		/// Auto-generated field.
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
-		protected global::Coolite.Ext.Web.ScriptManager scriptManager;
+		protected global::Ext.Net.ResourceManager scriptManager;
         
 		/// <summary>
 		/// exsDataStore control.
@@ -28,7 +28,7 @@ namespace Zeus.Admin.Plugins.Children
 		/// Auto-generated field.
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
-		protected global::Coolite.Ext.Web.Store exsDataStore;
+		protected global::Ext.Net.Store exsDataStore;
         
 		/// <summary>
 		/// gpaChildren control.
@@ -37,7 +37,7 @@ namespace Zeus.Admin.Plugins.Children
 		/// Auto-generated field.
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
-		protected global::Coolite.Ext.Web.GridPanel gpaChildren;
+		protected global::Ext.Net.GridPanel gpaChildren;
         
 		/// <summary>
 		/// TopToolbar control.
@@ -46,6 +46,6 @@ namespace Zeus.Admin.Plugins.Children
 		/// Auto-generated field.
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
-		protected global::Coolite.Ext.Web.Toolbar TopToolbar;
+		protected global::Ext.Net.Toolbar TopToolbar;
 	}
 }

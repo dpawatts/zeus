@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web.UI;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
@@ -95,8 +95,8 @@ namespace Zeus.Design.Editors
 
 			FieldSet fieldSet = new FieldSet { ID = Name + "fieldSet", Title = Title };
 			if (!string.IsNullOrEmpty(Description))
-				fieldSet.BodyControls.Add(new LiteralControl("<span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
-			fieldSet.BodyControls.Add(editor);
+				fieldSet.ContentControls.Add(new LiteralControl("<span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
+			fieldSet.ContentControls.Add(editor);
 
 			panel.Controls.Add(fieldSet);
 

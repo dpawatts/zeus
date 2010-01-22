@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Security;
 
 namespace Zeus.Admin.Plugins.MoveItem
 {
-	[AjaxMethodProxyID(Alias = "Move", IDMode = AjaxMethodProxyIDMode.Alias)]
+	[DirectMethodProxyID(Alias = "Move", IDMode = DirectMethodProxyIDMode.Alias)]
 	public partial class MoveUserControl : PluginUserControlBase
 	{
-		[AjaxMethod]
+		[DirectMethod]
 		public void MoveNode(int source, int destination, int pos)
 		{
 			ContentItem sourceContentItem = Engine.Persister.Get(source);
@@ -16,7 +16,7 @@ namespace Zeus.Admin.Plugins.MoveItem
 			// Check user has permission to create items under the SelectedItem
 			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, Page.User, Operations.Create))
 			{
-				Ext.MessageBox.Alert("Cannot move item", "You are not authorised to move an item to this location.");
+				ExtNet.MessageBox.Alert("Cannot move item", "You are not authorised to move an item to this location.");
 				return;
 			}
 

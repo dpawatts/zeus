@@ -1,11 +1,11 @@
-using Coolite.Ext.Web;
+using Ext.Net;
 
 namespace Zeus.Admin.Plugins
 {
 	public interface IGridToolbarPlugin : IToolbarPlugin
 	{
-		ToolbarButton GetToolbarButton(ContentItem contentItem, GridPanel gridPanel);
-		void ModifyGrid(ToolbarButton button, GridPanel gridPanel);
+		Button GetToolbarButton(ContentItem contentItem, GridPanel gridPanel);
+		void ModifyGrid(Button button, GridPanel gridPanel);
 		bool IsEnabled(ContentItem contentItem);
 	}
 }

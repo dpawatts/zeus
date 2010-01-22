@@ -1,13 +1,13 @@
 ﻿using System;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Web.Caching;
 
 namespace Zeus.Admin.Plugins.PageCaching
 {
-	[AjaxMethodProxyID(Alias = "PageCaching", IDMode = AjaxMethodProxyIDMode.Alias)]
+	[DirectMethodProxyID(Alias = "PageCaching", IDMode = DirectMethodProxyIDMode.Alias)]
 	public partial class PageCachingUserControl : PluginUserControlBase
 	{
-		[AjaxMethod]
+		[DirectMethod]
 		public void DeleteCachedPage(string id)
 		{
 			if (string.IsNullOrEmpty(id))

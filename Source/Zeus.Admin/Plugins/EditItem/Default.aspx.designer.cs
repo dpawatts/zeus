@@ -56,7 +56,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSave;
+        protected global::Ext.Net.Button btnSave;
         
         /// <summary>
         /// btnSaveUnpublished control.
@@ -65,7 +65,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSaveUnpublished;
+        protected global::Ext.Net.Button btnSaveUnpublished;
         
         /// <summary>
         /// btnPreview control.
@@ -74,7 +74,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnPreview;
+        protected global::Ext.Net.Button btnPreview;
         
         /// <summary>
         /// btnCancel control.
@@ -83,7 +83,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnCancel;
+        protected global::Ext.Net.Button btnCancel;
         
         /// <summary>
         /// txiLanguages control.
@@ -92,7 +92,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ToolbarTextItem txiLanguages;
+        protected global::Ext.Net.ToolbarTextItem txiLanguages;
         
         /// <summary>
         /// ddlLanguages control.
@@ -110,7 +110,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnZones;
+        protected global::Ext.Net.Button btnZones;
         
         /// <summary>
         /// btnSave2 control.
@@ -119,7 +119,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSave2;
+        protected global::Ext.Net.Button btnSave2;
         
         /// <summary>
         /// btnSaveUnpublished2 control.
@@ -128,7 +128,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnSaveUnpublished2;
+        protected global::Ext.Net.Button btnSaveUnpublished2;
         
         /// <summary>
         /// btnPreview2 control.
@@ -137,7 +137,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnPreview2;
+        protected global::Ext.Net.Button btnPreview2;
         
         /// <summary>
         /// btnCancel2 control.
@@ -146,7 +146,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnCancel2;
+        protected global::Ext.Net.Button btnCancel2;
         
         /// <summary>
         /// txiLanguages2 control.
@@ -155,7 +155,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.ToolbarTextItem txiLanguages2;
+        protected global::Ext.Net.ToolbarTextItem txiLanguages2;
         
         /// <summary>
         /// ddlLanguages2 control.
@@ -173,7 +173,7 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Coolite.Ext.Web.Button btnZones2;
+        protected global::Ext.Net.Button btnZones2;
         
         /// <summary>
         /// uscZones control.

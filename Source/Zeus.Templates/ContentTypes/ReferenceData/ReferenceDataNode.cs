@@ -1,6 +1,6 @@
-﻿using Zeus.Integrity;
+﻿using Ext.Net;
+using Zeus.Integrity;
 using Zeus.ContentTypes;
-using Coolite.Ext.Web;
 
 namespace Zeus.Templates.ContentTypes.ReferenceData
 {

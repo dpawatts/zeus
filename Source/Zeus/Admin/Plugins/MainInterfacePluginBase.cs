@@ -1,5 +1,5 @@
 using System;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Admin.Plugins
@@ -26,7 +26,7 @@ namespace Zeus.Admin.Plugins
 			
 		}
 
-		public virtual void RegisterScripts(ScriptManager scriptManager)
+		public virtual void RegisterScripts(ResourceManager scriptManager)
 		{
 			string[] requiredScripts = RequiredScripts;
 			if (requiredScripts != null)
@@ -34,7 +34,7 @@ namespace Zeus.Admin.Plugins
 					scriptManager.RegisterClientScriptInclude(GetType().FullName, requiredScript);
 		}
 
-		public virtual void RegisterStyles(ScriptManager scriptManager)
+		public virtual void RegisterStyles(ResourceManager scriptManager)
 		{
 			string[] requiredStyles = RequiredStyles;
 			if (requiredStyles != null)

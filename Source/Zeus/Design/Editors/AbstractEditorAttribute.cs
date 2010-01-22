@@ -4,7 +4,7 @@ using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Security;
@@ -180,7 +180,7 @@ namespace Zeus.Design.Editors
 			detailContainer.ID = "editDetail" + Name;
 			detailContainer.Attributes["class"] = "editDetail";
 			if (container is ContentPanel)
-				((ContentPanel) container).BodyControls.Add(detailContainer);
+				((ContentPanel) container).ContentControls.Add(detailContainer);
 			else
 				container.Controls.Add(detailContainer);
 			return detailContainer;

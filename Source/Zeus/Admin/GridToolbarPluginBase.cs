@@ -1,5 +1,5 @@
 using System;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Zeus.Admin.Plugins;
 using Zeus.Web.Hosting;
 
@@ -36,8 +36,8 @@ namespace Zeus.Admin
 			return true;
 		}
 
-		public abstract ToolbarButton GetToolbarButton(ContentItem contentItem, GridPanel gridPanel);
-		public abstract void ModifyGrid(ToolbarButton button, GridPanel gridPanel);
+		public abstract Button GetToolbarButton(ContentItem contentItem, GridPanel gridPanel);
+		public abstract void ModifyGrid(Button button, GridPanel gridPanel);
 
 		protected string GetPageUrl(Type type, string resourcePath)
 		{

@@ -1,20 +1,20 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.EditItem.Default" ValidateRequest="false" %>
-<%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register TagPrefix="zeus" TagName="AvailableZones" Src="~/admin/Plugins/EditItem/AvailableZones.ascx" %>
 <%@ Register TagPrefix="ext" Namespace="Coolite.Ext.UX" Assembly="Coolite.Ext.UX" %>
 <asp:Content runat="server" ContentPlaceHolderID="head">
-	<ext:ScriptContainer runat="server" />
-	<ext:StyleContainer runat="server" />
+	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
+	<ext:ResourcePlaceHolder runat="server" Mode="Style" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="ToolbarContainer"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="ContentContainer"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Outside">
-	<ext:ScriptManager runat="server" Theme="Gray" />
+	<ext:ResourceManager runat="server" Theme="Gray" />
 
-	<ext:ViewPort runat="server">
-		<Body>
+	<ext:Viewport runat="server">
+		<Content>
 			<ext:FitLayout runat="server">
 				<Items>
 					<ext:Panel runat="server" Border="false" BodyStyle="padding:5px" AutoScroll="true">
@@ -32,7 +32,7 @@
 								</Items>
 							</ext:Toolbar>
 						</TopBar>
-						<Body>
+						<Content>
 							<asp:HyperLink ID="hlNewerVersion" runat="server" Text="There is a newer version of this item that hasn't been published. Edit the newer version &amp;raquo;" CssClass="info" Visible="false" />
 							<asp:HyperLink ID="hlOlderVersion" runat="server" Text="This is a version of another item that is the master version. Edit the master version &amp;raquo;" CssClass="info" Visible="false" />
 							
@@ -41,7 +41,7 @@
 							
 							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
 								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
-						</Body>
+						</Content>
 						<BottomBar>
 							<ext:Toolbar runat="server">
 								<Items>
@@ -59,8 +59,8 @@
 					</ext:Panel>
 				</Items>
 			</ext:FitLayout>
-		</Body>
-	</ext:ViewPort>
+		</Content>
+	</ext:Viewport>
 	
 	<div class="right">
 		<zeus:AvailableZones runat="server" ID="uscZones" />

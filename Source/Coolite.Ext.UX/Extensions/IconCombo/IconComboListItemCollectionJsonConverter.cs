@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-using Coolite.Ext.Web;
+using Ext.Net;
 using Newtonsoft.Json;
 
 namespace Coolite.Ext.UX
