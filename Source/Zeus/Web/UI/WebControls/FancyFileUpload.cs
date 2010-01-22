@@ -1,7 +1,10 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Coolite.Ext.Web;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
+using Zeus.BaseLibrary.Web.UI;
+using ScriptManager = System.Web.UI.ScriptManager;
 
 namespace Zeus.Web.UI.WebControls
 {
@@ -118,16 +121,19 @@ namespace Zeus.Web.UI.WebControls
 				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
 			Controls.Add(new LiteralControl(html));
 
-			Page.ClientScript.RegisterCssResource(GetType(), "Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css");
+			string cssScript = string.Format(@"var headID = document.getElementsByTagName('head')[0];
+				var cssNode = document.createElement('link');
+				cssNode.type = 'text/css';
+				cssNode.rel = 'stylesheet';
+				cssNode.href = '{0}';
+				cssNode.media = 'screen';
+				headID.appendChild(cssNode);", WebResourceUtility.GetUrl(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css"));
+			ScriptManager.RegisterClientScriptBlock(this, GetType(), "FancyFileUpload", cssScript, true);
 
-			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadMooTools", 
-				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/mootools.js"));
-			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadFxProgressBar",
-				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Fx.ProgressBar.js"));
-			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadSwiffUploader",
-				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/Swiff.Uploader.js"));
-			ScriptManager.RegisterClientScriptInclude(this, GetType(), "FancyFileUploadAttach",
-				Utility.GetClientResourceUrl(GetType(), "FancyFileUpload/FancyUpload3.Attach2.js"));
+			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
+			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
+			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
+			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
 
 			string script = string.Format(@"var {8}up;
 function prepare{8}() {{

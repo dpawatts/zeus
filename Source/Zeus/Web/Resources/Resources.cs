@@ -71,7 +71,10 @@
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.bar.gif", "image/gif")]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css", "text/css", PerformSubstitution = true)]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js", "text/javascript", PerformSubstitution = true)]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.mootools.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.progress.gif", "image/gif")]
+[assembly: WebResource("Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js", "text/javascript")]
 
 [assembly: WebResource("Zeus.Web.Resources.miframe.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.tinymce.js", "text/javascript")]

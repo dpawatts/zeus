@@ -128,7 +128,7 @@ FancyUpload3.Attach.File = new Class({
 			this.ui.cancel
 		).inject(this.base.list).highlight();
 
-		var progress = new Element('img', { 'class': 'file-progress', src: 'bar.gif' }).inject(this.ui.size, 'after');
+		var progress = new Element('img', { 'class': 'file-progress', src: '<%= WebResource("Zeus.Web.Resources.FancyFileUpload.bar.gif") %>' }).inject(this.ui.size, 'after');
 		this.ui.progress = new Fx.ProgressBar(progress, {
 			fit: true
 		}).set(0);
@@ -213,5 +213,3 @@ FancyUpload3.Attach.File = new Class({
 	}
 
 })();
-
-if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded(); 

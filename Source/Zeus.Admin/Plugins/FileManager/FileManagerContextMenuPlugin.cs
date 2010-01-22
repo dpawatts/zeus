@@ -29,6 +29,11 @@ namespace Zeus.Admin.Plugins.FileManager
 			return base.IsApplicable(contentItem);
 		}
 
+		public override bool IsDefault(ContentItem contentItem)
+		{
+			return (contentItem is Folder);
+		}
+
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
 			return "function() {{ fileManager.show(); }}";

@@ -160,6 +160,9 @@ namespace Zeus.Design.Editors
 
 		protected virtual void AddValidators(Control panel, Control editor)
 		{
+			if (BaseValidator.GetValidationProperty(editor) == null)
+				return;
+
 			if (Required)
 				AddRequiredFieldValidator(panel, editor);
 			if (ValidateRegularExpression)

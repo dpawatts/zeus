@@ -4001,5 +4001,3 @@ Request.JSON = new Class({
 	}
 
 });
-
-if (typeof (Sys) !== 'undefined') Sys.Application.notifyScriptLoaded(); 

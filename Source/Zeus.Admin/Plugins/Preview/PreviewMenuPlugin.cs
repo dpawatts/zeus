@@ -24,7 +24,7 @@ namespace Zeus.Admin.Plugins.Preview
 
 		public override bool IsApplicable(ContentItem contentItem)
 		{
-			if (!(contentItem is PageContentItem))
+			if (!contentItem.IsPage)
 				return false;
 
 			return base.IsApplicable(contentItem);
