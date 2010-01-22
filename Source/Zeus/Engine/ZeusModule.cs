@@ -16,6 +16,7 @@ using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Serialization;
 using Zeus.Web;
+using Zeus.Web.Caching;
 using Zeus.Web.Hosting;
 using Zeus.Web.Mvc;
 using Zeus.Web.Mvc.Html;
@@ -101,6 +102,9 @@ namespace Zeus.Engine
 			Bind<IWebContext>().To<WebRequestContext>().InSingletonScope();
 			Bind<IEmbeddedResourceBuilder>().To<EmbeddedResourceBuilder>().InSingletonScope();
 			Bind<IEmbeddedResourceManager>().To<EmbeddedResourceManager>().InSingletonScope();
+
+			// Web / Caching
+			Bind<ICachingService>().To<CachingService>().InSingletonScope();
 
 			// Web / Text Templating
 			Bind<IMessageBuilder>().To<DefaultMessageBuilder>().InSingletonScope();

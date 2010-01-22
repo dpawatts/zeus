@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Children.Default" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
-	<ext:ScriptManager runat="server" ID="scriptManager" Theme="Gray" ScriptMode="Debug" />
+	<ext:ScriptManager runat="server" ID="scriptManager" Theme="Gray" />
 	
 	<script type="text/javascript">
 		var renderIcon = function(value, p, record) {

@@ -281,6 +281,10 @@
     <Compile Include="Security\User.cs" />
     <Compile Include="Security\UserContainer.cs" />
     <Compile Include="SystemNode.cs" />
+    <Compile Include="Web\Caching\CachingExtensions.cs" />
+    <Compile Include="Web\Caching\CachingService.cs" />
+    <Compile Include="Web\Caching\ICachingService.cs" />
+    <Compile Include="Web\Caching\PageCacheFilterAttribute.cs" />
     <Compile Include="Web\Mvc\AcceptImageSubmitAttribute.cs" />
     <Compile Include="Web\Mvc\AcceptParameterAttribute.cs" />
     <Compile Include="Web\Mvc\ActionFilters\ExportModelStateToTempDataAttribute.cs" />

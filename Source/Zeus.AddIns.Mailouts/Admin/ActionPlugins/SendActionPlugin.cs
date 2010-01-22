@@ -1,5 +1,6 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Mailouts.ContentTypes;
+using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.Mailouts.Admin.ActionPlugins

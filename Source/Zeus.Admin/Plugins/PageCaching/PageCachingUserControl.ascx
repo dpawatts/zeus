@@ -1,0 +1,1 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PageCachingUserControl.ascx.cs" Inherits="Zeus.Admin.Plugins.PageCaching.PageCachingUserControl" %>

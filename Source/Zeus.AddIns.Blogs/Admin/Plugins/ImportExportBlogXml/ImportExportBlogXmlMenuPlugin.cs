@@ -1,5 +1,6 @@
 using Coolite.Ext.Web;
 using Zeus.AddIns.Blogs.ContentTypes;
+using Zeus.Admin;
 using Zeus.Admin.Plugins;
 using Zeus.Security;
 

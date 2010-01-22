@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Zeus.Engine;
 using Zeus.Security;
+using Zeus.Web.Caching;
 
 namespace Zeus.Web.Mvc
 {
@@ -11,6 +12,7 @@ namespace Zeus.Web.Mvc
 	/// Base class for content controllers that provides easy access to the content item in scope.
 	/// </summary>
 	/// <typeparam name="T">The type of content item the controller handles.</typeparam>
+	[PageCacheFilter]
 	public abstract class ContentController<T> : Controller
 		where T : ContentItem
 	{

@@ -46,7 +46,8 @@ namespace Zeus.Admin
 						menu = new
 						{
 							items = menuItem.Menu.Primary.Items.Select(mi => GetObjectForJsonSerialization(mi))
-						}
+						},
+						disabled = !menuItem.Enabled
 					};
 				}
 				return new
@@ -54,6 +55,7 @@ namespace Zeus.Admin
 					text = GetMenuItemText(menuItem),
 					icon = menuItem.IconUrl,
 					handler = menuItem.Handler,
+					disabled = !menuItem.Enabled
 				};
 			}
 
@@ -83,8 +85,7 @@ namespace Zeus.Admin
 							result.Add(new MenuSeparator());
 
 						MenuItem menuItem = GetMenuItem(plugin, currentItem);
-						if (!IsEnabled(plugin, currentItem))
-							menuItem.Enabled = false;
+						menuItem.Enabled = IsEnabled(plugin, currentItem);
 
 						// Check if this is the default plugin for this content item.
 						if (IsDefault(plugin, currentItem))
