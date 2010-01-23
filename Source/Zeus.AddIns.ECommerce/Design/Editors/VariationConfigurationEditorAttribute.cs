@@ -67,17 +67,18 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			// Create editors for each of the possible permutations of variations.
-			CheckBoxList checkBoxList = (CheckBoxList)editor;
-			Product product = (Product)item;
+			CheckBoxList checkBoxList = (CheckBoxList) editor;
+			Product product = (Product) item;
 
 			// Build possible permutations.
 			IEnumerable<IEnumerable<Variation>> permutations = GetPermutations(product);
-			foreach (IEnumerable<Variation> permutation in permutations)
-			{
-				ListItem listItem = new ListItem(permutation.Join(v => v.Title, ", "), permutation.Join(v => v.ID.ToString(), ","));
-				listItem.Selected = HasPermutation(product, permutation);
-				checkBoxList.Items.Add(listItem);
-			}
+			if (permutations != null)
+				foreach (IEnumerable<Variation> permutation in permutations)
+				{
+					ListItem listItem = new ListItem(permutation.Join(v => v.Title, ", "), permutation.Join(v => v.ID.ToString(), ","));
+					listItem.Selected = HasPermutation(product, permutation);
+					checkBoxList.Items.Add(listItem);
+				}
 		}
 
 		private static bool HasPermutation(Product product, IEnumerable<Variation> permutation)
@@ -89,6 +90,8 @@ namespace Zeus.AddIns.ECommerce.Design.Editors
 		private static IEnumerable<IEnumerable<Variation>> GetPermutations(Product product)
 		{
 			VariationSetContainer variationSets = product.CurrentCategory.Shop.VariationsSet;
+			if (variationSets == null)
+				return null;
 			List<List<Variation>> inputVariationSets = new List<List<Variation>>();
 			foreach (VariationSet set in variationSets.Sets)
 			{
