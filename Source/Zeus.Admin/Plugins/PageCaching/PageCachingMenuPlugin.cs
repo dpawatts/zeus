@@ -31,8 +31,8 @@ namespace Zeus.Admin.Plugins.PageCaching
 
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
-			return string.Format("function() {{ top.zeus.reloadContentPanel('Page Caching', '{0}'); }}",
-				GetPageUrl(GetType(), "Zeus.Admin.Plugins.PageCaching.Default.aspx") + "?selected=" + contentItem.Path);
+			return string.Format("function() {{ Ext.net.DirectMethods.PageCaching.ShowDialog({0}, {{ url: '/admin/default.aspx' }}); }}",
+				contentItem.ID);
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)

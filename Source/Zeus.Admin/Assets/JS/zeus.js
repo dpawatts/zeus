@@ -69,7 +69,7 @@ frameManager.prototype = {
 
 		Ext.getCmp("pnlContent").setTitle(title);
 		document.getElementById("pnlContent_IFrame").src = url;
-		//Coolite.AjaxMethods.ReloadContentPanel(title, url);
+		//Ext.net.DirectMethods.ReloadContentPanel(title, url);
 	},
 	setPreviewTitle: function(title)
 	{

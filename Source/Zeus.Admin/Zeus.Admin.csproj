@@ -99,13 +99,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Plugins\PageCaching\DeleteCachedPageMenuPlugin.cs" />
-    <Compile Include="Plugins\PageCaching\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\PageCaching\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\PageCaching\PageCachingUserControl.ascx.cs">
       <DependentUpon>PageCachingUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -516,7 +509,6 @@
     <EmbeddedResource Include="Plugins\FileManager\FileManagerUserControl.ascx" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.js" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
-    <EmbeddedResource Include="Plugins\PageCaching\Default.aspx" />
     <EmbeddedResource Include="Plugins\PageCaching\PageCachingUserControl.ascx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />

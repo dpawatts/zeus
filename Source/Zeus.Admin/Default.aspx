@@ -62,8 +62,8 @@
 							<AutoLoad Url="/" Mode="IFrame" />
 						</ext:Panel>
 					</Center>
-					<South>
-						<ext:StatusBar runat="server" ID="stbStatusBar" AutoClear="1500" />
+					<South MinHeight="25">
+						<ext:StatusBar runat="server" ID="stbStatusBar" Height="25" AutoClear="1500" />
 					</South>
 				</ext:BorderLayout>
 			</Content>

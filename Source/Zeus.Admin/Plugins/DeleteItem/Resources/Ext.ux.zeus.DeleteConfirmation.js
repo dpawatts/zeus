@@ -115,7 +115,7 @@ Ext.ux.zeus.DeleteConfirmation = function()
 					{
 						stbStatusBar.showBusy("Deleting...");
 						win.hide();
-						Coolite.AjaxMethods.Delete.DeleteItems(affectedItemIDs,
+						Ext.net.DirectMethods.Delete.DeleteItems(affectedItemIDs,
 						{
 							url: "/admin/default.aspx",
 							success: function(result)

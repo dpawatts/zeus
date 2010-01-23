@@ -32,7 +32,7 @@ namespace Zeus.Admin.Plugins.Globalization
 				Width = Unit.Pixel(100),
 				Editable = false
 			};
-			comboBox.Listeners.Select.Handler = "Coolite.AjaxMethods.LanguageChooser.ChangeLanguage(record.get('value'), { url: '/admin/default.aspx', success: function(result) { stbStatusBar.setStatus({ text: 'Changed language', iconCls: '', clear: true }); } });";
+			comboBox.Listeners.Select.Handler = "Ext.net.DirectMethods.LanguageChooser.ChangeLanguage(record.get('value'), { url: '/admin/default.aspx', success: function(result) { stbStatusBar.setStatus({ text: 'Changed language', iconCls: '', clear: true }); } });";
 
 			foreach (Language language in Context.Current.Resolve<ILanguageManager>().GetAvailableLanguages())
 			{
