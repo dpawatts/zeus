@@ -164,12 +164,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOrderMailService.cs" />
+    <Compile Include="Services\IOrderService.cs" />
     <Compile Include="Services\IShoppingBasketItem.cs" />
     <Compile Include="Services\IShoppingBasket.cs" />
     <Compile Include="Services\IShoppingBasketService.cs" />
     <Compile Include="PaymentGateways\IPaymentGateway.cs" />
     <Compile Include="PaymentGateways\PaymentRequest.cs" />
     <Compile Include="Services\OrderMailService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ShoppingBasketService.cs" />
     <Compile Include="ZeusECommerceException.cs" />
   </ItemGroup>

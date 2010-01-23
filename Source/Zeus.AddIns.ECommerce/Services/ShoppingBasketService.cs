@@ -16,30 +16,18 @@ namespace Zeus.AddIns.ECommerce.Services
 		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
 		private readonly IFinder _finder;
-		private readonly IPaymentGateway _paymentGateway;
-		private readonly IOrderMailService _orderMailService;
 
-		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder finder,
-			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
+		public ShoppingBasketService(IPersister persister, IWebContext webContext, IFinder finder)
 		{
 			_persister = persister;
 			_webContext = webContext;
 			_finder = finder;
-			_paymentGateway = paymentGateway;
-			_orderMailService = orderMailService;
 		}
 
 		public bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
 		{
 			return product.VariationConfigurations.Any(vc => vc.Available
 				&& EnumerableUtility.EqualsIgnoringOrder(vc.Permutation.Variations.Cast<Variation>(), variations));
-		}
-
-		public IEnumerable<PaymentCardType> GetSupportedCardTypes()
-		{
-			foreach (PaymentCardType paymentCardType in Enum.GetValues(typeof(PaymentCardType)))
-				if (_paymentGateway.SupportsCardType(paymentCardType))
-					yield return paymentCardType;
 		}
 
 		public void AddItem(Shop shop, Product product, IEnumerable<Variation> variations)
@@ -166,67 +154,6 @@ namespace Zeus.AddIns.ECommerce.Services
 		public void SaveBasket(Shop shop)
 		{
 			_persister.Save(GetCurrentShoppingBasketInternal(shop));
-		}
-
-		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode)
-		{
-			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
-
-			// Convert shopping basket into order, with unpaid status.
-			Order order = new Order
-			{
-				DeliveryMethod = shoppingBasket.DeliveryMethod,
-				DeliveryPrice = shoppingBasket.DeliveryMethod.Price,
-				BillingAddress = (Address)shoppingBasket.BillingAddress.Clone(true),
-				ShippingAddress = (Address)(shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
-				PaymentCard = (PaymentCard)shoppingBasket.PaymentCard.Clone(true),
-				EmailAddress = shoppingBasket.EmailAddress,
-				TelephoneNumber = shoppingBasket.TelephoneNumber,
-				MobileTelephoneNumber = shoppingBasket.MobileTelephoneNumber,
-				Status = OrderStatus.Unpaid
-			};
-			foreach (ShoppingBasketItem shoppingBasketItem in shoppingBasket.Items)
-			{
-				OrderItem orderItem = new OrderItem
-				{
-					Product = shoppingBasketItem.Product,
-					ProductTitle = shoppingBasketItem.Product.Title,
-					Quantity = shoppingBasketItem.Quantity,
-					Price = shoppingBasketItem.Product.CurrentPrice
-				};
-				foreach (Variation variation in shoppingBasketItem.Variations)
-					orderItem.Variations.Add(variation.VariationSet.Title + ": " + variation.Title);
-				orderItem.AddTo(order);
-			}
-			order.AddTo(shop.Orders);
-			_persister.Save(order);
-
-			// Process payment.
-			PaymentRequest paymentRequest = new PaymentRequest(order.BillingAddress, order.ShippingAddress, order.ID.ToString(), order.TotalPrice,
-				"Order #" + order.ID, order.PaymentCard.NameOnCard, cardNumber, order.PaymentCard.ValidFrom, order.PaymentCard.ValidTo,
-				order.PaymentCard.IssueNumber, cardVerificationCode, order.PaymentCard.CardType, order.TelephoneNumber,
-				order.EmailAddress, _webContext.Request.UserHostAddress);
-			PaymentResponse paymentResponse = _paymentGateway.TakePayment(paymentRequest);
-
-			if (paymentResponse.Success)
-			{
-				// Clear shopping basket.
-				_persister.Delete(shoppingBasket);
-
-				// Update order status to Paid.
-				order.Status = OrderStatus.Paid;
-				_persister.Save(order);
-
-				// Send email to customer and vendor.
-				_orderMailService.SendOrderConfirmationToCustomer(shop, order);
-				_orderMailService.SendOrderConfirmationToVendor(shop, order);
-			}
-			else
-			{
-				throw new ZeusECommerceException(paymentResponse.Message);
-			}
-
-			return order;
 		}
 	}
 }

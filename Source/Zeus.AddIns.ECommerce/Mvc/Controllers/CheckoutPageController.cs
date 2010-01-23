@@ -18,10 +18,12 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 	public class CheckoutPageController : ZeusController<CheckoutPage>
 	{
 		private readonly IShoppingBasketService _shoppingBasketService;
+		private readonly IOrderService _orderService;
 
-		public CheckoutPageController(IShoppingBasketService shoppingBasketService)
+		public CheckoutPageController(IShoppingBasketService shoppingBasketService, IOrderService orderService)
 		{
 			_shoppingBasketService = shoppingBasketService;
+			_orderService = orderService;
 		}
 
 		protected Shop CurrentShop
@@ -137,7 +139,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		private ActionResult GetIndexView()
 		{
 			IEnumerable<SelectListItem> cardTypes = new [] { new SelectListItem { Text = "Please select...", Value = "" }}
-				.Union(_shoppingBasketService.GetSupportedCardTypes().Select(pct => new SelectListItem
+				.Union(_orderService.GetSupportedCardTypes().Select(pct => new SelectListItem
 				{
 					Text = pct.GetDescription(),
 					Value = pct.ToString()
@@ -165,7 +167,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		{
 			try
 			{
-				Order order = _shoppingBasketService.PlaceOrder(CurrentShop, cardNumber, cardVerificationCode);
+				Order order = _orderService.PlaceOrder(CurrentShop, cardNumber, cardVerificationCode);
 				return View("Receipt", new CheckoutPageReceiptViewModel(CurrentItem, order.ID.ToString(), CurrentShop.ContactPage));
 			}
 			catch (ZeusECommerceException ex)
