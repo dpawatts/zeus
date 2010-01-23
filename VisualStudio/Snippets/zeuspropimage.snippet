@@ -29,10 +29,10 @@
         </Literal>
 	  </Declarations>
       <Code Language="csharp">
-        <![CDATA[[ChildEditor("$displayname$", $sortOrder$)]
-		public virtual Image $name$
+        <![CDATA[[Zeus.Design.Editors.ChildEditor("$displayname$", $sortOrder$)]
+		public virtual Zeus.FileSystem.Image $name$
 		{
-			get { return GetChild("$name$") as Image; }
+			get { return GetChild("$name$") as Zeus.FileSystem.Image; }
 			set
 			{
 				if (value != null)

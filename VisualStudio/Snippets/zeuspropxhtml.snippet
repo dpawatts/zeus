@@ -2,9 +2,9 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <CodeSnippet Format="1.0.0">
     <Header>
-		<Title>zeuspropcollection</Title>
-		<Shortcut>zeuspropcollection</Shortcut>
-      <Description>Create a new Zeus Property Collection</Description>
+		<Title>zeuspropxhtml</Title>
+		<Shortcut>zeuspropxhtml</Shortcut>
+      <Description>Create a new Zeus XHTML String Property</Description>
       <Author>Tim Jones</Author>
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
@@ -15,7 +15,7 @@
         <Literal>
           <ID>name</ID>
           <ToolTip>Content Property Name</ToolTip>
-          <Default>MyThings</Default>
+          <Default>Text</Default>
         </Literal>
         <Literal>
           <ID>sortOrder</ID>
@@ -23,16 +23,17 @@
           <Default>100</Default>
         </Literal>
         <Literal>
-          <ID>displayname</ID>
+          <ID>displayName</ID>
           <ToolTip>Content Property Display Name</ToolTip>
-          <Default>My Things</Default>
+          <Default>Text</Default>
         </Literal>
 	  </Declarations>
       <Code Language="csharp">
-        <![CDATA[[Zeus.Design.Editors.StringCollectionEditor("$displayname$", $sortOrder$)]
-		public virtual Zeus.ContentProperties.PropertyCollection $name$
+        <![CDATA[[Zeus.ContentProperties.XhtmlStringContentProperty("$displayName$", $sortOrder$)]
+		public virtual string $name$
 		{
-			get { return GetDetailCollection("$name$", true); }
+			get { return GetDetail("$name$", string.Empty); }
+			set { SetDetail("$name$", value); }
 		}
 $end$]]>
       </Code>
