@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Web.Caching;
+using Ninject;
+using Zeus.Persistence;
 
 namespace Zeus.Web.Caching
 {
-	public class CachingService : ICachingService
+	public class CachingService : ICachingService, IStartable
 	{
 		private readonly IWebContext _webContext;
+		private readonly IPersister _persister;
 
-		public CachingService(IWebContext webContext)
+		public CachingService(IWebContext webContext, IPersister persister)
 		{
 			_webContext = webContext;
+			_persister = persister;
 		}
 
 		public bool IsPageCached(ContentItem contentItem)
@@ -42,5 +46,25 @@ namespace Zeus.Web.Caching
 		{
 			return "ZeusPageCache_" + contentItem.ID;
 		}
+
+		#region IStartable methods
+
+		public void Start()
+		{
+			_persister.ItemSaving += OnPersisterItemSaving;
+		}
+
+		private void OnPersisterItemSaving(object sender, CancelItemEventArgs e)
+		{
+			if (IsPageCached(e.AffectedItem))
+				DeleteCachedPage(e.AffectedItem);
+		}
+
+		public void Stop()
+		{
+			_persister.ItemSaving -= OnPersisterItemSaving;
+		}
+
+		#endregion
 	}
 }
