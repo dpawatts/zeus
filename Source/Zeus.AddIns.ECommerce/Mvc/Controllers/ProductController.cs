@@ -27,6 +27,13 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				CurrentItem.CurrentCategory.GetChildren<Subcategory>()));
 		}
 
+		[HttpGet]
+		public ActionResult AddToShoppingBasket()
+		{
+			return AddItem(null);			
+		}
+
+		[HttpPost]
 		public ActionResult AddToShoppingBasket(FormCollection formValues)
 		{
 			// Get variation configuration.
@@ -49,6 +56,11 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				return RedirectToParentPage();
 			}
 
+			return AddItem(variations);
+		}
+
+		private ActionResult AddItem(List<Variation> variations)
+		{
 			Shop shop = (Shop) CurrentItem.CurrentCategory.Parent;
 			_shoppingBasketService.AddItem(shop, CurrentItem, variations);
 
