@@ -130,7 +130,8 @@ namespace Zeus.AddIns.ECommerce.Services
 			else
 			{
 				shoppingBasket = new ShoppingBasket { Name = Guid.NewGuid().ToString() };
-				shoppingBasket.DeliveryMethod = shop.DeliveryMethods.GetChildren<DeliveryMethod>().FirstOrDefault();
+				if (shop.DeliveryMethods != null)
+					shoppingBasket.DeliveryMethod = shop.DeliveryMethods.GetChildren<DeliveryMethod>().FirstOrDefault();
 				shoppingBasket.AddTo(shop.ShoppingBaskets);
 				_persister.Save(shoppingBasket);
 
