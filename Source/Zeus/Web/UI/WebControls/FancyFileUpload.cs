@@ -26,15 +26,15 @@ namespace Zeus.Web.UI.WebControls
 			}
 		}
 
-		public string TypeFilterDescription
+		public virtual string TypeFilterDescription
 		{
-			get { return ViewState["TypeFilterDescription"] as string ?? "Images (*.jpg, *.jpeg, *.gif, *.png)"; }
+			get { return ViewState["TypeFilterDescription"] as string ?? "Files (*.*)"; }
 			set { ViewState["TypeFilterDescription"] = value; }
 		}
 
-		public string[] TypeFilter
+		public virtual string[] TypeFilter
 		{
-			get { return ViewState["TypeFilter"] as string[] ?? new[] { "*.jpg", "*.jpeg", "*.gif", "*.png" }; }
+			get { return ViewState["TypeFilter"] as string[] ?? new[] { "*.*" }; }
 			set { ViewState["TypeFilter"] = value; }
 		}
 

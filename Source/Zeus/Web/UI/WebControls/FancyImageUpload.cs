@@ -7,6 +7,18 @@ namespace Zeus.Web.UI.WebControls
 {
 	public class FancyImageUpload : FancyFileUpload, IValidator
 	{
+		public override string TypeFilterDescription
+		{
+			get { return ViewState["TypeFilterDescription"] as string ?? "Images (*.jpg, *.jpeg, *.gif, *.png)"; }
+			set { ViewState["TypeFilterDescription"] = value; }
+		}
+
+		public override string[] TypeFilter
+		{
+			get { return ViewState["TypeFilter"] as string[] ?? new[] { "*.jpg", "*.jpeg", "*.gif", "*.png" }; }
+			set { ViewState["TypeFilter"] = value; }
+		}
+
 		public int? MinimumWidth
 		{
 			get { return ViewState["MinimumWidth"] as int?; }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
-using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.Persistence;
 using Zeus.Web;
