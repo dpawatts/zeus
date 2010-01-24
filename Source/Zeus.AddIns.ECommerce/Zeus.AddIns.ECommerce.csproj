@@ -129,6 +129,7 @@
     <Compile Include="Mvc\Controllers\CategoryController.cs" />
     <Compile Include="Mvc\Controllers\CheckoutPageController.cs" />
     <Compile Include="Mvc\Controllers\ProductController.cs" />
+    <Compile Include="Mvc\Controllers\ProductControllerBase.cs" />
     <Compile Include="Mvc\Controllers\SearchResultsPageController.cs" />
     <Compile Include="Mvc\Controllers\ShopController.cs" />
     <Compile Include="Mvc\Controllers\ShoppingBasketPageController.cs" />

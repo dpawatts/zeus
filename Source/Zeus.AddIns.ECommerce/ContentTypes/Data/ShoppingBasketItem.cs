@@ -45,7 +45,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		public IEnumerable<Variation> Variations
 		{
-			get { return VariationPermutation.Variations.Cast<Variation>(); }
+			get
+			{
+				if (VariationPermutation != null)
+					return VariationPermutation.Variations.Cast<Variation>();
+				return null;
+			}
 		}
 	}
 }
