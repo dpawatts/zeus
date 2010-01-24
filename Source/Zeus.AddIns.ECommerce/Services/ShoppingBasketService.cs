@@ -25,6 +25,9 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		public bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
 		{
+			if ((variations == null || !variations.Any()) && (product.VariationConfigurations == null || !product.VariationConfigurations.Any()))
+				return true;
+
 			return product.VariationConfigurations.Any(vc => vc.Available
 				&& EnumerableUtility.EqualsIgnoringOrder(vc.Permutation.Variations.Cast<Variation>(), variations));
 		}
@@ -37,9 +40,13 @@ namespace Zeus.AddIns.ECommerce.Services
 			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && EnumerableUtility.Equals(i.Variations, variations));
 			if (item == null)
 			{
-				VariationPermutation variationPermutation = new VariationPermutation();
-				foreach (Variation variation in variations)
-					variationPermutation.Variations.Add(variation);
+				VariationPermutation variationPermutation = null;
+				if (variations != null && variations.Any())
+				{
+					variationPermutation = new VariationPermutation();
+					foreach (Variation variation in variations)
+						variationPermutation.Variations.Add(variation);
+				}
 				item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
 				item.AddTo(shoppingBasket);
 			}
