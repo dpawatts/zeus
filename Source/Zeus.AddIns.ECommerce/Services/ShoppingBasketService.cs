@@ -37,7 +37,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
 
 			// If card is already in basket, just increment quantity, otherwise create a new item.
-			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && EnumerableUtility.Equals(i.Variations, variations));
+			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && ((variations == null && i.Variations == null) || EnumerableUtility.Equals(i.Variations, variations)));
 			if (item == null)
 			{
 				VariationPermutation variationPermutation = null;
