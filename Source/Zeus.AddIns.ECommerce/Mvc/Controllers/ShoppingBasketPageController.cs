@@ -32,13 +32,15 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		public override ActionResult Index()
 		{
 			IShoppingBasket shoppingBasket = GetShoppingBasket();
-			IEnumerable<SelectListItem> deliveryMethods = CurrentShop.DeliveryMethods.GetChildren<DeliveryMethod>()
-				.Select(dm => new SelectListItem
-				{
-					Text = dm.Title,
-					Value = dm.ID.ToString(),
-					Selected = (dm == shoppingBasket.DeliveryMethod)
-				});
+			IEnumerable<SelectListItem> deliveryMethods = null;
+			if (CurrentShop.DeliveryMethods != null)
+				deliveryMethods = CurrentShop.DeliveryMethods.GetChildren<DeliveryMethod>()
+					.Select(dm => new SelectListItem
+					{
+						Text = dm.Title,
+						Value = dm.ID.ToString(),
+						Selected = (dm == shoppingBasket.DeliveryMethod)
+					});
 			return View(new ShoppingBasketPageViewModel(CurrentItem, GetShoppingBasket(), deliveryMethods, CurrentShop.CheckoutPage));
 		}
 
