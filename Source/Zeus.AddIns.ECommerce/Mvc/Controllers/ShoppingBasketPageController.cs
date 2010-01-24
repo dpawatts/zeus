@@ -46,14 +46,21 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 
 		public ActionResult UpdateQuantity(
 			[Bind(Prefix = "id")] int productID,
-			[Bind(Prefix = "varid")] int variationPermutationID,
+			[Bind(Prefix = "varid")] int? variationPermutationID,
 			[Bind(Prefix = "qty")] int quantity)
 		{
 			Product product = Engine.Persister.Get<Product>(productID);
-			VariationPermutation variationPermutation = Engine.Persister.Get<VariationPermutation>(variationPermutationID);
+			VariationPermutation variationPermutation = (variationPermutationID != null) ? Engine.Persister.Get<VariationPermutation>(variationPermutationID.Value) : null;
 			_shoppingBasketService.UpdateQuantity(CurrentShop, product, variationPermutation, quantity);
 			
 			return Redirect(CurrentItem.Url);
+		}
+
+		public ActionResult RemoveItem(
+			[Bind(Prefix = "id")] int productID,
+			[Bind(Prefix = "varid")] int? variationPermutationID)
+		{
+			return UpdateQuantity(productID, variationPermutationID, 0);
 		}
 
 		[ActionName("Checkout")]
