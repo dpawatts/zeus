@@ -23,7 +23,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		}
 
 		[ContentProperty("Product Code", 200)]
-		public string ProductCode
+		public virtual string ProductCode
 		{
 			get { return GetDetail("ProductCode", string.Empty); }
 			set { SetDetail("ProductCode", value); }
@@ -39,7 +39,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 
 		[ContentProperty("Sale Price", 220)]
 		[TextBoxEditor(EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
-		public decimal? SalePrice
+		public virtual decimal? SalePrice
 		{
 			get { return GetDetail<decimal?>("SalePrice", null); }
 			set { SetDetail("SalePrice", value); }

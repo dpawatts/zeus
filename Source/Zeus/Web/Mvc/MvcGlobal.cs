@@ -48,7 +48,7 @@ namespace Zeus.Web.Mvc
 
 			// Create Spark view engine and register it with MVC.
 			var sparkServiceContainer = SparkEngineStarter.CreateContainer();
-			sparkServiceContainer.AddFilter(new MobileDeviceDescriptorFilter());
+			//sparkServiceContainer.AddFilter(new MobileDeviceDescriptorFilter());
 			SparkEngineStarter.RegisterViewEngine(ViewEngines.Engines,
 				sparkServiceContainer);
 

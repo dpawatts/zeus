@@ -126,12 +126,12 @@ namespace Zeus.Web.UI.WebControls
 				cssNode.href = '{0}';
 				cssNode.media = 'screen';
 				headID.appendChild(cssNode);", WebResourceUtility.GetUrl(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css"));
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), "FancyFileUpload", cssScript, true);
+			ScriptManager.RegisterClientScriptBlock(this, typeof(FancyFileUpload), "FancyFileUpload", cssScript, true);
 
-			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
-			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
-			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
-			ScriptManager.RegisterClientScriptResource(this, GetType(), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
+			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
+			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
+			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
+			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
 
 			string script = string.Format(@"var {8}up;
 function prepare{8}() {{
