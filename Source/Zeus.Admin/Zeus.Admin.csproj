@@ -343,9 +343,6 @@
     <Compile Include="Install\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Navigation\TreeLoader.ashx.cs">
-      <DependentUpon>TreeLoader.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\NewItem\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -367,11 +364,8 @@
     <Compile Include="PreviewFrame.master.designer.cs">
       <DependentUpon>PreviewFrame.master</DependentUpon>
     </Compile>
-    <Compile Include="Web\UI\WebControls\LanguageDropDownList.cs" />
     <Compile Include="Web\UI\WebControls\ToolbarHyperLink.cs" />
-    <Compile Include="Web\UI\WebControls\FileTree.cs" />
     <Compile Include="Web\UI\WebControls\ToolbarButton.cs" />
-    <Compile Include="Web\UI\WebControls\Tree.cs" />
     <Compile Include="EmbeddedResourcePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -432,7 +426,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Plugins\MoveItem\Default.aspx" />
-    <EmbeddedResource Include="Navigation\TreeLoader.ashx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Css\permissions.css" />
