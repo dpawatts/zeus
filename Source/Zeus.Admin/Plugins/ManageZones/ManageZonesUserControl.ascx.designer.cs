@@ -8,18 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.Admin.Plugins.EditItem {
+namespace Zeus.Admin.Plugins.ManageZones {
     
     
-    public partial class AvailableZones {
-        
-        /// <summary>
-        /// rptZones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView rptZones;
+    public partial class ManageZonesUserControl {
     }
 }

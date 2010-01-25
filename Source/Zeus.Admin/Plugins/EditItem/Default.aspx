@@ -2,7 +2,7 @@
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
-<%@ Register TagPrefix="zeus" TagName="AvailableZones" Src="~/admin/Plugins/EditItem/AvailableZones.ascx" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI.WebControls" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" %>
 <%@ Register TagPrefix="ext" Namespace="Coolite.Ext.UX" Assembly="Coolite.Ext.UX" %>
 <asp:Content runat="server" ContentPlaceHolderID="head">
 	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
@@ -15,8 +15,8 @@
 
 	<ext:Viewport runat="server">
 		<Content>
-			<ext:FitLayout runat="server">
-				<Items>
+			<ext:BorderLayout runat="server">
+				<Center>
 					<ext:Panel runat="server" Border="false" BodyStyle="padding:5px" AutoScroll="true">
 						<TopBar>
 							<ext:Toolbar runat="server">
@@ -28,7 +28,6 @@
 									<ext:ToolbarFill runat="server" />
 									<ext:ToolbarTextItem runat="server" ID="txiLanguages" Text="Page view: " />
 									<ext:IconCombo runat="server" ID="ddlLanguages" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
-									<ext:Button runat="server" ID="btnZones" Text="Zones" Cls="showZones" />
 								</Items>
 							</ext:Toolbar>
 						</TopBar>
@@ -52,46 +51,18 @@
 									<ext:ToolbarFill runat="server" />
 									<ext:ToolbarTextItem runat="server" ID="txiLanguages2" Text="Page view: " />
 									<ext:IconCombo runat="server" ID="ddlLanguages2" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
-									<ext:Button runat="server" ID="btnZones2" Text="Zones" Cls="showZones" />
 								</Items>
 							</ext:Toolbar>
 						</BottomBar>
 					</ext:Panel>
-				</Items>
-			</ext:FitLayout>
+				</Center>
+			</ext:BorderLayout>
 		</Content>
 	</ext:Viewport>
 	
-	<div class="right">
-		<zeus:AvailableZones runat="server" ID="uscZones" />
-	</div>
-	
 	<script type="text/javascript">
-		jQuery(document).ready(function()
+		Ext.onReady(function()
 		{
-			jQuery(".right fieldset").hide();
-
-			jQuery(".showInfo").toggle(function()
-			{
-				zeustoggle.show(this, ".infoBox");
-			}, function()
-			{
-				zeustoggle.hide(this, ".infoBox");
-			});
-
-			jQuery(".showZones").toggle(function()
-			{
-				zeustoggle.show(this, ".zonesBox");
-			}, function()
-			{
-				zeustoggle.hide(this, ".zonesBox");
-			});
-
-			if (cookie.read(".infoBox"))
-				jQuery(".showInfo").click();
-			if (cookie.read(".zonesBox"))
-				jQuery(".showZones").click();
-
 			setTimeout(jQuery.zeusKeepAlive.sessionSaver,
 				jQuery.zeusKeepAlive.sessionSaverInterval);
 

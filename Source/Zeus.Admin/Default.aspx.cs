@@ -71,14 +71,9 @@ namespace Zeus.Admin
 			get { return ResourceManager.GetInstance(this); }
 		}
 
-		public Viewport ViewPort
+		public Viewport Viewport
 		{
 			get { return extViewPort; }
-		}
-
-		public BorderLayout BorderLayout
-		{
-			get { return extBorderLayout; }
 		}
 
 		public void LoadUserControls(string[] virtualPaths)

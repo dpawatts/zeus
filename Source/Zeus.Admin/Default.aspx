@@ -30,43 +30,32 @@
 	</div></noscript>
 	
 	<form runat="server">
-		<ext:Viewport runat="server" ID="extViewPort">
-			<Content>
-				<ext:BorderLayout runat="server" ID="extBorderLayout">
-					<North Margins-Bottom="5">
-						<ext:Panel runat="server">
-							<Content>
-								<div id="header">
-									<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
-									<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
-									<div id="headerRight">
-										<zeus:LoginStatus runat="server" ID="logOut" />
-										<p id="loggedAs">You are logged in as <zeus:LoginName runat="server" /></p>
-									</div>
-								</div>
+		<ext:Viewport runat="server" ID="extViewPort" Layout="Border">
+			<Items>
+				<ext:Panel runat="server" Region="North" Border="false">
+					<Content>
+						<div id="header">
+							<img runat="server" id="imgLogo" border="0" alt="Sound In Theory"/>
+							<p id="title">administration site for <span><asp:Literal runat="server" ID="ltlAdminName2" /></span></p>
+							<div id="headerRight">
+								<zeus:LoginStatus runat="server" ID="logOut" />
+								<p id="loggedAs">You are logged in as <zeus:LoginName runat="server" /></p>
+							</div>
+						</div>
 
-								<div id="toolbar">
-									<asp:PlaceHolder runat="server" ID="plcToolbar" />
-								</div>
-							</Content>
-							<BottomBar>
-								<ext:Toolbar runat="server" ID="extTopToolbar" />
-							</BottomBar>
-						</ext:Panel>
-					</North>
-					<West Split="true" MinWidth="175" MaxWidth="400">
-						
-					</West>
-					<Center>
-						<ext:Panel runat="server" ID="pnlContent" Title="Preview" Icon="Page">
-							<AutoLoad Url="/" Mode="IFrame" />
-						</ext:Panel>
-					</Center>
-					<South MinHeight="25">
-						<ext:StatusBar runat="server" ID="stbStatusBar" Height="25" AutoClear="1500" />
-					</South>
-				</ext:BorderLayout>
-			</Content>
+						<div id="toolbar">
+							<asp:PlaceHolder runat="server" ID="plcToolbar" />
+						</div>
+					</Content>
+					<BottomBar>
+						<ext:Toolbar runat="server" ID="extTopToolbar" />
+					</BottomBar>
+				</ext:Panel>
+				<ext:Panel runat="server" ID="pnlContent" Region="Center" Title="Preview" Icon="Page">
+					<AutoLoad Url="/" Mode="IFrame" />
+				</ext:Panel>						
+				<ext:StatusBar runat="server" ID="stbStatusBar" Region="South" MinHeight="25" Height="25" AutoClear="1500" />
+			</Items>
 		</ext:Viewport>
 	</form>
 </body>

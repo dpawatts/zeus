@@ -104,15 +104,6 @@ namespace Zeus.Admin.Plugins.EditItem {
         protected global::Coolite.Ext.UX.IconCombo ddlLanguages;
         
         /// <summary>
-        /// btnZones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnZones;
-        
-        /// <summary>
         /// btnSave2 control.
         /// </summary>
         /// <remarks>
@@ -165,23 +156,5 @@ namespace Zeus.Admin.Plugins.EditItem {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Coolite.Ext.UX.IconCombo ddlLanguages2;
-        
-        /// <summary>
-        /// btnZones2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Button btnZones2;
-        
-        /// <summary>
-        /// uscZones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected AvailableZones uscZones;
     }
 }

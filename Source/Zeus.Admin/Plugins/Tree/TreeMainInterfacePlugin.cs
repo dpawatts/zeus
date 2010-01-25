@@ -11,11 +11,6 @@ namespace Zeus.Admin.Plugins.Tree
 	{
 		public override void ModifyInterface(IMainInterface mainInterface)
 		{
-			// Setup West panel.
-			mainInterface.BorderLayout.West.Split = true;
-			mainInterface.BorderLayout.West.MinWidth = 175;
-			mainInterface.BorderLayout.West.MaxWidth = 400;
-
 			// Add tree.
 			TreePanel treePanel = new TreePanel
 			{
@@ -25,9 +20,15 @@ namespace Zeus.Admin.Plugins.Tree
 				Title = "Site",
 				AutoScroll = true,
 				PathSeparator = "|",
-				EnableDD = true
+				EnableDD = true,
+				UseArrows = true,
+				BodyStyle = "padding-top:5px",
+				Region = Region.West,
+				MinWidth = 175,
+				MaxWidth = 400,
+				Split = true
 			};
-			mainInterface.BorderLayout.West.Items.Add(treePanel);
+			mainInterface.Viewport.Items.Add(treePanel);
 
 			// Setup tree top toolbar.
 			Toolbar topToolbar = new Toolbar();

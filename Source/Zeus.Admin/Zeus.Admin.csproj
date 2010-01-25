@@ -98,6 +98,15 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Plugins\ManageZones\ManageZonesMenuPlugin.cs" />
+    <Compile Include="Plugins\ManageZones\ManageZonesUserControl.ascx.cs">
+      <DependentUpon>ManageZonesUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Plugins\ManageZones\ManageZonesUserControl.ascx.designer.cs">
+      <DependentUpon>ManageZonesUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\ManageZones\ManageZonesMainInterfacePlugin.cs" />
     <Compile Include="Plugins\PageCaching\DeleteCachedPageMenuPlugin.cs" />
     <Compile Include="Plugins\PageCaching\PageCachingUserControl.ascx.cs">
       <DependentUpon>PageCachingUserControl.ascx</DependentUpon>
@@ -160,13 +169,6 @@
     <Compile Include="AdminModule.cs" />
     <Compile Include="AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\EditItem\AvailableZones.ascx.cs">
-      <DependentUpon>AvailableZones.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Plugins\EditItem\AvailableZones.ascx.designer.cs">
-      <DependentUpon>AvailableZones.ascx</DependentUpon>
     </Compile>
     <Compile Include="AffectedItems.ascx.cs">
       <DependentUpon>AffectedItems.ascx</DependentUpon>
@@ -510,6 +512,7 @@
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.js" />
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
     <EmbeddedResource Include="Plugins\PageCaching\PageCachingUserControl.ascx" />
+    <EmbeddedResource Include="Plugins\ManageZones\ManageZonesUserControl.ascx" />
     <Content Include="Web.config" />
     <EmbeddedResource Include="Assets\Css\view.css" />
     <EmbeddedResource Include="Assets\Css\login.css" />
@@ -538,7 +541,6 @@
     <EmbeddedResource Include="Assets\JS\Plugins\jquery.cookies.js" />
     <EmbeddedResource Include="Assets\JS\Plugins\thickbox.js" />
     <EmbeddedResource Include="Assets\JS\view.js" />
-    <EmbeddedResource Include="Plugins\EditItem\AvailableZones.ascx" />
     <EmbeddedResource Include="Login.aspx" />
     <EmbeddedResource Include="Popup.master" />
     <EmbeddedResource Include="Resources\page_add.png" />

@@ -36,7 +36,7 @@ namespace Zeus.Admin.Plugins.Children
 			MenuItem menuItem = new MenuItem
 			{
 				Text = "Manage Children",
-				IconUrl = Utility.GetCooliteIconUrl(Icon.ApplicationViewDetail),
+				IconUrl = Utility.GetCooliteIconUrl(Icon.SitemapColor),
 				Handler = GetJavascriptHandler(contentItem)
 			};
 

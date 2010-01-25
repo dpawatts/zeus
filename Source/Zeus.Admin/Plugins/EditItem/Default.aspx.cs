@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 using Coolite.Ext.UX;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
@@ -8,10 +10,12 @@ using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
+using Zeus.Integrity;
 using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Hosting;
 using Zeus.Web.UI.WebControls;
+using TreeNode = Ext.Net.TreeNode;
 
 namespace Zeus.Admin.Plugins.EditItem
 {
@@ -77,12 +81,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 
 			base.OnInit(e);
-		}
-
-		protected override void OnLoad(EventArgs e)
-		{
-			LoadZones();
-			base.OnLoad(e);
 		}
 
 		protected string GetSessionKeepAliveUrl()
@@ -166,17 +164,6 @@ namespace Zeus.Admin.Plugins.EditItem
 		{
 			ItemEditorVersioningMode mode = (((ContentItem) zeusItemEditView.CurrentItem).VersionOf == null) ? ItemEditorVersioningMode.VersionOnly : ItemEditorVersioningMode.SaveOnly;
 			return (ContentItem) zeusItemEditView.Save((ContentItem) zeusItemEditView.CurrentItem, mode);
-		}
-
-		private void LoadZones()
-		{
-			Type itemType = CurrentItemType;
-			uscZones.CurrentItem = (ContentItem) zeusItemEditView.CurrentItem;
-			ContentType definition = Zeus.Context.ContentTypes.GetContentType(itemType);
-			uscZones.DataSource = definition.AvailableZones;
-			uscZones.DataBind();
-
-			btnZones.Visible = btnZones2.Visible = definition.AvailableZones.Count > 0;
 		}
 
 		private void CheckRelatedVersions(ContentItem item)
