@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
-using Zeus.ContentTypes;
 using Zeus.Engine;
 
 namespace Zeus.Web.Mvc
@@ -113,6 +110,7 @@ namespace Zeus.Web.Mvc
 			if (item.IsPage)
 			{
 				pathUrl = pathUrl.RemoveSegment(0).PrependSegment(itemUrl.PathWithoutExtension.TrimStart('/'))
+					.RemoveQuery(ContentItemKey).RemoveQuery(AreaKey) // base.GetVirtualPath will add these
 					.PathAndQuery.TrimStart('/');
 			}
 			else

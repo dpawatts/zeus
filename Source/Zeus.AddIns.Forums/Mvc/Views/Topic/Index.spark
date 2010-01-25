@@ -31,7 +31,7 @@
 	</div> <!-- fRungTwo -->
 	<div id="fRungThree">
 		<ul>
-			<li><a href="${Html.Url(Model.CurrentItem).AppendSegment("reply")}">Reply</a></li>
+			<li><a href="${Html.Url<TopicController>(Model.CurrentItem, c => c.Reply())}">Reply</a></li>
 		</ul>
 	</div> <!-- fRungThree -->
 	
@@ -41,7 +41,7 @@
 			<p>${post.Created}</p>
 
 			<ul>
-				<li><a href="${Html.Url(Model.CurrentItem).AppendSegment("quote").Query("p", post.ID)}">quote</a></li>
+				<li><a href="${Html.Url<TopicController>(Model.CurrentItem, c => c.Quote(post.ID))}">quote</a></li>
 				<li>|</li>
 				<if condition="Model.ForumService.CanEditPost(post, Model.CurrentMember)">
 					<li><a href="${post.EditUrl}">edit</a></li>

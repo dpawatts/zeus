@@ -52,12 +52,13 @@ namespace Zeus.Web.Mvc
 			SparkEngineStarter.RegisterViewEngine(ViewEngines.Engines,
 				sparkServiceContainer);
 
-			// Register areas (blogs, forums, etc). Mostly used for static assets
-			// such as CSS and JS files.
-			AreaRegistration.RegisterAllAreas();
-
 			// Register the primary routes used by Zeus.
 			RegisterRoutes(RouteTable.Routes, engine);
+
+			// Register areas (blogs, forums, etc). Mostly used for static assets
+			// such as CSS and JS files. This needs to happen after Zeus has registered
+			// content routes, because some areas might contain catch-all paths.
+			AreaRegistration.RegisterAllAreas();
 
 			// Set the controller factory to a custom one which uses the NinjectActionInvoker.
 			ControllerBuilder.Current.SetControllerFactory(engine.Resolve<IControllerFactory>());

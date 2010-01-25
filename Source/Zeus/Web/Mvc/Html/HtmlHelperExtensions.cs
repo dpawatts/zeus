@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentProperties;
@@ -81,6 +82,27 @@ namespace Zeus.Web.Mvc.Html
 		public static Url CurrentUrl(this HtmlHelper html)
 		{
 			return new Url(html.ViewContext.HttpContext.Request.RawUrl);
+		}
+
+		public static Url Url<TController>(this HtmlHelper html, ContentItem contentItem, Expression<Action<TController>> action)
+			where TController : Controller
+		{
+			// Get area name and controller name.
+			var controllerMapper = Context.Current.Resolve<IControllerMapper>();
+
+			RouteValueDictionary routeValuesFromExpression = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression(action);
+			if (routeValuesFromExpression.ContainsKey(ContentRoute.ActionKey))
+			{
+				string actionName = routeValuesFromExpression[ContentRoute.ActionKey].ToString();
+				routeValuesFromExpression[ContentRoute.ActionKey] = actionName.Substring(0, 1).ToLower() + actionName.Substring(1);
+			}
+			routeValuesFromExpression.Add(ContentRoute.AreaKey, controllerMapper.GetAreaName(contentItem.GetType()));
+			routeValuesFromExpression.Add(ContentRoute.ContentItemKey, contentItem);
+			VirtualPathData virtualPath = html.RouteCollection.GetVirtualPath(html.ViewContext.RequestContext, routeValuesFromExpression);
+
+			if (virtualPath != null)
+				return virtualPath.VirtualPath;
+			return null;
 		}
 	}
 }
