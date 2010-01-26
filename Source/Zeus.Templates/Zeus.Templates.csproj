@@ -127,6 +127,7 @@
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
+    <Compile Include="ContentTypes\ExternalRedirect.cs" />
     <Compile Include="ContentTypes\ForgottenPasswordPage.cs" />
     <Compile Include="ContentTypes\ITagGroupContainer.cs" />
     <Compile Include="ContentTypes\RegistrationPage.cs" />

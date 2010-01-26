@@ -9,7 +9,7 @@ namespace Zeus.Templates.ContentTypes
 	/// <summary>
 	/// Redirects to somewhere else. Used as a placeholder in the menu.
 	/// </summary>
-	[ContentType("Redirect", "Redirect", "Redirects to another page or an external address.", "", 40)]
+	[ContentType("Redirect", "Redirect", "Redirects to another page on the site.", "", 40)]
 	[RestrictParents(typeof(PageContentItem))]
 	public class Redirect : BasePage
 	{
