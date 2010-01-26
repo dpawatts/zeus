@@ -6,6 +6,7 @@ using Coolite.Ext.UX;
 using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
 using Zeus.Globalization;
@@ -253,6 +254,16 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(FancyFileUpload),
+				"Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css");
+
+			ExtNet.ResourceManager.RegisterIcon(Icon.Delete);
+			ExtNet.ResourceManager.RegisterIcon(Icon.ArrowNsew);
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
+			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
+
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");
 			CheckRelatedVersions((ContentItem) zeusItemEditView.CurrentItem);

@@ -1,5 +1,4 @@
 ﻿.demo-list .file {
-	line-height: 2em;
 	padding-left: 22px;
 	background: url(<%= WebResource("Zeus.Web.Resources.FancyFileUpload.attach.png") %>) no-repeat 1px 50%;
 }

@@ -11,7 +11,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="ToolbarContainer"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="ContentContainer"></asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Outside">
-	<ext:ResourceManager runat="server" Theme="Gray" />
+	<ext:ResourceManager runat="server" Theme="Gray" AjaxViewStateMode="Enabled" />
 
 	<ext:Viewport runat="server">
 		<Content>

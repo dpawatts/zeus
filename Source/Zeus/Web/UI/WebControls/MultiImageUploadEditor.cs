@@ -4,7 +4,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Properties
 
-		protected override string Title
+		protected override string ItemTitle
 		{
 			get { return "Image"; }
 		}

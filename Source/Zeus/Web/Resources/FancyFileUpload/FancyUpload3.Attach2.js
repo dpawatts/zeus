@@ -21,8 +21,8 @@ FancyUpload3.Attach = new Class({
 	},
 
 	initialize: function(list, select, options) {
-		this.list = $(list);
-		this.select = $(select);
+		this.list = document.id(list);
+		this.select = document.id(select);
 
 		options.target = this.select;
 		options.fileClass = options.fileClass || FancyUpload3.Attach.File;

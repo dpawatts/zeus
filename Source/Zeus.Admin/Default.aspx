@@ -12,7 +12,7 @@
 	<ext:ResourcePlaceHolder runat="server" Mode="Style" />
 	
 	<script type="text/javascript">
-		$(document).ready(function() {
+		Ext.onReady(function() {
 			window.zeus = new frameManager();
 		});
 

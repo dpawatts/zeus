@@ -45,7 +45,7 @@ namespace Zeus.Design.Editors
 			foreach (PropertyData propertyData in propertyDataToDelete)
 				detailCollection.Remove(propertyData);
 
-			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors.Count > 0;
+			return detailCollectionEditor.DeletedIndexes.Count > 0 || detailCollectionEditor.AddedEditors;
 		}
 
 		protected abstract void CreateOrUpdateDetailCollectionItem(ContentItem item,PropertyData existingDetail, Control editor, out object newDetail);

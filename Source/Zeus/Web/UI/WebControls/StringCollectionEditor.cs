@@ -1,5 +1,6 @@
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.ContentProperties;
 
 namespace Zeus.Web.UI.WebControls
@@ -8,7 +9,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Properties
 
-		protected override string Title
+		protected override string ItemTitle
 		{
 			get { return "String"; }
 		}

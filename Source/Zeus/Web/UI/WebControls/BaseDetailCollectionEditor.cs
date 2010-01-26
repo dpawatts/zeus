@@ -1,23 +1,36 @@
 ﻿using System;
-using System.Web.UI.WebControls;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 using Ext.Net;
+using Ext.Net.Utilities;
 using Zeus.ContentProperties;
 using System.Web.UI;
-using ImageButton = System.Web.UI.WebControls.ImageButton;
-using Label = System.Web.UI.WebControls.Label;
-using WebControl = System.Web.UI.WebControls.WebControl;
+using Button = Ext.Net.Button;
+using Panel = Ext.Net.Panel;
+using Parameter = Ext.Net.Parameter;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public abstract class BaseDetailCollectionEditor : WebControl, INamingContainer
+	[DirectMethodProxyID(IDMode = DirectMethodProxyIDMode.ClientID)]
+	public abstract class BaseDetailCollectionEditor : WebControl
 	{
+		private class CustomContainer : Container
+		{
+			protected override System.Web.UI.HtmlControls.HtmlGenericControl CreateContainer()
+			{
+				System.Web.UI.HtmlControls.HtmlGenericControl control = base.CreateContainer();
+				control.ID = ID.ConcatWith("_Content");
+				return control;
+			}
+		}
 		#region Fields
 
-		private PlaceHolder itemEditorsContainer;
+		private readonly List<Panel> _panels = new List<Panel>();
 		private readonly List<Control> _editors = new List<Control>();
 		private IEnumerable<PropertyData> _initialValues = new List<PropertyData>();
 		private int _editorIndex;
+		private Hidden _hiddenAddedEditors;
+		private Container _container;
 
 		#endregion
 
@@ -42,21 +55,11 @@ namespace Zeus.Web.UI.WebControls
 				return result;
 			}
 		}
+
 		public bool AlreadyInitialized
 		{
 			get { return (bool) (ViewState["AlreadyInitialized"] ?? false); }
 			set { ViewState["AlreadyInitialized"] = value; }
-		}
-
-		public IList<string> AddedEditors
-		{
-			get
-			{
-				IList<string> result = ViewState["AddedEditors"] as IList<string>;
-				if (result == null)
-					ViewState["AddedEditors"] = result = new List<string>();
-				return result;
-			}
 		}
 
 		protected override HtmlTextWriterTag TagKey
@@ -64,123 +67,144 @@ namespace Zeus.Web.UI.WebControls
 			get { return HtmlTextWriterTag.Div; }
 		}
 
+		public IList<Panel> Panels
+		{
+			get { return _panels; }
+		}
+
 		public IList<Control> Editors
 		{
 			get { return _editors; }
 		}
 
-		#endregion
-
-		protected override void OnInit(EventArgs e)
+		public int AddedEditorCount
 		{
-			base.OnInit(e);
-
-			UpdatePanel updatePanel = AddUpdatePanel();
-
-			itemEditorsContainer = new PlaceHolder();
-			updatePanel.ContentTemplateContainer.Controls.Add(itemEditorsContainer);
-			AddNewItemDdl(updatePanel);
-
-			Controls.Add(new LiteralControl("<br style=\"clear:both\" />"));
+			get
+			{
+				EnsureChildControls();
+				return Convert.ToInt32(_hiddenAddedEditors.Text);
+			}
+			private set
+			{
+				EnsureChildControls();
+				_hiddenAddedEditors.Text = value.ToString();
+			}
 		}
+
+		public bool AddedEditors
+		{
+			get { return AddedEditorCount > 0; }
+		}
+
+		#endregion
 
 		public void Initialize(IEnumerable<PropertyData> linkedItemDetails)
 		{
 			_initialValues = linkedItemDetails;
 		}
 
-		private UpdatePanel AddUpdatePanel()
+		protected override void OnInit(EventArgs e)
 		{
-			UpdatePanel updatePanel = new UpdatePanel { ID = "updatePanel" };
-			Controls.Add(updatePanel);
-			return updatePanel;
+			_hiddenAddedEditors = new Hidden { ID = ID + "_hiddenAddedEditors", Text = @"0" };
+			Controls.Add(_hiddenAddedEditors);
+
+			base.OnInit(e);
 		}
 
-		protected override void LoadViewState(object savedState)
+		protected override void OnLoad(EventArgs e)
 		{
-			base.LoadViewState(savedState);
-			EnsureChildControls();
-		}
+			_container = new CustomContainer { ID = ID + "_container" };
+			Controls.Add(_container);
 
-		protected override void CreateChildControls()
-		{
 			foreach (PropertyData linkDetail in _initialValues)
 				CreateLinkedItemEditor(linkDetail);
-			foreach (string id in AddedEditors)
+			for (int i = 0; i < AddedEditorCount; ++i)
 				CreateLinkedItemEditor(null);
 
-			base.CreateChildControls();
+			AddNewItemButton();
+			Controls.Add(new LiteralControl("<br style=\"clear:both\" />") { ID = ID + "_literalControl" });
+
+			base.OnLoad(e);
 		}
 
-		private void AddNewItemDdl(UpdatePanel container)
+		private void AddNewItemButton()
 		{
-			container.ContentTemplateContainer.Controls.Add(new Label { Text = "Add " + Title });
+			Controls.Add(new LiteralControl("<br style=\"clear:both\" />") { ID = ID + "_literalControl2" });
 
-			ImageButton b = new ImageButton();
-			container.ContentTemplateContainer.Controls.Add(b);
-			b.ID = "addNew";
-			b.ImageUrl = Page.ClientScript.GetWebResourceUrl(typeof(ItemEditorList), "Zeus.Web.UI.WebControls.Images.add.png");
-			b.ToolTip = "Add item";
-			b.CausesValidation = false;
-			b.Click += AddItemClick;
-			b.CssClass = "add";
+			var addButton = new Button
+			{
+				ID = ID + "_addButton",
+				Icon = Icon.Add,
+				Text = @"Add " + ItemTitle,
+				CausesValidation = false
+			};
+			addButton.DirectClick += OnAddButtonDirectClick;
+			Controls.Add(addButton);
 		}
 
-		private static string GetNewID()
+		private void OnAddButtonDirectClick(object sender, DirectEventArgs e)
 		{
-			return Guid.NewGuid().ToString().Replace("-", string.Empty);
+			++AddedEditorCount;
+			Panel panel = CreateLinkedItemEditor(null);
+			panel.Render(_container);
 		}
 
-		private void AddItemClick(object sender, ImageClickEventArgs e)
+		private Panel CreateLinkedItemEditor(PropertyData detail)
 		{
-			AddedEditors.Add(string.Empty);
-			CreateLinkedItemEditor(null);
-		}
-
-		private void CreateLinkedItemEditor(PropertyData detail)
-		{
-			PlaceHolder container = new PlaceHolder { ID = "plc" + _editorIndex };
-			AddDeleteButton(container, _editorIndex);
 			Control editor = CreateDetailEditor(_editorIndex, detail);
-			AddToContainer(container, editor);
-			itemEditorsContainer.Controls.Add(container);
+			Panel panel = CreatePanel(editor, _editorIndex);
+			_container.Controls.Add(panel);
+			Panels.Add(panel);
 			Editors.Add(editor);
 			++_editorIndex;
+
+			return panel;
 		}
 
 		protected abstract Control CreateDetailEditor(int id, PropertyData detail);
 
-		private void AddDeleteButton(Control container, int id)
+		private Panel CreatePanel(Control itemEditor, int id)
 		{
-			ImageButton b = new ImageButton();
-			container.Controls.Add(b);
-			b.ID = ID + "_d_" + id;
-			b.CssClass = " delete";
-			b.ImageUrl = Page.ClientScript.GetWebResourceUrl(typeof(BaseDetailCollectionEditor), "Zeus.Web.UI.WebControls.Images.delete.png");
-			b.ToolTip = "Delete item";
-			b.CommandArgument = id.ToString();
-			b.Click += DeleteItemClick;
+			var panel = new Panel
+			{
+				ID = ID + "_panel_" + id,
+				IDMode = IDMode.Legacy,
+				Header = false,
+				BodyStyle = "padding:5px",
+				StyleSpec = "margin-bottom:10px;"
+			};
+			var toolbar = new Toolbar();
+			panel.TopBar.Add(toolbar);
+
+			//toolbar.Items.Add(new Button { Icon = Icon.ArrowNsew });
+			toolbar.Items.Add(new ToolbarFill());
+
+			var deleteButton = new Button
+			{
+				ID = ID + "_deleteButton_" + id,
+				IDMode = IDMode.Legacy,
+				Icon = Icon.Delete,
+				Text = @"Delete " + ItemTitle,
+				CausesValidation = false
+			};
+			deleteButton.DirectEvents.Click.Event += OnDeleteButtonDirectClick;
+			deleteButton.DirectEvents.Click.ExtraParams.Add(new Parameter("ID", id.ToString()));
+			toolbar.Items.Add(deleteButton);
+
+			panel.ContentControls.Add(itemEditor);
+
+			return panel;
 		}
 
-		private void DeleteItemClick(object sender, ImageClickEventArgs e)
+		private void OnDeleteButtonDirectClick(object sender, DirectEventArgs e)
 		{
-			ImageButton b = (ImageButton) sender;
-			b.Enabled = false;
-			b.CssClass += " deleted";
-
-			int index = int.Parse(b.CommandArgument);
+			int index = int.Parse(e.ExtraParams["ID"]);
 			DeletedIndexes.Add(index);
-			((FieldSet) Editors[index].Parent).CssClass = "deleted";
+			Panels[index].Hidden = true;
+			Panels[index].Update();
 		}
 
-		private void AddToContainer(Control container, Control itemEditor)
-		{
-			FieldSet fs = new FieldSet { Title = Title };
-			container.Controls.Add(fs);
-			fs.ContentControls.Add(itemEditor);
-		}
-
-		protected abstract string Title
+		protected abstract string ItemTitle
 		{
 			get;
 		}

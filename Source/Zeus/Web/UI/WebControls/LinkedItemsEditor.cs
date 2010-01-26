@@ -30,7 +30,7 @@ namespace Zeus.Web.UI.WebControls
 			get { return Zeus.Context.Current.ContentTypes[TypeFilterInternal]; }
 		}
 
-		protected override string Title
+		protected override string ItemTitle
 		{
 			get { return ContentType.Title; }
 		}

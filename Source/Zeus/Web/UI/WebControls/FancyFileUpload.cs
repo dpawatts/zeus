@@ -1,6 +1,7 @@
 using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using ScriptManager = System.Web.UI.ScriptManager;
 
@@ -112,26 +113,18 @@ namespace Zeus.Web.UI.WebControls
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			bool justCreated = false;
 			if (string.IsNullOrEmpty(_hiddenIdentifierField.Value))
+			{
 				_hiddenIdentifierField.Value = Guid.NewGuid().ToString();
+				justCreated = true;
+			}
 
 			string html = string.Format(@"<div style=""float:left;width:600px;margin-bottom:10px;""><a href=""#"" id=""{0}"">Attach a file</a>
 				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
 			Controls.Add(new LiteralControl(html));
 
-			string cssScript = string.Format(@"var headID = document.getElementsByTagName('head')[0];
-				var cssNode = document.createElement('link');
-				cssNode.type = 'text/css';
-				cssNode.rel = 'stylesheet';
-				cssNode.href = '{0}';
-				cssNode.media = 'screen';
-				headID.appendChild(cssNode);", WebResourceUtility.GetUrl(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css"));
-			ScriptManager.RegisterClientScriptBlock(this, typeof(FancyFileUpload), "FancyFileUpload", cssScript, true);
-
-			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.mootools.js");
-			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
-			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
-			ScriptManager.RegisterClientScriptResource(this, typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
+			// Resource registration moved to Edit.Default.aspx.cs
 
 			string script = string.Format(@"var {8}up;
 function prepare{8}() {{
@@ -215,7 +208,10 @@ window.addEvent('domready', prepare{8});
 		 _hiddenFileNameField.ClientID,
 		 MaximumFileSize,
 		 ClientID);
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), ClientID + "FancyFileUpload", script, true);
+			if (ExtNet.IsAjaxRequest && justCreated)
+				ExtNet.ResourceManager.RegisterOnReadyScript(script + string.Format(" prepare{0}();", ClientID));
+			else
+				ScriptManager.RegisterStartupScript(this, GetType(), ClientID + "FancyFileUpload", script, true);
 
 			if (!string.IsNullOrEmpty(_currentFileName))
 			{
@@ -241,7 +237,7 @@ window.addEvent('domready', prepare{8});
 	}});
 	checkbox.inject(existingUi.element, 'top');
 }});", _currentFileName, _hiddenFileNameField.ClientID, ClientID);
-				ScriptManager.RegisterClientScriptBlock(this, GetType(), ClientID + "FancyFileUploadExistingFile", existingFileScript, true);
+				ScriptManager.RegisterStartupScript(this, GetType(), ClientID + "FancyFileUploadExistingFile", existingFileScript, true);
 			}
 
 			base.OnPreRender(e);

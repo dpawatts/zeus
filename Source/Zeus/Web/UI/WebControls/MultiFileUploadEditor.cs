@@ -1,7 +1,5 @@
-﻿using System;
-using System.Web.UI;
+﻿using System.Web.UI;
 using Zeus.ContentProperties;
-using Zeus.Design.Editors;
 using Zeus.FileSystem;
 
 namespace Zeus.Web.UI.WebControls
@@ -10,7 +8,7 @@ namespace Zeus.Web.UI.WebControls
 	{
 		#region Properties
 
-		protected override string Title
+		protected override string ItemTitle
 		{
 			get { return "File"; }
 		}
@@ -33,12 +31,6 @@ namespace Zeus.Web.UI.WebControls
 		protected virtual FancyFileUpload CreateEditor()
 		{
 			return new FancyFileUpload();
-		}
-
-		protected override void Render(HtmlTextWriter writer)
-		{
-			base.Render(writer);
-			writer.Write("<br style=\"clear:both\" />");
 		}
 	}
 }
