@@ -22,7 +22,7 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 		public ActionResult Index(int? p)
 		{
 			IPageable<Post> posts = Find.EnumerateAccessibleChildren(CurrentItem)
-				.Navigable()
+				.NavigablePages()
 				.OfType<Post>().OrderByDescending(post => post.Date)
 				.AsPageable(true, p ?? 1, CurrentItem.CurrentBlog.PageSize);
 			return View(new BlogMonthViewModel(CurrentItem, CurrentItem.Date, posts));

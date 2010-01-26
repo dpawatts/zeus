@@ -26,7 +26,7 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 		{
 			++month;
 			IEnumerable<Post> posts = Find.EnumerateAccessibleChildren(CurrentItem.Blog)
-				.Navigable().OfType<Post>()
+				.NavigablePages().OfType<Post>()
 				.Where(post => post.Date.Month == month && post.Date.Year == year)
 				.OrderBy(post => post.Date);
 

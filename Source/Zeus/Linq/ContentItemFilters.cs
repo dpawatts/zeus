@@ -84,16 +84,28 @@ namespace Zeus.Linq
 			return source.Where(ci => securityManager.IsAuthorized(ci, user, operation));
 		}
 
-		public static IEnumerable<T> Navigable<T>(this IQueryable<T> source)
+		public static IEnumerable<T> NavigablePages<T>(this IQueryable<T> source)
 			where T : ContentItem
 		{
 			return source.Pages().Visible().Published().Authorized(Operations.Read);
 		}
 
-		public static IEnumerable<T> Navigable<T>(this IEnumerable<T> source)
+		public static IEnumerable<T> NavigablePages<T>(this IEnumerable<T> source)
 			where T : ContentItem
 		{
 			return source.Pages().Visible().Published().Authorized(Operations.Read);
+		}
+
+		public static IEnumerable<T> NavigableItems<T>(this IQueryable<T> source)
+			where T : ContentItem
+		{
+			return source.Visible().Published().Authorized(Operations.Read);
+		}
+
+		public static IEnumerable<T> NavigableItems<T>(this IEnumerable<T> source)
+			where T : ContentItem
+		{
+			return source.Visible().Published().Authorized(Operations.Read);
 		}
 	}
 }

@@ -176,7 +176,7 @@ namespace Zeus.AddIns.Blogs.Services
 		public IEnumerable<Post> GetRecentPosts(Blog blog, int numberOfPosts)
 		{
 			return Find.EnumerateAccessibleChildren(blog)
-				.Navigable()
+				.NavigablePages()
 				.OfType<Post>().OrderByDescending(p => p.Date)
 				.Take(numberOfPosts);
 		}
@@ -184,7 +184,7 @@ namespace Zeus.AddIns.Blogs.Services
 		public IEnumerable<Post> GetPostsInCategory(Blog blog, Category category)
 		{
 			return Find.EnumerateAccessibleChildren(blog)
-				.Navigable()
+				.NavigablePages()
 				.OfType<Post>()
 				.Where(post => post.Categories.Cast<Category>().Contains(category))
 				.OrderByDescending(post => post.Date);

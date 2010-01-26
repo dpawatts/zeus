@@ -50,7 +50,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 		private static IEnumerable GetFiles(ContentItem contentItem, FileType fileType)
 		{
-			IEnumerable<ContentItem> files = contentItem.GetChildren().Navigable();
+			IEnumerable<ContentItem> files = contentItem.GetChildren().NavigablePages();
 			switch (fileType)
 			{
 				case FileType.Image :

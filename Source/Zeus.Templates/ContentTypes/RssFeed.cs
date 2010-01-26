@@ -64,7 +64,7 @@ namespace Zeus.Templates.ContentTypes
 			return Find.EnumerateAccessibleChildren(FeedRoot ?? Find.StartPage)
 				.OfType<ISyndicatable>()
 				.OfType<ContentItem>()
-				.Navigable()
+				.NavigablePages()
 				.Where(ci => ci.GetDetail(SyndicatableDefinitionAppender.SyndicatableDetailName, true))
 				.OrderByDescending(ci => ci.Published)
 				.Take(NumberOfItems)

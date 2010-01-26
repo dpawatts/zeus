@@ -14,20 +14,20 @@ namespace Zeus.Templates.Mvc.Html
 	{
 		public delegate string CssClassFunc(ContentItem contentItem, bool isFirst, bool isLast);
 
-		public static IEnumerable<ContentItem> NavigationItems(this HtmlHelper html)
+		public static IEnumerable<ContentItem> NavigationPages(this HtmlHelper html)
 		{
-			return NavigationItems(html, Find.StartPage);
+			return NavigationPages(html, Find.StartPage);
 		}
 
-		public static IEnumerable<ContentItem> NavigationItems(this HtmlHelper html, ContentItem startPage)
+		public static IEnumerable<ContentItem> NavigationPages(this HtmlHelper html, ContentItem startPage)
 		{
-			return startPage.GetGlobalizedChildren().Navigable();
+			return startPage.GetGlobalizedChildren().NavigablePages();
 		}
 
 		public static string NavigationLinks(this HtmlHelper html, ContentItem startItem, Func<string, string> layoutCallback,
 			CssClassFunc cssClassCallback)
 		{
-			var navigationItems = NavigationItems(html, startItem);
+			var navigationItems = NavigationPages(html, startItem);
 
 			string result = string.Empty;
 			foreach (ContentItem contentItem in navigationItems)
