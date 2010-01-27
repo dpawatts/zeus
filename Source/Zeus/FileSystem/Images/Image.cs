@@ -9,6 +9,11 @@ namespace Zeus.FileSystem.Images
 	[ContentType]
 	public class Image : File
 	{
+		public Image()
+		{
+			base.Visible = false;
+		}
+		
 		[ImageUploadEditor("Image", 100)]
 		public override byte[] Data
 		{
