@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ext.Net;
@@ -132,7 +133,7 @@ function prepare{8}() {{
 		return;
 	{8}up = new FancyUpload3.Attach('{3}', '{4}', {{
 		path: '{0}',
-		url: '/PostedFileUpload.axd',
+		url: '{9}',
 		fileSizeMax: {7} * 1024 * 1024,
 		data: 'identifier={5}',
 		
@@ -207,7 +208,8 @@ window.addEvent('domready', prepare{8});
 		 _hiddenIdentifierField.Value,
 		 _hiddenFileNameField.ClientID,
 		 MaximumFileSize,
-		 ClientID);
+		 ClientID,
+		 VirtualPathUtility.ToAbsolute("~/PostedFileUpload.axd"));
 			if (ExtNet.IsAjaxRequest && justCreated)
 				ExtNet.ResourceManager.RegisterOnReadyScript(script + string.Format(" prepare{0}();", ClientID));
 			else

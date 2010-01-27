@@ -6,7 +6,7 @@ namespace Zeus.Admin
 	{
 		protected override void OnPreInit(EventArgs e)
 		{
-			MasterPageFile = "~/admin/PreviewFrame.master";
+			MasterPageFile = Engine.GetServerResourceUrl(typeof(PreviewFrameAdminPage), "Zeus.Admin.PreviewFrame.master");
 			base.OnPreInit(e);
 		}
 	}

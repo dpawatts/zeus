@@ -14,7 +14,7 @@
 			var button = toolbar.items.items[0];
 			button.menu = new Ext.ux.menu.StoreMenu({
 				baseParams: { node: record.data.ID },
-				url: "/admin/Plugins/ContextMenu/ContextMenuLoader.ashx",
+				url: "<%= GetContextMenuLoaderUrl() %>",
 				xtype:"storemenu",
 				items: []
 			});

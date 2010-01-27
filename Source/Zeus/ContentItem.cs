@@ -253,8 +253,8 @@ namespace Zeus
 			get
 			{
 				if (IsPage)
-					return BaseLibrary.Web.Url.ToAbsolute("~/admin/assets/images/icons/page.png");
-				return BaseLibrary.Web.Url.ToAbsolute("~/admin/assets/images/icons/page_white.png");
+					return Utility.GetCooliteIconUrl(Ext.Net.Icon.Page);
+				return Utility.GetCooliteIconUrl(Ext.Net.Icon.PageWhite);
 			}
 		}
 

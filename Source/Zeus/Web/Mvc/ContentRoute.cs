@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
+using Zeus.Configuration;
 using Zeus.Engine;
 
 namespace Zeus.Web.Mvc
@@ -23,6 +25,7 @@ namespace Zeus.Web.Mvc
 		readonly ContentEngine engine;
 		readonly IRouteHandler routeHandler;
 		readonly IControllerMapper controllerMapper;
+		private readonly AdminSection _adminSection;
 
 		public ContentRoute(ContentEngine engine)
 			: this(engine, new MvcRouteHandler())
@@ -40,12 +43,13 @@ namespace Zeus.Web.Mvc
 			this.engine = engine;
 			this.routeHandler = routeHandler;
 			this.controllerMapper = controllerMapper ?? engine.Resolve<IControllerMapper>();
+			_adminSection = (AdminSection) ConfigurationManager.GetSection("zeus/admin");
 		}
 
 		public override RouteData GetRouteData(HttpContextBase httpContext)
 		{
 			string path = httpContext.Request.AppRelativeCurrentExecutionFilePath;
-			if (path.StartsWith("~/admin/", StringComparison.InvariantCultureIgnoreCase))
+			if (path.StartsWith("~/" + _adminSection + "/", StringComparison.InvariantCultureIgnoreCase))
 				return null;
 			if (path.EndsWith(".axd", StringComparison.InvariantCultureIgnoreCase))
 				return null;

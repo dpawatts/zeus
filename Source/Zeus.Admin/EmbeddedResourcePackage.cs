@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using System.Web.Routing;
+using Zeus.Configuration;
 using Zeus.Web.Hosting;
 
 namespace Zeus.Admin
@@ -9,7 +11,8 @@ namespace Zeus.Admin
 	{
 		public override void Register(RouteCollection routes, ResourceSettings resourceSettings)
 		{
-			RegisterStandardArea(routes, resourceSettings, "admin", "Assets");
+			AdminSection adminSection = (AdminSection) ConfigurationManager.GetSection("zeus/admin");
+			RegisterStandardArea(routes, resourceSettings, adminSection.Path, "Assets");
 		}
 	}
 }

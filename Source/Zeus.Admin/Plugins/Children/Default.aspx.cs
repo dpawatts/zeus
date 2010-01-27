@@ -39,5 +39,10 @@ namespace Zeus.Admin.Plugins.Children
 			exsDataStore.DataSource = SelectedItem.GetChildren();
 			exsDataStore.DataBind();
 		}
+
+		protected string GetContextMenuLoaderUrl()
+		{
+			return Engine.GetServerResourceUrl(typeof(Default), "Zeus.Admin.Plugins.ContextMenu.ContextMenuLoader.ashx");
+		}
 	}
 }

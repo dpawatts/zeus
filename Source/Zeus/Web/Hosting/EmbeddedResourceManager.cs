@@ -42,8 +42,7 @@ namespace Zeus.Web.Hosting
 
 		public string GetClientResourceUrl(Assembly resourceAssembly, string relativePath)
 		{
-			return "/content/" + _reverseAssemblyPathPrefixes[resourceAssembly]
-				+ "/" + relativePath;
+			return VirtualPathUtility.ToAbsolute("~/content/" + _reverseAssemblyPathPrefixes[resourceAssembly] + "/" + relativePath);
 		}
 
 		public string GetServerResourceUrl(Assembly resourceAssembly, string resourcePath)
