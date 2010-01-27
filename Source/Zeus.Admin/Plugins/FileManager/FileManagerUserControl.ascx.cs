@@ -31,6 +31,8 @@ namespace Zeus.Admin.Plugins.FileManager
 				};
 			treePanel.Loader.Add(treeloader);
 
+			filesStore.DirectEventConfig.Url = Engine.AdminManager.GetAdminDefaultUrl();
+
 			if (ExtNet.IsAjaxRequest)
 				return;
 

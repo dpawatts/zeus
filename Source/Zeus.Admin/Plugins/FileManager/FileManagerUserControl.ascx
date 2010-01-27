@@ -2,7 +2,6 @@
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 
 <ext:Store runat="server" ID="filesStore" AutoLoad="true" OnRefreshData="filesStore_RefreshData">
-	<DirectEventConfig Url="/admin/default.aspx" />
   <Reader>
     <ext:JsonReader>
       <Fields>
