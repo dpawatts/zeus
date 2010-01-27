@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
@@ -77,6 +78,11 @@ namespace Zeus.Web.Mvc.Html
 		public static Url Url(this HtmlHelper html, string url)
 		{
 			return new Url(url);
+		}
+
+		public static string ToAbsoluteUrl(this HtmlHelper html, string url)
+		{
+			return VirtualPathUtility.ToAbsolute(url);
 		}
 
 		public static Url CurrentUrl(this HtmlHelper html)

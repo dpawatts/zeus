@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Globalization;
@@ -121,8 +122,7 @@ namespace Zeus.Web
 					}
 
 					// we've reached the start page so we're done here
-					return url;
-					//return Url.ToAbsolute("~" + url.PathAndQuery);
+					return VirtualPathUtility.ToAbsolute("~" + url.PathAndQuery);
 				}
 
 				url = url.PrependSegment(current.Name, current.Extension);

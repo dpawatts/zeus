@@ -52,7 +52,7 @@
 					</BottomBar>
 				</ext:Panel>
 				<ext:Panel runat="server" ID="pnlContent" Region="Center" Title="Preview" Icon="Page">
-					<AutoLoad Url="/" Mode="IFrame" />
+					<AutoLoad Mode="IFrame" />
 				</ext:Panel>						
 				<ext:StatusBar runat="server" ID="stbStatusBar" Region="South" MinHeight="25" Height="25" AutoClear="1500" />
 			</Items>

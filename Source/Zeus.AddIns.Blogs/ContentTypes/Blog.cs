@@ -7,8 +7,8 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.Blogs.ContentTypes
 {
-	[ContentType]
-	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
+	[ContentType(Installer = Installation.InstallerHints.PreferredStartPage)]
+	[RestrictParents(typeof(WebsiteNode), typeof(Page), typeof(RootItem))]
 	public class Blog : BasePage, ISelfPopulator, IFileSystemContainer, ITagGroupContainer
 	{
 		private const string CategoryContainerName = "categories";

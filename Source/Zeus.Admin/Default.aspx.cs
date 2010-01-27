@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 using Ext.Net;
 using Zeus.Admin.Plugins;
@@ -38,6 +39,8 @@ namespace Zeus.Admin
 
 				plugin.ModifyInterface(this);
 			}
+
+			pnlContent.AutoLoad.Url = VirtualPathUtility.ToAbsolute("~/");
 		}
 
 		protected override void OnPreRender(EventArgs e)

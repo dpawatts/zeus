@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
 
@@ -61,21 +62,24 @@ namespace Zeus.Web.Hosting
 				relativePath = Regex.Replace(relativePath, "([A-Z])", m => m.Groups[1].Value.ToLower());
 			}
 
-			return "/" + _reverseAssemblyPathPrefixes[resourceAssembly] + "/" + relativePath;
+			return VirtualPathUtility.ToAbsolute("~/" + _reverseAssemblyPathPrefixes[resourceAssembly] + "/" + relativePath);
 		}
 
 		private EmbeddedResourceVirtualFile GetOrCreateVirtualFile(Url url, bool throwOnError)
 		{
+			// If we're in an application in a folder (i.e. /blog) then remove that part.
+			Url testUrl = new Url(VirtualPathUtility.ToAppRelative(url.Path).TrimStart('~'));
+
 			// Always deal with lower-case URLs for aspx pages.
-			if (url.Extension == ".aspx")
-				url = url.ToString().ToLower();
+			if (testUrl.Extension == ".aspx")
+				testUrl = testUrl.ToString().ToLower();
 
 			// First check if we already have a virtual file cached.
-			if (_files.ContainsKey(url))
-				return _files[url];
+			if (_files.ContainsKey(testUrl))
+				return _files[testUrl];
 
 			// Grab the first segment of the path. This will be the assembly prefix.
-			string assemblyPathPrefix = url.SegmentAtIndex(0);
+			string assemblyPathPrefix = testUrl.SegmentAtIndex(0);
 			if (string.IsNullOrEmpty(assemblyPathPrefix))
 				if (throwOnError)
 					throw new ArgumentException("URL does not contain an assembly path prefix", "url");
@@ -90,7 +94,7 @@ namespace Zeus.Web.Hosting
 			Assembly assembly = _assemblyPathPrefixes[assemblyPathPrefix];
 
 			// Now get the rest of the path. This, combined with the assembly prefix, will be the resource path.
-			Url remainingUrl = url.RemoveSegment(0);
+			Url remainingUrl = testUrl.RemoveSegment(0);
 			string resourcePath = remainingUrl.PathWithoutExtension.Replace('/', '.');
 			if (remainingUrl.Extension == ".aspx")
 			{
@@ -100,7 +104,7 @@ namespace Zeus.Web.Hosting
 
 			// Create a new virtual file.
 			EmbeddedResourceVirtualFile virtualFile = new EmbeddedResourceVirtualFile(url, assembly, assembly.GetName().Name + resourcePath + remainingUrl.Extension);
-			_files.Add(url, virtualFile);
+			_files.Add(testUrl, virtualFile);
 
 			// Check that resource actually exists.
 			if (assembly.GetManifestResourceStream(virtualFile.ResourcePath) == null)
