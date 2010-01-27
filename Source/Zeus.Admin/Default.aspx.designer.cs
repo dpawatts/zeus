@@ -23,6 +23,15 @@ namespace Zeus.Admin {
         protected global::System.Web.UI.WebControls.Literal ltlAdminName1;
         
         /// <summary>
+        /// rsmResourceManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ResourceManager rsmResourceManager;
+        
+        /// <summary>
         /// extViewPort control.
         /// </summary>
         /// <remarks>

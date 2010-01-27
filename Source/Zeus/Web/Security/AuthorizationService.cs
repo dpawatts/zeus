@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using System.Web;
 
 namespace Zeus.Web.Security
 {
@@ -58,7 +59,8 @@ namespace Zeus.Web.Security
 				throw new ArgumentNullException("verb");
 
 			// Check rules which pertain to this location.
-			AuthorizationLocation location = (AuthorizationLocation) _rootLocation.GetChild(virtualPath);
+			AuthorizationLocation location = (AuthorizationLocation) _rootLocation.GetChild(
+				VirtualPathUtility.ToAppRelative(virtualPath).TrimStart('~'));
 			if (!location.EveryoneAllowed)
 				return location.IsUserAllowed(user, verb);
 

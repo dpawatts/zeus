@@ -23,7 +23,7 @@
 	</script>
 </head>
 <body>
-	<ext:ResourceManager runat="server" Theme="Gray" />
+	<ext:ResourceManager runat="server" ID="rsmResourceManager" Theme="Gray" />
 	
 	<noscript><div id="js">
 		<p><span class="bold">NOTE: </span>Javascript is turned off. You must have javascript turned on to use this interface. For instructions, please contact us by clicking <a href="http://www.sitdap.com">here</a></p>

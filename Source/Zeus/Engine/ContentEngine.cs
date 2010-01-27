@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Reflection;
 using Zeus.Admin;
 using Zeus.BaseLibrary.DependencyInjection;
 using Zeus.BaseLibrary.Reflection;
@@ -12,6 +13,7 @@ using Zeus.Persistence;
 using Zeus.Plugin;
 using Zeus.Security;
 using Zeus.Web;
+using Zeus.Web.Hosting;
 using Zeus.Web.Security;
 using IWebContext=Zeus.Web.IWebContext;
 
@@ -153,6 +155,16 @@ namespace Zeus.Engine
 		public object Resolve(Type serviceType)
 		{
 			return _dependencyInjectionManager.Get(serviceType);
+		}
+
+		public string GetServerResourceUrl(Assembly assembly, string resourcePath)
+		{
+			return Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(assembly, resourcePath);
+		}
+
+		public string GetServerResourceUrl(Type type, string resourcePath)
+		{
+			return GetServerResourceUrl(type.Assembly, resourcePath);
 		}
 
 		/*/// <summary>Releases a component from the IoC container.</summary>

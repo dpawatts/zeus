@@ -38,7 +38,7 @@ namespace Zeus.AddIns.Forums.ContentTypes
 
 		public override string Title
 		{
-			get { return !string.IsNullOrEmpty(base.Title) ? base.Title : User.Username; }
+			get { return !string.IsNullOrEmpty(base.Title) ? base.Title : (User != null) ? User.Username : string.Empty; }
 			set { base.Title = value; }
 		}
 

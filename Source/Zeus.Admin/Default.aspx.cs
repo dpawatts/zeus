@@ -7,6 +7,7 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Configuration;
 using System.Configuration;
 using Zeus.Security;
+using Zeus.Web.Hosting;
 using Zeus.Web.UI;
 
 namespace Zeus.Admin
@@ -60,6 +61,9 @@ namespace Zeus.Admin
 				plugin.RegisterScripts(ScriptManager);
 				plugin.RegisterStyles(ScriptManager);
 			}
+
+			rsmResourceManager.DirectEventUrl = Engine.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
+				typeof(Default).Assembly, "Zeus.Admin.Default.aspx");
 
 			base.OnPreRender(e);
 		}

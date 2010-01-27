@@ -21,6 +21,8 @@ namespace Zeus.Admin
 
 		IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups();
 
+		string GetAdminDefaultUrl();
+
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>
 		/// <param name="item">The item to edit.</param>
 		/// <returns>The url to the edit page</returns>

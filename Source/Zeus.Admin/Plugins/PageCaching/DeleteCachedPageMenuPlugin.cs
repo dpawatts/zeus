@@ -45,8 +45,8 @@ namespace Zeus.Admin.Plugins.PageCaching
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
 			return string.Format(
-				"function() {{ stbStatusBar.showBusy(); Ext.net.DirectMethods.PageCaching.DeleteCachedPage({0}, {{ url: '/admin/default.aspx', success: function() {{ stbStatusBar.setStatus({{ text: 'Deleted cached page', iconCls: '', clear: true }}); }} }}); }}",
-				contentItem.ID);
+				"function() {{ stbStatusBar.showBusy(); Ext.net.DirectMethods.PageCaching.DeleteCachedPage({0}, {{ url: '{1}', success: function() {{ stbStatusBar.setStatus({{ text: 'Deleted cached page', iconCls: '', clear: true }}); }} }}); }}",
+				contentItem.ID, Context.AdminManager.GetAdminDefaultUrl());
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)

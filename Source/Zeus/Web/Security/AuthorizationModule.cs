@@ -30,8 +30,8 @@ namespace Zeus.Web.Security
 				{
 					AuthorizationRule rule = new AuthorizationRule();
 					rule.Action = (authorizationRule.Action == AuthorizationRuleAction.Allow) ? AuthorizationRuleAction.Allow : AuthorizationRuleAction.Deny;
-					rule.Roles.AddRange(authorizationRule.Roles.Cast<string>());
-					rule.Users.AddRange(authorizationRule.Users.Cast<string>());
+					rule.Roles.AddRange(authorizationRule.Roles);
+					rule.Users.AddRange(authorizationRule.Users);
 					rules.Add(rule);
 				}
 				authorizationService.AddRules(locationPath, rules);

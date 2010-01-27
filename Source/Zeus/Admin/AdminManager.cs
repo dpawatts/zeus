@@ -33,6 +33,7 @@ namespace Zeus.Admin
 
 		private readonly AdminSection _configSection;
 		private readonly ISecurityManager _securityManager;
+		private readonly IAdminAssemblyManager _adminAssembly;
 		private readonly IAuthorizationService _authorizationService;
 		private readonly IAuthenticationContextService _authenticationContextService;
 		private readonly IPersister _persister;
@@ -56,6 +57,7 @@ namespace Zeus.Admin
 		{
 			_configSection = configSection;
 			_securityManager = securityManager;
+			_adminAssembly = adminAssembly;
 			DeleteItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Delete.aspx");
 			EditItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.Plugins.EditItem.Default.aspx");
 			NewItemUrl = embeddedResourceManager.GetServerResourceUrl(adminAssembly.Assembly, "Zeus.Admin.New.aspx");
@@ -172,6 +174,11 @@ namespace Zeus.Admin
 		public IEnumerable<ActionPluginGroupAttribute> GetActionPluginGroups()
 		{
 			return _cachedActionPluginGroups;
+		}
+
+		public string GetAdminDefaultUrl()
+		{
+			return Context.Current.GetServerResourceUrl(_adminAssembly.Assembly, "Zeus.Admin.Default.aspx");
 		}
 
 		/// <summary>Gets the url to the edit page where to edit an existing item in the original language.</summary>

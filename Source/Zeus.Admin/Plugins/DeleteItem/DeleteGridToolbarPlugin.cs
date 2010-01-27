@@ -1,18 +1,10 @@
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.Security;
-
-//[assembly: WebResource("Zeus.Admin.Delete.Resources.Ext.ux.zeus.DeleteConfirmation.js", "text/javascript")]
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {
 	public class DeleteGridToolbarPlugin : GridToolbarPluginBase
 	{
-		public override string[] RequiredScripts
-		{
-			get { return new[] { WebResourceUtility.GetUrl(GetType(), "Zeus.Admin.Plugins.DeleteItem.Resources.Ext.ux.zeus.DeleteConfirmation.js") }; }
-		}
-
 		protected override string RequiredSecurityOperation
 		{
 			get { return Operations.Delete; }
@@ -52,8 +44,10 @@ namespace Zeus.Admin.Plugins.DeleteItem
 					var record = selections[i];
 					selectedIDs.push(record.data.ID);
 				}}
-				window.top.Ext.ux.zeus.DeleteConfirmation.showMultiple(selectedIDs);",
-				gridPanel.ClientID);
+				top.Ext.net.DirectMethods.Delete.ShowDialog('Delete Items',
+					'Are you sure you wish to delete these items?',
+					selectedIDs, {{ url : '{1}' }});",
+				gridPanel.ClientID, Context.AdminManager.GetAdminDefaultUrl());
 
 			return toolbarButton;
 		}

@@ -11,8 +11,14 @@ namespace Zeus.Admin.Plugins.MoveItem
 
 		public override void ModifyTree(TreePanel treePanel, IMainInterface mainInterface)
 		{
-			treePanel.Listeners.MoveNode.Handler = string.Format("{0}.showBusy(); Ext.net.DirectMethods.Move.MoveNode(node.id, newParent.id, index, {{ url: '/admin/default.aspx', success: function() {{ {0}.setStatus({{ text: 'Moved item', iconCls: '', clear: true }}); }} }})",
-				mainInterface.StatusBar.ClientID);
+			treePanel.Listeners.MoveNode.Handler = string.Format(@"
+				{0}.showBusy();
+				Ext.net.DirectMethods.Move.MoveNode(node.id, newParent.id, index,
+				{{
+					url: '{1}',
+					success: function() {{ {0}.setStatus({{ text: 'Moved item', iconCls: '', clear: true }}); }}
+				}})",
+				mainInterface.StatusBar.ClientID, Context.AdminManager.GetAdminDefaultUrl());
 		}
 	}
 }

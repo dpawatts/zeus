@@ -1,9 +1,5 @@
-using System.Web.UI;
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.Security;
-
-[assembly: WebResource("Zeus.Admin.Plugins.DeleteItem.Resources.Ext.ux.zeus.DeleteConfirmation.js", "text/javascript")]
 
 namespace Zeus.Admin.Plugins.DeleteItem
 {
@@ -12,11 +8,6 @@ namespace Zeus.Admin.Plugins.DeleteItem
 		public override string GroupName
 		{
 			get { return "NewEditDelete"; }
-		}
-
-		public override string[] RequiredScripts
-		{
-			get { return new[] { WebResourceUtility.GetUrl(GetType(), "Zeus.Admin.Plugins.DeleteItem.Resources.Ext.ux.zeus.DeleteConfirmation.js") }; }
 		}
 
 		protected override string RequiredSecurityOperation
@@ -44,8 +35,15 @@ namespace Zeus.Admin.Plugins.DeleteItem
 
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
-			return string.Format("function() {{ top.Ext.ux.zeus.DeleteConfirmation.show('{0}', '{1}', '{2}'); }}",
-				contentItem.Title.Replace("'", "\\'"), contentItem.ID, contentItem.IconUrl);
+			return string.Format(@"
+				function()
+				{{
+					Ext.net.DirectMethods.Delete.ShowDialog('Delete Item',
+						'<b>Are you sure you wish to delete this item?</b><br /><img src=\'{0}\' /> {1}',
+						{2}, {{ url : '{3}' }});
+				}}",
+				contentItem.IconUrl, contentItem.Title.Replace("'", "\\'"), contentItem.ID,
+				Context.AdminManager.GetAdminDefaultUrl());
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)

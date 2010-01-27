@@ -479,7 +479,6 @@
     <EmbeddedResource Include="Resources\group.png" />
     <EmbeddedResource Include="Resources\user.png" />
     <EmbeddedResource Include="Plugins\Children\Default.aspx" />
-    <EmbeddedResource Include="Plugins\DeleteItem\Resources\Ext.ux.zeus.DeleteConfirmation.js" />
     <EmbeddedResource Include="Plugins\DeleteItem\DeleteUserControl.ascx" />
     <EmbeddedResource Include="Plugins\NewItem\Resources\Ext.ux.zeus.NewItemContextMenuPlugin.js" />
     <Content Include="DynamicContent\Default.aspx" />

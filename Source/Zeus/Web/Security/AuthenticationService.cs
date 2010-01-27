@@ -53,7 +53,7 @@ namespace Zeus.Web.Security
 
 		public bool AccessingLoginPage()
 		{
-			string loginUrl = Url.ToAbsolute(_loginUrl);
+			string loginUrl = (!string.IsNullOrEmpty(_loginUrl) && VirtualPathUtility.IsAppRelative(_loginUrl)) ? VirtualPathUtility.ToAbsolute(_loginUrl) : _loginUrl;
 			return _webContext.Request.Path.Equals(loginUrl, StringComparison.InvariantCultureIgnoreCase);
 		}
 
