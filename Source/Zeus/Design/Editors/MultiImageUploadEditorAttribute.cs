@@ -12,6 +12,11 @@ namespace Zeus.Design.Editors
 			
 		}
 
+		protected override void HandleUpdatedFile(File file)
+		{
+			Context.Current.Resolve<ImageCachingService>().DeleteCachedImages(file);
+		}
+
 		protected override File CreateNewItem()
 		{
 			return new Image();

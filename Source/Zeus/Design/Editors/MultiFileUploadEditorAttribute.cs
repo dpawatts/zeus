@@ -52,11 +52,19 @@ namespace Zeus.Design.Editors
 				Directory.Delete(uploadFolder);
 
 				newDetail = newFile;
+
+				if (existingFileProperty != null)
+					HandleUpdatedFile(newFile);
 			}
 			else
 			{
 				newDetail = null;
 			}
+		}
+
+		protected virtual void HandleUpdatedFile(File file)
+		{
+			
 		}
 
 		protected virtual File CreateNewItem()

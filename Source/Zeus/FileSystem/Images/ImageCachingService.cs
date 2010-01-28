@@ -1,7 +1,5 @@
-using System.Linq;
 using Ninject;
 using SoundInTheory.DynamicImage.Caching;
-using Zeus.ContentProperties;
 using Zeus.Persistence;
 
 namespace Zeus.FileSystem.Images
@@ -21,21 +19,21 @@ namespace Zeus.FileSystem.Images
 			_persister.ItemSaved += OnPersisterItemSaved;
 		}
 
-		private static void OnPersisterItemDeleted(object sender, ItemEventArgs e)
+		private void OnPersisterItemDeleted(object sender, ItemEventArgs e)
 		{
 			DeleteCachedImages(e.AffectedItem);
 		}
 
-		private static void OnPersisterItemSaved(object sender, ItemEventArgs e)
+		private void OnPersisterItemSaved(object sender, ItemEventArgs e)
 		{
 			DeleteCachedImages(e.AffectedItem);
 		}
 
-		private static void DeleteCachedImages(ContentItem contentItem)
+		public void DeleteCachedImages(ContentItem contentItem)
 		{
 			if (contentItem is Image)
 			{
-				ZeusImageSource source = new ZeusImageSource { ContentID = contentItem.ID };
+				var source = new ZeusImageSource { ContentID = contentItem.ID };
 				DynamicImageCacheManager.Remove(source);
 			}
 		}
