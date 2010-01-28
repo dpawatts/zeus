@@ -26,13 +26,31 @@ namespace Zeus.Admin.Plugins.Tree
 				Region = Region.West,
 				MinWidth = 175,
 				MaxWidth = 400,
-				Split = true
+				Split = true,
+				CollapseFirst = false
 			};
 			mainInterface.Viewport.Items.Add(treePanel);
 
 			// Setup tree top toolbar.
 			Toolbar topToolbar = new Toolbar();
 			treePanel.TopBar.Add(topToolbar);
+
+			TriggerField filterField = new TriggerField
+			{
+				EnableKeyEvents = true,
+				Width = 100,
+				EmptyText = "Filter..."
+			};
+			filterField.Triggers.Add(new FieldTrigger
+			{
+				Icon = TemplateTriggerIcon.Clear,
+				HideTrigger = true
+			});
+			filterField.Listeners.KeyUp.Fn = "keyUp";
+			filterField.Listeners.KeyUp.Buffer = 100;
+			filterField.Listeners.TriggerClick.Fn = "clearFilter";
+			topToolbar.Items.Add(filterField);
+
 			topToolbar.Items.Add(new ToolbarFill());
 
 			Button refreshButton = new Button { Icon = Icon.Reload };
