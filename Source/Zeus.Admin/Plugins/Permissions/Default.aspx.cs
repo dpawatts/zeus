@@ -164,7 +164,8 @@ namespace Zeus.Admin.Plugins.Permissions
 				ApplyRules(item, allowedOperations);
 
 			// Apply recursively.
-			foreach (ContentItem child in item.GetChildren())
+			ContentItem[] children = item.GetChildren().ToArray();
+			foreach (ContentItem child in children)
 				ApplyRulesRecursive(child, allowedOperations);
 		}
 

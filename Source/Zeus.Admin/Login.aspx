@@ -8,7 +8,7 @@
 	<title>Login</title>
 	
 	<script type="text/javascript">
-		$(document).ready(function() {
+		jQuery(document).ready(function() {
 			if (window.self != window.top)
 				top.location = self.location.href;
 		});

@@ -112,7 +112,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 			yesButton.Listeners.Click.Handler = string.Format(@"
 				stbStatusBar.showBusy('Deleting...');
 				{0}.hide();
-				Ext.net.DirectMethods.Delete.DeleteItems({1},
+				Ext.net.DirectMethods.Delete.DeleteItems('{1}',
 				{{
 					url : '{2}',
 					success: function() {{ stbStatusBar.setStatus({{ text: 'Deleted Item(s)', iconCls: '', clear: true }}); }}
