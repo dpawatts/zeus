@@ -8,6 +8,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 		public override void ModifyInterface(IMainInterface mainInterface)
 		{
 			ResourceManager.GetInstance((Page) mainInterface).RegisterIcon(Icon.Add);
+			ResourceManager.GetInstance((Page) mainInterface).RegisterIcon(Icon.Delete);
 			ResourceManager.GetInstance((Page) mainInterface).RegisterIcon(Icon.ApplicationSideBoxes);
 		}
 	}

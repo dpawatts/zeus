@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.Configuration;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
@@ -122,7 +123,9 @@ jQuery(document).ready(function() {{
 				url // 1
 			);
 
-			if (insideUpdatePanel)
+			if (ExtNet.IsAjaxRequest)
+				ExtNet.ResourceManager.RegisterOnReadyScript(script);
+			else if (insideUpdatePanel)
 				System.Web.UI.ScriptManager.RegisterStartupScript(
 					this, typeof(AdminPage),
 					"AddRefreshEditScript",

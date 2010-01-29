@@ -90,7 +90,7 @@ namespace Zeus.Admin.Plugins.EditItem
 				typeof(KeepAlive).Assembly, "Zeus.Admin.Plugins.EditItem.KeepAlive.aspx");
 		}
 
-		protected void btnSave_Click(object sender, EventArgs e)
+		protected void btnSave_Click(object sender, DirectEventArgs e)
 		{
 			Validate();
 			if (!IsValid)

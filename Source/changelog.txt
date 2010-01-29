@@ -1,0 +1,7 @@
+29/01/2010, Tim Jones
+- Widgets are no longer shown in the tree view. To manage widgets,
+  right click the page in the tree and choose Manage Zones. In the
+  Manage Zones panel, you can drag/drop widgets to re-order them
+  or move them into a different zone. You can also add widgets by
+  clicking the zone name and then the Add button. You can delete
+  widgets by clicking the widget and then the Delete button.

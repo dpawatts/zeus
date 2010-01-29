@@ -228,7 +228,7 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 			return ToSelectListItems(source, null);
 		}
 
-		public static TSource Next<TSource>(this IEnumerable<TSource> source)
+		public static TSource Next<TSource>(this IEnumerable<TSource> source, TSource currentItem)
 			where TSource : class
 		{
 			bool found = false;
@@ -236,33 +236,32 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 			foreach (TSource item in source)
 			{
 				if (found)
-				{
 					return item;
-				}
-				else if (item.Equals(source))
-				{
+
+				if (item.Equals(currentItem))
 					found = true;
-				}
 			}
 
 			return null;
 		}
 
-		public static TSource Previous<TSource>(this IEnumerable<TSource> source) 
-			where TSource:class
+		public static TSource Previous<TSource>(this IEnumerable<TSource> source, TSource currentItem)
+			where TSource : class
+		{
+			return Previous(source, currentItem, i => true);
+		}
+
+		public static TSource Previous<TSource>(this IEnumerable<TSource> source, TSource currentItem, Func<TSource, bool> filter)
+			where TSource : class
 		{
 			TSource holder = null;
 
 			foreach (TSource item in source)
 			{
-				if (item.Equals(source))
-				{
+				if (item.Equals(currentItem))
 					return holder;
-				}
-				else
-				{
-					holder = item;
-				}
+
+				holder = item;
 			}
 
 			return null;

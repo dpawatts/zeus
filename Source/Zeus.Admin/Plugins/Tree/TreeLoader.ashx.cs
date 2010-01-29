@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using Ext.Net;
 using Zeus.Linq;
 using Zeus.Security;
+using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.Tree
 {
@@ -38,7 +40,7 @@ namespace Zeus.Admin.Plugins.Tree
 
 				//if (context.User.Identity.Name != "administrator")
 				//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
-				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read))
+				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read).Where(ci => !(ci is WidgetContentItem)))
 					.ToTreeNode(false);
 
 				if (treeNode is TreeNode)

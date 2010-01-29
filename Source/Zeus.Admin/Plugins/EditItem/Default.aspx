@@ -21,7 +21,13 @@
 						<TopBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave" Text="Save and publish" Icon="PageSave" OnClick="btnSave_Click" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnSave" Text="Save and publish" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+										<DirectEvents>
+											<Click OnEvent="btnSave_Click">
+												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
+											</Click>
+										</DirectEvents>
+									</ext:Button>
 									<ext:Button runat="server" ID="btnSaveUnpublished" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnPreview" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
@@ -44,7 +50,13 @@
 						<BottomBar>
 							<ext:Toolbar runat="server">
 								<Items>
-									<ext:Button runat="server" ID="btnSave2" Text="Save and publish" Icon="PageSave" OnClick="btnSave_Click" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;" AutoPostBack="true" />
+									<ext:Button runat="server" ID="btnSave2" Text="Save and publish" Icon="PageSave" OnClientClick="if (typeof(tinyMCE) !== 'undefined') { tinyMCE.triggerSave(false,true); } return true;">
+										<DirectEvents>
+											<Click OnEvent="btnSave_Click">
+												<EventMask ShowMask="true" Msg="Saving... Please wait." Target="Page" />
+											</Click>
+										</DirectEvents>
+									</ext:Button>
 									<ext:Button runat="server" ID="btnSaveUnpublished2" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnPreview2" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnCancel2" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.UI;
 using Ext.Net;
-using Zeus.Admin.Plugins.EditItem;
-using Zeus.BaseLibrary.Web;
+using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
 using Zeus.Integrity;
+using Zeus.Linq;
+using Zeus.Security;
 using Zeus.Web;
 using Zeus.Web.Hosting;
 
@@ -35,7 +35,8 @@ namespace Zeus.Admin.Plugins.ManageZones
 				Width = 175,
 				MaxWidth = 300,
 				Collapsible = true,
-				CloseAction = CloseAction.Close
+				CloseAction = CloseAction.Close,
+				EnableDD = true
 			};
 
 			IMainInterface mainInterface = (IMainInterface) Page;
@@ -44,16 +45,63 @@ namespace Zeus.Admin.Plugins.ManageZones
 			treePanel.Tools.Add(new Tool(ToolType.Close, "panel.hide(); " + mainInterface.Viewport.ClientID + ".doLayout();", string.Empty));
 
 			// Setup tree top toolbar.
-			Toolbar topToolbar = new Toolbar();
+			var topToolbar = new Toolbar();
 			treePanel.TopBar.Add(topToolbar);
 
-			Button addButton = new Button { ID = "addButton", Icon = Icon.Add };
-			addButton.Disabled = true;
+			var addButton = new Button
+			{
+				ID = "addButton",
+				Icon = Icon.Add,
+				Disabled = true
+			};
 			addButton.ToolTips.Add(new ToolTip { Html = "Add New Widget" });
-			addButton.Listeners.Click.Fn = "function(node) { top.zeus.reloadContentPanel('New Widget', " + treePanel.ClientID + ".getSelectionModel().getSelectedNode().attributes['newItemUrl']); }";
+			addButton.Listeners.Click.Fn = "function(button) { top.zeus.reloadContentPanel('New Widget', " + treePanel.ClientID + ".getSelectionModel().getSelectedNode().attributes['newItemUrl']); }";
 			topToolbar.Items.Add(addButton);
 
 			treePanel.Listeners.Click.Handler = "Ext.getCmp('" + addButton.ClientID + "').setDisabled(node.isLeaf());";
+
+			if (Engine.SecurityManager.IsAuthorized(contentItem, Context.User, Operations.Delete))
+			{
+				var deleteButton = new Button
+				{
+					ID = "deleteButton",
+					Icon = Icon.Delete,
+					Disabled = true
+				};
+				deleteButton.ToolTips.Add(new ToolTip { Html = "Delete Widget" });
+				deleteButton.Listeners.Click.Fn = string.Format(@"
+					function(button)
+					{{
+						var node = {0}.getSelectionModel().getSelectedNode();
+						stbStatusBar.showBusy('Deleting...');
+						Ext.net.DirectMethods.ManageZones.DeleteWidget(node.id,
+						{{
+							url : '{1}',
+							success: function()
+							{{
+								node.parentNode.removeChild(node);
+								stbStatusBar.setStatus({{ text: 'Deleted Widget', iconCls: '', clear: true }});
+								top.zeus.reloadContentPanel('Preview', '{2}');
+							}}
+						}});
+					}}",
+					treePanel.ClientID,
+					Engine.AdminManager.GetAdminDefaultUrl(),
+					contentItem.Url);
+				topToolbar.Items.Add(deleteButton);
+
+				treePanel.Listeners.Click.Handler += "Ext.getCmp('" + deleteButton.ClientID + "').setDisabled(!node.isLeaf());";
+			}
+
+			treePanel.Listeners.MoveNode.Handler = string.Format(@"
+				{0}.showBusy();
+				Ext.net.DirectMethods.ManageZones.MoveWidget(node.id, newParent.id, index,
+				{{
+					url: '{1}',
+					success: function() {{ {0}.setStatus({{ text: 'Moved Widget', iconCls: '', clear: true }}); }}
+				}})",
+				mainInterface.StatusBar.ClientID,
+				Engine.AdminManager.GetAdminDefaultUrl());
 
 			ContentType definition = Zeus.Context.ContentTypes.GetContentType(contentItem.GetType());
 
@@ -62,6 +110,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 			{
 				var zoneNode = new TreeNode
 				{
+					NodeID = availableZone.ZoneName,
 					Expanded = true,
 					IconFile = Utility.GetCooliteIconUrl(Icon.ApplicationSideList),
 					Text = availableZone.Title,
@@ -76,6 +125,7 @@ namespace Zeus.Admin.Plugins.ManageZones
 				{
 					var widgetNode = new TreeNode
 					{
+						NodeID = widget.ID.ToString(),
 						Leaf = true,
 						Text = widget.Title,
 						IconFile = widget.IconUrl,
@@ -98,6 +148,42 @@ namespace Zeus.Admin.Plugins.ManageZones
 		protected IEnumerable<WidgetContentItem> GetItemsInZone(ContentItem contentItem, AvailableZoneAttribute availableZone)
 		{
 			return Zeus.Context.Current.ContentManager.GetWidgets(contentItem, availableZone.ZoneName);
+		}
+
+		[DirectMethod]
+		public void DeleteWidget(int id)
+		{
+			ContentItem parent = Engine.Persister.Get(id).Parent;
+			ContentItem item = Engine.Persister.Get(id);
+			Zeus.Context.Persister.Delete(item);
+		}
+
+		[DirectMethod]
+		public void MoveWidget(int id, string destinationZone, int pos)
+		{
+			WidgetContentItem contentItem = (WidgetContentItem) Engine.Persister.Get(id);
+
+			// Change zone name.
+			contentItem.ZoneName = destinationZone;
+
+			// Update sort order based on new pos in sibling widgets.
+			IList<ContentItem> siblingWidgets = contentItem.Parent.Children
+				.OfType<WidgetContentItem>()
+				.InZone(destinationZone)
+				.Cast<ContentItem>()
+				.ToList();
+			Utility.MoveToIndex(siblingWidgets, contentItem, pos);
+
+			// Get index of widget before this one in full Children collection.
+			IList<ContentItem> siblings = contentItem.Parent.Children;
+			WidgetContentItem previousWidget = siblingWidgets.Previous(contentItem) as WidgetContentItem;
+			int index = (previousWidget != null) ? siblings.IndexOf(previousWidget) : 0;
+			Utility.MoveToIndex(siblings, contentItem, index);
+
+			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
+				Zeus.Context.Persister.Save(updatedItem);
+
+			Engine.Persister.Save(contentItem);
 		}
 	}
 }

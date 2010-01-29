@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using Ext.Net;
 using Zeus.Admin.Plugins.Tree;
 using Zeus.Linq;
 using Zeus.Security;
+using Zeus.Web;
 
 namespace Zeus.Admin.Plugins.FileManager
 {
@@ -20,7 +22,7 @@ namespace Zeus.Admin.Plugins.FileManager
 
 				SiteTree tree = SiteTree.From(selectedItem.TranslationOf ?? selectedItem, 2);
 
-				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read))
+				TreeNodeBase treeNode = tree.Filter(items => items.Authorized(context.User, Context.SecurityManager, Operations.Read).Where(ci => !(ci is WidgetContentItem)))
 					.ToTreeNode(false, false);
 
 				if (treeNode is TreeNode)
