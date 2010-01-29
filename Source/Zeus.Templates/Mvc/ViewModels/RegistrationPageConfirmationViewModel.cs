@@ -3,12 +3,12 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Templates.Mvc.ViewModels
 {
-	public class RegistrationPageConfirmationViewModel : ViewModel<RegistrationPage>
+	public class RegistrationPageConfirmationViewModel : ViewModel<RegistrationPageBase>
 	{
 		public bool EmailVerificationRequired { get; set; }
 		public string Email { get; set; }
 
-		public RegistrationPageConfirmationViewModel(RegistrationPage currentItem,
+		public RegistrationPageConfirmationViewModel(RegistrationPageBase currentItem,
 			bool emailVerificationRequired, string email)
 			: base(currentItem)
 		{

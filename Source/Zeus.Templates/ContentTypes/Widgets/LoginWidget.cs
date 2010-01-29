@@ -7,6 +7,11 @@ namespace Zeus.Templates.ContentTypes.Widgets
 	[AllowedZones(AllowedZones.AllNamed)]
 	public class LoginWidget : WidgetContentItem
 	{
+		public override string IconUrl
+		{
+			get { return Utility.GetCooliteIconUrl(Ext.Net.Icon.Key); }
+		}
+
 		[ContentProperty("Forgotten Password Page", 100)]
 		public virtual PageContentItem ForgottenPasswordPage
 		{

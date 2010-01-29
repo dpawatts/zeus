@@ -127,6 +127,7 @@
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
+    <Compile Include="ContentTypes\RegistrationPageBase.cs" />
     <Compile Include="ContentTypes\ExternalRedirect.cs" />
     <Compile Include="ContentTypes\ForgottenPasswordPage.cs" />
     <Compile Include="ContentTypes\ITagGroupContainer.cs" />
@@ -204,6 +205,8 @@
     <Compile Include="Services\AntiSpam\ReCaptchaService.cs" />
     <Compile Include="Services\AntiSpam\SpamStatus.cs" />
     <Compile Include="Services\BBCodeService.cs" />
+    <Compile Include="Services\IUserRegistrationService.cs" />
+    <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="TemplatesModule.cs" />
     <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />

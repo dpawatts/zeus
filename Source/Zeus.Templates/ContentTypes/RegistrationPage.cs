@@ -1,14 +1,10 @@
 using System;
 using Zeus.Design.Editors;
-using Zeus.Integrity;
-using Zeus.Web;
-using Zeus.Web.Security;
 
 namespace Zeus.Templates.ContentTypes
 {
-	[ContentType("Registration Page")]
-	[RestrictParents(typeof(ILoginContext))]
-	public class RegistrationPage : BasePage
+	[ContentType("Registration Page", "TemplatesRegistrationPage")]
+	public class RegistrationPage : RegistrationPageBase
 	{
 		[ContentProperty("Verification Email Sender", 100, Description="Email address which should be used as the sender email for the verification email which will be sent to newly registered users.")]
 		public virtual string VerificationEmailSender

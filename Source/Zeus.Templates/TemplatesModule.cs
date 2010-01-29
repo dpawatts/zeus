@@ -15,6 +15,7 @@ namespace Zeus.Templates
 			Bind<BBCodeService>().ToSelf();
 			Bind<NewsService>().ToSelf();
 			Bind<ITagService>().To<TagService>();
+			Bind<IUserRegistrationService>().To<UserRegistrationService>();
 
 			TemplatesSection configSection = ConfigurationManager.GetSection("zeus/templates") as TemplatesSection;
 			if (configSection != null)

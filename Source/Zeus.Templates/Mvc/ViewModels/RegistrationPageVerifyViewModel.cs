@@ -3,12 +3,12 @@ using Zeus.Web.Mvc.ViewModels;
 
 namespace Zeus.Templates.Mvc.ViewModels
 {
-	public class RegistrationPageVerifyViewModel : ViewModel<RegistrationPage>
+	public class RegistrationPageVerifyViewModel : ViewModel<RegistrationPageBase>
 	{
 		public bool Successful { get; set; }
 		public string ErrorMessage { get; set; }
 
-		public RegistrationPageVerifyViewModel(RegistrationPage currentItem,
+		public RegistrationPageVerifyViewModel(RegistrationPageBase currentItem,
 			bool successful, string errorMessage)
 			: base(currentItem)
 		{
@@ -17,5 +17,3 @@ namespace Zeus.Templates.Mvc.ViewModels
 		}
 	}
 }
-
-

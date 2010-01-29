@@ -6,27 +6,35 @@ using Zeus.Security;
 using Zeus.Templates.Configuration;
 using Zeus.Templates.ContentTypes;
 using Zeus.Templates.Mvc.ViewModels;
+using Zeus.Templates.Services;
 using Zeus.Templates.Services.AntiSpam;
 using Zeus.Web.Security;
 using IWebContext = Zeus.Web.IWebContext;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
-	public abstract class RegistrationPageControllerBase<TFormViewModel> : ZeusController<RegistrationPage>
+	public abstract class RegistrationPageControllerBase<T, TFormViewModel> : ZeusController<T>
+		where T : RegistrationPageBase
 		where TFormViewModel : RegistrationPageFormViewModel
 	{
 		private readonly TemplatesSection _templatesConfig;
+		private readonly IUserRegistrationService _userRegistrationService;
+		private readonly ICaptchaService _captchaService;
 		private readonly IWebContext _webContext;
 		private readonly ICredentialService _credentialService;
-		private readonly ICaptchaService _captchaService;
 
-		protected RegistrationPageControllerBase(TemplatesSection templatesConfig, IWebContext webContext,
-			ICredentialService credentialService, ICaptchaService captchaService)
+		protected abstract string VerificationEmailSender { get; }
+		protected abstract string VerificationEmailSubject { get; }
+		protected abstract string VerificationEmailBody { get; }
+
+		protected RegistrationPageControllerBase(TemplatesSection templatesConfig, IUserRegistrationService userRegistrationService,
+			ICaptchaService captchaService, IWebContext webContext, ICredentialService credentialService)
 		{
 			_templatesConfig = templatesConfig;
+			_userRegistrationService = userRegistrationService;
+			_captchaService = captchaService;
 			_webContext = webContext;
 			_credentialService = credentialService;
-			_captchaService = captchaService;
 		}
 
 		public override ActionResult Index()
@@ -45,36 +53,20 @@ namespace Zeus.Templates.Mvc.Controllers
 				return View("Index", new RegistrationPageViewModel(CurrentItem) { CaptchaError = captchaError });
 
 			// Create user.
-			UserCreateStatus status;
-			User user = _credentialService.CreateUser(registrationForm.Username,
+			UserCreateStatus status = _userRegistrationService.CreateUser(registrationForm.Username,
 				registrationForm.Password, registrationForm.Email,
-				new[] { _templatesConfig.UserRegistration.DefaultRole },
-				!_templatesConfig.UserRegistration.EmailVerificationRequired,
-				out status);
+				_webContext.GetFullyQualifiedUrl(new Url(CurrentItem.Url).AppendSegment("verify").AppendQuery("n=")),
+				VerificationEmailSender, VerificationEmailSubject,
+				VerificationEmailBody, registrationForm);
 			if (status != UserCreateStatus.Success)
 			{
 				ModelState.AddModelError("RegistrationError", "Could not create user: " + status.GetDescription());
 				return Index();
 			}
 
-			// Allow inherited classes to create profile.
-			CreateProfile(user, registrationForm);
-
-			// Send verification email.
-			if (_templatesConfig.UserRegistration.EmailVerificationRequired)
-				_credentialService.SendVerificationEmail(user,
-					_webContext.GetFullyQualifiedUrl(new Url(CurrentItem.Url).AppendSegment("verify").AppendQuery("n=")),
-					registrationForm.Email, CurrentItem.VerificationEmailSender, CurrentItem.VerificationEmailSubject,
-					CurrentItem.VerificationEmailBody);
-
 			return View("RegisterConfirmation", new RegistrationPageConfirmationViewModel(
 				CurrentItem, _templatesConfig.UserRegistration.EmailVerificationRequired,
 				registrationForm.Email));
-		}
-
-		protected virtual void CreateProfile(User user, TFormViewModel registrationForm)
-		{
-
 		}
 
 		[HttpGet]
