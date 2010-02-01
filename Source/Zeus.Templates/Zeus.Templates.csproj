@@ -231,7 +231,6 @@
     <Compile Include="Mvc\Html\ImageExtensions.cs" />
     <Compile Include="Mvc\Html\NavigationExtensions.cs" />
     <Compile Include="Mvc\Html\ReferenceDataExtensions.cs" />
-    <Compile Include="Mvc\Html\ValidationExtensions.cs" />
     <Compile Include="Mvc\Html\WidgetExtensions.cs" />
     <Compile Include="Mvc\Html\WidgetHelper.cs" />
     <Compile Include="Mvc\RssResult.cs" />
