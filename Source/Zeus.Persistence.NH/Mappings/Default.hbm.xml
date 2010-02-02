@@ -62,12 +62,12 @@
 		</subclass>
 
 		<subclass name="Zeus.ContentProperties.ObjectProperty, Zeus" discriminator-value="Object">
-			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" />
+			<many-to-one name="Blob" class="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" unique="true" column="DetailBlobID" cascade="all-delete-orphan" lazy="proxy" fetch="select" />
 		</subclass>
 	</class>
 
 	<!-- zeusDetailBlobs -->
-	<class name="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" table="zeusDetailBlobs">
+	<class name="Zeus.ContentProperties.ObjectPropertyDataBlob, Zeus" table="zeusDetailBlobs" lazy="true">
 		<id name="ID" column="ID" type="Int32" unsaved-value="0">
 			<generator class="native"/>
 		</id>
@@ -111,25 +111,27 @@
 
 		<many-to-one name="Parent" column="ParentID" class="Zeus.ContentItem, Zeus" not-null="false" lazy="proxy" fetch="select" />
 
-		<bag name="Children" cascade="all" generic="true" inverse="true" order-by="SortOrder" lazy="true">
+		<bag name="Children" cascade="all" generic="true" inverse="true" order-by="SortOrder" lazy="true" batch-size="10">
 			<cache usage="read-write" />
 			<key column="ParentID" />
 			<one-to-many class="Zeus.ContentItem, Zeus"/>
 		</bag>
 
-		<bag name="DetailsInternal" inverse="true" cascade="all-delete-orphan" generic="true" where="DetailCollectionID IS NULL" lazy="true">
+		<map name="Details" inverse="true" cascade="all-delete-orphan" generic="true" where="DetailCollectionID IS NULL" lazy="true" batch-size="10">
 			<cache usage="read-write" />
 			<key column="ItemID" />
+			<index column="Name" type="String" />
 			<one-to-many class="Zeus.ContentProperties.PropertyData, Zeus"/>
-		</bag>
+		</map>
 
-		<bag name="DetailCollectionsInternal" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
+		<map name="DetailCollections" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true">
 			<cache usage="read-write" />
 			<key column="ItemID" />
+			<index column="Name" type="String" />
 			<one-to-many class="Zeus.ContentProperties.PropertyCollection, Zeus"/>
-		</bag>
+		</map>
 
-		<bag name="AuthorizationRules" inverse="true" cascade="all-delete-orphan" generic="true" lazy="true" batch-size="10">
+		<bag name="AuthorizationRules" inverse="true" cascade="all-delete-orphan" fetch="join" generic="true" lazy="true" batch-size="10">
 			<cache usage="read-write" />
 			<key column="ItemID"/>
 			<one-to-many class="Zeus.Security.AuthorizationRule, Zeus"/>

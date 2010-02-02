@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
-using Zeus.AddIns.ECommerce.Services;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -13,9 +8,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(Order))]
 	public class OrderItem : BaseContentItem
 	{
-		public Product Product
+		public ContentItem Product
 		{
-			get { return GetDetail<Product>("Product", null); }
+			get { return GetDetail<ContentItem>("Product", null); }
 			set { SetDetail("Product", value); }
 		}
 

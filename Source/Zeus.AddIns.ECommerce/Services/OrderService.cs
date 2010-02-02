@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.PaymentGateways;
 using Zeus.Persistence;
 using Zeus.Web;
+using Zeus.Web.Security;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
@@ -28,9 +30,8 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		public IEnumerable<PaymentCardType> GetSupportedCardTypes()
 		{
-			foreach (PaymentCardType paymentCardType in Enum.GetValues(typeof(PaymentCardType)))
-				if (_paymentGateway.SupportsCardType(paymentCardType))
-					yield return paymentCardType;
+			return Enum.GetValues(typeof(PaymentCardType)).Cast<PaymentCardType>()
+				.Where(paymentCardType => _paymentGateway.SupportsCardType(paymentCardType));
 		}
 
 		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode)
@@ -40,6 +41,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			// Convert shopping basket into order, with unpaid status.
 			Order order = new Order
 			{
+				User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal) _webContext.User).MembershipUser : null,
 				DeliveryMethod = shoppingBasket.DeliveryMethod,
 				DeliveryPrice = shoppingBasket.DeliveryMethod.Price,
 				BillingAddress = (Address) shoppingBasket.BillingAddress.Clone(true),

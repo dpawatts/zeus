@@ -1,4 +1,4 @@
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Ext.Net;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -11,7 +11,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Shop), "Zeus.AddIns.ECommerce.Icons.lorry.png"); }
+			get { return GetIconUrl(Icon.Lorry); }
 		}
 
 		[ContentProperty("Price", 200)]

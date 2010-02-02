@@ -1,6 +1,4 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
+using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -12,7 +10,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Shop), "Zeus.AddIns.ECommerce.Icons.email_edit.png"); }
+			get { return GetIconUrl(Icon.EmailEdit); }
 		}
 
 		[ContentProperty("Title", 200)]

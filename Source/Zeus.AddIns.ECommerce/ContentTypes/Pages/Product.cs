@@ -19,7 +19,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	{
 		public override string IconUrl
 		{
-			get { return Utility.GetCooliteIconUrl(Icon.Package); }
+			get { return GetIconUrl(Icon.Package); }
 		}
 
 		[ContentProperty("Product Code", 200)]

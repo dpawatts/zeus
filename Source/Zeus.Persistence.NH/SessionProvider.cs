@@ -12,7 +12,7 @@ namespace Zeus.Persistence.NH
 
 		public SessionProvider(IConfigurationBuilder configurationBuilder, INotifyingInterceptor interceptor, IWebContext webContext)
 		{
-			//HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
+			//HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
 			_sessionFactory = configurationBuilder.Configuration.BuildSessionFactory();
 			_interceptor = interceptor;

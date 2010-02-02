@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Ext.Net;
 using Zeus.Admin;
 using Zeus.Collections;
 using Zeus.ContentProperties;
@@ -30,10 +31,8 @@ namespace Zeus
 		private DateTime? _expires;
 		private IList<ContentItem> _children = new List<ContentItem>();
 		private IList<ContentItem> _translations = new List<ContentItem>();
-		private IList<PropertyData> _detailsInternal = new List<PropertyData>();
-		private IList<PropertyCollection> _detailCollectionsInternal = new List<PropertyCollection>();
-		private PropertyDataDictionary _properties;
-		private PropertyCollectionDictionary _propertyCollections;
+		private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
+		private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
 		private string _url;
 
 		[Copy]
@@ -120,47 +119,17 @@ namespace Zeus
 		public virtual string SavedBy { get; set; }
 
 		/// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
-		internal IList<PropertyData> DetailsInternal
+		public IDictionary<string, PropertyData> Details
 		{
-			get { return _detailsInternal; }
-			set
-			{
-				_detailsInternal = value;
-				_properties = null;
-			}
-		}
-
-		public PropertyDataDictionary Details
-		{
-			get
-			{
-				if (_properties == null)
-					_properties = new PropertyDataDictionary(DetailsInternal);
-
-				return _properties;
-			}
+			get { return _details; }
+			set { _details = value; }
 		}
 
 		/// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
-		internal IList<PropertyCollection> DetailCollectionsInternal
+		public IDictionary<string, PropertyCollection> DetailCollections
 		{
-			get { return _detailCollectionsInternal; }
-			set
-			{
-				_detailCollectionsInternal = value;
-				_propertyCollections = null;
-			}
-		}
-
-		public PropertyCollectionDictionary DetailCollections
-		{
-			get
-			{
-				if (_propertyCollections == null)
-					_propertyCollections = new PropertyCollectionDictionary(DetailCollectionsInternal);
-
-				return _propertyCollections;
-			}
+			get { return _detailCollections; }
+			set { _detailCollections = value; }
 		}
 
 		/// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
@@ -369,9 +338,8 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual object GetDetail(string detailName)
 		{
-			PropertyDataDictionary details = GetCurrentOrMasterLanguageDetails(detailName);
-			return details.ContainsKey(detailName)
-				? details[detailName].Value
+			return Details.ContainsKey(detailName)
+				? Details[detailName].Value
 				: null;
 		}
 
@@ -381,13 +349,13 @@ namespace Zeus
 		/// <returns>The value stored in the details bag or null if no item was found.</returns>
 		public virtual T GetDetail<T>(string detailName, T defaultValue)
 		{
-			PropertyDataDictionary details = GetCurrentOrMasterLanguageDetails(detailName);
+			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
 			if (details.ContainsKey(detailName))
 				return Utility.Convert<T>(details[detailName].Value);
 			return defaultValue;
 		}
 
-		private PropertyDataDictionary GetCurrentOrMasterLanguageDetails(string detailName)
+		private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
 		{
 			// Look up content property matching this name.
 			IContentProperty property = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName);
@@ -591,11 +559,11 @@ namespace Zeus
 
 		private void CloneDetails(ContentItem cloned)
 		{
-			cloned.DetailsInternal = new List<PropertyData>();
+			cloned.Details = new Dictionary<string, PropertyData>();
 			foreach (var detail in Details.Values)
 				cloned[detail.Name] = detail.Value;
 
-			cloned.DetailCollectionsInternal = new List<PropertyCollection>();
+			cloned.DetailCollections = new Dictionary<string, PropertyCollection>();
 			foreach (PropertyCollection collection in DetailCollections.Values)
 			{
 				PropertyCollection clonedCollection = collection.Clone();
@@ -760,7 +728,7 @@ namespace Zeus
 		/// <returns></returns>
 		public virtual bool IsEmpty()
 		{
-			return string.IsNullOrEmpty(Title) && !DetailsInternal.Any() && !DetailCollectionsInternal.Any();
+			return string.IsNullOrEmpty(Title) && !Details.Any() && !DetailCollections.Any();
 		}
 
 		/// <summary>
@@ -935,5 +903,10 @@ namespace Zeus
 		}
 
 		#endregion
+
+		protected virtual string GetIconUrl(Icon icon)
+		{
+			return Utility.GetCooliteIconUrl(icon);
+		}
 	}
 }

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Zeus.AddIns.ECommerce.Services;
+using Ext.Net;
 using Zeus.Integrity;
+using Zeus.Security;
 using Zeus.Templates.ContentTypes;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
@@ -12,7 +13,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Order), "Zeus.AddIns.ECommerce.Icons.basket_put.png"); }
+			get { return GetIconUrl(Icon.BasketPut); }
+		}
+
+		public User User
+		{
+			get { return GetDetail<User>("User", null); }
+			set { SetDetail("User", value); }
 		}
 
 		public Address ShippingAddress
@@ -56,7 +63,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		public OrderStatus Status
 		{
-			get { return GetDetail<OrderStatus>("Status", OrderStatus.Unpaid); }
+			get { return GetDetail("Status", OrderStatus.Unpaid); }
 			set { SetDetail("Status", value); }
 		}
 

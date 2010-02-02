@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -10,7 +11,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(ShoppingBasketContainer), "Zeus.AddIns.ECommerce.Icons.basket_go.png"); }
+			get { return GetIconUrl(Icon.BasketGo); }
 		}
 	}
 }
