@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using SoundInTheory.DynamicImage.Fluent;
 using Zeus.FileSystem.Images;
 
 namespace Zeus.Templates.Mvc.Html
@@ -23,7 +24,9 @@ namespace Zeus.Templates.Mvc.Html
 		{
 			if (image == null)
 				return string.Empty;
-			return image.Url;
+			return new DynamicImageBuilder()
+				.WithLayer(LayerBuilder.Image.SourceImage(image))
+				.Url;
 		}
 
 		public static string Image(this HtmlHelper helper, Image image, int width, int height, bool fill)
