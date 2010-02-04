@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web;
 using Ext.Net;
 using Ext.Net.Utilities;
 using Zeus.BaseLibrary.ExtensionMethods;
@@ -237,10 +238,10 @@ namespace Zeus
 			return Regex.Replace(value, @"[^a-zA-Z0-9\-]", string.Empty);
 		}
 
+		private static readonly ResourceManager _resourceManager = new ResourceManager();
 		public static string GetCooliteIconUrl(Icon icon)
 		{
-			string iconResourceName = string.Format(ResourceManager.ASSEMBLYSLUG + ".icons.{0}", StringUtils.ToCharacterSeparatedFileName(icon.ToString(), '_', "png"));
-			return WebResourceUtility.GetUrl(typeof(ResourceManager), iconResourceName);
+			return _resourceManager.GetIconUrl(icon);
 		}
 
 		public static string GetClientResourceUrl(Assembly assembly, string relativePath)

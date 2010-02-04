@@ -17,9 +17,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[TabPanel("Images", "Images", 200)]
 	public class Product : BasePage
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(Icon.Package); }
+			get { return Icon.Package; }
 		}
 
 		[ContentProperty("Product Code", 200)]

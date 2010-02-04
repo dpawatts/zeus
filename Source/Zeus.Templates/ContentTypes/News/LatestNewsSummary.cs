@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes.News
@@ -6,9 +7,9 @@ namespace Zeus.Templates.ContentTypes.News
 	[AllowedZones(AllowedZones.AllNamed)]
 	public class LatestNewsSummary : BaseWidget
 	{
-		protected override string IconName
+		protected override Icon Icon
 		{
-			get { return "newspaper"; }
+			get { return Icon.Newspaper; }
 		}
 
 		[ContentProperty("News Section", 200)]

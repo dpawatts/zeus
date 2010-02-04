@@ -13,7 +13,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	{
 		public override string IconUrl
 		{
-			get { return GetIconUrl(typeof(Shop), "Zeus.AddIns.ECommerce.Icons.visa.png"); }
+			get { return GetIconUrl(typeof(PaymentCard), "Zeus.AddIns.ECommerce.Icons.visa.png"); }
 		}
 
 		[ContentProperty("CardType", 200)]

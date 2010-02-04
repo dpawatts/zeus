@@ -24,7 +24,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			string tempIconName = "Flag" + alpha2.Substring(0, 1) + alpha2.Substring(1).ToLower();
 			Icon icon;
 			if (EnumHelper.TryParse(tempIconName, out icon))
-				Icon = icon;
+				FlagIcon = icon;
 		}
 
 		[TextBoxEditor("Name", 10, Required = true)]
@@ -52,15 +52,15 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			set { SetDetail("Alpha3", value); }
 		}
 
-		public Icon Icon
+		public Icon FlagIcon
 		{
-			get { return GetDetail("Icon", Icon.Map); }
-			set { SetDetail("Icon", value); }
+			get { return GetDetail("FlagIcon", Icon.Map); }
+			set { SetDetail("FlagIcon", value); }
 		}
 
 		public override string IconUrl
 		{
-			get { return Utility.GetCooliteIconUrl(Icon); }
+			get { return Utility.GetCooliteIconUrl(FlagIcon); }
 		}
 	}
 }

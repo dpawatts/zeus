@@ -208,7 +208,6 @@
     <Compile Include="Services\IUserRegistrationService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="TemplatesModule.cs" />
-    <Compile Include="Icons\Resources.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
     <Compile Include="Mvc\Controllers\FormPageController.cs" />
@@ -271,40 +270,6 @@
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
       <Name>Zeus</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\page_gear.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\page.png" />
-    <EmbeddedResource Include="Icons\page_go.png" />
-    <EmbeddedResource Include="Icons\page_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\newspaper.png" />
-    <EmbeddedResource Include="Icons\newspaper_link.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\page_world.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\report.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\sitemap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\feed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\feed_link.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\tag_blue.png" />
-    <EmbeddedResource Include="Icons\tag_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\tag_yellow.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\FeedLink\Header.spark" />

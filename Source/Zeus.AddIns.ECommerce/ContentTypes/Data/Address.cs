@@ -8,9 +8,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(ShoppingBasket))]
 	public class Address : BaseContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(Icon.EmailEdit); }
+			get { return Icon.EmailEdit; }
 		}
 
 		[ContentProperty("Title", 200)]

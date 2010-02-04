@@ -35,7 +35,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 					icon = Icon.MoneyYen;
 					break;
 			}
-			Icon = icon;
+			CurrencyIcon = icon;
 		}
 
 		[TextBoxEditor("Name", 10, Required = true)]
@@ -66,15 +66,15 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			set { SetDetail("ExchangeRate", value); }
 		}
 
-		public Icon Icon
+		public Icon CurrencyIcon
 		{
-			get { return GetDetail("Icon", Icon.MoneyAdd); }
-			set { SetDetail("Icon", value); }
+			get { return GetDetail("CurrencyIcon", Icon.MoneyAdd); }
+			set { SetDetail("CurrencyIcon", value); }
 		}
 
 		public override string IconUrl
 		{
-			get { return Utility.GetCooliteIconUrl(Icon); }
+			get { return Utility.GetCooliteIconUrl(CurrencyIcon); }
 		}
 	}
 }

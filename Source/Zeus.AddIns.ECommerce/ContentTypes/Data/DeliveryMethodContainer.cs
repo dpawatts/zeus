@@ -9,9 +9,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(Shop))]
 	public class DeliveryMethodContainer : BaseContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(Icon.LorryGo); }
+			get { return Icon.LorryGo; }
 		}
 	}
 }

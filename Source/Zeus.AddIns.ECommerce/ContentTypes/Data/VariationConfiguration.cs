@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -9,9 +10,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(Product))]
 	public class VariationConfiguration : BaseContentItem, ILink
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(typeof(VariationConfiguration), "Zeus.AddIns.ECommerce.Icons.arrow_merge.png"); }
+			get { return Icon.ArrowMerge; }
 		}
 
 		string ILink.Contents

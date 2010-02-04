@@ -5,7 +5,6 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Security;
 using Zeus.Web.UI.WebControls;
@@ -282,7 +281,7 @@ namespace Zeus.Design.Editors
 				}
 
 				if (_label != null && globeTooltip != null)
-					_label.Text += " <img src=\"" + WebResourceUtility.GetUrl(typeof (AbstractEditorAttribute), "Zeus.Web.Resources.Icons.bullet_world_link.png") + "\" title=\"" + globeTooltip + "\" />";
+					_label.Text += " <img src=\"" + Utility.GetCooliteIconUrl(Icon.WorldLink) + "\" title=\"" + globeTooltip + "\" />";
 			}
 		}
 

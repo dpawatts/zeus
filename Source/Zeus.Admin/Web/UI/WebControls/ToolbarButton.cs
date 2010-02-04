@@ -1,15 +1,16 @@
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
+using Button = System.Web.UI.WebControls.Button;
 
 namespace Zeus.Admin.Web.UI.WebControls
 {
 	public class ToolbarButton : Button
 	{
-		public string ImageResourceName
+		public Icon Icon
 		{
-			get { return ViewState["ImageResourceName"] as string ?? string.Empty; }
-			set { ViewState["ImageResourceName"] = value; }
+			get { return (Icon) (ViewState["Icon"] ?? Icon.BulletBlue); }
+			set { ViewState["Icon"] = value; }
 		}
 
 		public override void RenderBeginTag(HtmlTextWriter writer)
@@ -24,7 +25,7 @@ namespace Zeus.Admin.Web.UI.WebControls
 			 * <img src="/images/icons/tick.png" alt="" />
 				 Save
 			 */
-			writer.AddAttribute(HtmlTextWriterAttribute.Src, WebResourceUtility.GetUrl(Page.GetType().BaseType, ImageResourceName));
+			writer.AddAttribute(HtmlTextWriterAttribute.Src, Utility.GetCooliteIconUrl(Icon));
 			writer.RenderBeginTag(HtmlTextWriterTag.Img);
 			writer.RenderEndTag();
 

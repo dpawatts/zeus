@@ -362,7 +362,6 @@
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
-    <Compile Include="Web\UI\WebControls\BorderlessImageButton.cs" />
     <Compile Include="Web\UI\WebControls\DropDownList.cs" />
     <Compile Include="Web\UI\WebControls\ExtendedListView.cs" />
     <Compile Include="Web\UI\WebControls\FakePropertyInfo.cs" />
@@ -566,8 +565,6 @@
     <Compile Include="Web\Security\PermissionDeniedHandler.cs" />
     <Compile Include="Web\TemplateAttribute.cs" />
     <Compile Include="Web\UI\FieldSetAttribute.cs" />
-    <Compile Include="Web\UI\WebControls\Breadcrumbs.cs" />
-    <Compile Include="Web\UI\WebControls\BreadcrumbItem.cs" />
     <Compile Include="Web\UI\WebControls\BaseDetailCollectionEditor.cs" />
     <Compile Include="Web\UI\WebControls\MultiFileUploadEditor.cs" />
     <Compile Include="Web\UI\WebControls\IBreadcrumbAppearance.cs" />
@@ -619,9 +616,6 @@
     <Compile Include="Persistence\ITransaction.cs" />
     <Compile Include="Web\UI\ItemAwareControl.cs" />
     <Compile Include="Web\UI\ItemUtility.cs" />
-    <Compile Include="Web\UI\MasterPage.generic.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Web\UI\WebControls\TimeRange.cs" />
     <Compile Include="Web\ThreadContext.cs" />
     <Compile Include="Persistence\GenericFind.cs" />
@@ -660,7 +654,6 @@
     </Compile>
     <Compile Include="Web\UI\TabPanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ColourPickerTextBox.cs" />
-    <Compile Include="Web\UI\WebControls\ComboBox.cs" />
     <Compile Include="Web\UI\WebControls\DatePicker.cs" />
     <Compile Include="Web\UI\WebControls\Span.cs" />
     <Compile Include="Web\UI\WebControls\IItemView.cs" />
@@ -689,10 +682,6 @@
     <EmbeddedResource Include="Web\UI\WebControls\NameEditor.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\UI\WebControls\Images\add.png" />
-    <EmbeddedResource Include="Web\UI\WebControls\Images\delete.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.timePicker.js" />
   </ItemGroup>
   <ItemGroup>
@@ -702,11 +691,7 @@
     <EmbeddedResource Include="Web\Resources\jQuery\TimePicker.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\DatePicker.css" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\ui.core.js" />
-    <EmbeddedResource Include="Web\Resources\jQuery\ui.datepicker.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\ui.css" />
@@ -719,12 +704,6 @@
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataEditor.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.css" />
@@ -761,9 +740,6 @@
     <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.colorpicker.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\jquery.mcdropdown.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Web\Resources\jQuery\ui.tabs.js" />
   </ItemGroup>
   <ItemGroup>
@@ -773,16 +749,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Web\Resources\TinyMCE\langs\en.js" />
     <EmbeddedResource Include="Web\Resources\tinymce.js" />
-    <EmbeddedResource Include="Web\Resources\Icons\folder.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_acrobat.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_word.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_compressed.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_excel.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_picture.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\page_white_powerpoint.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\jquery.js" />
-    <EmbeddedResource Include="Web\Resources\jQuery\calendar.gif" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_75_ffffff_40x100.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -796,19 +763,6 @@
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_454545_256x240.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_888888_256x240.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-icons_cd0a0a_256x240.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\group.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\user.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\group_key.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\bullet_key.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\folder_key.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\world.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\world_link.png" />
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.js" />
-    <EmbeddedResource Include="Web\Resources\jQuery\Plugins\fg.menu.css" />
-    <EmbeddedResource Include="Web\Resources\Flags\gb.png" />
-    <EmbeddedResource Include="Web\Resources\Icons\bullet_world_link.png" />
-    <EmbeddedResource Include="Web\Resources\FileDataEditor\swfobject.js" />
-    <EmbeddedResource Include="Web\Resources\FileDataEditor\FileDataUploader.swf" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyUpload3.Attach2.js" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\Fx.ProgressBar.js" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\Swiff.Uploader.js" />

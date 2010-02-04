@@ -59,7 +59,7 @@ namespace Zeus.Admin.Plugins.Globalization.LanguageOverview
 			{
 				string text;
 				if (Engine.LanguageManager.TranslationExists(item, language.Name))
-					text = string.Format("<img src=\"{0}\" />", WebResourceUtility.GetUrl(typeof(Default), "Zeus.Admin.Assets.Images.Icons.tick.png"));
+					text = string.Format("<img src=\"{0}\" />", Utility.GetCooliteIconUrl(Ext.Net.Icon.Tick));
 				else
 					text = "Create";
 				string link = string.Format("<a href=\"{0}\">{1}</a>", Engine.AdminManager.GetEditExistingItemUrl(item, language.Name), text);

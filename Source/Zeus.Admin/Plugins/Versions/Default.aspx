@@ -1,10 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Versions.Default" %>
+<%@ Import Namespace="Ext.Net" %>
 <%@ Import Namespace="Zeus.BaseLibrary.Web.UI"%>
 <%@ Import Namespace="Zeus.Admin.Plugins.Versions"%>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<asp:CustomValidator ID="cvVersionable" runat="server" Text="This item is not versionable." CssClass="info validator" Display="Dynamic" />
@@ -36,17 +37,17 @@
 				<asp:BoundField HeaderText="Saved by" DataField="SavedBy" meta:resourceKey="savedBy" />
 				<asp:TemplateField HeaderText="Edit" ItemStyle-Width="50">
 					<ItemTemplate>
-						<asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# Engine.AdminManager.GetEditExistingItemUrl((Zeus.ContentItem) Container.DataItem) %>'><asp:Image runat="server" ImageUrl='<%# WebResourceUtility.GetUrl(typeof(Default), "Zeus.Admin.Resources.page_edit.png") %>' AlternateText="Edit" /></asp:HyperLink>
+						<asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# Engine.AdminManager.GetEditExistingItemUrl((Zeus.ContentItem) Container.DataItem) %>'><asp:Image runat="server" ImageUrl='<%# Zeus.Utility.GetCooliteIconUrl(Icon.PageEdit) %>' AlternateText="Edit" /></asp:HyperLink>
 					</ItemTemplate>
 				</asp:TemplateField>
 				<asp:TemplateField HeaderText="Publish" ItemStyle-Width="50">
 					<ItemTemplate>
-						<asp:ImageButton runat="server" ID="btnPublish" AlternateText="Publish" CommandName="Publish" CommandArgument='<%# Eval("ID") %>' Visible="<%# !IsPublished(Container.DataItem) %>" ImageUrl='<%# WebResourceUtility.GetUrl(typeof(Default), "Zeus.Admin.Assets.Images.Icons.book_next.png") %>' />
+						<asp:ImageButton runat="server" ID="btnPublish" AlternateText="Publish" CommandName="Publish" CommandArgument='<%# Eval("ID") %>' Visible="<%# !IsPublished(Container.DataItem) %>" ImageUrl='<%# Zeus.Utility.GetCooliteIconUrl(Icon.BookNext) %>' />
 					</ItemTemplate>
 				</asp:TemplateField>
 				<asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
 					<ItemTemplate>
-						<asp:ImageButton runat="server" ID="btnDelete" AlternateText="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID") %>' Visible="<%# !IsPublished(Container.DataItem) %>" ImageUrl='<%# WebResourceUtility.GetUrl(typeof(Default), "Zeus.Admin.Resources.page_delete.png") %>' />
+						<asp:ImageButton runat="server" ID="btnDelete" AlternateText="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID") %>' Visible="<%# !IsPublished(Container.DataItem) %>" ImageUrl='<%# Zeus.Utility.GetCooliteIconUrl(Icon.PageDelete) %>' />
 					</ItemTemplate>
 				</asp:TemplateField>
 			</Columns>

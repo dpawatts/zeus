@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="Recycle Bin" Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.RecycleBin.Default" %>
+<%@ Import Namespace="Ext.Net" %>
 <%@ Import Namespace="Zeus.BaseLibrary.Web.UI"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarButton runat="server" ID="btnEmpty" Text="Empty Recycle Bin" ImageResourceName="Zeus.Admin.Assets.Images.Icons.bin_empty.png" CssClass="negative" OnClick="btnEmpty_Click" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarButton runat="server" ID="btnEmpty" Text="Empty Recycle Bin" Icon="BinEmpty" CssClass="negative" OnClick="btnEmpty_Click" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<asp:CustomValidator ID="cvRestore" CssClass="validator" ErrorMessage="An item with the same name already exists at the previous location." runat="server" Display="Dynamic" />
@@ -36,13 +37,13 @@
 			<asp:TemplateField HeaderText="Restore" ItemStyle-Width="50">
 					<ItemTemplate>
 						<asp:ImageButton runat="server" ID="btnRestore" AlternateText="Restore" CommandName="Restore" CommandArgument='<%# Eval("ID") %>'
-							ImageUrl='<%# WebResourceUtility.GetUrl(typeof(Zeus.Admin.RecycleBin.Default), "Zeus.Admin.Assets.Images.Icons.arrow_redo.png") %>' />
+							ImageUrl='<%# Zeus.Utility.GetCooliteIconUrl(Icon.ArrowRedo)) %>' />
 					</ItemTemplate>
 				</asp:TemplateField>
 			<asp:TemplateField HeaderText="Delete" ItemStyle-Width="50">
 				<ItemTemplate>
 					<asp:ImageButton runat="server" ID="btnDelete" AlternateText="Delete" CommandName="Delete" CommandArgument='<%# Eval("ID") %>'
-						ImageUrl='<%# WebResourceUtility.GetUrl(typeof(Zeus.Admin.RecycleBin.Default), "Zeus.Admin.Resources.page_delete.png") %>' />
+						ImageUrl='<%# Zeus.Utility.GetCooliteIconUrl(Icon.PageDelete) %>' />
 				</ItemTemplate>
 			</asp:TemplateField>
 		</Columns>

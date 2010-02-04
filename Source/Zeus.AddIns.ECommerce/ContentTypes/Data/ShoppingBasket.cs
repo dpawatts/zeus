@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.Services;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -12,9 +13,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(ShoppingBasketContainer))]
 	public class ShoppingBasket : BaseContentItem, IShoppingBasket
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(typeof(ShoppingBasket), "Zeus.AddIns.ECommerce.Icons.basket_put.png"); }
+			get { return Icon.BasketPut; }
 		}
 
 		public Address ShippingAddress

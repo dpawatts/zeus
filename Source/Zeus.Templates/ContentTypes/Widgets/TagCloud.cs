@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.Integrity;
 
 namespace Zeus.Templates.ContentTypes.Widgets
@@ -6,9 +7,9 @@ namespace Zeus.Templates.ContentTypes.Widgets
 	[AllowedZones(AllowedZones.AllNamed)]
 	public class TagCloud : BaseWidget
 	{
-		protected override string IconName
+		protected override Icon Icon
 		{
-			get { return "tag_yellow"; }
+			get { return Icon.TagYellow; }
 		}
 
 		[ContentProperty("Tag Group", 200)]

@@ -11,8 +11,6 @@ using Label = System.Web.UI.WebControls.Label;
 using ListItem = System.Web.UI.WebControls.ListItem;
 using WebControl = System.Web.UI.WebControls.WebControl;
 
-[assembly: WebResource("Zeus.Web.UI.WebControls.Images.add.png", "image/png")]
-[assembly: WebResource("Zeus.Web.UI.WebControls.Images.delete.png", "image/png")]
 namespace Zeus.Web.UI.WebControls
 {
 	public class ItemEditorList : WebControl, INamingContainer
@@ -217,7 +215,7 @@ namespace Zeus.Web.UI.WebControls
 			ImageButton b = new ImageButton();
 			b.ID = "addNew";
 			container.ContentTemplateContainer.Controls.Add(b);
-			b.ImageUrl = Page.ClientScript.GetWebResourceUrl(typeof(ItemEditorList), "Zeus.Web.UI.WebControls.Images.add.png");
+			b.ImageUrl = Utility.GetCooliteIconUrl(Icon.Add);
 			b.ToolTip = "Add item";
 			b.CausesValidation = false;
 			b.Click += AddItemClick;
@@ -246,7 +244,7 @@ namespace Zeus.Web.UI.WebControls
 			itemEditorsContainer.Controls.Add(b);
 			b.ID = ID + "_d_" + itemEditorIndex;
 			b.CssClass = " delete";
-			b.ImageUrl = Page.ClientScript.GetWebResourceUrl(typeof(ItemEditorList), "Zeus.Web.UI.WebControls.Images.delete.png");
+			b.ImageUrl = Utility.GetCooliteIconUrl(Icon.Delete);
 			b.ToolTip = "Delete item";
 			b.CommandArgument = itemEditorIndex.ToString();
 			b.CausesValidation = false;

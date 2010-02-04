@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -9,9 +10,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(Shop))]
 	public class VariationSetContainer : BaseContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(typeof(VariationSetContainer), "Zeus.AddIns.ECommerce.Icons.arrow_divide.png"); }
+			get { return Icon.ArrowDivide; }
 		}
 
 		public IEnumerable<VariationSet> Sets

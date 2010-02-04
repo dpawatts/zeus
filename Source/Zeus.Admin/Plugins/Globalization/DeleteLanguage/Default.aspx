@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Globalization.DeleteLanguage.Default" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarButton runat="server" ID="btnDelete" OnClick="btnDelete_Click" Text="Delete" ImageResourceName="Zeus.Admin.Assets.Images.Icons.delete.png" CssClass="negative" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarButton runat="server" ID="btnDelete" OnClick="btnDelete_Click" Text="Delete" Icon="Delete" CssClass="negative" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<p>Delete one of the languages for the page, without deleting the entire page. <!-- Note! When you delete a language for a page, 

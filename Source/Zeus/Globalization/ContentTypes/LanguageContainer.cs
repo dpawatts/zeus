@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Integrity;
@@ -17,9 +18,9 @@ namespace Zeus.Globalization.ContentTypes
 			Name = "languages";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return WebResourceUtility.GetUrl(typeof(LanguageContainer), "Zeus.Web.Resources.Icons.world.png"); }
+			get { return Icon.World; }
 		}
 	}
 }

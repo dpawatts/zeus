@@ -1,4 +1,5 @@
 using System.Web.UI;
+using Ext.Net;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
@@ -17,9 +18,9 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 			Name = "mailouts";
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return new Page().ClientScript.GetWebResourceUrl(typeof(MailoutsPlugin), "Zeus.AddIns.Mailouts.Resources.email_open.png"); }
+			get { return Icon.EmailOpen; }
 		}
 
 		[TextBoxEditor("EasyMail License Key", 1, Required = true)]

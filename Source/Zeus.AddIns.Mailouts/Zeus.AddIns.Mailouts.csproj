@@ -146,9 +146,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\email_go.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Admin\Sent.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
@@ -157,17 +154,6 @@
     <EmbeddedResource Include="Admin\CampaignRecipients.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\email.png" />
-    <EmbeddedResource Include="Resources\email_open.png" />
-    <EmbeddedResource Include="Resources\report.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\group.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\user_go.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

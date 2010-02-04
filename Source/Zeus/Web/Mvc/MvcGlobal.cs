@@ -14,6 +14,7 @@ namespace Zeus.Web.Mvc
 		private static void RegisterRoutes(RouteCollection routes, ContentEngine engine)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.IgnoreRoute("{*extaxd}", new { extaxd = @"(.*/)?ext.axd(/.*)?" });
 
 			string adminPath = Zeus.Context.Current.Resolve<AdminSection>().Path;
 			routes.IgnoreRoute(adminPath + "/{*pathInfo}");

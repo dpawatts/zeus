@@ -4,11 +4,13 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Security;
 using Zeus.Web.Security;
+using LinkButton = System.Web.UI.WebControls.LinkButton;
 
 namespace Zeus.Admin.Plugins.Permissions
 {
@@ -110,13 +112,13 @@ namespace Zeus.Admin.Plugins.Permissions
 		private void CreateRow(string roleOrUser, AuthorizationType type, IEnumerable<string> allowedOperations)
 		{
 			int index = tblPermissions.Rows.Count;
-			string imageResourceName = (type == AuthorizationType.Role) ? "Zeus.Admin.Resources.group.png" : "Zeus.Admin.Resources.user.png";
+			Icon icon = (type == AuthorizationType.Role) ? Icon.Group : Icon.User;
 			GenericIdentity identity = new GenericIdentity((type == AuthorizationType.User) ? roleOrUser : string.Empty);
 			string[] roles = (type == AuthorizationType.Role) ? new[] { roleOrUser } : new string[] { };
 			IPrincipal user = new GenericPrincipal(identity, roles);
 			TableRow row = new TableRow();
 			TableCell imageCell = new TableCell();
-			imageCell.Controls.Add(new LiteralControl("<img src=\"" + WebResourceUtility.GetUrl(typeof(Default), imageResourceName) + "\" />"));
+			imageCell.Controls.Add(new LiteralControl("<img src=\"" + Utility.GetCooliteIconUrl(icon) + "\" />"));
 			imageCell.Controls.Add(new HiddenField { ID = "hdn" + index + "Type", Value = type.ToString() });
 			imageCell.Controls.Add(new HiddenField { ID = "hdn" + index + "RoleOrUser", Value = roleOrUser });
 			row.Cells.Add(imageCell);

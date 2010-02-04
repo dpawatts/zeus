@@ -3,7 +3,7 @@
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<admin:ToolbarButton runat="server" ID="btnProcess" Text="Process" ImageResourceName="Zeus.AddIns.ECommerce.Icons.basket_go.png" CssClass="positive" OnClick="btnProcess_Click" />
+	<admin:ToolbarButton runat="server" ID="btnProcess" Text="Process" Icon="BasketGo" CssClass="positive" OnClick="btnProcess_Click" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<h2>View Order</h2>

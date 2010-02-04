@@ -1,62 +1,44 @@
-﻿using System.Web;
-using Zeus.BaseLibrary.Web.UI;
-using Zeus.ContentTypes;
+﻿using Ext.Net;
 using Zeus.Design.Editors;
-using Zeus.FileSystem.Details;
 using Zeus.Integrity;
 
 namespace Zeus.FileSystem
 {
 	[ContentType(Description = "A node that represents a file.")]
-	//[ContentTypeAuthorizedRoles(new string[] {})]
 	[RestrictParents(typeof(Folder))]
 	public class File : FileSystemNode
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
 			get
 			{
-				string resourceName = "Zeus.Web.Resources.Icons.";
 				string fileExtension = (!string.IsNullOrEmpty(FileExtension)) ? FileExtension.ToLower() : null;
 				switch (fileExtension)
 				{
 					case ".pdf":
-						resourceName += "page_white_acrobat.png";
-						break;
+						return Icon.PageWhiteAcrobat;
 					case ".zip":
-						resourceName += "page_white_compressed.png";
-						break;
+						return Icon.PageWhiteCompressed;
 					case ".xls":
 					case ".xlsx":
-						resourceName += "page_white_excel.png";
-						break;
+						return Icon.PageWhiteExcel;
 					case ".jpg":
 					case ".jpeg":
 					case ".gif":
 					case ".png":
 					case ".bmp":
-						resourceName += "page_white_picture.png";
-						break;
+						return Icon.PageWhitePicture;
 					case ".ppt":
 					case ".pptx":
-						resourceName += "page_white_powerpoint.png";
-						break;
+						return Icon.PageWhitePowerpoint;
 					case ".doc":
 					case ".docx":
-						resourceName += "page_white_word.png";
-						break;
+						return Icon.PageWhiteWord;
 					default:
-						resourceName += "page_white.png";
-						break;
+						return Icon.PageWhite;
 				}
-				return WebResourceUtility.GetUrl(typeof(File), resourceName);
 			}
 		}
-
-		/*public override string Url
-		{
-			get { return "/File.axd?Path=" + HttpUtility.UrlEncode(Path); }
-		}*/
 
 		public override string Extension
 		{

@@ -1,3 +1,4 @@
+using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
 
@@ -7,9 +8,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(VariationSet))]
 	public class Variation : BaseContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(typeof(Variation), "Zeus.AddIns.ECommerce.Icons.arrow_branch.png"); }
+			get { return Icon.ArrowBranch; }
 		}
 
 		public VariationSet VariationSet

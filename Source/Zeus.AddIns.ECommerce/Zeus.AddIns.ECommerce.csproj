@@ -195,41 +195,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\basket.png" />
-    <EmbeddedResource Include="Icons\basket_go.png" />
-    <EmbeddedResource Include="Icons\magnifier.png" />
-    <EmbeddedResource Include="Icons\package.png" />
-    <EmbeddedResource Include="Icons\page_green.png" />
-    <EmbeddedResource Include="Icons\page_red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\lorry.png" />
-    <EmbeddedResource Include="Icons\lorry_go.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\basket_put.png" />
-    <EmbeddedResource Include="Icons\money.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\email_edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\visa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\money_pound.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\arrow_branch.png" />
-    <EmbeddedResource Include="Icons\arrow_divide.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\arrow_join.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\arrow_merge.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Plugins\ManageOrders.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
@@ -242,6 +207,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Templates\OrderConfirmationVendor.spark" />
     <EmbeddedResource Include="Templates\OrderConfirmationCustomer.spark" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\visa.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentTypes\Widgets\" />

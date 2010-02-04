@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using Ext.Net;
 using Zeus.AddIns.Mailouts.ContentTypes.FormFieldAnswers;
 using Zeus.AddIns.Mailouts.Services;
 using Zeus.ContentProperties;
@@ -15,9 +16,9 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 	{
 		#region Properties
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return new Page().ClientScript.GetWebResourceUrl(typeof(ListMember), "Zeus.AddIns.Mailouts.Resources.user_go.png"); }
+			get { return Icon.UserGo; }
 		}
 
 		[TextBoxEditor("Email", 10, Required = true)]

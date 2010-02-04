@@ -2,8 +2,8 @@
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register Src="/admin/AffectedItems.ascx" TagName="AffectedItems" TagPrefix="zeus" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<admin:ToolbarButton runat="server" ID="btnCopy" Text="Try Again" ImageResourceName="Zeus.Admin.Assets.Images.Icons.page_copy.png" CssClass="positive" OnClick="btnCopy_Click" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarButton runat="server" ID="btnCopy" Text="Try Again" Icon="PageCopy" CssClass="positive" OnClick="btnCopy_Click" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<asp:CustomValidator id="cvCopy" meta:resourceKey="cvCopy" runat="server" CssClass="validator info" />

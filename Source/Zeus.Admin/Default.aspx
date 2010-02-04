@@ -8,8 +8,8 @@
 
 	<title><asp:Literal runat="server" ID="ltlAdminName1" /> Administration</title>
 	
-	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
 	<ext:ResourcePlaceHolder runat="server" Mode="Style" />
+	<ext:ResourcePlaceHolder runat="server" Mode="Script" />
 	
 	<script type="text/javascript">
 		Ext.onReady(function() {

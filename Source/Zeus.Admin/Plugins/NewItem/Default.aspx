@@ -4,7 +4,7 @@
 <%@ Register TagPrefix="ext" Assembly="Ext.Net" Namespace="Ext.Net" %>
 <%@ Import Namespace="Zeus.ContentTypes" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<ext:ResourceManager runat="server" Theme="Gray" />

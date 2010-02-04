@@ -6,7 +6,6 @@ using Zeus.Security;
 namespace Zeus.Admin.Plugins.MoveItem
 {
 	[ActionPluginGroup("CutCopyPaste", 20)]
-	//[ActionPlugin("Cut", "Cut", "CutCopyPaste", 1, "zeusnav.memorize('{selected}','/admin/App_Resources/Zeus.Admin.dll/Zeus.Admin.Move.aspx');", "Zeus.Admin.Resources.cut.png")]
 	public partial class Default : PreviewFrameAdminPage
 	{
 		protected void Page_Load(object sender, EventArgs e)

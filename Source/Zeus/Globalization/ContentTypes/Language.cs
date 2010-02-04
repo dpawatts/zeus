@@ -1,10 +1,11 @@
 using System.Globalization;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
-using Zeus.FileSystem.Images;
 using Zeus.Integrity;
 using Zeus.Security;
+using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.Globalization.ContentTypes
 {
@@ -63,8 +64,13 @@ namespace Zeus.Globalization.ContentTypes
 			{
 				if (FlagIcon != null)
 					return FlagIcon.Url;
-				return WebResourceUtility.GetUrl(typeof(Language), "Zeus.Web.Resources.Icons.world_link.png");
+				return base.IconUrl;
 			}
+		}
+
+		protected override Icon Icon
+		{
+			get { return Icon.WorldLink; }
 		}
 
 		public CultureInfo Culture

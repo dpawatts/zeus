@@ -10,7 +10,6 @@ using Zeus.Design.Displayers;
 namespace Zeus.Admin
 {
 	[ActionPluginGroup("ViewPreview", 30)]
-	//[ActionPlugin("View", "View Details", Operations.Read, "ViewPreview", 1, null, "Zeus.Admin.View.aspx", "selected={selected}", Targets.Preview, "Zeus.Admin.Resources.application_view_detail.png")]
 	public partial class View : PreviewFrameAdminPage
 	{
 		protected override void OnInit(EventArgs e)

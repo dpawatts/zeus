@@ -1,4 +1,5 @@
-﻿using Zeus.BaseLibrary.Web.UI;
+﻿using Ext.Net;
+using Zeus.BaseLibrary.Web.UI;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 
@@ -14,9 +15,9 @@ namespace Zeus.FileSystem
 			Visible = false;
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return WebResourceUtility.GetUrl(typeof(Folder), "Zeus.Web.Resources.Icons.folder.png"); }
+			get { return Icon.Folder; }
 		}
 
 		[TextBoxEditor("Name", 10)]

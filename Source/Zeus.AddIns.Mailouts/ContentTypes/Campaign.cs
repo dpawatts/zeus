@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Zeus.AddIns.Mailouts.ContentTypes.ListFilters;
+using Ext.Net;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Web.UI;
+using ListFilter = Zeus.AddIns.Mailouts.ContentTypes.ListFilters.ListFilter;
 
 namespace Zeus.AddIns.Mailouts.ContentTypes
 {
@@ -19,9 +20,9 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 			get { return (MailoutsPlugin) Parent; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return new Page().ClientScript.GetWebResourceUrl(typeof(Campaign), "Zeus.AddIns.Mailouts.Resources.email.png"); }
+			get { return Icon.Email; }
 		}
 
 		[LinkedItemDropDownListEditor("List", 10, Required = true, TypeFilter = typeof(List), ContainerName = "ListContainer")]

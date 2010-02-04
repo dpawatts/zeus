@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
+using Ext.Net;
 using Zeus.ContentProperties;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
@@ -76,9 +77,9 @@ namespace Zeus.Templates.ContentTypes.Forms
 			set { SetDetail("SubmitText", value); }
 		}
 
-		protected override string IconName
+		protected override Icon Icon
 		{
-			get { return "report"; }
+			get { return Icon.Report; }
 		}
 	}
 }

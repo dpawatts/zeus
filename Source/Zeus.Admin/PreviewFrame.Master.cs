@@ -15,7 +15,6 @@ namespace Zeus.Admin
 		{
 			Page.ClientScript.RegisterJQuery();
 
-			Page.ClientScript.RegisterJavascriptResource(typeof(PreviewFrame), "Zeus.Admin.Assets.JS.Plugins.jquery.cookies.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterJavascriptResource(typeof(PreviewFrame), "Zeus.Admin.Assets.JS.zeus.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterCssResource(typeof(PreviewFrame), "Zeus.Admin.Assets.Css.reset.css");
 			Page.ClientScript.RegisterCssResource(typeof(PreviewFrame), "Zeus.Admin.Assets.Css.shared.css");

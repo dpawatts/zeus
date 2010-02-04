@@ -2,8 +2,8 @@
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.HtmlControls" Assembly="Zeus" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save" ImageResourceName="Zeus.Admin.Assets.Images.Icons.tick.png" CssClass="positive" OnClick="btnSave_Click" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save" Icon="Tick" CssClass="positive" OnClick="btnSave_Click" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<p><asp:CheckBox runat="server" ID="chkInheritSettings" /></p>

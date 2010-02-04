@@ -1,4 +1,5 @@
 using System.Linq;
+using Ext.Net;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Installation;
@@ -33,13 +34,9 @@ namespace Zeus.Admin.RecycleBin
 			get { return Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(typeof(RecycleBinContainer).Assembly, "Zeus.Admin.RecycleBin.Default.aspx") + "?selected=" + Path; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get
-			{
-				string iconName = Children.Any() ? "bin" : "bin_closed";
-				return WebResourceUtility.GetUrl(typeof(RecycleBinContainer), "Zeus.Admin.Assets.Images.Icons." + iconName + ".png");
-			}
+			get { return Children.Any() ? Icon.Bin : Icon.BinClosed; }
 		}
 	}
 }

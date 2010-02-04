@@ -11,9 +11,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(OrderContainer))]
 	public class Order : BaseContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(Icon.BasketPut); }
+			get { return Icon.BasketPut; }
 		}
 
 		public User User

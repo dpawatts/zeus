@@ -2,7 +2,6 @@
 using System.Text;
 using Ext.Net;
 using Zeus.Admin;
-using Zeus.Collections;
 using Zeus.ContentProperties;
 using Zeus.ContentTypes;
 using Zeus.Globalization;
@@ -219,12 +218,12 @@ namespace Zeus
 		/// <summary>Gets the icon of this item. This can be used to distinguish item types in edit mode.</summary>
 		public virtual string IconUrl
 		{
-			get
-			{
-				if (IsPage)
-					return Utility.GetCooliteIconUrl(Ext.Net.Icon.Page);
-				return Utility.GetCooliteIconUrl(Ext.Net.Icon.PageWhite);
-			}
+			get { return Utility.GetCooliteIconUrl(Icon); }
+		}
+
+		protected virtual Icon Icon
+		{
+			get { return (IsPage) ? Icon.Page : Icon.PageWhite; }
 		}
 
 		/// <summary>The logical path to the node from the root node.</summary>
@@ -903,10 +902,5 @@ namespace Zeus
 		}
 
 		#endregion
-
-		protected virtual string GetIconUrl(Icon icon)
-		{
-			return Utility.GetCooliteIconUrl(icon);
-		}
 	}
 }

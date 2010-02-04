@@ -1,4 +1,5 @@
 using System.Linq;
+using Ext.Net;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentProperties;
 using Zeus.Integrity;
@@ -11,9 +12,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 	[RestrictParents(typeof(ShoppingBasketItem), typeof(VariationConfiguration), typeof(OrderItem))]
 	public class VariationPermutation : BaseContentItem, ILink
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return GetIconUrl(typeof(VariationPermutation), "Zeus.AddIns.ECommerce.Icons.arrow_merge.png"); }
+			get { return Icon.ArrowMerge; }
 		}
 
 		string ILink.Contents

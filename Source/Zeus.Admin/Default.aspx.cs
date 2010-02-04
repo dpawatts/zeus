@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.UI;
+using Coolite.Ext.UX;
 using Ext.Net;
 using Zeus.Admin.Plugins;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
@@ -48,7 +49,7 @@ namespace Zeus.Admin
 		{
 			Page.ClientScript.RegisterJQuery();
 
-			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.Plugins.ext.ux.menu.storemenu.js", ResourceInsertPosition.BodyBottom);
+			ResourceManager.GetInstance(this).RegisterClientScriptInclude(typeof(StoreMenu), "Coolite.Ext.UX.Extensions.StoreMenu.resources.ext.ux.menu.storemenu.js");
 
 			Page.ClientScript.RegisterJavascriptResource(typeof(Default), "Zeus.Admin.Assets.JS.zeus.js", ResourceInsertPosition.HeaderTop);
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.reset.css");

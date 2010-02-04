@@ -1,3 +1,10 @@
+04/02/2010, Tim Jones
+- Added Icon property to ContentItem. This is the simplest way
+  to set the icon, using the Ext.Net.Icon enumeration.
+- Removed IconName from BaseContentItem since it's no longer needed.
+- Deleted famfamfam embedded icons since they were duplicating
+  the Ext.Net.Icon ones.
+
 29/01/2010, Tim Jones
 - Widgets are no longer shown in the tree view. To manage widgets,
   right click the page in the tree and choose Manage Zones. In the

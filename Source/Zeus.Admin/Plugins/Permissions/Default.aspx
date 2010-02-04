@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.Admin.Plugins.Permissions.Default" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content ContentPlaceHolderID="Toolbar" runat="server">
-	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save" ImageResourceName="Zeus.Admin.Assets.Images.Icons.tick.png" CssClass="positive" OnClick="btnSave_Click" />
-	<admin:ToolbarButton runat="server" ID="btnSaveRecursive" Text="Save Whole Branch" ImageResourceName="Zeus.Admin.Assets.Images.Icons.tick.png" CssClass="positive" OnClick="btnSaveRecursive_Click" />
-	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" ImageResourceName="Zeus.Admin.Assets.Images.Icons.cross.png" CssClass="negative" />
+	<admin:ToolbarButton runat="server" ID="btnSave" Text="Save" Icon="Tick" CssClass="positive" OnClick="btnSave_Click" />
+	<admin:ToolbarButton runat="server" ID="btnSaveRecursive" Text="Save Whole Branch" Icon="Tick" CssClass="positive" OnClick="btnSaveRecursive_Click" />
+	<admin:ToolbarHyperLink runat="server" ID="hlCancel" Text="Cancel" Icon="Cross" CssClass="negative" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="Content" runat="server">
 	<asp:Table runat="server" ID="tblPermissions" CssClass="permissions" />

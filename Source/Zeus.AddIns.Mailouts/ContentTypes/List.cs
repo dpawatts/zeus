@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Web.UI;
+using Ext.Net;
 using Zeus.AddIns.Mailouts.ContentTypes.FormFields;
 using Zeus.AddIns.Mailouts.Services;
 using Zeus.ContentProperties;
@@ -17,9 +18,9 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 	[FieldSet("FormFieldsContainer", "Form Fields", 40)]
 	public class List : ContentItem
 	{
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return new Page().ClientScript.GetWebResourceUrl(typeof(List), "Zeus.AddIns.Mailouts.Resources.group.png"); }
+			get { return Icon.Group; }
 		}
 
 		[TextBoxEditor("Name", 10, Required = true, ContainerName = "ListName", Description = "Good example: 'Acme Company Newsletter' - Bad example: 'Cust_11_01_2007'")]

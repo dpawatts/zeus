@@ -1,22 +1,6 @@
 ﻿// NAVIGATION
 var zeusnav = new Object();
 
-
-// EDIT
-var zeustoggle = {
-	show: function(btn, bar) {
-		jQuery(btn).addClass("toggled").blur();
-		jQuery(bar).show();
-		cookie.create(bar, "show");
-	},
-	hide: function(btn, bar) {
-		jQuery(btn).removeClass("toggled").blur();
-		jQuery(bar).hide();
-		cookie.erase(bar)
-	}
-};
-
-
 // DEFAULT
 var frameManager = function() { }
 frameManager.prototype = {

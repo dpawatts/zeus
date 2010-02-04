@@ -13,10 +13,3 @@ using System.Web.UI;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("890c8a14-f2a9-4155-8f70-64b237fdcc06")]
-
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.email.png", "image/png")]
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.email_go.png", "image/png")]
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.email_open.png", "image/png")]
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.group.png", "image/png")]
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.report.png", "image/png")]
-[assembly: WebResource("Zeus.AddIns.Mailouts.Resources.user_go.png", "image/png")]

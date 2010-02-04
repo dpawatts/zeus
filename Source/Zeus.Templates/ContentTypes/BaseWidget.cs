@@ -1,4 +1,4 @@
-using Zeus.BaseLibrary.Web.UI;
+using Ext.Net;
 using Zeus.Design.Editors;
 using Zeus.Web;
 using Zeus.Web.UI;
@@ -15,14 +15,9 @@ namespace Zeus.Templates.ContentTypes
 			set { base.Title = value; }
 		}
 
-		public override string IconUrl
+		protected override Icon Icon
 		{
-			get { return WebResourceUtility.GetUrl(typeof(BaseContentItem), "Zeus.Templates.Icons." + IconName + ".png"); }
-		}
-
-		protected virtual string IconName
-		{
-			get { return "page_white"; }
+			get { return Icon.PageWhite; }
 		}
 	}
 }
