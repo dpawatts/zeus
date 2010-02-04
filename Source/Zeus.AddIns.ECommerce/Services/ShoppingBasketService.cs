@@ -82,7 +82,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(shoppingBasket);
 		}
 
-		public IShoppingBasket GetBasket(Shop shop)
+		public ShoppingBasket GetBasket(Shop shop)
 		{
 			return GetCurrentShoppingBasketInternal(shop);
 		}
@@ -142,20 +142,6 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 
 			return shoppingBasket;
-		}
-
-		/// <summary>
-		/// Masks the credit card using XXXXXX and appends the last 4 digits
-		/// </summary>
-		public string GetMaskedCardNumber(string cardNumber)
-		{
-			string result = "****";
-			if (cardNumber.Length > 8)
-			{
-				string lastFour = cardNumber.Substring(cardNumber.Length - 4, 4);
-				result = "**** **** **** " + lastFour;
-			}
-			return result;
 		}
 
 		public void SaveBasket(Shop shop)

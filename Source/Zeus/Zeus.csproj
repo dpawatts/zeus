@@ -142,6 +142,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AddIns\AddInContainer.cs" />
     <Compile Include="Admin\IMainInterface.cs" />
     <Compile Include="Admin\Plugins\IMainInterfacePlugin.cs" />
     <Compile Include="Admin\Plugins\MainInterfacePluginBase.cs" />

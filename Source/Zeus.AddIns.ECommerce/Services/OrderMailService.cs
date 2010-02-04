@@ -1,6 +1,6 @@
 using Ninject;
+using Zeus.AddIns.ECommerce.ContentTypes;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
-using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.Net.Mail;
 using Zeus.Web.TextTemplating;
 
@@ -17,7 +17,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			_mailSender = mailSender;
 		}
 
-		public void SendOrderConfirmationToCustomer(Shop shop, Order order)
+		public void SendOrderConfirmationToCustomer(IECommerceConfiguration shop, Order order)
 		{
 			string orderConfirmationCustomerText = _messageBuilder.Transform("OrderConfirmationCustomer",
 					new { order = order, text = shop.ConfirmationEmailText });
@@ -25,7 +25,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				orderConfirmationCustomerText);
 		}
 
-		public void SendOrderConfirmationToVendor(Shop shop, Order order)
+		public void SendOrderConfirmationToVendor(IECommerceConfiguration shop, Order order)
 		{
 			string orderConfirmationVendorText = _messageBuilder.Transform("OrderConfirmationVendor",
 					new { order = order });

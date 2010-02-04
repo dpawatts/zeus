@@ -1,4 +1,8 @@
 04/02/2010, Tim Jones
+- Existing ECommerce sites might break with this version - hopefully
+  the changes required will be clear.
+
+04/02/2010, Tim Jones
 - Added Icon property to ContentItem. This is the simplest way
   to set the icon, using the Ext.Net.Icon enumeration.
 - Removed IconName from BaseContentItem since it's no longer needed.

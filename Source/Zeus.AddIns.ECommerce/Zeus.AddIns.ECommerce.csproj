@@ -101,10 +101,12 @@
   <ItemGroup>
     <Compile Include="ActionPlugins\ManageOrdersActionPlugin.cs" />
     <Compile Include="ContentTypes\Data\Address.cs" />
+    <Compile Include="ContentTypes\Data\ECommerceAddIn.cs" />
     <Compile Include="ContentTypes\Data\OrderItem.cs" />
     <Compile Include="ContentTypes\Data\OrderContainer.cs" />
     <Compile Include="ContentTypes\Data\Order.cs" />
     <Compile Include="ContentTypes\Data\OrderStatus.cs" />
+    <Compile Include="ContentTypes\Data\ProductOrderItem.cs" />
     <Compile Include="ContentTypes\Data\VariationPermutation.cs" />
     <Compile Include="ContentTypes\Data\VariationConfiguration.cs" />
     <Compile Include="ContentTypes\Data\PaymentCard.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="ContentTypes\Data\ShoppingBasketContainer.cs" />
     <Compile Include="ContentTypes\Data\ShoppingBasket.cs" />
     <Compile Include="ContentTypes\Data\ShoppingBasketItem.cs" />
+    <Compile Include="ContentTypes\IECommerceConfiguration.cs" />
     <Compile Include="ContentTypes\Pages\CheckoutPage.cs" />
     <Compile Include="ContentTypes\Pages\SearchResultsPage.cs" />
     <Compile Include="ContentTypes\Pages\ShoppingBasketPage.cs" />
@@ -135,6 +138,7 @@
     <Compile Include="Mvc\Controllers\ShoppingBasketPageController.cs" />
     <Compile Include="Mvc\Controllers\SubcategoryController.cs" />
     <Compile Include="Mvc\ECommerceAreaRegistration.cs" />
+    <Compile Include="Mvc\Html\CheckoutPageExtensions.cs" />
     <Compile Include="Mvc\Html\ShoppingBasketExtensions.cs" />
     <Compile Include="Mvc\ViewModels\CategoryNoSubcategoriesViewModel.cs" />
     <Compile Include="Mvc\ViewModels\CategoryViewModel.cs" />

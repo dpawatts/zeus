@@ -14,7 +14,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[ContentType(Name = "BaseShop")]
 	[TabPanel("ECommerce", "E-Commerce", 100)]
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
-	public class Shop : BasePage, ISelfPopulator
+	public class Shop : BasePage, ISelfPopulator, IECommerceConfiguration
 	{
 		private const string VARIATION_CONTAINER_NAME = "variations";
 		private const string SHOPPING_BASKETS_NAME = "shopping-baskets";

@@ -6,7 +6,7 @@ using Zeus.Templates.ContentTypes;
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
 	[ContentType("Order Container")]
-	[RestrictParents(typeof(Shop))]
+	[RestrictParents(typeof(Shop), typeof(ECommerceAddIn))]
 	public class OrderContainer : BaseContentItem
 	{
 		protected override Icon Icon

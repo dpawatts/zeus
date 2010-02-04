@@ -1,6 +1,7 @@
 using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
+using Zeus.Templates.ContentTypes.ReferenceData;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -55,11 +56,25 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("TownCity", value); }
 		}
 
-		[ContentProperty("Postcode", 260)]
+		[ContentProperty("State / Region", 260)]
+		public string StateRegion
+		{
+			get { return GetDetail("StateRegion", string.Empty); }
+			set { SetDetail("StateRegion", value); }
+		}
+
+		[ContentProperty("Postcode", 270)]
 		public string Postcode
 		{
 			get { return GetDetail("Postcode", string.Empty); }
 			set { SetDetail("Postcode", value); }
+		}
+
+		[ContentProperty("Country", 280)]
+		public Country Country
+		{
+			get { return GetDetail<Country>("Country", null); }
+			set { SetDetail("Country", value); }
 		}
 	}
 }

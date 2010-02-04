@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zeus.AddIns.ECommerce.ContentTypes;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.AddIns.ECommerce.PaymentGateways;
@@ -14,18 +15,30 @@ namespace Zeus.AddIns.ECommerce.Services
 	{
 		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
-		private readonly IShoppingBasketService _shoppingBasketService;
 		private readonly IPaymentGateway _paymentGateway;
 		private readonly IOrderMailService _orderMailService;
 
-		public OrderService(IPersister persister, IWebContext webContext, IShoppingBasketService shoppingBasketService,
+		public OrderService(IPersister persister, IWebContext webContext,
 			IPaymentGateway paymentGateway, IOrderMailService orderMailService)
 		{
 			_persister = persister;
 			_webContext = webContext;
-			_shoppingBasketService = shoppingBasketService;
 			_paymentGateway = paymentGateway;
 			_orderMailService = orderMailService;
+		}
+
+		/// <summary>
+		/// Masks the credit card using XXXXXX and appends the last 4 digits
+		/// </summary>
+		public string GetMaskedCardNumber(string cardNumber)
+		{
+			string result = "****";
+			if (cardNumber.Length > 8)
+			{
+				string lastFour = cardNumber.Substring(cardNumber.Length - 4, 4);
+				result = "**** **** **** " + lastFour;
+			}
+			return result;
 		}
 
 		public IEnumerable<PaymentCardType> GetSupportedCardTypes()
@@ -34,38 +47,29 @@ namespace Zeus.AddIns.ECommerce.Services
 				.Where(paymentCardType => _paymentGateway.SupportsCardType(paymentCardType));
 		}
 
-		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode)
+		public Order PlaceOrder(IECommerceConfiguration configuration, string cardNumber, string cardVerificationCode,
+			DeliveryMethod deliveryMethod, decimal deliveryPrice, Address billingAddress,
+			Address shippingAddress, PaymentCard paymentCard, string emailAddress,
+			string telephoneNumber, string mobileTelephoneNumber,
+			IEnumerable<OrderItem> items)
 		{
-			ShoppingBasket shoppingBasket = (ShoppingBasket) _shoppingBasketService.GetBasket(shop);
-
 			// Convert shopping basket into order, with unpaid status.
 			Order order = new Order
 			{
 				User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal) _webContext.User).MembershipUser : null,
-				DeliveryMethod = shoppingBasket.DeliveryMethod,
-				DeliveryPrice = shoppingBasket.DeliveryMethod.Price,
-				BillingAddress = (Address) shoppingBasket.BillingAddress.Clone(true),
-				ShippingAddress = (Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
-				PaymentCard = (PaymentCard) shoppingBasket.PaymentCard.Clone(true),
-				EmailAddress = shoppingBasket.EmailAddress,
-				TelephoneNumber = shoppingBasket.TelephoneNumber,
-				MobileTelephoneNumber = shoppingBasket.MobileTelephoneNumber,
+				DeliveryMethod = deliveryMethod,
+				DeliveryPrice = deliveryPrice,
+				BillingAddress = billingAddress,
+				ShippingAddress = shippingAddress,
+				PaymentCard = paymentCard,
+				EmailAddress = emailAddress,
+				TelephoneNumber = telephoneNumber,
+				MobileTelephoneNumber = mobileTelephoneNumber,
 				Status = OrderStatus.Unpaid
 			};
-			foreach (ShoppingBasketItem shoppingBasketItem in shoppingBasket.Items)
-			{
-				OrderItem orderItem = new OrderItem
-				{
-					Product = shoppingBasketItem.Product,
-					ProductTitle = shoppingBasketItem.Product.Title,
-					Quantity = shoppingBasketItem.Quantity,
-					Price = shoppingBasketItem.Product.CurrentPrice
-				};
-				foreach (Variation variation in shoppingBasketItem.Variations)
-					orderItem.Variations.Add(variation.VariationSet.Title + ": " + variation.Title);
+			foreach (OrderItem orderItem in items)
 				orderItem.AddTo(order);
-			}
-			order.AddTo(shop.Orders);
+			order.AddTo(configuration.Orders);
 			_persister.Save(order);
 
 			// Process payment.
@@ -77,21 +81,50 @@ namespace Zeus.AddIns.ECommerce.Services
 
 			if (paymentResponse.Success)
 			{
-				// Clear shopping basket.
-				_persister.Delete(shoppingBasket);
-
 				// Update order status to Paid.
 				order.Status = OrderStatus.Paid;
 				_persister.Save(order);
 
 				// Send email to customer and vendor.
-				_orderMailService.SendOrderConfirmationToCustomer(shop, order);
-				_orderMailService.SendOrderConfirmationToVendor(shop, order);
+				_orderMailService.SendOrderConfirmationToCustomer(configuration, order);
+				_orderMailService.SendOrderConfirmationToVendor(configuration, order);
 			}
 			else
 			{
 				throw new ZeusECommerceException(paymentResponse.Message);
 			}
+
+			return order;
+		}
+
+		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode,
+			ShoppingBasket shoppingBasket)
+		{
+			List<OrderItem> items = new List<OrderItem>();
+			foreach (IShoppingBasketItem shoppingBasketItem in items)
+			{
+				ProductOrderItem orderItem = new ProductOrderItem
+				{
+					Product = shoppingBasketItem.Product,
+					ProductTitle = shoppingBasketItem.Product.Title,
+					Quantity = shoppingBasketItem.Quantity,
+					Price = shoppingBasketItem.Product.CurrentPrice
+				};
+				if (shoppingBasketItem.Variations != null)
+					foreach (Variation variation in shoppingBasketItem.Variations)
+						orderItem.Variations.Add(variation.VariationSet.Title + ": " + variation.Title);
+				items.Add(orderItem);
+			}
+
+			Order order = PlaceOrder(shop, cardNumber, cardVerificationCode, shoppingBasket.DeliveryMethod,
+				shoppingBasket.DeliveryMethod.Price, (Address) shoppingBasket.BillingAddress.Clone(true),
+				(Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
+				(PaymentCard) shoppingBasket.PaymentCard.Clone(true), shoppingBasket.EmailAddress,
+				shoppingBasket.TelephoneNumber, shoppingBasket.MobileTelephoneNumber,
+				items);
+
+			// Clear shopping basket.
+			_persister.Delete(shoppingBasket);
 
 			return order;
 		}

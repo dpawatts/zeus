@@ -115,6 +115,10 @@
       <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
       <Name>Zeus.AddIns.Blogs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce.PaymentGateways.SagePay\Zeus.AddIns.ECommerce.PaymentGateways.SagePay.csproj">
+      <Project>{2F01CC7A-40AE-4475-9948-E2B2EA405C13}</Project>
+      <Name>Zeus.AddIns.ECommerce.PaymentGateways.SagePay</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
       <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
       <Name>Zeus.AddIns.ECommerce</Name>
@@ -122,6 +126,10 @@
     <ProjectReference Include="..\..\Source\Zeus.AddIns.Forums\Zeus.AddIns.Forums.csproj">
       <Project>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</Project>
       <Name>Zeus.AddIns.Forums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.AddIns.Mailouts\Zeus.AddIns.Mailouts.csproj">
+      <Project>{E9B2E16C-32D2-4354-9099-876900E625C0}</Project>
+      <Name>Zeus.AddIns.Mailouts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
@@ -138,6 +146,10 @@
     <ProjectReference Include="..\..\Source\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Zeus.Web.Mvc.Pdf\Zeus.Web.Mvc.Pdf.csproj">
+      <Project>{A191F03D-F881-4247-A20E-1CDC6D2F0F28}</Project>
+      <Name>Zeus.Web.Mvc.Pdf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>

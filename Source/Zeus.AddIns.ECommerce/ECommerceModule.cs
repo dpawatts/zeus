@@ -9,6 +9,7 @@ namespace Zeus.AddIns.ECommerce
 		{
 			Bind<IOrderMailService>().To<OrderMailService>().InSingletonScope();
 			Bind<IShoppingBasketService>().To<ShoppingBasketService>().InSingletonScope();
+			Bind<IOrderService>().To<OrderService>().InSingletonScope();
 		}
 	}
 }

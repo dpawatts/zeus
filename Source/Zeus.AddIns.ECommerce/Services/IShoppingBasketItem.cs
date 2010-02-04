@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Zeus.AddIns.ECommerce.ContentTypes;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 

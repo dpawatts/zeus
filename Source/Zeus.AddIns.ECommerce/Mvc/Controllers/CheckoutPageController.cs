@@ -116,7 +116,7 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 				shoppingBasket.PaymentCard = paymentCard = new PaymentCard();
 			paymentCard.CardType = checkoutDetails.CardType;
 			paymentCard.NameOnCard = checkoutDetails.CardHolderName;
-			paymentCard.MaskedCardNumber = _shoppingBasketService.GetMaskedCardNumber(checkoutDetails.CardNumber);
+			paymentCard.MaskedCardNumber = _orderService.GetMaskedCardNumber(checkoutDetails.CardNumber);
 			paymentCard.ExpiryMonth = checkoutDetails.CardExpiryMonth.Value;
 			paymentCard.ExpiryYear = checkoutDetails.CardExpiryYear.Value;
 			paymentCard.StartMonth = checkoutDetails.CardStartMonth;
@@ -167,7 +167,8 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 		{
 			try
 			{
-				Order order = _orderService.PlaceOrder(CurrentShop, cardNumber, cardVerificationCode);
+				Order order = _orderService.PlaceOrder(CurrentShop, cardNumber, cardVerificationCode,
+					_shoppingBasketService.GetBasket(CurrentShop));
 				return View("Receipt", new CheckoutPageReceiptViewModel(CurrentItem, order.ID.ToString(), CurrentShop.ContactPage));
 			}
 			catch (ZeusECommerceException ex)
