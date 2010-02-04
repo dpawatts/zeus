@@ -99,7 +99,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionPlugins\ManageOrdersActionPlugin.cs" />
+    <Compile Include="Admin\Plugins\ManageOrdersActionPlugin.cs" />
+    <Compile Include="Admin\EmbeddedResourcePackage.cs" />
     <Compile Include="ContentTypes\Data\Address.cs" />
     <Compile Include="ContentTypes\Data\ECommerceAddIn.cs" />
     <Compile Include="ContentTypes\Data\OrderItem.cs" />
@@ -153,19 +154,19 @@
     <Compile Include="Mvc\ViewModels\SubcategoryViewModel.cs" />
     <Compile Include="PaymentGateways\PaymentCardType.cs" />
     <Compile Include="PaymentGateways\PaymentResponse.cs" />
-    <Compile Include="Plugins\ViewOrder.aspx.cs">
+    <Compile Include="Admin\Plugins\ManageOrders\ViewOrder.aspx.cs">
       <DependentUpon>ViewOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Plugins\ViewOrder.aspx.designer.cs">
+    <Compile Include="Admin\Plugins\ManageOrders\ViewOrder.aspx.designer.cs">
       <DependentUpon>ViewOrder.aspx.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\ManageOrders.aspx.cs">
-      <DependentUpon>ManageOrders.aspx</DependentUpon>
+    <Compile Include="Admin\Plugins\ManageOrders\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Plugins\ManageOrders.aspx.designer.cs">
-      <DependentUpon>ManageOrders.aspx.cs</DependentUpon>
+    <Compile Include="Admin\Plugins\ManageOrders\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IOrderMailService.cs" />
@@ -199,12 +200,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Plugins\ManageOrders.aspx">
+    <EmbeddedResource Include="Admin\Plugins\ManageOrders\Default.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Plugins\ViewOrder.aspx">
+    <EmbeddedResource Include="Admin\Plugins\ManageOrders\ViewOrder.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
   </ItemGroup>

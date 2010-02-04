@@ -5,9 +5,9 @@ using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.Admin;
 
-namespace Zeus.AddIns.ECommerce.Plugins
+namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 {
-	public partial class ManageOrders : PreviewFrameAdminPage
+	public partial class Default : PreviewFrameAdminPage
 	{
 		#region Methods
 

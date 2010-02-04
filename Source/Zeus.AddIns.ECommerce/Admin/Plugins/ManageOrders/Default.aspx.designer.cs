@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zeus.AddIns.ECommerce.Plugins {
+namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders {
     
     
-    public partial class ManageOrders {
+    public partial class Default {
         
         /// <summary>
         /// lsvOrders control.

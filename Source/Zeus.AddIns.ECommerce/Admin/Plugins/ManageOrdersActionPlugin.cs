@@ -1,9 +1,11 @@
 using Ext.Net;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
+using Zeus.Admin;
 using Zeus.Admin.Plugins;
 
 namespace Zeus.AddIns.ECommerce.ActionPlugins
 {
+	[ActionPluginGroup("ECommerce", 100)]
 	public class ManageOrdersActionPlugin : MenuPluginBase, IContextMenuPlugin
 	{
 		public override string GroupName
@@ -28,7 +30,7 @@ namespace Zeus.AddIns.ECommerce.ActionPlugins
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
 			return string.Format("function() {{ zeus.reloadContentPanel('Manage Orders', '{0}'); }}",
-				GetPageUrl(GetType(), "Zeus.AddIns.ECommerce.Plugins.ManageOrders.aspx") + "?selected=" + contentItem.Path);
+				GetPageUrl(GetType(), "Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders.Default.aspx") + "?selected=" + contentItem.Path);
 		}
 
 		public MenuItem GetMenuItem(ContentItem contentItem)
