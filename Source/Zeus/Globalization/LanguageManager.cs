@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Ext.Net;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
-using Zeus.FileSystem.Images;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
 using Zeus.Web;
+using Image = Zeus.FileSystem.Images.Image;
 
 namespace Zeus.Globalization
 {
@@ -183,13 +184,13 @@ namespace Zeus.Globalization
 		{
 			LanguageContainer languageContainer = Context.ContentTypes.CreateInstance<LanguageContainer>(parent);
 
-			AddLanguage(languageContainer, "English", "en", "gb", true);
+			AddLanguage(languageContainer, "English", "en", Icon.FlagGb, true);
 
 			_persister.Save(languageContainer);
 			return languageContainer;
 		}
 
-		private void AddLanguage(LanguageContainer languageContainer, string languageTitle, string languageCode, string flagIconName, bool enabled)
+		private void AddLanguage(LanguageContainer languageContainer, string languageTitle, string languageCode, Icon icon, bool enabled)
 		{
 			Language language = Context.ContentTypes.CreateInstance<Language>(languageContainer);
 			language.AddTo(languageContainer);
@@ -198,10 +199,7 @@ namespace Zeus.Globalization
 			language.Name = languageCode;
 			language.Enabled = enabled;
 
-			string flagIconFileName = flagIconName + ".png";
-			Image flagIcon = Image.FromStream(typeof(LanguageManager).Assembly.GetManifestResourceStream("Zeus.Web.Resources.Flags." + flagIconFileName),
-																				flagIconFileName);
-			language.FlagIcon = flagIcon;
+			language.FlagIcon = icon;
 		}
 
 		#endregion

@@ -1,6 +1,5 @@
 using System.Globalization;
 using Ext.Net;
-using Zeus.BaseLibrary.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
@@ -44,33 +43,16 @@ namespace Zeus.Globalization.ContentTypes
 			set { SetDetail("UrlSegment", value); }
 		}
 
-		[ChildEditor("Flag Icon", 50)]
-		public virtual Image FlagIcon
+		[ContentProperty("Flag", 50)]
+		public Icon FlagIcon
 		{
-			get { return GetChild("FlagIcon") as Image; }
-			set
-			{
-				if (value != null)
-				{
-					value.Name = "FlagIcon";
-					value.AddTo(this);
-				}
-			}
-		}
-
-		public override string IconUrl
-		{
-			get
-			{
-				if (FlagIcon != null)
-					return FlagIcon.Url;
-				return base.IconUrl;
-			}
+			get { return GetDetail("FlagIcon", Icon.WorldLink); }
+			set { SetDetail("FlagIcon", value); }
 		}
 
 		protected override Icon Icon
 		{
-			get { return Icon.WorldLink; }
+			get { return FlagIcon; }
 		}
 
 		public CultureInfo Culture

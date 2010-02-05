@@ -140,7 +140,7 @@ namespace Zeus.Admin.Plugins.Versions
 		protected string GetLanguage(string languageCode)
 		{
 			Language language = Engine.LanguageManager.GetLanguage(languageCode);
-			return "<img src=\"" + language.FlagIcon.Url + "\" /> " + language.Title;
+			return "<img src=\"" + language.IconUrl + "\" /> " + language.Title;
 		}
 
 		protected void chkShowAllLanguages_CheckedChanged(object sender, EventArgs e)
