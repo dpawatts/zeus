@@ -279,7 +279,7 @@ namespace Zeus.Web.UI.WebControls
 		{
 			FieldSet fs = new FieldSet();
 			string status = (item.ID != 0) ? "ID #" + item.ID : "(Unsaved)";
-			fs.Title = Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status;
+            fs.Title = (item.ID != 0) ? Zeus.Context.Current.ContentTypes[item.GetType()].ContentTypeAttribute.Title + " " + status : "New Item " + status;
 			container.Controls.Add(fs);
 			fs.ContentControls.Add(itemEditor);
 		}
