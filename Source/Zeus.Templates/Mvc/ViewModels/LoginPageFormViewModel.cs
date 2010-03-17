@@ -2,7 +2,7 @@
 
 namespace Zeus.Templates.Mvc.ViewModels
 {
-    public class LoginWidgetFormViewModel : BaseLoginFormViewModel
+    public class LoginPageFormViewModel : BaseLoginFormViewModel
 	{
 	}
 }

@@ -16,7 +16,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.BasketPut; }
 		}
 
-		public User User
+        public User User
 		{
 			get { return GetDetail<User>("User", null); }
 			set { SetDetail("User", value); }
@@ -65,6 +65,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		{
 			get { return GetDetail("Status", OrderStatus.Unpaid); }
 			set { SetDetail("Status", value); }
+		}
+
+		public string BookingRef
+		{
+            get { return GetDetail("BookingRef", string.Empty); }
+            set { SetDetail("BookingRef", value); }
 		}
 
 		public DeliveryMethod DeliveryMethod

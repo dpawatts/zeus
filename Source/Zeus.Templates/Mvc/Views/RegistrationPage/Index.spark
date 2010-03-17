@@ -1,7 +1,9 @@
 ﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.RegistrationPageViewModel"/>
 
+<!--${Html.Url(Model.CurrentItem).AppendSegment("register")}-->
+
 <div id="registration">
-	<form method="post" action="${Html.Url(Model.CurrentItem).AppendSegment("register")}">
+	<form method="post" action="/registration/register">
 		<div class="genericForm clearfix">
 			${Html.ValidationSummaryBox("Please correct the following errors before continuing:")}
 			<br />

@@ -73,21 +73,25 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(order);
 
 			// Process payment.
-			PaymentRequest paymentRequest = new PaymentRequest(order.BillingAddress, order.ShippingAddress, order.ID.ToString(), order.TotalPrice,
+            PaymentRequest paymentRequest = new PaymentRequest(order.BillingAddress, order.ShippingAddress, order.ID.ToString(), order.TotalPrice,
 				"Order #" + order.ID, order.PaymentCard.NameOnCard, cardNumber, order.PaymentCard.ValidFrom, order.PaymentCard.ValidTo,
 				order.PaymentCard.IssueNumber, cardVerificationCode, order.PaymentCard.CardType, order.TelephoneNumber,
 				order.EmailAddress, _webContext.Request.UserHostAddress);
-			PaymentResponse paymentResponse = _paymentGateway.TakePayment(paymentRequest);
-
-			if (paymentResponse.Success)
+			
+            PaymentResponse paymentResponse = _paymentGateway.TakePayment(paymentRequest);
+            
+            if (paymentResponse.Success)
 			{
 				// Update order status to Paid.
 				order.Status = OrderStatus.Paid;
 				_persister.Save(order);
 
 				// Send email to customer and vendor.
-				_orderMailService.SendOrderConfirmationToCustomer(configuration, order);
-				_orderMailService.SendOrderConfirmationToVendor(configuration, order);
+
+                //commented out by Dave - why would this be a centralised library - like we don't need to change this for project to project?
+
+				//_orderMailService.SendOrderConfirmationToCustomer(configuration, order);
+				//_orderMailService.SendOrderConfirmationToVendor(configuration, order);
 			}
 			else
 			{
@@ -96,6 +100,41 @@ namespace Zeus.AddIns.ECommerce.Services
 
 			return order;
 		}
+
+        public Order PlaceOrderWithoutPayment(IECommerceConfiguration configuration, DeliveryMethod deliveryMethod, 
+            decimal deliveryPrice, Address billingAddress,
+            Address shippingAddress, PaymentCard paymentCard, string emailAddress,
+            string telephoneNumber, string mobileTelephoneNumber,
+            IEnumerable<OrderItem> items)
+        {
+            // Convert shopping basket into order, with unpaid status.
+            Order order = new Order
+            {
+                User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal)_webContext.User).MembershipUser : null,
+                DeliveryMethod = deliveryMethod,
+                DeliveryPrice = deliveryPrice,
+                BillingAddress = billingAddress,
+                ShippingAddress = shippingAddress,
+                PaymentCard = paymentCard,
+                EmailAddress = emailAddress,
+                TelephoneNumber = telephoneNumber,
+                MobileTelephoneNumber = mobileTelephoneNumber,
+                Status = OrderStatus.Unpaid
+            };
+            foreach (OrderItem orderItem in items)
+                orderItem.AddTo(order);
+            order.AddTo(configuration.Orders);
+            _persister.Save(order);
+
+            // Process payment.
+            PaymentResponse paymentResponse = new PaymentResponse(true);
+
+            // Update order status to unpaid.
+            order.Status = OrderStatus.Unpaid;
+            _persister.Save(order);
+
+            return order;
+        }
 
 		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode,
 			ShoppingBasket shoppingBasket)

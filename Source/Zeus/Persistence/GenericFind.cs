@@ -4,6 +4,9 @@ using System.Linq;
 using Zeus.Collections;
 using Zeus.FileSystem;
 using Zeus.Web;
+using Zeus.Security;
+using Zeus.Web.Security.Items;
+using Zeus.Security.ContentTypes;
 
 namespace Zeus.Persistence
 {
@@ -177,5 +180,10 @@ namespace Zeus.Persistence
 			}
 			return false;
 		}
+
+        public static UserContainer UserContainer()
+        {
+            return RootItem.GetChildren<SystemNode>().Single().GetChildren<SecurityContainer>().Single().GetChildren<UserContainer>().Single();
+        }
 	}
 }

@@ -274,6 +274,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Mvc\Views\ArchiveCalendarWidget\Header.spark" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mvc\Views\Blog\RSSFeed.spark" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -293,9 +296,6 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

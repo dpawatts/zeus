@@ -1,0 +1,15 @@
+﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.BlogViewModel"/>
+
+<!--rss version="2.0">
+  <channel>
+    <title>Catch The Lingo Blog</title>
+    <link>http://www.catchthelingo.com/blog</link>
+    <description>All the latest thoughts and happenings at Catch the Lingo, the site for learning and living Spanish in South America</description>
+    <item each="var entry in Model.AllPosts">          
+      <title>${entry.Title}</title>
+      <link>http://www.catchthelingo.com${entry.Url}</link>
+      <description>${entry.Url}</description>
+      <pubDate>${entry.DateCreated.ToString("DDD, dd MMM yyyy hh:mm:ss GMT")}</pubDate>
+    </item>
+  </channel>
+</rss-->

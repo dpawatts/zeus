@@ -17,6 +17,12 @@ namespace Zeus.AddIns.ECommerce.Services
 			string telephoneNumber, string mobileTelephoneNumber,
 			IEnumerable<OrderItem> items);
 
+        Order PlaceOrderWithoutPayment(IECommerceConfiguration configuration, DeliveryMethod deliveryMethod,
+            decimal deliveryPrice, Address billingAddress,
+            Address shippingAddress, PaymentCard paymentCard, string emailAddress,
+            string telephoneNumber, string mobileTelephoneNumber,
+            IEnumerable<OrderItem> items);
+
 		Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode,
 			ShoppingBasket shoppingBasket);
 	}

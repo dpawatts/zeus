@@ -55,7 +55,9 @@ ${Html.DisplayProperty(Model.CurrentItem, ci => ci.Text)}
 			
 			${Html.Captcha(Model.CaptchaError)}
 
+			<!-- commented out by Dave - was breaking?
 			${Html.SubmitButton("submit", "Post Comment", new { @class = "submit" })}
+			-->
 		</div>
 	</form>
 

@@ -7,6 +7,7 @@ using Zeus.BaseLibrary.Collections.Generic;
 using Zeus.Linq;
 using Zeus.Templates.Mvc.Controllers;
 using Zeus.Web;
+using System.Collections.Generic;
 
 namespace Zeus.AddIns.Blogs.Mvc.Controllers
 {
@@ -25,7 +26,15 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 				.NavigablePages()
 				.OfType<Post>().OrderByDescending(post => post.Date)
 				.AsPageable(true, p ?? 1, CurrentItem.PageSize);
-			return View(new BlogViewModel(CurrentItem, recentPosts));
+			return View(new BlogViewModel(CurrentItem, recentPosts, null));
 		}
-	}
+
+        public ActionResult RSSFeed()
+		{
+            IEnumerable<Post> allPosts = Find.EnumerateAccessibleChildren(CurrentItem)
+                 .NavigablePages()
+                 .OfType<Post>().OrderByDescending(post => post.Date);
+			return View(new BlogViewModel(CurrentItem, null, allPosts));
+		}
+    }
 }

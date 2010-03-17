@@ -58,7 +58,10 @@ namespace Zeus.Design.Editors
 					file.Data = fs.ReadAllBytes();
 					file.ContentType = MimeUtility.GetMimeType(file.Data);
 					file.Size = fs.Length;
+                    
 				}
+                if (file.Title == "")
+                    file.Title = fileUpload.FileName;
 
 				// Delete temp folder.
 				System.IO.File.Delete(uploadedFile);

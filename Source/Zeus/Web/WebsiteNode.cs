@@ -30,6 +30,13 @@ namespace Zeus.Web
 			set { SetDetail("LoginPage", value); }
 		}
 
+        [ContentProperty("Forgotten Password Page", 40, Description = "This page will be pointed to from any 'Lost your details' links.")]
+        public virtual PageContentItem ForgottenPasswordPage
+        {
+            get { return GetDetail<PageContentItem>("ForgottenPasswordPage", null); }
+            set { SetDetail("ForgottenPasswordPage", value); }
+        }
+
 		public string LoginUrl
 		{
 			get { return (LoginPage != null) ? LoginPage.Url : null; }

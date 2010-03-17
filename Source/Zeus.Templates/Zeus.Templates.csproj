@@ -127,6 +127,7 @@
     <Compile Include="Configuration\MailConfigSource.cs" />
     <Compile Include="Configuration\SeoElement.cs" />
     <Compile Include="Configuration\TemplatesSection.cs" />
+    <Compile Include="ContentTypes\LoginPage.cs" />
     <Compile Include="ContentTypes\RegistrationPageBase.cs" />
     <Compile Include="ContentTypes\ExternalRedirect.cs" />
     <Compile Include="ContentTypes\ForgottenPasswordPage.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
     <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
+    <Compile Include="Mvc\Controllers\LoginPageController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
     <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
@@ -180,6 +182,9 @@
     <Compile Include="Mvc\Html\MarkItUpExtensions.cs" />
     <Compile Include="Mvc\Html\TaggingExtensions.cs" />
     <Compile Include="Mvc\SyndicationResultBase.cs" />
+    <Compile Include="Mvc\ViewModels\BaseLoginFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\LoginPageFormViewModel.cs" />
+    <Compile Include="Mvc\ViewModels\LoginPageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
@@ -382,14 +387,11 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2963</DevelopmentServerPort>
+          <DevelopmentServerPort>53948</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

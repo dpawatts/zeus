@@ -5,6 +5,7 @@ using Zeus.Design.Editors;
 using Zeus.Templates.Configuration;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web.UI;
+using Zeus.Web;
 
 namespace Zeus.Templates.Services
 {
@@ -73,9 +74,12 @@ namespace Zeus.Templates.Services
 
 		private static bool IsPage(ContentType contentType)
 		{
-			return typeof(BasePage).IsAssignableFrom(contentType.ItemType)
+			return (typeof(BasePage).IsAssignableFrom(contentType.ItemType)
 				&& contentType.ItemType != typeof(Redirect)
-				&& contentType.IsPage;
+				&& contentType.IsPage) ||
+                typeof(WebsiteNode).IsAssignableFrom(contentType.ItemType)
+                && contentType.ItemType != typeof(Redirect)
+                && contentType.IsPage;
 		}
 
 		#endregion

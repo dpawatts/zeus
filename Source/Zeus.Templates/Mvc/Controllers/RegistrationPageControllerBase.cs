@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.Web;
@@ -39,11 +40,17 @@ namespace Zeus.Templates.Mvc.Controllers
 
 		public override ActionResult Index()
 		{
-			return View("Index", new RegistrationPageViewModel(CurrentItem));
+            return View("Index", new RegistrationPageViewModel(CurrentItem));
 		}
 
+        [HttpPost]
+        public virtual ActionResult Register(TFormViewModel registrationForm)
+        {
+            return Register(registrationForm, null);
+        }
+
 		[HttpPost]
-		public ActionResult Register(TFormViewModel registrationForm)
+		public virtual ActionResult Register(TFormViewModel registrationForm, DataContentItem membershipDetails)
 		{
 			if (!ModelState.IsValid)
 				return Index();
@@ -58,11 +65,31 @@ namespace Zeus.Templates.Mvc.Controllers
 				_webContext.GetFullyQualifiedUrl(new Url(CurrentItem.Url).AppendSegment("verify").AppendQuery("n=")),
 				VerificationEmailSender, VerificationEmailSubject,
 				VerificationEmailBody, registrationForm);
+
 			if (status != UserCreateStatus.Success)
 			{
 				ModelState.AddModelError("RegistrationError", "Could not create user: " + status.GetDescription());
 				return Index();
 			}
+
+            //add the profile info
+            if (membershipDetails != null)
+            {
+                User NewUser = null;
+                try
+                {
+                    NewUser = Zeus.Find.UserContainer().GetChildren<User>().Where(u => u.Username == registrationForm.Username.ToLower()).Single();
+                }
+                catch
+                {
+                    System.Web.HttpContext.Current.Response.Write("User Count = " + Zeus.Find.UserContainer().GetChildren<User>().Count());
+                    System.Web.HttpContext.Current.Response.Write("Error: user not found = " + registrationForm.Username);
+                    System.Web.HttpContext.Current.Response.End();
+                }
+
+                membershipDetails.AddTo(NewUser);
+                Engine.Persister.Save(membershipDetails);
+            }
 
 			return View("RegisterConfirmation", new RegistrationPageConfirmationViewModel(
 				CurrentItem, _templatesConfig.UserRegistration.EmailVerificationRequired,
