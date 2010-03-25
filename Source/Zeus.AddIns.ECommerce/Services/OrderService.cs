@@ -107,33 +107,43 @@ namespace Zeus.AddIns.ECommerce.Services
             string telephoneNumber, string mobileTelephoneNumber,
             IEnumerable<OrderItem> items)
         {
-            // Convert shopping basket into order, with unpaid status.
-            Order order = new Order
-            {
-                User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal)_webContext.User).MembershipUser : null,
-                DeliveryMethod = deliveryMethod,
-                DeliveryPrice = deliveryPrice,
-                BillingAddress = billingAddress,
-                ShippingAddress = shippingAddress,
-                PaymentCard = paymentCard,
-                EmailAddress = emailAddress,
-                TelephoneNumber = telephoneNumber,
-                MobileTelephoneNumber = mobileTelephoneNumber,
-                Status = OrderStatus.Unpaid
-            };
-            foreach (OrderItem orderItem in items)
-                orderItem.AddTo(order);
-            order.AddTo(configuration.Orders);
-            _persister.Save(order);
+			try
+			{
 
-            // Process payment.
-            PaymentResponse paymentResponse = new PaymentResponse(true);
+				// Convert shopping basket into order, with unpaid status.
+				Order order = new Order
+				{
+					User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal)_webContext.User).MembershipUser : null,
+					DeliveryMethod = deliveryMethod,
+					DeliveryPrice = deliveryPrice,
+					BillingAddress = billingAddress,
+					ShippingAddress = shippingAddress,
+					PaymentCard = paymentCard,
+					EmailAddress = emailAddress,
+					TelephoneNumber = telephoneNumber,
+					MobileTelephoneNumber = mobileTelephoneNumber,
+					Status = OrderStatus.Unpaid
+				};
+				foreach (OrderItem orderItem in items)
+					orderItem.AddTo(order);
 
-            // Update order status to unpaid.
-            order.Status = OrderStatus.Unpaid;
-            _persister.Save(order);
+				order.AddTo(configuration.Orders);
 
-            return order;
+				if (_webContext.User != null)
+				{
+					order.Name = _webContext.User.Identity.Name + " for " + items.First().Title;
+					order.Title = _webContext.User.Identity.Name + " for " + items.First().Title;
+				}
+
+				order.Status = OrderStatus.Unpaid;
+				_persister.Save(order);
+
+				return order;
+			}
+			catch (System.Exception ex)
+			{ 
+				throw(new System.Exception("Error creating order: \n" + ex.Message + "\n" + ex.StackTrace));
+			}			
         }
 
 		public Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode,

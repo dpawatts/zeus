@@ -76,5 +76,18 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return GetDetail<Country>("Country", null); }
 			set { SetDetail("Country", value); }
 		}
+
+		public string PrintAddress
+		{
+			get {
+				return AddressLine1 + "<br/>" +
+					AddressLine2 + "<br/>" +
+					TownCity + "<br/>" +
+					StateRegion + "<br/>" +
+					Postcode + "<br/>" +
+					Country.Title;
+			}
+			
+		}
 	}
 }

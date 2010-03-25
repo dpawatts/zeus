@@ -28,6 +28,7 @@ namespace Zeus.Design.Editors
 		public string TypeFilterDescription { get; set; }
 		public string[] TypeFilter { get; set; }
 		public int MaximumFileSize { get; set; }
+		public bool StopFileRename { get; set; }
 
 		#endregion
 
@@ -57,11 +58,12 @@ namespace Zeus.Design.Editors
 				{
 					file.Data = fs.ReadAllBytes();
 					file.ContentType = MimeUtility.GetMimeType(file.Data);
-					file.Size = fs.Length;
-                    
+					file.Size = fs.Length;                    
 				}
-                if (file.Title == "")
-                    file.Title = fileUpload.FileName;
+                
+				//horrible hack here...TIM - this is the bit to sort
+				if (!StopFileRename && file.Title != "Image")
+					file.Title = fileUpload.FileName;
 
 				// Delete temp folder.
 				System.IO.File.Delete(uploadedFile);

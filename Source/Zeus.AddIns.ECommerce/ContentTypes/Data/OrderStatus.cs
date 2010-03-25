@@ -8,6 +8,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		Paid,
 
+		Confirmed,
+
+		Cancelled,
+
 		Processed
 	}
 }

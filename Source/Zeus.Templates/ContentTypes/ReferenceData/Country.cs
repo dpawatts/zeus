@@ -34,6 +34,13 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			set { base.Title = value; }
 		}
 
+		[TextBoxEditor("CountryCode", 20, Required = false)]
+		public string CountryCode
+		{
+			get { return GetDetail<string>("CountryCode", null); }
+			set { SetDetail("CountryCode", value); }
+		}
+
 		public string Numeric
 		{
 			get { return GetDetail<string>("Numeric", null); }
