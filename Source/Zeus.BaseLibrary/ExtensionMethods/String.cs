@@ -306,5 +306,13 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 
 			return Right(original, original.Length - (searchIndex + search.Length));
 		}
+
+		public static bool IsValidEmail(this string original)
+		{
+			if (string.IsNullOrEmpty(original))
+				return false;
+
+			return Regex.IsMatch(original, @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+		}
 	}
 }

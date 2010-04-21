@@ -10,5 +10,7 @@ namespace Zeus.Templates.Mvc.ViewModels
 		[DataType(DataType.Password)]
 		[Required]
 		public string Password { get; set; }
+
+		public string Target { get; set; }
 	}
 }

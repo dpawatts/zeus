@@ -23,8 +23,7 @@ namespace Zeus.Templates.Mvc.Controllers
 			return View(new LoginPageViewModel(CurrentItem, User.Identity.IsAuthenticated));
 		}
 
-        
-		[HttpPost]
+        [HttpPost]
         [ExportModelStateToTempData]
         public ActionResult Login(LoginPageFormViewModel loginForm)
 		{
@@ -35,8 +34,12 @@ namespace Zeus.Templates.Mvc.Controllers
 			}
 
 			_webSecurityService.SetAuthCookie(loginForm.Username, false);
+
+			//check for redirect instruction
+			if (!string.IsNullOrEmpty(loginForm.Target))
+				Response.Redirect(loginForm.Target);
+
 			return RedirectToParentPage();
 		}
-        
 	}
 }
