@@ -775,6 +775,7 @@
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\progress.gif" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\FancyFileUpload.css" />
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\mootools.js" />
+    <EmbeddedResource Include="Web\Resources\xregexp.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <EmbeddedResource Include="Web\Resources\miframe.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
@@ -792,7 +793,7 @@
     <Content Include="Web\Resources\TinyMCE\plugins\style\en.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\en_dlg.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\rule.js" />
-    <EmbeddedResource Include="Web\Resources\xregexp.js" />
+    <EmbeddedResource Include="Web\Resources\xregexp.min.js" />
     <EmbeddedResource Include="Web\Resources\xregexp-unicode-base.js" />
     <EmbeddedResource Include="Web\Resources\xregexp-unicode-categories.js" />
     <EmbeddedResource Include="Web\UI\WebControls\ReactiveTextBox.js" />

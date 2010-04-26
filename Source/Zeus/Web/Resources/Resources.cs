@@ -53,3 +53,4 @@
 [assembly: WebResource("Zeus.Web.Resources.xregexp-unicode-base.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.xregexp-unicode-categories.js", "text/javascript")]
 [assembly: WebResource("Zeus.Web.Resources.xregexp.js", "text/javascript")]
+[assembly: WebResource("Zeus.Web.Resources.xregexp.min.js", "text/javascript")]
