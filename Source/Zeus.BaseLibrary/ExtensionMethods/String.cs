@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Web;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -105,13 +107,39 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 			return char.ToLower(value[0]) + value.Substring(1);
 		}
 
+		public static bool IsSafeUrl(this string value)
+		{
+			return value == value.ToSafeUrl();
+		}
+
 		public static string ToSafeUrl(this string value)
 		{
 			if (string.IsNullOrEmpty(value))
 				return string.Empty;
 
-			string result = value.Replace(' ', '-').ToLower();
-			result = Regex.Replace(result, "[^a-zA-Z0-9\\-]", string.Empty);
+			string temp = value.ToLower().Trim();
+			temp = Regex.Replace(temp, "[ ]+", "-");
+
+			string result = string.Empty;
+			foreach (char c in temp)
+			{
+				switch (CharUnicodeInfo.GetUnicodeCategory(c))
+				{
+					case UnicodeCategory.DecimalDigitNumber :
+					case UnicodeCategory.LowercaseLetter :
+						result += HttpUtility.UrlEncode(c.ToString());
+						break;
+					default :
+						switch (c)
+						{
+							case '-' :
+							case '_' :
+								result += c;
+								break;
+						}
+						break;
+				}
+			}
 			return result;
 		}
 

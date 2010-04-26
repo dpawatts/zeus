@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zeus.BaseLibrary.ExtensionMethods;
 
@@ -107,6 +109,18 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 
 			// Assert.
 			Assert.AreEqual("ng.", result);
+		}
+
+		[TestMethod]
+		public void CanUrlEncodeString()
+		{
+			Assert.AreEqual("my-safe_url-is-great", " My  SAFE_Url is-great".ToSafeUrl());
+		}
+
+		[TestMethod]
+		public void CanUrlEncodeAccentedString()
+		{
+			Assert.AreEqual("%c3%a1cc%c3%a8nt", "áccènt".ToSafeUrl());
 		}
 	}
 }

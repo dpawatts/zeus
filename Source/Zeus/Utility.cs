@@ -11,6 +11,7 @@ using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.Web.UI;
 using Zeus.Integrity;
 using Zeus.Web.Hosting;
+using System.Globalization;
 
 namespace Zeus
 {
@@ -99,10 +100,7 @@ namespace Zeus
 
 		public static string GetSafeName(string value)
 		{
-			string result = value.ToLower();
-			result = Regex.Replace(result, "[ ]+", "-");
-			result = Regex.Replace(result, "[^a-zA-Z0-9_-]", string.Empty);
-			return result;
+			return value.ToSafeUrl();
 		}
 
 		/// <summary>Checks that the destination isn't below the source.</summary>

@@ -361,6 +361,7 @@
     <Compile Include="Web\TextTemplating\DefaultMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
+    <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\DropDownList.cs" />
@@ -791,6 +792,9 @@
     <Content Include="Web\Resources\TinyMCE\plugins\style\en.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\en_dlg.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\rule.js" />
+    <EmbeddedResource Include="Web\Resources\xregexp.js" />
+    <EmbeddedResource Include="Web\Resources\xregexp-unicode-base.js" />
+    <EmbeddedResource Include="Web\Resources\xregexp-unicode-categories.js" />
     <EmbeddedResource Include="Web\UI\WebControls\ReactiveTextBox.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\tabfocus\editor_plugin.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\tabfocus\editor_plugin_src.js" />

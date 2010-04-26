@@ -30,7 +30,24 @@
 
 	// private function
 	function getNameFromTitle(title) {
-		return title.toLowerCase().replace(/[ ]+/g, "-").replace(/[^a-zA-Z0-9_-]/g, "");
+		if (!title)
+			return "";
+
+		var temp = title.toLowerCase().replace(/^\s*/, "").replace(/\s*$/, "");
+		temp = temp.replace(/[ ]+/g, "-");
+
+		var decimalRegExp = XRegExp("^\\p{Nd}$");
+		var letterRegExp = XRegExp("^\\p{Ll}$");
+
+		var result = "";
+		for (var i = 0; i < temp.length; i++) {
+			var c = temp.charAt(i);
+			if (decimalRegExp.test(c) || letterRegExp.test(c))
+				result += encodeURI(c);
+			else if (c == '-' || c == '_')
+				result += c;
+		}
+		return result;
 	};
 
 	// plugin defaults - added as a property on our plugin function

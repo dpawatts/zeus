@@ -809,7 +809,8 @@ namespace Zeus
 		{
 			if (Name == null)
 				return false;
-			return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
+			return Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)
+				|| HttpUtility.UrlDecode(Name).Equals(name, StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		/// <summary>Gets wether a certain user is authorized to view this item.</summary>
