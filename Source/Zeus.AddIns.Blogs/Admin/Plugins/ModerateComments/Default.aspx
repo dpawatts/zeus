@@ -18,21 +18,11 @@
 			return String.format('<a href="{0}">{1}</a>',
 				record.data.PostUrl, value);
 		}
-
-		var renderStatus = function(value, p, record)
-		{
-			if (record.data.Spam)
-				return "Spam";
-			else if (record.data.Approved)
-				return "Approved";
-			else
-				return "Pending";
-		}
 	</script>
 	
 	<ext:Store ID="exsDataStore" runat="server" OnRefreshData="exsDataStore_RefreshData">
 		<Reader>
-			<ext:ArrayReader>
+			<ext:ArrayReader IDProperty="ID">
 				<Fields>
 					<ext:RecordField Name="ID" Mapping="ID" Type="Int" />
 					<ext:RecordField Name="AntiSpamAuthorName" Mapping="AntiSpamAuthorName" />
@@ -41,8 +31,7 @@
 					<ext:RecordField Name="Created" Mapping="Created" Type="Date" />
 					<ext:RecordField Name="PostTitle" Mapping="PostTitle" />
 					<ext:RecordField Name="PostUrl" Mapping="PostUrl" />
-					<ext:RecordField Name="Spam" Mapping="Spam" />
-					<ext:RecordField Name="Approved" Mapping="Approved" />
+					<ext:RecordField Name="Status" Mapping="Status" />
 				</Fields>
 			</ext:ArrayReader>
 		</Reader>
@@ -59,18 +48,14 @@
 									<ext:Button runat="server" ID="btnApprove" Text="Approve" Icon="Tick" Disabled="true">
 										<DirectEvents>
 											<Click OnEvent="ApproveFeedback">
-												<ExtraParams>
-													<ext:Parameter Name="Values" Value="Ext.encode(#{gpaComments}.getRowsValues())" Mode="Raw" />
-												</ExtraParams>
+												<EventMask ShowMask="true" />
 											</Click>
 										</DirectEvents>
 									</ext:Button>
 									<ext:Button runat="server" ID="btnSpam" Text="Spam" Icon="Decline" Disabled="true">
 										<DirectEvents>
 											<Click OnEvent="SubmitSpam">
-												<ExtraParams>
-													<ext:Parameter Name="Values" Value="Ext.encode(#{gpaComments}.getRowsValues())" Mode="Raw" />
-												</ExtraParams>
+												<EventMask ShowMask="true" />
 											</Click>
 										</DirectEvents>
 									</ext:Button>
@@ -101,9 +86,7 @@
 						</TopBar>
 						<ColumnModel>
 							<Columns>
-								<ext:Column ColumnID="Status" Header="Status" Width="100" Sortable="true" DataIndex="Status">
-									<Renderer Fn="renderStatus" />
-								</ext:Column>
+								<ext:Column ColumnID="Status" Header="Status" Width="100" Sortable="true" DataIndex="Status" />
 								<ext:Column ColumnID="Author" Header="Author" Width="200" Sortable="true" DataIndex="AntiSpamAuthorName">
 									<Renderer Fn="renderAuthor" />
 								</ext:Column>

@@ -65,48 +65,35 @@ namespace Zeus.AddIns.Blogs.Admin.Plugins.ModerateComments
 			exsDataStore.DataBind();
 		}
 
-		protected void SubmitSpam(object sender, DirectEventArgs e)
+		private void UpdateFeedbackItemStatus(DirectEventArgs e, Action<FeedbackItem> callback)
 		{
-			string json = e.ExtraParams["Values"];
-			if (string.IsNullOrEmpty(json))
-				return;
-
-			Dictionary<string, string>[] commentRows = JSON.Deserialize<Dictionary<string, string>[]>(json);
-			foreach (Dictionary<string, string> row in commentRows)
+			RowSelectionModel sm = (RowSelectionModel) gpaComments.SelectionModel.Primary;
+			foreach (SelectedRow row in sm.SelectedRows)
 			{
-				int feedbackID = Convert.ToInt32(row["ID"]);
+				int feedbackID = Convert.ToInt32(row.RecordID);
 
-				// Handle values.
 				FeedbackItem feedbackItem = Engine.Persister.Get<FeedbackItem>(feedbackID);
-				
-				// Send to anti-spam service as not spam.
-				//Engine.Resolve<IAntiSpamService>().
-				feedbackItem.Status = FeedbackItemStatus.Spam;
+				callback(feedbackItem);
 				Engine.Persister.Save(feedbackItem);
 			}
+			sm.SelectedRows.Clear();
+			sm.UpdateSelection();
+		}
 
-			//scriptManager.AddScript("Ext.Msg.alert('Submitted', 'Please see source code how to handle submitted data');");
+		protected void SubmitSpam(object sender, DirectEventArgs e)
+		{
+			UpdateFeedbackItemStatus(e, fi => fi.Status = FeedbackItemStatus.Spam);
 			RefreshData();
 		}
 
 		protected void ApproveFeedback(object sender, DirectEventArgs e)
 		{
-			string json = e.ExtraParams["Values"];
-			if (string.IsNullOrEmpty(json))
-				return;
-
-			Dictionary<string, string>[] commentRows = JSON.Deserialize<Dictionary<string, string>[]>(json);
-			foreach (Dictionary<string, string> row in commentRows)
+			UpdateFeedbackItemStatus(e, fi =>
 			{
-				int feedbackID = Convert.ToInt32(row["ID"]);
-
-				// Handle values.
-				FeedbackItem feedbackItem = Engine.Persister.Get<FeedbackItem>(feedbackID);
-				feedbackItem.Status = FeedbackItemStatus.Approved;
-				Engine.Persister.Save(feedbackItem);
-			}
-
-			//scriptManager.AddScript("Ext.Msg.alert('Submitted', 'Please see source code how to handle submitted data');");
+				// TODO - if feedback item was previously marked as spam, need
+				// to let spam service know this is not spam.
+				fi.Status = FeedbackItemStatus.Approved;
+			});
 			RefreshData();
 		}
 	}

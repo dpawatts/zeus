@@ -1,4 +1,5 @@
 ﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.CommentViewModel"/>
+<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
 
 <li id="comment${Model.CurrentItem.Number}">
 	<p class="commenter">
@@ -10,7 +11,7 @@
 		<br />
 		<span class="comment_info">${Model.CurrentItem.Created.ToString("dd MMMM, yyyy")} at ${Model.CurrentItem.Created.ToString("HH:mm")}</span>
 	</p>
-	<if condition="!Model.CurrentItem.Approved">
+	<if condition="Model.CurrentItem.Status != FeedbackItemStatus.Approved">
 		<em>Your comment is awaiting moderation.</em>
 		<br /><br />
 	</if>
