@@ -778,6 +778,13 @@
     <EmbeddedResource Include="Web\Resources\xregexp.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
     <EmbeddedResource Include="Web\Resources\miframe.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlist\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlist\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autoresize\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autoresize\editor_plugin_src.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autosave\langs\en.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\legacyoutput\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\legacyoutput\editor_plugin_src.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advhr.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advimage.css" />
     <Content Include="Web\Resources\TinyMCE\plugins\searchreplace\advlink.css" />
@@ -793,6 +800,8 @@
     <Content Include="Web\Resources\TinyMCE\plugins\style\en.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\en_dlg.js" />
     <Content Include="Web\Resources\TinyMCE\plugins\style\rule.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\wordcount\editor_plugin.js" />
+    <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\wordcount\editor_plugin_src.js" />
     <EmbeddedResource Include="Web\Resources\xregexp.min.js" />
     <EmbeddedResource Include="Web\Resources\xregexp-unicode-base.js" />
     <EmbeddedResource Include="Web\Resources\xregexp-unicode-categories.js" />
@@ -1042,6 +1051,11 @@
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\form_utils.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\mctabs.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\utils\validate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\Resources\TinyMCE\plugins\autosave\images\" />
+    <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\classes\utils\" />
+    <Folder Include="Web\Resources\TinyMCE\plugins\spellchecker\includes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

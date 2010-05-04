@@ -96,9 +96,6 @@
     <EmbeddedResource Include="Extensions\IconCombo\resources\ext.ux.IconCombo.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Extensions\TinyMCE\comingsoon.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Extensions\TinyMCE\resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
