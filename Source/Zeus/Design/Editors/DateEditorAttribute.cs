@@ -21,19 +21,19 @@ namespace Zeus.Design.Editors
 
 		protected override void DisableEditor(Control editor)
 		{
-			MultiField placeHolder = (MultiField) editor;
-			placeHolder.Fields[0].Enabled = false;
-			((DateField) placeHolder.Fields[0]).ReadOnly = true;
+			CompositeField placeHolder = (CompositeField)editor;
+			placeHolder.Items[0].Enabled = false;
+			((DateField)placeHolder.Items[0]).ReadOnly = true;
 			if (IncludeTime)
 			{
-				placeHolder.Fields[1].Enabled = false;
-				((TimeField) placeHolder.Fields[1]).ReadOnly = true;
+				placeHolder.Items[1].Enabled = false;
+				((TimeField)placeHolder.Items[1]).ReadOnly = true;
 			}
 		}
 
 		protected override Control AddEditor(Control container)
 		{
-			MultiField placeHolder = new MultiField();
+			CompositeField placeHolder = new CompositeField();
 
 			DateField tb = new DateField();
 			tb.ID = Name;
@@ -42,7 +42,7 @@ namespace Zeus.Design.Editors
 				tb.AllowBlank = false;
 				tb.Cls = "required";
 			}
-			placeHolder.Fields.Add(tb);
+			placeHolder.Items.Add(tb);
 
 			if (IncludeTime)
 			{
@@ -54,7 +54,7 @@ namespace Zeus.Design.Editors
 					timeField.AllowBlank = false;
 					timeField.Cls += " required";
 				}
-				placeHolder.Fields.Add(timeField);
+				placeHolder.Items.Add(timeField);
 			}
 
 			container.Controls.Add(placeHolder);
@@ -65,20 +65,20 @@ namespace Zeus.Design.Editors
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
-			MultiField placeHolder = (MultiField) editor;
-			DateField tb = (DateField) placeHolder.Fields[0];
+			CompositeField placeHolder = (CompositeField)editor;
+			DateField tb = (DateField)placeHolder.Items[0];
 			if (item[Name] != null)
 			{
 				tb.SelectedDate = (DateTime) item[Name];
 				if (IncludeTime)
-					((TimeField) placeHolder.Fields[1]).SelectedTime = ((DateTime) item[Name]).TimeOfDay;
+					((TimeField)placeHolder.Items[1]).SelectedTime = ((DateTime)item[Name]).TimeOfDay;
 			}
 		}
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			MultiField placeHolder = (MultiField) editor;
-			DateField tb = (DateField) placeHolder.Fields[0];
+			CompositeField placeHolder = (CompositeField)editor;
+			DateField tb = (DateField)placeHolder.Items[0];
 			bool result = false;
 			DateTime? currentDate = item[Name] as DateTime?;
 			if ((currentDate != null && tb.SelectedDate.Date != currentDate.Value) || currentDate == null)
@@ -89,7 +89,7 @@ namespace Zeus.Design.Editors
 			}
 			if (IncludeTime)
 			{
-				TimeField timeField = (TimeField) placeHolder.Fields[1];
+				TimeField timeField = (TimeField) placeHolder.Items[1];
 				if ((currentDate != null && timeField.SelectedTime != currentDate.Value.TimeOfDay) || currentDate == null)
 				{
 					DateTime newDate = (currentDate ?? DateTime.Now).Date.Add(timeField.SelectedTime);

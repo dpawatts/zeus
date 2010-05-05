@@ -93,12 +93,7 @@ namespace Zeus.Design.Editors
 			//editor.ZoneName = DefaultChildZoneName;
 			editor.Init += OnChildEditorInit;
 
-			FieldSet fieldSet = new FieldSet { ID = Name + "fieldSet", Title = Title };
-			if (!string.IsNullOrEmpty(Description))
-				fieldSet.ContentControls.Add(new LiteralControl("<span class=\"description\">" + Description.Replace("\n", "<br />") + "</span><br style=\"clear:both\" />"));
-			fieldSet.ContentControls.Add(editor);
-
-			panel.Controls.Add(fieldSet);
+			panel.Controls.Add(editor);
 
 			return editor;
 		}

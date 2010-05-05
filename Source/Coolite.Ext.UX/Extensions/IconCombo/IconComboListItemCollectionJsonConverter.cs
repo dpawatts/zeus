@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Coolite.Ext.UX
 {
-	public class IconComboListItemCollectionJsonConverter : JsonConverter
+	public class IconComboListItemCollectionJsonConverter : ListItemCollectionJsonConverter
 	{
 		private readonly string _iconClsField;
 
@@ -14,7 +14,7 @@ namespace Coolite.Ext.UX
 			_iconClsField = iconClsField;
 		}
 
-		public override void WriteJson(JsonWriter writer, object value)
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			ListItemCollection<ListItem> items = value as ListItemCollection<ListItem>;
 
@@ -37,16 +37,6 @@ namespace Coolite.Ext.UX
 			sb.Append("]})");
 
 			writer.WriteRawValue(sb.ToString());
-		}
-
-		public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType)
-		{
-			throw new System.NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(ListItemCollection<ListItem>).IsAssignableFrom(objectType);
 		}
 	}
 }

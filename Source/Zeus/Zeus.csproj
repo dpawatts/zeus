@@ -253,6 +253,8 @@
     <Compile Include="ContentTypes\ReplacesParentContentTypeAttribute.cs" />
     <Compile Include="DataContentItem.cs" />
     <Compile Include="Design\Editors\ChildEditorAttribute.cs" />
+    <Compile Include="Design\Editors\TextEditorAttributeBase.cs" />
+    <Compile Include="Design\Editors\TextFieldEditorAttribute.cs" />
     <Compile Include="Design\Editors\PageTitleEditorAttribute.cs" />
     <Compile Include="Design\Editors\PasswordEditorAttribute.cs" />
     <Compile Include="Design\Editors\RangeEditorAttribute.cs" />
@@ -362,6 +364,7 @@
     <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
+    <Compile Include="Web\UI\WebControls\ChildrenEditorGridPanel.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\DropDownList.cs" />
@@ -702,6 +705,10 @@
     <EmbeddedResource Include="Web\Resources\jQuery\ui.sortable.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Coolite.Ext.UX\Coolite.Ext.UX.csproj">
+      <Project>{FD6CEDDE-9B2F-49CC-954F-A93F27F41E7E}</Project>
+      <Name>Coolite.Ext.UX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
       <Project>{76EF3F95-5CEC-47A8-8D99-2EF19018536C}</Project>
       <Name>Zeus.BaseLibrary</Name>
@@ -750,7 +757,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Web\Resources\TinyMCE\langs\en.js" />
-    <EmbeddedResource Include="Web\Resources\tinymce.js" />
     <EmbeddedResource Include="Web\Resources\jQuery\jquery.js" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <EmbeddedResource Include="Web\Resources\jQuery\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -777,7 +783,6 @@
     <EmbeddedResource Include="Web\Resources\FancyFileUpload\mootools.js" />
     <EmbeddedResource Include="Web\Resources\xregexp.js" />
     <Content Include="Web\Resources\TinyMCE\license.txt" />
-    <EmbeddedResource Include="Web\Resources\miframe.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlist\editor_plugin.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\advlist\editor_plugin_src.js" />
     <EmbeddedResource Include="Web\Resources\TinyMCE\plugins\autoresize\editor_plugin.js" />

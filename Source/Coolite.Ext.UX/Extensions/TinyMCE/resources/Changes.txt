@@ -1,0 +1,12 @@
+﻿This file stores the changes made from the publicly released version.
+
+==============================
+Ext.ux.TinyMCE.js
+Line 22
+
+From this:
+windowGroup.zseed = 12000;
+
+To this:
+windowGroup.zseed = 8000;
+==============================

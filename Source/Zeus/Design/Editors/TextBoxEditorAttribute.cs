@@ -18,7 +18,7 @@ namespace Zeus.Design.Editors
 	/// }
 	/// </example>
 	[AttributeUsage(AttributeTargets.Property)]
-	public class TextBoxEditorAttribute : AbstractEditorAttribute
+	public class TextBoxEditorAttribute : TextEditorAttributeBase
 	{
 		private string _dataTypeText, _dataTypeErrorMessage;
 
@@ -39,9 +39,9 @@ namespace Zeus.Design.Editors
 		/// <param name="sortOrder">The order of this editor</param>
 		/// <param name="maxLength">The max length of the text box.</param>
 		public TextBoxEditorAttribute(string title, int sortOrder, int maxLength)
-			: this(title, sortOrder)
+			: base(title, sortOrder, maxLength)
 		{
-			MaxLength = maxLength;
+			
 		}
 
 		#region Properties
@@ -54,12 +54,6 @@ namespace Zeus.Design.Editors
 
 		/// <summary>Gets or sets the text box mode.</summary>
 		public TextBoxMode TextMode { get; set; }
-
-		/// <summary>Gets or sets the max length of the text box.</summary>
-		public int MaxLength { get; set; }
-
-		/// <summary>Gets or sets the default value. When the editor's value equals this value then null is saved instead.</summary>
-		public string DefaultValue { get; set; }
 
 		public string DataTypeText
 		{
@@ -78,8 +72,6 @@ namespace Zeus.Design.Editors
 			get;
 			set;
 		}
-
-		public bool ReadOnly { get; set; }
 
 		#endregion
 
@@ -140,24 +132,6 @@ namespace Zeus.Design.Editors
 			if (propertyType == typeof(DateTime))
 				return ValidationDataType.Date;
 			throw new NotSupportedException();
-		}
-
-		public override bool UpdateItem(IEditableObject item, Control editor)
-		{
-			TextBox tb = editor as TextBox;
-			string value = (tb.Text == DefaultValue) ? null : tb.Text;
-			if (!AreEqual(value, item[Name]))
-			{
-				item[Name] = value;
-				return true;
-			}
-			return false;
-		}
-
-		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
-		{
-			TextBox tb = editor as TextBox;
-			tb.Text = Utility.Convert<string>(item[Name]) ?? DefaultValue;
 		}
 
 		/// <summary>Creates a text box editor.</summary>

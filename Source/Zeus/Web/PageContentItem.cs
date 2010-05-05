@@ -5,8 +5,8 @@ using Zeus.Globalization;
 
 namespace Zeus.Web
 {
-	[UI.FieldSet("Titles", "Page Identification", 10)]
-	[UI.FieldSet("Content", "Content", 20)]
+	[UI.FieldSet("Titles", "Page Identification", 10, Collapsible = true)]
+	[UI.FieldSet("Content", "Content", 20, Collapsible = true)]
 	[DefaultContainer("Content")]
 	[Translatable]
 	public abstract class PageContentItem : ContentItem

@@ -1,3 +1,8 @@
+05/05/2010, Tim Jones
+- ChildEditors now no longer create fieldsets - so if you want them to 
+  be in a container, you will need to create a container in the parent 
+  content type - see FormPage / Form as an example.
+
 04/02/2010, Tim Jones
 - Existing ECommerce sites might break with this version - hopefully
   the changes required will be clear.

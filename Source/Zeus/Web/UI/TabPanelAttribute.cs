@@ -31,6 +31,7 @@ namespace Zeus.Web.UI
 			{
 				AutoScroll = true,
 				AutoHeight = true,
+				AutoWidth = true,
 				ID = "tabItem" + Name,
 				Title = Title,
 				BodyStyle = "padding:5px"

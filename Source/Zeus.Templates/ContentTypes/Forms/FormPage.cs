@@ -8,11 +8,11 @@ namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Form Page", "FormPage", "A page with a form that can be submitted and sent to an email address.", "", 240)]
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
-	[TabPanel("FormPanel", "Form", 100)]
+	[FieldSet("Form", "Form", 60, Collapsible = true)]
 	[DefaultTemplate("Form")]
 	public class FormPage : BasePage
 	{
-		[ChildEditor("Form", 60, ContainerName = "FormPanel")]
+		[ChildEditor("Form", 60, ContainerName = "Form")]
 		public virtual Form Form
 		{
 			get { return GetChild("Form") as Form; }

@@ -5,10 +5,9 @@ using Zeus.Web.UI;
 
 namespace Zeus.Templates.ContentTypes
 {
-	[TabPanel("General", "General", 100)]
 	public abstract class BaseWidget : WidgetContentItem
 	{
-		[TextBoxEditor("Title", 10, ContainerName = "General")]
+		[TextBoxEditor("Title", 10)]
 		public override string Title
 		{
 			get { return base.Title; }

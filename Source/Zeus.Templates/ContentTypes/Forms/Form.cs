@@ -13,10 +13,10 @@ namespace Zeus.Templates.ContentTypes.Forms
 	[RestrictParents(typeof(FormPage))]
 	//[AllowedChildren(typeof(Question))]
 	[AvailableZone("Questions", "Questions")]
-	[TabPanel("FormFields", "Fields", 110)]
+	[FieldSet("FormFields", "Fields", 100)]
 	public class Form : BaseWidget
 	{
-		[TextBoxEditor("Form Title", 10, ContainerName = "General")]
+		[TextBoxEditor("Form Title", 10)]
 		public override string Title
 		{
 			get { return base.Title; }
@@ -24,21 +24,19 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[XhtmlStringContentProperty("Intro Text", 100)]
-		[HtmlTextBoxEditor(ContainerName = "General")]
 		public virtual string IntroText
 		{
 			get { return GetDetail("IntroText", string.Empty); }
 			set { SetDetail("IntroText", value); }
 		}
 
-		[ChildrenEditor("Form Fields", 110, ContainerName = "FormFields", TypeFilter = typeof(IQuestion))]
+		[ChildrenEditor("Form Fields", 110, TypeFilter = typeof(IQuestion), ContainerName = "FormFields")]
 		public virtual IEnumerable<IQuestion> FormFields
 		{
 			get { return GetChildren<IQuestion>(); }
 		}
 
 		[ContentProperty("Mail From", 120)]
-		[TextBoxEditor(ContainerName = "General")]
 		public virtual string MailFrom
 		{
 			get { return GetDetail("MailFrom", string.Empty); }
@@ -46,7 +44,6 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[ContentProperty("Mail To", 130)]
-		[TextBoxEditor(ContainerName = "General")]
 		public virtual string MailTo
 		{
 			get { return GetDetail("MailTo", string.Empty); }
@@ -54,7 +51,6 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[ContentProperty("Mail Subject", 140)]
-		[TextBoxEditor(ContainerName = "General")]
 		public virtual string MailSubject
 		{
 			get { return GetDetail("MailSubject", string.Empty); }
@@ -62,7 +58,7 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[ContentProperty("Mail Body", 150)]
-		[TextBoxEditor(TextMode = TextBoxMode.MultiLine, ContainerName = "General")]
+		[TextBoxEditor(TextMode = TextBoxMode.MultiLine)]
 		public virtual string MailBody
 		{
 			get { return (string)(GetDetail("MailBody") ?? string.Empty); }
@@ -70,7 +66,6 @@ namespace Zeus.Templates.ContentTypes.Forms
 		}
 
 		[XhtmlStringContentProperty("Submit Text", 160)]
-		[HtmlTextBoxEditor(ContainerName = "General")]
 		public virtual string SubmitText
 		{
 			get { return GetDetail("SubmitText", string.Empty); }

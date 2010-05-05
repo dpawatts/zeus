@@ -24,14 +24,18 @@ namespace Zeus.Web.UI
 		/// <returns>The newly added fieldset.</returns>
 		public override Control AddTo(Control container)
 		{
-			FieldSet fieldSet = new FieldSet
+			Panel fieldSet = new Panel
 			{
 				ID = "FieldSet" + Name,
 				Title = Legend,
 				Collapsible = Collapsible,
-				Collapsed = Collapsed
+				Collapsed = Collapsed,
+				LabelAlign = LabelAlign.Top,
+				Padding = 5,
+				LabelSeparator = " "
 			};
 			container.Controls.Add(fieldSet);
+			container.Controls.Add(new LiteralControl("<br />"));
 			return fieldSet;
 		}
 	}

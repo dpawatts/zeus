@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Design.Editors
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class HtmlTextBoxEditorAttribute : TextBoxEditorAttribute
+	public class HtmlTextBoxEditorAttribute : TextEditorAttributeBase
 	{
 		public HtmlTextBoxEditorAttribute(string title, int sortOrder)
 			: base(title, sortOrder)
+		{
+		}
+
+		public HtmlTextBoxEditorAttribute(string title, int sortOrder, int maxLength)
+			: base(title, sortOrder, maxLength)
 		{
 		}
 
@@ -21,20 +27,32 @@ namespace Zeus.Design.Editors
 		public string CustomCssUrl { get; set; }
 		public string CustomStyleList { get; set; }
 
-		protected override void ModifyEditor(TextBox tb)
+		protected override void DisableEditor(Control editor)
 		{
-			tb.CssClass = string.Empty;
+			((HtmlTextBox) editor).Enabled = false;
+			((HtmlTextBox) editor).ReadOnly = true;
 		}
 
-		protected override TextBox CreateEditor()
+		/// <summary>Creates a text box editor.</summary>
+		/// <param name="container">The container control the tetx box will be placed in.</param>
+		/// <returns>A text box control.</returns>
+		protected override Control AddEditor(Control container)
 		{
-			return new HtmlTextBox
+			HtmlTextBox tb = new HtmlTextBox
 			{
 				DomainAbsoluteUrls = DomainAbsoluteUrls,
 				RootHtmlElementID = RootHtmlElementID,
 				CustomCssUrl = CustomCssUrl,
 				CustomStyleList = CustomStyleList
 			};
+			tb.ID = Name;
+			if (Required)
+				tb.CssClass += " required";
+			if (ReadOnly)
+				tb.ReadOnly = true;
+			container.Controls.Add(tb);
+
+			return tb;
 		}
 	}
 }

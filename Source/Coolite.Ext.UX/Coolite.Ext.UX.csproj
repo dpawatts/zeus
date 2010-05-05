@@ -81,6 +81,8 @@
     <Compile Include="Extensions\IconCombo\IconComboListItemCollectionJsonConverter.cs" />
     <Compile Include="Extensions\StoreMenuCommand\StoreGridCommand.cs" />
     <Compile Include="Extensions\StoreMenu\StoreMenu.cs" />
+    <Compile Include="Extensions\TinyMCE\TinyMCE.cs" />
+    <Compile Include="Extensions\TinyMCE\TinyMCESettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +98,13 @@
     <EmbeddedResource Include="Extensions\IconCombo\resources\ext.ux.IconCombo.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\TinyMCE\resources\" />
+    <EmbeddedResource Include="Extensions\TinyMCE\resources\Ext.ux.TinyMCE.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Extensions\TinyMCE\resources\Ext.ux.TinyMCE.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Extensions\TinyMCE\resources\Changes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

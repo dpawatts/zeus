@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Coolite.Ext.UX;
 using Ext.Net;
 using Zeus.Admin;
 using Zeus.BaseLibrary.ExtensionMethods.Web.UI;
 using Zeus.Web.Hosting;
+using Panel = Ext.Net.Panel;
 
 namespace Zeus.Web.UI.WebControls
 {
-	public sealed class HtmlTextBox : System.Web.UI.WebControls.TextBox
+	public sealed class HtmlTextBox : WebControl, ITextControl
 	{
-		public HtmlTextBox()
-		{
-			TextMode = System.Web.UI.WebControls.TextBoxMode.MultiLine;
-		}
+		private TinyMCE _textBox;
 
 		#region Properties
 
@@ -55,58 +56,96 @@ namespace Zeus.Web.UI.WebControls
 			set { ViewState["CustomStyleList"] = value; }
 		}
 
+		public bool ReadOnly
+		{
+			get { return (bool) (ViewState["ReadOnly"] ?? false); }
+			set { ViewState["ReadOnly"] = value; }
+		}
+
+		public string Text
+		{
+			get
+			{
+				EnsureChildControls();
+				return _textBox.Text;
+			}
+			set
+			{
+				EnsureChildControls();
+				_textBox.Text = value;
+			}
+		}
+
 		#endregion
 
 		#region Methods
 
+		protected override void CreateChildControls()
+		{
+			TinyMCE tinyMce = new TinyMCE();
+			tinyMce.ID = ID + "TinyMCE";
+			tinyMce.Settings.Mode = "none";
+			tinyMce.Settings.Theme = "advanced";
+			tinyMce.Settings.Plugins =
+				"style,layer,table,advimage,advlink,iespell,media,searchreplace,print,contextmenu,paste,fullscreen,noneditable,inlinepopups";
+			tinyMce.Settings.ThemeAdvancedButtons1AddBefore = "";
+			tinyMce.Settings.ThemeAdvancedButtons1 =
+				"bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect";
+			tinyMce.Settings.ThemeAdvancedButtons1Add =
+				"styleprops,sup,|,print,fullscreen,|,search,replace,iespell,|,forecolorpicker";
+			tinyMce.Settings.ThemeAdvancedButtons2AddBefore = "cut,copy,paste,pastetext,pasteword,|";
+			//theme_advanced_buttons2: '',
+			tinyMce.Settings.ThemeAdvancedButtons2Add = "|,table,media,insertlayer,inlinepopups";
+			tinyMce.Settings.ThemeAdvancedButtons3 = "";
+			tinyMce.Settings.ThemeAdvancedButtons3AddBefore = "";
+			tinyMce.Settings.ThemeAdvancedButtons3Add = "";
+			tinyMce.Settings.ThemeAdvancedButtons4 = "";
+			tinyMce.Settings.ThemeAdvancedToolbarLocation = "top";
+			tinyMce.Settings.ThemeAdvancedToolbarAlign = "left";
+			tinyMce.Settings.ThemeAdvancedPathLocation = "bottom";
+			tinyMce.Settings.ExtendedValidElements =
+				"hr[class|width|size|noshade],span[class|align|style],pre[class],code[class],iframe[src|width|height|name|align],dynamiccontent[state]";
+			tinyMce.Settings.FileBrowserCallback = "fileBrowserCallBack";
+			tinyMce.Settings.ThemeAdvancedResizeHorizontal = false;
+			tinyMce.Settings.ThemeAdvancedResizing = false;
+			tinyMce.Settings.ThemeAdvancedDisable = "help,fontselect,fontsizeselect,forecolor,backcolor";
+			tinyMce.Settings.RelativeUrls = false;
+			tinyMce.Settings.NonEditableClass = "nonEditable";
+			//custom_elements: '~dynamiccontent', // Notice the ~ prefix to force a span element for the element
+			tinyMce.Settings.RemoveScriptHost = !DomainAbsoluteUrls;
+			tinyMce.Settings.DocumentBaseUrl = Page.Request.Url.GetLeftPart(UriPartial.Authority);
+			tinyMce.Settings.ConvertUrls = true;
+			tinyMce.Settings.BodyID = RootHtmlElementID;
+			if (!string.IsNullOrEmpty(CustomCssUrl))
+				tinyMce.Settings.ContentCss = CustomCssUrl;
+			if (!string.IsNullOrEmpty(CustomStyleList))
+				tinyMce.Settings.ThemeAdvancedStyles = CustomStyleList;
+			tinyMce.Width = 600;
+			tinyMce.Height = 400;
+			tinyMce.ReadOnly = ReadOnly;
+			Controls.Add(tinyMce);
+
+			_textBox = tinyMce;
+
+			base.CreateChildControls();
+		}
+
 		protected override void OnPreRender(EventArgs e)
 		{
+			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
+
+			Page.ClientScript.RegisterClientScriptBlock(GetType(), "HtmlTextBox",
+				@"function fileBrowserCallBack(fieldName, url, destinationType, win)
+				{
+					var srcField = win.document.forms[0].elements[fieldName];
+					var insertFileUrl = function(data) {
+						srcField.value = data.url;
+					};
+
+					top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
+				}", true);
+
 			base.OnPreRender(e);
-
-			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderBottom);
-			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.miframe.js", ResourceInsertPosition.HeaderBottom);
-			Page.ClientScript.RegisterJavascriptResource(typeof(HtmlTextBox), "Zeus.Web.Resources.tinymce.js", ResourceInsertPosition.HeaderBottom);
-
-			string script = string.Format(
-				@"htmlEditor_init('{5}?rootPath={4}',
-				{{
-					remove_script_host: {1}
-					{6}
-					, document_base_url: '{2}',
-					convert_urls : false,
-					body_id: '{3}'
-					{7}
-				}}, '{0}'
-				);",
-				ClientID,
-				(!DomainAbsoluteUrls).ToString().ToLower(),
-				Page.Request.Url.GetLeftPart(UriPartial.Authority),
-				RootHtmlElementID,
-				Page.Server.UrlEncode(UploadFolder),
-				Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
-					Zeus.Context.Current.Resolve<IAdminAssemblyManager>().Assembly, "Zeus.Admin.FileManager.Default.aspx"),
-				!string.IsNullOrEmpty(CustomCssUrl) ? ", content_css: '" + CustomCssUrl + "'" : null,
-				!string.IsNullOrEmpty(CustomStyleList) ? ", theme_advanced_styles: '" + CustomStyleList + "'" : null);
-
-			// If this control is within an ExtJS Tab that is initially hidden, we need to register the script in the TabChanged
-			// event instead of on the initial window load.
-			Panel parentTab = this.FindParent<Panel>();
-			if (parentTab != null && parentTab.ParentComponent is TabPanel && ((TabPanel) parentTab.ParentComponent).ActiveTab != parentTab)
-			{
-				Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
-					"InitHtmlTextBox" + UniqueID,
-					string.Format("var {0}Initialised = false;", ClientID),
-					true);
-				parentTab.Listeners.Activate.Handler = string.Format(
-					"if (!{0}Initialised) {{ {1} {0}Initialised = true; }}",
-					ClientID, script);
-			}
-			else
-			{
-				Page.ClientScript.RegisterStartupScript(typeof(HtmlTextBox),
-					"InitHtmlTextBox" + UniqueID,
-					script, true);
-			}
 		}
 
 		#endregion

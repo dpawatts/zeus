@@ -64,7 +64,7 @@ namespace Coolite.Ext.UX
 				StringWriter sw = new StringWriter();
 				JsonTextWriter jw = new JsonTextWriter(sw);
 				IconComboListItemCollectionJsonConverter converter = new IconComboListItemCollectionJsonConverter(IconClsField);
-				converter.WriteJson(jw, this.Items);
+				converter.WriteJson(jw, this.Items, null);
 
 				return sw.GetStringBuilder().ToString();
 			}

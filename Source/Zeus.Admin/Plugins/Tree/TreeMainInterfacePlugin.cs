@@ -43,7 +43,7 @@ namespace Zeus.Admin.Plugins.Tree
 			};
 			filterField.Triggers.Add(new FieldTrigger
 			{
-				Icon = TemplateTriggerIcon.Clear,
+				Icon = TriggerIcon.Clear,
 				HideTrigger = true
 			});
 			filterField.Listeners.KeyUp.Fn = "keyUp";
