@@ -30,7 +30,8 @@ namespace Zeus.Templates.Mvc.Controllers
 			if (!ModelState.IsValid || !_webSecurityService.ValidateUser(loginForm.Username, loginForm.Password))
 			{
 				ModelState.AddModelError("Login.Failed", "Invalid username or password");
-				return RedirectToParentPage("#loginBox");
+				if (!string.IsNullOrEmpty(loginForm.Target))
+					return RedirectToParentPage("?target=" + loginForm.Target + "#loginBox");
 			}
 
 			_webSecurityService.SetAuthCookie(loginForm.Username, false);
