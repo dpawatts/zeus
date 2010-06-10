@@ -836,6 +836,15 @@ namespace Zeus
 				&& !(Expires != null && Expires.Value < DateTime.Now);
 		}
 
+		/// <summary>
+		/// Return something other than null to group items in the admin site tree.
+		/// </summary>
+		/// <returns></returns>
+		public virtual string FolderPlacementGroup
+		{
+			get { return null; }
+		}
+
 		#endregion
 
 		void IUrlParserDependency.SetUrlParser(IUrlParser parser)

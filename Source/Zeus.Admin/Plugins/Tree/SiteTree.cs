@@ -93,11 +93,34 @@ namespace Zeus.Admin.Plugins.Tree
 			}
 
 			if (!hasAsyncChildren)
-				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children)
+			{
+				// Allow for grouping of child items into folders.
+				var folderGroups = navigator.Children
+					.Select(ci => ci.Current.FolderPlacementGroup)
+					.Where(s => s != null)
+					.Distinct();
+				foreach (string folderGroup in folderGroups)
+				{
+					TreeNode folderNode = new TreeNode
+					{
+						Text = folderGroup,
+						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
+						Cls = "zeus-tree-node",
+						Expanded = true
+					};
+					((TreeNode) node).Nodes.Add(folderNode);
+					foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children.Where(n => n.Current.FolderPlacementGroup == folderGroup))
+					{
+						TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly, withLinks, filter);
+						folderNode.Nodes.Add(childNode);
+					}
+				}
+				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children.Where(n => n.Current.FolderPlacementGroup == null))
 				{
 					TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly, withLinks, filter);
 					((TreeNode) node).Nodes.Add(childNode);
 				}
+			}
 			if (!itemChildren.Any())
 			{
 				node.CustomAttributes.Add(new ConfigItem("children", "[]", ParameterMode.Raw));
