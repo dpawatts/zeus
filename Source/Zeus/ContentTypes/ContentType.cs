@@ -94,6 +94,8 @@ namespace Zeus.ContentTypes
 
 		public bool Translatable { get; set; }
 
+		public AdminSiteTreeVisibility Visibility { get; set; }
+
 		#endregion
 
 		#region Constructor
@@ -103,6 +105,7 @@ namespace Zeus.ContentTypes
 			Enabled = true;
 			ItemType = itemType;
 			ContentTypeAttribute = new ContentTypeAttribute { Title = itemType.Name, Name = itemType.Name };
+			Visibility = AdminSiteTreeVisibility.Visible;
 		}
 
 		#endregion

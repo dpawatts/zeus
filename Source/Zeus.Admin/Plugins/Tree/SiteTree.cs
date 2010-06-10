@@ -65,16 +65,20 @@ namespace Zeus.Admin.Plugins.Tree
 		public TreeNodeBase ToTreeNode(bool rootOnly, bool withLinks)
 		{
 			IHierarchyNavigator<ContentItem> navigator = new ItemHierarchyNavigator(_treeBuilder, _filter);
-			TreeNodeBase rootNode = BuildNodesRecursive(navigator, rootOnly, withLinks);
+			TreeNodeBase rootNode = BuildNodesRecursive(navigator, rootOnly, withLinks, _filter);
 			//rootNode.ChildrenOnly = _excludeRoot;
 			return rootNode;
 		}
 
-		private static TreeNodeBase BuildNodesRecursive(IHierarchyNavigator<ContentItem> navigator, bool rootOnly, bool withLinks)
+		private static TreeNodeBase BuildNodesRecursive(IHierarchyNavigator<ContentItem> navigator, bool rootOnly, bool withLinks,
+			Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> filter)
 		{
 			ContentItem item = navigator.Current;
 
-			bool hasAsyncChildren = ((!navigator.Children.Any() && item.GetChildren().Any()) || rootOnly);
+			var itemChildren = item.GetChildren();
+			if (filter != null)
+				itemChildren = filter(itemChildren);
+			bool hasAsyncChildren = ((!navigator.Children.Any() && itemChildren.Any()) || rootOnly);
 			TreeNodeBase node = (hasAsyncChildren) ? new AsyncTreeNode() as TreeNodeBase : new TreeNode();
 			node.Text = ((INode) item).Contents;
 			node.IconFile = item.IconUrl;
@@ -91,10 +95,10 @@ namespace Zeus.Admin.Plugins.Tree
 			if (!hasAsyncChildren)
 				foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children)
 				{
-					TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly, withLinks);
+					TreeNodeBase childNode = BuildNodesRecursive(childNavigator, rootOnly, withLinks, filter);
 					((TreeNode) node).Nodes.Add(childNode);
 				}
-			if (!item.GetChildren().Any())
+			if (!itemChildren.Any())
 			{
 				node.CustomAttributes.Add(new ConfigItem("children", "[]", ParameterMode.Raw));
 				node.Expanded = true;

@@ -236,6 +236,8 @@
     <Compile Include="ContentTypes\AbstractContentTypeRefiner.cs" />
     <Compile Include="ContentTypes\AttributeExplorer.cs" />
     <Compile Include="ContentTypes\ContentTypeConfigurationService.cs" />
+    <Compile Include="ContentTypes\AdminSiteTreeVisibility.cs" />
+    <Compile Include="ContentTypes\AdminSiteTreeVisibilityAttribute.cs" />
     <Compile Include="ContentTypes\DefaultContainerAttribute.cs" />
     <Compile Include="ContentTypes\DisableAttribute.cs" />
     <Compile Include="ContentTypes\EditableHierarchyBuilder.cs" />
