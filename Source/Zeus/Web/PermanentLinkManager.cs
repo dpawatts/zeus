@@ -7,14 +7,10 @@ namespace Zeus.Web
 	{
 		public string ResolvePermanentLinks(string value)
 		{
-			const string pattern = @"href=""~/link/([\d]+?)""";
+			const string pattern = @"href=""/?~/link/([\d]+?)""";
 			Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-			string stage1 = regex.Replace(value, OnPatternMatched);
+			return regex.Replace(value, OnPatternMatched);
 			
-			const string pattern2 = @"href=""/~/link/([\d]+?)""";
-			Regex regex2 = new Regex(pattern2, RegexOptions.IgnoreCase);
-
-			return regex2.Replace(stage1, OnPatternMatched);
 		}
 
 		private string OnPatternMatched(Match match)

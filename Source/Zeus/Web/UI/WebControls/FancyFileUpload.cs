@@ -42,7 +42,7 @@ namespace Zeus.Web.UI.WebControls
 
 		public int MaximumFileSize
 		{
-			get { return (int) (ViewState["MaximumFileSize"] ?? 5); }
+			get { return (int) (ViewState["MaximumFileSize"] ?? 16); }
 			set { ViewState["MaximumFileSize"] = value; }
 		}
 
