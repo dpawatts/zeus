@@ -18,6 +18,13 @@ namespace Zeus.Configuration
 			set { base["installer"] = value; }
 		}
 
+		[ConfigurationProperty("menuPlugins")]
+		public MenuPluginCollection MenuPlugins
+		{
+			get { return (MenuPluginCollection) base["menuPlugins"]; }
+			set { base["menuPlugins"] = value; }
+		}
+
 		[ConfigurationProperty("recycleBin")]
 		public RecycleBinElement RecycleBin
 		{

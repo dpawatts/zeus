@@ -6,6 +6,11 @@ namespace Zeus.Admin.Plugins.PageCaching
 {
 	public class DeleteCachedPageMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "Caching"; }

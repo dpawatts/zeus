@@ -5,6 +5,11 @@ namespace Zeus.Admin.Plugins.Children
 {
 	public class ManageChildrenMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "NewEditDelete"; }

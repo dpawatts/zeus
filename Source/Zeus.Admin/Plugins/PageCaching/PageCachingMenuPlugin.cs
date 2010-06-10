@@ -6,6 +6,11 @@ namespace Zeus.Admin.Plugins.PageCaching
 	[ActionPluginGroup("Caching", 40)]
 	public class PageCachingMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "Caching"; }

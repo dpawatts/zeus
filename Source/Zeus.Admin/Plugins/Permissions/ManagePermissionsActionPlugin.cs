@@ -5,6 +5,11 @@ namespace Zeus.Admin.Plugins.Permissions
 {
 	public class ManagePermissionsMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "ViewPreview"; }

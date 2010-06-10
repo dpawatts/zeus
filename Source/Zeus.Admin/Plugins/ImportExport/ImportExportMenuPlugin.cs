@@ -6,6 +6,11 @@ namespace Zeus.Admin.Plugins.ImportExport
 {
 	public class ImportExportMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "ViewPreview"; }

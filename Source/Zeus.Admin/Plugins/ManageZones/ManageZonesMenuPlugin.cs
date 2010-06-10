@@ -7,6 +7,11 @@ namespace Zeus.Admin.Plugins.ManageZones
 {
 	public class ManageZonesMenuPlugin : MenuPluginBase, IContextMenuPlugin
 	{
+		protected override bool AvailableByDefault
+		{
+			get { return false; }
+		}
+
 		public override string GroupName
 		{
 			get { return "NewEditDelete"; }
