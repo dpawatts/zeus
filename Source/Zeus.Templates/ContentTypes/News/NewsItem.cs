@@ -6,13 +6,14 @@ using Zeus.FileSystem;
 using Zeus.Integrity;
 using Zeus.Templates.Services.Syndication;
 using Image = Zeus.FileSystem.Images.Image;
+using Zeus.Web.UI.WebControls;
 
 namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Item")]
 	[RestrictParents(typeof(NewsContainer), typeof(NewsMonth))]
 	[AllowedChildren(typeof(Image))]
-	public class NewsItem : BaseNewsPage, IFileSystemContainer, ISyndicatable
+	public class NewsItem : BaseNewsPage, IFileSystemContainer, ISyndicatable, ISitemapAppearance
 	{
 		public override string IconUrl
 		{
@@ -72,5 +73,14 @@ namespace Zeus.Templates.ContentTypes.News
 		{
 			get { return Introduction; }
 		}
+
+		#region ISitemapAppearance Members
+
+		public bool VisibleInSitemap
+		{
+			get { return true; }
+		}
+
+		#endregion
 	}
 }

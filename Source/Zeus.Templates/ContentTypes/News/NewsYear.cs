@@ -8,7 +8,7 @@ namespace Zeus.Templates.ContentTypes.News
 {
 	[ContentType("News Year Page")]
 	[RestrictParents(typeof(NewsContainer))]
-	public class NewsYear : BaseNewsPage, IBreadcrumbAppearance
+	public class NewsYear : BaseNewsPage, IBreadcrumbAppearance, ISitemapAppearance
 	{
 		public override NewsContainer CurrentNewsContainer
 		{
@@ -52,6 +52,15 @@ namespace Zeus.Templates.ContentTypes.News
 		#region IBreadcrumbAppearance Members
 
 		bool IBreadcrumbAppearance.VisibleInBreadcrumb
+		{
+			get { return false; }
+		}
+
+		#endregion
+
+		#region ISitemapAppearance Members
+
+		public bool VisibleInSitemap
 		{
 			get { return false; }
 		}

@@ -57,7 +57,7 @@ namespace Zeus.Templates.Services
 			T item = _contentTypeManager.CreateInstance<T>(parent);
 			item.Name = name;
 			item.Title = title;
-			item.Visible = false;
+			item.Visible = true;
 			_persister.Save(item);
 			return item;
 		}

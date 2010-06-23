@@ -158,24 +158,60 @@ namespace Zeus.Templates.Mvc.Html
 			return sb.ToString();
 		}
 
-		private static void SitemapRecursive(ContentItem contentItem, StringBuilder sb)
+		private static bool SitemapRecursive(ContentItem contentItem, StringBuilder sb)
 		{
-			var childItems = contentItem.GetChildren().Pages().Visible();
+			var childItems = contentItem.GetChildren().Visible();
+
+			bool foundSomething = false;
+
+			StringBuilder sbInner = new StringBuilder();
+
 			if (childItems.Any())
 			{
-				sb.Append("<ul>");
+				sbInner.Append("<ul>");
 				foreach (ContentItem childItem in childItems)
 				{
-					sb.Append("<li>");
-					if (childItem.Visible)
-						sb.AppendFormat("<a href=\"{0}\">{1}</a>", childItem.Url, childItem.Title);
+					ISitemapAppearance appearance = childItem as ISitemapAppearance;
+					//the appearance != null bit means that by default items won't show as links
+					bool visible = childItem.Visible && (childItem.IsPage || (appearance != null && appearance.VisibleInSitemap));
+					
+					if (visible)
+					{
+						sbInner.Append("<li>");
+
+						sbInner.AppendFormat("<a href=\"{0}\">{1}</a>", childItem.Url, childItem.Title);
+						foundSomething = true;
+
+						//something has been found on this tree path, but still possibility of dead ends, so start again!
+						StringBuilder sbInnerFurther = new StringBuilder();
+						SitemapRecursive(childItem, sbInnerFurther);
+						sbInner.Append(sbInnerFurther.ToString());
+
+						sbInner.Append("</li>");
+					}
 					else
-						sb.Append(childItem.Title);
-					SitemapRecursive(childItem, sb);
-					sb.Append("</li>");
+					{
+						//nothing found yet, so don't add anything but keep checking - progress so far needs to be saved to the new stringbuilder
+						StringBuilder sbInnerFurther = new StringBuilder();
+						sbInnerFurther.Append("<li>");
+						sbInnerFurther.Append(childItem.Title);
+
+						//this will return if something is found further down the tree
+						foundSomething = SitemapRecursive(childItem, sbInnerFurther);
+
+						//only add this level if something was found!
+						if (foundSomething)
+							sbInner.Append(sbInnerFurther.ToString() + "</li>");
+					}
 				}
-				sb.Append("</ul>");
+				sbInner.Append("</ul>");
 			}
+
+			//only append to the final string, if at somepoint a link has been hit, otherwise, you'll end up with loads of titles for no reason
+			if (foundSomething)
+				sb.Append(sbInner.ToString());
+
+			return foundSomething;
 		}
 	}
 }

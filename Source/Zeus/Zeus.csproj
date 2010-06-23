@@ -369,6 +369,7 @@
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenEditorGridPanel.cs" />
+    <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />
     <Compile Include="Web\UI\HtmlControls\SortableColumnHeader.cs" />
     <Compile Include="Web\UI\WebControls\DropDownList.cs" />
