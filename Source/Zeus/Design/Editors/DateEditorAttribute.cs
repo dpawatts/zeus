@@ -81,7 +81,9 @@ namespace Zeus.Design.Editors
 			DateField tb = (DateField)placeHolder.Items[0];
 			bool result = false;
 			DateTime? currentDate = item[Name] as DateTime?;
-			if ((currentDate != null && tb.SelectedDate.Date != currentDate.Value) || currentDate == null)
+			//this line was not storing a date if set to the original value - in the case of a date that original value might 
+			//be DateTime.Now!!!  So put in a check 
+			if ((currentDate != null && (tb.SelectedDate.Date != currentDate.Value.Date || currentDate == DateTime.Now.Date)) || currentDate == null)
 			{
 				currentDate = tb.SelectedDate.Date.Add((currentDate ?? DateTime.Now).TimeOfDay);
 				item[Name] = currentDate;

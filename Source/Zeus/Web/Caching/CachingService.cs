@@ -42,9 +42,14 @@ namespace Zeus.Web.Caching
 			_webContext.HttpContext.Cache.Remove(GetCacheKey(contentItem));
 		}
 
-		private static string GetCacheKey(ContentItem contentItem)
+		private string GetCacheKey(ContentItem contentItem)
 		{
-			return "ZeusPageCache_" + contentItem.ID;
+			//return "ZeusPageCache_" + contentItem.ID;
+			//changed to make sure that the querystring is considered
+			if (_webContext.HttpContext.Request.QueryString == null)
+				return "ZeusPageCache_" + contentItem.ID;
+			else
+				return "ZeusPageCache_" + contentItem.ID + "_" + _webContext.HttpContext.Request.QueryString;
 		}
 
 		#region IStartable methods

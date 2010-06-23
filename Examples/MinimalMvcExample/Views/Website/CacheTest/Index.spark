@@ -1,0 +1,5 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.CacheTestViewModel" />
+
+${Model.GetTestQSNum}
+<br/><br/>
+${System.DateTime.Now}
