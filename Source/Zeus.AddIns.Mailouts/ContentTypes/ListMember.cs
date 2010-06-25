@@ -28,7 +28,7 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 			set { base.Title = value; }
 		}
 
-		[ChildrenEditor("Answers", 20, AddNewText = "Add New Answer", TypeFilter = typeof(FormFieldAnswer))]
+		[ChildrenEditor("Answers", 20, TypeFilter = typeof(FormFieldAnswer))]
 		public virtual IEnumerable<FormFieldAnswer> Fields
 		{
 			get { return GetChildren<FormFieldAnswer>(); }

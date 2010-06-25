@@ -368,6 +368,7 @@
     <Compile Include="Web\TextTemplating\IMessageBuilder.cs" />
     <Compile Include="Web\TextTemplating\MessageBuilder.cs" />
     <Compile Include="Web\UI\PanelAttribute.cs" />
+    <Compile Include="Web\UI\WebControls\ChildrenEditor.cs" />
     <Compile Include="Web\UI\WebControls\ChildrenEditorGridPanel.cs" />
     <Compile Include="Web\UI\WebControls\ISitemapAppearance.cs" />
     <Compile Include="Web\WebsiteNode.cs" />

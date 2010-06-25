@@ -254,6 +254,10 @@ namespace Zeus.Admin.Plugins.EditItem
 
 		protected override void OnPreRender(EventArgs e)
 		{
+			// The following resources are registered here because we can't register them during an Ext.NET AJAX request,
+			// which means if the control wasn't already present on the page, the scripts will be missing.
+
+			// FancyFileUpload
 			ExtNet.ResourceManager.RegisterClientStyleInclude(typeof(FancyFileUpload),
 				"Zeus.Web.Resources.FancyFileUpload.FancyFileUpload.css");
 
@@ -263,6 +267,19 @@ namespace Zeus.Admin.Plugins.EditItem
 			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Fx.ProgressBar.js");
 			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.Swiff.Uploader.js");
 			ExtNet.ResourceManager.RegisterClientScriptInclude(typeof(FancyFileUpload), "Zeus.Web.Resources.FancyFileUpload.FancyUpload3.Attach2.js");
+
+			// HtmlTextBox
+			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(typeof(HtmlTextBox), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
+			Page.ClientScript.RegisterClientScriptBlock(typeof(HtmlTextBox), "HtmlTextBox",
+				@"function fileBrowserCallBack(fieldName, url, destinationType, win)
+				{
+					var srcField = win.document.forms[0].elements[fieldName];
+					var insertFileUrl = function(data) {
+						srcField.value = data.url;
+					};
+
+					top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
+				}", true);
 
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.edit.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.view.css");

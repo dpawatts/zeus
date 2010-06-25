@@ -130,24 +130,6 @@ namespace Zeus.Web.UI.WebControls
 			base.CreateChildControls();
 		}
 
-		protected override void OnPreRender(EventArgs e)
-		{
-			Page.ClientScript.RegisterJavascriptInclude(Utility.GetClientResourceUrl(GetType(), "TinyMCE/tiny_mce.js"), ResourceInsertPosition.HeaderTop);
-
-			Page.ClientScript.RegisterClientScriptBlock(GetType(), "HtmlTextBox",
-				@"function fileBrowserCallBack(fieldName, url, destinationType, win)
-				{
-					var srcField = win.document.forms[0].elements[fieldName];
-					var insertFileUrl = function(data) {
-						srcField.value = data.url;
-					};
-
-					top.fileManager.show(Ext.get(fieldName), insertFileUrl, destinationType);
-				}", true);
-
-			base.OnPreRender(e);
-		}
-
 		#endregion
 	}
 }

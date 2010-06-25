@@ -65,7 +65,7 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 			set { SetDetail("UnsubscribePage", value); }
 		}
 
-		[ChildrenEditor("Form Fields", 70, AddNewText = "Add New Form Field", TypeFilter = typeof(FormField), ContainerName = "FormFieldsContainer")]
+		[ChildrenEditor("Form Fields", 70, TypeFilter = typeof(FormField), ContainerName = "FormFieldsContainer")]
 		public virtual IEnumerable<FormField> FormFields
 		{
 			get { return GetChildren<FormField>(); }

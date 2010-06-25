@@ -13,7 +13,6 @@ namespace Zeus.Templates.ContentTypes.Forms
 	[RestrictParents(typeof(FormPage))]
 	//[AllowedChildren(typeof(Question))]
 	[AvailableZone("Questions", "Questions")]
-	[FieldSet("FormFields", "Fields", 100)]
 	public class Form : BaseWidget
 	{
 		[TextBoxEditor("Form Title", 10)]
@@ -30,7 +29,7 @@ namespace Zeus.Templates.ContentTypes.Forms
 			set { SetDetail("IntroText", value); }
 		}
 
-		[ChildrenEditor("Form Fields", 110, TypeFilter = typeof(IQuestion), ContainerName = "FormFields")]
+		[ChildrenEditor("Form Fields", 110, TypeFilter = typeof(IQuestion))]
 		public virtual IEnumerable<IQuestion> FormFields
 		{
 			get { return GetChildren<IQuestion>(); }
