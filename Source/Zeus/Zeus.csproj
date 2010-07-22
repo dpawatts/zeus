@@ -247,7 +247,7 @@
     <Compile Include="ContentProperties\BaseContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\BooleanProperty.cs" />
     <Compile Include="ContentProperties\IContentProperty.cs" />
-    <Compile Include="ContentPropertyAttribute.cs" />
+    <Compile Include="Web\ContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\PropertyData.cs" />
     <Compile Include="ContentProperties\PropertyDataType.cs" />
     <Compile Include="ContentTypes\IPropertyAwareAttribute.cs" />

@@ -1,0 +1,7 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.MyPageViewModel" />
+
+${Html.Image(Model.CurrentItem.Image)}
+
+<br/><br/>
+
+${Html.Image(Model.CurrentItem.AnotherImage)}
