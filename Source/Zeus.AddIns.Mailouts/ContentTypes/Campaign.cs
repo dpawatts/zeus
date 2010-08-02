@@ -11,8 +11,8 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 {
 	[ContentType]
 	[RestrictParents(typeof(MailoutsPlugin))]
-	[FieldSet("ListContainer", "List", 10)]
-	[FieldSet("General", "General", 20)]
+	[Panel("ListContainer", "List", 10)]
+	[Panel("General", "General", 20)]
 	public class Campaign : ContentItem
 	{
 		internal MailoutsPlugin MailoutsPlugin

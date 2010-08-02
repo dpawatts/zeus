@@ -8,7 +8,7 @@ namespace Zeus.Templates.ContentTypes.Forms
 {
 	[ContentType("Form Page", "FormPage", "A page with a form that can be submitted and sent to an email address.", "", 240)]
 	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
-	[FieldSet("Form", "Form", 60, Collapsible = true)]
+	[Panel("Form", "Form", 60, Collapsible = true)]
 	[DefaultTemplate("Form")]
 	public class FormPage : BasePage
 	{

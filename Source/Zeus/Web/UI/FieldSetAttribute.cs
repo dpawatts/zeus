@@ -24,7 +24,7 @@ namespace Zeus.Web.UI
 		/// <returns>The newly added fieldset.</returns>
 		public override Control AddTo(Control container)
 		{
-			Panel fieldSet = new Panel
+			FieldSet fieldSet = new FieldSet
 			{
 				ID = "FieldSet" + Name,
 				Title = Legend,
@@ -34,8 +34,16 @@ namespace Zeus.Web.UI
 				Padding = 5,
 				LabelSeparator = " "
 			};
-			container.Controls.Add(fieldSet);
-			container.Controls.Add(new LiteralControl("<br />"));
+			if (container is ContentPanel)
+			{
+				((ContentPanel) container).ContentControls.Add(fieldSet);
+				((ContentPanel) container).ContentControls.Add(new LiteralControl("<br />"));
+			}
+			else
+			{
+				container.Controls.Add(fieldSet);
+				container.Controls.Add(new LiteralControl("<br />"));
+			}
 			return fieldSet;
 		}
 	}

@@ -10,9 +10,9 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("MyPage")]
 	[AllowedChildren(typeof(Zeus.FileSystem.Images.Image))]
-	[FieldSet("NewContainer", "All My Types Go in Here!", 100)]
-	[FieldSet("ImageContainer", "Main Image", 200)]
-	[FieldSet("AnotherImageContainer", "Secondary Image", 300)]
+	[Panel("NewContainer", "All My Types Go in Here!", 100)]
+	[FieldSet("ImageContainer", "Main Image", 200, ContainerName = "Content")]
+	[FieldSet("AnotherImageContainer", "Secondary Image", 300, ContainerName = "Content")]
 	[AdminSiteTreeVisibility(AdminSiteTreeVisibility.Visible | AdminSiteTreeVisibility.ChildrenHidden)]
 	public class MyPage : PageContentItem
 	{

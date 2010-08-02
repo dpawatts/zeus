@@ -12,10 +12,10 @@ namespace Zeus.AddIns.Mailouts.ContentTypes
 {
 	[ContentType]
 	[RestrictParents(typeof(MailoutsPlugin))]
-	[FieldSet("ListName", "List Name", 10)]
-	[FieldSet("CampaignDefaults", "Campaign Defaults", 20)]
-	[FieldSet("Unsubscribe", "Unsubscribe", 30)]
-	[FieldSet("FormFieldsContainer", "Form Fields", 40)]
+	[Panel("ListName", "List Name", 10)]
+	[Panel("CampaignDefaults", "Campaign Defaults", 20)]
+	[Panel("Unsubscribe", "Unsubscribe", 30)]
+	[Panel("FormFieldsContainer", "Form Fields", 40)]
 	public class List : ContentItem
 	{
 		protected override Icon Icon
