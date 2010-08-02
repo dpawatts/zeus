@@ -62,7 +62,7 @@ namespace Zeus.Design.Editors
 				}
                 
 				//horrible hack here...TIM - this is the bit to sort
-				if (!StopFileRename && file.Title != "Image")
+				if (!StopFileRename && (editor.Parent == null || editor.Parent.Parent == null || !(editor.Parent.Parent is ItemEditView)))
 					file.Title = fileUpload.FileName;
 
 				// Delete temp folder.
