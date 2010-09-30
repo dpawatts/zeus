@@ -65,6 +65,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Zeus.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -286,8 +289,5 @@ Global
 		{A7A33508-F0F0-46FC-882D-150BB333BC0C} = {203A0F4D-1D96-4F4C-995E-6F9505DD1D24}
 		{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
 		{34EDBA77-B394-419F-9A68-05EA97DA9F98} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Zeus.vsmdi
 	EndGlobalSection
 EndGlobal

@@ -6,13 +6,15 @@ namespace Zeus.AddIns.Blogs.Mvc.ViewModels
 {
 	public class PostViewModel : ViewModel<Post>
 	{
-		public PostViewModel(Post currentItem, IEnumerable<FeedbackItem> comments)
+        public PostViewModel(Post currentItem, IEnumerable<FeedbackItem> comments, IEnumerable<FeedbackItem> allComments)
 			: base(currentItem)
 		{
 			Comments = comments;
+            AllComments = allComments;
 		}
 
-		public IEnumerable<FeedbackItem> Comments { get; set; }
+        public IEnumerable<FeedbackItem> Comments { get; set; }
+        public IEnumerable<FeedbackItem> AllComments { get; set; }
 		public string CaptchaError { get; set; }
 	}
 }

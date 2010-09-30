@@ -20,7 +20,7 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 
 		public override ActionResult Index()
 		{
-			return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem)));
+            return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem), _commentService.GetAllComments(CurrentItem)));
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -36,7 +36,7 @@ namespace Zeus.AddIns.Blogs.Mvc.Controllers
 			}
 			catch (CaptchaException ex)
 			{
-				return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem))
+                return View("Index", new PostViewModel(CurrentItem, _commentService.GetDisplayedComments(CurrentItem), _commentService.GetAllComments(CurrentItem))
 				{
 					CaptchaError = ex.CaptchaError
 				});

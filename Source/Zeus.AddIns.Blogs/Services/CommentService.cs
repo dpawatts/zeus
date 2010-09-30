@@ -44,8 +44,12 @@ namespace Zeus.AddIns.Blogs.Services
 			comment.AddTo(post);
 
 			string error;
-			if (!_captchaService.Check(new HttpContextWrapper(HttpContext.Current), out error))
-				throw new CaptchaException(error, error);
+            if (!_captchaService.Check(new HttpContextWrapper(HttpContext.Current), out error))
+            {
+                //remove the comment, otherwise it persists for this call only and renders on the page!
+                post.Children.Remove(comment);
+                throw new CaptchaException(error, error);
+            }
 
 			SetCommonFeedbackItemProperties(post, comment);
 

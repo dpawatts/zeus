@@ -6,6 +6,7 @@ using System.Web.Routing;
 using Zeus.BaseLibrary.Web;
 using Zeus.Configuration;
 using Zeus.Engine;
+using System.Linq;
 
 namespace Zeus.Web.Mvc
 {
@@ -43,6 +44,7 @@ namespace Zeus.Web.Mvc
 			this.engine = engine;
 			this.routeHandler = routeHandler;
 			this.controllerMapper = controllerMapper ?? engine.Resolve<IControllerMapper>();
+            
 			_adminSection = (AdminSection) ConfigurationManager.GetSection("zeus/admin");
 		}
 
@@ -61,31 +63,54 @@ namespace Zeus.Web.Mvc
 		{
 			PathData td = engine.UrlParser.ResolvePath(request.RawUrl);
 
-			if (td.CurrentItem != null)
-			{
-				var item = td.CurrentItem;
-				var action = td.Action;
+            string extraParam = "";
+                
+            if (td.CurrentItem != null)
+            {
+                //all ok, we can continue
+            }
+            else
+            { 
+                //test for extra param being passed in...so /item/myParam
+                Uri thePath = new Uri(request.Url.ToString());
+                string thePathWithOutLastParam = new Uri(thePath.AbsoluteUri.Remove(thePath.AbsoluteUri.Length - (thePath.Segments.Last().Length + 1))).PathAndQuery;
+                td = engine.UrlParser.ResolvePath(thePathWithOutLastParam);
 
-				if (td.QueryParameters.ContainsKey("preview"))
-				{
-					int itemId;
-					if (int.TryParse(td.QueryParameters["preview"], out itemId))
-						item = engine.Persister.Get(itemId);
-				}
-				var controllerName = controllerMapper.GetControllerName(item.GetType());
+                if (td.CurrentItem != null)
+                {
+                    //again, we have the item, so we set the param and continue
+                    extraParam = thePath.Segments.Last();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            
+            var item = td.CurrentItem;
+            var action = td.Action;
 
-				if (controllerName == null)
-					return null;
+            if (td.QueryParameters.ContainsKey("preview"))
+            {
+                int itemId;
+                if (int.TryParse(td.QueryParameters["preview"], out itemId))
+                    item = engine.Persister.Get(itemId);
+            }
+            var controllerName = controllerMapper.GetControllerName(item.GetType());
 
-				var data = new RouteData(this, routeHandler);
-				data.Values[ContentItemKey] = item;
-				data.Values[ContentEngineKey] = engine;
-				data.Values[ControllerKey] = controllerName;
-				data.Values[ActionKey] = action;
-				data.Values[AreaKey] = controllerMapper.GetAreaName(item.GetType());
-				return data;
-			}
-			return null;
+            if (controllerName == null)
+                return null;
+
+            var data = new RouteData(this, routeHandler);
+            data.Values[ContentItemKey] = item;
+            data.Values[ContentEngineKey] = engine;
+            data.Values[ControllerKey] = controllerName;
+            data.Values[ActionKey] = action;
+            data.Values[AreaKey] = controllerMapper.GetAreaName(item.GetType());
+            if (!string.IsNullOrEmpty(extraParam))
+                data.Values["param"] = extraParam;
+            return data;
+
 		}
 
 		public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
