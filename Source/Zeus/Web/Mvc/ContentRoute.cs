@@ -70,13 +70,13 @@ namespace Zeus.Web.Mvc
                 //all ok, we can continue
             }
             else
-            { 
+            {
                 //test for extra param being passed in...so /item/myParam - needs to ignore querystring of course
                 string fullPath = request.Url.ToString();
                 if (fullPath.IndexOf('?') > -1)
                     fullPath = fullPath.Substring(0, fullPath.IndexOf('?'));
 
-                Uri thePath = new Uri(request.Url.ToString());
+                Uri thePath = new Uri(fullPath);
                 string thePathWithOutLastParam = new Uri(thePath.AbsoluteUri.Remove(thePath.AbsoluteUri.Length - (thePath.Segments.Last().Length + 1))).PathAndQuery;
                 td = engine.UrlParser.ResolvePath(thePathWithOutLastParam);
 
