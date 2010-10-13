@@ -20,6 +20,7 @@ using Zeus.Web.Hosting;
 namespace Zeus
 {
 	[RestrictParents(typeof(ContentItem))]
+    [System.Serializable]
 	public abstract class ContentItem : IUrlParserDependency, INode, IEditableObject
 	{
 		#region Private Fields

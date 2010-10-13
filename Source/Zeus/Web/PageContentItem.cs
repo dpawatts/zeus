@@ -9,6 +9,7 @@ namespace Zeus.Web
 	[UI.Panel("Content", "Content", 20, Collapsible = true)]
 	[DefaultContainer("Content")]
 	[Translatable]
+    [System.Serializable]
 	public abstract class PageContentItem : ContentItem
 	{
 		[TextBoxEditor("Title", 10, Required = true, Shared = false, ContainerName = "Titles")]
