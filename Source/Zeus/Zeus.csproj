@@ -188,6 +188,9 @@
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
+    <Compile Include="Configuration\CustomUrlsSection.cs" />
+    <Compile Include="Configuration\CustomUrlsIDCollection.cs" />
+    <Compile Include="Configuration\CustomUrlsIDElement.cs" />
     <Compile Include="Configuration\MenuPluginElement.cs" />
     <Compile Include="Configuration\MenuPluginCollection.cs" />
     <Compile Include="Configuration\CredentialsSection.cs" />

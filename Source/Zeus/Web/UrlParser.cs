@@ -6,6 +6,7 @@ using Zeus.Configuration;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
+using System.Linq;
 
 namespace Zeus.Web
 {
@@ -18,19 +19,20 @@ namespace Zeus.Web
 		protected readonly IWebContext _webContext;
 		private readonly bool _ignoreExistingFiles;
 		private readonly ILanguageManager _languageManager;
-		private readonly bool _useBrowserLanguagePreferences;
+        private readonly bool _useBrowserLanguagePreferences; 
+        private readonly CustomUrlsSection _configUrlsSection;
 
 		#endregion
 
 		#region Constructors
 
-		public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager)
-			: this(persister, host, webContext, notifier, config, languageManager, null)
+		public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls)
+			: this(persister, host, webContext, notifier, config, languageManager, urls, null)
 		{
-			
+            			
 		}
 
-		public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager, GlobalizationSection globalizationConfig)
+		public UrlParser(IPersister persister, IHost host, IWebContext webContext, IItemNotifier notifier, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls, GlobalizationSection globalizationConfig)
 		{
 			_persister = persister;
 			_host = host;
@@ -45,6 +47,8 @@ namespace Zeus.Web
 			DefaultDocument = "default";
 
 			_useBrowserLanguagePreferences = (globalizationConfig != null) ? globalizationConfig.UseBrowserLanguagePreferences : false;
+
+            _configUrlsSection = urls;
 		}
 
 		#endregion
@@ -57,11 +61,11 @@ namespace Zeus.Web
 
 		#region Properties
 
-		protected IHost Host
+        protected IHost Host
 		{
 			get { return _host; }
-		}
-
+        }
+        
 		protected IPersister Persister
 		{
 			get { return _persister; }
@@ -78,7 +82,24 @@ namespace Zeus.Web
 
 		public ContentItem CurrentPage
 		{
-			get { return _webContext.CurrentPage ?? (_webContext.CurrentPage = (ResolvePath(_webContext.Url).CurrentItem)); }
+			get {
+                ContentItem firstTry = _webContext.CurrentPage ?? (_webContext.CurrentPage = (ResolvePath(_webContext.Url).CurrentItem));
+                if (firstTry == null)
+                {
+                    //check for Custom Urls...
+                    foreach (CustomUrlsIDElement id in _configUrlsSection.IDs)
+                    {
+                        //need to check all children of these nodes to see if there's a match
+                        ContentItem tryMatch = Find.EnumerateAccessibleChildren(Persister.Get(id.ID)).Where(ci => ci.Url == _webContext.Url).SingleOrDefault();
+                        if (tryMatch != null)
+                            return tryMatch;
+                    }
+                    
+                    return null;
+                }
+                else
+                    return firstTry;
+                }
 		}
 
 		#endregion
@@ -243,7 +264,8 @@ namespace Zeus.Web
 			if (string.IsNullOrEmpty(url)) throw new ArgumentNullException("url");
 
 			ContentItem startingPoint = GetStartPage(url);
-			return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey) ?? Parse(startingPoint, url);
+			
+            return TryLoadingFromQueryString(url, PathData.ItemQueryKey, PathData.PageQueryKey) ?? Parse(startingPoint, url);            
 		}
 
 		private string CleanUrl(string url)

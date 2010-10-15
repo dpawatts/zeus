@@ -111,15 +111,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTypes\CacheTest.cs" />
+    <Compile Include="ContentTypes\CustomUrlContainer.cs" />
+    <Compile Include="ContentTypes\CustomUrlPage.cs" />
     <Compile Include="ContentTypes\MyLittleType.cs" />
     <Compile Include="ContentTypes\MyPage.cs" />
     <Compile Include="Controllers\CacheTestController.cs" />
+    <Compile Include="Controllers\CustomUrlContainerController.cs" />
+    <Compile Include="Controllers\CustomUrlPageController.cs" />
     <Compile Include="Controllers\MyPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CacheTestViewModel.cs" />
+    <Compile Include="ViewModels\CustomUrlContainerViewModel.cs" />
+    <Compile Include="ViewModels\CustomUrlPageViewModel.cs" />
     <Compile Include="ViewModels\MyPageViewModel.cs" />
     <Compile Include="WebsiteAreaRegistration.cs" />
     <Compile Include="WebsiteModule.cs" />
@@ -172,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Website\CacheTest\Index.spark" />
+    <None Include="Views\Website\CustomUrlContainer\Index.spark" />
+    <None Include="Views\Website\CustomUrlPage\Index.spark" />
     <None Include="Views\Website\MyPage\Index.spark" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

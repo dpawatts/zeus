@@ -14,14 +14,14 @@ namespace Zeus.Web
 	{
 		#region Constructors
 
-		public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager)
-			: base(persister, host, webContext, notifier, config, languageManager)
+		public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls)
+			: base(persister, host, webContext, notifier, config, languageManager, urls)
 		{
 			
 		}
 
-		public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager, GlobalizationSection globalizationConfig)
-			: base(persister, host, webContext, notifier, config, languageManager, globalizationConfig)
+        public MultipleSitesUrlParser(IPersister persister, IWebContext webContext, IItemNotifier notifier, IHost host, HostSection config, ILanguageManager languageManager, CustomUrlsSection urls, GlobalizationSection globalizationConfig)
+			: base(persister, host, webContext, notifier, config, languageManager, urls, globalizationConfig)
 		{
 
 		}
