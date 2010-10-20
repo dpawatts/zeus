@@ -89,15 +89,34 @@ namespace Zeus.Persistence
 		/// <returns>An enumeration of all children of an item.</returns>
 		public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item)
 		{
+            int depth = 200;
 			if (item.VersionOf != null) item = item.VersionOf;
 
 			foreach (ContentItem child in item.GetGlobalizedChildren())
 			{
 				yield return child;
-				foreach (ContentItem childItem in EnumerateAccessibleChildren(child))
+				foreach (ContentItem childItem in EnumerateAccessibleChildren(child, depth))
 					yield return childItem;
 			}
 		}
+
+        /// <summary>Enumerates child items and their children, and so on.</summary>
+        /// <param name="item">The parent item whose child items to enumerate. The item itself is not returned.</param>
+        /// <returns>An enumeration of all children of an item.</returns>
+        public static IEnumerable<ContentItem> EnumerateAccessibleChildren(ContentItem item, int depth)
+        {
+            if (item.VersionOf != null) item = item.VersionOf;
+
+            foreach (ContentItem child in item.GetGlobalizedChildren())
+            {
+                yield return child;
+                if (depth > 1)
+                {                    
+                    foreach (ContentItem childItem in EnumerateAccessibleChildren(child, depth - 1))
+                        yield return childItem;
+                }
+            }
+        }
 
 		public static bool IsAccessibleChildOrSelf(ContentItem item, ContentItem wantedItem)
 		{

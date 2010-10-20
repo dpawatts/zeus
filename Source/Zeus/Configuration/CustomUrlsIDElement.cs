@@ -18,5 +18,19 @@ namespace Zeus.Configuration
             }
 
         }
+
+        [ConfigurationProperty("depth", IsRequired = true)]
+        public int Depth
+        {
+            get
+            {
+                return (int)this["depth"];
+            }
+            set
+            {
+                this["depth"] = value;
+            }
+
+        }
 	}
 }
