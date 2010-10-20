@@ -82,24 +82,7 @@ namespace Zeus.Web
 
 		public ContentItem CurrentPage
 		{
-			get {
-                ContentItem firstTry = _webContext.CurrentPage ?? (_webContext.CurrentPage = (ResolvePath(_webContext.Url).CurrentItem));
-                if (firstTry == null)
-                {
-                    //check for Custom Urls...
-                    foreach (CustomUrlsIDElement id in _configUrlsSection.IDs)
-                    {
-                        //need to check all children of these nodes to see if there's a match
-                        ContentItem tryMatch = Find.EnumerateAccessibleChildren(Persister.Get(id.ID)).Where(ci => ci.Url == _webContext.Url).SingleOrDefault();
-                        if (tryMatch != null)
-                            return tryMatch;
-                    }
-                    
-                    return null;
-                }
-                else
-                    return firstTry;
-                }
+			get { return _webContext.CurrentPage ?? (_webContext.CurrentPage = (ResolvePath(_webContext.Url).CurrentItem)); }
 		}
 
 		#endregion
@@ -311,6 +294,23 @@ namespace Zeus.Web
 					data = StartPage
 						.FindPath(path.Substring(0, path.Length - DefaultDocument.Length))
 						.UpdateParameters(requestedUrl.GetQueries());
+				}
+
+				if (data.IsEmpty())
+				{
+					// Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
+					foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
+					{
+						//need to check all children of these nodes to see if there's a match
+						ContentItem tryMatch =
+							Find.EnumerateAccessibleChildren(Persister.Get(id.ID)).SingleOrDefault(
+								ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
+						if (tryMatch != null)
+						{
+							data = tryMatch.FindPath(PathData.DefaultAction);
+							break;
+						}
+					}
 				}
 
 				if (data.IsEmpty())

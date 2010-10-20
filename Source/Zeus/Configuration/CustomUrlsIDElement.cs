@@ -5,15 +5,16 @@ namespace Zeus.Configuration
 {
 	public class CustomUrlsIDElement : ConfigurationElement
 	{
+		[ConfigurationProperty("id", IsRequired = true)]
         public int ID
         {
             get
             {
-                return (int)this["value"];
+							return (int) this["id"];
             }
             set
             {
-                this["value"] = value;
+							this["id"] = value;
             }
 
         }

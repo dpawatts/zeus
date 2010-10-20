@@ -4,11 +4,11 @@ namespace Zeus.Configuration
 {
     public class CustomUrlsSection : ConfigurationSection
 	{
-		[ConfigurationProperty("IDs")]
-        public CustomUrlsIDsCollection IDs
+		[ConfigurationProperty("parentIDs")]
+        public CustomUrlsIDsCollection ParentIDs
 		{
-            get { return (CustomUrlsIDsCollection)base["IDs"]; }
-            set { base["IDs"] = value; }
+			get { return (CustomUrlsIDsCollection) base["parentIDs"]; }
+			set { base["parentIDs"] = value; }
 		}
 	}
 }
