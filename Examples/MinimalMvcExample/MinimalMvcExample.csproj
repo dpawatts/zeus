@@ -179,6 +179,7 @@
   <ItemGroup>
     <None Include="Views\Website\CacheTest\Index.spark" />
     <None Include="Views\Website\CustomUrlContainer\Index.spark" />
+    <None Include="Views\Website\CustomUrlPage\Testicle.spark" />
     <None Include="Views\Website\CustomUrlPage\Index.spark" />
     <None Include="Views\Website\MyPage\Index.spark" />
   </ItemGroup>

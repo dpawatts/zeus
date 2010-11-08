@@ -301,8 +301,6 @@ namespace Zeus.Web
                     // Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
                     foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                     {
-                        
-
                         //need to check all children of these nodes to see if there's a match
                         ContentItem tryMatch =
                             Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
@@ -311,6 +309,26 @@ namespace Zeus.Web
                         {
                             data = tryMatch.FindPath(PathData.DefaultAction);
                             break;
+                        }
+                        else
+                        { 
+                            //now need to check for an action...
+                            string fullPath = _webContext.Url.Path;
+                            if (fullPath.LastIndexOf("/") > -1)
+                            {
+                                string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
+                                string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
+
+                                ContentItem tryMatchAgain =
+                                    Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+                                        ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+
+                                if (tryMatchAgain != null)
+                                {
+                                    data = tryMatchAgain.FindPath(action);
+                                    break;
+                                }
+                            }
                         }
                     }
                 }

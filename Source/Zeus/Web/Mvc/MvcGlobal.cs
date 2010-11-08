@@ -17,7 +17,8 @@ namespace Zeus.Web.Mvc
 			routes.IgnoreRoute("{*extaxd}", new { extaxd = @"(.*/)?ext.axd(/.*)?" });
 
 			string adminPath = Zeus.Context.Current.Resolve<AdminSection>().Path;
-			routes.IgnoreRoute(adminPath + "/{*pathInfo}");
+            routes.IgnoreRoute(adminPath + "/{*pathInfo}");
+            routes.IgnoreRoute("assets" + "/{*pathInfo}");
 
 			// This route detects content item paths and executes their controller
 			routes.Add(new ContentRoute(engine));

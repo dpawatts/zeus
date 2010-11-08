@@ -13,5 +13,10 @@ namespace Zeus.Examples.MinimalMvcExample.Controllers
         {
             return View(new CustomUrlPageViewModel(CurrentItem));
         }
+
+        public ActionResult Testicle()
+        {
+            return View(new CustomUrlPageViewModel(CurrentItem));
+        }
     }
 }
