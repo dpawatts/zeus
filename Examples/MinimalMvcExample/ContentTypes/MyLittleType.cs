@@ -24,5 +24,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			get { return GetDetail("TestRichString", string.Empty); }
 			set { SetDetail("TestRichString", value); }
 		}
+
+        [ContentProperty("Multi Line Textbox", 35)]
+        [TextBoxEditor(TextMode=System.Web.UI.WebControls.TextBoxMode.MultiLine, Rows=8)]
+        public virtual string MultiTextBox
+        {
+            get { return GetDetail("MultiTextBox", string.Empty); }
+            set { SetDetail("MultiTextBox", value); }
+        }
 	}
 }
