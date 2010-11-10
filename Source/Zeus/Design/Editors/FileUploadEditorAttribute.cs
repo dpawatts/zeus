@@ -28,7 +28,6 @@ namespace Zeus.Design.Editors
 		public string TypeFilterDescription { get; set; }
 		public string[] TypeFilter { get; set; }
 		public int MaximumFileSize { get; set; }
-		public bool StopFileRename { get; set; }
 
 		#endregion
 
@@ -60,10 +59,9 @@ namespace Zeus.Design.Editors
 					file.ContentType = MimeUtility.GetMimeType(file.Data);
 					file.Size = fs.Length;                    
 				}
-                
-				//horrible hack here...TIM - this is the bit to sort
-				if (!StopFileRename && (editor.Parent == null || editor.Parent.Parent == null || !(editor.Parent.Parent is ItemEditView)))
-					file.Title = fileUpload.FileName;
+
+				// Later, we will change the name, if this is a child property.
+				file.Name = file.Title = fileUpload.FileName;
 
 				// Delete temp folder.
 				System.IO.File.Delete(uploadedFile);

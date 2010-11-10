@@ -61,6 +61,11 @@ namespace Zeus.Design.Editors
 		{
 			ItemEditView itemEditor = (ItemEditView) editor;
 			//itemEditor.Update();
+			itemEditor.Saving += ((sender, args) =>
+			{
+				// Reset the name here - it might have been changed, for example by FileUploadEditorAttribute.
+				((ContentItem) args.AffectedItem).Name = Name;
+			});
 			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
 			{
 				ContentItem child;

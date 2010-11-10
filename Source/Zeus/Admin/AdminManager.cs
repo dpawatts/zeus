@@ -229,7 +229,8 @@ namespace Zeus.Admin
 		/// <param name="addedEditors">The editors to update the item with.</param>
 		/// <param name="versioningMode">How to treat the item beeing saved in respect to versioning.</param>
 		/// <param name="user">The user that is performing the saving.</param>
-		public virtual ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, ItemEditorVersioningMode versioningMode, IPrincipal user)
+		public virtual ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, ItemEditorVersioningMode versioningMode, IPrincipal user,
+			Action<ContentItem> onSavingCallback)
 		{
 			// when an unpublished version is saved and published
 			if (versioningMode == ItemEditorVersioningMode.SaveAsMaster)
@@ -247,6 +248,7 @@ namespace Zeus.Admin
 
 					if (wasUpdated || IsNew(itemToUpdate))
 					{
+						onSavingCallback(itemToUpdate);
 						itemToUpdate.Published = published ?? Utility.CurrentTime();
 						_persister.Save(itemToUpdate);
 					}
@@ -261,7 +263,10 @@ namespace Zeus.Admin
 			{
 				bool wasUpdated = UpdateItem(item, addedEditors, user);
 				if (wasUpdated || IsNew(item))
+				{
+					onSavingCallback(item);
 					_persister.Save(item);
+				}
 
 				return item;
 			}
@@ -288,7 +293,10 @@ namespace Zeus.Admin
 					IncrementVersion(item);
 
 					if (wasUpdated || IsNew(item))
+					{
+						onSavingCallback(item);
 						_persister.Save(item);
+					}
 
 					tx.Commit();
 
@@ -307,6 +315,7 @@ namespace Zeus.Admin
 					bool wasUpdated = UpdateItem(item, addedEditors, user);
 					if (wasUpdated || IsNew(item))
 					{
+						onSavingCallback(item);
 						item.Published = null;
 						_persister.Save(item);
 					}

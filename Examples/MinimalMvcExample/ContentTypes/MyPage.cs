@@ -44,7 +44,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			}
 		}
 
-        [ContentProperty("Other Images", 200, EditorContainerName = "Content")]
+        /*[ContentProperty("Other Images", 200, EditorContainerName = "Content")]
         [ChildrenEditor("Other Images", 200, TypeFilter = typeof(Zeus.FileSystem.Images.Image), ContainerName = "Content")]
         public IEnumerable<Zeus.FileSystem.Images.Image> Images
         {
@@ -55,7 +55,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 		public virtual IEnumerable<MyLittleType> ListFilters
 		{
 			get { return GetChildren<MyLittleType>(); }
-		}
+		}*/
 
 	}
 }

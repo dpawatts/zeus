@@ -45,7 +45,7 @@
 							<asp:CustomValidator ID="csvException" runat="server" Display="None" />
 							
 							<zeus:ItemEditView runat="server" ID="zeusItemEditView" OnItemCreating="zeusItemEditView_ItemCreating"
-								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" OnSaving="zeusItemEditView_Saving" />
+								OnDefinitionCreating="zeusItemEditView_DefinitionCreating" />
 						</Content>
 						<BottomBar>
 							<ext:Toolbar runat="server">

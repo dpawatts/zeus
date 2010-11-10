@@ -68,7 +68,7 @@ namespace Zeus.Admin
 		/// <param name="addedEditors">The editors to update the item with.</param>
 		/// <param name="versioningMode">How to treat the item beeing saved in respect to versioning.</param>
 		/// <param name="user">The user that is performing the saving.</param>
-		ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, ItemEditorVersioningMode versioningMode, IPrincipal user);
+		ContentItem Save(ContentItem item, IDictionary<string, Control> addedEditors, ItemEditorVersioningMode versioningMode, IPrincipal user, Action<ContentItem> onSavingCallback);
 
 		/// <summary>Updates the item with the values from the editors.</summary>
 		/// <param name="item">The item to update.</param>

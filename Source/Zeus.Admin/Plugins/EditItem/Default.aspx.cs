@@ -247,11 +247,6 @@ namespace Zeus.Admin.Plugins.EditItem
 			e.TypeDefinition = TypeDefinition;
 		}
 
-		protected void zeusItemEditView_Saving(object sender, ItemViewEditableObjectEventArgs e)
-		{
-			//Zeus.Context.Persister.Save((ContentItem) e.AffectedItem);
-		}
-
 		protected override void OnPreRender(EventArgs e)
 		{
 			// The following resources are registered here because we can't register them during an Ext.NET AJAX request,

@@ -6,11 +6,5 @@
 		{
 			get { return string.Empty; }
 		}
-
-		public override string Title
-		{
-			get { return Name; }
-			set { Name = value; }
-		}
 	}
 }
