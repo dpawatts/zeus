@@ -19,12 +19,14 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			set { SetDetail("TestString", value); }
 		}
 
+        /*
 		[XhtmlStringContentProperty("Test Rich String", 35)]
 		public virtual string TestRichString
 		{
 			get { return GetDetail("TestRichString", string.Empty); }
 			set { SetDetail("TestRichString", value); }
 		}
+         */
 
 		[ContentProperty("Multi Line Textbox", 35)]
 		[TextAreaEditor(Height = 200, Width = 500)]
@@ -33,5 +35,6 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			get { return GetDetail("MultiTextBox", string.Empty); }
 			set { SetDetail("MultiTextBox", value); }
 		}
+        
 	}
 }

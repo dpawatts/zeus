@@ -44,11 +44,18 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			}
 		}
 
+        [ContentProperty("Other Images", 200, EditorContainerName = "Content")]
+        [ChildrenEditor("Other Images", 200, TypeFilter = typeof(Zeus.FileSystem.Images.Image), ContainerName = "Content")]
+        public IEnumerable<Zeus.FileSystem.Images.Image> Images
+        {
+            get { return GetChildren<Zeus.FileSystem.Images.Image>(); }
+        }
+
 		[ChildrenEditor("Test Child Editors", 15, TypeFilter = typeof(MyLittleType), ContainerName = "NewContainer")]
 		public virtual IEnumerable<MyLittleType> ListFilters
 		{
 			get { return GetChildren<MyLittleType>(); }
-		} 
+		}
 
 	}
 }
