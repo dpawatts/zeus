@@ -13,7 +13,6 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	[Panel("NewContainer", "All My Types Go in Here!", 100)]
 	[FieldSet("ImageContainer", "Main Image", 200, ContainerName = "Content")]
 	[FieldSet("AnotherImageContainer", "Secondary Image", 300, ContainerName = "Content")]
-	[AdminSiteTreeVisibility(AdminSiteTreeVisibility.Visible | AdminSiteTreeVisibility.ChildrenHidden)]
 	public class MyPage : PageContentItem
 	{
 		[Zeus.Design.Editors.ChildEditor("Image", 100, ContainerName="ImageContainer")]
@@ -44,18 +43,21 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			}
 		}
 
-        /*[ContentProperty("Other Images", 200, EditorContainerName = "Content")]
+        /*
+        [ContentProperty("Other Images", 200, EditorContainerName = "Content")]
         [ChildrenEditor("Other Images", 200, TypeFilter = typeof(Zeus.FileSystem.Images.Image), ContainerName = "Content")]
         public IEnumerable<Zeus.FileSystem.Images.Image> Images
         {
             get { return GetChildren<Zeus.FileSystem.Images.Image>(); }
         }
+         */
+
 
 		[ChildrenEditor("Test Child Editors", 15, TypeFilter = typeof(MyLittleType), ContainerName = "NewContainer")]
 		public virtual IEnumerable<MyLittleType> ListFilters
 		{
 			get { return GetChildren<MyLittleType>(); }
-		}*/
+		}
 
 	}
 }
