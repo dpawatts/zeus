@@ -102,5 +102,19 @@ namespace Zeus.Security
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.User); }
 		}
+
+        public override string FolderPlacementGroup
+        {
+            get
+            {
+                if (Roles.Count() > 1)
+                    return "Multiple Roles";
+                else if (Roles.Count() ==1)
+                    return Roles.First();
+                else
+                    return "No Roles Defined";
+
+            }
+        }
 	}
 }

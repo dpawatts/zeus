@@ -319,6 +319,8 @@ namespace Zeus.Web
                                 string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
                                 string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
 
+                                //by taking off the potential action, there is a danger of 
+
                                 ContentItem tryMatchAgain =
                                     Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
                                         ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
