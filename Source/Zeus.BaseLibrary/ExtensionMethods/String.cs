@@ -117,7 +117,8 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 			if (string.IsNullOrEmpty(value))
 				return string.Empty;
 
-			string temp = value.ToLower().Trim();
+            string temp = value.ToLower().Trim();
+            //temp = temp.Replace("  ", " ").Replace("  ", " ").Trim();
 			temp = Regex.Replace(temp, "[ ]+", "-");
 
 			string result = string.Empty;

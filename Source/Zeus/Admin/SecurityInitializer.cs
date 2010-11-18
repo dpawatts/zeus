@@ -40,7 +40,8 @@ namespace Zeus.Admin
 				DefaultUrl = "~/" + _adminConfig.Path + "/default.aspx",
 				Timeout = TimeSpan.FromMinutes(60),
 				CookiePath = "/",
-				CookieDomain = string.Empty
+				CookieDomain = string.Empty,
+                SlidingExpiration = true
 			});
 		}
 	}
