@@ -72,11 +72,12 @@ namespace Zeus.AddIns.ECommerce.Services
 			order.AddTo(configuration.Orders);
 			_persister.Save(order);
 
-			// Process payment.
-            PaymentRequest paymentRequest = new PaymentRequest(order.BillingAddress, order.ShippingAddress, order.ID.ToString(), order.TotalPrice,
-				"Order #" + order.ID, order.PaymentCard.NameOnCard, cardNumber, order.PaymentCard.ValidFrom, order.PaymentCard.ValidTo,
-				order.PaymentCard.IssueNumber, cardVerificationCode, order.PaymentCard.CardType, order.TelephoneNumber,
-				order.EmailAddress, _webContext.Request.UserHostAddress);
+            // Process payment.
+            PaymentRequest paymentRequest = new PaymentRequest(
+                PaymentTransactionType.Payment, order.ID.ToString(), order.TotalPrice, "Order #" + order.ID,
+                order.BillingAddress, order.ShippingAddress,
+                order.PaymentCard, cardNumber, cardVerificationCode, 
+                order.TelephoneNumber, order.EmailAddress, _webContext.Request.UserHostAddress);
 			
             PaymentResponse paymentResponse = _paymentGateway.TakePayment(paymentRequest);
             

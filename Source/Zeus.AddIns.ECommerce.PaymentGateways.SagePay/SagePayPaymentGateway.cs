@@ -39,6 +39,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 				case PaymentCardType.JcbCard:
 				case PaymentCardType.Laser:
 				case PaymentCardType.Solo:
+                case PaymentCardType.AmericanExpress:
 					return true;
 				default :
 					return false;
@@ -172,7 +173,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			// Now to build the Direct POST.  For more details see the Direct Protocol 2.22.
 			// NB: Fields potentially containing non ASCII characters are URLEncoded when included in the POST
 			postData["VPSProtocol"] = _vpsProtocol;
-			postData["TxType"] = "PAYMENT";
+			postData["TxType"] = GetTransactionType(paymentRequest.TransactionType);
 			postData["Vendor"] = _vendorName;
 			postData["VendorTxCode"] = paymentRequest.TransactionCode;
 
@@ -181,15 +182,15 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			if (!string.IsNullOrEmpty(paymentRequest.Description))
 				postData["Description"] = paymentRequest.Description.Left(100); // Up to 100 chars of free format description
 
-			postData["CardHolder"] = paymentRequest.CardHolder;
+			postData["CardHolder"] = paymentRequest.Card.NameOnCard;
 			postData["CardNumber"] = paymentRequest.CardNumber;
-			if (paymentRequest.ValidFrom != null)
-				postData["StartDate"] = paymentRequest.ValidFrom.Value.ToString("MMyy");
-			postData["ExpiryDate"] = paymentRequest.ValidTo.ToString("MMyy");
-			if (!string.IsNullOrEmpty(paymentRequest.IssueNumber))
-				postData["IssueNumber"] = paymentRequest.IssueNumber;
-			postData["CV2"] = paymentRequest.VerificationCode;
-			postData["CardType"] = GetCardType(paymentRequest.CardType);
+			if (paymentRequest.Card.ValidFrom != null)
+                postData["StartDate"] = paymentRequest.Card.ValidFrom.Value.ToString("MMyy");
+            postData["ExpiryDate"] = paymentRequest.Card.ValidTo.ToString("MMyy");
+            if (!string.IsNullOrEmpty(paymentRequest.Card.IssueNumber))
+                postData["IssueNumber"] = paymentRequest.Card.IssueNumber;
+            postData["CV2"] = paymentRequest.CardSecurityCode;
+			postData["CardType"] = GetCardType(paymentRequest.Card.CardType);
 
 			postData["BillingSurname"] = paymentRequest.BillingAddress.Surname;
 			postData["BillingFirstnames"] = paymentRequest.BillingAddress.FirstName;
@@ -234,6 +235,11 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			return postData;
 		}
 
+        /// <summary>
+        /// Get card type
+        /// </summary>
+        /// <param name="cardType"></param>
+        /// <returns></returns>
 		private static string GetCardType(PaymentCardType cardType)
 		{
 			switch (cardType)
@@ -262,5 +268,25 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 					throw new NotSupportedException(string.Format("The card type '{0}' is not currently supported by the SagePay payment gateway.", cardType));
 			}
 		}
+
+        /// <summary>
+        /// Get transaction type
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <returns></returns>
+        private static string GetTransactionType(PaymentTransactionType transactionType)
+        {
+            switch (transactionType)
+            {
+                case PaymentTransactionType.Payment:
+                    return "PAYMENT";
+                case PaymentTransactionType.Deferred:
+                    return "DEFERRED";
+                case PaymentTransactionType.Authenticate:
+                    return "AUTHENTICATE";
+                default:
+                    throw new NotSupportedException(string.Format("The transaction type '{0}' is not currently supported by the Direct SagePay payment gateway.", transactionType));
+            }
+        }
 	}
 }

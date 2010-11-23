@@ -3,55 +3,50 @@ using Zeus.AddIns.ECommerce.ContentTypes.Data;
 
 namespace Zeus.AddIns.ECommerce.PaymentGateways
 {
+    /// <summary>
+    /// Payemnt request class
+    /// </summary>
 	public class PaymentRequest
 	{
-		public PaymentRequest(Address billingAddress, Address shippingAddress,
-			string transactionCode, decimal amount, string description,
-			string cardHolder, string cardNumber,
-			DateTime? validFrom, DateTime validTo,
-			string issueNumber, string verificationCode,
-			PaymentCardType cardType,
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public PaymentRequest(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
+			Address billingAddress, Address shippingAddress, 
+            PaymentCard card, string cardNumber, string cardSecurityCode,
 			string telephoneNumber, string emailAddress,
 			string clientIpAddress)
 		{
-			BillingAddress = billingAddress;
+            TransactionType = transactionType;
+            TransactionCode = transactionCode;
+            Amount = amount;
+            Description = description;
+            
+            BillingAddress = billingAddress;
 			ShippingAddress = shippingAddress;
-			TransactionCode = transactionCode;
-			Amount = amount;
-			Description = description;
 
-			CardHolder = cardHolder;
-			CardNumber = cardNumber;
-
-			ValidFrom = validFrom;
-			ValidTo = validTo;
-
-			IssueNumber = issueNumber;
-			VerificationCode = verificationCode;
-			CardType = cardType;
-
+            Card = card;
+            CardNumber = cardNumber;
+            CardSecurityCode = cardSecurityCode;
+			
 			TelephoneNumber = telephoneNumber;
 			EmailAddress = emailAddress;
 
 			ClientIpAddress = clientIpAddress;
 		}
 
-		public Address BillingAddress { get; private set; }
-		public Address ShippingAddress { get; private set; }
-		public string TransactionCode { get; private set; }
-		public decimal Amount { get; private set; }
-		public string Description { get; private set; }
+        public PaymentTransactionType TransactionType { get; private set; }
+        public string TransactionCode { get; private set; }
+        public decimal Amount { get; private set; }
+        public string Description { get; private set; }
 
-		public string CardHolder { get; private set; }
-		public string CardNumber { get; private set; }
+        public Address BillingAddress { get; private set; }
+        public Address ShippingAddress { get; private set; }
 
-		public DateTime? ValidFrom { get; private set; }
-		public DateTime ValidTo { get; private set; }
-
-		public string IssueNumber { get; private set; }
-		public string VerificationCode { get; private set; }
-		public PaymentCardType CardType { get; private set; }
-
+        public PaymentCard Card { get; private set; }
+        public string CardNumber { get; private set; }
+        public string CardSecurityCode { get; private set; }
+        
 		public string TelephoneNumber { get; private set; }
 		public string EmailAddress { get; private set; }
 
