@@ -7,18 +7,18 @@ namespace Coolite.Ext.UX
 {
 	public class IconComboListItemCollectionJsonConverter : ListItemCollectionJsonConverter
 	{
-		private readonly string _iconClsField;
+		private readonly string _iconUrlField;
 
-		public IconComboListItemCollectionJsonConverter(string iconClsField)
+		public IconComboListItemCollectionJsonConverter(string iconUrlField)
 		{
-			_iconClsField = iconClsField;
+			_iconUrlField = iconUrlField;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			ListItemCollection<ListItem> items = value as ListItemCollection<ListItem>;
 
-			StringBuilder sb = new StringBuilder("new Ext.data.SimpleStore({fields:[\"text\",\"value\",\"" + _iconClsField + "\"],data :[");
+			StringBuilder sb = new StringBuilder("new Ext.data.SimpleStore({fields:[\"text\",\"value\",\"" + _iconUrlField + "\"],data :[");
 			if (items != null && items.Count > 0)
 			{
 				foreach (IconComboListItem item in items)
@@ -28,7 +28,7 @@ namespace Coolite.Ext.UX
 					sb.Append(",");
 					sb.Append(JSON.Serialize(item.Value));
 					sb.Append(",");
-					sb.Append(JSON.Serialize(item.IconCls));
+					sb.Append(JSON.Serialize(item.IconUrl));
 					sb.Append("],");
 				}
 				sb.Remove(sb.Length - 1, 1);

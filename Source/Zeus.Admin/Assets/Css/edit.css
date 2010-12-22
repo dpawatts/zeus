@@ -19,7 +19,7 @@ div.editDetail label
 	color: #808285;
 }
 
-input[type="text"], textarea, div.editDetail > select
+.x-panel-body input[type="text"], textarea, div.editDetail > select
 {
 	vertical-align: baseline;
 	border: solid 1px #999;
@@ -28,18 +28,18 @@ input[type="text"], textarea, div.editDetail > select
 	padding: 3px;
 }
 
-input[type="text"].x-form-text
+.x-panel-body input[type="text"].x-form-text
 {
 	width: auto;
 }
 
-input[type="text"], textarea
+.x-panel-body input[type="text"], textarea
 {
 	font-size: 13px;
 	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png") %>) repeat-x top left;
 }
 
-input[disabled], input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly]
+.x-panel-body input[disabled], .x-panel-body input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly]
 {
  background: #dcdcdc;
  cursor: default;

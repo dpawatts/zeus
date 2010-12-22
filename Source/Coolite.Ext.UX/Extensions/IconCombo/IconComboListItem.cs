@@ -7,16 +7,16 @@ namespace Coolite.Ext.UX
 	{
 		[DefaultValue("")]
 		[NotifyParentProperty(true)]
-		public string IconCls
+		public string IconUrl
 		{
-			get { return (string) this.ViewState["IconCls"] ?? ""; }
-			set { this.ViewState["IconCls"] = value; }
+			get { return (string) this.ViewState["IconUrl"] ?? ""; }
+			set { this.ViewState["IconUrl"] = value; }
 		}
 
-		public IconComboListItem(string text, string value, string iconCls)
+		public IconComboListItem(string text, string value, string iconUrl)
 			: base(text, value)
 		{
-			IconCls = iconCls;
+			IconUrl = iconUrl;
 		}
 	}
 }

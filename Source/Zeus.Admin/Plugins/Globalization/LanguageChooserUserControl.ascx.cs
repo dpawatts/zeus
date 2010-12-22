@@ -9,7 +9,7 @@ namespace Zeus.Admin.Plugins.Globalization
 		public void ChangeLanguage(string languageCode)
 		{
 			Zeus.Context.AdminManager.CurrentAdminLanguageBranch = languageCode;
-			Refresh(Find.StartPage);
+			Refresh(Zeus.Context.Current.LanguageManager.GetTranslation(Find.StartPage, languageCode));
 		}
 	}
 }

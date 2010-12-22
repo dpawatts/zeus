@@ -92,8 +92,18 @@ namespace Zeus.Admin
 
 		public string CurrentAdminLanguageBranch
 		{
-			get { return _webContext.Request.QueryString["language"] ?? ((_webContext.Request.Cookies["editlanguagebranch"] != null) ? _webContext.Request.Cookies["editlanguagebranch"].Value : _languageManager.GetDefaultLanguage()); }
-			set { _webContext.Response.Cookies["editlanguagebranch"].Value = value; }
+			get
+			{
+				return _webContext.Request.QueryString["language"] ??
+					((_webContext.Request.Cookies["editlanguagebranch"] != null)
+						? _webContext.Request.Cookies["editlanguagebranch"].Value
+						: _languageManager.GetDefaultLanguage());
+			}
+			set
+			{
+				_webContext.Response.Cookies["editlanguagebranch"].Value = value;
+				_webContext.Request.Cookies["editlanguagebranch"].Value = value;
+			}
 		}
 
 		public bool TreeTooltipsEnabled

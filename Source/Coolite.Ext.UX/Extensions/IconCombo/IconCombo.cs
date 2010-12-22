@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Web.UI;
+using System.Xml.Serialization;
 using Ext.Net;
 using Newtonsoft.Json;
 
@@ -33,27 +34,42 @@ namespace Coolite.Ext.UX
 
 		public override string InstanceOf
 		{
-			get { return "iconcombo"; }
+			get { return "Ext.ux.IconCombo"; }
 		}
 
 		public override string XType
 		{
-			get { return "Ext.ux.IconCombo"; }
+			get { return "iconcombo"; }
 		}
 
 		[DefaultValue("")]
 		[Description("The underlying data field name to bind to this ComboBox (defaults to undefined if mode = \'remote\' or \'text\' if transforming a select).")]
 		[Category("Config Options")]
 		[ConfigOption]
-		public virtual string IconClsField
+		public virtual string IconUrlField
 		{
 			get
 			{
-				return (string) this.ViewState["IconClsField"] ?? "iconCls";
+				return (string) this.ViewState["IconUrlField"] ?? "iconUrl";
 			}
 			set
 			{
-				this.ViewState["IconClsField"] = value;
+				this.ViewState["IconUrlField"] = value;
+			}
+		}
+
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+		[XmlIgnore]
+		[JsonIgnore]
+		public override ConfigOptionsCollection ConfigOptions
+		{
+			get
+			{
+				ConfigOptionsCollection list = base.ConfigOptions;
+				list.Add("iconUrlField", string.Empty, IconUrlField);
+				return list;
 			}
 		}
 
@@ -63,7 +79,7 @@ namespace Coolite.Ext.UX
 			{
 				StringWriter sw = new StringWriter();
 				JsonTextWriter jw = new JsonTextWriter(sw);
-				IconComboListItemCollectionJsonConverter converter = new IconComboListItemCollectionJsonConverter(IconClsField);
+				IconComboListItemCollectionJsonConverter converter = new IconComboListItemCollectionJsonConverter(IconUrlField);
 				converter.WriteJson(jw, this.Items, null);
 
 				return sw.GetStringBuilder().ToString();

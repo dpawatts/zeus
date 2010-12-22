@@ -6,7 +6,7 @@
 }
 
 /* X-BROWSER-WARNING: this is not being honored by Safari */
-.ux-icon-combo-input {
+.ux-icon-combo-input, input[type="text"].ux-icon-combo-input {
   padding-left: 25px;
 }
 

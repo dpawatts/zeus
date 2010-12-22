@@ -29,12 +29,12 @@ namespace Coolite.Ext.UX
 
 		public override string InstanceOf
 		{
-			get { return "storemenu"; }
+			get { return "Ext.ux.menu.StoreMenu"; }
 		}
 
 		public override string XType
 		{
-			get { return "Ext.ux.menu.StoreMenu"; }
+			get { return "storemenu"; }
 		}
 	}
 }

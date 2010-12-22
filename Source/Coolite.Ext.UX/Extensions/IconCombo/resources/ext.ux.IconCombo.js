@@ -9,12 +9,11 @@
 * @extends Ext.form.ComboBox
 */
 Ext.ux.IconCombo = Ext.extend(Ext.form.ComboBox, {
-	initComponent: function()
-	{
+	initComponent: function() {
 		Ext.apply(this, {
 			tpl: '<tpl for=".">'
                 + '<div class="x-combo-list-item ux-icon-combo-item" '
-                + 'style="background-image:url({' + this.iconClsField + '})">'
+                + 'style="background-image:url({' + this.iconUrlField + '})">'
                 + '{' + this.displayField + '}'
                 + '</div></tpl>'
 		});
@@ -24,8 +23,7 @@ Ext.ux.IconCombo = Ext.extend(Ext.form.ComboBox, {
 
 	}, // end of function initComponent
 
-	onRender: function(ct, position)
-	{
+	onRender: function(ct, position) {
 		// call parent onRender
 		Ext.ux.IconCombo.superclass.onRender.call(this, ct, position);
 
@@ -37,20 +35,19 @@ Ext.ux.IconCombo = Ext.extend(Ext.form.ComboBox, {
 		this.icon = Ext.DomHelper.append(this.el.up('div.x-form-field-wrap'), {
 			tag: 'div', style: 'position:absolute'
 		});
+		
+		this.setIconCls();
 	}, // end of function onRender
 
-	setIconCls: function()
-	{
+	setIconCls: function() {
 		var rec = this.store.query(this.valueField, this.getValue()).itemAt(0);
-		if (rec)
-		{
+		if (rec && this.icon) {
 			this.icon.className = 'ux-icon-combo-icon';
-			this.icon.style.backgroundImage = 'url(' + rec.get(this.iconClsField) + ')';
+			this.icon.style.backgroundImage = 'url(' + rec.get(this.iconUrlField) + ')';
 		}
 	}, // end of function setIconCls
 
-	setValue: function(value)
-	{
+	setValue: function(value) {
 		Ext.ux.IconCombo.superclass.setValue.call(this, value);
 		this.setIconCls();
 	} // end of function setValue
