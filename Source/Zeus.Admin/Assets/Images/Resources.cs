@@ -4,6 +4,7 @@ using System.Web.UI;
 
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.exclamation.png", "image/png")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Icons.information.png", "image/png")]
+[assembly: WebResource("Zeus.Admin.Assets.Images.Icons.LanguageMissing.gif", "image/png")]
 
 [assembly: WebResource("Zeus.Admin.Assets.Images.Login.button.gif", "image/gif")]
 [assembly: WebResource("Zeus.Admin.Assets.Images.Login.mainBox.gif", "image/gif")]

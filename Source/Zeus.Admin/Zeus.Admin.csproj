@@ -419,6 +419,7 @@
     <EmbeddedResource Include="Assets\Images\Tree\expand-all.gif" />
     <EmbeddedResource Include="Assets\Images\Icons\exclamation.png" />
     <EmbeddedResource Include="Assets\Images\Icons\information.png" />
+    <EmbeddedResource Include="Assets\Images\Icons\LanguageMissing.gif" />
     <Content Include="DynamicContent\Default.aspx" />
     <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />
