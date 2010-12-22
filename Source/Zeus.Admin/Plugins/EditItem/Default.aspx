@@ -33,7 +33,11 @@
 									<ext:Button runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
 									<ext:ToolbarFill runat="server" />
 									<ext:ToolbarTextItem runat="server" ID="txiLanguages" Text="Page view: " />
-									<ext:IconCombo runat="server" ID="ddlLanguages" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
+									<ext:IconCombo runat="server" ID="ddlLanguages" Width="100" Editable="false">
+										<DirectEvents>
+											<Select OnEvent="ddlLanguages_ValueChanged" />
+										</DirectEvents>
+									</ext:IconCombo>
 								</Items>
 							</ext:Toolbar>
 						</TopBar>
@@ -60,9 +64,6 @@
 									<ext:Button runat="server" ID="btnSaveUnpublished2" Text="Save an unpublished version" Icon="BookNext" OnClick="btnSaveUnpublished_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnPreview2" Text="Preview" Icon="Zoom" OnClick="btnPreview_Click" AutoPostBack="true" />
 									<ext:Button runat="server" ID="btnCancel2" Text="Cancel" Icon="Cross" OnClick="btnCancel_Click" AutoPostBack="true" CausesValidation="false" />
-									<ext:ToolbarFill runat="server" />
-									<ext:ToolbarTextItem runat="server" ID="txiLanguages2" Text="Page view: " />
-									<ext:IconCombo runat="server" ID="ddlLanguages2" Width="100" Editable="false" AutoPostBack="true" OnValueChanged="ddlLanguages_ValueChanged" />
 								</Items>
 							</ext:Toolbar>
 						</BottomBar>

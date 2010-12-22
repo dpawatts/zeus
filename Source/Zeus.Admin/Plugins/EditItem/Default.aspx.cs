@@ -63,7 +63,7 @@ namespace Zeus.Admin.Plugins.EditItem
 			}
 
 			bool languagesVisible = GlobalizationEnabled && Engine.LanguageManager.CanBeTranslated((ContentItem) zeusItemEditView.CurrentItem);
-			txiLanguages.Visible = ddlLanguages.Visible = txiLanguages2.Visible = ddlLanguages2.Visible = languagesVisible;
+			txiLanguages.Visible = ddlLanguages.Visible = languagesVisible;
 
 			if (!Engine.Resolve<AdminSection>().Versioning.Enabled || !Engine.SecurityManager.IsAuthorized(SelectedItem, User, Operations.Version))
 			{
@@ -283,9 +283,9 @@ namespace Zeus.Admin.Plugins.EditItem
 			base.OnPreRender(e);
 		}
 
-		protected void ddlLanguages_ValueChanged(object sender, EventArgs e)
+		protected void ddlLanguages_ValueChanged(object sender, DirectEventArgs e)
 		{
-			Response.Redirect(new Url(Request.RawUrl).SetQueryParameter("language", ddlLanguages.SelectedItem.Value));
+			ExtNet.Redirect(new Url(Request.RawUrl).SetQueryParameter("language", ddlLanguages.SelectedItem.Value));
 		}
 
 		protected void btnCancel_Click(object sender, EventArgs e)
