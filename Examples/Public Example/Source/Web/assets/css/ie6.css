@@ -1,0 +1,32 @@
+#topNav ul li a:after {
+    content:"."; 
+    display:block; 
+    height:0; 
+    clear:both; 
+    visibility:hidden;
+}
+#topNav ul li a {
+    display:inline-block;
+}
+#topNav ul li a {
+    display:block;
+}
+#topNav ul li a {
+    height:1px;
+}
+
+#topNav ul li a {
+	float: left;
+}
+
+#topNav ul li a span  {
+	float: left;
+}
+
+/**************** news *************/
+
+#newsArch li a {
+	display: inline-block;
+}
+
+
