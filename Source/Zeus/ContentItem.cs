@@ -731,12 +731,22 @@ namespace Zeus
 			return string.IsNullOrEmpty(Title) && !Details.Any() && !DetailCollections.Any();
 		}
 
+        /// <summary>
+        /// Translations don't have their Parent object set, so this is an abstraction to allow
+        /// translations to act as normal content items.
+        /// </summary>
+        /// <returns></returns>
+        public virtual ContentItem GetParent()
+        {
+            return GetParent(ContentLanguage.PreferredCulture.Name);
+        }
+
 		/// <summary>
 		/// Translations don't have their Parent object set, so this is an abstraction to allow
 		/// translations to act as normal content items.
 		/// </summary>
 		/// <returns></returns>
-		public virtual ContentItem GetParent()
+		public virtual ContentItem GetParent(string languageName)
 		{
 			ContentItem realItem = TranslationOf ?? this;
 			ContentItem parent = realItem.Parent;
@@ -745,7 +755,7 @@ namespace Zeus
 				return null;
 
 			return (Context.Current.LanguageManager.Enabled)
-				? (Context.Current.LanguageManager.GetTranslation(parent, ContentLanguage.PreferredCulture.Name) ?? parent)
+                ? (Context.Current.LanguageManager.GetTranslation(parent, languageName) ?? parent)
 				: parent;
 		}
 

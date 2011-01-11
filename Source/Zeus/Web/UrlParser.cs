@@ -131,7 +131,7 @@ namespace Zeus.Web
 
 				url = url.PrependSegment(current.Name, current.Extension);
 
-				current = current.GetParent();
+				current = current.GetParent(languageCode);
 			} while (current != null);
 
 			// If we didn't find the start page, it means the specified
