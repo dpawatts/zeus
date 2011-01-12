@@ -85,7 +85,7 @@ namespace Zeus.Admin.Plugins.Tree
 				itemChildren = filter(itemChildren);
 			bool hasAsyncChildren = ((!navigator.Children.Any() && itemChildren.Any()) || rootOnly);
 			TreeNodeBase node = (hasAsyncChildren) ? new AsyncTreeNode() as TreeNodeBase : new TreeNode();
-			node.Text = ((INode) item).Contents;
+			node.Text = ((INode) translatedItem).Contents;
 
 			if (translationStatus == TranslationStatus.NotAvailableInSelectedLanguage || translationStatus == TranslationStatus.DisplayedInAnotherLanguage)
 			{
