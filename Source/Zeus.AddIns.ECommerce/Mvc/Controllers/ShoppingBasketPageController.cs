@@ -26,7 +26,11 @@ namespace Zeus.AddIns.ECommerce.Mvc.Controllers
 
 		protected Shop CurrentShop
 		{
-			get { return (Shop) CurrentItem.Parent; }
+			get 
+            { 
+                ContentItem result = CurrentItem.GetParent();
+                return (Shop)(result.TranslationOf ?? result);
+            }
 		}
 
 		public override ActionResult Index()
