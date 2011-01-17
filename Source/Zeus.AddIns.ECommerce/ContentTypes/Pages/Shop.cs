@@ -57,6 +57,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return GetChildren<ShoppingBasketPage>().FirstOrDefault(); }
 		}
 
+        [ContentProperty("VAT, %", 199, EditorContainerName = "ECommerce")]
+        public decimal VAT
+        {
+            get { return GetDetail("VAT", default(decimal)); }
+            set { SetDetail("VAT", value); }
+        }
+
 		[StringCollectionEditor("Titles", 200, ContainerName = "ECommerce")]
 		public PropertyCollection Titles
 		{
