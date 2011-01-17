@@ -9,6 +9,7 @@ namespace Zeus.AddIns.ECommerce.Services
 		DeliveryMethod DeliveryMethod { get; set; }
 		int TotalItemCount { get; }
 		decimal SubTotalPrice { get; }
+        decimal TotalVat { get; }
 		decimal TotalPrice { get; }
 
 		Address BillingAddress { get; set; }
