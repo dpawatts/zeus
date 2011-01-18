@@ -34,6 +34,7 @@ namespace Zeus
 		private IDictionary<string, PropertyData> _details = new Dictionary<string, PropertyData>();
 		private IDictionary<string, PropertyCollection> _detailCollections = new Dictionary<string, PropertyCollection>();
 		private string _url;
+        private bool _visible;
 
 		[Copy]
 		private IUrlParser _urlParser;
@@ -94,7 +95,17 @@ namespace Zeus
 
 		/// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
 		[Copy]
-		public virtual bool Visible { get; set; }
+		public virtual bool Visible {
+            get {
+                if (this.TranslationOf == null)
+                    return _visible;
+                else
+                    return this.TranslationOf.Visible;
+                }
+            set {
+                _visible = value;
+            }
+        }
 
 		/// <summary>Gets or sets the published version of this item. If this value is not null then this item is a previous version of the item specified by VersionOf.</summary>
 		public virtual ContentItem VersionOf { get; set; }
