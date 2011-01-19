@@ -19,7 +19,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.BasketPut; }
 		}
 
-		public Address ShippingAddress
+		public virtual Address ShippingAddress
 		{
 			get { return GetChild("shipping-address") as Address; }
 			set
@@ -32,7 +32,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		public Address BillingAddress
+        public virtual Address BillingAddress
 		{
 			get { return GetChild("billing-address") as Address; }
 			set
@@ -45,7 +45,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		public PaymentCard PaymentCard
+        public virtual PaymentCard PaymentCard
 		{
 			get { return GetChild("payment-card") as PaymentCard; }
 			set
@@ -58,46 +58,46 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			}
 		}
 
-		public DeliveryMethod DeliveryMethod
+        public virtual DeliveryMethod DeliveryMethod
 		{
 			get { return GetDetail<DeliveryMethod>("DeliveryMethod", null); }
 			set { SetDetail("DeliveryMethod", value); }
 		}
 
-		public string EmailAddress
+        public virtual string EmailAddress
 		{
 			get { return GetDetail("EmailAddress", string.Empty); }
 			set { SetDetail("EmailAddress", value); }
 		}
 
-		public string TelephoneNumber
+        public virtual string TelephoneNumber
 		{
 			get { return GetDetail("TelephoneNumber", string.Empty); }
 			set { SetDetail("TelephoneNumber", value); }
 		}
 
-		public string MobileTelephoneNumber
+        public virtual string MobileTelephoneNumber
 		{
 			get { return GetDetail("MobileTelephoneNumber", string.Empty); }
 			set { SetDetail("MobileTelephoneNumber", value); }
 		}
 
-		public IEnumerable<IShoppingBasketItem> Items
+        public virtual IEnumerable<IShoppingBasketItem> Items
 		{
 			get { return GetChildren<ShoppingBasketItem>().Cast<IShoppingBasketItem>(); }
 		}
 
-		public int TotalItemCount
+        public virtual int TotalItemCount
 		{
-			get { return Items.Sum(i => i.Quantity); }
+			get { return Items.Where(p => !p.Product.OutOfStock).Sum(i => i.Quantity); }
 		}
 
-		public decimal SubTotalPrice
+        public virtual decimal SubTotalPrice
 		{
-			get { return Items.Sum(i => i.Product.CurrentPrice * i.Quantity); }
+            get { return Items.Where(p => !p.Product.OutOfStock).Sum(i => i.Product.CurrentPrice * i.Quantity); }
 		}
 
-        public decimal TotalVat
+        public virtual decimal TotalVat
         {
             get 
             {
@@ -116,7 +116,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             }
         }
 
-		public decimal TotalPrice
+        public virtual decimal TotalPrice
 		{
 			get
 			{
