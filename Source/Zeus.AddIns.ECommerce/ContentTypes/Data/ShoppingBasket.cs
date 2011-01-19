@@ -116,7 +116,21 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             }
         }
 
-        public virtual decimal TotalPrice
+        public decimal SubTotalPricePlusVAT
+        {
+            get
+            {
+                // sub total
+                decimal result = SubTotalPrice;
+
+                // add VAT
+                result += TotalVat;
+
+                return result;
+            }
+        }
+
+		public decimal TotalPrice
 		{
 			get
 			{
@@ -125,7 +139,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
                 // add delivery
 				if (DeliveryMethod != null)
-					result += DeliveryMethod.Price;
+                    result += DeliveryMethod.GetPriceForShoppingBasket(this);
 
                 // add VAT
                 result += TotalVat;

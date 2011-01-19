@@ -16,10 +16,20 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		[ContentProperty("Price", 200)]
 		[TextBoxEditor(Required = true, EditorPrefixText = "£&nbsp;", TextBoxCssClass = "price")]
-		public decimal Price
+		public virtual decimal Price
 		{
 			get { return GetDetail("Price", 0m); }
 			set { SetDetail("Price", value); }
 		}
+
+        public decimal GetPriceForShoppingBasket(ShoppingBasket basket)
+        {
+            return (this.Price > 0m) ? this.Price : OverridePriceForShoppingBasket(basket);
+        }
+
+        public virtual decimal OverridePriceForShoppingBasket(ShoppingBasket basket)
+        {
+            throw new System.NotImplementedException();
+        }
 	}
 }
