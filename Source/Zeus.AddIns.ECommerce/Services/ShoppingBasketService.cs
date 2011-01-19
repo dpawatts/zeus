@@ -74,10 +74,13 @@ namespace Zeus.AddIns.ECommerce.Services
 			if (item == null)
 				return;
 
-			if (newQuantity == 0)
-				shoppingBasket.Children.Remove(item);
-			else
-				item.Quantity = newQuantity;
+            if (newQuantity == 0)
+            {
+                shoppingBasket.Children.Remove(item);
+                _persister.Delete(item);
+            }
+            else
+                item.Quantity = newQuantity;
 
 			_persister.Save(shoppingBasket);
 		}

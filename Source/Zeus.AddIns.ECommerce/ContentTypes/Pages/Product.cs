@@ -90,5 +90,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		{
 			get { return (Category) ((Parent is Category) ? Parent : Parent.Parent); }
 		}
+
+        [ContentProperty("Item is Out of Stock", 300)]
+        public virtual bool OutOfStock
+        {
+            get { return GetDetail("OutOfStock", false); }
+            set { SetDetail("OutOfStock", value); }
+        }
 	}
 }
