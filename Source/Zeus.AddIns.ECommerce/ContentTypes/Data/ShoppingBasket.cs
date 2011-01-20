@@ -116,21 +116,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             }
         }
 
-        public decimal SubTotalPricePlusVAT
-        {
-            get
-            {
-                // sub total
-                decimal result = SubTotalPrice;
-
-                // add VAT
-                result += TotalVat;
-
-                return result;
-            }
-        }
-
-		public decimal TotalPrice
+        public virtual decimal TotalPrice
 		{
 			get
 			{
