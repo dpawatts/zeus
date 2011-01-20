@@ -22,6 +22,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Icon.Plugin; }
 		}
 
+        [ContentProperty("VAT, %", 199)]
+        public decimal VAT
+        {
+            get { return GetDetail("VAT", default(decimal)); }
+            set { SetDetail("VAT", value); }
+        }
+
 		[ContentProperty("Confirmation Email From", 220)]
 		public string ConfirmationEmailFrom
 		{

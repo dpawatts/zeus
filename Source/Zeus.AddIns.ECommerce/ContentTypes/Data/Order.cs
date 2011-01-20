@@ -4,6 +4,7 @@ using Ext.Net;
 using Zeus.Integrity;
 using Zeus.Security;
 using Zeus.Templates.ContentTypes;
+using System;
 
 namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 {
@@ -85,6 +86,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("DeliveryPrice", value); }
 		}
 
+        public decimal VatRate
+        {
+            get { return GetDetail("VatRate", 0m); }
+            set { SetDetail("VatRate", value); }
+        }
+
 		public string EmailAddress
 		{
 			get { return GetDetail("EmailAddress", string.Empty); }
@@ -118,9 +125,27 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Items.Sum(i => i.LineTotal); }
 		}
 
+        public virtual decimal TotalVat
+        {
+            get
+            {
+                decimal result = 0;
+
+                // VAT settings are taken from the shop node
+                if (VatRate > 0)
+                {
+                    double vat = (double)VatRate / 100;
+                    double subresult = (double)SubTotalPrice * vat;
+                    result = Math.Round(Convert.ToDecimal(subresult), 2);
+                }
+
+                return result;
+            }
+        }
+
 		public decimal TotalPrice
 		{
-			get { return SubTotalPrice + DeliveryPrice; }
+			get { return SubTotalPrice + DeliveryPrice + TotalVat; }
 		}
 	}
 }

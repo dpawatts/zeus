@@ -65,7 +65,8 @@ namespace Zeus.AddIns.ECommerce.Services
 				EmailAddress = emailAddress,
 				TelephoneNumber = telephoneNumber,
 				MobileTelephoneNumber = mobileTelephoneNumber,
-				Status = OrderStatus.Unpaid
+				Status = OrderStatus.Unpaid,
+                VatRate = configuration.VAT
 			};
 			foreach (OrderItem orderItem in items)
 				orderItem.AddTo(order);
@@ -123,7 +124,8 @@ namespace Zeus.AddIns.ECommerce.Services
 					EmailAddress = emailAddress,
 					TelephoneNumber = telephoneNumber,
 					MobileTelephoneNumber = mobileTelephoneNumber,
-					Status = OrderStatus.Unpaid
+					Status = OrderStatus.Unpaid,
+                    VatRate = configuration.VAT
 				};
 				foreach (OrderItem orderItem in items)
 					orderItem.AddTo(order);
