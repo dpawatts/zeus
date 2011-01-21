@@ -7,8 +7,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes
 		string ConfirmationEmailFrom { get; }
 		string ConfirmationEmailText { get; }
 		string VendorEmail { get; }
-        decimal VAT { get; }
-
+        
 		OrderContainer Orders { get; }
 	}
 }

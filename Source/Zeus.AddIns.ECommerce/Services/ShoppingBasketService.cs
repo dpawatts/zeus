@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Ninject;
 using Zeus.AddIns.ECommerce.ContentTypes.Data;
 using Zeus.AddIns.ECommerce.ContentTypes.Pages;
 using Zeus.BaseLibrary.Collections.Generic;
@@ -10,7 +11,7 @@ using Zeus.Web;
 
 namespace Zeus.AddIns.ECommerce.Services
 {
-	public class ShoppingBasketService : IShoppingBasketService
+	public class ShoppingBasketService : IShoppingBasketService, IStartable
 	{
 		private readonly IPersister _persister;
 		private readonly IWebContext _webContext;
@@ -23,7 +24,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			_finder = finder;
 		}
 
-		public bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
+        public virtual bool IsValidVariationPermutation(Product product, IEnumerable<Variation> variations)
 		{
 			if ((variations == null || !variations.Any()) && (product.VariationConfigurations == null || !product.VariationConfigurations.Any()))
 				return true;
@@ -32,7 +33,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				&& EnumerableUtility.EqualsIgnoringOrder(vc.Permutation.Variations.Cast<Variation>(), variations));
 		}
 
-		public void AddItem(Shop shop, Product product, IEnumerable<Variation> variations)
+        public virtual void AddItem(Shop shop, Product product, IEnumerable<Variation> variations)
 		{
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
 
@@ -58,12 +59,12 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(shoppingBasket);
 		}
 
-		public void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation)
+        public virtual void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation)
 		{
 			UpdateQuantity(shop, product, variationPermutation, 0);
 		}
 
-		public void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity)
+        public virtual void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity)
 		{
 			if (newQuantity < 0)
 				throw new ArgumentOutOfRangeException("newQuantity", "Quantity must be greater than or equal to 0.");
@@ -85,12 +86,12 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(shoppingBasket);
 		}
 
-		public ShoppingBasket GetBasket(Shop shop)
+        public virtual ShoppingBasket GetBasket(Shop shop)
 		{
 			return GetCurrentShoppingBasketInternal(shop);
 		}
 
-		public void ClearBasket(Shop shop)
+        public virtual void ClearBasket(Shop shop)
 		{
 			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
 			if (shoppingBasket != null)
@@ -100,7 +101,49 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 		}
 
-		private static string GetCookieKey(Shop shop)
+        public virtual void SaveBasket(Shop shop)
+        {
+            _persister.Save(GetCurrentShoppingBasketInternal(shop));
+        }
+
+        #region IStartable Members
+
+        public void Start()
+        {
+            _persister.ItemSaving += CalculateBasketTotal;
+        }
+
+        public void Stop()
+        {
+            _persister.ItemSaving -= CalculateBasketTotal;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Calculate basket total - default behaviour
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void CalculateBasketTotal(object sender, Zeus.CancelItemEventArgs e)
+        {
+            if (e.AffectedItem is IShoppingBasket)
+            {
+                var basket = e.AffectedItem as IShoppingBasket;
+
+                // set delivery price
+                if (basket.DeliveryMethod != null)
+                    basket.TotalDeliveryPrice = basket.DeliveryMethod.Price;
+
+                // set VAT price
+                basket.TotalVatPrice = 0m;
+
+                // set final total
+                basket.TotalPrice = basket.SubTotalPrice + basket.TotalDeliveryPrice + basket.TotalVatPrice;
+            }
+        }
+
+        private static string GetCookieKey(Shop shop)
 		{
 			return "ZeusECommerce" + shop.ID;
 		}
@@ -145,11 +188,6 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 
 			return shoppingBasket;
-		}
-
-		public void SaveBasket(Shop shop)
-		{
-			_persister.Save(GetCurrentShoppingBasketInternal(shop));
-		}
-	}
+		}        
+    }
 }

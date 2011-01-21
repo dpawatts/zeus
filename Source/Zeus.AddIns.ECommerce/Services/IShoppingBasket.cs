@@ -7,10 +7,12 @@ namespace Zeus.AddIns.ECommerce.Services
 	{
 		IEnumerable<IShoppingBasketItem> Items { get; }
 		DeliveryMethod DeliveryMethod { get; set; }
+
 		int TotalItemCount { get; }
 		decimal SubTotalPrice { get; }
-        decimal TotalVat { get; }
-		decimal TotalPrice { get; }
+        decimal TotalDeliveryPrice { get; set; }
+        decimal TotalVatPrice { get; set; }
+        decimal TotalPrice { get; set; }
 
 		Address BillingAddress { get; set; }
 		Address ShippingAddress { get; set; }

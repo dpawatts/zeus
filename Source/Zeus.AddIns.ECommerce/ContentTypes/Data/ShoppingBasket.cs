@@ -97,41 +97,22 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             get { return Items.Where(p => !p.Product.OutOfStock).Sum(i => i.Product.CurrentPrice * i.Quantity); }
 		}
 
-        public virtual decimal TotalVat
+        public virtual decimal TotalDeliveryPrice
         {
-            get 
-            {
-                decimal result = 0;
+            get { return GetDetail<decimal>("TotalDeliveryPrice", default(decimal)); }
+            set { SetDetail("TotalDeliveryPrice", value); }
+        }
 
-                // VAT settings are taken from the shop node
-                var shop = GetParent().GetParent() as Shop;
-                if (shop.VAT > 0)
-                {
-                    double vat = (double)shop.VAT / 100;
-                    double subresult = (double)SubTotalPrice * vat;
-                    result = Math.Round(Convert.ToDecimal(subresult), 2);
-                }
-
-                return result;
-            }
+        public virtual decimal TotalVatPrice
+        {
+            get { return GetDetail<decimal>("TotalVatPrice", default(decimal)); }
+            set { SetDetail("TotalVatPrice", value); }
         }
 
         public virtual decimal TotalPrice
 		{
-			get
-			{
-				// sub total
-                decimal result = SubTotalPrice;
-
-                // add delivery
-				if (DeliveryMethod != null)
-                    result += DeliveryMethod.GetPriceForShoppingBasket(this);
-
-                // add VAT
-                result += TotalVat;
-
-				return result;
-			}
+            get { return GetDetail<decimal>("TotalPrice", default(decimal)); }
+            set { SetDetail("TotalPrice", value); }
 		}
 	}
 }

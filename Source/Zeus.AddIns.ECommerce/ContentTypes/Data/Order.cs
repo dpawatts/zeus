@@ -80,18 +80,6 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			set { SetDetail("DeliveryMethod", value); }
 		}
 
-		public decimal DeliveryPrice
-		{
-			get { return GetDetail("DeliveryPrice", 0m); }
-			set { SetDetail("DeliveryPrice", value); }
-		}
-
-        public decimal VatRate
-        {
-            get { return GetDetail("VatRate", 0m); }
-            set { SetDetail("VatRate", value); }
-        }
-
 		public string EmailAddress
 		{
 			get { return GetDetail("EmailAddress", string.Empty); }
@@ -125,27 +113,22 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return Items.Sum(i => i.LineTotal); }
 		}
 
-        public virtual decimal TotalVat
+        public decimal TotalDeliveryPrice
         {
-            get
-            {
-                decimal result = 0;
+            get { return GetDetail("TotalDeliveryPrice", 0m); }
+            set { SetDetail("TotalDeliveryPrice", value); }
+        }
 
-                // VAT settings are taken from the shop node
-                if (VatRate > 0)
-                {
-                    double vat = (double)VatRate / 100;
-                    double subresult = (double)SubTotalPrice * vat;
-                    result = Math.Round(Convert.ToDecimal(subresult), 2);
-                }
-
-                return result;
-            }
+        public virtual decimal TotalVatPrice
+        {
+            get { return GetDetail("TotalVatPrice", 0m); }
+            set { SetDetail("TotalVatPrice", value); }
         }
 
 		public decimal TotalPrice
 		{
-			get { return SubTotalPrice + DeliveryPrice + TotalVat; }
+            get { return GetDetail("TotalPrice", 0m); }
+            set { SetDetail("TotalPrice", value); }
 		}
 	}
 }

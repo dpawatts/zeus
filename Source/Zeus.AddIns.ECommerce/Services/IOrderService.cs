@@ -15,13 +15,13 @@ namespace Zeus.AddIns.ECommerce.Services
 			DeliveryMethod deliveryMethod, decimal deliveryPrice, Address billingAddress,
 			Address shippingAddress, PaymentCard paymentCard, string emailAddress,
 			string telephoneNumber, string mobileTelephoneNumber,
-			IEnumerable<OrderItem> items);
+			IEnumerable<OrderItem> items, decimal totalVatPrice, decimal totalPrice);
 
         Order PlaceOrderWithoutPayment(IECommerceConfiguration configuration, DeliveryMethod deliveryMethod,
             decimal deliveryPrice, Address billingAddress,
             Address shippingAddress, PaymentCard paymentCard, string emailAddress,
             string telephoneNumber, string mobileTelephoneNumber,
-            IEnumerable<OrderItem> items);
+            IEnumerable<OrderItem> items, decimal totalVatPrice, decimal totalPrice);
 
 		Order PlaceOrder(Shop shop, string cardNumber, string cardVerificationCode,
 			ShoppingBasket shoppingBasket);

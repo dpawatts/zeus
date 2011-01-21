@@ -1,5 +1,4 @@
 using Ext.Net;
-using Zeus.AddIns.ECommerce.Services;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
 using Zeus.Templates.ContentTypes;
@@ -22,15 +21,5 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return GetDetail("Price", 0m); }
 			set { SetDetail("Price", value); }
 		}
-
-        /// <summary>
-        /// Return price by default
-        /// </summary>
-        /// <param name="basket"></param>
-        /// <returns></returns>
-        public virtual decimal GetPriceForShoppingBasket(IShoppingBasket basket)
-        {
-            return Price;
-        }
 	}
 }

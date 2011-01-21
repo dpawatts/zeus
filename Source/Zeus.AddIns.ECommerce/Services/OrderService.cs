@@ -51,14 +51,14 @@ namespace Zeus.AddIns.ECommerce.Services
 			DeliveryMethod deliveryMethod, decimal deliveryPrice, Address billingAddress,
 			Address shippingAddress, PaymentCard paymentCard, string emailAddress,
 			string telephoneNumber, string mobileTelephoneNumber,
-			IEnumerable<OrderItem> items)
+			IEnumerable<OrderItem> items,
+            decimal totalVatPrice, decimal totalPrice)
 		{
 			// Convert shopping basket into order, with unpaid status.
 			Order order = new Order
 			{
 				User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal) _webContext.User).MembershipUser : null,
 				DeliveryMethod = deliveryMethod,
-				DeliveryPrice = deliveryPrice,
 				BillingAddress = billingAddress,
 				ShippingAddress = shippingAddress,
 				PaymentCard = paymentCard,
@@ -66,7 +66,9 @@ namespace Zeus.AddIns.ECommerce.Services
 				TelephoneNumber = telephoneNumber,
 				MobileTelephoneNumber = mobileTelephoneNumber,
 				Status = OrderStatus.Unpaid,
-                VatRate = configuration.VAT
+                TotalDeliveryPrice = deliveryPrice,
+                TotalVatPrice = totalVatPrice,
+                TotalPrice = totalPrice
 			};
 			foreach (OrderItem orderItem in items)
 				orderItem.AddTo(order);
@@ -110,7 +112,8 @@ namespace Zeus.AddIns.ECommerce.Services
             decimal deliveryPrice, Address billingAddress,
             Address shippingAddress, PaymentCard paymentCard, string emailAddress,
             string telephoneNumber, string mobileTelephoneNumber,
-            IEnumerable<OrderItem> items)
+            IEnumerable<OrderItem> items,
+            decimal totalVatPrice, decimal totalPrice)
         {
 			try
 			{
@@ -120,7 +123,6 @@ namespace Zeus.AddIns.ECommerce.Services
 				{
 					User = (_webContext.User != null && (_webContext.User is WebPrincipal)) ? ((WebPrincipal)_webContext.User).MembershipUser : null,
 					DeliveryMethod = deliveryMethod,
-					DeliveryPrice = deliveryPrice,
 					BillingAddress = billingAddress,
 					ShippingAddress = shippingAddress,
 					PaymentCard = paymentCard,
@@ -128,7 +130,9 @@ namespace Zeus.AddIns.ECommerce.Services
 					TelephoneNumber = telephoneNumber,
 					MobileTelephoneNumber = mobileTelephoneNumber,
 					Status = OrderStatus.Unpaid,
-                    VatRate = configuration.VAT
+                    TotalDeliveryPrice = deliveryPrice,
+                    TotalVatPrice = totalVatPrice,
+                    TotalPrice = totalPrice
 				};
 				foreach (OrderItem orderItem in items)
 					orderItem.AddTo(order);
@@ -176,7 +180,7 @@ namespace Zeus.AddIns.ECommerce.Services
 				(Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
 				(PaymentCard) shoppingBasket.PaymentCard.Clone(true), shoppingBasket.EmailAddress,
 				shoppingBasket.TelephoneNumber, shoppingBasket.MobileTelephoneNumber,
-				items);
+				items, shoppingBasket.TotalDeliveryPrice, shoppingBasket.TotalPrice);
 
 			// Clear shopping basket.
 			_persister.Delete(shoppingBasket);
