@@ -97,5 +97,12 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
             get { return GetDetail("OutOfStock", false); }
             set { SetDetail("OutOfStock", value); }
         }
+
+        [ContentProperty("VAT Zero Rated", 300, Description="Please check if VAT is not added to this product")]
+        public virtual bool VatZeroRated
+        {
+            get { return GetDetail("VatZeroRated", false); }
+            set { SetDetail("VatZeroRated", value); }
+        }
 	}
 }

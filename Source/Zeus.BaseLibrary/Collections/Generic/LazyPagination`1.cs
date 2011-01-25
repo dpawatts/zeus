@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace Zeus.BaseLibrary.Collections.Generic
 {
 	/// <summary>
-	/// Executes an IQueryable in order to created a paged set of objects.
+	/// Executes an IEnumerable in order to created a paged set of objects.
 	/// The query is not executed until the LazyPagination is enumerated or one of its properties is invoked.
 	/// The results of the query are cached.
 	/// </summary>
@@ -24,7 +24,7 @@ namespace Zeus.BaseLibrary.Collections.Generic
 		/// <summary>
 		/// The query to execute.
 		/// </summary>
-		public IQueryable<T> Query { get; private set; }
+		public IEnumerable<T> Query { get; private set; }
 		public int PageNumber { get; private set; }
 
 
@@ -34,7 +34,7 @@ namespace Zeus.BaseLibrary.Collections.Generic
 		/// <param name="query">The query to page.</param>
 		/// <param name="pageNumber">The current page number.</param>
 		/// <param name="pageSize">Number of items per page.</param>
-		public LazyPagination(IQueryable<T> query, int pageNumber, int pageSize)
+		public LazyPagination(IEnumerable<T> query, int pageNumber, int pageSize)
 		{
 			PageNumber = pageNumber;
 			PageSize = pageSize;
