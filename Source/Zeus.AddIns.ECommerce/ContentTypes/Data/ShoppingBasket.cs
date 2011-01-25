@@ -97,6 +97,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             get { return Items.Where(p => !p.Product.OutOfStock).Sum(i => i.Product.CurrentPrice * i.Quantity); }
 		}
 
+        public virtual decimal SubTotalPriceForVatCalculation
+        {
+            get { return Items.Where(p => !p.Product.OutOfStock && !p.Product.VatZeroRated).Sum(i => i.Product.CurrentPrice * i.Quantity); }
+        }
+
         public virtual decimal TotalDeliveryPrice
         {
             get { return GetDetail<decimal>("TotalDeliveryPrice", default(decimal)); }
