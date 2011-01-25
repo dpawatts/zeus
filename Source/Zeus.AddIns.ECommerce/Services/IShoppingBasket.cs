@@ -13,6 +13,7 @@ namespace Zeus.AddIns.ECommerce.Services
         decimal TotalDeliveryPrice { get; set; }
         decimal TotalVatPrice { get; set; }
         decimal TotalPrice { get; set; }
+        decimal SubTotalPriceForVatCalculation { get; }
 
 		Address BillingAddress { get; set; }
 		Address ShippingAddress { get; set; }
