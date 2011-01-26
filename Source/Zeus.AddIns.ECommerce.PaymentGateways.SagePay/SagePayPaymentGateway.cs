@@ -200,7 +200,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["BillingCity"] = paymentRequest.BillingAddress.TownCity;
 			postData["BillingPostCode"] = paymentRequest.BillingAddress.Postcode;
             if (paymentRequest.BillingAddress.Country != null)
-                postData["BillingCountry"] = paymentRequest.BillingAddress.Country.CountryCode;
+                postData["BillingCountry"] = paymentRequest.BillingAddress.Country.Alpha2;
             else
                 postData["BillingCountry"] = "GB";
 
@@ -212,7 +212,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["DeliveryCity"] = paymentRequest.ShippingAddress.TownCity;
 			postData["DeliveryPostCode"] = paymentRequest.ShippingAddress.Postcode;
             if (paymentRequest.ShippingAddress.Country != null)
-                postData["DeliveryCountry"] = paymentRequest.ShippingAddress.Country.CountryCode;
+                postData["DeliveryCountry"] = paymentRequest.ShippingAddress.Country.Alpha2;
             else
                 postData["DeliveryCountry"] = "GB";
 			if (!string.IsNullOrEmpty(paymentRequest.TelephoneNumber))
