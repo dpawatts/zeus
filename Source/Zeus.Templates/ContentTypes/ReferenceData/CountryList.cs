@@ -21,7 +21,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 
 		#region ISelfPopulator Members
 
-		public void Populate()
+		public virtual void Populate()
 		{
 			Children.Add(new Country("AF", "AFGHANISTAN", "Afghanistan", "AFG", "004"));
             Children.Add(new Country("AX", "ALAND ISLANDS", "Aland Islands", "ALA", "000"));
@@ -39,6 +39,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Add(new Country("AU", "AUSTRALIA", "Australia", "AUS", "036"));
 			Children.Add(new Country("AT", "AUSTRIA", "Austria", "AUT", "040"));
 			Children.Add(new Country("AZ", "AZERBAIJAN", "Azerbaijan", "AZE", "031"));
+
 			Children.Add(new Country("BS", "BAHAMAS", "Bahamas", "BHS", "044"));
 			Children.Add(new Country("BH", "BAHRAIN", "Bahrain", "BHR", "048"));
 			Children.Add(new Country("BD", "BANGLADESH", "Bangladesh", "BGD", "050"));
@@ -50,6 +51,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Add(new Country("BM", "BERMUDA", "Bermuda", "BMU", "060"));
 			Children.Add(new Country("BT", "BHUTAN", "Bhutan", "BTN", "064"));
 			Children.Add(new Country("BO", "BOLIVIA", "Bolivia", "BOL", "068"));
+            Children.Add(new Country("BQ", "BONAIRE, SAINT EUSTATIUS AND SABA", "Bonaire, Saint Eustatius And Saba", "BES", "000"));
 			Children.Add(new Country("BA", "BOSNIA AND HERZEGOVINA", "Bosnia and Herzegovina", "BIH", "070"));
 			Children.Add(new Country("BW", "BOTSWANA", "Botswana", "BWA", "072"));
 			Children.Add(new Country("BV", "BOUVET ISLAND", "Bouvet Island", "BVT", "074"));
@@ -80,7 +82,7 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
 			Children.Add(new Country("CI", "COTE D'IVOIRE", "Cote D'Ivoire", "CIV", "384"));
 			Children.Add(new Country("HR", "CROATIA", "Croatia", "HRV", "191"));
 			Children.Add(new Country("CU", "CUBA", "Cuba", "CUB", "192"));
-            Children.Add(new Country("CY", "CURACAO", "Curacao", "CUW", "000"));
+            Children.Add(new Country("CW", "CURACAO", "Curacao", "CUW", "000"));
             Children.Add(new Country("CY", "CYPRUS", "Cyprus", "CYP", "196"));
 			Children.Add(new Country("CZ", "CZECH REPUBLIC", "Czech Republic", "CZE", "203"));
 			
