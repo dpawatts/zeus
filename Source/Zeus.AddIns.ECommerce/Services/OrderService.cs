@@ -164,10 +164,11 @@ namespace Zeus.AddIns.ECommerce.Services
 			{
 				ProductOrderItem orderItem = new ProductOrderItem
 				{
-					Product = shoppingBasketItem.Product,
+					WeakProductLink = shoppingBasketItem.Product.ID,
 					ProductTitle = shoppingBasketItem.Product.Title,
 					Quantity = shoppingBasketItem.Quantity,
-					Price = shoppingBasketItem.Product.CurrentPrice
+					Price = shoppingBasketItem.Product.CurrentPrice,
+                    VATable = !(shoppingBasketItem.Product.VatZeroRated)
 				};
 				if (shoppingBasketItem.Variations != null)
 					foreach (Variation variation in shoppingBasketItem.Variations)

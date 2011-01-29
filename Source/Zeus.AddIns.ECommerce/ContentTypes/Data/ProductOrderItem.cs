@@ -10,10 +10,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 			get { return ProductTitle; }
 		}
 
-		public ContentItem Product
+		public int WeakProductLink
 		{
-			get { return GetDetail<ContentItem>("Product", null); }
-			set { SetDetail("Product", value); }
+            get { return GetDetail("WeakProductLink", 0); }
+            set { SetDetail("WeakProductLink", value); }
 		}
 
 		public string ProductTitle

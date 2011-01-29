@@ -30,7 +30,7 @@
 				<td style="vertical-align:top"><%# Container.DataItem.TotalPrice.ToString("C2") %></td>
 				<td style="vertical-align:top"><%# Container.DataItem.Status.GetDescription() %></td>
 				<td style="vertical-align:top">
-					<a href="vieworder.aspx?selected=<%# Container.DataItem.Path %>">Details</a>
+					<a href="admin.plugins.manage-orders.view-order.aspx?selected=<%# Container.DataItem.Path %>">Details</a>
 				</td>
 			</tr>
 		</ItemTemplate>

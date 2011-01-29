@@ -7,7 +7,7 @@ namespace Zeus.AddIns.ECommerce.Plugins
 {
 	public partial class ViewOrder : PreviewFrameAdminPage
 	{
-		protected Order SelectedOrder
+        protected Order SelectedOrder
 		{
 			get { return (Order) SelectedItem; }
 		}

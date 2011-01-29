@@ -18,9 +18,15 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		{
 			get { return GetDetail("Price", 0m); }
 			set { SetDetail("Price", value); }
-		}
+        }
 
-		public decimal LineTotal
+        public bool VATable
+        {
+            get { return GetDetail("VATable", false); }
+            set { SetDetail("VATable", value); }
+        }
+
+        public decimal LineTotal
 		{
 			get { return Price * Quantity; }
 		}

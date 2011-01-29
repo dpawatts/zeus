@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageOrders.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ViewOrder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewOrder.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ViewOrder" %>
 <%@ Import Namespace="Zeus.AddIns.ECommerce.ContentTypes.Data"%>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
@@ -7,6 +7,8 @@
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<h2>View Order</h2>
+
+    <% Order SelectedOrder = new Order(); %>
 
 	<table class="tb">
 		<tr class="titles">
@@ -62,7 +64,7 @@
 		</tr>
 		<% foreach (OrderItem orderItem in SelectedOrder.Items) { %>
 		<tr>
-			<td><%= orderItem.ProductTitle %></td>
+			<td><%= orderItem.DisplayTitle %></td>
 			<td>
 				<% foreach (string variation in orderItem.Variations) { %>
 				<%= variation %><br />
