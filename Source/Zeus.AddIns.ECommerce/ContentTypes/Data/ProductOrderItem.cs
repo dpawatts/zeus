@@ -16,6 +16,10 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             set { SetDetail("WeakProductLink", value); }
 		}
 
+        public Zeus.AddIns.ECommerce.ContentTypes.Pages.Product Product {
+            get { return (Zeus.AddIns.ECommerce.ContentTypes.Pages.Product)Zeus.Context.Persister.Get(WeakProductLink); }
+        }
+
 		public string ProductTitle
 		{
 			get { return GetDetail("ProductTitle", string.Empty); }
