@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Ext.Net;
+using Zeus.Admin.Plugins.Tree;
 using Zeus.Configuration;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
@@ -118,6 +120,12 @@ jQuery(document).ready(function() {{
 					script = REFRESH_BOTH_FORMAT;
 					break;
 			}
+
+			// If content item is not visible in tree, then get the first parent item
+			// that is visible.
+			contentItem = Find.EnumerateParents(contentItem, null, true)
+				.First(TreeMainInterfacePlugin.IsVisibleInTree);
+
 			script = string.Format(script,
 				contentItem.ID, // 0
 				url // 1

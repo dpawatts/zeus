@@ -1,4 +1,5 @@
 using Ext.Net;
+using Zeus.ContentTypes;
 using Zeus.Linq;
 using Zeus.Security;
 using Zeus.Web.Hosting;
@@ -133,6 +134,12 @@ namespace Zeus.Admin.Plugins.Tree
 					foreach (string requiredScript in requiredScripts)
 						scriptManager.RegisterClientScriptInclude(treePlugin.GetType().FullName, requiredScript);
 			}
+		}
+
+		public static bool IsVisibleInTree(ContentItem contentItem)
+		{
+			return ((Context.ContentTypes[contentItem.GetType()].Visibility & AdminSiteTreeVisibility.Visible) == AdminSiteTreeVisibility.Visible)
+					&& (contentItem.Parent == null || (Context.ContentTypes[contentItem.Parent.GetType()].Visibility & AdminSiteTreeVisibility.ChildrenHidden) != AdminSiteTreeVisibility.ChildrenHidden);
 		}
 	}
 }
