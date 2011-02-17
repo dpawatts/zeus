@@ -341,7 +341,15 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 			if (string.IsNullOrEmpty(original))
 				return false;
 
-			return Regex.IsMatch(original, @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+            try
+            {
+                Match match = Regex.Match(original, @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+                return ((match.Success && (match.Index == 0)) && (match.Length == original.Length));
+            }
+            catch
+            {
+                return false;
+            }
 		}
 
 		public static bool IsValidUKTelephoneNumber(this string original)
