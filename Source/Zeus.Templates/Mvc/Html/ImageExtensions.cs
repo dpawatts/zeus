@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using SoundInTheory.DynamicImage.Fluent;
 using Zeus.FileSystem.Images;
+using SoundInTheory.DynamicImage;
 
 namespace Zeus.Templates.Mvc.Html
 {
@@ -25,9 +26,19 @@ namespace Zeus.Templates.Mvc.Html
             return Image(helper, image, width, height, fill, string.Empty);
         }
 
+        public static string Image(this HtmlHelper helper, Image image, int width, int height, bool fill, DynamicImageFormat format)
+        {
+            return Image(helper, image, width, height, fill, string.Empty, format);
+        }
+
         public static string Image(this HtmlHelper helper, Image image, int width, int height, bool fill, string defaultImage)
         {
-            string url = ImageUrl(helper, image, width, height, fill, defaultImage);
+            return Image(helper, image, width, height, fill, defaultImage, DynamicImageFormat.Jpeg);
+        }
+
+        public static string Image(this HtmlHelper helper, Image image, int width, int height, bool fill, string defaultImage, DynamicImageFormat format)
+        {
+            string url = ImageUrl(helper, image, width, height, fill, defaultImage, format);
             if (string.IsNullOrEmpty(url))
                 return string.Empty;
 
@@ -50,10 +61,15 @@ namespace Zeus.Templates.Mvc.Html
 
         public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill)
         {
-            return ImageUrl(helper, image, width, height, fill, string.Empty);
+            return ImageUrl(helper, image, width, height, fill, string.Empty, DynamicImageFormat.Jpeg);
         }
 
-        public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill, string defaultImage)
+        public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill, DynamicImageFormat format)
+        {
+            return ImageUrl(helper, image, width, height, fill, string.Empty, format);
+        }
+
+        public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill, string defaultImage, DynamicImageFormat format)
         {
             string result = defaultImage;
 
@@ -71,7 +87,7 @@ namespace Zeus.Templates.Mvc.Html
                 // generate resized image url
                 else
                 {
-                    result = image.GetUrl(width, height, fill);
+                    result = image.GetUrl(width, height, fill, format);
                 }
             }
 

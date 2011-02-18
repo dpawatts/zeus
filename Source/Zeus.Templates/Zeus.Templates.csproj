@@ -373,6 +373,9 @@
     <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\images\submenu.png" />
     <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\style.css" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

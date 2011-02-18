@@ -3,6 +3,8 @@ using SoundInTheory.DynamicImage.Fluent;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
+using SoundInTheory.DynamicImage;
+using SoundInTheory.DynamicImage.Filters;
 
 namespace Zeus.FileSystem.Images
 {
@@ -33,17 +35,45 @@ namespace Zeus.FileSystem.Images
 			};
 		}
 
-		public string GetUrl(int width, int height, bool fill)
+		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
-			return new DynamicImageBuilder()
+            DynamicImage image = new DynamicImage();
+            image.ImageFormat = format;
+            ImageLayer imageLayer = new ImageLayer();
+
+            ZeusImageSource source = new ZeusImageSource();
+            source.ContentID = this.ID;
+
+            imageLayer.Source.SingleSource = source;
+
+            ResizeFilter resizeFilter = new ResizeFilter();
+		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
+		    resizeFilter.Width = SoundInTheory.DynamicImage.Unit.Pixel(width);
+		    resizeFilter.Height = SoundInTheory.DynamicImage.Unit.Pixel(height);
+
+            imageLayer.Filters.Add(resizeFilter);
+            
+		    image.Layers.Add(imageLayer);                
+
+			return image.ImageUrl;
+
+            /*old code replaced
+             * 
+            return new DynamicImageBuilder()
 				.WithLayer(
 					LayerBuilder.Image.SourceImage(this).WithFilter(FilterBuilder.Resize.To(width, height, fill)))
 				.Url;
+             */
+		}
+
+        public string GetUrl(int width, int height, bool fill)
+		{
+            return GetUrl(width, height, fill, DynamicImageFormat.Jpeg);
 		}
 
 		public string GetUrl(int width, int height)
 		{
-			return GetUrl(width, height, true);
+            return GetUrl(width, height, true, DynamicImageFormat.Jpeg);
 		}
 	}
 }
