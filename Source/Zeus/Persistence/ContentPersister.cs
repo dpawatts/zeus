@@ -216,16 +216,17 @@ namespace Zeus.Persistence
 				((ISelfPersister) contentItem).Save();
 			}
 			else
-			{
-				contentItem.Updated = DateTime.Now;
-				using (ITransaction transaction = _contentRepository.BeginTransaction())
-				{
-					_contentRepository.SaveOrUpdate(contentItem);
-					contentItem.AddTo(contentItem.Parent);
-					EnsureSortOrder(contentItem);
-					transaction.Commit();
-				}
-			}
+            {
+                contentItem.Updated = DateTime.Now;
+                
+                using (ITransaction transaction = _contentRepository.BeginTransaction())
+                {
+                    _contentRepository.SaveOrUpdate(contentItem);
+                    contentItem.AddTo(contentItem.Parent);
+                    EnsureSortOrder(contentItem);
+                    transaction.Commit();
+                }
+            }
 			Invoke(ItemSaved, new ItemEventArgs(contentItem));
 		}
 

@@ -261,7 +261,16 @@ namespace Zeus.Admin
 						onSavingCallback(itemToUpdate);
 						itemToUpdate.Published = published ?? Utility.CurrentTime();
 						_persister.Save(itemToUpdate);
-					}
+
+                        ContentItem theParent = itemToUpdate.Parent;
+                        while (theParent.Parent != null)
+                        { 
+                            //go up the tree updating - if a child has been changed, so effectively has the parent
+                            theParent.Updated = DateTime.Now;
+                            _persister.Save(theParent);
+                            theParent = theParent.Parent;
+                        }
+                    }
 
 					tx.Commit();
 					return item.VersionOf;
@@ -275,7 +284,16 @@ namespace Zeus.Admin
 				if (wasUpdated || IsNew(item))
 				{
 					onSavingCallback(item);
-					_persister.Save(item);
+                    _persister.Save(item);
+
+                    ContentItem theParent = item.Parent;
+                    while (theParent.Parent != null)
+                    {
+                        //go up the tree updating - if a child has been changed, so effectively has the parent
+                        theParent.Updated = DateTime.Now;
+                        _persister.Save(theParent);
+                        theParent = theParent.Parent;
+                    }
 				}
 
 				return item;

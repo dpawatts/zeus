@@ -36,9 +36,9 @@ namespace Zeus.Templates.Mvc
 				RssItem item = new RssItem();
 				item.Title = syndicatable.Title;
 				item.Link = GetLink(syndicatable.Url);
-				item.Description = syndicatable.Summary;
+                item.Description = syndicatable.Summary;
 				item.PublicationDate = syndicatable.Published;
-				feed.Channel.AddItem(item);
+                feed.Channel.AddItem(item);
 			}
 
 			SyndicationResourceSaveSettings settings = new SyndicationResourceSaveSettings
