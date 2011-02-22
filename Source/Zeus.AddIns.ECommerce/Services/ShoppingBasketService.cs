@@ -35,7 +35,7 @@ namespace Zeus.AddIns.ECommerce.Services
 
         public virtual void AddItem(Shop shop, Product product, IEnumerable<Variation> variations)
 		{
-			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
+			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, true);
 
 			// If card is already in basket, just increment quantity, otherwise create a new item.
 			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && ((variations == null && i.Variations == null) || EnumerableUtility.Equals(i.Variations, variations)));
@@ -69,7 +69,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			if (newQuantity < 0)
 				throw new ArgumentOutOfRangeException("newQuantity", "Quantity must be greater than or equal to 0.");
 
-			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
+			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, true);
 			ShoppingBasketItem item = shoppingBasket.GetChildren<ShoppingBasketItem>().SingleOrDefault(i => i.Product == product && i.VariationPermutation == variationPermutation);
 
 			if (item == null)
@@ -88,13 +88,13 @@ namespace Zeus.AddIns.ECommerce.Services
 
         public virtual ShoppingBasket GetBasket(Shop shop)
 		{
-			return GetCurrentShoppingBasketInternal(shop);
+			return GetCurrentShoppingBasketInternal(shop, false);
 		}
 
         public virtual void ClearBasket(Shop shop)
 		{
-			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop);
-			if (shoppingBasket != null)
+			ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, false);
+			if (shoppingBasket != null && shoppingBasket.ID > 0)
 			{
 				_persister.Delete(shoppingBasket);
 				_webContext.Response.Cookies.Remove(GetCookieKey(shop));
@@ -103,7 +103,7 @@ namespace Zeus.AddIns.ECommerce.Services
 
         public virtual void SaveBasket(Shop shop)
         {
-            _persister.Save(GetCurrentShoppingBasketInternal(shop));
+            _persister.Save(GetCurrentShoppingBasketInternal(shop, true));
         }
 
         #region IStartable Members
@@ -158,7 +158,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			return _finder.QueryItems<ShoppingBasket>().SingleOrDefault(sb => sb.Name == shopperID);
 		}
 
-		private ShoppingBasket GetCurrentShoppingBasketInternal(Shop shop)
+		private ShoppingBasket GetCurrentShoppingBasketInternal(Shop shop, bool createBasket)
 		{
 			ShoppingBasket shoppingBasket = GetShoppingBasketFromCookie(shop);
 
@@ -178,13 +178,19 @@ namespace Zeus.AddIns.ECommerce.Services
 				shoppingBasket = new ShoppingBasket { Name = Guid.NewGuid().ToString() };
 				if (shop.DeliveryMethods != null)
 					shoppingBasket.DeliveryMethod = shop.DeliveryMethods.GetChildren<DeliveryMethod>().FirstOrDefault();
-				shoppingBasket.AddTo(shop.ShoppingBaskets);
-				_persister.Save(shoppingBasket);
 
-				HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name);
-				if (shop.PersistentShoppingBaskets)
-					cookie.Expires = DateTime.Now.AddYears(1);
-				_webContext.Response.Cookies.Add(cookie);
+                // don't always save basket to database
+                // this will only happen when we add items to it
+                if (createBasket)
+                {
+                    shoppingBasket.AddTo(shop.ShoppingBaskets);
+                    _persister.Save(shoppingBasket);
+
+                    HttpCookie cookie = new HttpCookie(GetCookieKey(shop), shoppingBasket.Name);
+                    if (shop.PersistentShoppingBaskets)
+                        cookie.Expires = DateTime.Now.AddYears(1);
+                    _webContext.Response.Cookies.Add(cookie);
+                }
 			}
 
 			return shoppingBasket;
