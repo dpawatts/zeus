@@ -15,6 +15,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 	[FieldSet("AnotherImageContainer", "Secondary Image", 300, ContainerName = "Content")]
 	public class MyPage : PageContentItem
 	{
+		[LinkedItemDropDownListEditor("Product", 99)]
+		public virtual ContentItem Product
+		{
+			get { return GetDetail<ContentItem>("Product", null); }
+			set { SetDetail("Product", value); }
+		}
+
 		[Zeus.Design.Editors.ChildEditor("Image", 100, ContainerName="ImageContainer")]
 		public virtual Zeus.FileSystem.Images.Image Image
 		{
