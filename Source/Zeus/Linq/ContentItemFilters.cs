@@ -87,25 +87,33 @@ namespace Zeus.Linq
 		public static IEnumerable<T> NavigablePages<T>(this IQueryable<T> source)
 			where T : ContentItem
 		{
-			return source.Pages().Visible().Published().Authorized(Operations.Read);
+            //return source.Pages().Visible().Published().Authorized(Operations.Read);
+            //above was returning incorrect results as Published() is not correctly implemented
+            return source.Pages().Visible().Authorized(Operations.Read);
 		}
 
 		public static IEnumerable<T> NavigablePages<T>(this IEnumerable<T> source)
 			where T : ContentItem
 		{
-			return source.Pages().Visible().Published().Authorized(Operations.Read);
+            //return source.Pages().Visible().Published().Authorized(Operations.Read);
+            //above was returning incorrect results as Published() is not correctly implemented
+            return source.Pages().Visible().Authorized(Operations.Read);
 		}
 
 		public static IEnumerable<T> NavigableItems<T>(this IQueryable<T> source)
 			where T : ContentItem
 		{
-			return source.Visible().Published().Authorized(Operations.Read);
+            //return source.Visible().Published().Authorized(Operations.Read);
+            //above was returning incorrect results as Published() is not correctly implemented
+            return source.Visible().Authorized(Operations.Read);
 		}
 
 		public static IEnumerable<T> NavigableItems<T>(this IEnumerable<T> source)
 			where T : ContentItem
 		{
-			return source.Visible().Published().Authorized(Operations.Read);
+			//return source.Visible().Published().Authorized(Operations.Read);
+            //above was returning incorrect results as Published() is not correctly implemented
+            return source.Visible().Authorized(Operations.Read);
 		}
 	}
 }
