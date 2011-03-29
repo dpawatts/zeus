@@ -144,6 +144,8 @@
     </Compile>
     <Compile Include="AddIns\AddInContainer.cs" />
     <Compile Include="Admin\IMainInterface.cs" />
+    <Compile Include="Admin\NavigationFlag\NavigationCachingService.cs" />
+    <Compile Include="Admin\NavigationFlag\NavigationServiceInitializer.cs" />
     <Compile Include="Admin\Plugins\IMainInterfacePlugin.cs" />
     <Compile Include="Admin\Plugins\MainInterfacePluginBase.cs" />
     <Compile Include="Admin\Plugins\TreePluginBase.cs" />
