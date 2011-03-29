@@ -7,6 +7,7 @@ using Zeus.Linq;
 using Zeus.Templates.ContentTypes;
 using Zeus.Web;
 using Zeus.Web.UI.WebControls;
+using Zeus.BaseLibrary.Navigation;
 
 namespace Zeus.Templates.Mvc.Html
 {
@@ -213,5 +214,56 @@ namespace Zeus.Templates.Mvc.Html
 
 			return foundSomething;
 		}
+
+        public static IList<NavigationItem> LoadNav(this HtmlHelper html)
+        {
+            string Lang = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
+            DateTime lastChecked = System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang];
+            if (System.Web.HttpContext.Current.Application["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1))
+            {
+                var result = new List<NavigationItem>();
+
+                foreach (ContentItem item in html.NavigationPages(Find.RootItem))
+                {
+                    result.Add(new NavigationItem { Title = item.Title, Url = item.Url, ID = item.ID });
+                }
+
+                foreach (ContentItem item in html.NavigationPages())
+                {
+                    result.Add(new NavigationItem { Title = item.Title, Url = item.Url, ID = item.ID });
+                }
+
+                foreach (NavigationItem item in result)
+                {
+                    ContentItem theItem = Zeus.Context.Persister.Get(item.ID);
+                    if (theItem != Zeus.Find.StartPage)
+                    {
+                        foreach (ContentItem subNavItem in html.NavigationPages(theItem))
+                        {
+                            if (item.SubNav == null) item.SubNav = new List<NavigationItem>();
+                            item.SubNav.Add(new NavigationItem { Title = subNavItem.Title, Url = subNavItem.Url, ID = subNavItem.ID, ParentUrl = item.Url, SubNav = GetTertiaryNav(html, subNavItem, true) });
+                        }
+                    }
+                }
+
+                System.Web.HttpContext.Current.Application["primaryNav" + Lang] = result;
+                System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] = DateTime.Now;
+                return result;
+            }
+            else
+            {
+                return (IList<NavigationItem>)System.Web.HttpContext.Current.Application["primaryNav" + Lang];
+            }
+        }
+
+        private static IList<NavigationItem> GetTertiaryNav(HtmlHelper html, ContentItem subNavItem, bool continueLoop)
+        {
+            List<NavigationItem> result = new List<NavigationItem>();
+            foreach (ContentItem tertiaryItem in html.NavigationPages(subNavItem))
+            {
+                result.Add(new NavigationItem { Title = tertiaryItem.Title, Url = tertiaryItem.Url, ID = tertiaryItem.ID, ParentUrl = subNavItem.Url, SubNav = continueLoop ? GetTertiaryNav(html, tertiaryItem, false) : null });
+            }
+            return result;
+        }
 	}
 }

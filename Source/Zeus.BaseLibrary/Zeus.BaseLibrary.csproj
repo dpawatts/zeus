@@ -115,6 +115,7 @@
     <Compile Include="Collections\SingletonList.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionManager.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionUtility.cs" />
+    <Compile Include="Navigation\NavigationItem.cs" />
     <Compile Include="Net\WebClientUtility.cs" />
     <Compile Include="Reflection\AssemblyFinder.cs" />
     <Compile Include="Reflection\IAssemblyFinder.cs" />
