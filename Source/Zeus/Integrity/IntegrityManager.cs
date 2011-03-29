@@ -2,6 +2,7 @@
 using Zeus.ContentTypes;
 using Zeus.Globalization;
 using Zeus.Web;
+using Zeus.Configuration;
 
 namespace Zeus.Integrity
 {
@@ -11,17 +12,19 @@ namespace Zeus.Integrity
 
 		private readonly IContentTypeManager _contentTypeManager;
 		private readonly IUrlParser _urlParser;
-		private readonly ILanguageManager _languageManager;
+        private readonly ILanguageManager _languageManager;
+		private readonly AdminSection _adminConfig;
 
 		#endregion
 
 		#region Constructor
 
-		public IntegrityManager(IContentTypeManager contentTypeManager, IUrlParser urlParser, ILanguageManager languageManager)
+		public IntegrityManager(IContentTypeManager contentTypeManager, IUrlParser urlParser, ILanguageManager languageManager, AdminSection adminSection)
 		{
 			_contentTypeManager = contentTypeManager;
 			_urlParser = urlParser;
 			_languageManager = languageManager;
+            _adminConfig = adminSection;
 		}
 
 		#endregion
@@ -88,13 +91,19 @@ namespace Zeus.Integrity
 		/// <returns>True if the name is unique.</returns>
 		public bool IsLocallyUnique(string name, ContentItem item)
 		{
-			ContentItem parentItem = item.GetParent();
-			if (parentItem != null)
-				foreach (ContentItem potentiallyClashingItem in parentItem.Children)
-					if (!potentiallyClashingItem.Equals(item) && potentiallyClashingItem != item.TranslationOf)
-						foreach (ContentItem translation in _languageManager.GetTranslationsOf(potentiallyClashingItem, true))
-							if (!translation.Equals(item) && translation.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
-								return false;
+            //this causes an error if in install mode due to the root node not being installed yet so can't add Language Container which is needed to check if root node is unique!
+            //so check mode - if in install it's safe to assume this code isn't needed
+            if (_adminConfig.Installer.Mode != InstallationMode.Install)
+            {
+			    ContentItem parentItem = item.GetParent();
+			    if (parentItem != null)
+				    foreach (ContentItem potentiallyClashingItem in parentItem.Children)
+					    if (!potentiallyClashingItem.Equals(item) && potentiallyClashingItem != item.TranslationOf)
+						    foreach (ContentItem translation in _languageManager.GetTranslationsOf(potentiallyClashingItem, true))
+							    if (!translation.Equals(item) && translation.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+								    return false;
+            }
+
 			return true;
 		}
 
