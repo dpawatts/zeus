@@ -298,43 +298,52 @@ namespace Zeus.Web
 
 				if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1)
 				{
-					// Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
-					foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
-					{
-						// First check that the page referenced in web.config actually exists.
-						ContentItem customUrlPage = Persister.Get(id.ID);
-						if (customUrlPage == null)
-							continue;
+                    //check cache for previously mapped item
+                    if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
+                    {
 
-						//need to check all children of these nodes to see if there's a match
-						ContentItem tryMatch =
-							Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
-								ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
-						if (tryMatch != null)
-						{
-							data = tryMatch.FindPath(PathData.DefaultAction);
-							break;
-						}
-						//now need to check for an action...
-						string fullPath = _webContext.Url.Path;
-						if (fullPath.LastIndexOf("/") > -1)
-						{
-							string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
-							string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
+                        // Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
+                        foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
+                        {
+                            // First check that the page referenced in web.config actually exists.
+                            ContentItem customUrlPage = Persister.Get(id.ID);
+                            if (customUrlPage == null)
+                                continue;
 
-							//by taking off the potential action, there is a danger of 
+                            //need to check all children of these nodes to see if there's a match
+                            ContentItem tryMatch =
+                                Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
+                                    ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
+                            if (tryMatch != null)
+                            {
+                                data = tryMatch.FindPath(PathData.DefaultAction);
+                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = data;
+                                break;
+                            }
+                            //now need to check for an action...
+                            string fullPath = _webContext.Url.Path;
+                            if (fullPath.LastIndexOf("/") > -1)
+                            {
+                                string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
+                                string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
 
-							ContentItem tryMatchAgain =
-								Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
-									ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+                                //by taking off the potential action, there is a danger of 
 
-							if (tryMatchAgain != null)
-							{
-								data = tryMatchAgain.FindPath(action);
-								break;
-							}
-						}
-					}
+                                ContentItem tryMatchAgain =
+                                    Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+                                        ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+
+                                if (tryMatchAgain != null)
+                                {
+                                    data = tryMatchAgain.FindPath(action);
+                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = data;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                        return (PathData)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path];
 				}
 
 				if (data.IsEmpty())
