@@ -317,7 +317,8 @@ namespace Zeus.Web
                             if (tryMatch != null)
                             {
                                 data = tryMatch.FindPath(PathData.DefaultAction);
-                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = data;
+                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
+                                System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
                                 break;
                             }
                             //now need to check for an action...
@@ -336,14 +337,22 @@ namespace Zeus.Web
                                 if (tryMatchAgain != null)
                                 {
                                     data = tryMatchAgain.FindPath(action);
-                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = data;
+                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                     break;
                                 }
                             }
                         }
                     }
                     else
-                        return (PathData)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path];
+                    {
+                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
+                        string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
+                        if (string.IsNullOrEmpty(act))
+                            return ci.FindPath(PathData.DefaultAction);
+                        else
+                            return ci.FindPath(act);
+                    }
 				}
 
 				if (data.IsEmpty())
