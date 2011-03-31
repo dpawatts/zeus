@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 using Zeus.ContentTypes;
+using System.Web.UI;
 
 namespace Zeus.Design.Editors
 {
@@ -41,6 +42,27 @@ namespace Zeus.Design.Editors
 				return linkedItem.ID.ToString();
 			return string.Empty;
 		}
+
+        public override bool UpdateItem(IEditableObject item, Control editor)
+        {
+            ListControl ddl = (ListControl)editor;
+            object one = GetValue(ddl);
+            object two = GetValue(item);
+            
+            if (one == null && two.ToString() == string.Empty)
+            {//do nothing - this means the same as them being equal
+            }
+            else if (((ContentItem)one).ID.ToString() == two.ToString())
+            {//do nothing - this means the same as them being equal
+            }
+            else if (GetValue(ddl) != GetValue(item))
+            {
+                item[Name] = GetValue(ddl);
+                return true;
+            }
+                
+            return false;
+        }
 
 		protected override ListItem[] GetListItems(IEditableObject item)
 		{

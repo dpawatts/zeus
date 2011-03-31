@@ -31,8 +31,14 @@ namespace Zeus.Design.Editors
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			item[Name] = ((NameEditor) editor).Text;
-			return true;
+            object editorValue = ((NameEditor)editor).Text;
+            object itemValue = item[Name];
+            if (!AreEqual(editorValue, itemValue))
+            {
+                item[Name] = ((NameEditor)editor).Text;
+                return true;
+            }
+            return false;			
 		}
 
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)

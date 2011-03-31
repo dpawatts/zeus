@@ -382,8 +382,24 @@ namespace Zeus.Admin
 			bool updated = false;
 			ContentType contentType = _contentTypeManager.GetContentType(item.GetType());
 			foreach (IEditor e in contentType.GetEditors(user))
+            {
 				if (addedEditors.ContainsKey(e.Name))
+                {
 					updated = e.UpdateItem(item, addedEditors[e.Name]) || updated;
+                    /*
+                    if (updated)
+                    {
+                        System.Web.HttpContext.Current.Response.Write("Editor Name = " + e.Name + "<br/>");
+                        System.Web.HttpContext.Current.Response.Write("Item Name = " + item.Name + "<br/>");
+                        System.Web.HttpContext.Current.Response.Write("Item Url = " + item.Url + "<br/>");
+                        System.Web.HttpContext.Current.Response.End();
+                    }
+                     */
+                    
+                }
+            }
+            
+
 			return updated;
 		}
 

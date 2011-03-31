@@ -2,6 +2,7 @@
 using System.Web.UI.WebControls;
 using Zeus.BaseLibrary;
 using Zeus.ContentTypes;
+using System.Web.UI;
 
 namespace Zeus.Design.Editors
 {
@@ -74,5 +75,20 @@ namespace Zeus.Design.Editors
 					return e;
 			return null;
 		}
+
+        public override bool UpdateItem(IEditableObject item, Control editor)
+        {
+            ListControl ddl = (ListControl)editor;
+            string selectedText = "";
+            if (!string.IsNullOrEmpty(ddl.SelectedValue))
+                selectedText = Enum.GetName(_enumType, Convert.ToInt32(ddl.SelectedValue));
+            
+            if (GetValue(ddl).ToString() != selectedText)
+            {
+                item[Name] = GetValue(ddl);
+                return true;
+            }
+            return false;
+        }
 	}
 }

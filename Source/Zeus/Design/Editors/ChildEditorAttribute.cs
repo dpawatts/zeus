@@ -66,13 +66,15 @@ namespace Zeus.Design.Editors
 				// Reset the name here - it might have been changed, for example by FileUploadEditorAttribute.
 				((ContentItem) args.AffectedItem).Name = Name;
 			});
+
 			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
 			{
 				ContentItem child;
 				if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
 					Context.Persister.Delete(child);
 			});
-			return true;
+
+			return false;
 		}
 
 		protected override void DisableEditor(Control editor)

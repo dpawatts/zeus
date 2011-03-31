@@ -21,5 +21,6 @@ namespace Zeus.Examples.MinimalMvcExample.Controllers
             return View(new MyPageViewModel(CurrentItem));
         }
 
+
 	}
 }

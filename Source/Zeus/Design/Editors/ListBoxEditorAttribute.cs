@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.UI.WebControls;
 using Zeus.ContentTypes;
+using System.Web.UI;
 
 namespace Zeus.Design.Editors
 {
@@ -52,5 +53,37 @@ namespace Zeus.Design.Editors
 					listItem.Selected = true;
 			}
 		}
+
+        public override bool UpdateItem(IEditableObject item, Control editor)
+        {
+            //check if there's a value yet...
+            if (item[Name] == null)
+                return true;
+            else
+            {
+                ListControl ddl = (ListControl)editor;
+
+                string selectedInEditor = "";
+                foreach (ListItem listItem in ddl.Items)
+                {
+                    if (listItem.Selected)
+                        selectedInEditor += "_" + listItem.Value;
+                }
+
+                System.Collections.Generic.List<int> orig_ddl = (System.Collections.Generic.List<int>)item[Name];
+                string selectedInObject = "";
+                foreach (int val in orig_ddl)
+                {
+                    selectedInObject += "_" + val;
+                }
+
+                if (selectedInEditor != selectedInObject)
+                {
+                    item[Name] = GetValue(ddl);
+                    return true;
+                }
+            }
+            return false;
+        }
 	}
 }

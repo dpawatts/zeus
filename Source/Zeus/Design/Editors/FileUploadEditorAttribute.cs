@@ -50,7 +50,7 @@ namespace Zeus.Design.Editors
 			}
 			else if (fileUpload.HasNewOrChangedFile)
 			{
-				// Populate File object.
+                // Populate File object.
 				file.FileName = fileUpload.FileName;
 				string uploadedFile = GetUploadedFilePath(fileUpload);
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
