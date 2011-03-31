@@ -74,7 +74,7 @@ namespace Zeus.Design.Editors
 					Context.Persister.Delete(child);
 			});
 
-			return false;
+			return true;
 		}
 
 		protected override void DisableEditor(Control editor)
