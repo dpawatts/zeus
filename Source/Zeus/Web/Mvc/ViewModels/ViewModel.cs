@@ -18,39 +18,48 @@ namespace Zeus.Web.Mvc.ViewModels
 	{
 		public ViewModel(T currentItem)
 		{
-			CurrentItem = currentItem;
-
-            //fire changed signal if needed
-            ChangeSignalFired = false;
-
-            //check watchers
-            bool bWatcherChanged = false;
-            if (CacheWatchers != null)
+            if (currentItem == null)
             {
-                foreach (ContentItem ci in CacheWatchers)
+                //no model, so fire changes (essentially denying the page caching)
+                _allDataSignal.FireChanged();
+                ChangeSignalFired = true;
+            }
+            else
+            {
+                CurrentItem = currentItem;
+
+                //fire changed signal if needed
+                ChangeSignalFired = false;
+
+                //check watchers
+                bool bWatcherChanged = false;
+                if (CacheWatchers != null)
                 {
-                    var WatcherSessionVal = System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.ID + "_" + ci.ID];
-                    if ((WatcherSessionVal == null) || (WatcherSessionVal != null && (System.DateTime)WatcherSessionVal != ci.Updated))
+                    foreach (ContentItem ci in CacheWatchers)
                     {
-                        System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.ID + "_" + ci.ID] = ci.Updated;
-                        bWatcherChanged = true;
+                        var WatcherSessionVal = System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.ID + "_" + ci.ID];
+                        if ((WatcherSessionVal == null) || (WatcherSessionVal != null && (System.DateTime)WatcherSessionVal != ci.Updated))
+                        {
+                            System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.ID + "_" + ci.ID] = ci.Updated;
+                            bWatcherChanged = true;
+                        }
                     }
                 }
-            }
 
-            //check itself
-            var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.ID];
-            bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != currentItem.Updated);
-            if (bWatcherChanged || itemChanged)
-            {
-                if (SessionVal != null)
+                //check itself
+                var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.ID];
+                bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != currentItem.Updated);
+                if (bWatcherChanged || itemChanged)
                 {
-                    //only fire the signal if the item has actually changed (this is because once a signal is fired, all items for that template will be recached!)
-                    _allDataSignal.FireChanged();
-                    ChangeSignalFired = true;
+                    if (SessionVal != null)
+                    {
+                        //only fire the signal if the item has actually changed (this is because once a signal is fired, all items for that template will be recached!)
+                        _allDataSignal.FireChanged();
+                        ChangeSignalFired = true;
+                    }
+                    if (itemChanged)
+                        System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.ID] = currentItem.Updated;
                 }
-                if (itemChanged)
-                    System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.ID] = currentItem.Updated;
             }
 		}
 
