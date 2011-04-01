@@ -40,7 +40,7 @@ namespace Zeus.AddIns.Blogs.Services
 			comment.AuthorName = name;
 			comment.AuthorUrl = url;
 			comment.AuthorEmail = email;
-			comment.Text = StringExtensions.ConvertUrlsToHyperLinks(null, text);
+            comment.Text = StringExtensions.ConvertUrlsToHyperLinks(null, text);
 			comment.AddTo(post);
 
 			string error;

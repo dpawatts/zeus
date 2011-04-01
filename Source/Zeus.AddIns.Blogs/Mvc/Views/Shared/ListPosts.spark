@@ -6,6 +6,8 @@
 <macro name="ListPosts" posts="IPageable<Post>">
 	<if condition="posts.Any()">
 		<for each="Post post in posts">
+			
+			
 			<h2 id="post-${post.ID}">
 				<a title="Permanent link to this post" href="${post.Url}" rel="bookmark">${post.Title}</a>
 			</h2>
