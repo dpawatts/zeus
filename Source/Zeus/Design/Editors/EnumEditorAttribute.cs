@@ -82,8 +82,8 @@ namespace Zeus.Design.Editors
             string selectedText = "";
             if (!string.IsNullOrEmpty(ddl.SelectedValue))
                 selectedText = Enum.GetName(_enumType, Convert.ToInt32(ddl.SelectedValue));
-            
-            if (GetValue(ddl).ToString() != selectedText)
+
+            if (selectedText != (item[Name] == null ? string.Empty : item[Name].ToString()))
             {
                 item[Name] = GetValue(ddl);
                 return true;

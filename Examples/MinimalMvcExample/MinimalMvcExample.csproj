@@ -120,6 +120,7 @@
     <Compile Include="Controllers\CustomUrlPageController.cs" />
     <Compile Include="Controllers\MyPageController.cs" />
     <Compile Include="Design\Editors\PageListBoxEditorAttribute.cs" />
+    <Compile Include="Enums\Vegetables.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

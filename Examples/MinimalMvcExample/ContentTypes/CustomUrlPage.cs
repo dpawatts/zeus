@@ -7,6 +7,7 @@ using Zeus.Web.UI;
 using Zeus.ContentTypes;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Examples.MinimalMvcExample.Design.Editors;
+using Zeus.Examples.MinimalMvcExample.Enums;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
@@ -49,6 +50,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
                     value.AddTo(this);
                 }
             }
+        }
+
+        [ContentProperty("Vegetable", 300)]
+        public virtual Vegetable Vegetable
+        {
+            get { return GetDetail("Vegetable", Vegetable.Potato); }
+            set { SetDetail("Vegetable", value); }
         }
 	}
 }
