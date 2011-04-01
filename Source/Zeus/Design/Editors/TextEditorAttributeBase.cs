@@ -60,7 +60,7 @@ namespace Zeus.Design.Editors
 		{
 			ITextControl tb = editor as ITextControl;
 			string value = (tb.Text == DefaultValue) ? null : tb.Text;
-            if (!AreEqual(value, item[Name].ToString()))
+            if (!AreEqual(value, (item[Name] == null ? null : item[Name].ToString())))
 			{
 				item[Name] = value;
 				return true;
