@@ -1,4 +1,5 @@
-﻿namespace Zeus.Persistence.NH
+﻿using System.Collections.Generic;
+namespace Zeus.Persistence.NH
 {
 	public class Repository<TKey, TEntity> : IRepository<TKey, TEntity>
 	{

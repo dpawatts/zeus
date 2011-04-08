@@ -275,105 +275,116 @@ namespace Zeus.Web
 		public PathData ResolvePath(string url)
 		{
 			Url requestedUrl = url;
-			ContentItem item = TryLoadingFromQueryString(requestedUrl, PathData.PageQueryKey);
-			if (item != null)
-				return item.FindPath(requestedUrl["action"] ?? PathData.DefaultAction)
-						.SetArguments(requestedUrl["arguments"])
-						.UpdateParameters(requestedUrl.GetQueries());
 
-			ContentItem startPage = GetStartPage(requestedUrl);
-			string languageCode = GetLanguage(ref requestedUrl);
-			string path = Url.ToRelative(requestedUrl.PathWithoutExtension).TrimStart('~');
-			PathData data = startPage.FindPath(path, languageCode).UpdateParameters(requestedUrl.GetQueries());
+            //ignore anything to /assets/
+            if (requestedUrl.Path.StartsWith("/assets/"))
+            {
+                PathData data = new PathData();
+                data.IsRewritable = false;
+                return data;
+            }
+            else
+            {
+                ContentItem item = TryLoadingFromQueryString(requestedUrl, PathData.PageQueryKey);
+                if (item != null)
+                    return item.FindPath(requestedUrl["action"] ?? PathData.DefaultAction)
+                            .SetArguments(requestedUrl["arguments"])
+                            .UpdateParameters(requestedUrl.GetQueries());
 
-			if (data.IsEmpty())
-			{
-				if (path.EndsWith(DefaultDocument, StringComparison.OrdinalIgnoreCase))
-				{
-					// Try to find path without default document.
-					data = StartPage
-							.FindPath(path.Substring(0, path.Length - DefaultDocument.Length))
-							.UpdateParameters(requestedUrl.GetQueries());
-				}
+                ContentItem startPage = GetStartPage(requestedUrl);
+                string languageCode = GetLanguage(ref requestedUrl);
+                string path = Url.ToRelative(requestedUrl.PathWithoutExtension).TrimStart('~');
+                PathData data = startPage.FindPath(path, languageCode).UpdateParameters(requestedUrl.GetQueries());
 
-				if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1)
-				{
-                    //check cache for previously mapped item
-                    if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
+                if (data.IsEmpty())
+                {
+                    if (path.EndsWith(DefaultDocument, StringComparison.OrdinalIgnoreCase))
                     {
+                        // Try to find path without default document.
+                        data = StartPage
+                                .FindPath(path.Substring(0, path.Length - DefaultDocument.Length))
+                                .UpdateParameters(requestedUrl.GetQueries());
+                    }
 
-                        // Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
-                        foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
+                    if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1)
+                    {
+                        //check cache for previously mapped item
+                        if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
                         {
-                            // First check that the page referenced in web.config actually exists.
-                            ContentItem customUrlPage = Persister.Get(id.ID);
-                            if (customUrlPage == null)
-                                continue;
 
-                            //need to check all children of these nodes to see if there's a match
-                            ContentItem tryMatch =
-                                Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
-                                    ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
-                            if (tryMatch != null)
+                            // Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
+                            foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                             {
-                                data = tryMatch.FindPath(PathData.DefaultAction);
-                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
-                                System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
-                                break;
-                            }
-                            //now need to check for an action...
-                            string fullPath = _webContext.Url.Path;
-                            if (fullPath.LastIndexOf("/") > -1)
-                            {
-                                string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
-                                string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
+                                // First check that the page referenced in web.config actually exists.
+                                ContentItem customUrlPage = Persister.Get(id.ID);
+                                if (customUrlPage == null)
+                                    continue;
 
-                                //by taking off the potential action, there is a danger of 
-
-                                ContentItem tryMatchAgain =
-                                    Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
-                                        ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
-
-                                if (tryMatchAgain != null)
+                                //need to check all children of these nodes to see if there's a match
+                                ContentItem tryMatch =
+                                    Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
+                                        ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
+                                if (tryMatch != null)
                                 {
-                                    data = tryMatchAgain.FindPath(action);
-                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
-                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                    data = tryMatch.FindPath(PathData.DefaultAction);
+                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
+                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
                                     break;
+                                }
+                                //now need to check for an action...
+                                string fullPath = _webContext.Url.Path;
+                                if (fullPath.LastIndexOf("/") > -1)
+                                {
+                                    string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
+                                    string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
+
+                                    //by taking off the potential action, there is a danger of 
+
+                                    ContentItem tryMatchAgain =
+                                        Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+                                            ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+
+                                    if (tryMatchAgain != null)
+                                    {
+                                        data = tryMatchAgain.FindPath(action);
+                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                        System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
-                        string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
-                        if (string.IsNullOrEmpty(act))
-                            return ci.FindPath(PathData.DefaultAction);
                         else
-                            return ci.FindPath(act);
+                        {
+                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
+                            string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
+                            if (string.IsNullOrEmpty(act))
+                                return ci.FindPath(PathData.DefaultAction);
+                            else
+                                return ci.FindPath(act);
+                        }
                     }
-				}
 
-				if (data.IsEmpty())
-				{
-					// Allow user code to set path through event
-					if (PageNotFound != null)
-					{
-						PageNotFoundEventArgs args = new PageNotFoundEventArgs(requestedUrl);
-						args.AffectedPath = data;
-						PageNotFound(this, args);
+                    if (data.IsEmpty())
+                    {
+                        // Allow user code to set path through event
+                        if (PageNotFound != null)
+                        {
+                            PageNotFoundEventArgs args = new PageNotFoundEventArgs(requestedUrl);
+                            args.AffectedPath = data;
+                            PageNotFound(this, args);
 
-						if (args.AffectedItem != null)
-							data = args.AffectedItem.FindPath(PathData.DefaultAction);
-						else
-							data = args.AffectedPath;
-					}
-				}
-			}
+                            if (args.AffectedItem != null)
+                                data = args.AffectedItem.FindPath(PathData.DefaultAction);
+                            else
+                                data = args.AffectedPath;
+                        }
+                    }
+                }
 
-			data.IsRewritable = IsRewritable(_webContext.PhysicalPath);
-			return data;
+                data.IsRewritable = IsRewritable(_webContext.PhysicalPath);
+                return data;
+            }
 		}
 
 		protected virtual string GetLanguage(ref Url url)
