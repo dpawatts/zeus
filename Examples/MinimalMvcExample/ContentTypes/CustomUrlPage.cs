@@ -25,6 +25,14 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             }
         }
 
+        public override bool HasCustomUrl
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         [ContentProperty("Selection Of Pages", 110)]
         [PageListBoxEditor("Selection Of Pages", 110)]
         public IList<int> PagesSelection

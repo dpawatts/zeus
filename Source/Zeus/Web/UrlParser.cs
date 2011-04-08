@@ -7,6 +7,7 @@ using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Zeus.Web
 {
@@ -306,6 +307,30 @@ namespace Zeus.Web
                                 .UpdateParameters(requestedUrl.GetQueries());
                     }
 
+                    //cache data first time we go through this
+                    if (_configUrlsSection.ParentIDs.Count > 0 && System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null)
+                    {
+                        foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
+                        {
+                            // First check that the page referenced in web.config actually exists.
+                            ContentItem customUrlPage = Persister.Get(id.ID);
+                            if (customUrlPage == null)
+                                continue;
+
+                            //need to check all children of these nodes to see if there's a match
+                            IEnumerable<ContentItem> AllContentItemsWithCustomUrls = Find.EnumerateAccessibleChildren(customUrlPage, id.Depth);
+                            foreach (ContentItem ci in AllContentItemsWithCustomUrls)
+                            {
+                                if (ci.HasCustomUrl)
+                                {
+                                    System.Web.HttpContext.Current.Application["customUrlCache_" + ci.Url] = ci.ID;
+                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + ci.Url] = "";                                    
+                                }
+                            }
+                        }
+                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = true;
+                    }
+
                     if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1)
                     {
                         //check cache for previously mapped item
@@ -338,16 +363,26 @@ namespace Zeus.Web
                                     string pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
                                     string action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
 
-                                    //by taking off the potential action, there is a danger of 
-
-                                    ContentItem tryMatchAgain =
-                                        Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
-                                            ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
-
-                                    if (tryMatchAgain != null)
+                                    //see whether we have the root item in the cache...
+                                    if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                     {
-                                        data = tryMatchAgain.FindPath(action);
-                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                        ContentItem tryMatchAgain =
+                                            Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+                                                ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+
+                                        if (tryMatchAgain != null)
+                                        {
+                                            data = tryMatchAgain.FindPath(action);
+                                            System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                            System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        data = ci.FindPath(action);
+                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                         System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                         break;
                                     }

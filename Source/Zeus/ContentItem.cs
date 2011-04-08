@@ -173,6 +173,12 @@ namespace Zeus
 			get { return true; }
 		}
 
+        /// <summary>Gets whether this item is a page. This is used for site map purposes.</summary>
+        public virtual bool HasCustomUrl
+        {
+            get { return false; }
+        }
+
 		/// <summary>
 		/// Gets the public url to this item. This is computed by walking the 
 		/// parent path and prepending their names to the url.
