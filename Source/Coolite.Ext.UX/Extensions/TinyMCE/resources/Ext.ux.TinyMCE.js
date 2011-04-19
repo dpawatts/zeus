@@ -365,7 +365,11 @@
 		
 			// Minimal width and height for advanced theme
 			if( width < 100 ) width = 100;
-			if( height < 129 ) height = 129;
+			if (height < 129) height = 129;
+			
+			// A quick and dirty hack by Andy to fix overflow problems...
+			width -= 4;
+			height -= 100;
 			
 			// Set toolbar div width
 			var edTable = Ext.get(this.ed.id + "_tbl"), 
