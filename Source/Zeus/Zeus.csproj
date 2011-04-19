@@ -190,6 +190,8 @@
     <Compile Include="Configuration\AuthorizedRoleElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsElement.cs" />
     <Compile Include="Configuration\ContentTypeSettingsCollection.cs" />
+    <Compile Include="Configuration\CustomUrlsRapidCheckCollection.cs" />
+    <Compile Include="Configuration\CustomUrlsRapidCheckElement.cs" />
     <Compile Include="Configuration\CustomUrlsSection.cs" />
     <Compile Include="Configuration\CustomUrlsIDCollection.cs" />
     <Compile Include="Configuration\CustomUrlsIDElement.cs" />

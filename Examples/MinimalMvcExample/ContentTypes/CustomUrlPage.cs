@@ -8,13 +8,15 @@ using Zeus.ContentTypes;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.Examples.MinimalMvcExample.Design.Editors;
 using Zeus.Examples.MinimalMvcExample.Enums;
+using Zeus.ContentProperties;
+using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
     [ContentType("Custom Url Page")]
     [RestrictParents(typeof(CustomUrlContainer))]
-    [FieldSet("BannerFS", "Banner Image", 300, ContainerName = "Content")]
-    [AllowedChildren(Types = new[] { typeof(Zeus.FileSystem.Images.Image) })]
+    [Panel("Images", "Images", 340)]
+    [AllowedChildren(Types = new[] { typeof(Page) })]
 	public class CustomUrlPage : PageContentItem
 	{
         public override string Url
@@ -45,6 +47,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         /// <summary>
         /// Banner image
         /// </summary>
+        /*
         [ContentProperty("Banner", 200)]
         [ChildEditor("Banner", 200, ContainerName="BannerFS")]
         public Zeus.FileSystem.Images.Image Banner
@@ -59,6 +62,15 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
                 }
             }
         }
+         */
+
+        [ContentProperty("MyPage", 200)]
+        [ChildEditor("MyPage", 200)]
+        public virtual MyLittleType MyPage
+        {
+            get { return GetDetail("MyPage", (default(MyLittleType))); }
+            set { SetDetail("MyPage", value); }
+        }
 
         [ContentProperty("Vegetable", 300)]
         public virtual Vegetable Vegetable
@@ -66,5 +78,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             get { return GetDetail("Vegetable", Vegetable.Potato); }
             set { SetDetail("Vegetable", value); }
         }
+
+        [XhtmlStringContentProperty("Tiny MCE Content", 350)]
+        public virtual string TinyMCEContent
+        {
+            get { return GetDetail("TinyMCEContent", string.Empty); }
+            set { SetDetail("TinyMCEContent", value); }
+        }
+
 	}
 }
