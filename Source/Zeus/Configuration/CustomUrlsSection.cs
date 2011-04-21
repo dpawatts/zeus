@@ -18,5 +18,12 @@ namespace Zeus.Configuration
             set { base["rapidCheck"] = value; }
         }
 
+        [ConfigurationProperty("mandatoryStrings")]
+        public CustomUrlsMandatoryStringsCollection MandatoryStrings
+        {
+            get { return (CustomUrlsMandatoryStringsCollection)base["mandatoryStrings"]; }
+            set { base["mandatoryStrings"] = value; }
+        }
+
 	}
 }

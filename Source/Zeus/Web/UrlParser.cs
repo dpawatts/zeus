@@ -310,13 +310,16 @@ namespace Zeus.Web
                     //cache data first time we go through this
                     if (_configUrlsSection.ParentIDs.Count > 0 && System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null)
                     {
+                        //the below takes resource and time, we only want one request doing this at a time, so set the flag immediately
+                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = true;
+
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
                             // First check that the page referenced in web.config actually exists.
                             ContentItem customUrlPage = Persister.Get(id.ID);
                             if (customUrlPage == null)
                                 continue;
-                            
+
                             //need to check all children of these nodes to see if there's a match
                             IEnumerable<ContentItem> AllContentItemsWithCustomUrls = Find.EnumerateAccessibleChildren(customUrlPage, id.Depth);
                             foreach (ContentItem ci in AllContentItemsWithCustomUrls)
@@ -324,14 +327,25 @@ namespace Zeus.Web
                                 if (ci.HasCustomUrl)
                                 {
                                     System.Web.HttpContext.Current.Application["customUrlCache_" + ci.Url] = ci.ID;
-                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + ci.Url] = "";                                    
+                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + ci.Url] = "";
                                 }
                             }
                         }
-                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = true;
                     }
 
-                    if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1)
+                    bool bTryCustomUrls = false;
+                    {
+                        foreach (CustomUrlsMandatoryStringsElement stringToFind in _configUrlsSection.MandatoryStrings)
+                        {
+                            if (_webContext.Url.Path.IndexOf(stringToFind.Value) > -1)
+                            {
+                                bTryCustomUrls = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1 && bTryCustomUrls)
                     {
                         //check cache for previously mapped item
                         if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
@@ -347,11 +361,11 @@ namespace Zeus.Web
                                 pathNoAction = fullPath.Substring(0, fullPath.LastIndexOf("/"));
                                 action = fullPath.Substring(fullPath.LastIndexOf("/") + 1);
                             }
-                             
+
                             foreach (CustomUrlsRapidCheckElement possibleAction in _configUrlsSection.RapidCheck)
                             {
                                 if (possibleAction.Action == action)
-                                { 
+                                {
                                     //check for cache
                                     //see whether we have the root item in the cache...
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] != null)
@@ -390,7 +404,7 @@ namespace Zeus.Web
                                 //now need to check for an action...
                                 if (fullPath.LastIndexOf("/") > -1)
                                 {
-                                    
+
                                     //see whether we have the root item in the cache...
                                     if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                     {

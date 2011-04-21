@@ -65,6 +65,10 @@ namespace Zeus.Engine
 
 		protected void Application_BeginRequest(object sender, EventArgs e)
 		{
+            //check for denied IP addresses
+            if (System.Web.HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] == "78.144.74.189")
+                System.Web.HttpContext.Current.Response.End();
+
 			if (BeginRequest != null && !IsStaticResource(sender))
 				BeginRequest(sender, e);
 		}
@@ -126,7 +130,8 @@ namespace Zeus.Engine
 					case ".jpeg":
 					case ".js":
 					case ".axd":
-					case ".ashx":
+                    case ".ashx":
+                    case ".ico":
 						return true;
 				}
 			}
