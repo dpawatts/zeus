@@ -22,15 +22,28 @@ namespace Zeus.Web.Handlers
 
 		public static string GetUploadFolder(string identifier)
 		{
-			string tempFolderPath = HttpRuntime.AppDomainAppPath;
+            //see if the setting is in machine.config - the reason for having it there is that the same folder can be used for all sites,
+            //reducing issues when moving sites around.  If no setting is found one will be created in the app folder, the issue with that
+            //being that when a file is deleted the app domain restarts
 
-			string uploadRootFolderPath = Path.Combine(tempFolderPath, UploadRootFolder);
-			if (!Directory.Exists(uploadRootFolderPath))
-				Directory.CreateDirectory(uploadRootFolderPath);
+            string uploadRootFolderPath = "";
+            if (System.Configuration.ConfigurationSettings.AppSettings["ZeusUploadFolder"] != null)
+            {
+                uploadRootFolderPath = System.Configuration.ConfigurationSettings.AppSettings["ZeusUploadFolder"];
+            }
+            else
+            {
+                string tempFolderPath = HttpRuntime.AppDomainAppPath;
+                uploadRootFolderPath = Path.Combine(tempFolderPath, UploadRootFolder);
+            }
 
-			string uploadFolderPath = Path.Combine(uploadRootFolderPath, identifier);
+            if (!Directory.Exists(uploadRootFolderPath))
+                Directory.CreateDirectory(uploadRootFolderPath);
 
-			return uploadFolderPath;
+            string uploadFolderPath = Path.Combine(uploadRootFolderPath, identifier);
+
+            return uploadFolderPath;
+            
 		}
 
 		public bool IsReusable

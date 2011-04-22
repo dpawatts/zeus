@@ -39,7 +39,7 @@ namespace Zeus.Design.Editors
 
 		public override bool UpdateItem(IEditableObject item, Control editor)
 		{
-			FancyFileUpload fileUpload = (FancyFileUpload) editor;
+            FancyFileUpload fileUpload = (FancyFileUpload) editor;
 			File file = (File) item;
 
 			bool result = false;

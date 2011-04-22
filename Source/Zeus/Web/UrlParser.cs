@@ -273,12 +273,61 @@ namespace Zeus.Web
 			return args.AffectedItem;
 		}
 
+        private bool isFile(string path)
+        {
+            path = path.ToLower();
+            if (path.EndsWith(".css"))
+                return true;
+            else if (path.EndsWith(".gif"))
+                return true;
+            else if (path.EndsWith(".png"))
+                return true;
+            else if (path.EndsWith(".jpg"))
+                return true;
+            else if (path.EndsWith(".jpeg"))
+                return true;
+            else if (path.EndsWith(".js"))
+                return true;
+            else if (path.EndsWith(".axd"))
+                return true;
+            else if (path.EndsWith(".ashx"))
+                return true;
+            else if (path.EndsWith(".ico"))
+                return true;
+            else if (path.EndsWith(".css"))
+                return true;
+            else if (path.EndsWith(".swf"))
+                return true;
+				
+            return false;
+        }
+
+        private void LogIt(string what)
+        {
+            // create a writer and open the file
+            TextWriter tw = new StreamWriter("c:\\sites\\zeus\\debugger.txt", true);
+
+            // write a line of text to the file
+            tw.WriteLine(System.DateTime.Now + " // " + what);
+
+            // close the stream
+            tw.Close();
+        }
+
 		public PathData ResolvePath(string url)
 		{
 			Url requestedUrl = url;
 
-            //ignore anything to /assets/
-            if (requestedUrl.Path.StartsWith("/assets/") || !requestedUrl.Path.StartsWith("/"))
+            //look for files etc and ignore
+            bool bNeedsProcessing = true;
+            if (requestedUrl.Path.ToLower().StartsWith("/assets/"))
+                bNeedsProcessing = false;
+            else if (!requestedUrl.Path.StartsWith("/"))
+                bNeedsProcessing = false;
+            else if (isFile(requestedUrl.Path))
+                bNeedsProcessing = false;
+
+            if (!bNeedsProcessing)
             {
                 PathData data = new PathData();
                 data.IsRewritable = false;
@@ -308,10 +357,28 @@ namespace Zeus.Web
                     }
 
                     //cache data first time we go through this
-                    if (_configUrlsSection.ParentIDs.Count > 0 && System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null)
+                    if ((_configUrlsSection.ParentIDs.Count > 0) && (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null))
                     {
+                        /*
+                        LogIt("In the cache all section : session says " + 
+                            (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null ? "No setting" : "Setting Found") +
+                            " : requestedUrl.Path = " + requestedUrl.Path +
+                            " : _webContext.Url.Path = " + _webContext.Url.Path +
+                            " : isFile? = " + isFile(_webContext.Url.Path));
+                         */
+                        
                         //the below takes resource and time, we only want one request doing this at a time, so set the flag immediately
-                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = true;
+                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = "true";
+
+                        //this code can freak out the 2nd level caching in NHibernate, so clear it if asked to 
+                        //TO DO - implement this
+                        /*
+                        sessionFactory.EvictQueries();
+                        foreach (var collectionMetadata in sessionFactory.GetAllCollectionMetadata())
+                            sessionFactory.EvictCollection(collectionMetadata.Key);
+                        foreach (var classMetadata in sessionFactory.GetAllClassMetadata())
+                            sessionFactory.EvictEntity(classMetadata.Key);
+                        */
 
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
@@ -383,7 +450,7 @@ namespace Zeus.Web
 
                             // Check for Custom Urls (could be done in a service that subscribes to the IUrlParser.PageNotFound event)...
                             foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
-                            {
+                            {                                
                                 // First check that the page referenced in web.config actually exists.
                                 ContentItem customUrlPage = Persister.Get(id.ID);
                                 if (customUrlPage == null)
