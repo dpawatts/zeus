@@ -8,6 +8,7 @@ using Zeus.Globalization.ContentTypes;
 using Zeus.Persistence;
 using System.Linq;
 using System.Collections.Generic;
+using NHibernate;
 
 namespace Zeus.Web
 {
@@ -273,18 +274,18 @@ namespace Zeus.Web
 			return args.AffectedItem;
 		}
 
-        private bool isFile(string path)
+        private bool isFile(string path, bool includeImages)
         {
             path = path.ToLower();
             if (path.EndsWith(".css"))
                 return true;
-            else if (path.EndsWith(".gif"))
+            else if (path.EndsWith(".gif") && includeImages)
                 return true;
-            else if (path.EndsWith(".png"))
+            else if (path.EndsWith(".png") && includeImages)
                 return true;
-            else if (path.EndsWith(".jpg"))
+            else if (path.EndsWith(".jpg") && includeImages)
                 return true;
-            else if (path.EndsWith(".jpeg"))
+            else if (path.EndsWith(".jpeg") && includeImages)
                 return true;
             else if (path.EndsWith(".js"))
                 return true;
@@ -312,7 +313,13 @@ namespace Zeus.Web
 
             // close the stream
             tw.Close();
-        }
+        }/*
+                        LogIt("In the cache all section : session says " + 
+                            (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null ? "No setting" : "Setting Found") +
+                            " : requestedUrl.Path = " + requestedUrl.Path +
+                            " : _webContext.Url.Path = " + _webContext.Url.Path +
+                            " : isFile? = " + isFile(_webContext.Url.Path));
+                         */
 
 		public PathData ResolvePath(string url)
 		{
@@ -324,7 +331,7 @@ namespace Zeus.Web
                 bNeedsProcessing = false;
             else if (!requestedUrl.Path.StartsWith("/"))
                 bNeedsProcessing = false;
-            else if (isFile(requestedUrl.Path))
+            else if (isFile(requestedUrl.Path, false))
                 bNeedsProcessing = false;
 
             if (!bNeedsProcessing)
@@ -359,26 +366,9 @@ namespace Zeus.Web
                     //cache data first time we go through this
                     if ((_configUrlsSection.ParentIDs.Count > 0) && (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null))
                     {
-                        /*
-                        LogIt("In the cache all section : session says " + 
-                            (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null ? "No setting" : "Setting Found") +
-                            " : requestedUrl.Path = " + requestedUrl.Path +
-                            " : _webContext.Url.Path = " + _webContext.Url.Path +
-                            " : isFile? = " + isFile(_webContext.Url.Path));
-                         */
-                        
                         //the below takes resource and time, we only want one request doing this at a time, so set the flag immediately
                         System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = "true";
-
-                        //this code can freak out the 2nd level caching in NHibernate, so clear it if asked to 
-                        //TO DO - implement this
-                        /*
-                        sessionFactory.EvictQueries();
-                        foreach (var collectionMetadata in sessionFactory.GetAllCollectionMetadata())
-                            sessionFactory.EvictCollection(collectionMetadata.Key);
-                        foreach (var classMetadata in sessionFactory.GetAllClassMetadata())
-                            sessionFactory.EvictEntity(classMetadata.Key);
-                        */
+                        System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"] = System.DateTime.Now;
 
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
@@ -398,28 +388,61 @@ namespace Zeus.Web
                                 }
                             }
                         }
+
+                        System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] = System.DateTime.Now;
                     }
 
                     bool bTryCustomUrls = false;
                     {
-                        foreach (CustomUrlsMandatoryStringsElement stringToFind in _configUrlsSection.MandatoryStrings)
+                        if (!isFile(requestedUrl.Path, true))
                         {
-                            if (_webContext.Url.Path.IndexOf(stringToFind.Value) > -1)
+                            foreach (CustomUrlsMandatoryStringsElement stringToFind in _configUrlsSection.MandatoryStrings)
                             {
-                                bTryCustomUrls = true;
-                                break;
+                                if (_webContext.Url.Path.IndexOf(stringToFind.Value) > -1)
+                                {
+                                    bTryCustomUrls = true;
+                                    break;
+                                }
                             }
                         }
                     }
 
                     if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1 && bTryCustomUrls)
                     {
+                        
+                        DateTime lastRun = Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
+                        DateTime lastComplete = System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
+
+                        //temp measure - sleep until the initial loop is complete
+                        int loops = 0;
+                        while (lastComplete < lastRun && loops < 20)
+                        {
+                            loops++;
+                            System.Threading.Thread.Sleep(1000);
+                            lastComplete = System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
+                        }
+
+                        //this code can freak out the 2nd level caching in NHibernate, so clear it if within 5 mins of the last time the cache everything loop was called
+                        //TO DO: implement this
+                        /*
+                        if (DateTime.Now.Subtract(lastRun).TotalMinutes < 5)
+                        {
+                            NHibernate.Cfg.Configuration Configuration = new NHibernate.Cfg.Configuration();
+                            ISessionFactory sessionFactory = Configuration.BuildSessionFactory();
+
+                            sessionFactory.EvictQueries();
+                            foreach (var collectionMetadata in sessionFactory.GetAllCollectionMetadata())
+                                sessionFactory.EvictCollection(collectionMetadata.Key);
+                            foreach (var classMetadata in sessionFactory.GetAllClassMetadata())
+                                sessionFactory.EvictEntity(classMetadata.Key);
+                        }
+                        */
+
                         //check cache for previously mapped item
                         if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
                         {
                             //HACK!!  Using the RapidCheck elements in config try to pre-empt this being a known path with the action
                             //This needed to be implemented for performance reasons
-
                             string fullPath = _webContext.Url.Path;
                             string pathNoAction = "";
                             string action = "";

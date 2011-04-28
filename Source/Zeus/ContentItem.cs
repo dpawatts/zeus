@@ -16,6 +16,7 @@ using Zeus.Web;
 using Zeus.Security;
 using System.Security.Principal;
 using Zeus.Web.Hosting;
+using System.Threading;
 
 namespace Zeus
 {
@@ -367,10 +368,55 @@ namespace Zeus
 		public virtual T GetDetail<T>(string detailName, T defaultValue)
 		{
 			IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
-			if (details.ContainsKey(detailName))
+
+            //try inserted to stop "illegal access" error
+            bool? bContains;
+            bContains = tryAndWaitIfNecessary(details, detailName);
+
+            //if failed try again
+            if (bContains == null)
+            {
+                bContains = tryAndWaitIfNecessary(details, detailName);
+                //if still failed, then another second has already passed so try a final time with no catch
+                if (bContains == null)
+                    bContains = details.ContainsKey(detailName);
+            }
+
+            if (bContains.Value)
 				return Utility.Convert<T>(details[detailName].Value);
 			return defaultValue;
 		}
+
+        private bool? tryAndWaitIfNecessary(IDictionary<string, PropertyData> details, string detailName)
+        {
+            try
+            {
+                return details.ContainsKey(detailName);
+            }
+            catch (System.Exception ex)
+            {
+                if (ex.Message.ToLower().IndexOf("illegal access to loading collection") > -1)
+                {
+                    //wait for a second and try again
+                    Thread.Sleep(1000);
+                }
+                else if (ex.Message.ToLower().IndexOf("could not initialize a collection batch") > -1)
+                {
+                    //wait for a second and try again
+                    Thread.Sleep(1000);
+                }
+                else if (ex.Message.ToLower().IndexOf("was deadlocked on lock resources with another process and has been chosen as the deadlock victim") > -1)
+                {
+                    //wait for a second and try again
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    throw (ex);
+                }
+                return null;
+            }            
+        }
 
 		private IDictionary<string, PropertyData> GetCurrentOrMasterLanguageDetails(string detailName)
 		{
