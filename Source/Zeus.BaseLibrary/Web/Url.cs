@@ -463,11 +463,16 @@ namespace Zeus.BaseLibrary.Web
 
 		public Url PrependSegment(string segment)
 		{
-			if (string.IsNullOrEmpty(Path) || Path == "/")
-				return PrependSegment(segment, DefaultExtension);
-
-			return PrependSegment(segment, Extension);
+			return PrependSegment(segment, false);
 		}
+
+        public Url PrependSegment(string segment, bool ignoreExtension)
+        {
+            if (string.IsNullOrEmpty(Path) || Path == "/")
+                return PrependSegment(segment, DefaultExtension);
+
+            return PrependSegment(segment, ignoreExtension ? "" : Extension);
+        }
 
 		public Url PrependSegment(string segment, string extension)
 		{

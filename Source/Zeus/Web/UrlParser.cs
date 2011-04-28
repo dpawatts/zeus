@@ -108,7 +108,7 @@ namespace Zeus.Web
 			ContentItem current = item;
 			Url url = new Url("/");
 
-			// Walk the item's parent items to compute it's url
+            // Walk the item's parent items to compute it's url
 			do
 			{
 				if (IsStartPage(current))
@@ -124,7 +124,7 @@ namespace Zeus.Web
 						if (LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name) != _webContext.LocalUrl.Authority)
 							url = url.SetAuthority(LanguageSelection.GetHostFromLanguage(ContentLanguage.PreferredCulture.Name));
 						else if (!string.IsNullOrEmpty(languageCode))
-							url = url.PrependSegment(languageCode);
+							url = url.PrependSegment(languageCode, true);
 					}
 
 					// we've reached the start page so we're done here
