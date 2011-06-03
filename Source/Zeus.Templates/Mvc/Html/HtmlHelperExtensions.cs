@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using Zeus.Templates.ContentTypes;
+using Zeus.Web;
 
 namespace Zeus.Templates.Mvc.Html
 {
@@ -33,9 +34,9 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string HtmlTitle(this HtmlHelper html, ContentItem contentItem)
 		{
-            if (contentItem is Page)
+            if (contentItem is PageContentItem)
             {
-                Page thePage = contentItem as Page;
+                PageContentItem thePage = contentItem as PageContentItem;
                 if (thePage.UseProgrammableSEOAssets)
                     return thePage.ProgrammableHtmlTitle;
             }
@@ -44,9 +45,9 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string MetaKeywords(this HtmlHelper html, ContentItem contentItem)
 		{
-            if (contentItem is Page)
+            if (contentItem is PageContentItem)
             {
-                Page thePage = contentItem as Page;
+                PageContentItem thePage = contentItem as PageContentItem;
                 if (thePage.UseProgrammableSEOAssets)
                     return thePage.ProgrammableMetaKeywords;
             }
@@ -55,9 +56,9 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string MetaDescription(this HtmlHelper html, ContentItem contentItem)
 		{
-            if (contentItem is Page)
+            if (contentItem is PageContentItem)
             {
-                Page thePage = contentItem as Page;
+                PageContentItem thePage = contentItem as PageContentItem;
                 if (thePage.UseProgrammableSEOAssets)
                     return thePage.ProgrammableMetaDescription;
             }

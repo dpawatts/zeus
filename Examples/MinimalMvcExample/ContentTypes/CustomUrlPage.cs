@@ -86,5 +86,21 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             set { SetDetail("TinyMCEContent", value); }
         }
 
+        public override bool UseProgrammableSEOAssets
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override string ProgrammableHtmlTitle
+        {
+            get
+            {
+                return "moo";
+            }
+        }
+
 	}
 }
