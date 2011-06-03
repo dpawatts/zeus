@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Templates.Mvc.Html
 {
@@ -32,16 +33,34 @@ namespace Zeus.Templates.Mvc.Html
 
 		public static string HtmlTitle(this HtmlHelper html, ContentItem contentItem)
 		{
-			return html.PropertyOrDefault(contentItem, SeoUtility.HTML_TITLE, "Title");
+            if (contentItem is Page)
+            {
+                Page thePage = contentItem as Page;
+                if (thePage.UseProgrammableSEOAssets)
+                    return thePage.ProgrammableHtmlTitle;
+            }
+            return html.PropertyOrDefault(contentItem, SeoUtility.HTML_TITLE, "Title");        
 		}
 
 		public static string MetaKeywords(this HtmlHelper html, ContentItem contentItem)
 		{
+            if (contentItem is Page)
+            {
+                Page thePage = contentItem as Page;
+                if (thePage.UseProgrammableSEOAssets)
+                    return thePage.ProgrammableMetaKeywords;
+            }
 			return html.PropertyOrDefault(contentItem, SeoUtility.META_KEYWORDS, "Title");
 		}
 
 		public static string MetaDescription(this HtmlHelper html, ContentItem contentItem)
 		{
+            if (contentItem is Page)
+            {
+                Page thePage = contentItem as Page;
+                if (thePage.UseProgrammableSEOAssets)
+                    return thePage.ProgrammableMetaDescription;
+            }
 			return html.PropertyOrDefault(contentItem, SeoUtility.META_DESCRIPTION, "Title");
 		}
 

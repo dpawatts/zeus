@@ -50,5 +50,11 @@ namespace Zeus.Web
 		{
 			get { return true; }
 		}
+
+        public virtual string ProgrammableHtmlTitle { get; set; }
+        public virtual string ProgrammableMetaDescription { get; set; }
+        public virtual string ProgrammableMetaKeywords { get; set; }
+
+        public virtual bool UseProgrammableSEOAssets { get { return false; } }
 	}
 }
