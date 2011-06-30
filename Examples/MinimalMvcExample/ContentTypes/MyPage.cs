@@ -66,5 +66,13 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 			get { return GetChildren<MyLittleType>(); }
 		}
 
+        public override bool AllowParamsOnIndex
+        {
+            get
+            {
+                return true;
+            }
+        }
+
 	}
 }

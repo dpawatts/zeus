@@ -1,0 +1,2 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.MyPageViewModel" />
+Param = ${Model.ParamPassed}

@@ -13,7 +13,6 @@ namespace Zeus.Templates
 		public override void Load()
 		{
 			Bind<BBCodeService>().ToSelf();
-			Bind<NewsService>().ToSelf();
 			Bind<ITagService>().To<TagService>();
 			Bind<IUserRegistrationService>().To<UserRegistrationService>();
 

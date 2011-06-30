@@ -177,14 +177,8 @@ namespace Zeus
             get { return true; }
         }
 
-        /// <summary>Gets whether this item is a page. This is used for site map purposes.</summary>
+        /// <summary>Needs to be overridden and set to true for the code needed to match a Custom Url to kick in</summary>
         public virtual bool HasCustomUrl
-        {
-            get { return false; }
-        }
-
-        /// <summary>Gets whether this item is a page. This is used for site map purposes.</summary>
-        public virtual bool AllowParamsOnIndex
         {
             get { return false; }
         }

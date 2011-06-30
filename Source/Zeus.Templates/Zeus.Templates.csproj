@@ -157,12 +157,6 @@
     <Compile Include="ContentTypes\Widgets\LoginWidget.cs" />
     <Compile Include="ContentTypes\Widgets\TagCloud.cs" />
     <Compile Include="ContentTypes\Widgets\FeedLink.cs" />
-    <Compile Include="ContentTypes\News\BaseNewsPage.cs" />
-    <Compile Include="ContentTypes\News\LatestNewsSummary.cs" />
-    <Compile Include="ContentTypes\News\NewsContainer.cs" />
-    <Compile Include="ContentTypes\News\NewsItem.cs" />
-    <Compile Include="ContentTypes\News\NewsMonth.cs" />
-    <Compile Include="ContentTypes\News\NewsYear.cs" />
     <Compile Include="ContentTypes\Page.cs" />
     <Compile Include="ContentTypes\Redirect.cs" />
     <Compile Include="ContentTypes\RssFeed.cs" />
@@ -216,9 +210,6 @@
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
     <Compile Include="Mvc\Controllers\FormPageController.cs" />
-    <Compile Include="Mvc\Controllers\News\LatestNewsSummaryController.cs" />
-    <Compile Include="Mvc\Controllers\News\NewsContainerController.cs" />
-    <Compile Include="Mvc\Controllers\News\NewsItemController.cs" />
     <Compile Include="Mvc\Controllers\PageController.cs" />
     <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
     <Compile Include="Mvc\Controllers\RssFeedController.cs" />
@@ -241,8 +232,6 @@
     <Compile Include="Mvc\TemplatesAreaRegistration.cs" />
     <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
     <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\LatestNewsSummaryViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\NewsItemViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
     <Compile Include="Mvc\ViewModels\WebsiteNodeViewModel.cs" />
@@ -259,7 +248,6 @@
     <Compile Include="Services\ITagService.cs" />
     <Compile Include="Services\Syndication\IFeed.cs" />
     <Compile Include="Services\Syndication\ISyndicatable.cs" />
-    <Compile Include="Services\NewsService.cs" />
     <Compile Include="Services\SeoDefinitionAppender.cs" />
     <Compile Include="Services\Syndication\SyndicatableDefinitionAppender.cs" />
     <Compile Include="Services\TagService.cs" />
@@ -281,8 +269,6 @@
     <EmbeddedResource Include="Mvc\Views\FeedLink\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Form\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Form\Submit.spark" />
-    <EmbeddedResource Include="Mvc\Views\LatestNewsSummary\Index.spark" />
-    <EmbeddedResource Include="Mvc\Views\NewsItem\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Page\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\Sitemap\Index.spark" />
     <EmbeddedResource Include="Mvc\Views\WebsiteNode\Index.spark" />

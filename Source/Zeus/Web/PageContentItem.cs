@@ -56,5 +56,11 @@ namespace Zeus.Web
         public virtual string ProgrammableMetaKeywords { get; set; }
 
         public virtual bool UseProgrammableSEOAssets { get { return false; } }
+
+        /// <summary>If set to true the code will allow /any_string_here and pass the "any_string_here" part in as a string called "Param" into the action matched by the Url without the "any_string_here" part - allows basic MVC functionality to work</summary>
+        public virtual bool AllowParamsOnIndex
+        {
+            get { return false; }
+        }
 	}
 }

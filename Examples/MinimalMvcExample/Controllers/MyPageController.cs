@@ -12,13 +12,13 @@ namespace Zeus.Examples.MinimalMvcExample.Controllers
         [NonAction]
 		public override ActionResult Index()
 		{
-			return View(new MyPageViewModel(CurrentItem));
+			return View(new MyPageViewModel(CurrentItem, ""));
 		}
 
 
         public ActionResult Index(string param)
         {
-            return View(new MyPageViewModel(CurrentItem));
+            return View(new MyPageViewModel(CurrentItem, param));
         }
 
 

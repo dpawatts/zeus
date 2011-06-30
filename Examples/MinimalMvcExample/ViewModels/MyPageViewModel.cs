@@ -5,10 +5,12 @@ namespace Zeus.Examples.MinimalMvcExample.ViewModels
 {
 	public class MyPageViewModel : ViewModel<MyPage>
 	{
-		public MyPageViewModel(MyPage currentItem)
+		public MyPageViewModel(MyPage currentItem, string param)
 			: base(currentItem)
 		{
-
+            ParamPassed = param;
 		}
+
+        public string ParamPassed { get; set; }
 	}
 }

@@ -81,20 +81,11 @@ namespace Zeus.Web.Mvc
                 string thePathWithOutLastParam = new Uri(thePath.AbsoluteUri.Remove(thePath.AbsoluteUri.Length - (thePath.Segments.Last().Length + 1))).PathAndQuery;
                 td = engine.UrlParser.ResolvePath(thePathWithOutLastParam);
 
-                if (td.CurrentItem != null)
+                //check to see if the content item has been and is a page and if so, if it allows the Index(Param) option                        
+                if (td.CurrentItem != null && td.CurrentItem as PageContentItem != null && (td.CurrentItem as PageContentItem).AllowParamsOnIndex)
                 {
-                    //check to see if the content item allows the Index(Param) option
-                    if (td.CurrentItem.AllowParamsOnIndex)
-                    {
-                        //again, we have the item, so we set the param and continue
-                        extraParam = thePath.Segments.Last();
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-                }
+                    extraParam = thePath.Segments.Last();                    
+                }                
                 else
                 {
                     return null;
