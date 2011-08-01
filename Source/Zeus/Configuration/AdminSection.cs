@@ -101,5 +101,12 @@ namespace Zeus.Configuration
 			get { return (string) base["path"]; }
 			set { base["path"] = value; }
 		}
+
+        [ConfigurationProperty("shareAuthorisationContext", DefaultValue = "false")]
+        public bool ShareAuthorisationContext
+		{
+            get { return (bool)base["shareAuthorisationContext"]; }
+            set { base["shareAuthorisationContext"] = value; }
+		}
 	}
 }

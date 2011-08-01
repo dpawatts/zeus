@@ -7,6 +7,13 @@ namespace Zeus.Configuration
 {
 	public class AuthenticationSection : ConfigurationSection
 	{
+        private readonly AdminSection _configSection;
+
+        public AuthenticationSection(AdminSection configSection)
+        {
+            _configSection = configSection;
+        }
+
 		[StringValidator(MinLength = 1), ConfigurationProperty("defaultUrl", DefaultValue = "default.aspx")]
 		public string DefaultUrl
 		{
@@ -38,7 +45,7 @@ namespace Zeus.Configuration
 		[StringValidator(MinLength = 1), ConfigurationProperty("name", DefaultValue = ".ISISWEBAUTH")]
 		public string Name
 		{
-			get { return (string) base["name"]; }
+			get { return (string) (_configSection.ShareAuthorisationContext ? ".ISISWEBAUTH.ADMIN" : base["name"]); }
 			set { base["name"] = string.IsNullOrEmpty(value) ? base.Properties["name"].DefaultValue : value; }
 		}
 
