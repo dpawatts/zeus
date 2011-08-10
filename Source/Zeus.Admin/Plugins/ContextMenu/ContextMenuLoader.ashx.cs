@@ -16,7 +16,7 @@ namespace Zeus.Admin.Plugins.ContextMenu
 		protected override bool IsApplicable(IContextMenuPlugin plugin, ContentItem item)
 		{
 			return plugin.IsApplicable(item);
-		}
+        }
 
 		protected override bool IsDefault(IContextMenuPlugin plugin, ContentItem item)
 		{

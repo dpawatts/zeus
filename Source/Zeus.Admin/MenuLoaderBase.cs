@@ -16,11 +16,13 @@ namespace Zeus.Admin
 
 			if (!string.IsNullOrEmpty(nodeId))
 			{
-				ContentItem selectedItem = Context.Persister.Get(Convert.ToInt32(nodeId));
+                //use abs value due to placement folders needing to use negative value of their parent so sorting will work
+				ContentItem selectedItem = Context.Persister.Get(Math.Abs(Convert.ToInt32(nodeId)));
 
 				//if (context.User.Identity.Name != "administrator")
 				//	filter = new CompositeSpecification<ContentItem>(new PageSpecification<ContentItem>(), filter);
-				List<BaseMenuItem> menuItems = CreateMenuItems(selectedItem);
+
+                List<BaseMenuItem> menuItems = CreateMenuItems(selectedItem);
 
 				JArray serializedMenuItems = JArray.FromObject(menuItems.Select(mi => GetObjectForJsonSerialization(mi)));
 				context.Response.Write(serializedMenuItems);
@@ -105,7 +107,7 @@ namespace Zeus.Admin
 
 		protected abstract IEnumerable<TPlugin> GetPlugins(string groupName);
 		protected abstract bool IsApplicable(TPlugin plugin, ContentItem item);
-		protected abstract bool IsDefault(TPlugin plugin, ContentItem item);
+        protected abstract bool IsDefault(TPlugin plugin, ContentItem item);
 		protected abstract MenuItem GetMenuItem(TPlugin plugin, ContentItem item);
 		protected abstract bool IsEnabled(TPlugin plugin, ContentItem item);
 

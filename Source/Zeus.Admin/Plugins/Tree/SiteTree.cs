@@ -129,8 +129,10 @@ namespace Zeus.Admin.Plugins.Tree
 						Text = folderGroup,
 						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
 						Cls = "zeus-tree-node",
-						Expanded = true
+						Expanded = false,
+                        NodeID = (0 - Int32.Parse(node.NodeID)).ToString()
 					};
+
 					((TreeNode) node).Nodes.Add(folderNode);
 					foreach (IHierarchyNavigator<ContentItem> childNavigator in navigator.Children.Where(n => n.Current.FolderPlacementGroup == folderGroup))
 					{

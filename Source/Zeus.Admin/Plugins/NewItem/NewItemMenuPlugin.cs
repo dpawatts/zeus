@@ -78,7 +78,8 @@ namespace Zeus.Admin.Plugins.NewItem
 			// Add child menu items for types that can be created under the current item.
 			IContentTypeManager manager = Context.Current.Resolve<IContentTypeManager>();
 			var childTypes = manager.GetAllowedChildren(manager.GetContentType(contentItem.GetType()), null, Context.Current.WebContext.User);
-			if (childTypes.Any())
+
+            if (childTypes.Any())
 			{
 				Menu childMenu = new Menu();
 				menuItem.Menu.Add(childMenu);

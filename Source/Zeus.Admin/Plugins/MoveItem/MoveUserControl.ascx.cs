@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ext.Net;
 using Zeus.Security;
+using System;
 
 namespace Zeus.Admin.Plugins.MoveItem
 {
@@ -11,7 +12,8 @@ namespace Zeus.Admin.Plugins.MoveItem
 		public void MoveNode(int source, int destination, int pos)
 		{
 			ContentItem sourceContentItem = Engine.Persister.Get(source);
-			ContentItem destinationContentItem = Engine.Persister.Get(destination);
+            //get abs value of destination - this sorts out placement folders, which have to have the a negative value of their parent node so that sorting, moving etc can work
+			ContentItem destinationContentItem = Engine.Persister.Get(Math.Abs(destination));
 
 			// Check user has permission to create items under the SelectedItem
 			if (!Engine.SecurityManager.IsAuthorized(destinationContentItem, Page.User, Operations.Create))
