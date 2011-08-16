@@ -122,15 +122,18 @@ namespace Zeus.Admin.Plugins.Tree
 					.Select(ci => ci.Current.FolderPlacementGroup)
 					.Where(s => s != null)
 					.Distinct();
+
+                int uniqueCount = 0;
 				foreach (string folderGroup in folderGroups)
 				{
+                    uniqueCount += 100000;
 					TreeNode folderNode = new TreeNode
 					{
 						Text = folderGroup,
 						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
 						Cls = "zeus-tree-node",
 						Expanded = false,
-                        NodeID = (0 - Int32.Parse(node.NodeID)).ToString()
+                        NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()
 					};
 
 					((TreeNode) node).Nodes.Add(folderNode);

@@ -16,7 +16,11 @@ namespace Zeus.Admin
 
 			if (!string.IsNullOrEmpty(nodeId))
 			{
-                //use abs value due to placement folders needing to use negative value of their parent so sorting will work
+                //use abs value due to placement folders needing to use negative value of their parent so sorting will work, also the folders needed unique IDs, so used 100000 as increment
+                int nodeID = Convert.ToInt32(nodeId);
+                if (nodeID < 0)
+                    nodeID = -1 * (nodeID % 100000);
+
 				ContentItem selectedItem = Context.Persister.Get(Math.Abs(Convert.ToInt32(nodeId)));
 
 				//if (context.User.Identity.Name != "administrator")
