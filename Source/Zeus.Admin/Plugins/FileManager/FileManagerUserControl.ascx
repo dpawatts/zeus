@@ -17,7 +17,7 @@
 	<Content>
 		<ext:BorderLayout runat="server">
 			<West MinWidth="150" MaxWidth="250" Split="true">
-				<ext:TreePanel runat="server" ID="treePanel" Width="150" Animate="true" ContainerScroll="true" RootVisible="true" Border="false">
+				<ext:TreePanel runat="server" ID="treePanel" Width="150" Animate="true" AutoScroll="true" ContainerScroll="true" RootVisible="true" Border="false">
 					<Listeners>
 						<Click Handler="currentNode = node.attributes.id; #{filesStore}.reload({ params: { node: node.attributes.id, type: fileManager.type } });" />
 					</Listeners>
