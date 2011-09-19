@@ -359,5 +359,11 @@ namespace Zeus.BaseLibrary.ExtensionMethods
 
 			return Regex.IsMatch(original, @"^\s*\(?(020[7,8]{1}\)?[ ]?[1-9]{1}[0-9{2}[ ]?[0-9]{4})|(0[1-8]{1}[0-9]{3}\)?[ ]?[1-9]{1}[0-9]{2}[ ]?[0-9]{3})\s*$");
 		}
+
+        public static string MultilineTextToHTML(this string text)
+        {
+            return System.Web.HttpContext.Current.Server.HtmlEncode(text).Replace("\n", "<br/>");
+        }
+    
 	}
 }

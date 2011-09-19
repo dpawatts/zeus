@@ -261,6 +261,7 @@
     <Compile Include="ContentProperties\BooleanProperty.cs" />
     <Compile Include="ContentProperties\IContentProperty.cs" />
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
+    <Compile Include="FileSystem\Images\HiddenImage.cs" />
     <Compile Include="Web\ContentPropertyAttribute.cs" />
     <Compile Include="ContentProperties\PropertyData.cs" />
     <Compile Include="ContentProperties\PropertyDataType.cs" />
