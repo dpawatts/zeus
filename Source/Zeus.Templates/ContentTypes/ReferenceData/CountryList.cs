@@ -296,8 +296,16 @@ namespace Zeus.Templates.ContentTypes.ReferenceData
             Children.Add(new Country("ZM", "ZAMBIA", "Zambia", "ZMB", "894"));
 			Children.Add(new Country("ZW", "ZIMBABWE", "Zimbabwe", "ZWE", "716"));
 
-			foreach (Country country in Children)
-				country.Parent = this;
+            Zeus.Context.Persister.Save(this);
+
+            foreach (Country country in Children)
+            {
+                country.Parent = this;
+                Zeus.Context.Persister.Save(country);
+            }
+
+            //Zeus.Context.Persister.Save(this);
+
 		}
 
 		#endregion

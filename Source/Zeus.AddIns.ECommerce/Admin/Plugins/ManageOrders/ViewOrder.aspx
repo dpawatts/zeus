@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewOrder.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ViewOrder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewOrder.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Plugins.ViewOrder" Debug="true"  %>
 <%@ Import Namespace="Zeus.AddIns.ECommerce.ContentTypes.Data"%>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<admin:ToolbarButton runat="server" ID="btnProcess" Text="Process" Icon="BasketGo" CssClass="positive" OnClick="btnProcess_Click" />
+	<admin:ToolbarButton runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" CssClass="positive" OnClick="btnCancel_Click" />
+	<admin:ToolbarButton runat="server" ID="btnBack" Text="Back to Manage Orders" Icon="ArrowLeft" CssClass="positive" OnClick="btnBack_Click" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<h2>View Order</h2>
 
-    <% Order SelectedOrder = new Order(); %>
-
-	<table class="tb">
+    <table class="tb" id="adminTable">
 		<tr class="titles">
 			<th>Customer</th>
 			<th>Billing Address</th>
@@ -48,7 +48,7 @@
 		</tr>
 		<tr>
 			<td><%= SelectedOrder.Status.GetDescription() %></td>
-			<td><%= SelectedOrder.DeliveryMethod.Title %></td>
+			<td><%= SelectedOrder.DeliveryMethod == null ? "N/A" : SelectedOrder.DeliveryMethod.Title%></td>
 			<td><%= SelectedOrder.Created %></td>
 			<td><%= SelectedOrder.ID %></td>
 		</tr>
@@ -57,7 +57,7 @@
 	<table class="tb">
 		<tr class="titles">
 			<th>Product</th>
-			<th>Variations</th>
+			
 			<th>Quantity</th>
 			<th>Price Per Unit</th>
 			<th>Line Total</th>
@@ -65,24 +65,15 @@
 		<% foreach (OrderItem orderItem in SelectedOrder.Items) { %>
 		<tr>
 			<td><%= orderItem.DisplayTitle %></td>
-			<td>
-				<% foreach (string variation in orderItem.Variations) { %>
-				<%= variation %><br />
-				<% } %>
-			</td>
+			
 			<td><%= orderItem.Quantity %></td>
 			<td><%= orderItem.Price.ToString("C2")%></td>
 			<td><%= orderItem.LineTotal.ToString("C2")%></td>
 		</tr>
 		<% } %>
+		
 		<tr>
-			<td colspan="2">Delivery Price</td>
-			<td>1</td>
-			<td><%= SelectedOrder.DeliveryPrice.ToString("C2") %></td>
-			<td><%= SelectedOrder.DeliveryPrice.ToString("C2") %></td>
-		</tr>
-		<tr>
-			<td colspan="4">TOTAL</td>
+			<td colspan="3">TOTAL</td>
 			<td><%= SelectedOrder.TotalPrice.ToString("C2") %></td>
 		</tr>
 	</table>

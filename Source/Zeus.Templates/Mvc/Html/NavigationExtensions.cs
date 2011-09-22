@@ -275,5 +275,15 @@ namespace Zeus.Templates.Mvc.Html
 
             return "ZeusCache_" + ContentID.ToString() + "_" + Key + (Lang ? "_" + LangCode : "");
         }
+
+        public static string GetCacheKey(this HtmlHelper html, string ContentID, string Key, bool Lang)
+        {
+            string LangCode = "";
+
+            if (Lang)
+                LangCode = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
+
+            return "ZeusCache_" + ContentID + "_" + Key + (Lang ? "_" + LangCode : "");
+        }
 	}
 }

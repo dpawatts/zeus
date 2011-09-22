@@ -21,8 +21,8 @@ namespace Zeus.Web.Mvc.ViewModels
             if (currentItem == null)
             {
                 //no model, so fire changes (essentially denying the page caching)
-                _allDataSignal.FireChanged();
-                ChangeSignalFired = true;
+                    _allDataSignal.FireChanged();
+                    ChangeSignalFired = true;
             }
             else
             {

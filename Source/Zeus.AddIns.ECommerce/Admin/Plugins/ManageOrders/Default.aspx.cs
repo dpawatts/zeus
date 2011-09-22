@@ -21,7 +21,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 
 		private void ReBind()
 		{
-			lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
+			lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status == OrderStatus.Paid).OrderByDescending(o => o.ID).ToList();
 			lsvOrders.DataBind();
 		}
 
@@ -42,6 +42,17 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 			Engine.Persister.Save(order);
 
 			ReBind();
+		}
+
+        protected void btnSeeAll_Click(object sender, CommandEventArgs e)
+		{
+            lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
+            lsvOrders.DataBind();
+		}
+
+        protected void btnSearch_Click(object sender, CommandEventArgs e)
+		{
+			
 		}
 
 		protected void lsvOrders_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)

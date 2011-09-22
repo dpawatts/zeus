@@ -11,5 +11,7 @@
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnProcess;
+        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnCancel;
+        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnBack;
     }
 }

@@ -2,13 +2,17 @@
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods" %>
+<asp:Content runat="server" ContentPlaceHolderID="Toolbar">
+	<admin:ToolbarButton runat="server" ID="btnSeeAll" Text="See All Orders" Icon="BasketGo" CssClass="positive" OnClick="btnSeeAll_Click" />
+	<admin:ToolbarButton runat="server" ID="btnSearch" Text="Search for an Order" Icon="Cross" CssClass="positive" OnClick="btnSearch_Click" />
+</asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 	<h2>Manage Orders</h2>
 
 	<zeus:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order"
 		OnPagePropertiesChanging="lsvOrders_PagePropertiesChanging">
 		<LayoutTemplate>
-			<table class="tb">
+			<table class="tb" id="adminTable">
 				<tr class="titles">
 					<th>Order Number</th>
 					<th>Date Placed</th>
@@ -25,7 +29,7 @@
 			<tr>
 				<td style="vertical-align:top"><%# Container.DataItem.ID %></td>
 				<td style="vertical-align:top"><%# Container.DataItem.Created.ToShortDateString() %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.EmailAddress%></td>
+				<td style="vertical-align:top"><%# Container.DataItem.ShippingAddress.FirstName + " " + Container.DataItem.ShippingAddress.Surname + " - " + Container.DataItem.EmailAddress%></td>
 				<td style="vertical-align:top"><%# Container.DataItem.TotalItemCount%></td>
 				<td style="vertical-align:top"><%# Container.DataItem.TotalPrice.ToString("C2") %></td>
 				<td style="vertical-align:top"><%# Container.DataItem.Status.GetDescription() %></td>
@@ -36,7 +40,7 @@
 		</ItemTemplate>
 	</zeus:TypedListView>
 	
-	<asp:DataPager ID="dpgSearchResultsPager" runat="server" PageSize="30" PagedControlID="lsvOrders">
+	  <asp:DataPager ID="dpgSearchResultsPager" runat="server" PageSize="30" PagedControlID="lsvOrders">
 		<Fields>
       <asp:NumericPagerField ButtonCount="10" ButtonType="Link" />
     </Fields>

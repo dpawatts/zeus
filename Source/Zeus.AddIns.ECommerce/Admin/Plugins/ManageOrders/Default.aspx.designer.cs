@@ -29,5 +29,7 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataPager dpgSearchResultsPager;
+        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSeeAll;
+        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSearch;
     }
 }
