@@ -2,12 +2,41 @@
 <%@ Import Namespace="Zeus.AddIns.ECommerce.ContentTypes.Data"%>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods"%>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
+
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<admin:ToolbarButton runat="server" ID="btnProcess" Text="Process" Icon="BasketGo" CssClass="positive" OnClick="btnProcess_Click" />
 	<admin:ToolbarButton runat="server" ID="btnCancel" Text="Cancel" Icon="Cross" CssClass="positive" OnClick="btnCancel_Click" />
 	<admin:ToolbarButton runat="server" ID="btnBack" Text="Back to Manage Orders" Icon="ArrowLeft" CssClass="positive" OnClick="btnBack_Click" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
+<style>
+/* ORDER TABLES */
+            #adminTable, .tb {
+                border-collapse: collapse; border-spacing: 0;
+                margin: 0 10px 10px 0 ;
+                float: left;
+            }
+
+            #adminTable td, #adminTable th, .tb td, .tb th{
+                border: 1px solid #ddd;
+                font-family: arial;
+                padding: 7px;
+            }
+
+            #adminTable th, .tb th {
+                font-weight: bold;
+                color: Black;
+                font-size: 12px;
+                background: #f0fdff;
+                text-align: left;
+            }
+
+            #adminTable td, .tb td {
+                font-size: 12px;
+                line-height: 17px;
+            }
+</style>
+
 	<h2>View Order</h2>
 
     <table class="tb" id="adminTable">
@@ -38,8 +67,8 @@
 			</td>
 		</tr>
 	</table>
-	
-	<table class="tb">
+	<div style="clear:both" />
+	<table class="tb" id="adminTable">
 		<tr class="titles">
 			<th>Status</th>
 			<th>Delivery Method</th>
@@ -53,8 +82,9 @@
 			<td><%= SelectedOrder.ID %></td>
 		</tr>
 	</table>
+	<div style="clear:both" />
 	
-	<table class="tb">
+	<table class="tb" id="adminTable">
 		<tr class="titles">
 			<th>Product</th>
 			

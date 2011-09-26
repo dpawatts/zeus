@@ -44,13 +44,13 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 			ReBind();
 		}
 
-        protected void btnSeeAll_Click(object sender, CommandEventArgs e)
+        protected void btnSeeAll_Click(object sender, EventArgs e)
 		{
             lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
             lsvOrders.DataBind();
 		}
 
-        protected void btnSearch_Click(object sender, CommandEventArgs e)
+        protected void btnSearch_Click(object sender, EventArgs e)
 		{
 			
 		}

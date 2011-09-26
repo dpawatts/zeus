@@ -2,11 +2,39 @@
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods" %>
+
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
 	<admin:ToolbarButton runat="server" ID="btnSeeAll" Text="See All Orders" Icon="BasketGo" CssClass="positive" OnClick="btnSeeAll_Click" />
-	<admin:ToolbarButton runat="server" ID="btnSearch" Text="Search for an Order" Icon="Cross" CssClass="positive" OnClick="btnSearch_Click" />
+	<admin:ToolbarButton runat="server" ID="btnSearch" Text="Search for an Order" Icon="Magnifier" CssClass="positive" OnClick="btnSearch_Click" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
+<style>
+/* ORDER TABLES */
+            #adminTable, .tb {
+                border-collapse: collapse; border-spacing: 0;
+                margin: 0 10px 10px 0 ;
+                float: left;
+            }
+
+            #adminTable td, #adminTable th, .tb td, .tb th{
+                border: 1px solid #ddd;
+                font-family: arial;
+                padding: 7px;
+            }
+
+            #adminTable th, .tb th {
+                font-weight: bold;
+                font-size: 12px;
+                color: Black;
+                background: #f0fdff;
+                text-align: left;
+            }
+
+            #adminTable td, .tb td {
+                font-size: 12px;
+                line-height: 17px;
+            }
+</style>
 	<h2>Manage Orders</h2>
 
 	<zeus:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order"
