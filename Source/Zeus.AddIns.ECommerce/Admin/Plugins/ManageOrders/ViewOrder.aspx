@@ -51,6 +51,7 @@
 				Telephone: <%= SelectedOrder.TelephoneNumber %><br />
 				Mobile: <%= SelectedOrder.MobileTelephoneNumber %>
 			</td>
+		    <% if (SelectedOrder.BillingAddress != null) { %>
 			<td>
 				<%= SelectedOrder.BillingAddress.PersonTitle %> <%= SelectedOrder.BillingAddress.FirstName %> <%= SelectedOrder.BillingAddress.Surname %><br />
 				<%= SelectedOrder.BillingAddress.AddressLine1 %><br />
@@ -58,6 +59,9 @@
 				<%= SelectedOrder.BillingAddress.TownCity %><br />
 				<%= SelectedOrder.BillingAddress.Postcode %><br />
 			</td>
+			<% } else { %>
+			<td>No Billing Address Recorded</td>
+			<% } %>
 			<td>
 				<%= SelectedOrder.ShippingAddress.PersonTitle %> <%= SelectedOrder.ShippingAddress.FirstName %> <%= SelectedOrder.ShippingAddress.Surname %><br />
 				<%= SelectedOrder.ShippingAddress.AddressLine1 %><br />
@@ -74,12 +78,14 @@
 			<th>Delivery Method</th>
 			<th>Order Date</th>
 			<th>Order Number</th>
+			<th>Payment Method</th>
 		</tr>
 		<tr>
 			<td><%= SelectedOrder.Status.GetDescription() %></td>
 			<td><%= SelectedOrder.DeliveryMethod == null ? "N/A" : SelectedOrder.DeliveryMethod.Title%></td>
 			<td><%= SelectedOrder.Created %></td>
 			<td><%= SelectedOrder.ID %></td>
+			<td><%= SelectedOrder.PaymentMethod.GetDescription() %></td>
 		</tr>
 	</table>
 	<div style="clear:both" />

@@ -66,7 +66,13 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		{
 			get { return GetDetail("Status", OrderStatus.Unpaid); }
 			set { SetDetail("Status", value); }
-		}
+        }
+
+        public PaymentMethod PaymentMethod
+        {
+            get { return GetDetail("PaymentMethod", PaymentMethod.SagePay); }
+            set { SetDetail("PaymentMethod", value); }
+        }
 
 		public string BookingRef
 		{

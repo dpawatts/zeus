@@ -101,7 +101,15 @@
   <ItemGroup>
     <Compile Include="Admin\Plugins\ManageOrdersActionPlugin.cs" />
     <Compile Include="Admin\EmbeddedResourcePackage.cs" />
+    <Compile Include="Admin\Plugins\ManageOrders\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Plugins\ManageOrders\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ContentTypes\Data\Address.cs" />
+    <Compile Include="ContentTypes\Data\PaymentMethod.cs" />
     <Compile Include="ContentTypes\Data\ECommerceAddIn.cs" />
     <Compile Include="ContentTypes\Data\OrderItem.cs" />
     <Compile Include="ContentTypes\Data\OrderContainer.cs" />
@@ -216,6 +224,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\visa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Admin\Plugins\ManageOrders\Search.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ContentTypes\Widgets\" />

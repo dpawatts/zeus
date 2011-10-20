@@ -46,13 +46,24 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders
 
         protected void btnSeeAll_Click(object sender, EventArgs e)
 		{
+            btnSeeAll.Visible = false;
+            btnSeeOnlyUnprocessed.Visible = true;
+
             lsvOrders.DataSource = SelectedItem.GetChildren<Order>().Where(o => o.Status != OrderStatus.Unpaid).OrderByDescending(o => o.ID).ToList();
             lsvOrders.DataBind();
-		}
+        }
+
+        protected void btnSeeOnlyUnprocessed_Click(object sender, EventArgs e)
+        {
+            btnSeeAll.Visible = true;
+            btnSeeOnlyUnprocessed.Visible = false;
+
+            ReBind();
+        }
 
         protected void btnSearch_Click(object sender, EventArgs e)
 		{
-			
+            Response.Redirect("admin.plugins.manage-orders.search.aspx?selected=" + Request.QueryString["selected"]);
 		}
 
 		protected void lsvOrders_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)

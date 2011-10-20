@@ -10,7 +10,7 @@
 namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders {
     
     
-    public partial class Default {
+    public partial class Search {
         
         /// <summary>
         /// lsvOrders control.
@@ -29,8 +29,12 @@ namespace Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataPager dpgSearchResultsPager;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSeeAll;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSeeOnlyUnprocessed;
-        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnSearch;
+        protected global::Zeus.Admin.Web.UI.WebControls.ToolbarButton btnBack;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
+
+        protected global::System.Web.UI.WebControls.TextBox txtOrderNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerFirstName;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerEmail;
     }
 }

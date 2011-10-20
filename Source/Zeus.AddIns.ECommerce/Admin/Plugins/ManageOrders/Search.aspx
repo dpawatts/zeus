@@ -1,12 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="Zeus.AddIns.ECommerce.Admin.Plugins.ManageOrders.Search" %>
 <%@ Register TagPrefix="admin" Namespace="Zeus.Admin.Web.UI.WebControls" Assembly="Zeus.Admin" %>
 <%@ Register TagPrefix="zeus" Namespace="Zeus.Web.UI.WebControls" Assembly="Zeus" %>
 <%@ Import Namespace="Zeus.BaseLibrary.ExtensionMethods" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="Toolbar">
-	<admin:ToolbarButton runat="server" ID="btnSeeAll" Text="See All Orders" Icon="BasketGo" CssClass="positive" OnClick="btnSeeAll_Click" />
-	<admin:ToolbarButton runat="server" ID="btnSeeOnlyUnprocessed" Text="See Only Unprocessed Orders" Icon="Basket" CssClass="positive" OnClick="btnSeeOnlyUnprocessed_Click" Visible="false" />
-	<admin:ToolbarButton runat="server" ID="btnSearch" Text="Search for an Order" Icon="Magnifier" CssClass="positive" OnClick="btnSearch_Click" />
+	<admin:ToolbarButton runat="server" ID="btnBack" Text="Back to Manage Orders" Icon="ArrowLeft" CssClass="positive" OnClick="btnBack_Click" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="Content">
 <style>
@@ -36,8 +34,30 @@
                 line-height: 17px;
             }
 </style>
-	<h2>Manage Orders</h2>
+    <h2>Search for Orders</h2>
+     <table>
+        <tr>
+            <td>Order Number</td>
+            <td><asp:TextBox id="txtOrderNumber" runat="server" /></td>
+        </tr>
+        <tr>
+            <td>Customer First Name</td>
+            <td><asp:TextBox id="txtCustomerFirstName" runat="server" /></td>
+        </tr>
+        <tr>
+            <td>Customer Last Name</td>
+            <td><asp:TextBox id="txtCustomerLastName" runat="server" /></td>
+        </tr>
+        <tr>
+            <td>Customer Email</td>
+            <td><asp:TextBox id="txtCustomerEmail" runat="server" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><asp:Button runat="server" id="btnSearch" Text="Search" OnClick="btnSearch_Click" /></td>            
+        </tr>
+    </table>
 
+	
 	<zeus:TypedListView runat="server" ID="lsvOrders" DataItemTypeName="Zeus.AddIns.ECommerce.ContentTypes.Data.Order"
 		OnPagePropertiesChanging="lsvOrders_PagePropertiesChanging">
 		<LayoutTemplate>
@@ -49,7 +69,6 @@
 					<th># Items</th>
 					<th>Total Price</th>
 					<th>Status</th>
-					<th>Method</th>
 					<th>Details</th>
 				</tr>
 				<asp:PlaceHolder runat="server" ID="itemPlaceholder" />
@@ -63,12 +82,14 @@
 				<td style="vertical-align:top"><%# Container.DataItem.TotalItemCount%></td>
 				<td style="vertical-align:top"><%# Container.DataItem.TotalPrice.ToString("C2") %></td>
 				<td style="vertical-align:top"><%# Container.DataItem.Status.GetDescription() %></td>
-				<td style="vertical-align:top"><%# Container.DataItem.PaymentMethod.GetDescription() %></td>
 				<td style="vertical-align:top">
 					<a href="admin.plugins.manage-orders.view-order.aspx?selected=<%# Container.DataItem.Path %>">Details</a>
 				</td>
 			</tr>
 		</ItemTemplate>
+		<EmptyDataTemplate>
+		    There are no search results to show for these values
+		</EmptyDataTemplate>
 	</zeus:TypedListView>
 	
 	  <asp:DataPager ID="dpgSearchResultsPager" runat="server" PageSize="30" PagedControlID="lsvOrders">

@@ -139,14 +139,19 @@ namespace Zeus.AddIns.ECommerce.Services
 
 				order.AddTo(configuration.Orders);
 
-				if (_webContext.User != null)
-				{
-					order.Name = _webContext.User.Identity.Name + " for " + items.First().Title;
-					order.Title = _webContext.User.Identity.Name + " for " + items.First().Title;
-				}
-
-				order.Status = OrderStatus.Unpaid;
+                order.Status = OrderStatus.Unpaid;
 				_persister.Save(order);
+
+                if (_webContext.User != null && !string.IsNullOrEmpty(_webContext.User.Identity.Name))
+                {
+                    order.Title = _webContext.User.Identity.Name + " for " + items.First().Title;
+                }
+                else
+                {
+                    order.Title = "Order #" + order.ID;
+                }
+
+                _persister.Save(order);
 
 				return order;
 			}
