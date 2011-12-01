@@ -39,7 +39,7 @@ namespace Zeus.Templates.Services
 
 			foreach (ContentType contentType in _contentTypeManager.GetContentTypes())
 			{
-				if (IsPage(contentType))
+                if (IsPage(contentType))
 				{
 					FieldSetAttribute seoTab = new FieldSetAttribute("SEO", SeoTabTitle, 15)
 					{
@@ -76,10 +76,10 @@ namespace Zeus.Templates.Services
 		{
 			return (typeof(BasePage).IsAssignableFrom(contentType.ItemType)
 				&& contentType.ItemType != typeof(Redirect)
-				&& contentType.IsPage) ||
+                && contentType.IsPage && !contentType.IgnoreSEOAssets) ||
                 typeof(WebsiteNode).IsAssignableFrom(contentType.ItemType)
                 && contentType.ItemType != typeof(Redirect)
-                && contentType.IsPage;
+                && contentType.IsPage && !contentType.IgnoreSEOAssets;
 		}
 
 		#endregion

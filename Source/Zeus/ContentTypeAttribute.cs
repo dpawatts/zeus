@@ -51,6 +51,12 @@ namespace Zeus
 		/// </summary>
 		public bool IsPage { get; set; }
 
+        /// <summary>
+        /// Unfortunately the above also dicates behaviour in the admin system
+        /// This will allow you to turn off the SEO Assets
+        /// </summary>		
+        public bool IgnoreSEOAssets { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -59,7 +65,16 @@ namespace Zeus
 		{
 			RefinementOrder = RefineOrder.First;
 			IsPage = true;
+            IgnoreSEOAssets = false;
 		}
+
+        /// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
+        /// <param name="title">Sets IgnoreSEO to true.</param>
+        public ContentTypeAttribute(bool ignoreSEOAssets)
+            : this()
+        {
+            IgnoreSEOAssets = ignoreSEOAssets;
+        }
 
 		/// <summary>Initializes a new instance of ContentTypeAttribute class.</summary>
 		/// <param name="title">The title used when presenting this item type to editors.</param>
@@ -105,6 +120,7 @@ namespace Zeus
 			currentContentType.ContentTypeAttribute = this;
 			currentContentType.IsDefined = true;
 			currentContentType.IsPage = IsPage;
+            currentContentType.IgnoreSEOAssets = IgnoreSEOAssets;
 		}
 	}
 }

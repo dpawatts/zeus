@@ -5,15 +5,16 @@ using Zeus.Design.Editors;
 using System.Collections.Generic;
 using Zeus.Web.UI;
 using Zeus.ContentTypes;
+using Zeus.Templates.ContentTypes;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
-	[ContentType("MyPage")]
+	[ContentType("MyPage", IgnoreSEOAssets=true)]
 	[AllowedChildren(typeof(Zeus.FileSystem.Images.Image))]
 	[Panel("NewContainer", "All My Types Go in Here!", 100)]
 	[FieldSet("ImageContainer", "Main Image", 200, ContainerName = "Content")]
 	[FieldSet("AnotherImageContainer", "Secondary Image", 300, ContainerName = "Content")]
-	public class MyPage : PageContentItem
+	public class MyPage : BasePage
 	{
 		[LinkedItemDropDownListEditor("Product", 99)]
 		public virtual ContentItem Product

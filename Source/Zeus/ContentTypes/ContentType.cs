@@ -66,7 +66,9 @@ namespace Zeus.ContentTypes
 		/// <summary>Definitions which are not enabled are not available when creating new items.</summary>
 		public bool Enabled { get; set; }
 
-		public bool IsPage { get; set; }
+        public bool IsPage { get; set; }
+
+        public bool IgnoreSEOAssets { get; set; }
 
 		/// <summary>Gets or sets whether this content type has been defined. Weirdly enough a content type
 		/// may exist without being defined. To define a content type the class must implement 
