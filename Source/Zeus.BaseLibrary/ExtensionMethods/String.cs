@@ -7,6 +7,7 @@ using System.IO;
 using System.Web;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
 
 namespace Zeus.BaseLibrary.ExtensionMethods
 {
@@ -363,6 +364,89 @@ namespace Zeus.BaseLibrary.ExtensionMethods
         public static string MultilineTextToHTML(this string text)
         {
             return System.Web.HttpContext.Current.Server.HtmlEncode(text).Replace("\n", "<br/>");
+        }
+
+        /// <summary>
+        /// Content cut for summaries in the lists
+        /// </summary>
+        /// <param name="html"></param>
+        /// <param name="theString"></param>
+        /// <param name="theLength"></param>
+        /// <returns></returns>
+        public static string SafeTruncate(this string theString, int theLength)
+        {
+            if (theString.Length < theLength)
+            {
+                return theString;
+            }
+            else
+            {
+                string newText = "";
+                newText = theString.Substring(0, theLength);
+
+                // test whether the truncate has cut into an existing HTML tag. If it has, remove a character to newText and test again. Do this until false. 
+                Regex isItCutXP = new Regex(@"<[^>]*$");
+                while (isItCutXP.IsMatch(newText))
+                {
+                    theLength--;
+                    newText = theString.Substring(0, theLength);
+                }
+
+                //remove images from newText
+                Regex imagesRGX = new Regex(@"<img[^>]+>", RegexOptions.None);
+                newText = imagesRGX.Replace(newText, "");
+
+                // match all opening HTML tags (avoiding <br> tags) in newText and put in an array called 'theMatches'
+                Regex openTagsRGX = new Regex(@"<(?!\/)(?!br)[^>]+>", RegexOptions.IgnoreCase);
+                MatchCollection theMatches = openTagsRGX.Matches(newText);
+
+
+                // for each opening tag, create a close tag
+                ArrayList theCloses = new ArrayList();
+                Regex inTagRGX = new Regex(@"\w+");
+                foreach (Match m in theMatches)
+                {
+
+                    var theTag = inTagRGX.Match(m.ToString());
+                    string toAdd = "</" + theTag.ToString() + ">";
+                    theCloses.Add(toAdd);
+                }
+
+
+                //find all currently existing close tags
+                Regex closeTagsRGX = new Regex(@"<\/[^>]+>", RegexOptions.IgnoreCase);
+                MatchCollection existingCloseTags = closeTagsRGX.Matches(newText);
+                string returningText = "";
+
+                //if there are any, delete matches entries in theCloses in the order in which they appear
+
+                foreach (Match m in existingCloseTags)
+                {
+
+                    foreach (string exC in theCloses)
+                    {
+                        if (m.ToString() == exC)
+                        {
+                            theCloses.Remove(exC);
+                            break;
+                        }
+                    }
+
+                }
+                //reverse it
+                theCloses.Reverse();
+
+                //concatentate theCloses into a string and tack it to the end of the truncated text.
+                StringBuilder theCloseString = new StringBuilder();
+                foreach (string m in theCloses)
+                {
+                    theCloseString.Append(m);
+                }
+
+                returningText = newText + "..." + theCloseString;
+
+                return returningText;
+            }
         }
     
 	}
