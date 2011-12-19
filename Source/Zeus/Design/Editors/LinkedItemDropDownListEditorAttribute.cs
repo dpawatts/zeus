@@ -25,7 +25,8 @@ namespace Zeus.Design.Editors
 
 		#endregion
 
-		public bool ExcludeSelf { get; set; }
+        public bool ExcludeSelf { get; set; }
+        public bool UseNonHiearchicalTitle { get; set; }
 		public Type TypeFilter { get; set; }
 
 		protected override object GetValue(ListControl ddl)
@@ -74,7 +75,7 @@ namespace Zeus.Design.Editors
 				itemList = itemList.Where(i => i != item);
 			return itemList
 				.OrderBy(i => i.HierarchicalTitle)
-				.Select(i => new ListItem {Value = i.ID.ToString(), Text = i.HierarchicalTitle})
+                .Select(i => new ListItem { Value = i.ID.ToString(), Text = UseNonHiearchicalTitle ? i.Title : i.HierarchicalTitle })
 				.ToArray();
 		}
 	}

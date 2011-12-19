@@ -10,7 +10,7 @@ using Zeus.Web;
 namespace Zeus.Templates.ContentTypes
 {
 	[ContentType("Feed", Description = "An RSS feed that outputs XML with the latest feed data.")]
-	[RestrictParents(typeof(WebsiteNode), typeof(Page))]
+	[RestrictParents(typeof(WebsiteNode), typeof(Page))]    
 	public class RssFeed : PageContentItem, IFeed, INode
 	{
 		public override string IconUrl
