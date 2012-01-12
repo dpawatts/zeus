@@ -174,6 +174,7 @@
     <Compile Include="Admin\RecycleBin\NotThrowableAttribute.cs" />
     <Compile Include="Admin\SecurityInitializer.cs" />
     <Compile Include="Admin\Targets.cs" />
+    <Compile Include="Admin\TestRecomplile.cs" />
     <Compile Include="Admin\TreeSorter.cs" />
     <Compile Include="CancelDestinationEventArgs.cs" />
     <Compile Include="CancelItemEventArgs.cs" />
