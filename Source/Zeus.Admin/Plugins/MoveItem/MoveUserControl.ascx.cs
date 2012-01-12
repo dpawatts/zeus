@@ -35,6 +35,19 @@ namespace Zeus.Admin.Plugins.MoveItem
 			Utility.MoveToIndex(siblings, sourceContentItem, pos);
 			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
 				Zeus.Context.Persister.Save(updatedItem);
+
+            //set the updated value on the parent of the item that has been moved (for caching purposes)
+            sourceContentItem.Parent.Updated = Utility.CurrentTime();
+            Zeus.Context.Persister.Save(sourceContentItem.Parent);
+
+            ContentItem theParent = sourceContentItem.Parent.Parent;
+            while (theParent.Parent != null)
+            {
+                //go up the tree updating - if a child has been changed, so effectively has the parent
+                theParent.Updated = DateTime.Now;
+                Zeus.Context.Persister.Save(theParent);
+                theParent = theParent.Parent;
+            }
 		}
 	}
 }

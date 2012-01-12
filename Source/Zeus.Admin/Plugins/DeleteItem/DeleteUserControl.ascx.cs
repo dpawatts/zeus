@@ -148,6 +148,19 @@ namespace Zeus.Admin.Plugins.DeleteItem
 				Zeus.Context.Persister.Delete(item);
 			}
 
+            //set the updated value on the parent of the item that has been moved (for caching purposes)
+            parent.Updated = Utility.CurrentTime();
+            Zeus.Context.Persister.Save(parent);
+
+            ContentItem theParent = parent;
+            while (theParent.Parent != null)
+            {
+                //go up the tree updating - if a child has been changed, so effectively has the parent
+                theParent.Updated = DateTime.Now;
+                Zeus.Context.Persister.Save(theParent);
+                theParent = theParent.Parent;
+            }
+
 			if (parent != null)
 				Refresh(parent);
 			else

@@ -8,11 +8,11 @@ using System.Web.UI;
 
 namespace Zeus.Design.Editors
 {
-	public class LinkedItemDropDownListEditor : DropDownListEditorAttribute
+    public class LinkedItemDropDownListEditor : DropDownListEditorAttribute
 	{
 		#region Constructors
 
-		public LinkedItemDropDownListEditor()
+        public LinkedItemDropDownListEditor()
 		{
 			ExcludeSelf = true;
 		}
@@ -27,7 +27,8 @@ namespace Zeus.Design.Editors
 
         public bool ExcludeSelf { get; set; }
         public bool UseNonHiearchicalTitle { get; set; }
-		public Type TypeFilter { get; set; }
+        public Type TypeFilter { get; set; }
+        public bool IsRequired { get; set; }
 
 		protected override object GetValue(ListControl ddl)
 		{
@@ -53,6 +54,17 @@ namespace Zeus.Design.Editors
             if (one == null && two.ToString() == string.Empty)
             {//do nothing - this means the same as them being equal
             }
+            else if (one == null && !IsRequired)
+            {
+               //the below case converting one to a ContentItem will error (and thus prevents the item from being saved), so set to null
+                item[Name] = null;
+                return true;
+            }
+            else if (one == null && IsRequired)
+            {
+                //throw a better error than the one which would be thrown
+                throw (new Exception("This parameter (in the dropdownlist) is compulsory"));
+            }
             else if (((ContentItem)one).ID.ToString() == two.ToString())
             {//do nothing - this means the same as them being equal
             }
@@ -61,7 +73,7 @@ namespace Zeus.Design.Editors
                 item[Name] = GetValue(ddl);
                 return true;
             }
-                
+
             return false;
         }
 
