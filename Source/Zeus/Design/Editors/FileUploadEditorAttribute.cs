@@ -61,7 +61,8 @@ namespace Zeus.Design.Editors
 				}
 
 				// Later, we will change the name, if this is a child property.
-				file.Name = file.Title = fileUpload.FileName;
+                file.Title = fileUpload.FileName;
+                file.Name = Utility.GetSafeName(file.Title);
 
 				// Delete temp folder.
 				System.IO.File.Delete(uploadedFile);
