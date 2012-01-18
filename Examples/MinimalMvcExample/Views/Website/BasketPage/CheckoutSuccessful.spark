@@ -1,0 +1,72 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+		<div id="generic">
+			<h1 id="page-head">Your Order Was Successful</h1>
+			
+			<div class="editor">
+				<p>Thank you for ordering from shellys.com - we have sent you a confirmation email as a receipt, and your goods will be shipped promptly.</p>
+							
+				<h3>Order Summary:</h3>
+				<!--table class="order-summary">
+					<tr>
+						<th>Item / Quantity</th>
+						<th>Price</th>
+					</tr>
+					<tr each="BasketItem item in Model.ItemsInBasket">
+						<td>
+							1 x ${item.SkuName} [Size ${item.Size}]
+						</td>
+						<td>							
+							<if condition="Model._basket.Discount != null && Model._basket.Discount.DiscountType == NopSolutions.NopCommerce.BusinessLogic.Promo.Discounts.DiscountTypeEnum.AssignedToSKUs && Model._basket.GetDiscountForProductSKU(item.SKU_ID) > 0">
+								#decimal disc = Model._basket.GetDiscountForProductSKU(item.SKU_ID);
+								&pound;${Html.DisplayPrice(Model.GetSKU(item).Price)} MINUS ${string.Format("{0:c}", disc)} DISCOUNT = &pound;${Html.DisplayPrice(Model.GetSKU(item).Price - disc)}
+							</if>
+							<else>
+								&pound;${Html.DisplayPrice(item.Price)}
+							</else>
+						</td>
+					</tr>
+				</table>
+				<h3>Your Order Reference : Your Order Reference : SHL_10${Model.OrderReference}</h3>
+				<table class="order-summary">
+					<if condition="Model._basket.DiscountID > 0 && Model._basket.Discount.DiscountType == NopSolutions.NopCommerce.BusinessLogic.Promo.Discounts.DiscountTypeEnum.AssignedToOrderSubTotal">
+						<tr>
+							<td>ITEMS SUBTOTAL</td>
+							<td>&pound;${Html.DisplayPrice(Model._basket.ItemsTotalWithoutDiscount)}</td>
+						</tr>
+						<tr>
+							<td>DISCOUNT</td>
+							<td>${string.Format("{0:c}", Model._basket.Discount.DiscountAmount)}%</td>
+						</tr>
+					</if>
+					
+					<tr>
+						<td>ITEMS TOTAL</td>
+						<td>&pound;${Html.DisplayPrice(Model._basket.ItemsTotal)}</td>
+					</tr>					 
+					<tr>
+						<td>SHIPPING: ${Model._basket.DeliveryMethodName.ToUpper()}</td>
+						<td>&pound;${Html.DisplayPrice(Model._basket.DeliveryPrice)}</td>
+					</tr>
+					<tr>
+						<td>ORDER TOTAL</td>
+						<td>&pound;${Html.DisplayPrice(Model._basket.BasketTotal)}</td>
+					</tr>
+					
+				</table-->
+			
+				<p>Order Summary goes here!</p>
+			
+				<h3>Products will be shipped to...</h3>
+				<p>
+					${Model.ShippingAddress.FirstName + " " + Model.ShippingAddress.Surname}<br/>
+					${!string.IsNullOrEmpty(Model.ShippingAddress.AddressLine1) ? Model.ShippingAddress.AddressLine1 + "<br/>" : ""}
+					${!string.IsNullOrEmpty(Model.ShippingAddress.AddressLine2) ? Model.ShippingAddress.AddressLine2 + "<br/>" : ""}
+					${!string.IsNullOrEmpty(Model.ShippingAddress.TownCity) ? Model.ShippingAddress.TownCity + "<br/>" : ""}
+					${!string.IsNullOrEmpty(Model.ShippingAddress.StateRegion) ? Model.ShippingAddress.StateRegion + "<br/>" : ""}
+					${!string.IsNullOrEmpty(Model.ShippingAddress.Country) ? Model.ShippingAddress.Country + "<br/>" : ""}
+					${!string.IsNullOrEmpty(Model.ShippingAddress.Postcode) ? Model.ShippingAddress.Postcode + "<br/>" : ""}
+				</p>
+			
+			</div>
+		</div>			

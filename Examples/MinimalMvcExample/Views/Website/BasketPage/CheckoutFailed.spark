@@ -1,0 +1,10 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+		<div id="generic">
+		
+			<h1 id="page-head">Your Order Was Unsuccessful</h1>
+
+			<div class="editor">
+				<p>We have cancelled the order as instructed, payment will not be taken.</p>
+			</div>
+		</div>

@@ -1,0 +1,25 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+<h1>The Basket</h1>
+
+<table>
+	<tr each="PayPalItem ppItem in Model.CurrentItem.BasketItems">
+		<td>${ppItem.Name}</td>
+		<td>${ppItem.Description}</td>
+		<td>${ppItem.Quantity}</td>
+		<td>${ppItem.Amount}</td>
+	</tr>
+	<tr>
+		<td colspan="2">Shipping</td>
+		<td colspan="2">${Model.CurrentItem.DeliveryPrice}</td>
+	</tr>
+	<tr>
+		<td colspan="2">Total</td>
+		<td colspan="2">${Model.CurrentItem.BasketTotal}</td>
+	</tr>
+</table>
+
+<a href="${Model.CurrentItem.Url}/checkout">Pay With PayPal</a>
+
+
+

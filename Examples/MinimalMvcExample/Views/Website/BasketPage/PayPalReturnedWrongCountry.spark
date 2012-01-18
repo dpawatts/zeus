@@ -1,0 +1,43 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+		<div id="generic">
+			
+			<h1 id="page-head">Your Order Was Unsuccessful</h1>
+			
+			<div class="editor">
+				
+				<div id="checkoutError">
+				
+					<p>Unfortunately the information we received back from PayPal did not match the shipping information you gave us :</p>
+					
+					<if condition="string.IsNullOrEmpty(Model.ShippingAddress.Country)">
+    
+						<p>We did not get country information back from PayPal, so it's impossible for us to validate your order.  <a href="/contact-us">Please contact us for more help</a>.</p>
+					    
+					</if>
+					<else>
+						<p>The country you entered as your shipping address in Paypal is not valid for the shipping option you chose</p>
+						<!--if condition="Model.CountryWasFound">
+							<p>The Shipping Location you entered was ${Model.CurrentItem.}</p>
+							<p>However, you entered the country of ${Model.ShippingAddress.Country} into PayPal, which is not valid for the chosen Shipping Region</p>
+							<p>Please choose from the below options...</p>
+							<table class="error-options">
+								<tr>
+									<td>Re-authorise the payment with PayPal, using this Shipping Region (which is the correct Shipping Location for the Country you entered into PayPal) : ${Model.AlternateShippingLocation.Title}</td>
+									<td class="action"><a href="${Model.CurrentItem.Url}/changeShippingLocation?id=${Model.AlternateShippingLocation.ID}">Go<em></em></a></td>
+								</tr>
+								<tr>
+									<td>Go back to your basket and select a different Shipping Region manually</td>
+									<td class="action"><a href="${Model.CurrentItem.Url}">Go<em></em></a></td>
+								</tr>
+							</table>
+						</if>
+						<else>
+							<p>The Country entered into PayPal (${Model.CountryReturnedFromPayPal}) is not linked to any of our Shipping Regions - you can find out more about why we don't ship to the location <a href="/contact-us">by contacting us</a></p>
+						</else-->
+					</else>
+				</div>
+			
+			</div>
+			
+		</div>

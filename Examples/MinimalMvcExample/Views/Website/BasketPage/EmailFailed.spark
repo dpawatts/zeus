@@ -1,0 +1,10 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+			<div id="generic">
+				<h1 id="page-head">Your Order Was Successful</h1>
+					
+				<div class="editor">
+					<p>Your order has been processed, many thanks.<br/><br/>  There has however been an issue with sending you your order confirmation email, but this will not affect your order.  If you are at all concerned please email us on info@shellys.com</p>
+				</div>
+			</div>
+

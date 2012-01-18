@@ -1,0 +1,14 @@
+<viewdata model="Zeus.Examples.MinimalMvcExample.ViewModels.BasketPageViewModel" />
+
+		
+		<div id="generic">
+			<h1 id="page-head">Your Order Was Unsuccessful</h1>
+
+			<div class="editor">
+				<p>Unfortunately your order has failed to be processed correctly : the error given back to us by PayPal was :</p>
+				<p>${Model.CheckoutMessage}</p>
+			</div>
+		</div>
+
+
+
