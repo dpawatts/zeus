@@ -125,7 +125,7 @@ namespace Zeus.Web.UI.WebControls
 				<ul class=""demo-list"" id=""{1}""></ul></div>", GetAnchorClientID(), GetListClientID());
 			Controls.Add(new LiteralControl(html));
 
-			// Resource registration moved to Edit.Default.aspx.cs
+            // Resource registration moved to Edit.Default.aspx.cs
 
 			string script = string.Format(@"var {8}up;
 function prepare{8}() {{

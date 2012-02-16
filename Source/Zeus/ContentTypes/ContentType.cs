@@ -6,6 +6,7 @@ using Zeus.ContentProperties;
 using Zeus.Design.Displayers;
 using Zeus.Design.Editors;
 using Zeus.Integrity;
+using Zeus.Web;
 
 namespace Zeus.ContentTypes
 {
@@ -68,7 +69,25 @@ namespace Zeus.ContentTypes
 
         public bool IsPage { get; set; }
 
-        public bool IgnoreSEOAssets { get; set; }
+        public bool IgnoreSEOAssets
+        {
+            get
+            {
+                if (Activator.CreateInstance(ItemType) is PageContentItem)
+                    return ((PageContentItem)Activator.CreateInstance(ItemType)).UseProgrammableSEOAssets;
+                else
+                    return false;
+            }
+        }
+        public string IgnoreSEOExplanation {
+            get
+            {
+                if (Activator.CreateInstance(ItemType) is PageContentItem)
+                    return ((PageContentItem)Activator.CreateInstance(ItemType)).UseProgrammableSEOAssetsExplanation;
+                else
+                    return string.Empty;
+            }
+        }
 
 		/// <summary>Gets or sets whether this content type has been defined. Weirdly enough a content type
 		/// may exist without being defined. To define a content type the class must implement 

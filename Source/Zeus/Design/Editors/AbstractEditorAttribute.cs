@@ -65,7 +65,9 @@ namespace Zeus.Design.Editors
 		public int SortOrder { get; set; }
 
 		/// <summary>Gets or sets the label used for presentation.</summary>
-		public string Title { get; set; }
+        public string Title { get; set; }
+
+        public int? CurrentID { get; set; }
 
 		public string ContainerName { get; set; }
 

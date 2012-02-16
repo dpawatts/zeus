@@ -96,13 +96,16 @@ namespace Zeus.Design.Editors
 		{
 			((FancyFileUpload)editor).Enabled = false;
 		}
-
+        
 		protected override void UpdateEditorInternal(IEditableObject item, Control editor)
 		{
 			FancyFileUpload fileUpload = (FancyFileUpload)editor;
 			File file = (File)item;
-			if (!file.IsEmpty())
-				fileUpload.CurrentFileName = file.FileName;
+            if (!file.IsEmpty())
+            {
+                CurrentID = file.ID;
+                fileUpload.CurrentFileName = file.FileName;
+            }
 		}
 
 		protected virtual FancyFileUpload CreateEditor()

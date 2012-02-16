@@ -10,14 +10,15 @@ using Zeus.Examples.MinimalMvcExample.Design.Editors;
 using Zeus.Examples.MinimalMvcExample.Enums;
 using Zeus.ContentProperties;
 using Zeus.Templates.ContentTypes;
+using Zeus.FileSystem.Images;
 
 namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
     [ContentType("Custom Url Page")]
     [RestrictParents(typeof(CustomUrlContainer))]
     [Panel("Images", "Images", 340)]
-    [AllowedChildren(Types = new[] { typeof(Page) })]
-	public class CustomUrlPage : PageContentItem
+    [AllowedChildren(Types = new[] { typeof(Page), typeof(CroppedImage) })]
+	public class CustomUrlPage : BasePage
 	{
         public override string Url
         {
@@ -47,12 +48,12 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         /// <summary>
         /// Banner image
         /// </summary>
-        /*
+        
         [ContentProperty("Banner", 200)]
-        [ChildEditor("Banner", 200, ContainerName="BannerFS")]
-        public Zeus.FileSystem.Images.Image Banner
+        [ChildEditor("Banner", 200, arg1="400", arg2="200")]
+        public Zeus.FileSystem.Images.CroppedImage Banner
         {
-            get { return GetChild("Banner") as Zeus.FileSystem.Images.Image; }
+            get { return GetChild("Banner") as Zeus.FileSystem.Images.CroppedImage; }
             set
             {
                 if (value != null)
@@ -62,8 +63,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
                 }
             }
         }
-         */
-
+        
         [ContentProperty("MyPage", 200)]
         [ChildEditor("MyPage", 200)]
         public virtual MyLittleType MyPage
@@ -94,11 +94,27 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             }
         }
 
+        public override string UseProgrammableSEOAssetsExplanation
+        {
+            get
+            {
+                return "no SEO assets cos you suck balls!";
+            }
+        }
+
         public override string ProgrammableHtmlTitle
         {
             get
             {
                 return "moo";
+            }
+        }
+
+        public override string ProgrammableMetaDescription
+        {
+            get
+            {
+                return "This is a programmatical desc";
             }
         }
 

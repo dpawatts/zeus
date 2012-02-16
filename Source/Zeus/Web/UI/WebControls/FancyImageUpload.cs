@@ -37,6 +37,8 @@ namespace Zeus.Web.UI.WebControls
 			base.OnInit(e);
 		}
 
+        public int CurrentID { get; set; }
+
 		#region IValidator Members
 
 		/// <summary>Gets or sets the error message generated when the name editor contains invalid values.</summary>

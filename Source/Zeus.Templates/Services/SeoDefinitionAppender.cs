@@ -46,12 +46,26 @@ namespace Zeus.Templates.Services
 						Collapsible = true,
 						Collapsed = true
 					};
+
 					contentType.Add(seoTab);
 
 					AddEditableText(contentType, HtmlTitleTitle, SeoUtility.HTML_TITLE, 11, _templatesConfig.Seo.HtmlTitleFormat, "Used in the &lt;title&gt; element on the page", 200, false);
 					AddEditableText(contentType, MetaKeywordsTitle, SeoUtility.META_KEYWORDS, 21, _templatesConfig.Seo.MetaKeywordsFormat, null, 400, false);
 					AddEditableText(contentType, MetaDescriptionTitle, SeoUtility.META_DESCRIPTION, 22, _templatesConfig.Seo.MetaDescriptionFormat, null, 1000, true);
 				}
+                else if (contentType.IgnoreSEOAssets)
+                {
+                    FieldSetAttribute seoTab = new FieldSetAttribute("SEO", contentType.IgnoreSEOExplanation, 15)
+                    {
+                        Collapsible = true,
+                        Collapsed = false
+                    };
+
+                    contentType.Add(seoTab);
+
+
+                }
+
 			}
 		}
 

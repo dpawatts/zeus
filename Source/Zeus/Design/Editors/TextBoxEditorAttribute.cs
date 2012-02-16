@@ -41,7 +41,7 @@ namespace Zeus.Design.Editors
 		public TextBoxEditorAttribute(string title, int sortOrder, int maxLength)
 			: base(title, sortOrder, maxLength)
 		{
-			
+            
 		}
 
 		#region Properties

@@ -65,6 +65,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.3680.23265, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -97,6 +101,13 @@
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Imagecrop.aspx.cs">
+      <DependentUpon>Imagecrop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Imagecrop.aspx.designer.cs">
+      <DependentUpon>Imagecrop.aspx</DependentUpon>
     </Compile>
     <Compile Include="Plugins\ManageZones\ManageZonesMenuPlugin.cs" />
     <Compile Include="Plugins\ManageZones\ManageZonesUserControl.ascx.cs">
@@ -420,6 +431,17 @@
     <EmbeddedResource Include="Assets\Images\Icons\exclamation.png" />
     <EmbeddedResource Include="Assets\Images\Icons\information.png" />
     <EmbeddedResource Include="Assets\Images\Icons\LanguageMissing.gif" />
+    <EmbeddedResource Include="Imagecrop.aspx" />
+    <EmbeddedResource Include="Assets\JS\jcrop\fixed.js" />
+    <EmbeddedResource Include="Assets\JS\jcrop\non-fixed.js" />
+    <EmbeddedResource Include="Assets\Css\jcrop.gif" />
+    <EmbeddedResource Include="Assets\Css\jcrop_jquery.css" />
+    <EmbeddedResource Include="Assets\JS\jcrop\jquery.color.js" />
+    <EmbeddedResource Include="Assets\JS\jcrop\jquery.Jcrop.js" />
+    <EmbeddedResource Include="Assets\JS\jcrop\jquery.Jcrop.min.js" />
+    <EmbeddedResource Include="Assets\JS\jcrop\jquery.min.js" />
+    <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
+    <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
     <Content Include="DynamicContent\Default.aspx" />
     <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />

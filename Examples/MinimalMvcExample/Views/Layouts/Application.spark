@@ -1,2 +1,13 @@
-<use:view />
+<html>
 
+	<head>	
+		<title>${Html.HtmlTitle(Model.CurrentItem)}</title>
+		<meta name="description" content="${Html.MetaDescription(Model.CurrentItem)}" />
+	</head>
+	<body>
+
+		<use:view />
+
+	</body>
+
+</html>

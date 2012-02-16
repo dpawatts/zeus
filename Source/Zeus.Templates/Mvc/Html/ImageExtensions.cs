@@ -71,6 +71,7 @@ namespace Zeus.Templates.Mvc.Html
 
         public static string ImageUrl(this HtmlHelper helper, Image image, int width, int height, bool fill, string defaultImage, DynamicImageFormat format)
         {
+            
             string result = defaultImage;
 
             // only generate url if image exists
@@ -87,11 +88,20 @@ namespace Zeus.Templates.Mvc.Html
                 // generate resized image url
                 else
                 {
-                    result = image.GetUrl(width, height, fill, format);
+                    if (image is CroppedImage)
+                    {
+                        CroppedImage cImage = (CroppedImage)image;
+                        result = cImage.GetUrl(width, height, fill, format);
+                    }
+                    else
+                    {
+                        result = image.GetUrl(width, height, fill, format);
+                    }
                 }
             }
 
             return result;
+            
         }
 
         /// <summary>

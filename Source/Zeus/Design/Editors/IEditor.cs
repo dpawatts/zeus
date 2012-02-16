@@ -23,5 +23,7 @@ namespace Zeus.Design.Editors
 		/// <param name="item">The object that contains values to assign to the editor.</param>
 		/// <param name="editor">The editor to load with a value.</param>
 		void UpdateEditor(IEditableObject item, Control editor);
+
+        int? CurrentID { get; set; }
 	}
 }

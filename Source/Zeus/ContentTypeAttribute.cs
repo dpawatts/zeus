@@ -120,7 +120,7 @@ namespace Zeus
 			currentContentType.ContentTypeAttribute = this;
 			currentContentType.IsDefined = true;
 			currentContentType.IsPage = IsPage;
-            currentContentType.IgnoreSEOAssets = IgnoreSEOAssets;
+            //currentContentType.IgnoreSEOAssets = IgnoreSEOAssets;
 		}
 	}
 }
