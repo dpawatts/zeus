@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 using Ninject;
 
 namespace Zeus.Web.Mvc
@@ -33,6 +34,11 @@ namespace Zeus.Web.Mvc
 			if (controller == null)
 				throw new HttpException(404, string.Format(CultureInfo.CurrentUICulture, "The controller for path '{0}' was not found or does not implement IController.", requestContext.HttpContext.Request.Path));
 			return controller;
+		}
+
+		public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
+		{
+			return SessionStateBehavior.Default;
 		}
 
 		private IController InstantiateController(string controllerName)
