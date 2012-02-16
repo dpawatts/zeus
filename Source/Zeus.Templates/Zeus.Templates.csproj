@@ -79,13 +79,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="SoundInTheory.DynamicImage, Version=1.0.3581.23916, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
+    <Reference Include="SoundInTheory.DynamicImage, Version=2.0.2.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.dll</HintPath>
-    </Reference>
-    <Reference Include="SoundInTheory.DynamicImage.Caching.Sql, Version=1.0.3581.23916, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\DynamicImage\SoundInTheory.DynamicImage.Caching.Sql.dll</HintPath>
+      <HintPath>..\packages\DynamicImage.2.0.2\lib\NET40\SoundInTheory.DynamicImage.dll</HintPath>
     </Reference>
     <Reference Include="Spark, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

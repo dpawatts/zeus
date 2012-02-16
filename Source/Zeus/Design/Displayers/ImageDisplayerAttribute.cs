@@ -8,8 +8,6 @@ namespace Zeus.Design.Displayers
 {
 	public class ImageDisplayerAttribute : DisplayerAttribute
 	{
-		private DynamicImage _dynamicImage;
-
 		public int Width
 		{
 			get;

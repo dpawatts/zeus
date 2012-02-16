@@ -80,7 +80,7 @@ namespace Zeus.Templates.Mvc.Html
                 // special code for image without resizing
                 if (width == 0 && height == 0)
                 {
-                    result = new DynamicImageBuilder()
+                    result = new CompositionBuilder()
                         .WithLayer(LayerBuilder.Image.SourceImage(image))
                         .Url;
                 }

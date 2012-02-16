@@ -1,12 +1,10 @@
-using System.IO;
-using SoundInTheory.DynamicImage.Fluent;
-using Zeus.BaseLibrary.ExtensionMethods.IO;
-using Zeus.BaseLibrary.Web;
-using Zeus.Design.Editors;
-using SoundInTheory.DynamicImage;
-using SoundInTheory.DynamicImage.Filters;
-using Zeus.ContentTypes;
 using System;
+using SoundInTheory.DynamicImage;
+using SoundInTheory.DynamicImage.Caching;
+using SoundInTheory.DynamicImage.Filters;
+using SoundInTheory.DynamicImage.Layers;
+using Zeus.ContentTypes;
+using Zeus.Design.Editors;
 
 namespace Zeus.FileSystem.Images
 {
@@ -80,12 +78,12 @@ namespace Zeus.FileSystem.Images
 
             // generate resized image url
             // set image format
-            var dynamicImage = new SoundInTheory.DynamicImage.DynamicImage();
+            var dynamicImage = new SoundInTheory.DynamicImage.Composition();
             dynamicImage.ImageFormat = format;
             
             // create image layer wit ha source
             var imageLayer = new ImageLayer();
-            imageLayer.Source.SingleSource = imageSource;
+            imageLayer.Source = imageSource;
 
             // add filters
             if (!(TopLeftXVal == 0 && TopLeftYVal == 0 && CropWidth == 0 && CropHeight == 0))
@@ -93,7 +91,6 @@ namespace Zeus.FileSystem.Images
                 var cropFilter = new CropFilter
                 {
                     Enabled = true,
-                    Name = "Default Crop",
                     X = this.TopLeftXVal,
                     Y = this.TopLeftYVal,
                     Width = this.CropWidth,
@@ -136,7 +133,7 @@ namespace Zeus.FileSystem.Images
             dynamicImage.Layers.Add(imageLayer);
 
             // generate url
-            return dynamicImage.ImageUrl;
+            return ImageUrlGenerator.GetImageUrl(dynamicImage);
         }
 
         public string GetUrl()
