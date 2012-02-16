@@ -1,7 +1,0 @@
-﻿<use namespace="System.Collections.Generic" />
-<use namespace="System.Linq" />
-<use namespace="Zeus.AddIns.Blogs.ContentTypes" />
-
-<macro name="ListCategories" categories="IEnumerable<Category>">
-	<for each="var category in categories"><a href="${category.Url}">${category.Title}</a>&nbsp;</for>
-</macro>

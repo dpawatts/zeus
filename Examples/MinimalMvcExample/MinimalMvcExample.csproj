@@ -139,10 +139,6 @@
     <Compile Include="WebsiteModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Zeus.AddIns.Blogs\Zeus.AddIns.Blogs.csproj">
-      <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
-      <Name>Zeus.AddIns.Blogs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce.PaymentGateways.SagePay\Zeus.AddIns.ECommerce.PaymentGateways.SagePay.csproj">
       <Project>{2F01CC7A-40AE-4475-9948-E2B2EA405C13}</Project>
       <Name>Zeus.AddIns.ECommerce.PaymentGateways.SagePay</Name>
@@ -154,14 +150,6 @@
     <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce\Zeus.AddIns.ECommerce.csproj">
       <Project>{E1EC7BD3-0431-4AD5-A037-F68166BD92B4}</Project>
       <Name>Zeus.AddIns.ECommerce</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Zeus.AddIns.Forums\Zeus.AddIns.Forums.csproj">
-      <Project>{0401C41A-ED78-4410-B12E-CFCF8C6BAF2C}</Project>
-      <Name>Zeus.AddIns.Forums</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Zeus.AddIns.Mailouts\Zeus.AddIns.Mailouts.csproj">
-      <Project>{E9B2E16C-32D2-4354-9099-876900E625C0}</Project>
-      <Name>Zeus.AddIns.Mailouts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.Admin\Zeus.Admin.csproj">
       <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>

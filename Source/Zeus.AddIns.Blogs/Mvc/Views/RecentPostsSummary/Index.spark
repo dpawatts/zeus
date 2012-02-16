@@ -1,9 +1,0 @@
-﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.RecentPostsSummaryViewModel"/>
-
-<h3 class="first">Recent Posts</h3>
-
-<ul class="articles">
-	<li each="var post in Model.RecentPosts">
-		<a title="Permanent link to this post" href="${post.Url}">${post.Title}</a>
-	</li>
-</ul>

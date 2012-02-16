@@ -1,8 +1,0 @@
-﻿<viewdata model="Zeus.AddIns.Blogs.Mvc.ViewModels.BlogViewModel"/>
-<use import="ListPosts" />
-
-<content name="head">
-	<link rel="stylesheet" type="text/css" href="/assets/blogs/css/core.css" />
-</content>
-
-${ListPosts(Model.RecentPosts)}
