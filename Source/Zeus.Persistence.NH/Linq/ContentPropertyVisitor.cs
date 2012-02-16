@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using NHibernate.Linq.Visitors;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
 
 namespace Zeus.Persistence.NH.Linq
 {
-	internal class ContentPropertyVisitor : ExpressionVisitor
+	internal class ContentPropertyVisitor : NHibernate.Linq.Visitors.ExpressionVisitor
 	{
 		private readonly IContentPropertyManager _contentPropertyManager;
 

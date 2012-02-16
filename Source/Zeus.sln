@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9293D83E-48A0-4A7D-9FC2-0F3F191CFEB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{AAB76390-02E2-4B9A-9C8B-BC0057E660AC}"
@@ -25,6 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A7A33508
 	ProjectSection(SolutionItems) = preProject
 		..\Build\Template.wxs = ..\Build\Template.wxs
 		..\Build\ZeusTeamCityBuild.msbuild = ..\Build\ZeusTeamCityBuild.msbuild
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{B197282F-CBBE-454C-842C-F6AA857FCBBB}"
+	ProjectSection(SolutionItems) = preProject
+		changelog.txt = changelog.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus", "Zeus\Zeus.csproj", "{205892DE-129F-4F77-B5E2-41E863676BFB}"
@@ -58,11 +63,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.BaseLibrary.Tests", "Zeus.BaseLibrary.Tests\Zeus.BaseLibrary.Tests.csproj", "{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Templates.Tests", "Zeus.Templates.Tests\Zeus.Templates.Tests.csproj", "{34EDBA77-B394-419F-9A68-05EA97DA9F98}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{B197282F-CBBE-454C-842C-F6AA857FCBBB}"
-	ProjectSection(SolutionItems) = preProject
-		changelog.txt = changelog.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.AddIns.ECommerce.PaypalExpress", "Zeus.AddIns.ECommerce.PaypalExpress\Zeus.AddIns.ECommerce.PaypalExpress.csproj", "{730D671D-33B8-4BF5-80B4-729E0965EACA}"
 EndProject
