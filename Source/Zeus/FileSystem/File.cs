@@ -40,11 +40,6 @@ namespace Zeus.FileSystem
 			}
 		}
 
-		public override string Extension
-		{
-			get { return FileExtension; }
-		}
-
 		public string FileExtension
 		{
 			get { return System.IO.Path.GetExtension(FileName); }
