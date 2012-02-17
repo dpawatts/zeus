@@ -100,7 +100,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="SitemapHTMLExample.htm" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentTypes\BasketPage.cs" />
@@ -159,10 +161,6 @@
     <ProjectReference Include="..\..\Source\Zeus.Templates\Zeus.Templates.csproj">
       <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
       <Name>Zeus.Templates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Source\Zeus.Web.Mvc.Pdf\Zeus.Web.Mvc.Pdf.csproj">
-      <Project>{A191F03D-F881-4247-A20E-1CDC6D2F0F28}</Project>
-      <Name>Zeus.Web.Mvc.Pdf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus\Zeus.csproj">
       <Project>{205892DE-129F-4F77-B5E2-41E863676BFB}</Project>
