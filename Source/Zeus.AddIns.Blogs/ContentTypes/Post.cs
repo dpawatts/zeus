@@ -90,7 +90,7 @@ namespace Zeus.AddIns.Blogs.ContentTypes
 				return "<p>" + Excerpt + "</p>";
 
 			if (!string.IsNullOrEmpty(Text))
-				return Text.Truncate(300, true);
+				return Text.SafeTruncate(300);
 
 			return "<p>" + Title + "</p>";
 		}

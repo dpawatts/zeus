@@ -20,7 +20,7 @@ namespace Zeus.Templates.Mvc.Controllers
         [ImportModelStateFromTempData]
         public override ActionResult Index()
 		{
-			return View(new LoginPageViewModel(CurrentItem, User.Identity.IsAuthenticated));
+            return View(new LoginPageViewModel(CurrentItem, User.Identity.IsAuthenticated, CurrentUser));
 		}
 
         [HttpPost]
@@ -40,7 +40,7 @@ namespace Zeus.Templates.Mvc.Controllers
 			if (!string.IsNullOrEmpty(loginForm.Target))
 				Response.Redirect(loginForm.Target);
 
-			return RedirectToParentPage();
+            return RedirectToParentPage();
 		}
 	}
 }
