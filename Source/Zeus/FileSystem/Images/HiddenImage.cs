@@ -8,5 +8,12 @@ namespace Zeus.FileSystem.Images
     [ContentTypeAuthorizedRoles("Administrators")]    
     public class HiddenImage : Zeus.FileSystem.Images.Image
     {
+        public override string IconUrl
+        {
+            get
+            {
+                return Utility.GetCooliteIconUrl(Ext.Net.Icon.PictureEdit);
+            }
+        }
     }
 }

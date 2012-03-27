@@ -263,6 +263,7 @@
     <Compile Include="ContentProperties\IContentProperty.cs" />
     <Compile Include="Design\Editors\CroppedImageUploadEditorAttribute.cs" />
     <Compile Include="Design\Editors\TextAreaEditorAttribute.cs" />
+    <Compile Include="FileSystem\Images\HiddenCroppedImage.cs" />
     <Compile Include="FileSystem\Images\CroppedImage.cs" />
     <Compile Include="FileSystem\Images\HiddenImage.cs" />
     <Compile Include="Web\ContentPropertyAttribute.cs" />

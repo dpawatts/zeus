@@ -11,8 +11,6 @@ using System;
 namespace Zeus.FileSystem.Images
 {
     [ContentType("User Cropped Image")]
-    [AdminSiteTreeVisibility(AdminSiteTreeVisibility.Hidden)]
-    [ContentTypeAuthorizedRoles("Administrators")]
     public class CroppedImage : Image, AcceptArgsFromChildEditor
     {
         [CroppedImageUploadEditor("CroppedImage", 100)]
