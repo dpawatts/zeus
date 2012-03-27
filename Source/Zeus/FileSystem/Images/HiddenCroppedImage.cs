@@ -15,5 +15,16 @@ namespace Zeus.FileSystem.Images
     [ContentTypeAuthorizedRoles("Administrators")]    
     public class HiddenCroppedImage : CroppedImage
     {
+        public override string arg1
+        {
+            get { return GetDetail("arg1", string.Empty); }
+            set { SetDetail("arg1", value); }
+        }
+
+        public override string arg2
+        {
+            get { return GetDetail("arg2", string.Empty); }
+            set { SetDetail("arg2", value); }
+        }
     }
 }

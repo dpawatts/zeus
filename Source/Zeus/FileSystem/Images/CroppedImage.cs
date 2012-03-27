@@ -10,6 +10,8 @@ using System;
 
 namespace Zeus.FileSystem.Images
 {
+    //the editor when this isn't hidden needs to understand that the crop values will be in the parent object
+
     [ContentType("User Cropped Image")]
     public class CroppedImage : Image, AcceptArgsFromChildEditor
     {
@@ -20,23 +22,13 @@ namespace Zeus.FileSystem.Images
             set { base.Data = value; }
         }
 
-        /* These are the base settings - not sure where they should sit...possibly in the editor code? */
-        /*
-        [Zeus.ContentProperty("Fixed Width Value", 210, Description = "0 is off")]
-        public virtual int FixedWidthValue
+        public override string IconUrl
         {
-            get { return GetDetail("FixedWidthValue", 0); }
-            set { SetDetail("FixedWidthValue", value); }
+            get
+            {
+                return Utility.GetCooliteIconUrl(Ext.Net.Icon.PictureEdit);
+            }
         }
-
-        [Zeus.ContentProperty("Fixed Height Value", 220, Description = "0 is off")]
-        public virtual int FixedHeightValue
-        {
-            get { return GetDetail("FixedHeightValue", 0); }
-            set { SetDetail("FixedHeightValue", value); }
-        }
-        */
-        /* Vals from jcrop... */
 
         public virtual int TopLeftXVal
         {
@@ -151,16 +143,16 @@ namespace Zeus.FileSystem.Images
         
         #region AcceptArgsFromChildEditor Members
 
-        public string arg1
+        public virtual string arg1
         {
-            get { return GetDetail("arg1", string.Empty); }
-            set { SetDetail("arg1", value); }
+            get { return (Parent as ParentWithCroppedImageValues).Width.ToString(); }
+            set { }
         }
 
-        public string arg2
+        public virtual string arg2
         {
-            get { return GetDetail("arg2", string.Empty); }
-            set { SetDetail("arg2", value); }
+            get { return (Parent as ParentWithCroppedImageValues).Height.ToString(); }
+            set { }
         }
 
         public int FixedWidthValue
@@ -176,5 +168,11 @@ namespace Zeus.FileSystem.Images
         }
         
         #endregion
+    }
+
+    public interface ParentWithCroppedImageValues
+    {
+        int Width { get; }
+        int Height { get; }
     }
 }

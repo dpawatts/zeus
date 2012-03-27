@@ -17,8 +17,8 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
     [ContentType("Custom Url Page")]
     [RestrictParents(typeof(CustomUrlContainer))]
     [Panel("Images", "Images", 340)]
-    [AllowedChildren(Types = new[] { typeof(Page), typeof(CroppedImage) })]
-	public class CustomUrlPage : BasePage
+    [AllowedChildren(Types = new[] { typeof(Page), typeof(CroppedImage), typeof(CroppedImage) })]
+    public class CustomUrlPage : BasePage, ParentWithCroppedImageValues
 	{
         public override string Url
         {
@@ -51,9 +51,9 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         
         [ContentProperty("Banner", 200)]
         [ChildEditor("Banner", 200, arg1="400", arg2="200")]
-        public Zeus.FileSystem.Images.CroppedImage Banner
+        public Zeus.FileSystem.Images.HiddenCroppedImage Banner
         {
-            get { return GetChild("Banner") as Zeus.FileSystem.Images.CroppedImage; }
+            get { return GetChild("Banner") as Zeus.FileSystem.Images.HiddenCroppedImage; }
             set
             {
                 if (value != null)
@@ -118,5 +118,19 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             }
         }
 
-	}
+
+        #region ParentWithCroppedImageValues Members
+
+        public int Width
+        {
+            get { return 300; }
+        }
+
+        public int Height
+        {
+            get { return 200; }
+        }
+
+        #endregion
+    }
 }
