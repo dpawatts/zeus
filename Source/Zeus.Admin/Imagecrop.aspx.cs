@@ -42,16 +42,32 @@ namespace Zeus.Admin
                 if ((800 / ActualWidth) > (600 / ActualHeight))
                 {
                     //resized, leaving width @ 800
-                    double percChange = (double)800 / (double)ActualWidth;
-                    minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
-                    minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    double percChange = (double)ActualWidth / (double)800;
+                    if (percChange > 1)
+                    {
+                        minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
+                        minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    }
+                    else
+                    {
+                        minWidth = ImageToEdit.FixedWidthValue;
+                        minHeight = ImageToEdit.FixedHeightValue;
+                    }
                 }
                 else
-                {
+                {                    
                     //resized, leaving height @ 600
-                    double percChange = (double)600 / (double)ActualHeight;
-                    minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
-                    minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    double percChange = (double)ActualHeight / (double)600;
+                    if (percChange > 1)
+                    {
+                        minWidth = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedWidthValue, 0));
+                        minHeight = Convert.ToInt32(Math.Round(percChange * ImageToEdit.FixedHeightValue, 0));
+                    }
+                    else
+                    {
+                        minWidth = ImageToEdit.FixedWidthValue;
+                        minHeight = ImageToEdit.FixedHeightValue;
+                    }
                 }
 
                 //ImageToEdit.GetUrl(800, 600, true, DynamicImageFormat.Jpeg, true);
