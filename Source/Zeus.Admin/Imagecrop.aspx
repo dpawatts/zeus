@@ -79,7 +79,7 @@
 	</div></noscript>
 	
 		<!-- This is the image we're attaching Jcrop to -->
-		<img src="<%= ImageToEdit.GetUrl(800, 600, true, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, true) %>?rand=<%= new System.Random().Next(1000) %>" id="target" alt="Image to Edit" />
+		<img src="<%= ImageToEdit.GetUrlForAdmin(800, 600, true, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, true) %>?rand=<%= new System.Random().Next(1000) %>" id="target" alt="Image to Edit" />
 
 		<!-- This is the form that our event handler fills -->
 		<form id="coords" class="coords" action="/admin/Imagecrop.aspx" method="post">

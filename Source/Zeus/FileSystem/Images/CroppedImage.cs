@@ -7,6 +7,9 @@ using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Filters;
 using Zeus.ContentTypes;
 using System;
+using System.Drawing;
+using SoundInTheory.DynamicImage.Sources;
+using System.Net;
 
 namespace Zeus.FileSystem.Images
 {
@@ -59,8 +62,11 @@ namespace Zeus.FileSystem.Images
             return GetUrl(width, height, fill, format, false);
         }
 
-        public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
+        public string GetUrlForAdmin(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
+            //see if it's the standard editor crop (from admin site most likely)
+            bool isStandard = width == 800 & height == 600;
+
             //first construct the crop
             var imageSource = new ZeusImageSource();
             imageSource.ContentID = this.ID;
@@ -72,7 +78,46 @@ namespace Zeus.FileSystem.Images
             // set image format
             var dynamicImage = new SoundInTheory.DynamicImage.DynamicImage();
             dynamicImage.ImageFormat = format;
-            
+
+            //create the background
+            string optionalBackground = System.Web.HttpContext.Current.Server.MapPath("/assets/zeus/background.png");
+            bool useBG = System.IO.File.Exists(optionalBackground);
+            double percChangeForBG = 1;
+            var bgLayer = new ImageLayer();
+            if (useBG)
+            {
+                bgLayer.SourceFileName = optionalBackground;
+
+                if (!isStandard)
+                {
+                    System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(this.Data));
+                    int ActualWidth = image.Width;
+                    int ActualHeight = image.Height;
+                    image.Dispose();
+
+                    if ((Convert.ToDouble(ActualWidth) / Convert.ToDouble(800)) >= (Convert.ToDouble(ActualHeight) / Convert.ToDouble(600)))
+                    {
+                        percChangeForBG = (double)ActualWidth / (double)800;
+                    }
+                    else
+                    {
+                        percChangeForBG = (double)ActualHeight / (double)600;
+                    }                        
+
+                    var resizeBG = new ResizeFilter
+                    {
+                        Enabled = true,
+                        Mode = ResizeMode.UniformFill,
+                        EnlargeImage = true,
+                        //has to change as per the original resize
+                        Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
+                        Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
+                    };
+
+                    bgLayer.Filters.Add(resizeBG);
+                }
+            }
+
             // create image layer wit ha source
             var imageLayer = new ImageLayer();
             imageLayer.Source.SingleSource = imageSource;
@@ -122,11 +167,150 @@ namespace Zeus.FileSystem.Images
                 imageLayer.Filters.Add(resizeFilter);
             }
 
-            // add the layer
+            // add the layer after resizing as it's being edited
+            if (useBG)
+            {
+                dynamicImage.Layers.Add(bgLayer);
+                imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
+                imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+            }
+
             dynamicImage.Layers.Add(imageLayer);
 
             // generate url
             return dynamicImage.ImageUrl;
+        }
+
+        public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
+        {
+            //see if it's the standard editor crop (from admin site most likely)
+            bool isStandard = width == 800 & height == 600;
+
+            //first construct the crop
+            var imageSource = new ZeusImageSource();
+            imageSource.ContentID = this.ID;
+
+            if (this.Data == null)
+                return "";
+
+            // generate resized image url
+            // set image format
+            var dynamicImage = new SoundInTheory.DynamicImage.DynamicImage();
+            dynamicImage.ImageFormat = format;
+
+            ImageLayer imageLayer = new ImageLayer();
+
+            //create the background
+            string optionalBackground = System.Web.HttpContext.Current.Server.MapPath("/assets/zeus/background.png");
+            bool useBG = System.IO.File.Exists(optionalBackground);
+            double percChangeForBG = 1;
+            var bgLayer = new ImageLayer();
+            if (useBG)
+            {
+                bgLayer.SourceFileName = optionalBackground;
+
+                if (!isStandard)
+                {
+                    System.Drawing.Image image = System.Drawing.Image.FromStream(new MemoryStream(this.Data));
+                    int ActualWidth = image.Width;
+                    int ActualHeight = image.Height;
+                    image.Dispose();
+
+                    if ((Convert.ToDouble(ActualWidth) / Convert.ToDouble(800)) >= (Convert.ToDouble(ActualHeight) / Convert.ToDouble(600)))
+                    {
+                        percChangeForBG = (double)ActualWidth / (double)800;
+                    }
+                    else
+                    {
+                        percChangeForBG = (double)ActualHeight / (double)600;
+                    }
+
+                    var resizeBG = new ResizeFilter
+                    {
+                        Enabled = true,
+                        Mode = ResizeMode.UniformFill,
+                        EnlargeImage = true,
+                        //has to change as per the original resize
+                        Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
+                        Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
+                    };
+
+                    bgLayer.Filters.Add(resizeBG);
+                }
+
+                dynamicImage.Layers.Add(bgLayer);
+                imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
+                imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+            }
+
+            // create image layer wit ha source
+            imageLayer.Source.SingleSource = imageSource;
+
+            //now combine the 2 layers...
+            dynamicImage.Layers.Add(imageLayer);
+
+            // generate url
+            string halfWayFileName = dynamicImage.ImageUrl;
+
+            var dynamicImage2 = new SoundInTheory.DynamicImage.DynamicImage();
+
+            var HalfwayImageSource = new ImageLayer();
+            BytesImageSource sourceData = new BytesImageSource();
+            var webClient = new WebClient();
+            sourceData.Bytes = webClient.DownloadData("http://" + System.Web.HttpContext.Current.Request.Url.Host + halfWayFileName);
+            HalfwayImageSource.Source.Add(sourceData);
+
+            // add filters
+            if (!(TopLeftXVal == 0 && TopLeftYVal == 0 && CropWidth == 0 && CropHeight == 0))
+            {
+                var cropFilter = new CropFilter
+                {
+                    Enabled = true,
+                    Name = "Default Crop",
+                    X = this.TopLeftXVal,
+                    Y = this.TopLeftYVal,
+                    Width = this.CropWidth,
+                    Height = this.CropHeight
+                };
+                if (!isResize)
+                    HalfwayImageSource.Filters.Add(cropFilter);
+
+                //finally resize both image and bg (if added)
+                if (width > 0 && height > 0)
+                {
+                    var resizeFilter = new ResizeFilter
+                    {
+                        Mode = isResize ? ResizeMode.Uniform : ResizeMode.UniformFill,
+                        Width = SoundInTheory.DynamicImage.Unit.Pixel(width),
+                        Height = SoundInTheory.DynamicImage.Unit.Pixel(height)
+                    };
+
+                    HalfwayImageSource.Filters.Add(resizeFilter);
+                }
+                else if (width > 0)
+                {
+                    var resizeFilter = new ResizeFilter
+                    {
+                        Mode = ResizeMode.UseWidth,
+                        Width = SoundInTheory.DynamicImage.Unit.Pixel(width)
+                    };
+                    HalfwayImageSource.Filters.Add(resizeFilter);
+                }
+                else if (height > 0)
+                {
+                    var resizeFilter = new ResizeFilter
+                    {
+                        Mode = ResizeMode.UseHeight,
+                        Height = SoundInTheory.DynamicImage.Unit.Pixel(height)
+                    };
+                    HalfwayImageSource.Filters.Add(resizeFilter);
+                }
+            }
+
+            dynamicImage2.Layers.Add(HalfwayImageSource);
+
+            return dynamicImage2.ImageUrl;
+
         }
 
         public string GetUrl()
