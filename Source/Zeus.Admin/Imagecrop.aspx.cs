@@ -117,19 +117,27 @@ namespace Zeus.Admin
                 {
                     //resized, leaving width @ 800
                     double percChange = (double)ActualWidth / (double)800;
-                    x1 = Convert.ToInt32(Math.Round(percChange * x1, 0));
-                    y1 = Convert.ToInt32(Math.Round(percChange * y1, 0));
-                    w = Convert.ToInt32(Math.Round(percChange * w, 0));
-                    h = Convert.ToInt32(Math.Round(percChange * h, 0));
+                    if (percChange > 1)
+                    {
+                        //this means the image was actually resized, so we need to amend the recorded data, else leave it as it is
+                        x1 = Convert.ToInt32(Math.Round(percChange * x1, 0));
+                        y1 = Convert.ToInt32(Math.Round(percChange * y1, 0));
+                        w = Convert.ToInt32(Math.Round(percChange * w, 0));
+                        h = Convert.ToInt32(Math.Round(percChange * h, 0));
+                    }
                 }
                 else
                 {
                     //resized, leaving height @ 600
                     double percChange = (double)ActualHeight / (double)600;
-                    x1 = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(x1), 0));
-                    y1 = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(y1), 0));
-                    w = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(w), 0));
-                    h = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(h), 0));
+                    if (percChange > 1)
+                    {
+                        //this means the image was actually resized, so we need to amend the recorded data, else leave it as it is
+                        x1 = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(x1), 0));
+                        y1 = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(y1), 0));
+                        w = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(w), 0));
+                        h = Convert.ToInt32(Math.Round(percChange * Convert.ToDouble(h), 0));
+                    }
                 }
 
                 ImageToEdit = Zeus.Context.Persister.Get<CroppedImage>(id);

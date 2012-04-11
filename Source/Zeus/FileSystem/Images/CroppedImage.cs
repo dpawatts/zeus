@@ -102,19 +102,22 @@ namespace Zeus.FileSystem.Images
                     else
                     {
                         percChangeForBG = (double)ActualHeight / (double)600;
-                    }                        
+                    }
 
-                    var resizeBG = new ResizeFilter
+                    if (percChangeForBG > 1)
                     {
-                        Enabled = true,
-                        Mode = ResizeMode.UniformFill,
-                        EnlargeImage = true,
-                        //has to change as per the original resize
-                        Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
-                        Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
-                    };
+                        var resizeBG = new ResizeFilter
+                        {
+                            Enabled = true,
+                            Mode = ResizeMode.UniformFill,
+                            EnlargeImage = true,
+                            //has to change as per the original resize
+                            Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
+                            Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
+                        };
 
-                    bgLayer.Filters.Add(resizeBG);
+                        bgLayer.Filters.Add(resizeBG);
+                    }
                 }
             }
 
@@ -171,8 +174,16 @@ namespace Zeus.FileSystem.Images
             if (useBG)
             {
                 dynamicImage.Layers.Add(bgLayer);
-                imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
-                imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+                if (percChangeForBG > 1)
+                {
+                    imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
+                    imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+                }
+                else
+                {
+                    imageLayer.X = 200;
+                    imageLayer.Y = 150;
+                }
             }
 
             dynamicImage.Layers.Add(imageLayer);
@@ -225,22 +236,34 @@ namespace Zeus.FileSystem.Images
                         percChangeForBG = (double)ActualHeight / (double)600;
                     }
 
-                    var resizeBG = new ResizeFilter
+                    if (percChangeForBG > 1)
                     {
-                        Enabled = true,
-                        Mode = ResizeMode.UniformFill,
-                        EnlargeImage = true,
-                        //has to change as per the original resize
-                        Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
-                        Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
-                    };
+                        var resizeBG = new ResizeFilter
+                        {
+                            Enabled = true,
+                            Mode = ResizeMode.UniformFill,
+                            EnlargeImage = true,
+                            //has to change as per the original resize
+                            Width = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(1200) * percChangeForBG)),
+                            Height = Unit.Pixel(Convert.ToInt32(Convert.ToDouble(900) * percChangeForBG)),
+                        };
 
-                    bgLayer.Filters.Add(resizeBG);
+                        bgLayer.Filters.Add(resizeBG);
+                    }
                 }
 
                 dynamicImage.Layers.Add(bgLayer);
-                imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
-                imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+                if (percChangeForBG > 1)
+                {
+                    imageLayer.X = (Convert.ToInt32(Convert.ToDouble(200) * percChangeForBG));
+                    imageLayer.Y = (Convert.ToInt32(Convert.ToDouble(150) * percChangeForBG));
+                }
+                else
+                {
+                    imageLayer.X = 200;
+                    imageLayer.Y = 150;
+                }
+
             }
 
             // create image layer wit ha source
