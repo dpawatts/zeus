@@ -194,6 +194,11 @@ namespace Zeus.FileSystem.Images
 
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
+            if (this.TopLeftXVal == 0 && this.TopLeftYVal == 0 && this.CropWidth == 0 && this.CropHeight == 0)
+            {
+                return GetUrl(width, height, fill);
+            }
+                
             //see if it's the standard editor crop (from admin site most likely)
             bool isStandard = width == 800 & height == 600;
 
