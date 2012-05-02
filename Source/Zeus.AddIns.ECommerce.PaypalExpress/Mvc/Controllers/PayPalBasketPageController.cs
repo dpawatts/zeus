@@ -132,6 +132,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
             if (pass)
             {
                 System.Web.HttpContext.Current.Session["shippingAddress"] = shippingAddress;
+                System.Web.HttpContext.Current.Session[""] = shippingAddress;
                 System.Web.HttpContext.Current.Session["ppToken"] = token;
                 System.Web.HttpContext.Current.Session["ppID"] = PayerID;
 

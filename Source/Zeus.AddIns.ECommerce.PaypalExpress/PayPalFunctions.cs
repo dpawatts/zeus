@@ -61,7 +61,7 @@ public class NVPAPICaller
     private string BNCode = "PP-ECWizard";
 
     //HttpWebRequest Timeout specified in milliseconds 
-    private const int Timeout = 10000;
+    private const int Timeout = 100000;
     private static readonly string[] SECURED_NVPS = new string[] { ACCT, CVV2, SIGNATURE, PWD };
 
     public com.paypal.soap.api.DoDirectPaymentResponseType TakeCardPayment(
@@ -191,6 +191,10 @@ public class NVPAPICaller
         encoder["METHOD"] = "SetExpressCheckout";
         encoder["RETURNURL"] = returnURL;
         encoder["CANCELURL"] = cancelURL;
+        
+        if (!StartPage.UseShipping)
+            encoder["NOSHIPPING"] = "1";
+
         encoder["PAYMENTREQUEST_0_AMT"] = amt;
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
         //as uk only
@@ -199,7 +203,7 @@ public class NVPAPICaller
         encoder["PAYMENTREQUEST_0_SHIPPINGAMT"] = shippingCost.ToString("0.00");
         encoder["PAYMENTREQUEST_0_HANDLINGAMT"] = "0.00";
         encoder["PAYMENTREQUEST_0_TAXAMT"] = "0.00";
-        encoder["PAYMENTREQUEST_0_DESC"] = "Order from Shellys.com";
+        encoder["PAYMENTREQUEST_0_DESC"] = "Order";
 
         //add the items from the basket and tell PayPal about them...
         encoder["PAYMENTREQUEST_0_ITEMAMT"] = items.Sum(i => i.Amount).ToString("0.00");

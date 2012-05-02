@@ -14,5 +14,6 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ContentTypeInterfaces
         string TestAPIPassword { get; set; }
         string TestAPISignature { get; set; }
         bool UseTestEnvironment { get; set; }
+        bool UseShipping { get; set; }
     }
 }

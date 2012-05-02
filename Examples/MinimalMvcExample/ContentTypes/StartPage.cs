@@ -60,5 +60,22 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         }
 
         #endregion
+
+        #region IStartPageForPayPal Members
+
+
+        public bool UseShipping
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 }
