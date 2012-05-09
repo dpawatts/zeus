@@ -55,7 +55,7 @@ namespace Zeus.Design.Editors
                 }
                 else
                 {
-                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Image is not large enough to be cropped - it is advised that you upload a larger image</p><br/>"));                    
+                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Image is not large enough to be cropped - it is advised that you upload a larger image</p></div><br/>"));                    
                 }
             }
         }

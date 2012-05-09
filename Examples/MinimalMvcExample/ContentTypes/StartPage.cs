@@ -68,7 +68,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         {
             get
             {
-                throw new System.NotImplementedException();
+                return false;
             }
             set
             {
