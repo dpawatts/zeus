@@ -14,7 +14,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
     /// <typeparam name="T">ContentItem which implements IPayPalBasketPage</typeparam>
     public abstract class PayPalBasketPageController<T> : ZeusController<T> where T : ContentItem, IPayPalBasketPage
     {
-        public ActionResult Checkout()
+        public virtual ActionResult Checkout()
         {
             var basketPageViewModel = GetViewModel(CurrentItem);
 
@@ -53,7 +53,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
         public virtual Type typeOfViewModel { get { return typeof(PayPalBasketPageViewModel<T>); } }
 
         [HttpGet]
-        public ActionResult CheckoutSuccessful()
+        public virtual ActionResult CheckoutSuccessful()
         {
             NVPAPICaller test = new NVPAPICaller();
 
@@ -120,7 +120,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
         }
         
         [HttpGet]
-        public ActionResult PayPalConfirmation(string token, string PayerID)
+        public virtual ActionResult PayPalConfirmation(string token, string PayerID)
         {
             //get shipping address
             NVPAPICaller test = new NVPAPICaller();
@@ -132,7 +132,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
             if (pass)
             {
                 System.Web.HttpContext.Current.Session["shippingAddress"] = shippingAddress;
-                System.Web.HttpContext.Current.Session[""] = shippingAddress;
+                //System.Web.HttpContext.Current.Session[""] = shippingAddress;
                 System.Web.HttpContext.Current.Session["ppToken"] = token;
                 System.Web.HttpContext.Current.Session["ppID"] = PayerID;
 

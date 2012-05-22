@@ -5,6 +5,7 @@ using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
 using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Filters;
+using System.Drawing;
 
 namespace Zeus.FileSystem.Images
 {
@@ -38,22 +39,24 @@ namespace Zeus.FileSystem.Images
 		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
             DynamicImage image = new DynamicImage();
+            image.Fill.BackgroundColour = Color.White;
+
             image.ImageFormat = format;
             ImageLayer imageLayer = new ImageLayer();
-
+            
             ZeusImageSource source = new ZeusImageSource();
             source.ContentID = this.ID;
 
             imageLayer.Source.SingleSource = source;
-
+            
             ResizeFilter resizeFilter = new ResizeFilter();
-		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
+            resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
 		    resizeFilter.Width = SoundInTheory.DynamicImage.Unit.Pixel(width);
 		    resizeFilter.Height = SoundInTheory.DynamicImage.Unit.Pixel(height);
-
-            imageLayer.Filters.Add(resizeFilter);
             
-		    image.Layers.Add(imageLayer);                
+            imageLayer.Filters.Add(resizeFilter);
+
+            image.Layers.Add(imageLayer);
 
 			return image.ImageUrl;
 
