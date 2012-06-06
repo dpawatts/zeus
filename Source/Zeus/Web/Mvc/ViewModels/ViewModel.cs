@@ -21,11 +21,25 @@ namespace Zeus.Web.Mvc.ViewModels
             if (currentItem == null)
             {
                 //no model, so fire changes (essentially denying the page caching)
-                    _allDataSignal.FireChanged();
-                    ChangeSignalFired = true;
+                _allDataSignal = new CacheSignal();
+                _allDataSignal.FireChanged();
+                ChangeSignalFired = true;
             }
             else
             {
+                //set up the signal for this object
+                CacheSignal signalForContentItem;
+                if (_allDataSignals.TryGetValue(currentItem.ID, out signalForContentItem))
+                {
+                    _allDataSignal = signalForContentItem;
+                }
+                else
+                {
+                    //the signal doesn't exist, so add it to the list
+                    _allDataSignal = new CacheSignal();
+                    _allDataSignals.Add(currentItem.ID, _allDataSignal);
+                }
+
                 CurrentItem = currentItem;
 
                 //fire changed signal if needed
@@ -66,7 +80,8 @@ namespace Zeus.Web.Mvc.ViewModels
         public virtual List<ContentItem> CacheWatchers { get; set; }
 
         public bool ChangeSignalFired { get; set; }
-        public static CacheSignal _allDataSignal = new CacheSignal();
+        public static Dictionary<int, CacheSignal> _allDataSignals = new Dictionary<int, CacheSignal>();
+        public CacheSignal _allDataSignal;
 
         public virtual string ActionForCache { get { return ""; } }
 

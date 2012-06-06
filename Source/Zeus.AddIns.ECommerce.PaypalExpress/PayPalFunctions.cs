@@ -22,8 +22,6 @@ using System.Collections.Generic;
 using Zeus.AddIns.ECommerce.PaypalExpress;
 using Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ContentTypeInterfaces;
 
-
-
 /// <summary>
 /// Summary description for NVPAPICaller
 /// </summary>
