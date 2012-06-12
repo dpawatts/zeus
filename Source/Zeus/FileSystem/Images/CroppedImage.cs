@@ -59,7 +59,7 @@ namespace Zeus.FileSystem.Images
 
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
         {
-            return GetUrl(width, height, fill, format, false);
+            return GetUrl(width, height, fill, format, false);                
         }
 
         public string GetUrlForAdmin(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
@@ -194,6 +194,13 @@ namespace Zeus.FileSystem.Images
 
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
+            string appKey = "CroppedImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
+            string res = System.Web.HttpContext.Current.Application[appKey] == null ? null : System.Web.HttpContext.Current.Application[appKey].ToString();
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+
+            if (res != null && lastUpdated == this.Updated)
+                return res;
+
             if (this.TopLeftXVal == 0 && this.TopLeftYVal == 0 && this.CropWidth == 0 && this.CropHeight == 0)
             {
                 return GetUrl(width, height, fill);
@@ -336,6 +343,9 @@ namespace Zeus.FileSystem.Images
             }
 
             dynamicImage2.Layers.Add(HalfwayImageSource);
+
+            System.Web.HttpContext.Current.Application[appKey] = dynamicImage2.ImageUrl;
+            System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
 
             return dynamicImage2.ImageUrl;
 

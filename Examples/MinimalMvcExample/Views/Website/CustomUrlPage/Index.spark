@@ -2,4 +2,7 @@
 
 When I see this, it's all sorted!!!
 
-${ Model.CurrentItem.Banner.ImageTag }
+${Model.CurrentItem.Banner.ImageTag}
+<br/><br/><br/><br/>
+
+${Html.ImageUrl(Model.CurrentItem.Banner, 40, 40, true)}
