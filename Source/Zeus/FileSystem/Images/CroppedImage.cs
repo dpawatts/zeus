@@ -192,6 +192,30 @@ namespace Zeus.FileSystem.Images
             return dynamicImage.ImageUrl;
         }
 
+        public static void Log(string what)
+        {
+            /*
+            using (StreamWriter w = System.IO.File.AppendText(System.Web.HttpContext.Current.Server.MapPath("/log.txt")))
+            {
+                Log(what, w);
+                // Close the writer and underlying file.
+                w.Close();
+            }
+             */
+        }
+
+        public static void Log(string logMessage, TextWriter w)
+        {
+            w.Write("\r\nLog Entry : ");
+            w.WriteLine("{0} {1}", DateTime.Now.ToLongTimeString(),
+                DateTime.Now.ToLongDateString());
+            w.WriteLine("  :");
+            w.WriteLine("  :{0}", logMessage);
+            w.WriteLine("-------------------------------");
+            // Update the underlying file.
+            w.Flush();
+        }
+
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
             string appKey = "CroppedImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
@@ -199,11 +223,25 @@ namespace Zeus.FileSystem.Images
             DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
 
             if (res != null && lastUpdated == this.Updated)
+            {
+                Log("Image was retrieved from Cache - " + appKey);
                 return res;
+            }
+            else
+            {
+                Log("Image originated - " + appKey + " (res was " + (res == null ? "null" : res) + " and timer was " + lastUpdated.ToShortTimeString() + ")");
+            }
 
             if (this.TopLeftXVal == 0 && this.TopLeftYVal == 0 && this.CropWidth == 0 && this.CropHeight == 0)
             {
-                return GetUrl(width, height, fill);
+                string res2 = GetUrl(width, height, fill);
+
+                System.Web.HttpContext.Current.Application[appKey] = res2;
+                System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+
+                Log(res2 + " added to cache for " + appKey);
+
+                return res2;
             }
                 
             //see if it's the standard editor crop (from admin site most likely)
@@ -346,6 +384,8 @@ namespace Zeus.FileSystem.Images
 
             System.Web.HttpContext.Current.Application[appKey] = dynamicImage2.ImageUrl;
             System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+
+            Log(dynamicImage2.ImageUrl + " added to cache for " + appKey);
 
             return dynamicImage2.ImageUrl;
 
