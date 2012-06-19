@@ -38,7 +38,7 @@ namespace Zeus.Admin
 				Name = ".ISISWEBAUTH.ADMIN",
 				LoginUrl = "~/" + _adminConfig.Path + "/login.aspx",
 				DefaultUrl = "~/" + _adminConfig.Path + "/default.aspx",
-				Timeout = TimeSpan.FromMinutes(60),
+                Timeout = TimeSpan.FromMinutes(_adminConfig.AdminTimeOut),
 				CookiePath = "/",
 				CookieDomain = string.Empty,
                 SlidingExpiration = true

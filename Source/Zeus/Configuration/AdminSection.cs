@@ -102,6 +102,13 @@ namespace Zeus.Configuration
 			set { base["path"] = value; }
 		}
 
+        [ConfigurationProperty("adminTimeOut", DefaultValue = "60")]
+        public int AdminTimeOut
+		{
+            get { return (int)base["adminTimeOut"]; }
+            set { base["adminTimeOut"] = value; }
+		}
+
         [ConfigurationProperty("shareAuthorisationContext", DefaultValue = "false")]
         public bool ShareAuthorisationContext
 		{
