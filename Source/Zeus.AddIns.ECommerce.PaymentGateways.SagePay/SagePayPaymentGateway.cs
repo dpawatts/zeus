@@ -27,6 +27,18 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			_purchaseUrl = configSection.PurchaseUrl;
 		}
 
+        public SagePayPaymentGateway(string vendorName)
+        {
+            // Get configuration section.
+            SagePaySection configSection = ConfigurationManager.GetSection("zeus.addIns.ecommerce.paymentGateways/sagePay") as SagePaySection;
+            if (configSection == null)
+                configSection = new SagePaySection();
+            _vpsProtocol = configSection.VpsProtocol;
+            _vendorName = vendorName;
+            _currency = configSection.Currency;
+            _purchaseUrl = configSection.PurchaseUrl;
+        }
+
 		public bool SupportsCardType(PaymentCardType cardType)
 		{
 			switch (cardType)
