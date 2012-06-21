@@ -212,13 +212,15 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["BillingCity"] = paymentRequest.BillingAddress.TownCity;
 			postData["BillingPostCode"] = paymentRequest.BillingAddress.Postcode;
 
-            if (paymentRequest.BillingAddress.Country.Title == "United States")
-            {
-                postData["BillingState"] = paymentRequest.BillingAddress.StateRegion;
-            }
-
             if (paymentRequest.BillingAddress.Country != null)
+            {
                 postData["BillingCountry"] = paymentRequest.BillingAddress.Country.Alpha2;
+
+                if (paymentRequest.BillingAddress.Country.Title == "United States")
+                {
+                    postData["BillingState"] = paymentRequest.BillingAddress.StateRegion;
+                }
+            }
             else
                 postData["BillingCountry"] = "GB";
 
@@ -230,16 +232,19 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["DeliveryCity"] = paymentRequest.ShippingAddress.TownCity;
 			postData["DeliveryPostCode"] = paymentRequest.ShippingAddress.Postcode;
             if (paymentRequest.ShippingAddress.Country != null)
+            {
                 postData["DeliveryCountry"] = paymentRequest.ShippingAddress.Country.Alpha2;
+
+                if (paymentRequest.ShippingAddress.Country.Title == "United States")
+                {
+                    postData["DeliveryState"] = paymentRequest.ShippingAddress.StateRegion;
+                }
+            }
             else
                 postData["DeliveryCountry"] = "GB";
+
 			if (!string.IsNullOrEmpty(paymentRequest.TelephoneNumber))
 				postData["DeliveryPhone"] = paymentRequest.TelephoneNumber;
-
-            if (paymentRequest.ShippingAddress.Country.Title == "United States")
-            {
-                postData["DeliveryState"] = paymentRequest.ShippingAddress.StateRegion;
-            }
 
 			postData["CustomerEMail"] = paymentRequest.EmailAddress;
 			// postData["Basket"] = FormatBasket(paymentRequest); // TODO
