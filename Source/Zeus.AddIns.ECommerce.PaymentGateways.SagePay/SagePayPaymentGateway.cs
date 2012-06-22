@@ -13,7 +13,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 	/// </summary>
 	public class SagePayPaymentGateway : IPaymentGateway
 	{
-		private readonly string _vpsProtocol, _vendorName, _currency, _purchaseUrl;
+		private string _vpsProtocol, _vendorName, _currency, _purchaseUrl;
 
 		public SagePayPaymentGateway()
 		{
@@ -27,16 +27,9 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			_purchaseUrl = configSection.PurchaseUrl;
 		}
 
-        public SagePayPaymentGateway(string vendorName)
+        public void OverrideVendorName(string newVendor)
         {
-            // Get configuration section.
-            SagePaySection configSection = ConfigurationManager.GetSection("zeus.addIns.ecommerce.paymentGateways/sagePay") as SagePaySection;
-            if (configSection == null)
-                configSection = new SagePaySection();
-            _vpsProtocol = configSection.VpsProtocol;
-            _vendorName = vendorName;
-            _currency = configSection.Currency;
-            _purchaseUrl = configSection.PurchaseUrl;
+            _vendorName = newVendor;
         }
 
 		public bool SupportsCardType(PaymentCardType cardType)
