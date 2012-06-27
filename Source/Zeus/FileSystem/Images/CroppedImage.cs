@@ -330,7 +330,15 @@ namespace Zeus.FileSystem.Images
             var HalfwayImageSource = new ImageLayer();
             BytesImageSource sourceData = new BytesImageSource();
             var webClient = new WebClient();
-            sourceData.Bytes = webClient.DownloadData("http://" + System.Web.HttpContext.Current.Request.Url.Host + halfWayFileName);
+            try
+            {
+                sourceData.Bytes = webClient.DownloadData("http://" + System.Web.HttpContext.Current.Request.Url.Host + halfWayFileName);
+            }
+            catch
+            {
+                return "Byte retrieval failed for " + halfWayFileName;
+            }
+
             HalfwayImageSource.Source.Add(sourceData);
 
             // add filters
