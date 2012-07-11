@@ -183,6 +183,18 @@ namespace Zeus
             get { return false; }
         }
 
+        /// <summary>If set to false it will stop the update going up the tree - useful when you don't want caches kicked for simple updates on large sites - cache dependencies are still easy enough to set</summary>
+        public virtual bool PropogateUpdate
+        {
+            get { return true; }
+        }
+
+        /// <summary>Only to be used on Parents with children set to be invisible in tree</summary>
+        public virtual bool IgnoreOrderOnSave
+        {
+            get { return false; }
+        }
+
         /// <summary>
         /// Gets the public url to this item. This is computed by walking the 
         /// parent path and prepending their names to the url.
@@ -519,10 +531,11 @@ namespace Zeus
 
             Parent = newParent;
 
+            //see if we care about ordering...
             if (newParent != null && !newParent.Children.Contains(this))
             {
                 IList<ContentItem> siblings = newParent.Children;
-                if (siblings.Count > 0)
+                if (siblings.Count > 0 && !newParent.IgnoreOrderOnSave)
                 {
                     int lastOrder = siblings[siblings.Count - 1].SortOrder;
 
@@ -542,8 +555,8 @@ namespace Zeus
                         return;
                     }
                 }
-
-                siblings.Add(this);
+                else
+                    siblings.Add(this);
             }
         }
 

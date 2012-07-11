@@ -20,6 +20,14 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
     [AllowedChildren(Types = new[] { typeof(Page), typeof(CroppedImage), typeof(CroppedImage) })]
     public class CustomUrlPage : BasePage, ParentWithCroppedImageValues
 	{
+        public override bool IgnoreOrderOnSave
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         public override string Url
         {
             get

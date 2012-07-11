@@ -263,7 +263,7 @@ namespace Zeus.Admin
 						_persister.Save(itemToUpdate);
 
                         ContentItem theParent = itemToUpdate.Parent;
-                        while (theParent.Parent != null)
+                        while (theParent.Parent != null && (item.PropogateUpdate && theParent.PropogateUpdate))
                         { 
                             //go up the tree updating - if a child has been changed, so effectively has the parent
                             theParent.Updated = DateTime.Now;
@@ -287,7 +287,7 @@ namespace Zeus.Admin
                     _persister.Save(item);
 
                     ContentItem theParent = item.Parent;
-                    while (theParent.Parent != null)
+                    while (theParent.Parent != null && (item.PropogateUpdate && theParent.PropogateUpdate))
                     {
                         //go up the tree updating - if a child has been changed, so effectively has the parent
                         theParent.Updated = DateTime.Now;
