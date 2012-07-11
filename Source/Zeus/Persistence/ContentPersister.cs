@@ -224,7 +224,7 @@ namespace Zeus.Persistence
                 {
                     _contentRepository.SaveOrUpdate(contentItem);
                     contentItem.AddTo(contentItem.Parent);
-                    EnsureSortOrder(contentItem);
+                    EnsureSortOrder(contentItem);                    
                     transaction.Commit();
                 }
             }
@@ -233,7 +233,7 @@ namespace Zeus.Persistence
 
 		private void EnsureSortOrder(ContentItem unsavedItem)
 		{
-			if (unsavedItem.Parent != null)
+			if (unsavedItem.Parent != null && !unsavedItem.Parent.IgnoreOrderOnSave)
 			{
 				IEnumerable<ContentItem> updatedItems = Utility.UpdateSortOrder(unsavedItem.Parent.Children);
 				foreach (ContentItem updatedItem in updatedItems)

@@ -555,8 +555,8 @@ namespace Zeus
                         return;
                     }
                 }
-                else
-                    siblings.Add(this);
+                
+                siblings.Add(this);
             }
         }
 

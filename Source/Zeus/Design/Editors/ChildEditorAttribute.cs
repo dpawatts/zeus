@@ -73,8 +73,12 @@ namespace Zeus.Design.Editors
 			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
 			{
 				ContentItem child;
-				if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
-					Context.Persister.Delete(child);
+
+                if (!((ContentItem)itemEditor.CurrentItem).IsEmpty())
+                {
+                    if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
+                        Context.Persister.Delete(child);
+                }
 			});
 
 			return true;
