@@ -323,10 +323,9 @@ namespace Zeus.Admin
 					if (wasUpdated || IsNew(item))
 					{
 						onSavingCallback(item);
-						_persister.Save(item);
+                        _persister.Save(item);
+                        tx.Commit();
 					}
-
-					tx.Commit();
 
 					return item;
 				}
