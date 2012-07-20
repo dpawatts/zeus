@@ -98,7 +98,8 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			try
 			{
-				SaveChanges();
+                if (((ContentItem)zeusItemEditView.CurrentItem).HasMinRequirementsForSaving())
+                    SaveChanges();
 			}
 			catch (Exception ex)
 			{

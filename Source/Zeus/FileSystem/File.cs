@@ -91,5 +91,10 @@ namespace Zeus.FileSystem
 		{
 			return Data == null;
 		}
+
+        public override bool HasMinRequirementsForSaving()
+        {
+            return Data != null;
+        }
 	}
 }

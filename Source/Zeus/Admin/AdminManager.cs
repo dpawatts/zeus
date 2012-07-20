@@ -258,7 +258,12 @@ namespace Zeus.Admin
 
 					if (wasUpdated || IsNew(itemToUpdate))
 					{
-						onSavingCallback(itemToUpdate);
+                        onSavingCallback(itemToUpdate);
+                        foreach (ContentItem child in item.Children.ToList())
+                        {
+                            if (!child.HasMinRequirementsForSaving())
+                                item.Children.Remove(child);
+                        }
 						itemToUpdate.Published = published ?? Utility.CurrentTime();
 						_persister.Save(itemToUpdate);
 
@@ -284,6 +289,11 @@ namespace Zeus.Admin
 				if (wasUpdated || IsNew(item))
 				{
 					onSavingCallback(item);
+                    foreach (ContentItem child in item.Children.ToList())
+                    {
+                        if (!child.HasMinRequirementsForSaving())
+                            item.Children.Remove(child);
+                    }
                     _persister.Save(item);
 
                     ContentItem theParent = item.Parent;

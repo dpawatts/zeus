@@ -926,6 +926,11 @@ namespace Zeus
                 && !(Expires != null && Expires.Value < DateTime.Now);
         }
 
+        public virtual bool HasMinRequirementsForSaving()
+        {
+            return true;
+        }
+
         /// <summary>
         /// Return something other than null to group items in the admin site tree.
         /// </summary>
