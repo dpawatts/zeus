@@ -98,7 +98,7 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			try
 			{
-                if (((ContentItem)zeusItemEditView.CurrentItem).HasMinRequirementsForSaving())
+                if (((ContentItem)zeusItemEditView.CurrentItem).HasMinRequirementsForSaving() || ((ContentItem)zeusItemEditView.CurrentItem).ID == 0)
                     SaveChanges();
 			}
 			catch (Exception ex)
