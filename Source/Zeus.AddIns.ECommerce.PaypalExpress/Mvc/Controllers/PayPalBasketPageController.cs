@@ -73,11 +73,13 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
             {
                 var basketPageViewModel = GetViewModel(CurrentItem);
                 var shippingAddress = (Address)System.Web.HttpContext.Current.Session["shippingAddress"];
+                string noteToSeller = (string)System.Web.HttpContext.Current.Session["ppNoteToSeller"];
 
                 try
                 {
                     PayPalOrderSuccess(basketPageViewModel, shippingAddress, token);
                     basketPageViewModel.ShippingAddress = shippingAddress;
+                    basketPageViewModel.NoteToSeller = noteToSeller;
                     return View(basketPageViewModel);
                 }
                 catch (System.Exception ex)
@@ -127,12 +129,14 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
 
             Address shippingAddress = new Address();
             string retMsg = "";
-            bool pass = test.GetShippingDetails(token, ref PayerID, ref shippingAddress, ref retMsg);
+            string noteToSeller = "";
+            bool pass = test.GetShippingDetails(token, ref PayerID, ref shippingAddress, ref noteToSeller, ref retMsg);
 
             if (pass)
             {
                 System.Web.HttpContext.Current.Session["shippingAddress"] = shippingAddress;
                 //System.Web.HttpContext.Current.Session[""] = shippingAddress;
+                System.Web.HttpContext.Current.Session["ppNoteToSeller"] = noteToSeller;
                 System.Web.HttpContext.Current.Session["ppToken"] = token;
                 System.Web.HttpContext.Current.Session["ppID"] = PayerID;
 

@@ -251,7 +251,7 @@ public class NVPAPICaller
     /// <param name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool GetShippingDetails(string token, ref string PayerId, ref Address ShippingAddress, ref string retMsg)
+    public bool GetShippingDetails(string token, ref string PayerId, ref Address ShippingAddress, ref string noteToSeller, ref string retMsg)
     {
         if (StartPage.UseTestEnvironment)
         {
@@ -282,7 +282,7 @@ public class NVPAPICaller
             //ShippingAddress.Country = decoder["PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"];
             ShippingAddress.Country = decoder["SHIPTOCOUNTRYNAME"];
             ShippingAddress.Email = decoder["EMAIL"];
-
+            noteToSeller = decoder["PAYMENTREQUEST_0_NOTETEXT"];
             return true;
         }
         else

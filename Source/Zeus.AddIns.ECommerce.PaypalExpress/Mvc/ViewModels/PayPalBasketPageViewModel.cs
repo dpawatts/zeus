@@ -16,5 +16,6 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ViewModels
         public string PaymentReturnMessage { get; set; }
         public string CheckoutMessage { get; set; }
         public Address ShippingAddress { get; set; }
+        public string NoteToSeller { get; set; }
     }
 }
