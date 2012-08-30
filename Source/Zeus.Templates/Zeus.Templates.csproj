@@ -135,16 +135,6 @@
     <Compile Include="ContentTypes\RegistrationPage.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
-    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Form.cs" />
-    <Compile Include="ContentTypes\Forms\FormPage.cs" />
-    <Compile Include="ContentTypes\Forms\IQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Option.cs" />
-    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Question.cs" />
-    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\ReferenceData\Currency.cs" />
     <Compile Include="ContentTypes\ReferenceData\CurrencyList.cs" />
@@ -162,10 +152,8 @@
     <Compile Include="ContentTypes\RssFeed.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
-    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Mvc\Controllers\LoginPageController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
-    <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
     <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
@@ -179,8 +167,6 @@
     <Compile Include="Mvc\ViewModels\BaseLoginFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetConfirmationViewModel.cs" />
@@ -209,7 +195,6 @@
     <Compile Include="TemplatesModule.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
-    <Compile Include="Mvc\Controllers\FormPageController.cs" />
     <Compile Include="Mvc\Controllers\PageController.cs" />
     <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
     <Compile Include="Mvc\Controllers\RssFeedController.cs" />
@@ -231,7 +216,6 @@
     <Compile Include="Mvc\RssResult.cs" />
     <Compile Include="Mvc\TemplatesAreaRegistration.cs" />
     <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
     <Compile Include="Mvc\ViewModels\WebsiteNodeViewModel.cs" />
@@ -361,6 +345,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Design\Editors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
