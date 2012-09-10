@@ -15,6 +15,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 	[ContentType(Name = "BaseProduct")]
 	[RestrictParents(typeof(Category))]
 	[TabPanel("Images", "Images", 200)]
+    [FieldSet("fsMainImage", "Main Image", 100, ContainerName = "Images")]
 	public class Product : BasePage
 	{
 		protected override Icon Icon
@@ -50,8 +51,9 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 			get { return SalePrice ?? RegularPrice; }
 		}
 
-		[ChildEditor("Main Image", 230)]
-		public Image MainImage
+        [ContentProperty("Main Image", 230, EditorContainerName = "fsMainImage")]
+        [ChildEditor("Main Image", 230)]
+        public Image MainImage
 		{
 			get { return GetChild("MainImage") as Image; }
 			set
@@ -65,7 +67,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Pages
 		}
 
 		[MultiImageUploadEditor("Extra Images", 250, ContainerName = "Images")]
-		public PropertyCollection ExtraImages
+		public virtual PropertyCollection ExtraImages
 		{
 			get { return GetDetailCollection("ExtraImages", true); }
 		}

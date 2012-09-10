@@ -27,7 +27,7 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 
 		public decimal LineTotal
 		{
-			get { return Product.CurrentPrice * Quantity; }
+			get { return (VariationPermutation != null && VariationPermutation.PriceOverride.HasValue ? VariationPermutation.PriceOverride.Value : Product.CurrentPrice) * Quantity; }
 		}
 
 		public VariationPermutation VariationPermutation

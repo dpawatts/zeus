@@ -25,6 +25,11 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
 		public PropertyCollection Variations
 		{
 			get { return GetDetailCollection("Variations", true); }
-		}
+        }
+
+        public decimal? PriceOverride {
+            get { return GetDetail("PriceOverride", default(decimal?)); }
+            set { SetDetail("PriceOverride", value); }
+        }
 	}
 }

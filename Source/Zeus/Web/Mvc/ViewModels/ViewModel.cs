@@ -65,12 +65,9 @@ namespace Zeus.Web.Mvc.ViewModels
                 bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != currentItem.Updated);
                 if (bWatcherChanged || itemChanged)
                 {
-                    if (SessionVal != null)
-                    {
-                        //only fire the signal if the item has actually changed (this is because once a signal is fired, all items for that template will be recached!)
-                        _allDataSignal.FireChanged();
-                        ChangeSignalFired = true;
-                    }
+                    _allDataSignal.FireChanged();
+                    ChangeSignalFired = true;
+                    
                     if (itemChanged)
                         System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.ID] = currentItem.Updated;
                 }

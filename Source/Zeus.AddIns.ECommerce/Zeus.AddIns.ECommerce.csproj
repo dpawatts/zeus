@@ -109,6 +109,8 @@
       <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="ContentTypes\Data\Address.cs" />
+    <Compile Include="ContentTypes\Data\Discount.cs" />
+    <Compile Include="ContentTypes\Data\DiscountContainer.cs" />
     <Compile Include="ContentTypes\Data\PaymentMethod.cs" />
     <Compile Include="ContentTypes\Data\ECommerceAddIn.cs" />
     <Compile Include="ContentTypes\Data\OrderItem.cs" />

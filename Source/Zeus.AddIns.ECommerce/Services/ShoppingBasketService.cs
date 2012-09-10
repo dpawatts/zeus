@@ -47,8 +47,10 @@ namespace Zeus.AddIns.ECommerce.Services
 					variationPermutation = new VariationPermutation();
 					foreach (Variation variation in variations)
 						variationPermutation.Variations.Add(variation);
+                
+                    variationPermutation.PriceOverride = GetPriceOverride(variationPermutation);				
 				}
-				item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
+                item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
 				item.AddTo(shoppingBasket);
 			}
 			else
@@ -58,6 +60,12 @@ namespace Zeus.AddIns.ECommerce.Services
 
 			_persister.Save(shoppingBasket);
 		}
+
+        public virtual decimal? GetPriceOverride(VariationPermutation vp)
+        {
+            //allows overrides to add custom price information
+            return null;
+        }
 
         public virtual void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation)
 		{
@@ -100,6 +108,39 @@ namespace Zeus.AddIns.ECommerce.Services
 				_webContext.Response.Cookies.Remove(GetCookieKey(shop));
 			}
 		}
+
+        public virtual bool ApplyDiscount(Shop shop, string code, out string message)
+        {
+            ShoppingBasket shoppingBasket = GetCurrentShoppingBasketInternal(shop, true);
+
+            IEnumerable<Discount> discounts = Zeus.Find.StartPage.GetChildren<DiscountContainer>().Single().GetChildren<Discount>().Where(d => d.ValidFrom <= DateTime.Now.Date && d.ValidTo >= DateTime.Now.Date && d.CouponCode.ToLowerInvariant() == code.ToLowerInvariant());
+            if (!discounts.Any())
+            {
+                message = "No valid discount was found with the code you entered, please try again";
+                return false;
+            }
+            else if (discounts.Count() > 1)
+            {
+                throw new Exception("Sorry, there is a problem with the system configuration, multiple discounts have been applied with the same code");
+            }
+            else
+            {
+                Discount discount = discounts.Single();
+                if (discount.MaxGlobalUses > 0 && discount.UsesSoFar >= discount.MaxGlobalUses)
+                {
+                    message = "The discount code has surpassed it's maximum amount of uses and so is no longer valid";
+                    return false;
+                }
+
+                shoppingBasket.Discount = discount;
+
+                _persister.Save(shoppingBasket);
+
+                message = "";
+                return true;
+            }
+
+        }
 
         public virtual void SaveBasket(Shop shop)
         {
@@ -176,8 +217,8 @@ namespace Zeus.AddIns.ECommerce.Services
 			else
 			{
 				shoppingBasket = new ShoppingBasket { Name = Guid.NewGuid().ToString() };
-				if (shop.DeliveryMethods != null)
-					shoppingBasket.DeliveryMethod = shop.DeliveryMethods.GetChildren<DeliveryMethod>().FirstOrDefault();
+                if (shop.DeliveryMethods != null)
+                    shoppingBasket.DeliveryMethod = DefaultDeliveryMethod(shop);
 
                 // don't always save basket to database
                 // this will only happen when we add items to it
@@ -194,6 +235,11 @@ namespace Zeus.AddIns.ECommerce.Services
 			}
 
 			return shoppingBasket;
-		}        
+		}
+
+        public virtual DeliveryMethod DefaultDeliveryMethod(Shop shop)
+        {
+            return shop.DeliveryMethods.GetChildren<DeliveryMethod>().FirstOrDefault();
+        }
     }
 }
