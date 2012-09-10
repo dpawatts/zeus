@@ -51,7 +51,8 @@ namespace Zeus.AddIns.ECommerce.Services
 			DeliveryMethod deliveryMethod, decimal deliveryPrice, Address billingAddress,
 			Address shippingAddress, PaymentCard paymentCard, string emailAddress,
 			string telephoneNumber, string mobileTelephoneNumber,
-			IEnumerable<OrderItem> items,
+            IEnumerable<OrderItem> items,
+            decimal discountAmount, string discountDescription,
             decimal totalVatPrice, decimal totalPrice)
 		{
 			// Convert shopping basket into order, with unpaid status.
@@ -67,6 +68,8 @@ namespace Zeus.AddIns.ECommerce.Services
 				MobileTelephoneNumber = mobileTelephoneNumber,
 				Status = OrderStatus.Unpaid,
                 TotalDeliveryPrice = deliveryPrice,
+                DiscountAmount = discountAmount,
+                DiscountDescription = discountDescription,
                 TotalVatPrice = totalVatPrice,
                 TotalPrice = totalPrice
 			};
@@ -113,6 +116,7 @@ namespace Zeus.AddIns.ECommerce.Services
             Address shippingAddress, PaymentCard paymentCard, string emailAddress,
             string telephoneNumber, string mobileTelephoneNumber,
             IEnumerable<OrderItem> items,
+            decimal discountAmount, string discountDescription,
             decimal totalVatPrice, decimal totalPrice)
         {
 			try
@@ -131,6 +135,8 @@ namespace Zeus.AddIns.ECommerce.Services
 					MobileTelephoneNumber = mobileTelephoneNumber,
 					Status = OrderStatus.Unpaid,
                     TotalDeliveryPrice = deliveryPrice,
+                    DiscountAmount = discountAmount,
+                    DiscountDescription = discountDescription,
                     TotalVatPrice = totalVatPrice,
                     TotalPrice = totalPrice
 				};
@@ -172,7 +178,7 @@ namespace Zeus.AddIns.ECommerce.Services
 					WeakProductLink = shoppingBasketItem.Product.ID,
 					ProductTitle = shoppingBasketItem.Product.Title,
 					Quantity = shoppingBasketItem.Quantity,
-					Price = shoppingBasketItem.Product.CurrentPrice,
+					Price = shoppingBasketItem.VariationPermutation != null && shoppingBasketItem.VariationPermutation.PriceOverride.HasValue ? shoppingBasketItem.VariationPermutation.PriceOverride.Value : shoppingBasketItem.Product.CurrentPrice,
                     VATable = !(shoppingBasketItem.Product.VatZeroRated)
 				};
 				if (shoppingBasketItem.Variations != null)
@@ -186,7 +192,10 @@ namespace Zeus.AddIns.ECommerce.Services
 				(Address) (shoppingBasket.ShippingAddress ?? shoppingBasket.BillingAddress).Clone(true),
 				(PaymentCard) shoppingBasket.PaymentCard.Clone(true), shoppingBasket.EmailAddress,
 				shoppingBasket.TelephoneNumber, shoppingBasket.MobileTelephoneNumber,
-				items, shoppingBasket.TotalDeliveryPrice, shoppingBasket.TotalPrice);
+				items,
+                shoppingBasket.Discount.DiscountAmount(shoppingBasket.SubTotalPrice),
+                shoppingBasket.Discount.DescriptionForAdministrators, 
+                shoppingBasket.TotalDeliveryPrice, shoppingBasket.TotalPrice);
 
 			// Clear shopping basket.
 			_persister.Delete(shoppingBasket);
