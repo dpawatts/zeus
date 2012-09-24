@@ -62,7 +62,7 @@ namespace Zeus.Web.Mvc
 
         public RouteData GetRouteDataForPath(HttpRequestBase request)
         {
-            PathData td = engine.UrlParser.ResolvePath(request.RawUrl);
+            PathData td = engine.UrlParser.ResolvePath(request.Url.ToString());
 
             string extraParam = "";
 
