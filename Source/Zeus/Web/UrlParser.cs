@@ -9,6 +9,7 @@ using Zeus.Persistence;
 using System.Linq;
 using System.Collections.Generic;
 using NHibernate;
+using System.Text.RegularExpressions;
 
 namespace Zeus.Web
 {
@@ -398,10 +399,21 @@ namespace Zeus.Web
                         {
                             foreach (CustomUrlsMandatoryStringsElement stringToFind in _configUrlsSection.MandatoryStrings)
                             {
-                                if (_webContext.Url.Path.IndexOf(stringToFind.Value) > -1)
+                                if (stringToFind.IsRegex)
                                 {
-                                    bTryCustomUrls = true;
-                                    break;
+                                    if (Regex.IsMatch(_webContext.Url.Path, stringToFind.Value))                                        
+                                    {
+                                        bTryCustomUrls = true;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (_webContext.Url.Path.IndexOf(stringToFind.Value) > -1)
+                                    {
+                                        bTryCustomUrls = true;
+                                        break;
+                                    }
                                 }
                             }
                         }
