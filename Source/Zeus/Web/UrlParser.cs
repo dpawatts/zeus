@@ -491,45 +491,57 @@ namespace Zeus.Web
                                 if (customUrlPage == null)
                                     continue;
 
-                                //need to check all children of these nodes to see if there's a match
-                                ContentItem tryMatch =
-                                    Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
-                                        ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
+                                //only search inside the parent id if we find that it has changed...
+                                DateTime? parentUpdated = System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID] == null ? null : (DateTime?)System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID];
 
-                                if (tryMatch != null)
+                                if (parentUpdated == null || parentUpdated.Value != customUrlPage.Updated)
                                 {
-                                    data = tryMatch.FindPath(PathData.DefaultAction);
-                                    System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
-                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
-                                    break;
-                                }
-                                //now need to check for an action...
-                                if (fullPath.LastIndexOf("/") > -1)
-                                {
+                                    System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID] = customUrlPage.Updated;
 
-                                    //see whether we have the root item in the cache...
-                                    if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
+                                    //need to check all children of these nodes to see if there's a match
+                                    ContentItem tryMatch =
+                                        Find.EnumerateAccessibleChildren(customUrlPage, id.Depth).SingleOrDefault(
+                                            ci => ci.Url.Equals(_webContext.Url.Path, StringComparison.InvariantCultureIgnoreCase));
+
+                                    if (tryMatch != null)
                                     {
-                                        ContentItem tryMatchAgain =
-                                            Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
-                                                ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+                                        data = tryMatch.FindPath(PathData.DefaultAction);
+                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
+                                        System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
+                                        break;
+                                    }
+                                    //now need to check for an action...
+                                    if (fullPath.LastIndexOf("/") > -1)
+                                    {
 
-                                        if (tryMatchAgain != null)
+                                        //see whether we have the root item in the cache...
+                                        if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
                                         {
-                                            data = tryMatchAgain.FindPath(action);
-                                            System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                            ContentItem tryMatchAgain =
+                                                Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
+                                                    ci => ci.Url.Equals(pathNoAction, StringComparison.InvariantCultureIgnoreCase));
+
+                                            if (tryMatchAgain != null)
+                                            {
+                                                data = tryMatchAgain.FindPath(action);
+                                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                                System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                            data = ci.FindPath(action);
+                                            System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
                                             System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                             break;
                                         }
                                     }
-                                    else
-                                    {
-                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
-                                        data = ci.FindPath(action);
-                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
-                                        System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
-                                        break;
-                                    }
+                                }
+                                else
+                                { 
+                                    //ignore, if parent hasn't been updated, no new URLs to search
                                 }
                             }
                         }
