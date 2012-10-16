@@ -33,28 +33,29 @@ namespace Zeus.Persistence.NH
 		public ConfigurationBuilder(IContentTypeManager definitions, DatabaseSection databaseSectionConfig)
 		{
 			_definitions = definitions;
-
+            
 			if (databaseSectionConfig == null)
 				databaseSectionConfig = new DatabaseSection();
 
             var configuration = MsSqlConfiguration.MsSql2008
                 .ConnectionString(c => c.FromConnectionStringWithKey(databaseSectionConfig.ConnectionStringName));
 				//.Cache(c => c.ProviderClass(databaseSectionConfig.CacheProviderClass));
-
-            /*
-            if (databaseSectionConfig.CacheEnabled)
-				configuration = configuration.Cache(c => c.UseQueryCache());
-            */
+            
+            
 
 			IDictionary<string, string> properties = configuration.ToProperties();
-			properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();
-			properties["connection.connection_string_name"] = databaseSectionConfig.ConnectionStringName;
-
-			//ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
+            properties["cache.provider_class"] = databaseSectionConfig.CacheProviderClass;
+            properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();
+            properties["connection.connection_string_name"] = databaseSectionConfig.ConnectionStringName;
+            
+            if (databaseSectionConfig.CacheEnabled)
+				properties["cache.use_query_cache"] = true.ToString();
+            
+            //ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
 			//persistenceModel.Mappings.(DefaultLazy.AlwaysTrue());
 
 			_configuration = new NHibernate.Cfg.Configuration().AddProperties(properties);
-
+            
 			AddMapping(_configuration, "Zeus.Persistence.NH.Mappings.Default.hbm.xml");
 			//_configuration.AddAssembly(Assembly.GetExecutingAssembly());
 

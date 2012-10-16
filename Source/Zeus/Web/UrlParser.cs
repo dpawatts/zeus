@@ -351,7 +351,7 @@ namespace Zeus.Web
 
                 ContentItem startPage = GetStartPage(requestedUrl);
                 string languageCode = GetLanguage(ref requestedUrl);
-                string path = Url.ToRelative(requestedUrl.PathWithoutExtension).TrimStart('~');
+                string path = Url.ToRelative(requestedUrl.Path).TrimStart('~');
                 PathData data = startPage.FindPath(path, languageCode).UpdateParameters(requestedUrl.GetQueries());
 
                 if (data.IsEmpty())
