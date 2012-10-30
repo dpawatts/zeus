@@ -12,7 +12,7 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 				throw new ArgumentNullException("source");
 
 			return source.Provider.CreateQuery(
-				Expression.Call(null, (typeof(Queryable).GetMethod("OfType")).MakeGenericMethod(resultType), source.Expression));
+                Expression.Call(null, (typeof(Queryable).GetMethod("OfType")).MakeGenericMethod(resultType), source.Expression));
 		}
 
 		public static IQueryable<TSource> OfType<TSource>(this IQueryable<TSource> source, Type type)
