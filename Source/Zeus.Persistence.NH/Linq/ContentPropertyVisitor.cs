@@ -6,6 +6,7 @@ using System.Reflection;
 using NHibernate.Linq.Visitors;
 using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.ContentProperties;
+using Zeus.BaseLibrary.Linq;
 
 namespace Zeus.Persistence.NH.Linq
 {

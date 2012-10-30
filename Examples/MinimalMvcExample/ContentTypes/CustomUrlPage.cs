@@ -73,10 +73,10 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
         }
         
         [ContentProperty("MyPage", 200)]
-        [ChildEditor("MyPage", 200)]
+        [LinkedItemDropDownListEditor("MyPage", 200, TypeFilter=typeof(MyLittleType))]
         public virtual MyLittleType MyPage
         {
-            get { return GetDetail("MyPage", (default(MyLittleType))); }
+            get { return GetDetail<MyLittleType>("MyPage", (default(MyLittleType))); }
             set { SetDetail("MyPage", value); }
         }
 
