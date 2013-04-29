@@ -61,6 +61,7 @@ namespace Zeus.Templates.ContentTypes
 
 		public virtual IEnumerable<ISyndicatable> GetItems()
 		{
+            //the .OfType<ContentItem>() call here might not work, remove if you have issue with it
 			return Find.EnumerateAccessibleChildren(FeedRoot ?? Find.StartPage)
 				.OfType<ISyndicatable>()
 				.OfType<ContentItem>()

@@ -1,3 +1,4 @@
+/*
 using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Linq;
@@ -20,3 +21,4 @@ namespace Zeus.Persistence.NH.Linq
 		}
 	}
 }
+*/
