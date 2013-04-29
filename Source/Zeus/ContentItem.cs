@@ -161,6 +161,9 @@ namespace Zeus
             set { _translations = value; }
         }
 
+        public virtual int? OverrideCacheID { get; set; }
+        public int CacheID { get { return OverrideCacheID.HasValue ? OverrideCacheID.Value : ID; } }
+
         #endregion
 
         #region Public Properties (generated)

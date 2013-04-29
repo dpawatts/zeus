@@ -27,18 +27,20 @@ namespace Zeus.Templates.Mvc.Controllers
         [ExportModelStateToTempData]
         public ActionResult Login(LoginPageFormViewModel loginForm)
 		{
-			if (!ModelState.IsValid || !_webSecurityService.ValidateUser(loginForm.Username, loginForm.Password))
-			{
-				ModelState.AddModelError("Login.Failed", "Invalid username or password");
-				if (!string.IsNullOrEmpty(loginForm.Target))
-					return RedirectToParentPage("?target=" + loginForm.Target + "#loginBox");
-			}
+            if (!ModelState.IsValid || !_webSecurityService.ValidateUser(loginForm.Username, loginForm.Password))
+            {
+                ModelState.AddModelError("Login.Failed", "Invalid username or password");
+                if (!string.IsNullOrEmpty(loginForm.Target))
+                    return RedirectToParentPage("?target=" + loginForm.Target + "#loginBox");
+            }
+            else
+            {
+                _webSecurityService.SetAuthCookie(loginForm.Username, false);
 
-			_webSecurityService.SetAuthCookie(loginForm.Username, false);
-
-			//check for redirect instruction
-			if (!string.IsNullOrEmpty(loginForm.Target))
-				Response.Redirect(loginForm.Target);
+                //check for redirect instruction
+                if (!string.IsNullOrEmpty(loginForm.Target))
+                    Response.Redirect(loginForm.Target);
+            }
 
             return RedirectToParentPage();
 		}

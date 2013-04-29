@@ -32,6 +32,13 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay.Configuration
 		{
 			get { return (string)base["purchaseUrl"]; }
 			set { base["purchaseUrl"] = value; }
-		}
+        }
+
+        [ConfigurationProperty("callbackFor3D", IsRequired = false)]
+        public string CallbackFor3D
+        {
+            get { return (string)base["callbackFor3D"]; }
+            set { base["callbackFor3D"] = value; }
+        }
 	}
 }

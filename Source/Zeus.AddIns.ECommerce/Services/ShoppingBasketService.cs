@@ -48,7 +48,7 @@ namespace Zeus.AddIns.ECommerce.Services
 					foreach (Variation variation in variations)
 						variationPermutation.Variations.Add(variation);
                 
-                    variationPermutation.PriceOverride = GetPriceOverride(variationPermutation);				
+                    variationPermutation.PriceOverride = GetPriceOverride(variationPermutation, product);				
 				}
                 item = new ShoppingBasketItem { Product = product, VariationPermutation = variationPermutation, Quantity = 1 };
 				item.AddTo(shoppingBasket);
@@ -61,7 +61,7 @@ namespace Zeus.AddIns.ECommerce.Services
 			_persister.Save(shoppingBasket);
 		}
 
-        public virtual decimal? GetPriceOverride(VariationPermutation vp)
+        public virtual decimal? GetPriceOverride(VariationPermutation vp, Product product)
         {
             //allows overrides to add custom price information
             return null;

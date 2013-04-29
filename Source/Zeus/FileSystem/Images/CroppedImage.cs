@@ -64,12 +64,17 @@ namespace Zeus.FileSystem.Images
 
         public string GetUrlForAdmin(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
-            //see if it's the standard editor crop (from admin site most likely)
-            bool isStandard = width == 800 & height == 600;
-
             //first construct the crop
             var imageSource = new ZeusImageSource();
             imageSource.ContentID = this.ID;
+
+            return GetUrlForAdminViaSource(imageSource, width, height, fill, format, isResize);
+        }
+
+        public string GetUrlForAdminViaSource(ImageSource source, int width, int height, bool fill, DynamicImageFormat format, bool isResize)
+        {
+            //see if it's the standard editor crop (from admin site most likely)
+            bool isStandard = width == 800 & height == 600;
 
             if (this.Data == null)
                 return "";
@@ -123,7 +128,7 @@ namespace Zeus.FileSystem.Images
 
             // create image layer wit ha source
             var imageLayer = new ImageLayer();
-            imageLayer.Source.SingleSource = imageSource;
+            imageLayer.Source.SingleSource = source;
 
             // add filters
             if (!(TopLeftXVal == 0 && TopLeftYVal == 0 && CropWidth == 0 && CropHeight == 0))

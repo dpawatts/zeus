@@ -13,7 +13,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 	/// </summary>
 	public class SagePayPaymentGateway : IPaymentGateway
 	{
-		private string _vpsProtocol, _vendorName, _currency, _purchaseUrl;
+		private string _vpsProtocol, _vendorName, _currency, _purchaseUrl, _callbackUrlFor3D;
 
 		public SagePayPaymentGateway()
 		{
@@ -24,7 +24,8 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			_vpsProtocol = configSection.VpsProtocol;
 			_vendorName = configSection.VendorName;
 			_currency = configSection.Currency;
-			_purchaseUrl = configSection.PurchaseUrl;
+            _purchaseUrl = configSection.PurchaseUrl;
+            _callbackUrlFor3D = configSection.CallbackFor3D;
 		}
 
         public void OverrideVendorName(string newVendor)
@@ -90,12 +91,26 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 
 			switch (status)
 			{
-				case "3DAUTH" :
-					throw new NotImplementedException();
+                case "3DAUTH":
+                    return Process3DAuthResponse(status, statusDetail, responseData);                    
 				default :
 					// If this isn't 3D-Auth, then this is an authorisation result (either successful or otherwise).
 					return ProcessAuthorisationResponse(status, statusDetail, responseData);
 			}
+		}
+        
+        private PaymentResponse Process3DAuthResponse(string status, string statusDetail, NameValueCollection responseData)
+		{
+			// This is a 3D-Secure transaction, so we need to redirect the customer to their bank **
+            // for authentication.  First get the pertinent information from the response **
+            return new PaymentResponse(false)
+			{
+				Message = "3D",
+                MD = responseData["MD"],
+                ACSURL = responseData["ACSURL"],
+                PAReq = responseData["PAReq"],
+                CallBackUrl = _callbackUrlFor3D
+			};
 		}
 
 		private static PaymentResponse ProcessAuthorisationResponse(string status, string statusDetail, NameValueCollection responseData)
@@ -166,7 +181,15 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			foreach (string responseItem in responseItems)
 			{
 				string[] responseItemKeyValue = responseItem.Split(new[] { '=' }, StringSplitOptions.None);
-				responseData.Add(responseItemKeyValue[0], responseItemKeyValue[1]);
+                //deal with = being part of the value
+                string val = "";
+                for (int i = 1; i <= responseItemKeyValue.GetUpperBound(0); i++)
+                {
+                    if (i > 1)
+                        val += "=";
+                    val += responseItemKeyValue[i];
+                }
+                responseData.Add(responseItemKeyValue[0], val);
 			}
 			return responseData;
 		}
