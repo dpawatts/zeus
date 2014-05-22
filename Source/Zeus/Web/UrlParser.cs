@@ -230,6 +230,7 @@ namespace Zeus.Web
             foreach (Language language in Context.Current.LanguageManager.GetAvailableLanguages())
                 if (url.StartsWith(language.Name, StringComparison.InvariantCultureIgnoreCase))
                     throw new NotImplementedException();
+            ContentItem notFound = NotFoundPage(url);
 
             return current.GetChild(url) ?? NotFoundPage(url);
         }
@@ -272,6 +273,10 @@ namespace Zeus.Web
             PageNotFoundEventArgs args = new PageNotFoundEventArgs(url);
             if (PageNotFound != null)
                 PageNotFound(this, args);
+
+            if (System.Web.HttpContext.Current != null)
+                System.Web.HttpContext.Current.Response.StatusCode = 404;
+
             return args.AffectedItem;
         }
 
@@ -569,6 +574,8 @@ namespace Zeus.Web
                                 data = args.AffectedItem.FindPath(PathData.DefaultAction);
                             else
                                 data = args.AffectedPath;
+
+                            data.Is404 = true;
                         }
                     }
                 }

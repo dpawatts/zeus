@@ -63,5 +63,20 @@ namespace Zeus.Web
         {
             get { return false; }
         }
+
+        /*
+        /// <summary>If set to true the code will interrupt the 404 return and server.transfer to the URL return from the function below - this allows bespoke handling of missing data based on URL patterns</summary>
+        public virtual bool AllowParentInterruptionOf404
+        {
+            get { return false; }
+        }
+        public virtual string UrlToTransferTo()
+        {
+            if (AllowParentInterruptionOf404)
+                return "/";
+            else
+                throw new System.Exception("You must have set the relevant AllowParentInterruptionOf404 property to access this value");
+        }
+         */
 	}
 }

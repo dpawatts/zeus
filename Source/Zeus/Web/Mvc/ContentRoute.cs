@@ -66,12 +66,17 @@ namespace Zeus.Web.Mvc
 
             string extraParam = "";
 
-            if (td.CurrentItem != null)
+            if (td.CurrentItem != null && !td.Is404)
             {
-                //all ok, we can continue
+                //all ok, item found, we can continue
             }
             else
             {
+                bool originalLookUpWas404 = td.Is404;
+                PathData originalPathData = null;
+                if (originalLookUpWas404)
+                    originalPathData = td;
+
                 //test for extra param being passed in...so /item/myParam - needs to ignore querystring of course
                 string fullPath = request.Url.ToString();
                 if (fullPath.IndexOf('?') > -1)
@@ -82,13 +87,26 @@ namespace Zeus.Web.Mvc
                 td = engine.UrlParser.ResolvePath(thePathWithOutLastParam);
 
                 //check to see if the content item has been and is a page and if so, if it allows the Index(Param) option                        
-                if (td.CurrentItem != null && td.CurrentItem as PageContentItem != null && (td.CurrentItem as PageContentItem).AllowParamsOnIndex)
+                if (!td.Is404 && td.CurrentItem != null && td.CurrentItem as PageContentItem != null && (td.CurrentItem as PageContentItem).AllowParamsOnIndex)
                 {
-                    extraParam = thePath.Segments.Last();                    
-                }                
+                    extraParam = thePath.Segments.Last();
+                }
                 else
                 {
-                    return null;
+                    //check for 404
+                    if (td.Is404 || originalLookUpWas404)
+                    {
+                        if (!td.Is404 && originalLookUpWas404)
+                        { 
+                            //need to return to our original 404 page here...
+                            td = originalPathData;
+                        }
+
+                        //return correct response!  Code will continue from here and all will be fine...
+                        System.Web.HttpContext.Current.Response.StatusCode = 404;
+                    }
+                    else
+                        return null;
                 }
             }
 

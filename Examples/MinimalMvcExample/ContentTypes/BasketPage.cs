@@ -46,6 +46,28 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             get { return new List<string> { "United Kingdom" }; }
         }
 
+        public bool ForceStateMatch
+        {
+            get { return false; }
+        }
+
+        public System.Collections.Generic.IEnumerable<string> PossibleStates
+        {
+            get { return new List<string>(); }
+        }
+
+
+
+        #endregion
+
+        #region IPayPalBasketPage Members
+
+
+        public string Currency
+        {
+            get { return "GBP"; }
+        }
+
         #endregion
     }
 }

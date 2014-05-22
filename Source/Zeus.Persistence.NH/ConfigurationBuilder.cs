@@ -37,12 +37,12 @@ namespace Zeus.Persistence.NH
 			if (databaseSectionConfig == null)
 				databaseSectionConfig = new DatabaseSection();
 
-			var configuration = MsSqlConfiguration.MsSql2008
-				//.ConnectionString(c => c.FromConnectionStringWithKey(databaseSectionConfig.ConnectionStringName))
-				.Cache(c => c.ProviderClass(databaseSectionConfig.CacheProviderClass));
+            var configuration = MsSqlConfiguration.MsSql2008
+                .ConnectionString(c => c.FromConnectionStringWithKey(databaseSectionConfig.ConnectionStringName));
+				//.Cache(c => c.ProviderClass(databaseSectionConfig.CacheProviderClass));
 
-			if (databaseSectionConfig.CacheEnabled)
-				configuration = configuration.Cache(c => c.UseQueryCache());
+			//if (databaseSectionConfig.CacheEnabled)
+			//	configuration = configuration.Cache(c => c.UseQueryCache());
 
 			IDictionary<string, string> properties = configuration.ToProperties();
 			properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();

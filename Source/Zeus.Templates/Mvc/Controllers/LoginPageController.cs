@@ -4,6 +4,7 @@ using Zeus.Web;
 using Zeus.Web.Mvc.ActionFilters;
 using Zeus.Web.Security;
 using Zeus.Templates.ContentTypes;
+using System.Net;
 
 namespace Zeus.Templates.Mvc.Controllers
 {
@@ -37,12 +38,38 @@ namespace Zeus.Templates.Mvc.Controllers
             {
                 _webSecurityService.SetAuthCookie(loginForm.Username, false);
 
-                //check for redirect instruction
+                //check for redirect instruction, and check that it isn't going to error - if it is then ignore the redirect
                 if (!string.IsNullOrEmpty(loginForm.Target))
-                    Response.Redirect(loginForm.Target);
+                {
+                    if (TestFor500(loginForm.Target))
+                        Response.Redirect(loginForm.Target);
+                }
             }
 
             return RedirectToParentPage();
 		}
+
+        public static bool TestFor500(string url)
+        {
+            try
+            {
+                HttpWebRequest webRequest = HttpWebRequest.Create("http://" + System.Web.HttpContext.Current.Request.Url.Host + url) as HttpWebRequest;
+                webRequest.Method = WebRequestMethods.Http.Get;
+                webRequest.ContentType = "application/x-www-form-urlencoded";
+                using (HttpWebResponse response = webRequest.GetResponse() as HttpWebResponse)
+                {
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            }
+            catch (WebException ex)
+            {
+                return false;
+            }
+        }
 	}
 }

@@ -30,7 +30,9 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                                                             ReturnUrl + "/PayPalConfirmation",
                                                             ReturnUrl + "/CheckoutFailed",
                                                             CurrentItem.BasketItems,
-                                                            CurrentItem.DeliveryPrice);
+                                                            CurrentItem.DeliveryPrice,
+                                                            CurrentItem.Currency
+                                                            );
             if (ret)
             {
                 
@@ -44,15 +46,16 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
             {
                 basketPageViewModel.PaymentReturnMessage = retMsg;
                 //the payment failed
-                //code here should display the error message - this is not a payment error, this is an account error
-            }
+                //code here should display the error message - this is not a payment error, this is an account error, 
+                //or an error with the totals being passed to PayPal - the rounding should be done from the calling application rather than inside this code!!!
+                basketPageViewModel.CheckoutMessage = retMsg;
 
-            return View("Index", basketPageViewModel);
+                return View("PayPalFailed", basketPageViewModel);
+            }
         }
 
         public virtual Type typeOfViewModel { get { return typeof(PayPalBasketPageViewModel<T>); } }
 
-        [HttpGet]
         public virtual ActionResult CheckoutSuccessful()
         {
             NVPAPICaller test = new NVPAPICaller();
@@ -67,7 +70,7 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
             payerId = System.Web.HttpContext.Current.Session["ppID"].ToString();
             finalPaymentAmount = CurrentItem.BasketTotal.ToString().TrimEnd('0');
 
-            bool ret = test.ConfirmPayment(finalPaymentAmount, token, payerId, ref decoder, ref retMsg);
+            bool ret = test.ConfirmPayment(finalPaymentAmount, token, payerId, ref decoder, ref retMsg, CurrentItem.Currency);
 
             if (ret)
             {
@@ -141,7 +144,6 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                 System.Web.HttpContext.Current.Session["ppID"] = PayerID;
 
                 //at this point check to see if an appropriate country has been used...
-
                 var basketPageViewModel = GetViewModel(CurrentItem);
                 basketPageViewModel.ShippingAddress = shippingAddress;
                 
@@ -149,6 +151,11 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                 {
                     //throw the error...
                     return View("PayPalReturnedWrongCountry", basketPageViewModel);
+                }
+                else if (CurrentItem.ForceStateMatch && !CurrentItem.PossibleStates.Contains(shippingAddress.StateRegion))
+                {
+                    //throw the error...
+                    return View("PayPalReturnedWrongState", basketPageViewModel);
                 }
 
                 var result = View(basketPageViewModel);

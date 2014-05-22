@@ -167,7 +167,8 @@ public class NVPAPICaller
     /// <param ref name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost)
+
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency)
     {
         string host = "www.paypal.com";
         if (StartPage.UseTestEnvironment)
@@ -196,7 +197,7 @@ public class NVPAPICaller
         encoder["PAYMENTREQUEST_0_AMT"] = amt;
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
         //as uk only
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "GBP";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = string.IsNullOrEmpty(currency) ? "GBP" : currency;
 
         encoder["PAYMENTREQUEST_0_SHIPPINGAMT"] = shippingCost.ToString("0.00");
         encoder["PAYMENTREQUEST_0_HANDLINGAMT"] = "0.00";
@@ -280,6 +281,7 @@ public class NVPAPICaller
             ShippingAddress.StateRegion = decoder["PAYMENTREQUEST_0_SHIPTOSTATE"];
             ShippingAddress.Postcode = decoder["PAYMENTREQUEST_0_SHIPTOZIP"];
             //ShippingAddress.Country = decoder["PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"];
+            ShippingAddress.PhoneNumber = decoder["PAYMENTREQUEST_0_SHIPTOPHONENUM"];
             ShippingAddress.Country = decoder["SHIPTOCOUNTRYNAME"];
             ShippingAddress.Email = decoder["EMAIL"];
             noteToSeller = decoder["PAYMENTREQUEST_0_NOTETEXT"];
@@ -302,7 +304,7 @@ public class NVPAPICaller
     /// <param name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool ConfirmPayment(string finalPaymentAmount, string token, string payerId, ref NVPCodec decoder, ref string retMsg)
+    public bool ConfirmPayment(string finalPaymentAmount, string token, string payerId, ref NVPCodec decoder, ref string retMsg, string currency)
     {
         if (StartPage.UseTestEnvironment)
         {
@@ -316,7 +318,7 @@ public class NVPAPICaller
         encoder["PAYERID"] = payerId;
         encoder["PAYMENTREQUEST_0_AMT"] = finalPaymentAmount;
         //encoder["CURRENCYCODE"] = SoundInTheory.CatchTheLingo.Web.Classes.Currency.GetPayPalCurrencyCodeAsString();
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "GBP";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = string.IsNullOrEmpty(currency) ? "GBP" : currency;
 
         string pStrrequestforNvp = encoder.Encode();
         string pStresponsenvp = HttpCall(pStrrequestforNvp);

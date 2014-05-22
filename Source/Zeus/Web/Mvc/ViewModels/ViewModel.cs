@@ -97,5 +97,38 @@ namespace Zeus.Web.Mvc.ViewModels
 		}
 
 		public new T CurrentItem { get; set; }
+
+        public ICacheSignal GetDataForItem(ContentItem item)
+        {
+            SignalData res = new SignalData();
+            if (item == null)
+            {
+                //no model, so fire changes (essentially denying the page caching)
+                res._allDataSignal = new CacheSignal();
+                res._allDataSignal.FireChanged();
+                res.ChangeSignalFired = true;
+            }
+            else
+            {
+                //set up the signal for this object
+                res._allDataSignal = new CacheSignal();
+                
+                //fire changed signal if needed
+                res.ChangeSignalFired = false;
+
+                //check itself
+                var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID];
+                bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != item.Updated);
+                if (itemChanged)
+                {
+                    res._allDataSignal.FireChanged();
+                    res.ChangeSignalFired = true;
+
+                    if (itemChanged)
+                        System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID] = item.Updated;
+                }
+            }
+            return res._allDataSignal;
+        }
 	}
 }

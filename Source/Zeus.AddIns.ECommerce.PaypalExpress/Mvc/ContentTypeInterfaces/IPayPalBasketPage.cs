@@ -13,5 +13,8 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ContentTypeInterfaces
         decimal DeliveryPrice { get; }
         bool ForceCountryMatch { get; }
         IEnumerable<string> PossibleCountries { get; }
+        string Currency { get; }
+        bool ForceStateMatch { get; }
+        IEnumerable<string> PossibleStates { get; }        
     }
 }

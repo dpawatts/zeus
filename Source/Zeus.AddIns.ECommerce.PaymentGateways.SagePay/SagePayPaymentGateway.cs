@@ -206,7 +206,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["VendorTxCode"] = paymentRequest.TransactionCode;
 
 			postData["Amount"] = paymentRequest.Amount.ToString("F2"); // Formatted to 2 decimal places with leading digit but no commas or currency symbols
-			postData["Currency"] = _currency;
+			postData["Currency"] = string.IsNullOrEmpty(paymentRequest.CurrencyOverride) ? _currency : paymentRequest.CurrencyOverride;
 			if (!string.IsNullOrEmpty(paymentRequest.Description))
 				postData["Description"] = paymentRequest.Description.Left(100); // Up to 100 chars of free format description
 

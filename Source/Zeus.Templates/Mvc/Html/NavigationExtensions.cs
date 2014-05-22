@@ -217,15 +217,23 @@ namespace Zeus.Templates.Mvc.Html
 
         public static IList<NavigationItem> LoadNav(this HtmlHelper html)
         {
+            return LoadNav(html, true);
+        }
+
+        public static IList<NavigationItem> LoadNav(this HtmlHelper html, bool includeRootItem)
+        {
             string Lang = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
             DateTime lastChecked = System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang];
-            if (System.Web.HttpContext.Current.Application["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1))
+            if (System.Web.HttpContext.Current.Application["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1) || Find.StartPage.Updated > lastChecked)
             {
                 var result = new List<NavigationItem>();
 
-                foreach (ContentItem item in html.NavigationPages(Find.RootItem))
+                if (includeRootItem)
                 {
-                    result.Add(new NavigationItem { Title = item.Title, Url = item.Url, ID = item.ID });
+                    foreach (ContentItem item in html.NavigationPages(Find.RootItem))
+                    {
+                        result.Add(new NavigationItem { Title = item.Title, Url = item.Url, ID = item.ID });
+                    }
                 }
 
                 foreach (ContentItem item in html.NavigationPages())

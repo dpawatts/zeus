@@ -10,7 +10,7 @@ using Zeus.BaseLibrary.Linq;
 
 namespace Zeus.Persistence.NH.Linq
 {
-	internal class ContentPropertyVisitor : ExpressionVisitor
+	internal class ContentPropertyVisitor : Zeus.BaseLibrary.Linq.ExpressionVisitor
 	{
 		private readonly IContentPropertyManager _contentPropertyManager;
 
