@@ -18,6 +18,8 @@ namespace Zeus.Web.Mvc.ViewModels
 	{
         public ViewModel(T currentItem)
 		{
+            Initialise();
+
             if (currentItem == null)
             {
                 //no model, so fire changes (essentially denying the page caching)
@@ -74,6 +76,11 @@ namespace Zeus.Web.Mvc.ViewModels
             }
 		}
 
+        public virtual void Initialise()
+        {
+            //override this to do stuff before the base constructor!!
+        }
+
         public virtual List<ContentItem> CacheWatchers { get; set; }
 
         public bool ChangeSignalFired { get; set; }
@@ -100,35 +107,30 @@ namespace Zeus.Web.Mvc.ViewModels
 
         public ICacheSignal GetDataForItem(ContentItem item)
         {
-            SignalData res = new SignalData();
+            CacheSignal res;
             if (item == null)
             {
                 //no model, so fire changes (essentially denying the page caching)
-                res._allDataSignal = new CacheSignal();
-                res._allDataSignal.FireChanged();
-                res.ChangeSignalFired = true;
+                res = new CacheSignal();
+                res.FireChanged();                
             }
             else
             {
                 //set up the signal for this object
-                res._allDataSignal = new CacheSignal();
+                res = new CacheSignal();
                 
-                //fire changed signal if needed
-                res.ChangeSignalFired = false;
-
                 //check itself
                 var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID];
                 bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != item.Updated);
                 if (itemChanged)
                 {
-                    res._allDataSignal.FireChanged();
-                    res.ChangeSignalFired = true;
-
+                    res.FireChanged();
+                    
                     if (itemChanged)
                         System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID] = item.Updated;
                 }
             }
-            return res._allDataSignal;
+            return res;
         }
 	}
 }

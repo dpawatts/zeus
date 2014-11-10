@@ -58,10 +58,12 @@ namespace Zeus.Web.Mvc
                 return null;
 
             return GetRouteDataForPath(httpContext.Request);
+            
         }
 
         public RouteData GetRouteDataForPath(HttpRequestBase request)
         {
+
             PathData td = engine.UrlParser.ResolvePath(request.Url.ToString());
 
             string extraParam = "";
@@ -112,7 +114,7 @@ namespace Zeus.Web.Mvc
 
             var item = td.CurrentItem;
             var action = td.Action;
-
+            
             if (td.QueryParameters.ContainsKey("preview"))
             {
                 int itemId;

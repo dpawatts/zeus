@@ -56,7 +56,7 @@ namespace Zeus.Admin
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.shared.css");
 			Page.ClientScript.RegisterCssResource(typeof(Default), "Zeus.Admin.Assets.Css.default.css", ResourceInsertPosition.HeaderBottom);
 
-			// Render plugin scripts.
+            // Render plugin scripts.
 			foreach (IMainInterfacePlugin plugin in Engine.ResolveAll<IMainInterfacePlugin>())
 			{
 				plugin.RegisterScripts(ScriptManager);

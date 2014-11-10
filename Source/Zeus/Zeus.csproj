@@ -347,7 +347,6 @@
     <Compile Include="Web\Mvc\NinjectActionInvoker.cs" />
     <Compile Include="Web\Mvc\NotModifiedResult.cs" />
     <Compile Include="Web\Mvc\StandardAreaRegistration.cs" />
-    <Compile Include="Web\Mvc\ViewModels\SignalData.cs" />
     <Compile Include="Web\Mvc\ViewModels\ViewModel.cs" />
     <Compile Include="Web\Mvc\ViewPageResult.cs" />
     <Compile Include="Web\PageContentItem.cs" />
