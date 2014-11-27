@@ -186,6 +186,12 @@ namespace Zeus
             get { return false; }
         }
 
+        /// <summary>Needs to be overridden and set to true for the code needed to match a Custom Url to kick in</summary>
+        public virtual bool CheckItselfForCaching
+        {
+            get { return true; }
+        }
+
         /// <summary>If set to false it will stop the update going up the tree - useful when you don't want caches kicked for simple updates on large sites - cache dependencies are still easy enough to set</summary>
         public virtual bool PropogateUpdate
         {

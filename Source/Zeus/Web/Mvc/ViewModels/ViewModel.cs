@@ -62,9 +62,13 @@ namespace Zeus.Web.Mvc.ViewModels
                     }
                 }
 
-                //check itself
                 var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.CacheID];
-                bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != currentItem.Updated);
+                
+                //check itself
+                bool itemChanged = false;
+                if (CurrentItem.CheckItselfForCaching)
+                    itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != currentItem.Updated);
+
                 if (bWatcherChanged || itemChanged)
                 {
                     _allDataSignal.FireChanged();

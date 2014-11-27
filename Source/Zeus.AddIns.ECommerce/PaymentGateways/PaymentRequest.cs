@@ -18,7 +18,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
             string clientIpAddress)
         {
             Initialise(transactionType, transactionCode, amount, description, billingAddress, shippingAddress,
-                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, null);
+                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, null, false, false, null, false);
         }
 
         public PaymentRequest(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
@@ -28,14 +28,34 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
 			string clientIpAddress, string currencyOverride)
 		{
             Initialise(transactionType, transactionCode, amount, description, billingAddress, shippingAddress,
-                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, currencyOverride);
+                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, currencyOverride, false, false, null, false);
 		}
 
+        public PaymentRequest(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
+            Address billingAddress, Address shippingAddress,
+            PaymentCard card, string cardNumber, string cardSecurityCode,
+            string telephoneNumber, string emailAddress,
+            string clientIpAddress, string currencyOverride, bool createToken)
+        {
+            Initialise(transactionType, transactionCode, amount, description, billingAddress, shippingAddress,
+                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, currencyOverride, createToken, false, null, false);
+        }
+
+        public PaymentRequest(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
+            Address billingAddress, Address shippingAddress,
+            PaymentCard card, string cardNumber, string cardSecurityCode,
+            string telephoneNumber, string emailAddress,
+            string clientIpAddress, string currencyOverride, string token, bool storeToken)
+        {
+            Initialise(transactionType, transactionCode, amount, description, billingAddress, shippingAddress,
+                card, cardNumber, cardSecurityCode, telephoneNumber, emailAddress, clientIpAddress, currencyOverride, false, true, token, storeToken);
+        }
+        
         private void Initialise(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
 			Address billingAddress, Address shippingAddress, 
             PaymentCard card, string cardNumber, string cardSecurityCode,
 			string telephoneNumber, string emailAddress,
-			string clientIpAddress, string currencyOverride)
+            string clientIpAddress, string currencyOverride, bool createToken, bool useToken, string token, bool storeToken)
         {
             TransactionType = transactionType;
             TransactionCode = transactionCode;
@@ -55,6 +75,11 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
             ClientIpAddress = clientIpAddress;
 
             CurrencyOverride = currencyOverride;
+
+            CreateToken = createToken;
+            UseToken = useToken;
+            Token = token;
+            StoreToken = storeToken;
         }
 
         public PaymentTransactionType TransactionType { get; private set; }
@@ -75,5 +100,10 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
 		public string ClientIpAddress { get; private set; }
 
         public string CurrencyOverride { get; private set; }
+
+        public bool CreateToken { get; private set; }
+        public bool UseToken { get; private set; }
+        public string Token { get; private set; }
+        public bool StoreToken { get; private set; }
 	}
 }

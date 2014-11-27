@@ -32,5 +32,10 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
             get { return System.Web.HttpContext.Current.Session["3DSecure_CallBackUrl"].ToString(); }
             set { System.Web.HttpContext.Current.Session["3DSecure_CallBackUrl"] = value; }
         }
+        public string Token
+        {
+            get { return System.Web.HttpContext.Current.Session["Token"] != null ? System.Web.HttpContext.Current.Session["Token"].ToString() : null; }
+            set { System.Web.HttpContext.Current.Session["Token"] = value; }
+        }
 	}
 }

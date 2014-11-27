@@ -5,6 +5,8 @@ using System.Net;
 using System.Text;
 using Zeus.AddIns.ECommerce.PaymentGateways.SagePay.Configuration;
 using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods.Collections;
+using System.Linq;
 
 namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 {
@@ -58,7 +60,9 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			byte[] responseBytes = null;
 			try
 			{
-				responseBytes = webClient.UploadValues(_purchaseUrl, "POST", BuildPostData(paymentRequest));
+                NameValueCollection postData = BuildPostData(paymentRequest);
+                string test = postData.Join(pd => string.Format("{0} = {1}", pd, postData[pd]), "\n");
+                responseBytes = webClient.UploadValues(_purchaseUrl, "POST", postData);
 			}
 			catch (WebException ex)
 			{
@@ -281,6 +285,8 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			// If your back office application is a subscription system with recurring transactions, use C
 			// Your Sage Pay account MUST be set up for the account type you choose.  If in doubt, use E.
 			postData["AccountType"] = "E";
+
+            postData["CreateToken"] = paymentRequest.CreateToken ? "1" : "0";
 
 			return postData;
 		}
