@@ -39,7 +39,8 @@ namespace Zeus.Web.Mvc.ViewModels
                 {
                     //the signal doesn't exist, so add it to the list
                     _allDataSignal = new CacheSignal();
-                    _allDataSignals.Add(currentItem.CacheID, _allDataSignal);
+                    if (!_allDataSignals.ContainsKey(currentItem.CacheID))
+                        _allDataSignals.Add(currentItem.CacheID, _allDataSignal);
                 }
 
                 CurrentItem = currentItem;

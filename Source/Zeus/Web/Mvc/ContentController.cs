@@ -177,7 +177,7 @@ namespace Zeus.Web.Mvc
 
 				if (httpContext.Session == null)
 				{
-					throw new InvalidOperationException("Session state appears to be disabled.");
+                    throw new InvalidOperationException("Session state appears to be disabled.  User Agent was " + httpContext.Request.UserAgent);
 				}
 
 				httpContext.Session[TempDataSessionStateKey] = values;
