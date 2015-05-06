@@ -11,6 +11,10 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
         /// <summary>
         /// Constructor
         /// </summary>
+        
+        public PaymentRequest()
+        { }
+
         public PaymentRequest(PaymentTransactionType transactionType, string transactionCode, decimal amount, string description,
             Address billingAddress, Address shippingAddress,
             PaymentCard card, string cardNumber, string cardSecurityCode,
@@ -82,28 +86,28 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways
             StoreToken = storeToken;
         }
 
-        public PaymentTransactionType TransactionType { get; private set; }
-        public string TransactionCode { get; private set; }
-        public decimal Amount { get; private set; }
-        public string Description { get; private set; }
+        public PaymentTransactionType TransactionType { get; set; }
+        public string TransactionCode { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
 
-        public Address BillingAddress { get; private set; }
-        public Address ShippingAddress { get; private set; }
+        public Address BillingAddress { get; set; }
+        public Address ShippingAddress { get; set; }
 
-        public PaymentCard Card { get; private set; }
-        public string CardNumber { get; private set; }
-        public string CardSecurityCode { get; private set; }
+        public PaymentCard Card { get; set; }
+        public string CardNumber { get; set; }
+        public string CardSecurityCode { get; set; }
         
-		public string TelephoneNumber { get; private set; }
-		public string EmailAddress { get; private set; }
+		public string TelephoneNumber { get; set; }
+		public string EmailAddress { get; set; }
 
-		public string ClientIpAddress { get; private set; }
+		public string ClientIpAddress { get; set; }
 
-        public string CurrencyOverride { get; private set; }
+        public string CurrencyOverride { get; set; }
 
-        public bool CreateToken { get; private set; }
-        public bool UseToken { get; private set; }
-        public string Token { get; private set; }
-        public bool StoreToken { get; private set; }
+        public bool CreateToken { get; set; }
+        public bool UseToken { get; set; }
+        public string Token { get; set; }
+        public bool StoreToken { get; set; }
 	}
 }

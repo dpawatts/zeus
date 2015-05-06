@@ -581,6 +581,7 @@ namespace Zeus.Web
                 }
 
                 data.IsRewritable = IsRewritable(_webContext.PhysicalPath);
+                
                 return data;
             }
         }

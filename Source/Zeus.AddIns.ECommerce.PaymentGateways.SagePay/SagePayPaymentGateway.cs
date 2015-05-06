@@ -174,7 +174,8 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			}
 			return new PaymentResponse(success)
 			{
-				Message = message
+				Message = message,
+                Token = responseData["Token"]
 			};
 		}
 
@@ -214,15 +215,25 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			if (!string.IsNullOrEmpty(paymentRequest.Description))
 				postData["Description"] = paymentRequest.Description.Left(100); // Up to 100 chars of free format description
 
-			postData["CardHolder"] = paymentRequest.Card.NameOnCard;
-			postData["CardNumber"] = paymentRequest.CardNumber;
-			if (paymentRequest.Card.ValidFrom != null)
-                postData["StartDate"] = paymentRequest.Card.ValidFrom.Value.ToString("MMyy");
-            postData["ExpiryDate"] = paymentRequest.Card.ValidTo.ToString("MMyy");
-            if (!string.IsNullOrEmpty(paymentRequest.Card.IssueNumber))
-                postData["IssueNumber"] = paymentRequest.Card.IssueNumber;
-            postData["CV2"] = paymentRequest.CardSecurityCode;
-			postData["CardType"] = GetCardType(paymentRequest.Card.CardType);
+            if (paymentRequest.UseToken)
+            {
+                postData["Token"] = paymentRequest.Token;
+                postData["StoreToken"] = "1";
+                postData["CV2"] = paymentRequest.CardSecurityCode;			    
+            }
+            else
+            { 
+			    postData["CardHolder"] = paymentRequest.Card.NameOnCard;
+			    postData["CardNumber"] = paymentRequest.CardNumber;
+			    if (paymentRequest.Card.ValidFrom != null)
+                    postData["StartDate"] = paymentRequest.Card.ValidFrom.Value.ToString("MMyy");
+                postData["ExpiryDate"] = paymentRequest.Card.ValidTo.ToString("MMyy");
+                if (!string.IsNullOrEmpty(paymentRequest.Card.IssueNumber))
+                    postData["IssueNumber"] = paymentRequest.Card.IssueNumber;
+                postData["CV2"] = paymentRequest.CardSecurityCode;
+			    postData["CardType"] = GetCardType(paymentRequest.Card.CardType);
+                postData["CreateToken"] = paymentRequest.CreateToken ? "1" : "0";
+            }
 
 			postData["BillingSurname"] = paymentRequest.BillingAddress.Surname;
 			postData["BillingFirstnames"] = paymentRequest.BillingAddress.FirstName;
@@ -286,8 +297,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			// Your Sage Pay account MUST be set up for the account type you choose.  If in doubt, use E.
 			postData["AccountType"] = "E";
 
-            postData["CreateToken"] = paymentRequest.CreateToken ? "1" : "0";
-
+            
 			return postData;
 		}
 
