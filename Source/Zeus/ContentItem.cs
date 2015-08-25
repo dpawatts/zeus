@@ -79,6 +79,7 @@ namespace Zeus
         /// <summary>Gets or sets the date this item was updated.</summary>
         [Copy]
         public virtual DateTime Updated { get; set; }
+        public virtual void ReorderAction() {  }
 
         /// <summary>Gets or sets the publish date of this item.</summary>
         public virtual DateTime? Published { get; set; }

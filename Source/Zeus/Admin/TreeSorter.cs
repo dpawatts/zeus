@@ -55,6 +55,8 @@ namespace Zeus.Admin
 			Utility.MoveToIndex(siblings, item, index);
 			foreach (ContentItem updatedItem in Utility.UpdateSortOrder(siblings))
 			{
+                if (item.ID == updatedItem.ID)
+                    updatedItem.ReorderAction();
 				persister.Save(updatedItem);
 			}
 		}

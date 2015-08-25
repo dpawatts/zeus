@@ -31,7 +31,8 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                                                             ReturnUrl + "/CheckoutFailed",
                                                             CurrentItem.BasketItems,
                                                             CurrentItem.DeliveryPrice,
-                                                            CurrentItem.Currency
+                                                            CurrentItem.Currency,
+                                                            ForceReturnURLsOverHttps
                                                             );
             if (ret)
             {
@@ -53,6 +54,8 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                 return View("PayPalFailed", basketPageViewModel);
             }
         }
+
+        public virtual bool ForceReturnURLsOverHttps { get { return false; } }
 
         public virtual Type typeOfViewModel { get { return typeof(PayPalBasketPageViewModel<T>); } }
 

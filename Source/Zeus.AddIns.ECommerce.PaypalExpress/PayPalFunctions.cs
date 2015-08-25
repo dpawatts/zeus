@@ -170,6 +170,11 @@ public class NVPAPICaller
 
     public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency)
     {
+        return ShortcutExpressCheckout(amt, ref token, ref retMsg, returnURL, cancelURL, items, shippingCost, currency, false);
+    }
+
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency, bool forceReturnURLsOverHttps)
+    {
         string host = "www.paypal.com";
         if (StartPage.UseTestEnvironment)
         {
