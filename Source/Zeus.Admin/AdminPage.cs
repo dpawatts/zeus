@@ -55,10 +55,16 @@ jQuery(document).ready(function() {{
 		{
 			get
 			{
-				ContentItem selectedItem = GetFromViewState()
-					?? GetFromUrl()
-					?? Zeus.Context.UrlParser.StartPage;
-				return selectedItem;
+                ContentItem selectedItem = GetFromViewState()
+                    ?? GetFromUrl();
+                
+                //added code to stop the start page being returned if the url accessed is tampered with or data changed during edit, else home page was getting edited!!
+                if (selectedItem == null && !string.IsNullOrEmpty(Request["selected"]))
+                    throw new Exception("Url Doesn't Exist!! Content Item has been moved or changed");
+                else if (selectedItem == null)
+                    selectedItem = Zeus.Context.UrlParser.StartPage;
+                
+                return selectedItem;
 			}
 			set
 			{

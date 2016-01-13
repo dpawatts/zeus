@@ -231,6 +231,16 @@ namespace Zeus.Persistence
 			Invoke(ItemSaved, new ItemEventArgs(contentItem));
 		}
 
+        public void SetUpdatedToNow(ContentItem contentItem)
+        {
+            contentItem.Updated = DateTime.Now;
+            using (ITransaction transaction = _contentRepository.BeginTransaction())
+            {
+                _contentRepository.SaveOrUpdate(contentItem);
+                transaction.Commit();
+            }
+        }
+
 		private void EnsureSortOrder(ContentItem unsavedItem)
 		{
 			if (unsavedItem.Parent != null && !unsavedItem.Parent.IgnoreOrderOnSave)
