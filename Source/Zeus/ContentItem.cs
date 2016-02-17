@@ -17,6 +17,7 @@ using Zeus.Security;
 using System.Security.Principal;
 using Zeus.Web.Hosting;
 using System.Threading;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Zeus
 {
@@ -48,6 +49,7 @@ namespace Zeus
         public virtual int ID { get; set; }
 
         /// <summary>Gets or sets this item's parent. This can be null for root items and previous versions but should be another page in other situations.</summary>
+        [BsonIgnore]
         public virtual ContentItem Parent { get; set; }
 
         /// <summary>Gets or sets the item's title. This is used in edit mode and probably in a custom implementation.</summary>
@@ -364,7 +366,7 @@ namespace Zeus
         }
 
         #endregion
-
+        
         protected ContentItem()
         {
             Created = DateTime.Now;
