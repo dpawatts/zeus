@@ -1,8 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
 using SoundInTheory.DynamicImage;
-using SoundInTheory.DynamicImage.Sources;
-using System.Collections.Generic;
 using SoundInTheory.DynamicImage.Caching;
+using SoundInTheory.DynamicImage.Sources;
 using SoundInTheory.DynamicImage.Util;
 
 namespace Zeus.FileSystem.Images
@@ -13,19 +12,19 @@ namespace Zeus.FileSystem.Images
 
 		public int ContentID
 		{
-			get { return (int) (ViewState["ContentID"] ?? 0); }
-			set { ViewState["ContentID"] = value; }
+			get { return (int) (this["ContentID"] ?? 0); }
+			set { this["ContentID"] = value; }
 		}
 
 		public bool ThrowExceptionOnFormatError
 		{
-			get { return (bool)(ViewState["ThrowExceptionOnFormatError"] ?? false); }
-			set { ViewState["ThrowExceptionOnFormatError"] = value; }
+			get { return (bool)(this["ThrowExceptionOnFormatError"] ?? false); }
+			set { this["ThrowExceptionOnFormatError"] = value; }
 		}
 
 		#endregion
 
-		public override FastBitmap GetBitmap(ISite site, bool designMode)
+		public override FastBitmap GetBitmap()
 		{
 			Image image = Context.Persister.Get(ContentID) as Image;
 			if (image != null && image.Data != null)

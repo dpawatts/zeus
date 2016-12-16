@@ -1,5 +1,6 @@
 using System.IO;
-using SoundInTheory.DynamicImage.Fluent;
+using SoundInTheory.DynamicImage.Caching;
+using SoundInTheory.DynamicImage.Layers;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
@@ -39,36 +40,25 @@ namespace Zeus.FileSystem.Images
 
 		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
-            string appKey = "ZeusImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
-            string res = System.Web.HttpContext.Current.Application[appKey] == null ? null : System.Web.HttpContext.Current.Application[appKey].ToString();
-            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
-
-            if (res != null && lastUpdated == this.Updated)
-            {
-                return res;
-            }
-
-            DynamicImage image = new DynamicImage();
-            image.Fill.BackgroundColour = Color.White;
-
+			Composition image = new Composition();
             image.ImageFormat = format;
             ImageLayer imageLayer = new ImageLayer();
             
             ZeusImageSource source = new ZeusImageSource();
-            source.ContentID = this.ID;
+            source.ContentID = ID;
 
-            imageLayer.Source.SingleSource = source;
-            
+            imageLayer.Source = source;
+
             ResizeFilter resizeFilter = new ResizeFilter();
-            resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
-		    resizeFilter.Width = SoundInTheory.DynamicImage.Unit.Pixel(width);
-		    resizeFilter.Height = SoundInTheory.DynamicImage.Unit.Pixel(height);
+		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
+		    resizeFilter.Width = Unit.Pixel(width);
+		    resizeFilter.Height = Unit.Pixel(height);
+
+            imageLayer.Filters.Add(resizeFilter);
             
             imageLayer.Filters.Add(resizeFilter);
 
-            image.Layers.Add(imageLayer);
-
-			string url = image.ImageUrl;
+			return ImageUrlGenerator.GetImageUrl(image);
 
             /*old code replaced
              * 

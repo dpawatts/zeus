@@ -5,17 +5,43 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using Ninject;
+using Ninject.Planning.Bindings;
 
 namespace Zeus.BaseLibrary.DependencyInjection
 {
 	public class DependencyInjectionManager
 	{
-		private readonly IKernel _kernel;
+		private readonly InitializableKernel _kernel;
+
+		private class InitializableKernel : StandardKernel
+		{
+			private readonly List<IBinding> _bindings;
+
+			public InitializableKernel()
+			{
+				_bindings = new List<IBinding>();
+			}
+
+			public override void AddBinding(IBinding binding)
+			{
+				_bindings.Add(binding);
+				base.AddBinding(binding);
+			}
+
+			public void InitializeServices()
+			{
+				Type initializableInterfaceType = typeof(IInitializable);
+				Type startableInterfaceType = typeof(IStartable);
+				foreach (IBinding binding in _bindings)
+					if (initializableInterfaceType.IsAssignableFrom(binding.Service) || startableInterfaceType.IsAssignableFrom(binding.Service))
+						this.Get(binding.Service); // Force creation.
+			}
+		}
 
 		public DependencyInjectionManager()
 		{
 			// Create kernel.
-			_kernel = new StandardKernel();
+			_kernel = new InitializableKernel();
 			try
 			{
 				// Get all DLLS in bin folder.
@@ -40,8 +66,7 @@ namespace Zeus.BaseLibrary.DependencyInjection
 			return FindAssemblyNames(filenames, a => true).Select(an => Assembly.Load(an));
 		}
 
-		private static IEnumerable<AssemblyName> FindAssemblyNames(IEnumerable<string> filenames,
-																																Predicate<Assembly> filter)
+		private static IEnumerable<AssemblyName> FindAssemblyNames(IEnumerable<string> filenames, Predicate<Assembly> filter)
 		{
 			AppDomain temporaryDomain = CreateTemporaryAppDomain();
 
@@ -86,7 +111,7 @@ namespace Zeus.BaseLibrary.DependencyInjection
 
 		public void Initialize()
 		{
-			((KernelBase) _kernel).InitializeServices();
+			_kernel.InitializeServices();
 		}
 
 		public void Bind<TService, TComponent>()

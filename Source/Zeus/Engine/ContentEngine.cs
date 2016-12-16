@@ -90,7 +90,6 @@ namespace Zeus.Engine
 
 			_dependencyInjectionManager = new DependencyInjectionManager();
 			_dependencyInjectionManager.Bind<IAssemblyFinder, AssemblyFinder>();
-			_dependencyInjectionManager.Bind<ITypeFinder, TypeFinder>();
 
 			_dependencyInjectionManager.BindInstance(eventBroker);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/database") as DatabaseSection);

@@ -21,12 +21,15 @@ namespace Zeus.Web.Mvc
 				IAdapterDescriptor controllerDefinition = GetControllerFor(id.ItemType, controllerDefinitions);
 				if (controllerDefinition != null)
 				{
+					string controllerName = GetControllerName(controllerDefinition.AdapterType, controllerDefinition.AreaName);
+
 					ControllerMap[id.ItemType] = controllerDefinition.ControllerName;
 					AreaMap[id.ItemType] = controllerDefinition.AreaName;
 
-					kernel.Bind<IController>().To(controllerDefinition.AdapterType)
-						.InTransientScope()
-						.Named(GetControllerName(controllerDefinition.AdapterType, controllerDefinition.AreaName));
+					if (!kernel.GetBindings(typeof(IController)).Any(b => b.Metadata.Name == controllerName))
+						kernel.Bind<IController>().To(controllerDefinition.AdapterType)
+							.InTransientScope()
+							.Named(controllerName);
 
 					IList<IPathFinder> finders = PathDictionary.GetFinders(id.ItemType);
 					if (0 == finders.Where(f => f is ActionResolver).Count())

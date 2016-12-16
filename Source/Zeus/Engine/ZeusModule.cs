@@ -94,7 +94,6 @@ namespace Zeus.Engine
 			Bind<IHost>().To<Host>().InSingletonScope();
 			Bind<IUrlParser>().To<MultipleSitesUrlParser>().InSingletonScope();
 			Bind<IPermanentLinkManager>().To<PermanentLinkManager>().InSingletonScope();
-			Bind<ICredentialStore>().To<CredentialStore>().InSingletonScope();
 			Bind<IWebSecurityManager>().To<CredentialStore>().InSingletonScope();
 			Bind<PermissionDeniedHandler>().To<PermissionDeniedHandler>().InSingletonScope(); // FIX
 			Bind<IRequestDispatcher>().To<RequestDispatcher>().InSingletonScope();
