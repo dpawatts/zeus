@@ -1,8 +1,11 @@
 using System;
+using System.Net;
+using System.IO;
 using SoundInTheory.DynamicImage;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Filters;
 using SoundInTheory.DynamicImage.Layers;
+using SoundInTheory.DynamicImage.Sources;
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 
@@ -123,7 +126,7 @@ namespace Zeus.FileSystem.Images
 
             // create image layer with a source
             var imageLayer = new ImageLayer();
-            imageLayer.Source = imageSource;
+            imageLayer.Source = source;
 
             // add filters
             if (!(TopLeftXVal == 0 && TopLeftYVal == 0 && CropWidth == 0 && CropHeight == 0))
@@ -255,7 +258,7 @@ namespace Zeus.FileSystem.Images
 
             // generate resized image url
             // set image format
-            var dynamicImage = new SoundInTheory.DynamicImage.DynamicImage();
+            var dynamicImage = new SoundInTheory.DynamicImage.Composition();
             dynamicImage.ImageFormat = format;
 
             ImageLayer imageLayer = new ImageLayer();
@@ -316,15 +319,15 @@ namespace Zeus.FileSystem.Images
             }
 
             // create image layer wit ha source
-            imageLayer.Source.SingleSource = imageSource;
+            imageLayer.Source = imageSource;
 
             //now combine the 2 layers...
             dynamicImage.Layers.Add(imageLayer);
 
             // generate url
-            string halfWayFileName = dynamicImage.ImageUrl;
+            string halfWayFileName = ImageUrlGenerator.GetImageUrl(dynamicImage);
 
-            var dynamicImage2 = new SoundInTheory.DynamicImage.DynamicImage();
+            var dynamicImage2 = new SoundInTheory.DynamicImage.Composition();
 
             var HalfwayImageSource = new ImageLayer();
             BytesImageSource sourceData = new BytesImageSource();
@@ -338,7 +341,7 @@ namespace Zeus.FileSystem.Images
                 return "Byte retrieval failed for " + halfWayFileName;
             }
 
-            HalfwayImageSource.Source.Add(sourceData);
+            HalfwayImageSource.Source = sourceData;
 
             // add filters
             if (!(TopLeftXVal == 0 && TopLeftYVal == 0 && CropWidth == 0 && CropHeight == 0))
@@ -346,7 +349,6 @@ namespace Zeus.FileSystem.Images
                 var cropFilter = new CropFilter
                 {
                     Enabled = true,
-                    Name = "Default Crop",
                     X = this.TopLeftXVal,
                     Y = this.TopLeftYVal,
                     Width = this.CropWidth,
@@ -389,13 +391,13 @@ namespace Zeus.FileSystem.Images
 
             dynamicImage2.Layers.Add(HalfwayImageSource);
 
-            System.Web.HttpContext.Current.Application[appKey] = dynamicImage2.ImageUrl;
+            string imageUrl = ImageUrlGenerator.GetImageUrl(dynamicImage2);
+
+            System.Web.HttpContext.Current.Application[appKey] = imageUrl;
             System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+            Log(imageUrl + " added to cache for " + appKey);
 
-            Log(dynamicImage2.ImageUrl + " added to cache for " + appKey);
-
-            return dynamicImage2.ImageUrl;
-
+            return imageUrl;
         }
 
         public string GetUrl()

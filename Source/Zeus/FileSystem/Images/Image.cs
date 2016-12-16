@@ -40,7 +40,16 @@ namespace Zeus.FileSystem.Images
 
 		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
-			Composition image = new Composition();
+            string appKey = "ZeusImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
+            string res = System.Web.HttpContext.Current.Cache[appKey] == null ? null : System.Web.HttpContext.Current.Cache[appKey].ToString();
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+
+            if (res != null && lastUpdated == this.Updated)
+            {
+                return res;
+            }
+
+            Composition image = new Composition();
             image.ImageFormat = format;
             ImageLayer imageLayer = new ImageLayer();
             
@@ -58,18 +67,10 @@ namespace Zeus.FileSystem.Images
             
             imageLayer.Filters.Add(resizeFilter);
 
-			return ImageUrlGenerator.GetImageUrl(image);
+            string url = ImageUrlGenerator.GetImageUrl(image);
 
-            /*old code replaced
-             * 
-            return new DynamicImageBuilder()
-				.WithLayer(
-					LayerBuilder.Image.SourceImage(this).WithFilter(FilterBuilder.Resize.To(width, height, fill)))
-				.Url;
-             */
-
-            System.Web.HttpContext.Current.Application[appKey] = url;
-            System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+            System.Web.HttpContext.Current.Cache[appKey] = url;
+            System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
 
             return url;
 		}
