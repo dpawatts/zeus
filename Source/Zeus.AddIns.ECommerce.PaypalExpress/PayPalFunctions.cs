@@ -12,9 +12,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using com.paypal.sdk.profiles;
-using com.paypal.sdk.services;
-using com.paypal.soap.api;
 using System.Linq;
 using Zeus;
 using Zeus.Templates.ContentTypes.ReferenceData;
@@ -62,8 +59,8 @@ public class NVPAPICaller
     private const int Timeout = 100000;
     private static readonly string[] SECURED_NVPS = new string[] { ACCT, CVV2, SIGNATURE, PWD };
 
-    public com.paypal.soap.api.DoDirectPaymentResponseType TakeCardPayment(
-        com.paypal.soap.api.CreditCardTypeType cardType,
+    public void TakeCardPayment(
+        string cardType,
         string cardNumber,
         int startMonth,
         int startYear,
@@ -78,12 +75,13 @@ public class NVPAPICaller
         string city,
         string state,
         string postCode,
-        CountryCodeType country,
+        string country,
         decimal amount,
-        com.paypal.soap.api.CurrencyCodeType currency,
+        string currency,
         string ipAddress,
-        com.paypal.soap.api.PaymentActionCodeType paymentType)
+        string paymentType)
     {
+        /*
         CallerServices caller = new CallerServices();
         IAPIProfile profile = ProfileFactory.createSignatureAPIProfile();
         profile.APIUsername = APIUsername;
@@ -93,6 +91,8 @@ public class NVPAPICaller
         profile.APISignature = APISignature;
         caller.APIProfile = profile;
         com.paypal.soap.api.DoDirectPaymentRequestDetailsType directPaymentDetails = new com.paypal.soap.api.DoDirectPaymentRequestDetailsType();
+
+        new PayPal.DefaultSOAPAPICallHandler()
 
         //Set Credit Card
         com.paypal.soap.api.CreditCardDetailsType cc = new com.paypal.soap.api.CreditCardDetailsType();
@@ -143,7 +143,7 @@ public class NVPAPICaller
 
         request.DoDirectPaymentRequestDetails.CreditCard.CardOwner.Address.CountrySpecified = true;
         return (com.paypal.soap.api.DoDirectPaymentResponseType)caller.Call("DoDirectPayment", request);
-
+        */
     }
 
     /// <summary>
