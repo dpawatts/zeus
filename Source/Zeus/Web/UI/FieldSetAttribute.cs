@@ -34,10 +34,10 @@ namespace Zeus.Web.UI
 				Padding = 5,
 				LabelSeparator = " "
 			};
-			if (container is ContentPanel)
+			if (container is Component)
 			{
-				((ContentPanel) container).ContentControls.Add(fieldSet);
-				((ContentPanel) container).ContentControls.Add(new LiteralControl("<br />"));
+				((Component) container).ContentControls.Add(fieldSet);
+				((Component) container).ContentControls.Add(new LiteralControl("<br />"));
 			}
 			else
 			{

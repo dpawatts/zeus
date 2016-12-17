@@ -180,8 +180,9 @@ namespace Zeus.Design.Editors
 			HtmlGenericControl detailContainer = new HtmlGenericControl("div");
 			detailContainer.ID = "editDetail" + Name;
 			detailContainer.Attributes["class"] = "editDetail";
-			if (container is ContentPanel)
-				((ContentPanel) container).ContentControls.Add(detailContainer);
+
+			if (container is Component)
+				((Component) container).ContentControls.Add(detailContainer);
 			else
 				container.Controls.Add(detailContainer);
 			return detailContainer;

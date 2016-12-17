@@ -20,6 +20,11 @@
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,13 +64,17 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Ext.Net\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=1.2.0.19755, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.1.2.0\lib\Ext.Net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=9ad232b50c3e6444, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Ext.Net\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Ext.Net.Utilities, Version=1.1.0.19751, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.1.2.0\lib\Ext.Net.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.1.2.0\lib\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -442,6 +451,8 @@
     <EmbeddedResource Include="Assets\JS\jcrop\jquery.min.js" />
     <EmbeddedResource Include="Assets\Css\jcrop_demos.css" />
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
+    <Content Include="App_Readme\Ext.NET.CHANGELOG.txt" />
+    <Content Include="App_Readme\Ext.NET.README.txt" />
     <Content Include="DynamicContent\Default.aspx" />
     <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />
@@ -462,6 +473,7 @@
     <EmbeddedResource Include="Plugins\FileManager\Resources\Ext.ux.zeus.FileManager.css" />
     <EmbeddedResource Include="Plugins\PageCaching\PageCachingUserControl.ascx" />
     <EmbeddedResource Include="Plugins\ManageZones\ManageZonesUserControl.ascx" />
+    <Content Include="Ext.NET.Default.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
