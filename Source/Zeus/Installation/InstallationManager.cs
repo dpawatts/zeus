@@ -6,7 +6,10 @@ using System.IO;
 using System.Linq;
 using FluentMigrator;
 using FluentMigrator.Runner;
+using FluentMigrator.Runner.Announcers;
 using FluentMigrator.Runner.Processors;
+using FluentMigrator.Runner.Initialization;
+using FluentMigrator.Runner.Processors.SqlServer;
 using Microsoft.SqlServer.Management.Smo;
 using Zeus.Configuration;
 using Zeus.ContentTypes;
@@ -58,13 +61,16 @@ namespace Zeus.Installation
 		/// <summary>Executes sql create database scripts.</summary>
 		public void Install()
 		{
-			IMigrationProcessorFactory processorFactory = ProcessorFactory.GetFactory("SqlServer");
-			IMigrationProcessor processor = processorFactory.Create(GetConnectionString());
+            IMigrationProcessorFactory processorFactory = new SqlServerProcessorFactory();
+			IMigrationProcessor processor = processorFactory.Create(GetConnectionString(), new NullAnnouncer(), new ProcessorOptions());
+            IRunnerContext context = new RunnerContext(new NullAnnouncer());
+            context.Namespace = "Zeus.Installation.Migrations";
 
-			MigrationVersionRunner runner = new MigrationVersionRunner(
-				new MigrationConventions(),
-				processor, 
-				new MigrationLoader(new MigrationConventions()), typeof(AddTables).Assembly, "Zeus.Installation.Migrations");
+            MigrationRunner runner = new MigrationRunner(
+                typeof(AddTables).Assembly,
+                context,
+                processor
+            );
 			runner.MigrateUp();
 		}
 
