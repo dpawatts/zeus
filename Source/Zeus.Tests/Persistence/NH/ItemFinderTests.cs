@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.Engine;
 using Zeus.Persistence;
@@ -11,10 +11,10 @@ using Zeus.Configuration;
 
 namespace Zeus.Tests.Persistence.NH
 {
-	[TestClass]
+	[TestFixture]
 	public class ItemFinderTests
 	{
-		[TestMethod]
+		[Test]
 		public void Can_Query_Detail()
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();

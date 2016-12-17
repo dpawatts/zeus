@@ -1,12 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.Web.TextTemplating;
 
 namespace Zeus.Tests.Web.TextTemplating
 {
-	[TestClass]
+	[TestFixture]
 	public class DefaultMessageBuilderTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanBuildMessageFromEmbeddedTemplate()
 		{
 			DefaultMessageBuilder messageBuilder = new DefaultMessageBuilder();

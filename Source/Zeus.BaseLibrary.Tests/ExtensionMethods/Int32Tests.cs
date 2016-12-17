@@ -1,30 +1,30 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 {
-	[TestClass]
+	[TestFixture]
 	public class Int32Tests
 	{
-		[TestMethod]
+		[Test]
 		public void ToOrdinal_1()
 		{
 			Assert.AreEqual("1st", 1.ToOrdinal());
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToOrdinal_2()
 		{
 			Assert.AreEqual("2nd", 2.ToOrdinal());
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToOrdinal_3()
 		{
 			Assert.AreEqual("3rd", 3.ToOrdinal());
 		}
 
-		[TestMethod]
+		[Test]
 		public void ToOrdinal_4()
 		{
 			Assert.AreEqual("4th", 4.ToOrdinal());

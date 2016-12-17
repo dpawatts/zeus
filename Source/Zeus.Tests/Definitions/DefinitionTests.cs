@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.Engine;
 using Zeus.Tests.Definitions.Items;
@@ -6,12 +6,12 @@ using Zeus.ContentTypes;
 
 namespace Zeus.Tests.Definitions
 {
-	[TestClass]
+	[TestFixture]
 	public class DefinitionTests
 	{
 		private ContentTypeManager _definitionManager;
 
-		[TestInitialize]
+		[SetUp]
 		public void SetUp()
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();
@@ -20,7 +20,7 @@ namespace Zeus.Tests.Definitions
 			_definitionManager = new ContentTypeManager(contentTypeBuilder, null);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanCreateNewItemInstance()
 		{
 			TestTextPage item = _definitionManager.CreateInstance<TestTextPage>(null);

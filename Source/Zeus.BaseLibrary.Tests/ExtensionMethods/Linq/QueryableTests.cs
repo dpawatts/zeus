@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 {
-	[TestClass]
+	[TestFixture]
 	public class QueryableTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanFilterByType()
 		{
 			IQueryable myArray = new object[]

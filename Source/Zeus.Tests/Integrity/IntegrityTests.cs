@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Interfaces;
 using Zeus.BaseLibrary.Reflection;
@@ -13,7 +13,7 @@ using Zeus.Web;
 
 namespace Zeus.Tests.Integrity
 {
-	[TestClass]
+	[TestFixture]
 	public class IntegrityTests : ItemTestsBase
 	{
 		private IPersister persister;
@@ -28,7 +28,7 @@ namespace Zeus.Tests.Integrity
 
 		#region SetUp
 
-		[TestInitialize]
+		[SetUp]
 		public override void SetUp()
 		{
 			base.SetUp();
@@ -97,7 +97,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Move
 
-		[TestMethod]
+		[Test]
 		public void CanMoveItem()
 		{
 			StartPage startPage = new StartPage();
@@ -106,7 +106,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canMove, "The page couldn't be moved to the destination.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanMoveItemEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -115,7 +115,7 @@ namespace Zeus.Tests.Integrity
 			moving.Raise(persister, new CancelDestinationEventArgs(page, startPage));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveItemOntoItself()
 		{
 			Page page = new Page();
@@ -123,18 +123,16 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved onto itself.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveItemOntoItselfEvent()
 		{
 			Page page = new Page();
+            Assert.Throws(typeof(DestinationOnOrBelowItselfException), () => {
+                moving.Raise(persister, new CancelDestinationEventArgs(page, page));
+            });
+        }
 
-			ExceptionAssert.Throws<DestinationOnOrBelowItselfException>(delegate
-			{
-				moving.Raise(persister, new CancelDestinationEventArgs(page, page));
-			});
-		}
-
-		[TestMethod]
+		[Test]
 		public void CannotMoveItemBelowItself()
 		{
 			Page page = new Page();
@@ -144,19 +142,18 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved below itself.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveItemBelowItselfEvent()
 		{
 			Page page = new Page();
 			Page page2 = CreateOneItem<Page>(2, "Rutger", page);
 
-			ExceptionAssert.Throws<DestinationOnOrBelowItselfException>(delegate
-			{
-				moving.Raise(persister, new CancelDestinationEventArgs(page, page2));
-			});
+            Assert.Throws(typeof(DestinationOnOrBelowItselfException), () => {
+                moving.Raise(persister, new CancelDestinationEventArgs(page, page2));
+            });
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveIfNameIsOccupied()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -167,20 +164,19 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The page could be moved even though the name was occupied.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveIfNameIsOccupiedEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
 			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
 			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
 
-			ExceptionAssert.Throws<NameOccupiedException>(delegate
-			{
-				moving.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
-			});
+            Assert.Throws(typeof(NameOccupiedException), () => {
+                moving.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
+            });
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveIfTypeIsntAllowed()
 		{
 			StartPage startPage = new StartPage();
@@ -190,23 +186,22 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canMove, "The start page could be moved even though a page isn't an allowed destination.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotMoveIfTypeIsntAllowedEvent()
 		{
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			ExceptionAssert.Throws<NotAllowedParentException>(delegate
-			{
-				moving.Raise(persister, new CancelDestinationEventArgs(startPage, page));
-			});
-		}
+            Assert.Throws(typeof(NotAllowedParentException), () => {
+                moving.Raise(persister, new CancelDestinationEventArgs(startPage, page));
+            });
+        }
 
 		#endregion
 
 		#region Copy
 
-		[TestMethod]
+		[Test]
 		public void CanCopyItem()
 		{
 			StartPage startPage = new StartPage();
@@ -215,7 +210,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canCopy, "The page couldn't be copied to the destination.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanCopyItemEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -224,7 +219,7 @@ namespace Zeus.Tests.Integrity
 			copying.Raise(persister, new CancelDestinationEventArgs(page, startPage));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotCopyIfNameIsOccupied()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -235,20 +230,19 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canCopy, "The page could be copied even though the name was occupied.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotCopyIfNameIsOccupiedEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
 			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
 			Page page3 = CreateOneItem<Page>(3, "Sasha", null);
 
-			ExceptionAssert.Throws<NameOccupiedException>(delegate
-			{
-				copying.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
-			});
+            Assert.Throws(typeof(NameOccupiedException), () => {
+                copying.Raise(persister, new CancelDestinationEventArgs(page3, startPage));
+            });
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotCopyIfTypeIsntAllowed()
 		{
 			StartPage startPage = new StartPage();
@@ -258,23 +252,22 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canCopy, "The start page could be copied even though a page isn't an allowed destination.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotCopyIfTypeIsntAllowedEvent()
 		{
 			StartPage startPage = new StartPage();
 			Page page = new Page();
 
-			ExceptionAssert.Throws<NotAllowedParentException>(delegate
-			{
-				copying.Raise(persister, new CancelDestinationEventArgs(startPage, page));
-			});
+            Assert.Throws(typeof(NotAllowedParentException), () => {
+                copying.Raise(persister, new CancelDestinationEventArgs(startPage, page));
+            });
 		}
 
 		#endregion
 
 		#region Delete
 
-		[TestMethod]
+		[Test]
 		public void CanDelete()
 		{
 			Page page = new Page();
@@ -289,7 +282,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanDeleteEvent()
 		{
 			Page page = new Page();
@@ -303,7 +296,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotDeleteStartPage()
 		{
 			StartPage startPage = new StartPage();
@@ -318,7 +311,7 @@ namespace Zeus.Tests.Integrity
 			mocks.Verify(parser);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotDeleteStartPageEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -327,10 +320,9 @@ namespace Zeus.Tests.Integrity
 			Expect.On(parser).Call(parser.IsRootOrStartPage(startPage)).Return(true);
 			mocks.Replay(parser);
 
-			ExceptionAssert.Throws<CannotDeleteRootException>(delegate
-			{
-				deleting.Raise(persister, new CancelItemEventArgs(startPage));
-			});
+            Assert.Throws(typeof(CannotDeleteRootException), () => {
+                deleting.Raise(persister, new CancelItemEventArgs(startPage));
+            });
 			mocks.Verify(parser);
 		}
 
@@ -338,7 +330,7 @@ namespace Zeus.Tests.Integrity
 
 		#region Save
 
-		[TestMethod]
+		[Test]
 		public void CanSave()
 		{
 			StartPage startPage = new StartPage();
@@ -347,7 +339,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsTrue(canSave, "Couldn't save");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanSaveEvent()
 		{
 			StartPage startPage = new StartPage();
@@ -355,7 +347,7 @@ namespace Zeus.Tests.Integrity
 			saving.Raise(persister, new CancelItemEventArgs(startPage));
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotSaveNotLocallyUniqueItem()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -367,7 +359,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canSave, "Could save even though the item isn't the only sibling with the same name.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void LocallyUniqueItemThatWithoutNameYet()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -379,7 +371,7 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(isUnique, "Shouldn't have been locally unique.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotSaveNotLocallyUniqueItemEvent()
 		{
 			StartPage startPage = CreateOneItem<StartPage>(1, "start", null);
@@ -387,13 +379,12 @@ namespace Zeus.Tests.Integrity
 			Page page2 = CreateOneItem<Page>(2, "Sasha", startPage);
 			Page page3 = CreateOneItem<Page>(3, "Sasha", startPage);
 
-			ExceptionAssert.Throws<NameOccupiedException>(delegate
-			{
-				saving.Raise(persister, new CancelItemEventArgs(page3));
-			});
+            Assert.Throws(typeof(NameOccupiedException), () => {
+                saving.Raise(persister, new CancelItemEventArgs(page3));
+            });
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotSaveUnallowedItem()
 		{
 			Page page = CreateOneItem<Page>(1, "John", null);
@@ -403,23 +394,22 @@ namespace Zeus.Tests.Integrity
 			Assert.IsFalse(canSave, "Could save even though the start page isn't below a page.");
 		}
 
-		[TestMethod]
+		[Test]
 		public void CannotSaveUnallowedItemEvent()
 		{
 			Page page = CreateOneItem<Page>(1, "John", null);
 			StartPage startPage = CreateOneItem<StartPage>(2, "Leonidas", page);
 
-			ExceptionAssert.Throws<NotAllowedParentException>(delegate
-			{
-				saving.Raise(persister, new CancelItemEventArgs(startPage));
-			});
+            Assert.Throws(typeof(NotAllowedParentException), () => {
+                saving.Raise(persister, new CancelItemEventArgs(startPage));
+            });
 		}
 
 		#endregion
 
 		#region Security
 
-		[TestMethod]
+		[Test]
 		public void UserCanEditAccessibleDetail()
 		{
 			ContentType definition = definitions.GetContentType(typeof(Page));
@@ -428,7 +418,7 @@ namespace Zeus.Tests.Integrity
 				Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void UserCannotEditInaccessibleDetail()
 		{
 			ContentType definition = definitions.GetContentType(typeof(Page));

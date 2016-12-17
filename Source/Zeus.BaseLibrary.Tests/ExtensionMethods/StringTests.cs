@@ -1,14 +1,14 @@
 using System.Diagnostics;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.ExtensionMethods;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 {
-	[TestClass]
+	[TestFixture]
 	public class StringTests
 	{
-		[TestMethod]
+		[Test]
 		public void Test_Left_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -16,7 +16,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("This i", leftPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Left_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -24,7 +24,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("This is a test string.", leftPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Left_EmptyString()
 		{
 			const string myString = "";
@@ -32,7 +32,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("", leftPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Right_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -40,7 +40,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("tring.", rightPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Right_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -48,7 +48,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("This is a test string.", rightPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_ToPascalCase()
 		{
 			const string myString = "ThisIsAnIdentifier";
@@ -56,7 +56,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("thisIsAnIdentifier", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Truncate_Length_Is_LessThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -64,7 +64,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("Thi...", leftPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Test_Truncate_Length_Is_GreaterThanStringLength()
 		{
 			const string myString = "This is a test string.";
@@ -72,7 +72,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("This is a test string.", leftPart);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanGetLeftBefore()
 		{
 			// Arrange.
@@ -85,7 +85,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("This is my ", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanGetRightAfter()
 		{
 			// Arrange.
@@ -98,7 +98,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual(" string.", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanGetRightAfterLast()
 		{
 			// Arrange.
@@ -111,13 +111,13 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 			Assert.AreEqual("ng.", result);
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanUrlEncodeString()
 		{
 			Assert.AreEqual("my-safe_url-is-great", " My  SAFE_Url is-great".ToSafeUrl());
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanUrlEncodeAccentedString()
 		{
 			Assert.AreEqual("%c3%a1cc%c3%a8nt", "áccènt".ToSafeUrl());

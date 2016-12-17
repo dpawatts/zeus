@@ -1,15 +1,15 @@
 using System.Drawing;
 using System.IO;
 using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.Templates.Mvc.Html;
 
 namespace Zeus.Templates.Tests.Mvc.Html
 {
-	[TestClass]
+	[TestFixture]
 	public class GravatarExtensionsTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanGenerateGravatarImageUrl()
 		{
 			// Arrange.
