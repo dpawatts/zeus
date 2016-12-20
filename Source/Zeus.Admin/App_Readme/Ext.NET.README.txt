@@ -1,12 +1,12 @@
 ﻿Product      : Ext.NET Pro
-Version      : 1.2.0
-Last Updated : 2011-09-12
+Version      : 1.3.0
+Last Updated : 2012-02-29
 
 --------------------------------------------------------------------------
    CONTENTS
 --------------------------------------------------------------------------
 
-I.    Version 1.2.0 CHANGELOG
+I.    Version 1.3.0 CHANGELOG
 II.   ADD TO VISUAL STUDIO (or VISUAL WEB DEVELOPER) PROJECT INSTRUCTIONS
 III.  SAMPLE WEB.CONFIG
 IV.   <extnet> WEB.CONFIG GLOBAL CONFIGURATION PROPERTIES
@@ -14,7 +14,7 @@ V.    CREDITS
 
 
 --------------------------------------------------------------------------
-   I. Version 1.2.0 CHANGELOG
+   I. Version 1.3.0 CHANGELOG
 --------------------------------------------------------------------------
 
 See CHANGELOG.txt
@@ -169,9 +169,9 @@ directMethodProxy : ClientProxy
 	Default is 'Default'. Options include [Default|Include|Ignore]
 
 ajaxViewStateMode : ViewStateMode
-	Specifies whether the ViewState should be returned and updated on the client during an DirectEvent. 
-	The Default value is to Exclude the ViewState from the Response.
-	Default is 'Default'. Options include [Default|Exclude|Include]
+	Specifies whether the ViewState should be returned and updated on the client during a DirectEvent. 
+	The Default value is Disabled, i.e. to disable the ViewState from the Response.
+	Default is 'Disabled'. Options include [Inherit|Disabled|Enabled]
 
 cleanResourceUrl : boolean
 	The Ext.NET controls can clean up the autogenerate WebResource Url so they look presentable.        
@@ -246,6 +246,7 @@ quickTips : boolean
 	Specifies whether to render the QuickTips. Provides attractive and customizable tooltips for any element.
 	Default is 'true'. Options include [true|false]
 	
+
 --------------------------------------------------------------------------
                              IV. CREDITS
 --------------------------------------------------------------------------
@@ -255,12 +256,25 @@ quickTips : boolean
 	
     See \Build\Resources\Ext\Licenses\FamFamFam.txt for more information.
 
-2.  Json.NET provided by James Newton-King
+2.  Flag icons provided by Mark James 
+	http://www.famfamfam.com/lab/icons/flags/
+
+	These icons are public domain, and as such are free for any use 
+	(attribution appreciated but not required).
+	
+    See \Build\Resources\Ext\Licenses\FlagIcons.txt for more information.
+
+2.  Silk companion icon set #1 - "More Silk!" provided by Damien Guard
+	http://www.damieng.com/icons/silkcompanion
+
+	See \Build\Ext.Net\Licenses\SilkCompanionIcon.txt for more information.
+
+3.  Json.NET provided by James Newton-King
     http://www.codeplex.com/json/
     
     See \Build\Ext.Net\Licenses\Newtonsoft.Json.txt
     
-3.  Ext JS JavaScript Library provided by Sencha, Inc.
+4.  Ext JS JavaScript Library provided by Sencha, Inc.
     http://www.sencha.com/products/js/   
     
     See \Build\Ext.Net\Licenses\ExtJS.txt
@@ -270,7 +284,7 @@ quickTips : boolean
                                
 --------------------------------------------------------------------------
 	
-      Copyright (c) 2006-2011, Ext.NET, Inc. All rights reserved.
+      Copyright (c) 2007-2012, Ext.NET, Inc. All rights reserved.
 
                            Ext.NET, Inc.
                          support@ext.net

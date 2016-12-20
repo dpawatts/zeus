@@ -13,7 +13,7 @@ namespace Zeus.Web.TextTemplating
 
 		public DefaultMessageBuilder()
 		{
-			_engine = new SparkViewEngine(new SparkSettings() { PageBaseType = "Zeus.Web.Mvc.SparkView" });
+			_engine = new SparkViewEngine(new SparkSettings() { PageBaseType = "Spark.Web.Mvc.SparkView" });
 		}
 
 		public override void Initialize(Assembly templateAssembly, string templateResourcePath)

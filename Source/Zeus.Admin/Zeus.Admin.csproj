@@ -63,17 +63,35 @@
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ext.Net, Version=1.2.0.19755, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.1.2.0\lib\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=1.3.0.2809, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.1.3.0\lib\Ext.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ext.Net.Utilities, Version=1.1.0.19751, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.1.2.0\lib\Ext.Net.Utilities.dll</HintPath>
+    <Reference Include="Ext.Net.Utilities, Version=1.3.0.39155, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.Utilities.1.3.0\lib\Ext.Net.Utilities.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ext.NET.1.2.0\lib\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -453,6 +471,8 @@
     <EmbeddedResource Include="Assets\JS\jcrop_jquery.js" />
     <Content Include="App_Readme\Ext.NET.CHANGELOG.txt" />
     <Content Include="App_Readme\Ext.NET.README.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities.LICENSE.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities.README.txt" />
     <Content Include="DynamicContent\Default.aspx" />
     <EmbeddedResource Include="Plugins\Versions\Default.aspx" />
     <EmbeddedResource Include="Plugins\Globalization\LanguageOverview\Default.aspx" />

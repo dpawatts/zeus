@@ -30,7 +30,7 @@ namespace Zeus.Persistence.NH
 
 		public IQueryable<T> Query<T>()
 		{
-			return _sessionProvider.OpenSession.Session.Linq<T>();
+            return _sessionProvider.OpenSession.Session.GetSessionImplementation().Linq<T>();
 		}
 
 		public IQueryable<T> QueryItems<T>()

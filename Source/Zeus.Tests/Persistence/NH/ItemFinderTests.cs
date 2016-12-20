@@ -5,6 +5,9 @@ using Zeus.Engine;
 using Zeus.Persistence;
 using Zeus.Persistence.NH;
 using Zeus.ContentTypes;
+using Zeus.ContentProperties;
+using Zeus.Design.Displayers;
+using Zeus.Design.Editors;
 using Zeus.Web;
 using System.Configuration;
 using Zeus.Configuration;
@@ -19,8 +22,10 @@ namespace Zeus.Tests.Persistence.NH
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();
 			ITypeFinder typeFinder = new TypeFinder(assemblyFinder);
-			IContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null, null, null);
-			IItemNotifier itemNotifier = new ItemNotifier();
+			IContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, new EditableHierarchyBuilder<IEditor>(),
+                new AttributeExplorer<IDisplayer>(), new AttributeExplorer<IEditor>(),
+                new AttributeExplorer<IContentProperty>(), new AttributeExplorer<IEditorContainer>());
+            IItemNotifier itemNotifier = new ItemNotifier();
 			IContentTypeManager contentTypeManager = new ContentTypeManager(contentTypeBuilder, itemNotifier);
 			IConfigurationBuilder configurationBuilder = new ConfigurationBuilder(contentTypeManager, ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
 			ISessionProvider sessionProvider = new SessionProvider(configurationBuilder, new NotifyingInterceptor(new ItemNotifier()), new ThreadContext());

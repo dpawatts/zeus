@@ -10,6 +10,9 @@ using Zeus.Integrity;
 using Zeus.Persistence;
 using Zeus.Tests.Integrity.ContentTypes;
 using Zeus.Web;
+using System.Configuration;
+using System.Web;
+using System.IO;
 
 namespace Zeus.Tests.Integrity
 {
@@ -44,7 +47,30 @@ namespace Zeus.Tests.Integrity
 			IItemNotifier notifier = mocks.DynamicMock<IItemNotifier>();
 			mocks.Replay(notifier);
 			definitions = new ContentTypeManager(builder, notifier);
-			integrityManger = new IntegrityManager(definitions, parser, null, null);
+
+            // Language manager
+            Globalization.ILanguageManager languageManager = new Globalization.LanguageManager(
+                persister,
+                new Host(new WebRequestContext(), (Zeus.Configuration.HostSection)ConfigurationManager.GetSection("zeus/host")),
+                definitions
+            );
+
+            // Mock the request
+            HttpRequest httpRequest = new HttpRequest("", "http://zeus-test/", "");
+            StringWriter stringWriter = new StringWriter();
+            HttpResponse httpResponse = new HttpResponse(stringWriter);
+            HttpContext httpContextMock = new HttpContext(httpRequest, httpResponse);
+            HttpContext.Current = httpContextMock;
+
+            // Mock the context
+            Context.Current.AddComponentInstance("LanguageManager", languageManager);
+
+            integrityManger = new IntegrityManager(
+                definitions,
+                parser,
+                languageManager,
+                (Zeus.Configuration.AdminSection)ConfigurationManager.GetSection("zeus/admin")
+            );
 			IntegrityEnforcer enforcer = new IntegrityEnforcer(persister, integrityManger);
 			enforcer.Start();
 		}
@@ -54,7 +80,10 @@ namespace Zeus.Tests.Integrity
 			IAssemblyFinder assemblyFinder = mocks.StrictMock<IAssemblyFinder>();
 			Expect.On(assemblyFinder)
 				.Call(assemblyFinder.GetAssemblies())
-				.Return(new[] {typeof (AlternativePage).Assembly})
+				.Return(new[] {
+                    typeof (AlternativePage).Assembly,
+                    typeof (Globalization.ContentTypes.Language).Assembly
+                })
 				.Repeat.Any();
 
 			ITypeFinder typeFinder = mocks.StrictMock<ITypeFinder>();
@@ -67,13 +96,14 @@ namespace Zeus.Tests.Integrity
 				        		typeof (Page),
 				        		typeof (Root),
 				        		typeof (StartPage),
-				        		typeof (SubPage)
-				        	});
+				        		typeof (SubPage),
+                                typeof (Globalization.ContentTypes.Language)
+                            });
 			mocks.Replay(typeFinder);
 			return typeFinder;
 		}
 
-		private void CreatePersister()
+        private void CreatePersister()
 		{
 			mocks.Record();
 			persister = mocks.DynamicMock<IPersister>();

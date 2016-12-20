@@ -27,7 +27,7 @@ namespace Zeus.BaseLibrary.Reflection
 			{
 				_binFolderAssembliesLoaded = true;
 				if (HttpContext.Current != null)
-					LoadMatchingAssemblies(HttpRuntime.BinDirectory);
+					LoadMatchingAssemblies(GetBinDirectory());
 			}
 
 			List<string> addedAssemblyNames = new List<string>();
@@ -40,10 +40,26 @@ namespace Zeus.BaseLibrary.Reflection
 			return assemblies;
 		}
 
-		/// <summary>Iterates all assemblies in the AppDomain and if it's name matches the configured patterns add it to our list.</summary>
-		/// <param name="addedAssemblyNames"></param>
-		/// <param name="assemblies"></param>
-		private void AddAssembliesInAppDomain(List<string> addedAssemblyNames, List<Assembly> assemblies)
+        /// <summary>
+        /// Gets the direcory containing the application
+        /// </summary>
+        /// <returns></returns>
+        private string GetBinDirectory()
+        {
+            try
+            {
+                return Path.GetDirectoryName(HttpRuntime.BinDirectory);
+            }
+            catch (System.Exception)
+            {
+                return Path.GetDirectoryName(GetType().Assembly.Location);
+            }
+        }
+
+        /// <summary>Iterates all assemblies in the AppDomain and if it's name matches the configured patterns add it to our list.</summary>
+        /// <param name="addedAssemblyNames"></param>
+        /// <param name="assemblies"></param>
+        private void AddAssembliesInAppDomain(List<string> addedAssemblyNames, List<Assembly> assemblies)
 		{
 			foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
 			{

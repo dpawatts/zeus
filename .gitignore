@@ -38,3 +38,4 @@ httpd.parse.errors
 /build/TestResult.xml
 .vs
 Source/packages
+*.FileUpload
