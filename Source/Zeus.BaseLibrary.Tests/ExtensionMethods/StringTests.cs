@@ -61,7 +61,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods
 		{
 			const string myString = "This is a test string.";
 			string leftPart = myString.Truncate(6);
-			Assert.AreEqual("Thi...", leftPart);
+			Assert.AreEqual("This ...", leftPart);
 		}
 
 		[Test]
