@@ -23,8 +23,6 @@ namespace Zeus.Persistence
 		event EventHandler<CancelDestinationEventArgs> ItemCopying;
 		/// <summary>Occurs when an item has been copied</summary>
 		event EventHandler<DestinationEventArgs> ItemCopied;
-		/// <summary>Occurs when an item is loaded</summary>
-		event EventHandler<ItemEventArgs> ItemLoaded;
 
 		ContentItem Copy(ContentItem source, ContentItem destination);
 		ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren);

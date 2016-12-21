@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.BaseLibrary</RootNamespace>
     <AssemblyName>Zeus.BaseLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -124,6 +124,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -188,7 +189,10 @@
     <Compile Include="Collections\SingletonList.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionManager.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionUtility.cs" />
+    <Compile Include="ExtensionMethods\ByteArray.cs" />
     <Compile Include="ExtensionMethods\Collections\NameValueCollection.cs" />
+    <Compile Include="Mime\FileType.cs" />
+    <Compile Include="Mime\MimeTypes.cs" />
     <Compile Include="Navigation\NavigationItem.cs" />
     <Compile Include="Net\WebClientUtility.cs" />
     <Compile Include="Reflection\AssemblyFinder.cs" />
@@ -289,6 +293,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

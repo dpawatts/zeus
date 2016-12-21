@@ -55,7 +55,7 @@ namespace Zeus.FileSystem.Images
             set { SetDetail("CropHeight", value); }
         }
 
-        public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
+        public new string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
         {
             return GetUrl(width, height, fill, format, false);                
         }
@@ -221,8 +221,8 @@ namespace Zeus.FileSystem.Images
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
             string appKey = "CroppedImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
-            string res = System.Web.HttpContext.Current.Application[appKey] == null ? null : System.Web.HttpContext.Current.Application[appKey].ToString();
-            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+            string res = System.Web.HttpContext.Current.Cache[appKey] == null ? null : System.Web.HttpContext.Current.Cache[appKey].ToString();
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Cache[appKey + "_timer"] : DateTime.MinValue;
 
             if (res != null && lastUpdated == this.Updated)
             {
@@ -238,8 +238,8 @@ namespace Zeus.FileSystem.Images
             {
                 string res2 = GetUrl(width, height, fill);
 
-                System.Web.HttpContext.Current.Application[appKey] = res2;
-                System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+                System.Web.HttpContext.Current.Cache[appKey] = res2;
+                System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
 
                 Log(res2 + " added to cache for " + appKey);
 
@@ -393,8 +393,8 @@ namespace Zeus.FileSystem.Images
 
             string imageUrl = ImageUrlGenerator.GetImageUrl(dynamicImage2);
 
-            System.Web.HttpContext.Current.Application[appKey] = imageUrl;
-            System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+            System.Web.HttpContext.Current.Cache[appKey] = imageUrl;
+            System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
             Log(imageUrl + " added to cache for " + appKey);
 
             return imageUrl;

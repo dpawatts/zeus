@@ -66,7 +66,7 @@ namespace Zeus.Templates.Mvc.Controllers
                         return false;
                 }
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 return false;
             }

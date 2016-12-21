@@ -1,4 +1,5 @@
 using System.Net.Mail;
+using System.Configuration;
 
 namespace Zeus.Net.Mail
 {
@@ -9,8 +10,8 @@ namespace Zeus.Net.Mail
 	{
 		protected override SmtpClient GetSmtpClient()
 		{
-            if (System.Configuration.ConfigurationSettings.AppSettings["MailServer"] != null)
-                return CreateSmtpClient(System.Configuration.ConfigurationSettings.AppSettings["MailServer"], -1, null, null);
+            if (ConfigurationManager.AppSettings["MailServer"] != null)
+                return CreateSmtpClient(ConfigurationManager.AppSettings["MailServer"], -1, null, null);
             else
                 return CreateSmtpClient(null, -1, null, null);
 		}

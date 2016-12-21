@@ -61,9 +61,6 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been copied</summary>
 		public event EventHandler<DestinationEventArgs> ItemCopied;
 
-		/// <summary>Occurs when an item is loaded</summary>
-		public event EventHandler<ItemEventArgs> ItemLoaded;
-
 		#endregion
 
 		#region Methods

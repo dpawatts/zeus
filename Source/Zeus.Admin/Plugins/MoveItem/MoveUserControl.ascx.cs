@@ -53,7 +53,7 @@ namespace Zeus.Admin.Plugins.MoveItem
                     theParent = theParent.Parent;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //ExtNet.MessageBox.Alert("Cannot move item", ex.Message + " : " + ex.StackTrace);				
             }

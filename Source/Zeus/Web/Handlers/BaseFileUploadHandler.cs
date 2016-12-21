@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Web;
+using System.Configuration;
 
 namespace Zeus.Web.Handlers
 {
@@ -27,9 +28,9 @@ namespace Zeus.Web.Handlers
             //being that when a file is deleted the app domain restarts
 
             string uploadRootFolderPath = "";
-            if (System.Configuration.ConfigurationSettings.AppSettings["ZeusUploadFolder"] != null)
+            if (ConfigurationManager.AppSettings["ZeusUploadFolder"] != null)
             {
-                uploadRootFolderPath = System.Configuration.ConfigurationSettings.AppSettings["ZeusUploadFolder"];
+                uploadRootFolderPath = ConfigurationManager.AppSettings["ZeusUploadFolder"];
             }
             else
             {

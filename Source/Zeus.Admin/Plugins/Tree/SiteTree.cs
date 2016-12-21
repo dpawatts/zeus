@@ -12,7 +12,7 @@ namespace Zeus.Admin.Plugins.Tree
 	{
 		private readonly HierarchyBuilder _treeBuilder;
 		private Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> _filter;
-		private bool _excludeRoot, _forceSync;
+		private bool _excludeRoot;
 
 		public SiteTree(HierarchyBuilder treeBuilder)
 		{
@@ -48,7 +48,6 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public SiteTree ForceSync()
 		{
-			_forceSync = true;
 			return this;
 		}
 

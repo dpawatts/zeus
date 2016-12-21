@@ -10,7 +10,6 @@ namespace Zeus.Web.UI.WebControls
 		private TimePicker toTime;
 
 		private RequiredFieldValidator fromTimeValidator;
-		private RequiredFieldValidator toTimeValidator;
 
 		private Label between;
 

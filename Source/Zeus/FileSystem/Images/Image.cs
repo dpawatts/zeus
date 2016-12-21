@@ -1,6 +1,7 @@
 using System.IO;
 using SoundInTheory.DynamicImage.Caching;
 using SoundInTheory.DynamicImage.Layers;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
@@ -31,7 +32,7 @@ namespace Zeus.FileSystem.Images
 			byte[] fileBytes = stream.ReadAllBytes();
 			return new Image
 			{
-				ContentType = MimeUtility.GetMimeType(fileBytes),
+				ContentType = fileBytes.GetMimeType(),
 				Data = fileBytes,
 				Name = filename,
 				Size = stream.Length
@@ -42,7 +43,7 @@ namespace Zeus.FileSystem.Images
 		{
             string appKey = "ZeusImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
             string res = System.Web.HttpContext.Current.Cache[appKey] == null ? null : System.Web.HttpContext.Current.Cache[appKey].ToString();
-            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Cache[appKey + "_timer"] : DateTime.MinValue;
 
             if (res != null && lastUpdated == this.Updated)
             {

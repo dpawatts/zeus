@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web.UI;
+using Zeus.BaseLibrary.ExtensionMethods;
 using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.ContentProperties;
@@ -43,7 +44,7 @@ namespace Zeus.Design.Editors
 				using (FileStream fs = new FileStream(uploadedFile, FileMode.Open))
 				{
 					newFile.Data = fs.ReadAllBytes();
-					newFile.ContentType = MimeUtility.GetMimeType(newFile.Data);
+                    newFile.ContentType = newFile.Data.GetMimeType();
 					newFile.Size = fs.Length;
 				}
 

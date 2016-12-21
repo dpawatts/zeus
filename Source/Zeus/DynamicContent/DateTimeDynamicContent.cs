@@ -7,9 +7,6 @@ namespace Zeus.DynamicContent
 	{
 		#region Fields
 
-		private int _contentID;
-		private string _detailName;
-
 		#endregion
 
 		#region Properties
