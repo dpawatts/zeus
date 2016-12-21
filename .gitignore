@@ -39,3 +39,4 @@ httpd.parse.errors
 .vs
 Source/packages
 *.FileUpload
+App_Data

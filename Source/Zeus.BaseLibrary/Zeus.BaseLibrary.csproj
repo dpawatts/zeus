@@ -105,6 +105,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MimeTypesMap, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1b320cc08ad5aa89, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeTypesMap.1.0.0\lib\net451\MimeTypesMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -238,7 +242,6 @@
     <Compile Include="ExtensionMethods\Web\HttpRequest.cs" />
     <Compile Include="Web\InvalidQueryStringException.cs" />
     <Compile Include="Web\IWebContext.cs" />
-    <Compile Include="Web\MimeUtility.cs" />
     <Compile Include="Web\Routing\DebugHttpHandler.cs" />
     <Compile Include="Web\Routing\DebugRoute.cs" />
     <Compile Include="Web\Routing\DebugRouteHandler.cs" />
@@ -282,6 +285,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

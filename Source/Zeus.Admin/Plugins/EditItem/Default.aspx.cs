@@ -145,6 +145,7 @@ namespace Zeus.Admin.Plugins.EditItem
                     Buttons = MessageBox.Button.OK,
                     Message = "Item saved"
                 });
+                RefreshNavigationPanel(currentItem.VersionOf ?? currentItem);
             }
         }
 

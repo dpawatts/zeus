@@ -107,7 +107,12 @@ namespace Zeus.Web.Hosting
 
 			// Check that resource actually exists.
 			if (assembly.GetManifestResourceStream(virtualFile.ResourcePath) == null)
-				throw new ArgumentException(string.Format("Cannot find resource in assembly '{0}' matching resource path '{1}'.", assembly, virtualFile.ResourcePath));
+            {
+                if (throwOnError)
+                    throw new ArgumentException(string.Format("Cannot find resource in assembly '{0}' matching resource path '{1}'.", assembly, virtualFile.ResourcePath));
+                else
+                    return null;
+            }
 
 			return virtualFile;
 		}

@@ -9,6 +9,15 @@ Ext.ux.zeus.FileManager = function(windowDialog, view, tree)
 	this.tree = tree;
 };
 
+// Cache data by image name for easy lookup
+Ext.ux.zeus.FileManager.Lookup = {};
+
+Ext.ux.zeus.FileManager.formatData = function (data) {
+    data.shortName = Ext.util.Format.ellipsis(data.name, 15);
+    Ext.ux.zeus.FileManager.Lookup[data.name] = data;
+    return data;
+};
+
 Ext.ux.zeus.FileManager.prototype = {
 	// Cache data by image name for easy lookup
 	lookup: {},
@@ -39,12 +48,11 @@ Ext.ux.zeus.FileManager.prototype = {
 	{
 		var selectedNode = this.view.getSelectedNodes()[0];
 		var callback = this.callback;
-		var lookup = this.lookup;
 		this.windowDialog.hide(this.animateTarget, function()
 		{
 			if (selectedNode && callback)
 			{
-				var data = lookup[selectedNode.id];
+			    var data = Ext.ux.zeus.FileManager.Lookup[selectedNode.id];
 				callback(data);
 			}
 		});

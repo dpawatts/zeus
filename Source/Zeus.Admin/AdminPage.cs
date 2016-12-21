@@ -106,6 +106,24 @@ jQuery(document).ready(function() {{
 			return Request["returnUrl"] ?? (SelectedItem.VersionOf ?? SelectedNode).PreviewUrl;
 		}
 
+        public void RefreshNavigationPanel(ContentItem contentItem)
+        {
+            string script = string.Format(@"
+            jQuery(document).ready(function() {{
+	            if (window.top.zeus) {{
+		            window.top.zeus.refreshNavigation('{0}');
+                }}
+            }});", contentItem.ID);
+
+            if (ExtNet.IsAjaxRequest)
+                ExtNet.ResourceManager.RegisterOnReadyScript(script);
+            else
+                ClientScript.RegisterStartupScript(
+                    typeof(AdminPage),
+                    "AddRefreshEditPreviewScript",
+                    script, true);
+        }
+
 		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)
 		{
 			Refresh(contentItem, frame, insideUpdatePanel, GetPreviewUrl(contentItem));
