@@ -182,7 +182,7 @@ public class NVPAPICaller
             host = "www.sandbox.paypal.com";
         }
 
-        string siteRoot = ConfigurationSettings.AppSettings["SiteRoot"];
+        string siteRoot = ConfigurationManager.AppSettings["SiteRoot"];
 
         returnURL = "http://" + returnURL;
         cancelURL = "http://" + cancelURL;
