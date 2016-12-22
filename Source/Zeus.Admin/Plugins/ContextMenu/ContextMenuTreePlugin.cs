@@ -11,6 +11,9 @@ namespace Zeus.Admin.Plugins.ContextMenu
 		{
 			treePanel.Listeners.ContextMenu.Handler = string.Format(@"function(node, e)
 				{{
+                    if (node.text == undefined || (!!node.ui && !!node.ui.elNode && jQuery(node.ui.elNode).hasClass('disable-context'))) {{
+                        return false;
+                    }}
 					{0}.selectPath(node.getPath());
 					var contextMenu = new Ext.ux.menu.StoreMenu(
 					{{

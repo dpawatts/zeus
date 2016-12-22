@@ -143,8 +143,11 @@ namespace Zeus.Admin.Plugins.EditItem
                 {
                     Icon = MessageBox.Icon.INFO,
                     Buttons = MessageBox.Button.OK,
-                    Message = "Item saved"
+                    Message = "Item saved",
+                    Handler = string.Format(@"top.zeus.reloadContentPanel('Edit', '{0}');", GetEditUrl(currentItem.VersionOf ?? currentItem)),
+                    Closable = false
                 });
+
                 RefreshNavigationPanel(currentItem.VersionOf ?? currentItem);
             }
         }

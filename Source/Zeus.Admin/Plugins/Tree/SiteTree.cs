@@ -130,7 +130,7 @@ namespace Zeus.Admin.Plugins.Tree
                     {
                         Text = folderGroup,
                         IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
-                        Cls = "zeus-tree-node",
+                        Cls = "zeus-tree-node disable-context",
                         Expanded = false,
                         // TODO: Check why this was necessary
                         //NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()

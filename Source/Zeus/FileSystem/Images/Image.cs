@@ -6,6 +6,7 @@ using Zeus.BaseLibrary.ExtensionMethods.IO;
 using Zeus.BaseLibrary.Web;
 using Zeus.Design.Editors;
 using SoundInTheory.DynamicImage;
+using SoundInTheory.DynamicImage.Fluent;
 using SoundInTheory.DynamicImage.Filters;
 using System.Drawing;
 using System;
@@ -50,23 +51,26 @@ namespace Zeus.FileSystem.Images
                 return res;
             }
 
-            Composition image = new Composition();
-            image.ImageFormat = format;
-            ImageLayer imageLayer = new ImageLayer();
-            
-            ZeusImageSource source = new ZeusImageSource();
-            source.ContentID = ID;
+            Composition image = new Composition {
+                ImageFormat = format
+            };
 
-            imageLayer.Source = source;
+            ImageLayer imageLayer = new ImageLayer
+            {
+                Source = new ZeusImageSource {
+                    ContentID = ID
+                }
+            };
 
-            ResizeFilter resizeFilter = new ResizeFilter();
-		    resizeFilter.Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform;
-		    resizeFilter.Width = Unit.Pixel(width);
-		    resizeFilter.Height = Unit.Pixel(height);
+            ResizeFilter resizeFilter = new ResizeFilter
+            {
+                Mode = fill ? ResizeMode.UniformFill : ResizeMode.Uniform,
+                Width = Unit.Pixel(width),
+                Height = Unit.Pixel(height)
+            };
 
             imageLayer.Filters.Add(resizeFilter);
-            
-            imageLayer.Filters.Add(resizeFilter);
+            image.Layers.Add(imageLayer);
 
             string url = ImageUrlGenerator.GetImageUrl(image);
 
