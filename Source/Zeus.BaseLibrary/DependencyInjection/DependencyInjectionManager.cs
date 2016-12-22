@@ -15,11 +15,11 @@ namespace Zeus.BaseLibrary.DependencyInjection
 
 		private class InitializableKernel : StandardKernel
 		{
-			private readonly List<IBinding> _bindings;
+			private readonly List<IBinding> _bindings = new List<IBinding>();
 
 			public InitializableKernel()
 			{
-				_bindings = new List<IBinding>();
+				
 			}
 
 			public override void AddBinding(IBinding binding)
