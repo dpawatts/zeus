@@ -137,7 +137,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Spark.Web.Mvc, Version=1.8.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
-      <HintPath>..\packages\Spark.Web.Mvc4.1.8.1.0\lib\NET4\Spark.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Spark.Web.Mvc5.1.8.1.0\lib\NET45\Spark.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
