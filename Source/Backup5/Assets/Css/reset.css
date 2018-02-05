@@ -1,0 +1,32 @@
+/****************************************** Clear elements fix  ***************************************/
+
+.clearfix:after {
+    content:"."; 
+    display:block; 
+    height:0; 
+    clear:both; 
+    visibility:hidden;
+}
+.clearfix {
+    display:inline-block;
+}
+.clearfix {
+    display:block;
+}
+* html .clearfix {
+    height:1px;
+}
+
+
+
+code, kbd, samp, pre, tt, var, textarea, input, select, isindex { font: inherit; font-size: 1em; }
+dfn, i, cite, var, address, em { font-style: normal; }
+th, b, h1, h2, h3, h4, h5, h6 { font-weight: normal; }
+a, img, a img, iframe, form, abbr, acronym, object, applet { border: none; }
+table { border-collapse: collapse;}
+caption, th, td, center { text-align: left; vertical-align: top; }
+body { line-height: 1em; background: white; }
+q { quotes: "" ""; }
+ul, ol, dir, menu { list-style: none; }
+sub, sup { vertical-align: baseline; }
+a { color: inherit; text-decoration: none; }

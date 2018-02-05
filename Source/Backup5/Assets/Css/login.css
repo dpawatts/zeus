@@ -1,0 +1,95 @@
+body {
+	background: #f2f2f3;
+	font-family: arial;
+}
+
+#login {
+	width: 359px;
+	height: 249px;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.mainBox.gif") %>) top left no-repeat;
+	margin: 200px auto 0;
+	padding: 1px 0 0;
+	position: relative;
+	
+}
+
+#login p {
+	color: #a7a9ac;
+	font-size: 16px;
+}
+
+#for {
+	display: block;
+	margin: 30px 0 0 120px;
+}
+
+#webName {
+	font-weight: bold;
+	margin: 2px 0 0 120px;
+}
+
+form {
+	margin: 25px 0 0 10px;
+}
+
+form label {
+	display: block;
+	float: left;
+	text-align: right;
+	width: 94px;
+	font-size: 14px;
+	color: #808285;
+	padding: 0 15px 0 0;
+	margin: 4px 0 0;
+}
+
+form br {
+	clear: both;
+}
+
+form input {
+	width: 181px;
+	height: 16px;
+	border: 1px solid #fff;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.textBox.gif") %>) top left no-repeat;
+	margin: 0 0 12px 0;
+	font-size: 13px;
+	color: #808285;
+	padding: 4px 0 0 3px;
+}
+
+ #login #forgot {
+	display: block;
+	text-align: right;
+	float: left;
+	margin: 35px 0px 0 70px;
+	color: #808285;
+	font-size: 12px;
+}
+
+#login #forgot:hover {
+	color: #ec722a;
+}
+
+#loginButton {
+	display: block;
+	border: none;
+	width: 98px;
+	float: right;
+	margin: 35px 58px 0 0;
+	height: 28px;
+	text-indent: -9999px;
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.button.gif") %>) top left no-repeat;
+}
+
+#loginButton:hover {
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.Login.button.gif") %>) bottom left no-repeat;
+}
+
+#tryAgain {
+	position: absolute;
+	top: 163px;
+	left: 28px;
+	font-size: 12px;
+	color: #ec722a;
+}

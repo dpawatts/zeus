@@ -1,0 +1,3 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.FormPageViewModel" />
+
+${Html.Display(Model, Model.CurrentItem.Form)}
