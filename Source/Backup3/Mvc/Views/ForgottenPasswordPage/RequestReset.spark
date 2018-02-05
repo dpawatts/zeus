@@ -1,0 +1,5 @@
+﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.ForgottenPasswordPageRequestResetViewModel"/>
+
+<div id="requestReset">
+	<p>${Model.Status}</p>
+</div>

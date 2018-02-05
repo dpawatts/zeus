@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9293D83E-48A0-4A7D-9FC2-0F3F191CFEB9}"
 EndProject
@@ -57,6 +57,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.BaseLibrary.Tests", "Zeus.BaseLibrary.Tests\Zeus.BaseLibrary.Tests.csproj", "{87A31BEF-E24C-4B85-BF83-7428EDE9C03B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Templates.Tests", "Zeus.Templates.Tests\Zeus.Templates.Tests.csproj", "{34EDBA77-B394-419F-9A68-05EA97DA9F98}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76EF3F95-5CEC-47A8-8D99-2EF19018536C} = {76EF3F95-5CEC-47A8-8D99-2EF19018536C}
+		{205892DE-129F-4F77-B5E2-41E863676BFB} = {205892DE-129F-4F77-B5E2-41E863676BFB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.AddIns.ECommerce.PaypalExpress", "Zeus.AddIns.ECommerce.PaypalExpress\Zeus.AddIns.ECommerce.PaypalExpress.csproj", "{730D671D-33B8-4BF5-80B4-729E0965EACA}"
 EndProject
@@ -322,6 +326,9 @@ Global
 		{87A31BEF-E24C-4B85-BF83-7428EDE9C03B} = {9293D83E-48A0-4A7D-9FC2-0F3F191CFEB9}
 		{34EDBA77-B394-419F-9A68-05EA97DA9F98} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
 		{730D671D-33B8-4BF5-80B4-729E0965EACA} = {4FFD8740-F10F-453F-97FD-DAE6C34FF0CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F42E3AC-2062-479F-BD78-DE78011D41D7}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Zeus.vsmdi

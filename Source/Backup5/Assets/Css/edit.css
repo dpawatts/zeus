@@ -1,0 +1,249 @@
+div.editDetail
+{
+	margin-top: 15px;
+	clear: both;
+}
+
+div.editDetail label 
+{
+	color: #808285;
+}
+
+.editorLabel {
+	width: 150px;
+	float: left;
+	text-align: right;
+	display: block;
+	margin: 0 15px 0 0;
+	font-size: 14px;
+	color: #808285;
+}
+
+.x-panel-body input[type="text"],
+.x-panel-body input.textEditor,
+textarea,
+div.editDetail > select
+{
+	vertical-align: baseline;
+	border: solid 1px #999;
+	width: 500px;
+	color: #808285;
+	padding: 3px;
+}
+
+.x-panel-body input[type="text"].x-form-text
+{
+	width: auto;
+}
+
+.x-panel-body input[type="text"],
+.x-panel-body input.textEditor,
+textarea
+{
+	font-size: 13px;
+	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png") %>) repeat-x top left;
+}
+
+.x-panel-body input[disabled], .x-panel-body input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly]
+{
+ background: #dcdcdc;
+ cursor: default;
+}
+
+img.image
+{
+	clear: both;
+	margin-left: 165px;
+	margin-top: 5px;
+}
+
+span.clearFile input
+{
+	margin-top: 5px;
+	margin-left: 165px;
+	margin-right: 3px;
+}
+
+span.fileName img
+{
+	margin-top: 5px;
+}
+
+span.fileName
+{
+	clear: both;
+	margin-left: 165px;
+}
+
+input[type="text"].required, textarea.required, select.required {
+	border: 1px solid #E6ACAC;
+}
+
+input[type="text"].colour, input[type="text"].price, input[type="text"].integer, input[type="text"].number
+{
+	width: 60px;
+}
+
+input[type="text"].date
+{
+	width: 80px;
+}
+
+.checkBoxList {
+	display: block;
+	float: left;
+}
+
+.checkBoxList input[type="checkbox"] {
+	margin-right: 3px;
+}
+
+.add 
+{
+	margin-left: 5px;
+}
+
+.delete
+{
+	float: right;
+	margin-left: 5px;
+}
+
+.deleted
+{
+	display: none;
+}
+
+.colorpicker input[type="text"] {
+	background: none;
+	vertical-align: inherit;
+	width: auto;
+}
+
+.prefix, .postfix
+{
+	color: #808285;
+	font-size: 14px;
+	margin-bottom: 3px;
+}
+
+.description
+{
+	float: left;
+	margin-left: 165px;
+	color: #808285;
+	font-size: 10px;
+}
+
+a
+{
+	text-decoration: underline;
+}
+
+span.nameLabel
+{
+	font-size: 14px;
+	color: #808285;
+}
+
+input.nameEditor
+{
+	width: 300px;
+}
+
+span.edit {
+	width: 48px;
+	padding: 0;
+}
+
+span.edit a {
+	display: block;
+	height: 23px;
+	width: 54px;
+	text-indent: -99999px;
+	clear:both;
+	float:left;
+	margin-top: 3px;
+	margin-bottom:15px;
+	margin-left:165px;
+}
+
+span.edit a {
+	background: url(<%= WebResource("Zeus.Admin.Assets.Images.View.edit.gif") %>) top left no-repeat;
+}
+
+span.edit a:hover {
+	background-position: bottom left;
+}
+
+.right
+{
+	position: absolute;
+	top: 40px;
+	right: 10px;
+	width: 220px;
+	background-color: White;
+	z-index: 10;
+}
+
+.right fieldset
+{
+	margin-right: 0;
+}
+
+/* Zones */
+.zonesBox a
+{
+	color:#333;
+	font-weight:normal;
+	text-decoration:none;
+}
+.zonesBox dl
+{
+	margin:0;
+}
+.zonesBox dt
+{
+	padding:5px 0;
+	font-size:1.1em;
+	font-weight:bold;
+	display:block;
+}
+.zonesBox dt a
+{
+	float:right;
+	padding:2px;
+}
+.zonesBox dd
+{
+	margin:0;
+	padding:0 0 5px 5px;
+}
+
+.linkedItemsEditor
+{
+	float: left;
+	width: 480px;
+	border: 1px solid #CECECE;
+	padding: 10px;
+	margin-bottom: 10px;
+	padding-bottom: 0;
+}
+
+.linkedItemsEditor fieldset
+{
+	width: 435px;
+	padding: 10px;
+}
+
+.linkedItemsEditor legend
+{
+	margin-left: -5px;
+}
+
+input[type="text"].linkedItem, textarea.linkedItem, div.editDetail > select.linkedItem
+{
+	width: 435px;
+}
+
+.ui-widget { font-size: 100%; }
