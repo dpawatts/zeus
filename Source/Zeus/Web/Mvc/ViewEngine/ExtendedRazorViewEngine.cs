@@ -15,7 +15,9 @@ namespace Zeus.Web.Mvc.ViewEngine
                 new string[]
                 {
                     "~/Areas/{2}/Views/{1}/{0}.cshtml",
-                    "~/Areas/{2}/Views/Shared/{1}/{0}.cshtml"
+                    "~/Areas/{2}/Views/Shared/{1}/{0}.cshtml",
+                    "~/Areas/{2}/Views/{1}/{0}",
+                    "~/Areas/{2}/Views/Shared/{1}/{0}"
                 }).ToArray();
         }
     }
