@@ -15,3 +15,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("9cc95ec2-06c7-4bb4-aaca-7bc493dc8cab")]
 
 [assembly: InternalsVisibleTo("Zeus.Admin")]
+[assembly: AssemblyVersion("0.8.0.1")]
+
