@@ -1,6 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.ForgottenPasswordPageResetViewModel"/>
-
-<div id="resetPassword">
-	<p>The password reset request could not be found or has expired. Please use the forgotten
-	password form to make another request.</p>
-</div>

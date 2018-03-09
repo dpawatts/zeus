@@ -1,6 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.ForgottenPasswordPageResetConfirmationViewModel"/>
-
-<div id="requestReset">
-	<p if="Model.Successful">Your password has been changed. Please login with your new password.</p>
-	<p if="!Model.Successful">Your password was not changed due to an error.</p>
-</div>

@@ -1,1 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MoveUserControl.ascx.cs" Inherits="Zeus.Admin.Plugins.MoveItem.MoveUserControl" %>

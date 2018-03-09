@@ -1,7 +1,0 @@
-﻿An order has been successfully placed.
-
-Item Cost Total: ${#order.SubTotalPrice "C2"}
-Delivery Cost:   ${#order.DeliveryPrice "C2"}
-Total Cost:      ${#order.TotalPrice "C2"}
-
-The order confirmation number is ${#order.ID}.

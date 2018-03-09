@@ -1,1 +1,0 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ManageZonesUserControl.ascx.cs" Inherits="Zeus.Admin.Plugins.ManageZones.ManageZonesUserControl" %>

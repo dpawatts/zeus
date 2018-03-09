@@ -1,3 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.FormSubmitViewModel" />
-
-${Html.DisplayProperty(Model.CurrentItem, m => m.SubmitText)}

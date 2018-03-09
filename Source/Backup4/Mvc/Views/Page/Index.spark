@@ -1,3 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.PageViewModel"/>
-
-${Html.DisplayProperty(Model.CurrentItem, ci => ci.Content)}

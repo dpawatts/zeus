@@ -1,2 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.FeedLinkViewModel" />
-<a href="${Model.CurrentItem.SelectedFeed.Url}"><img src="${Model.CurrentItem.SelectedFeed.IconUrl}" alt="RSS" /> ${Model.CurrentItem.Title}</a>

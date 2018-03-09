@@ -1,9 +1,0 @@
-table.permissions th, table.permissions td
-{
-	padding: 3px;
-}
-
-table.permissions td.operation
-{
-	text-align: center;
-}

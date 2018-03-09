@@ -1,2 +1,0 @@
-﻿<viewdata model="Zeus.Templates.Mvc.ViewModels.FeedLinkViewModel" />
-<link rel="alternate" type="application/rss+xml" title="${Model.CurrentItem.Title}" href="${Model.CurrentItem.SelectedFeed.Url}" />
