@@ -321,7 +321,7 @@ namespace Zeus.Web
             tw.Close();
         }/*
                         LogIt("In the cache all section : session says " + 
-                            (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null ? "No setting" : "Setting Found") +
+                            (System.Web.HttpContext.Current.Cache["customUrlCacheActivated"] == null ? "No setting" : "Setting Found") +
                             " : requestedUrl.Path = " + requestedUrl.Path +
                             " : _webContext.Url.Path = " + _webContext.Url.Path +
                             " : isFile? = " + isFile(_webContext.Url.Path));
@@ -370,11 +370,11 @@ namespace Zeus.Web
                     }
 
                     //cache data first time we go through this
-                    if ((_configUrlsSection.ParentIDs.Count > 0) && (System.Web.HttpContext.Current.Application["customUrlCacheActivated"] == null))
+                    if ((_configUrlsSection.ParentIDs.Count > 0) && (System.Web.HttpContext.Current.Cache["customUrlCacheActivated"] == null))
                     {
                         //the below takes resource and time, we only want one request doing this at a time, so set the flag immediately
-                        System.Web.HttpContext.Current.Application["customUrlCacheActivated"] = "true";
-                        System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"] = System.DateTime.Now;
+                        System.Web.HttpContext.Current.Cache["customUrlCacheActivated"] = "true";
+                        System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopLastRun"] = System.DateTime.Now;
 
                         foreach (CustomUrlsIDElement id in _configUrlsSection.ParentIDs)
                         {
@@ -389,13 +389,13 @@ namespace Zeus.Web
                             {
                                 if (ci.HasCustomUrl)
                                 {
-                                    System.Web.HttpContext.Current.Application["customUrlCache_" + ci.Url] = ci.ID;
-                                    System.Web.HttpContext.Current.Application["customUrlCacheAction_" + ci.Url] = "";
+                                    System.Web.HttpContext.Current.Cache["customUrlCache_" + ci.Url] = ci.ID;
+                                    System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + ci.Url] = "";
                                 }
                             }
                         }
 
-                        System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] = System.DateTime.Now;
+                        System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopComplete"] = System.DateTime.Now;
                     }
 
                     bool bTryCustomUrls = false;
@@ -427,8 +427,8 @@ namespace Zeus.Web
                     if (data.IsEmpty() && requestedUrl.Path.IndexOf(".") == -1 && bTryCustomUrls)
                     {
 
-                        DateTime lastRun = Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
-                        DateTime lastComplete = System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
+                        DateTime lastRun = Convert.ToDateTime(System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopLastRun"]);
+                        DateTime lastComplete = System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopLastRun"]);
 
                         //temp measure - sleep until the initial loop is complete
                         int loops = 0;
@@ -436,7 +436,7 @@ namespace Zeus.Web
                         {
                             loops++;
                             System.Threading.Thread.Sleep(1000);
-                            lastComplete = System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Application["customUrlCacheInitialLoopLastRun"]);
+                            lastComplete = System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopComplete"] == null ? DateTime.MinValue : Convert.ToDateTime(System.Web.HttpContext.Current.Cache["customUrlCacheInitialLoopLastRun"]);
                         }
 
                         //this code can freak out the 2nd level caching in NHibernate, so clear it if within 5 mins of the last time the cache everything loop was called
@@ -456,7 +456,7 @@ namespace Zeus.Web
                         */
 
                         //check cache for previously mapped item
-                        if (System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] == null)
+                        if (System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path] == null)
                         {
                             //HACK!!  Using the RapidCheck elements in config try to pre-empt this being a known path with the action
                             //This needed to be implemented for performance reasons
@@ -475,13 +475,13 @@ namespace Zeus.Web
                                 {
                                     //check for cache
                                     //see whether we have the root item in the cache...
-                                    if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] != null)
+                                    if (System.Web.HttpContext.Current.Cache["customUrlCache_" + pathNoAction] != null)
                                     {
                                         //we now have a match without any more calls to the database
-                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                        ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Cache["customUrlCache_" + pathNoAction]);
                                         data = ci.FindPath(action);
-                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
-                                        System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                        System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path] = ci.ID;
+                                        System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                         return data;
                                     }
                                 }
@@ -497,11 +497,11 @@ namespace Zeus.Web
                                     continue;
 
                                 //only search inside the parent id if we find that it has changed...
-                                DateTime? parentUpdated = System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID] == null ? null : (DateTime?)System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID];
+                                DateTime? parentUpdated = System.Web.HttpContext.Current.Cache["customUrlCacheParent_" + id.ID] == null ? null : (DateTime?)System.Web.HttpContext.Current.Cache["customUrlCacheParent_" + id.ID];
 
                                 if (parentUpdated == null || parentUpdated.Value != customUrlPage.Updated)
                                 {
-                                    System.Web.HttpContext.Current.Application["customUrlCacheParent_" + id.ID] = customUrlPage.Updated;
+                                    System.Web.HttpContext.Current.Cache["customUrlCacheParent_" + id.ID] = customUrlPage.Updated;
 
                                     //need to check all children of these nodes to see if there's a match
                                     ContentItem tryMatch =
@@ -511,8 +511,8 @@ namespace Zeus.Web
                                     if (tryMatch != null)
                                     {
                                         data = tryMatch.FindPath(PathData.DefaultAction);
-                                        System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
-                                        System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = "";
+                                        System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path] = tryMatch.ID;
+                                        System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + _webContext.Url.Path] = "";
                                         break;
                                     }
                                     //now need to check for an action...
@@ -520,7 +520,7 @@ namespace Zeus.Web
                                     {
 
                                         //see whether we have the root item in the cache...
-                                        if (System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction] == null)
+                                        if (System.Web.HttpContext.Current.Cache["customUrlCache_" + pathNoAction] == null)
                                         {
                                             ContentItem tryMatchAgain =
                                                 Find.EnumerateAccessibleChildren(Persister.Get(id.ID), id.Depth).SingleOrDefault(
@@ -529,17 +529,17 @@ namespace Zeus.Web
                                             if (tryMatchAgain != null)
                                             {
                                                 data = tryMatchAgain.FindPath(action);
-                                                System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
-                                                System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                                System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path] = tryMatchAgain.ID;
+                                                System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                                 break;
                                             }
                                         }
                                         else
                                         {
-                                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + pathNoAction]);
+                                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Cache["customUrlCache_" + pathNoAction]);
                                             data = ci.FindPath(action);
-                                            System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path] = ci.ID;
-                                            System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path] = action;
+                                            System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path] = ci.ID;
+                                            System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + _webContext.Url.Path] = action;
                                             break;
                                         }
                                     }
@@ -552,8 +552,8 @@ namespace Zeus.Web
                         }
                         else
                         {
-                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Application["customUrlCache_" + _webContext.Url.Path]);
-                            string act = System.Web.HttpContext.Current.Application["customUrlCacheAction_" + _webContext.Url.Path].ToString();
+                            ContentItem ci = _persister.Get((int)System.Web.HttpContext.Current.Cache["customUrlCache_" + _webContext.Url.Path]);
+                            string act = System.Web.HttpContext.Current.Cache["customUrlCacheAction_" + _webContext.Url.Path].ToString();
                             if (string.IsNullOrEmpty(act))
                                 return ci.FindPath(PathData.DefaultAction);
                             else

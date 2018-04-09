@@ -399,9 +399,15 @@ namespace Zeus
         /// <returns>The value stored in the details bag or null if no item was found.</returns>
         public virtual object GetDetail(string detailName)
         {
-            return Details.ContainsKey(detailName)
-                ? Details[detailName].Value
-                : null;
+            IDictionary<string, PropertyData> source = GetCurrentOrMasterLanguageDetails(detailName);
+            lock (source)
+            {
+                IDictionary<string, PropertyData> details = new Dictionary<string, PropertyData>(GetCurrentOrMasterLanguageDetails(detailName));
+
+                return details.ContainsKey(detailName)
+                    ? details[detailName].Value
+                    : null;
+            }
         }
 
         /// <summary>Gets a detail from the details bag.</summary>
@@ -410,54 +416,15 @@ namespace Zeus
         /// <returns>The value stored in the details bag or null if no item was found.</returns>
         public virtual T GetDetail<T>(string detailName, T defaultValue)
         {
-            IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
-
-            //try inserted to stop "illegal access" error
-            bool? bContains;
-            bContains = tryAndWaitIfNecessary(details, detailName);
-
-            //if failed try again
-            if (bContains == null)
+            IDictionary<string, PropertyData> source = GetCurrentOrMasterLanguageDetails(detailName);
+            lock (source)
             {
-                bContains = tryAndWaitIfNecessary(details, detailName);
-                //if still failed, then another second has already passed so try a final time with no catch
-                if (bContains == null)
-                    bContains = details.ContainsKey(detailName);
-            }
+                IDictionary<string, PropertyData> details = new Dictionary<string, PropertyData>(source);
 
-            if (bContains.Value)
-                return Utility.Convert<T>(details[detailName].Value);
-            return defaultValue;
-        }
+                if (details.ContainsKey(detailName))
+                    return Utility.Convert<T>(details[detailName].Value);
 
-        private bool? tryAndWaitIfNecessary(IDictionary<string, PropertyData> details, string detailName)
-        {
-            try
-            {
-                return details.ContainsKey(detailName);
-            }
-            catch (System.Exception ex)
-            {
-                if (ex.Message.ToLower().IndexOf("illegal access to loading collection") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("could not initialize a collection batch") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("was deadlocked on lock resources with another process and has been chosen as the deadlock victim") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    throw (ex);
-                }
-                return null;
+                return defaultValue;
             }
         }
 
@@ -480,24 +447,27 @@ namespace Zeus
 
             if (string.IsNullOrEmpty(detailName))
                 throw new ArgumentNullException("detailName");
-
-            PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
-
-            if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
+            
+            lock (_details)
             {
-                // update an existing detail
-                detail.Value = value;
-            }
-            else
-            {
-                if (detail != null)
-                    // delete detail or remove detail of wrong type
-                    Details.Remove(detailName);
-                if (value != null)
+                PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
+
+                if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
                 {
-                    // add new detail
-                    PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
-                    Details.Add(detailName, propertyData);
+                    // update an existing detail
+                    detail.Value = value;
+                }
+                else
+                {
+                    if (detail != null)
+                        // delete detail or remove detail of wrong type
+                        Details.Remove(detailName);
+                    if (value != null)
+                    {
+                        // add new detail
+                        PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
+                        Details.Add(detailName, propertyData);
+                    }
                 }
             }
         }

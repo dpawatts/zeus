@@ -223,8 +223,8 @@ namespace Zeus.Templates.Mvc.Html
         public static IList<NavigationItem> LoadNav(this HtmlHelper html, bool includeRootItem)
         {
             string Lang = Zeus.Globalization.ContentLanguage.PreferredCulture.TwoLetterISOLanguageName;
-            DateTime lastChecked = System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang];
-            if (System.Web.HttpContext.Current.Application["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1) || Find.StartPage.Updated > lastChecked)
+            DateTime lastChecked = System.Web.HttpContext.Current.Cache["primaryNavLastLoaded" + Lang] == null ? DateTime.MinValue : (DateTime)System.Web.HttpContext.Current.Cache["primaryNavLastLoaded" + Lang];
+            if (System.Web.HttpContext.Current.Cache["primaryNav" + Lang] == null || DateTime.Now.Subtract(lastChecked) > TimeSpan.FromHours(1) || Find.StartPage.Updated > lastChecked)
             {
                 var result = new List<NavigationItem>();
 
@@ -254,13 +254,13 @@ namespace Zeus.Templates.Mvc.Html
                     }
                 }
 
-                System.Web.HttpContext.Current.Application["primaryNav" + Lang] = result;
-                System.Web.HttpContext.Current.Application["primaryNavLastLoaded" + Lang] = DateTime.Now;
+                System.Web.HttpContext.Current.Cache["primaryNav" + Lang] = result;
+                System.Web.HttpContext.Current.Cache["primaryNavLastLoaded" + Lang] = DateTime.Now;
                 return result;
             }
             else
             {
-                return (IList<NavigationItem>)System.Web.HttpContext.Current.Application["primaryNav" + Lang];
+                return (IList<NavigationItem>)System.Web.HttpContext.Current.Cache["primaryNav" + Lang];
             }
         }
 
