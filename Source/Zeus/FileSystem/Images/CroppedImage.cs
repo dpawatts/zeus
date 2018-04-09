@@ -224,8 +224,8 @@ namespace Zeus.FileSystem.Images
         public string GetUrl(int width, int height, bool fill, DynamicImageFormat format, bool isResize)
         {
             string appKey = "CroppedImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
-            string res = System.Web.HttpContext.Current.Application[appKey] == null ? null : System.Web.HttpContext.Current.Application[appKey].ToString();
-            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+            string res = System.Web.HttpContext.Current.Cache[appKey] == null ? null : System.Web.HttpContext.Current.Cache[appKey].ToString();
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Cache[appKey + "_timer"] : DateTime.MinValue;
 
             if (res != null && lastUpdated == this.Updated)
             {
@@ -241,8 +241,8 @@ namespace Zeus.FileSystem.Images
             {
                 string res2 = GetUrl(width, height, fill);
 
-                System.Web.HttpContext.Current.Application[appKey] = res2;
-                System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+                System.Web.HttpContext.Current.Cache[appKey] = res2;
+                System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
 
                 Log(res2 + " added to cache for " + appKey);
 
@@ -395,8 +395,8 @@ namespace Zeus.FileSystem.Images
 
             dynamicImage2.Layers.Add(HalfwayImageSource);
 
-            System.Web.HttpContext.Current.Application[appKey] = dynamicImage2.ImageUrl;
-            System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+            System.Web.HttpContext.Current.Cache[appKey] = dynamicImage2.ImageUrl;
+            System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
 
             Log(dynamicImage2.ImageUrl + " added to cache for " + appKey);
 

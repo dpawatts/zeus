@@ -40,8 +40,8 @@ namespace Zeus.FileSystem.Images
 		public string GetUrl(int width, int height, bool fill, DynamicImageFormat format)
 		{
             string appKey = "ZeusImage_" + this.ID + "_" + width + "_" + height + "_" + fill.ToString();
-            string res = System.Web.HttpContext.Current.Application[appKey] == null ? null : System.Web.HttpContext.Current.Application[appKey].ToString();
-            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Application[appKey + "_timer"] : DateTime.MinValue;
+            string res = System.Web.HttpContext.Current.Cache[appKey] == null ? null : System.Web.HttpContext.Current.Cache[appKey].ToString();
+            DateTime lastUpdated = res != null ? (DateTime)System.Web.HttpContext.Current.Cache[appKey + "_timer"] : DateTime.MinValue;
 
             if (res != null && lastUpdated == this.Updated)
             {
@@ -78,8 +78,8 @@ namespace Zeus.FileSystem.Images
 				.Url;
              */
 
-            System.Web.HttpContext.Current.Application[appKey] = url;
-            System.Web.HttpContext.Current.Application[appKey + "_timer"] = this.Updated;
+            System.Web.HttpContext.Current.Cache[appKey] = url;
+            System.Web.HttpContext.Current.Cache[appKey + "_timer"] = this.Updated;
 
             return url;
 		}

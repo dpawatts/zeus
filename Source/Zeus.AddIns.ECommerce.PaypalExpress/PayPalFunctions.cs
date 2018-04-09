@@ -170,10 +170,10 @@ public class NVPAPICaller
 
     public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency)
     {
-        return ShortcutExpressCheckout(amt, ref token, ref retMsg, returnURL, cancelURL, items, shippingCost, currency, false);
+        return ShortcutExpressCheckout(amt, ref token, ref retMsg, returnURL, cancelURL, items, shippingCost, currency, false, 0);
     }
 
-    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency, bool forceReturnURLsOverHttps)
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency, bool forceReturnURLsOverHttps, decimal tax = 0)
     {
         string host = "www.paypal.com";
         if (StartPage.UseTestEnvironment)
@@ -206,7 +206,7 @@ public class NVPAPICaller
 
         encoder["PAYMENTREQUEST_0_SHIPPINGAMT"] = shippingCost.ToString("0.00");
         encoder["PAYMENTREQUEST_0_HANDLINGAMT"] = "0.00";
-        encoder["PAYMENTREQUEST_0_TAXAMT"] = "0.00";
+        encoder["PAYMENTREQUEST_0_TAXAMT"] = tax.ToString("0.00");
         encoder["PAYMENTREQUEST_0_DESC"] = "Order";
 
         //add the items from the basket and tell PayPal about them...

@@ -84,9 +84,11 @@ namespace Zeus
         public virtual void ReorderAction() {  }
 
         /// <summary>Gets or sets the publish date of this item.</summary>
+        [BsonIgnore]
         public virtual DateTime? Published { get; set; }
 
         /// <summary>Gets or sets the expiration date of this item.</summary>
+        [BsonIgnore]
         public virtual DateTime? Expires
         {
             get { return _expires; }
@@ -95,6 +97,7 @@ namespace Zeus
 
         /// <summary>Gets or sets the sort order of this item.</summary>
         [Copy]
+        [BsonIgnore]
         public virtual int SortOrder { get; set; }
 
         /// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
@@ -115,21 +118,25 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets the published version of this item. If this value is not null then this item is a previous version of the item specified by VersionOf.</summary>
+        [BsonIgnore]
         public virtual ContentItem VersionOf { get; set; }
 
         /// <summary>
         /// Gets or sets the version number of this item. This starts at 1, and increases for later versions.
         /// </summary>
         [Copy]
+        [BsonIgnore]
         public virtual int Version { get; set; }
 
         /// <summary>Gets or sets the original language version of this item. If this value is not null then this item is a translated version of the item specified by TranslationOf.</summary>
+        [BsonIgnore]
         public virtual ContentItem TranslationOf { get; set; }
 
         /// <summary>
         /// Gets or sets the language code of this item.
         /// </summary>
         [Copy]
+        [BsonIgnore]
         public virtual string Language { get; set; }
 
         /// <summary>Gets or sets the name of the identity who saved this item.</summary>
@@ -137,6 +144,7 @@ namespace Zeus
         public virtual string SavedBy { get; set; }
 
         /// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
+        [BsonIgnore]
         public IDictionary<string, PropertyData> Details
         {
             get { return _details; }
@@ -144,6 +152,7 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
+        [BsonIgnore]
         public IDictionary<string, PropertyCollection> DetailCollections
         {
             get { return _detailCollections; }
@@ -151,6 +160,7 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
+        [BsonIgnore]
         public virtual IList<ContentItem> Children
         {
             get { return _children; }
@@ -158,12 +168,14 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
+        [BsonIgnore]
         public virtual IList<ContentItem> Translations
         {
             get { return _translations; }
             set { _translations = value; }
         }
 
+        [BsonIgnore]
         public virtual int? OverrideCacheID { get; set; }
         public int CacheID { get { return OverrideCacheID.HasValue ? OverrideCacheID.Value : ID; } }
 
@@ -290,6 +302,7 @@ namespace Zeus
         #endregion
 
         /// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
+        [BsonIgnore]
         public virtual IList<AuthorizationRule> AuthorizationRules
         {
             get
@@ -302,6 +315,7 @@ namespace Zeus
         }
 
         /// <summary>Gets an array of language settings for this item. Null or empty list is interpreted as this item inheriting its settings from its parent.</summary>
+        [BsonIgnore]
         public virtual IList<LanguageSetting> LanguageSettings
         {
             get
@@ -318,6 +332,7 @@ namespace Zeus
         /// <summary>Gets or sets the detail or property with the supplied name. If a property with the supplied name exists this is always returned in favour of any detail that might have the same name.</summary>
         /// <param name="detailName">The name of the propery or detail.</param>
         /// <returns>The value of the property or detail. If now property exists null is returned.</returns>
+        [BsonIgnore]
         public virtual object this[string detailName]
         {
             get

@@ -2,6 +2,7 @@
 using Zeus.ContentTypes;
 using Zeus.Design.Editors;
 using Zeus.Globalization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Zeus.Web
 {
@@ -51,8 +52,13 @@ namespace Zeus.Web
 			get { return true; }
 		}
 
+        [BsonIgnore]
         public virtual string ProgrammableHtmlTitle { get; set; }
+
+        [BsonIgnore]
         public virtual string ProgrammableMetaDescription { get; set; }
+
+        [BsonIgnore]
         public virtual string ProgrammableMetaKeywords { get; set; }
 
         public virtual bool UseProgrammableSEOAssets { get { return false; } }

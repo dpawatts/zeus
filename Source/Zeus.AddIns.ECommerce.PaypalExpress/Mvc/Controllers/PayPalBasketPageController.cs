@@ -32,7 +32,8 @@ namespace Zeus.AddIns.ECommerce.PaypalExpress.Mvc.Controllers
                                                             CurrentItem.BasketItems,
                                                             CurrentItem.DeliveryPrice,
                                                             CurrentItem.Currency,
-                                                            ForceReturnURLsOverHttps
+                                                            ForceReturnURLsOverHttps,
+                                                            CurrentItem.TaxTotal
                                                             );
             if (ret)
             {

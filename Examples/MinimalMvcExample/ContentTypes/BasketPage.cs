@@ -56,7 +56,7 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
             get { return new List<string>(); }
         }
 
-
+        public decimal TaxTotal { get { return 0; } }
 
         #endregion
 

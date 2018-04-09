@@ -13,6 +13,7 @@ bin
 *resharper*
 *.suo
 *.cache
+.vs
 Thumbs.db
  
 # Other useful stuff

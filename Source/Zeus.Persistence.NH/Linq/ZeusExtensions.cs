@@ -1,5 +1,6 @@
 using NHibernate;
 using NHibernate.Linq;
+using System.Linq;
 
 namespace Zeus.Persistence.NH.Linq
 {
@@ -14,13 +15,10 @@ namespace Zeus.Persistence.NH.Linq
         /// <typeparam name="T">An NHibernate entity type.</typeparam>
         /// <param name="session">An initialized <see cref="T:NHibernate.ISession"/> object.</param>
         /// <returns>An <see cref="T:NHibernate.Linq.NHibernateQueryProvider"/> used to evaluate an expression tree.</returns>
-        public static System.Linq.IQueryable<T> Linq<T>(this ISession session)
+        public static INHibernateQueryable<T> Linq<T>(this ISession session)
         {
-            /*
-			QueryOptions options = new QueryOptions();
-			return new Query<T>(new ZeusQueryProvider(session, options), options);
-             */
-            return session.Query<T>();
+            QueryOptions options = new QueryOptions();
+            return new Query<T>(new ZeusQueryProvider(session, options), options);
         }
     }
 }

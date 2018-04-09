@@ -18,6 +18,12 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -141,10 +147,6 @@
     <Compile Include="WebsiteModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Source\Zeus.AddIns.Blogs\Zeus.AddIns.Blogs.csproj">
-      <Project>{4AAC0536-6EED-457E-B26A-974C35B3BC2D}</Project>
-      <Name>Zeus.AddIns.Blogs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Source\Zeus.AddIns.ECommerce.PaymentGateways.SagePay\Zeus.AddIns.ECommerce.PaymentGateways.SagePay.csproj">
       <Project>{2F01CC7A-40AE-4475-9948-E2B2EA405C13}</Project>
       <Name>Zeus.AddIns.ECommerce.PaymentGateways.SagePay</Name>
