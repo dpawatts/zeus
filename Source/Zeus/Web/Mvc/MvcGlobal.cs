@@ -20,8 +20,8 @@ namespace Zeus.Web.Mvc
             routes.IgnoreRoute(adminPath + "/{*pathInfo}");
             routes.IgnoreRoute("assets" + "/{*pathInfo}");
 
-			// This route detects content item paths and executes their controller
-			routes.Add(new ContentRoute(engine));
+            // This route detects content item paths and executes their controller
+            routes.Add(new ContentRoute(engine));
 		}
 
 		private static void RegisterFallbackRoute(RouteCollection routes)
@@ -36,17 +36,19 @@ namespace Zeus.Web.Mvc
 
 		public override void Init()
 		{
-			// normally the engine is initialized by the initializer module but it can also be initialized this programmatically
-			// since we attach programmatically we need to associate the event broker with a http application
-			EventBroker.Instance.Attach(this);
+            base.Init();
 
-			base.Init();
+            // normally the engine is initialized by the initializer module but it can also be initialized this programmatically
+            // since we attach programmatically we need to associate the event broker with a http application
+            EventBroker.Instance.Attach(this);
 		}
 
 		protected override void OnApplicationStart(EventArgs e)
 		{
-			// Create and initialize Zeus engine.
-			ContentEngine engine = Zeus.Context.Initialize(false);
+            base.OnApplicationStart(e);
+
+            // Create and initialize Zeus engine.
+            ContentEngine engine = Zeus.Context.Initialize(false);
 
 			// Create Spark view engine and register it with MVC.
 			var sparkServiceContainer = SparkEngineStarter.CreateContainer();
@@ -70,8 +72,6 @@ namespace Zeus.Web.Mvc
 
 			// Use a custom model metadata provider.
 			ModelMetadataProviders.Current = new CustomDataAnnotationsModelMetadataProvider();
-
-			base.OnApplicationStart(e);
 		}
 	}
 }

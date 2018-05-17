@@ -96,10 +96,13 @@ namespace Zeus.Web.Mvc
                 else
                 {
                     //check for 404
-                    if (td.Is404 && originalLookUpWas404)
+                    if (td.Is404 || originalLookUpWas404)
                     {
-                        //need to return to our original 404 page here...
-                        td = originalPathData;
+                        if (!td.Is404 && originalLookUpWas404)
+                        {
+                            //need to return to our original 404 page here...
+                            td = originalPathData;
+                        }
 
                         //return correct response!  Code will continue from here and all will be fine...
                         System.Web.HttpContext.Current.Response.StatusCode = 404;
@@ -114,7 +117,7 @@ namespace Zeus.Web.Mvc
 
             if (item == null)
                 return null;
-            
+
             if (td.QueryParameters.ContainsKey("preview"))
             {
                 int itemId;
