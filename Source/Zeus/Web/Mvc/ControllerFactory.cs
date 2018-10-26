@@ -43,7 +43,11 @@ namespace Zeus.Web.Mvc
 
 		private IController InstantiateController(string controllerName)
 		{
+#if DEBUG
+			IController controller = _kernel.Get<IController>(controllerName.ToLowerInvariant());
+#else
 			IController controller = _kernel.TryGet<IController>(controllerName.ToLowerInvariant());
+#endif
 
 			var standardController = controller as Controller;
 
