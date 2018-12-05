@@ -335,6 +335,8 @@ namespace Zeus.Web
             bool bNeedsProcessing = true;
             if (requestedUrl.Path.ToLower().StartsWith("/assets/"))
                 bNeedsProcessing = false;
+            if (requestedUrl.Path.ToLower().StartsWith("/content/"))
+                bNeedsProcessing = false;
             else if (!requestedUrl.Path.StartsWith("/"))
                 bNeedsProcessing = false;
             else if (isFile(requestedUrl.Path, false))
