@@ -16,18 +16,13 @@ namespace Zeus.Web.Mvc
     /// </summary>
     public class ContentRoute : Route
     {
-        public const string ContentItemKey = "item";
-        public const string ContentItemIdKey = "id";
-        public const string ContentEngineKey = "engine";
-        public const string ContentUrlKey = "url";
-        public const string ControllerKey = "controller";
         public const string ActionKey = "action";
         public const string AreaKey = "area";
-
-        readonly ContentEngine engine;
-        readonly IRouteHandler routeHandler;
-        readonly IControllerMapper controllerMapper;
-        private readonly AdminSection _adminSection;
+        public const string ContentEngineKey = "engine";
+        public const string ContentItemIdKey = "id";
+        public const string ContentItemKey = "item";
+        public const string ContentUrlKey = "url";
+        public const string ControllerKey = "controller";
 
         public ContentRoute(ContentEngine engine)
             : this(engine, new MvcRouteHandler())
@@ -58,12 +53,10 @@ namespace Zeus.Web.Mvc
                 return null;
 
             return GetRouteDataForPath(httpContext.Request);
-            
         }
 
         public RouteData GetRouteDataForPath(HttpRequestBase request)
         {
-
             PathData td = engine.UrlParser.ResolvePath(request.Url.ToString());
 
             string extraParam = "";
@@ -88,7 +81,7 @@ namespace Zeus.Web.Mvc
                 string thePathWithOutLastParam = new Uri(thePath.AbsoluteUri.Remove(thePath.AbsoluteUri.Length - (thePath.Segments.Last().Length + 1))).PathAndQuery;
                 td = engine.UrlParser.ResolvePath(thePathWithOutLastParam);
 
-                //check to see if the content item has been and is a page and if so, if it allows the Index(Param) option                        
+                //check to see if the content item has been and is a page and if so, if it allows the Index(Param) option
                 if (!td.Is404 && td.CurrentItem != null && td.CurrentItem as PageContentItem != null && (td.CurrentItem as PageContentItem).AllowParamsOnIndex)
                 {
                     extraParam = thePath.Segments.Last();
@@ -129,16 +122,19 @@ namespace Zeus.Web.Mvc
             if (controllerName == null)
                 return null;
 
+            string areaName = controllerMapper.GetAreaName(item.GetType());
+
             var data = new RouteData(this, routeHandler);
             data.Values[ContentItemKey] = item;
             data.Values[ContentEngineKey] = engine;
             data.Values[ControllerKey] = controllerName;
             data.Values[ActionKey] = action;
-            data.Values[AreaKey] = controllerMapper.GetAreaName(item.GetType());
+            data.Values[AreaKey] = areaName;
             if (!string.IsNullOrEmpty(extraParam))
                 data.Values["param"] = extraParam;
+            // trigger ASP.net areas
+            data.DataTokens["area"] = areaName;
             return data;
-
         }
 
         public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
@@ -181,5 +177,10 @@ namespace Zeus.Web.Mvc
 
             return pathData;
         }
+
+        private readonly AdminSection _adminSection;
+        private readonly IControllerMapper controllerMapper;
+        private readonly ContentEngine engine;
+        private readonly IRouteHandler routeHandler;
     }
 }
