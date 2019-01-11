@@ -6,6 +6,7 @@ using System.Text;
 using System.Collections.Generic;
 using Zeus.Configuration;
 using Zeus.Web;
+using FluentNHibernate.Cfg;
 
 namespace Zeus.Persistence.NH
 {
@@ -39,21 +40,23 @@ namespace Zeus.Persistence.NH
 
             var configuration = MsSqlConfiguration.MsSql2008
                 .ConnectionString(c => c.FromConnectionStringWithKey(databaseSectionConfig.ConnectionStringName));
-				//.Cache(c => c.ProviderClass(databaseSectionConfig.CacheProviderClass));
-
-			//if (databaseSectionConfig.CacheEnabled)
-			//	configuration = configuration.Cache(c => c.UseQueryCache());
 
 			IDictionary<string, string> properties = configuration.ToProperties();
-			properties["cache.use_second_level_cache"] = databaseSectionConfig.CacheEnabled.ToString();
-			properties["connection.connection_string_name"] = databaseSectionConfig.ConnectionStringName;
+			properties[NHibernate.Cfg.Environment.ConnectionStringName] = databaseSectionConfig.ConnectionStringName;
+            properties[NHibernate.Cfg.Environment.CacheProvider] = databaseSectionConfig.CacheProviderClass;
 
-			//ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
-			//persistenceModel.Mappings.(DefaultLazy.AlwaysTrue());
+            if (databaseSectionConfig.CacheEnabled)
+            {
+                properties[NHibernate.Cfg.Environment.UseQueryCache] = "true";
+                properties[NHibernate.Cfg.Environment.UseSecondLevelCache] = "true";
+            }
 
-			_configuration = new NHibernate.Cfg.Configuration().AddProperties(properties);
+            //ZeusPersistenceModel persistenceModel = new ZeusPersistenceModel();
+            //persistenceModel.Mappings.(DefaultLazy.AlwaysTrue());
 
-			AddMapping(_configuration, "Zeus.Persistence.NH.Mappings.Default.hbm.xml");
+            _configuration = new NHibernate.Cfg.Configuration().AddProperties(properties);
+
+            AddMapping(_configuration, "Zeus.Persistence.NH.Mappings.Default.hbm.xml");
 			//_configuration.AddAssembly(Assembly.GetExecutingAssembly());
 
 			//persistenceModel.Configure(_configuration);

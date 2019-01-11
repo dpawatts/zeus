@@ -18,6 +18,7 @@ namespace Zeus.Web.Mvc.ViewModels
 	{
         public ViewModel(T currentItem)
 		{
+            CurrentItem = currentItem;
             Initialise();
 
             if (currentItem == null)
@@ -43,8 +44,6 @@ namespace Zeus.Web.Mvc.ViewModels
                         _allDataSignals.Add(currentItem.CacheID, _allDataSignal);
                 }
 
-                CurrentItem = currentItem;
-
                 //fire changed signal if needed
                 ChangeSignalFired = false;
 
@@ -54,16 +53,16 @@ namespace Zeus.Web.Mvc.ViewModels
                 {
                     foreach (ContentItem ci in CacheWatchers)
                     {
-                        var WatcherSessionVal = System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.CacheID + "_" + ci.ID];
+                        var WatcherSessionVal = System.Web.HttpContext.Current.Cache["zeusWatchChange_" + ActionForCache + "_" + currentItem.CacheID + "_" + ci.ID];
                         if ((WatcherSessionVal == null) || (WatcherSessionVal != null && (System.DateTime)WatcherSessionVal != ci.Updated))
                         {
-                            System.Web.HttpContext.Current.Application["zeusWatchChange_" + ActionForCache + "_" + currentItem.CacheID + "_" + ci.ID] = ci.Updated;
+                            System.Web.HttpContext.Current.Cache["zeusWatchChange_" + ActionForCache + "_" + currentItem.CacheID + "_" + ci.ID] = ci.Updated;
                             bWatcherChanged = true;
                         }
                     }
                 }
 
-                var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.CacheID];
+                var SessionVal = System.Web.HttpContext.Current.Cache["zeusChange_" + ActionForCache + "_" + currentItem.CacheID];
                 
                 //check itself
                 bool itemChanged = false;
@@ -76,7 +75,7 @@ namespace Zeus.Web.Mvc.ViewModels
                     ChangeSignalFired = true;
                     
                     if (itemChanged)
-                        System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + currentItem.CacheID] = currentItem.Updated;
+                        System.Web.HttpContext.Current.Cache["zeusChange_" + ActionForCache + "_" + currentItem.CacheID] = currentItem.Updated;
                 }
             }
 		}
@@ -125,14 +124,14 @@ namespace Zeus.Web.Mvc.ViewModels
                 res = new CacheSignal();
                 
                 //check itself
-                var SessionVal = System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID];
+                var SessionVal = System.Web.HttpContext.Current.Cache["zeusChange_" + ActionForCache + "_" + item.CacheID];
                 bool itemChanged = (SessionVal == null) || (SessionVal != null && (System.DateTime)SessionVal != item.Updated);
                 if (itemChanged)
                 {
                     res.FireChanged();
                     
                     if (itemChanged)
-                        System.Web.HttpContext.Current.Application["zeusChange_" + ActionForCache + "_" + item.CacheID] = item.Updated;
+                        System.Web.HttpContext.Current.Cache["zeusChange_" + ActionForCache + "_" + item.CacheID] = item.Updated;
                 }
             }
             return res;

@@ -243,7 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zeus.Admin\Zeus.Admin.csproj">
-      <Project>{0DD839BB-FC9C-4F5B-8AD3-6A9B8B05A2EF}</Project>
+      <Project>{0dd839bb-fc9c-4f5b-8ad3-6a9b8b05a2ef}</Project>
       <Name>Zeus.Admin</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.BaseLibrary\Zeus.BaseLibrary.csproj">
@@ -251,7 +251,7 @@
       <Name>Zeus.BaseLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus.Templates\Zeus.Templates.csproj">
-      <Project>{EE13987B-E700-4CC6-9AF8-0BE51FD89A0C}</Project>
+      <Project>{ee13987b-e700-4cc6-9af8-0be51fd89a0c}</Project>
       <Name>Zeus.Templates</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zeus\Zeus.csproj">
