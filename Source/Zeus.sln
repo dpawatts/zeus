@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9293D83E-48A0-4A7D-9FC2-0F3F191CFEB9}"
 EndProject
@@ -292,16 +292,19 @@ Global
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Debug|x64.ActiveCfg = Debug|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Debug|x64.Build.0 = Debug|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Debug|x86.Build.0 = Debug|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|Any CPU.ActiveCfg = Debug|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|Any CPU.Build.0 = Debug|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|x64.ActiveCfg = Debug|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|x64.Build.0 = Debug|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|x86.ActiveCfg = Debug|Any CPU
+		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Documentation|x86.Build.0 = Debug|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|x64.ActiveCfg = Release|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|x64.Build.0 = Release|x64
 		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|x86.ActiveCfg = Release|Any CPU
+		{730D671D-33B8-4BF5-80B4-729E0965EACA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -322,6 +325,9 @@ Global
 		{87A31BEF-E24C-4B85-BF83-7428EDE9C03B} = {9293D83E-48A0-4A7D-9FC2-0F3F191CFEB9}
 		{34EDBA77-B394-419F-9A68-05EA97DA9F98} = {2609146F-D8B6-43C5-8AAD-CAF08CE85B18}
 		{730D671D-33B8-4BF5-80B4-729E0965EACA} = {4FFD8740-F10F-453F-97FD-DAE6C34FF0CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9197B30-00AB-4821-B879-1B0ECD631E8A}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Zeus.vsmdi

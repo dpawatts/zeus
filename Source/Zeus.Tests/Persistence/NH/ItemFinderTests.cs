@@ -27,7 +27,7 @@ namespace Zeus.Tests.Persistence.NH
                 new AttributeExplorer<IContentProperty>(), new AttributeExplorer<IEditorContainer>());
             IItemNotifier itemNotifier = new ItemNotifier();
 			IContentTypeManager contentTypeManager = new ContentTypeManager(contentTypeBuilder, itemNotifier);
-			IConfigurationBuilder configurationBuilder = new ConfigurationBuilder(contentTypeManager, ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
+			IConfigurationBuilder configurationBuilder = new Zeus.Persistence.NH.ConfigurationBuilder(contentTypeManager, ConfigurationManager.GetSection("zeus/database") as DatabaseSection);
 			ISessionProvider sessionProvider = new SessionProvider(configurationBuilder, new NotifyingInterceptor(new ItemNotifier()), new ThreadContext());
 
 			/*var results = itemFinder.Find<NewsContainer>(

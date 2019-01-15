@@ -35,7 +35,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 		public void PrependTest()
 		{
 			var ints = new[] { 1, 2, 3 };
-			var zeroToThree = ints.Prepend(0);
+			IEnumerable<int> zeroToThree = ints.Prepend(0);
 			CollectionAssert.AreEqual(new[] { 0, 1, 2, 3 }, zeroToThree.ToArray());
 		}
 	}

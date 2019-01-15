@@ -13,15 +13,15 @@ namespace Zeus.Templates
 		public override void Load()
 		{
 			Bind<BBCodeService>().ToSelf();
-			Bind<ITagService>().To<TagService>();
-			Bind<IUserRegistrationService>().To<UserRegistrationService>();
+			Bind<ITagService, TagService>();
+			Bind<IUserRegistrationService, UserRegistrationService>();
 
 			TemplatesSection configSection = ConfigurationManager.GetSection("zeus/templates") as TemplatesSection;
 			if (configSection != null)
 				Bind(typeof(TemplatesSection)).ToConstant(configSection);
 
 			if (configSection == null || configSection.MailConfiguration == MailConfigSource.SystemNet)
-				Bind<IMailSender>().To<MailSender>();
+				Bind<IMailSender, MailSender>();
 			else
 				Bind<IMailSender>().To<FakeMailSender>();
 

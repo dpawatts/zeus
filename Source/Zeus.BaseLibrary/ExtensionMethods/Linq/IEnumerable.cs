@@ -192,25 +192,7 @@ namespace Zeus.BaseLibrary.ExtensionMethods.Linq
 					yield return e2.Current;
 				}
 		}
-
-		public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> source, TSource element)
-		{
-			using (IEnumerator<TSource> e1 = source.GetEnumerator())
-				while (e1.MoveNext())
-					yield return e1.Current;
-
-			yield return element;
-		}
-
-		public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> source, TSource element)
-		{
-			yield return element;
-
-			using (IEnumerator<TSource> e1 = source.GetEnumerator())
-				while (e1.MoveNext())
-					yield return e1.Current;
-		}
-
+			   
 		public static IEnumerable<SelectListItem> ToSelectListItems<TSource>(this IEnumerable<TSource> source, object defaultValue)
 			where TSource : IEquatable<TSource>
 		{

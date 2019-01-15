@@ -56,7 +56,7 @@ namespace Zeus.BaseLibrary.DependencyInjection
 				// won't get loaded again.
 				_kernel.Load(FindAssemblies(files.Where(s => !Path.GetFileName(s).StartsWith("Zeus."))));
 			}
-			catch (TypeLoadException)
+			catch (TypeLoadException ex)
 			{
 				
 			}
