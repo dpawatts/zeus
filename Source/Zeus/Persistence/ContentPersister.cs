@@ -156,6 +156,11 @@ namespace Zeus.Persistence
 			return _contentRepository.Get<T>(id);
 		}
 
+		public T Get<T>(Func<T, bool> condition) where T : ContentItem
+		{
+			return _contentRepository.Get(condition);
+		}
+
 		public ContentItem Load(int id)
 		{
 			return _contentRepository.Load(id);

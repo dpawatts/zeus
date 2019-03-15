@@ -135,11 +135,27 @@ namespace Zeus.Web.Security
 			return users == null ? null : users.GetChildren().Cast<User>();
 		}
 
+		/// <summary>
+		/// A more efficient method to retrieve users
+		/// </summary>
+		/// <param name="username">Username to look up</param>
+		/// <returns>User</returns>
+		public User Get(string username)
+		{
+			if (string.IsNullOrWhiteSpace(username))
+			{
+				return null;
+			}
+			var user = _persister.Get<User>(x => x.Name == username);
+			return user;
+		}
+
 		private User GetUser(string username)
 		{
 			UserContainer users = GetUserContainer(false);
 			if (users == null)
 				return null;
+
 			return users.GetChild(username) as User;
 		}
 

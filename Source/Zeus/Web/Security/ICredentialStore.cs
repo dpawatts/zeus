@@ -11,6 +11,7 @@ namespace Zeus.Web.Security
 		IEnumerable<User> GetAllUsers();
 		User GetUser(string username);
 		User GetUserByNonce(string nonce);
+		User Get(string username);
 		void SaveNonce(User user, string nonce);
 		void VerifyUser(User user);
 		PasswordResetRequest GetPasswordResetRequestByNonce(string nonce);

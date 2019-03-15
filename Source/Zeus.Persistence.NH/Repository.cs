@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using NHibernate.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Zeus.Persistence.NH
 {
 	public class Repository<TKey, TEntity> : IRepository<TKey, TEntity>
@@ -28,6 +32,11 @@ namespace Zeus.Persistence.NH
 		public TEntity Get(TKey id)
 		{
 			return _sessionProvider.OpenSession.Session.Get<TEntity>(id);
+		}
+
+		public T Get<T>(Func<T, bool> condition) where T: TEntity
+		{
+			return _sessionProvider.OpenSession.Session.Query<T>().FirstOrDefault(condition);
 		}
 
 		public T Get<T>(TKey id)
