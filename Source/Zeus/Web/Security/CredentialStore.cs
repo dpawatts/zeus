@@ -146,7 +146,7 @@ namespace Zeus.Web.Security
 			{
 				return null;
 			}
-			var user = _persister.Get<User>(x => x.Name == username);
+			var user = _persister.Get<User>(x => string.Equals(x.Name, username, StringComparison.InvariantCultureIgnoreCase));
 			return user;
 		}
 
