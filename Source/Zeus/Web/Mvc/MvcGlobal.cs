@@ -22,8 +22,6 @@ namespace Zeus.Web.Mvc
 
         protected override void OnApplicationStart(EventArgs e)
         {
-            base.OnApplicationStart(e);
-            
             // Create and initialize Zeus engine.
             ContentEngine engine = Zeus.Context.Initialize(false);
 
@@ -53,6 +51,8 @@ namespace Zeus.Web.Mvc
 
             // Use a custom model metadata provider.
             ModelMetadataProviders.Current = new CustomDataAnnotationsModelMetadataProvider();
+
+            base.OnApplicationStart(e);
         }
 
         private static void RegisterFallbackRoute(RouteCollection routes)
