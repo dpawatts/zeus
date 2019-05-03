@@ -36,7 +36,7 @@ namespace Zeus.BaseLibrary.DependencyInjection
 				{
 					if (initializableInterfaceType.IsAssignableFrom(binding.Service) || startableInterfaceType.IsAssignableFrom(binding.Service))
 					{
-						this.Get(binding.Service); // Force creation.
+						this.GetAll(binding.Service); // Force creation.
 					}
 				}
 			}
@@ -182,7 +182,7 @@ namespace Zeus.BaseLibrary.DependencyInjection
 
 		public TService Get<TService>()
 		{
-			return _kernel.Get<TService>();
+			return _kernel.GetAll<TService>().First();
 		}
 
 		public IEnumerable<TService> GetAll<TService>()
