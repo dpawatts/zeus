@@ -12,6 +12,10 @@ using System.Web.Hosting;
 
 namespace Zeus.BaseLibrary.Reflection
 {
+	/// <summary>
+	/// Loads assemblies from disk and caches them
+	/// </summary>
+	/// <remarks>Purloined shamelessly from https://github.com/umbraco/Umbraco-CMS/blob/v8/dev/src/Umbraco.Core/Composing/TypeFinder.cs</remarks>
 	public class AssemblyFinder : IAssemblyFinder
 	{
 		private static volatile HashSet<Assembly> _localFilteredAssemblyCache;

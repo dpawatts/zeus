@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web;
 using Ninject;
 using Ninject.Planning.Bindings;
+using Zeus.BaseLibrary.Reflection;
 
 namespace Zeus.BaseLibrary.DependencyInjection
 {
@@ -19,7 +20,6 @@ namespace Zeus.BaseLibrary.DependencyInjection
 
 			public InitializableKernel()
 			{
-				
 			}
 
 			public override void AddBinding(IBinding binding)
@@ -33,8 +33,12 @@ namespace Zeus.BaseLibrary.DependencyInjection
 				Type initializableInterfaceType = typeof(IInitializable);
 				Type startableInterfaceType = typeof(IStartable);
 				foreach (IBinding binding in _bindings)
+				{
 					if (initializableInterfaceType.IsAssignableFrom(binding.Service) || startableInterfaceType.IsAssignableFrom(binding.Service))
+					{
 						this.Get(binding.Service); // Force creation.
+					}
+				}
 			}
 		}
 
@@ -45,20 +49,41 @@ namespace Zeus.BaseLibrary.DependencyInjection
 			try
 			{
 				// Get all DLLS in bin folder.
-				IEnumerable<string> files = Directory.GetFiles(GetBinDirectory(), "*.dll");
-                //IEnumerable<string> files = Directory.GetFiles(Path.GetDirectoryName(GetType().Assembly.Location), "*.dll");
-                
-                // Load modules in Zeus DLLs first.
-                _kernel.Load(FindAssemblies(files.Where(s => Path.GetFileName(s).StartsWith("Zeus."))));
+				//IEnumerable<string> files = Directory.GetFiles(GetBinDirectory(), "*.dll");
+				//IEnumerable<string> files = Directory.GetFiles(Path.GetDirectoryName(GetType().Assembly.Location), "*.dll");
+
+				// Load modules in Zeus DLLs first.
+				//_kernel.Load(FindAssemblies(files.Where(s => Path.GetFileName(s).StartsWith("Zeus."))));
 
 				// Then load non-Zeus DLLs - this gives projects a chance to override Zeus modules.
 				// Actually we just load all DLLs, because DLLs that have already been loaded
 				// won't get loaded again.
-				_kernel.Load(FindAssemblies(files.Where(s => !Path.GetFileName(s).StartsWith("Zeus."))));
+				//_kernel.Load(FindAssemblies(files.Where(s => !Path.GetFileName(s).StartsWith("Zeus."))));
+
+				var assemblies = AssemblyFinder.GetAssembliesWithKnownExclusions(null).ToList();
+				var zeusAssemblies = new HashSet<Assembly>();
+				var nonZeusAssemblies = new HashSet<Assembly>();
+
+				for(var i = 0; i < assemblies.Count; i++)
+				{
+					var assembly = assemblies[i];
+					if (assembly.FullName.StartsWith("Zeus.", StringComparison.OrdinalIgnoreCase))
+					{
+						zeusAssemblies.Add(assembly);
+					}
+					else
+					{
+						nonZeusAssemblies.Add(assembly);
+					}
+				}
+
+				// load zeus assemblies
+				_kernel.Load(zeusAssemblies);
+				// load non-zeus
+				_kernel.Load(nonZeusAssemblies);
 			}
-			catch (TypeLoadException ex)
+			catch (TypeLoadException)
 			{
-				
 			}
 		}
 
