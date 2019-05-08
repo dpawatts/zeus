@@ -98,6 +98,32 @@ namespace Zeus.Security
 			set { SetDetail("LastPasswordChangedDate", value, Published.Value); }
 		}
 
+		[ContentProperty("Last Password Changed Date", 166)]
+		public virtual int LoginFailureCounter
+		{
+			get
+			{
+				return (int)GetDetail("LoginFailureCounter", 0);
+			}
+			set
+			{
+				SetDetail("LoginFailureCounter", value, 0);
+			}
+		}
+
+		[ContentProperty("Is Account Locked", 168)]
+		public virtual bool AccountLocked
+		{
+			get
+			{
+				return (bool)GetDetail("AccountLocked", false);
+			}
+			set
+			{
+				SetDetail("AccountLocked", value, false);
+			}
+		}
+
 		public override string IconUrl
 		{
 			get { return Utility.GetCooliteIconUrl(Icon.User); }
