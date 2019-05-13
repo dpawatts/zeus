@@ -131,6 +131,18 @@ namespace Zeus.AddIns.ECommerce.ContentTypes.Data
             set { SetDetail("TotalVatPrice", value); }
         }
 
+        public virtual decimal DiscountAmount
+        {
+            get { return GetDetail("DiscountAmount", 0m); }
+            set { SetDetail("DiscountAmount", value); }
+        }
+
+        public virtual string DiscountDescription
+        {
+            get { return GetDetail("DiscountDescription", default(string)); }
+            set { SetDetail("DiscountDescription", value); }
+        }
+
 		public decimal TotalPrice
 		{
             get { return GetDetail("TotalPrice", 0m); }

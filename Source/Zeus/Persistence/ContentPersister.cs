@@ -61,9 +61,6 @@ namespace Zeus.Persistence
 		/// <summary>Occurs when an item has been copied</summary>
 		public event EventHandler<DestinationEventArgs> ItemCopied;
 
-		/// <summary>Occurs when an item is loaded</summary>
-		public event EventHandler<ItemEventArgs> ItemLoaded;
-
 		#endregion
 
 		#region Methods
@@ -159,6 +156,11 @@ namespace Zeus.Persistence
 			return _contentRepository.Get<T>(id);
 		}
 
+		public T Get<T>(Func<T, bool> condition) where T : ContentItem
+		{
+			return _contentRepository.Get(condition);
+		}
+
 		public ContentItem Load(int id)
 		{
 			return _contentRepository.Load(id);
@@ -203,7 +205,7 @@ namespace Zeus.Persistence
 
 			foreach (ContentItem item in siblings)
 				Save(item);
-		}
+        }
 
 		public void Save(ContentItem unsavedItem)
 		{
@@ -224,16 +226,26 @@ namespace Zeus.Persistence
                 {
                     _contentRepository.SaveOrUpdate(contentItem);
                     contentItem.AddTo(contentItem.Parent);
-                    EnsureSortOrder(contentItem);
+                    EnsureSortOrder(contentItem);                    
                     transaction.Commit();
                 }
             }
 			Invoke(ItemSaved, new ItemEventArgs(contentItem));
 		}
 
+        public void SetUpdatedToNow(ContentItem contentItem)
+        {
+            contentItem.Updated = DateTime.Now;
+            using (ITransaction transaction = _contentRepository.BeginTransaction())
+            {
+                _contentRepository.SaveOrUpdate(contentItem);
+                transaction.Commit();
+            }
+        }
+
 		private void EnsureSortOrder(ContentItem unsavedItem)
 		{
-			if (unsavedItem.Parent != null)
+			if (unsavedItem.Parent != null && !unsavedItem.Parent.IgnoreOrderOnSave)
 			{
 				IEnumerable<ContentItem> updatedItems = Utility.UpdateSortOrder(unsavedItem.Parent.Children);
 				foreach (ContentItem updatedItem in updatedItems)

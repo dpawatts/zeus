@@ -41,7 +41,7 @@
 											</tpl>
 										</Html>
 									</Template>
-									<PrepareData Fn="function(data) { return fileManager.formatData(data); }" />
+									<PrepareData Fn="function(data) { return Ext.ux.zeus.FileManager.formatData(data); }" />
 									<Listeners>
 										<BeforeSelect Handler="return this.store.getRange().length > 0;" />
 										<DblClick Handler="fileManager.doCallback();" />
@@ -69,11 +69,10 @@
 </ext:Window>
 
 <script type="text/javascript">
-	var currentNode, fileManager, imageChooserView;
-	Ext.onReady(function()
-	{
+	var currentNode, fileManager;
+	Ext.onReady(function () {
 		var imageChooser = Ext.getCmp("<%= imageChooser.ClientID %>");
-		imageChooserView = Ext.getCmp("<%= imageChooserView.ClientID %>");
+		var imageChooserView = Ext.getCmp("<%= imageChooserView.ClientID %>");
 		var treePanel = Ext.getCmp("<%= treePanel.ClientID %>");
 
 		fileManager = new Ext.ux.zeus.FileManager(imageChooser, imageChooserView, treePanel);

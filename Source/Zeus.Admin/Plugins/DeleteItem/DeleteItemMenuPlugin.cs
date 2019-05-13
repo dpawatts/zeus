@@ -40,7 +40,7 @@ namespace Zeus.Admin.Plugins.DeleteItem
 				{{
 					Ext.net.DirectMethods.Delete.ShowDialog('Delete Item',
 						'<b>Are you sure you wish to delete this item?</b><br /><img src=\'{0}\' /> {1}',
-						{2}, {{ url : '{3}' }});
+						'{2}', {{ url : '{3}' }});
 				}}",
 				contentItem.IconUrl, contentItem.Title.Replace("'", "\\'"), contentItem.ID,
 				Context.AdminManager.GetAdminDefaultUrl());

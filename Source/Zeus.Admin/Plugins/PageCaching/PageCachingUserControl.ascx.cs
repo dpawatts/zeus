@@ -48,7 +48,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 			Button btnSave = new Button { Text = @"Save" };
 			window.Buttons.Add(btnSave);
 			btnSave.Listeners.Click.Handler = string.Format(
-				"stbStatusBar.showBusy(); Ext.net.DirectMethods.PageCaching.SavePageCachingSettings({0}, Ext.getCmp('{1}').getValue(), Ext.getCmp('{2}').getValue(), {{ url: '{4}', success: function() {{ stbStatusBar.setStatus({{ text: 'Saved page caching settings', iconCls: '', clear: true }}); }} }}); {3}.close();",
+				"stbStatusBar.showBusy(); Ext.net.DirectMethods.PageCaching.SavePageCachingSettings('{0}', Ext.getCmp('{1}').getValue(), Ext.getCmp('{2}').getValue(), {{ url: '{4}', success: function() {{ stbStatusBar.setStatus({{ text: 'Saved page caching settings', iconCls: '', clear: true }}); }} }}); {3}.close();",
 				id, chkEnableCache.ClientID, tmeCacheDuration.ClientID, window.ClientID, Engine.AdminManager.GetAdminDefaultUrl());
 
 			Button btnCancel = new Button { Text = @"Cancel" };

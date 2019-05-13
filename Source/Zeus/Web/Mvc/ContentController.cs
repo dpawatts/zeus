@@ -149,38 +149,44 @@ namespace Zeus.Web.Mvc
 			{
 				HttpContextBase httpContext = controllerContext.HttpContext;
 
+                Dictionary<string, object> tempDataDictionary = null;
+                //let these through, non dangerous and stops bots throwing 100s of errors
 				if (httpContext.Session == null)
 				{
-					throw new InvalidOperationException("Session state appears to be disabled.");
+					//throw new InvalidOperationException("Session state appears to be disabled.");
+                    return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 				}
-
-				var tempDataDictionary = (httpContext.Session[TempDataSessionStateKey]
+                else
+                {
+                    tempDataDictionary = (httpContext.Session[TempDataSessionStateKey]
 																	?? httpContext.Items[TempDataSessionStateKey])
 																 as Dictionary<string, object>;
 
-				if (tempDataDictionary == null)
-				{
-					return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-				}
+				    if (tempDataDictionary == null)
+				    {
+					    return new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+				    }
 
-				// If we got it from Session, remove it so that no other request gets it
-				httpContext.Session.Remove(TempDataSessionStateKey);
-				// Cache the data in the HttpContext Items to keep available for the rest of the request
-				httpContext.Items[TempDataSessionStateKey] = tempDataDictionary;
+				    // If we got it from Session, remove it so that no other request gets it
+				    httpContext.Session.Remove(TempDataSessionStateKey);
+				    // Cache the data in the HttpContext Items to keep available for the rest of the request
+				    httpContext.Items[TempDataSessionStateKey] = tempDataDictionary;
 
-				return tempDataDictionary;
+				    return tempDataDictionary;
+                }
 			}
 
 			public void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
 			{
 				HttpContextBase httpContext = controllerContext.HttpContext;
 
-				if (httpContext.Session == null)
-				{
-					throw new InvalidOperationException("Session state appears to be disabled.");
-				}
-
-				httpContext.Session[TempDataSessionStateKey] = values;
+                //let these through, non dangerous and stops bots throwing 100s of errors
+                if (httpContext.Session == null)
+                {
+                //    throw new InvalidOperationException("Session state appears to be disabled.  User Agent was " + httpContext.Request.UserAgent);
+                }
+                else
+                    httpContext.Session[TempDataSessionStateKey] = values;
 			}
 
 			#endregion

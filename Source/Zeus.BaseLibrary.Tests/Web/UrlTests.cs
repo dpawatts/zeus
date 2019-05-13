@@ -1,12 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.Web;
 
 namespace Zeus.BaseLibrary.Tests.Web
 {
-	[TestClass]
+	[TestFixture]
 	public class UrlTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanParse_Url()
 		{
 			Url url = new Url("http://localhost/my/path/to/the/file.aspx?query=nothing#fragment");

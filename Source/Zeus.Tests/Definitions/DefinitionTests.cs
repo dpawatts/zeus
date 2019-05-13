@@ -1,26 +1,34 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using Zeus.BaseLibrary.Reflection;
 using Zeus.Engine;
+using Zeus.Persistence;
 using Zeus.Tests.Definitions.Items;
 using Zeus.ContentTypes;
 
 namespace Zeus.Tests.Definitions
 {
-	[TestClass]
+	[TestFixture]
 	public class DefinitionTests
 	{
 		private ContentTypeManager _definitionManager;
 
-		[TestInitialize]
+		[SetUp]
 		public void SetUp()
 		{
 			IAssemblyFinder assemblyFinder = new AssemblyFinder();
 			ITypeFinder typeFinder = new TypeFinder(assemblyFinder);
-			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(typeFinder, null, null, null, null, null);
-			_definitionManager = new ContentTypeManager(contentTypeBuilder, null);
+			ContentTypeBuilder contentTypeBuilder = new ContentTypeBuilder(
+                typeFinder,
+                new EditableHierarchyBuilder<Design.Editors.IEditor>(),
+                new AttributeExplorer<Design.Displayers.IDisplayer>(),
+                new AttributeExplorer<Design.Editors.IEditor>(),
+                new AttributeExplorer<ContentProperties.IContentProperty>(),
+                new AttributeExplorer<IEditorContainer>()
+             );
+			_definitionManager = new ContentTypeManager(contentTypeBuilder, new ItemNotifier());
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanCreateNewItemInstance()
 		{
 			TestTextPage item = _definitionManager.CreateInstance<TestTextPage>(null);

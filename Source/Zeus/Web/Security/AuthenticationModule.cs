@@ -103,7 +103,7 @@ namespace Zeus.Web.Security
 			User membershipUser = null;
 			try
 			{
-				membershipUser = WebSecurityEngine.Get<ICredentialService>().GetUser(ticket.Name);	
+				membershipUser = WebSecurityEngine.Get<ICredentialService>().GetUserFast(ticket.Name);
 			}
 			catch
 			{
@@ -114,14 +114,18 @@ namespace Zeus.Web.Security
 			e.Context.User = new WebPrincipal(membershipUser, ticket);
 
 			if (ticket == tOld)
+			{
 				return;
+			}
 
 			HttpCookie cookie = null;
 			if (!ticket.CookiePath.Equals("/"))
 			{
 				cookie = e.Context.Request.Cookies[CurrentAuthenticationService.Config.Name];
 				if (cookie != null)
+				{
 					cookie.Path = ticket.CookiePath;
+				}
 			}
 
 			CurrentAuthenticationService.CreateOrUpdateCookieFromTicket(ticket, cookie);

@@ -10,6 +10,7 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		int TotalItemCount { get; }
 		decimal SubTotalPrice { get; }
+        decimal SubTotalPricePostDiscount { get; }
         decimal TotalDeliveryPrice { get; set; }
         decimal TotalVatPrice { get; set; }
         decimal TotalPrice { get; set; }
@@ -22,6 +23,9 @@ namespace Zeus.AddIns.ECommerce.Services
 
 		string EmailAddress { get; set; }
 		string TelephoneNumber { get; set; }
-		string MobileTelephoneNumber { get; set; }
+        string MobileTelephoneNumber { get; set; }
+
+        Discount Discount { get; set; }
+        bool DiscountApplied { get; }
 	}
 }

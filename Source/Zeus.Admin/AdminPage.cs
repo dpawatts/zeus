@@ -8,6 +8,8 @@ using Zeus.Configuration;
 using Zeus.Globalization;
 using Zeus.Globalization.ContentTypes;
 using Zeus.Web;
+using Zeus.Web.Hosting;
+using Zeus;
 
 namespace Zeus.Admin
 {
@@ -55,10 +57,16 @@ jQuery(document).ready(function() {{
 		{
 			get
 			{
-				ContentItem selectedItem = GetFromViewState()
-					?? GetFromUrl()
-					?? Zeus.Context.UrlParser.StartPage;
-				return selectedItem;
+                ContentItem selectedItem = GetFromViewState()
+                    ?? GetFromUrl();
+                
+                //added code to stop the start page being returned if the url accessed is tampered with or data changed during edit, else home page was getting edited!!
+                if (selectedItem == null && !string.IsNullOrEmpty(Request["selected"]))
+                    throw new Exception("Url Doesn't Exist!! Content Item has been moved or changed");
+                else if (selectedItem == null)
+                    selectedItem = Zeus.Context.UrlParser.StartPage;
+                
+                return selectedItem;
 			}
 			set
 			{
@@ -100,7 +108,41 @@ jQuery(document).ready(function() {{
 			return Request["returnUrl"] ?? (SelectedItem.VersionOf ?? SelectedNode).PreviewUrl;
 		}
 
-		public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)
+        public void RefreshNavigationPanel(ContentItem contentItem)
+        {
+            string script = string.Format(@"
+            jQuery(document).ready(function() {{
+	            if (window.top.zeus) {{
+		            window.top.zeus.refreshNavigation('{0}');
+                }}
+            }});", contentItem.ID);
+
+            if (ExtNet.IsAjaxRequest)
+                ExtNet.ResourceManager.RegisterOnReadyScript(script);
+            else
+                ClientScript.RegisterStartupScript(
+                    typeof(AdminPage),
+                    "AddRefreshEditPreviewScript",
+                    script, true);
+        }
+
+        public void RefreshEditPanel(ContentItem contentItem)
+        {
+            string script = string.Format(@"
+            jQuery(document).ready(function() {{
+	            top.zeus.reloadContentPanel('Edit', '{0}');
+            }});", GetEditUrl(contentItem));
+
+            if (ExtNet.IsAjaxRequest)
+                ExtNet.ResourceManager.RegisterOnReadyScript(script);
+            else
+                ClientScript.RegisterStartupScript(
+                    typeof(AdminPage),
+                    "AddRefreshEditContentScript",
+                    script, true);
+        }
+
+        public void Refresh(ContentItem contentItem, AdminFrame frame, bool insideUpdatePanel)
 		{
 			Refresh(contentItem, frame, insideUpdatePanel, GetPreviewUrl(contentItem));
 		}
@@ -144,6 +186,15 @@ jQuery(document).ready(function() {{
 					"AddRefreshEditScript",
 					script, true);
 		}
+
+        protected virtual string GetEditUrl(ContentItem contentItem)
+        {
+            IAdminAssemblyManager adminAssembly = Zeus.Context.Current.Resolve<IAdminAssemblyManager>();
+            return Zeus.Context.Current.Resolve<IEmbeddedResourceManager>().GetServerResourceUrl(
+                adminAssembly.Assembly,
+                "Zeus.Admin.Plugins.EditItem.Default.aspx"
+            ) + "?selected=" + contentItem.Path;
+        }
 
 		protected virtual string GetPreviewUrl(ContentItem selectedItem)
 		{

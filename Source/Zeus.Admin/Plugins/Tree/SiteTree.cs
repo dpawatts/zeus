@@ -12,7 +12,7 @@ namespace Zeus.Admin.Plugins.Tree
 	{
 		private readonly HierarchyBuilder _treeBuilder;
 		private Func<IEnumerable<ContentItem>, IEnumerable<ContentItem>> _filter;
-		private bool _excludeRoot, _forceSync;
+		private bool _excludeRoot;
 
 		public SiteTree(HierarchyBuilder treeBuilder)
 		{
@@ -48,7 +48,6 @@ namespace Zeus.Admin.Plugins.Tree
 
 		public SiteTree ForceSync()
 		{
-			_forceSync = true;
 			return this;
 		}
 
@@ -127,13 +126,15 @@ namespace Zeus.Admin.Plugins.Tree
 				foreach (string folderGroup in folderGroups)
 				{
                     uniqueCount += 100000;
-					TreeNode folderNode = new TreeNode
-					{
-						Text = folderGroup,
-						IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
-						Cls = "zeus-tree-node",
-						Expanded = false,
-                        NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()
+                    TreeNode folderNode = new TreeNode
+                    {
+                        Text = folderGroup,
+                        IconFile = Utility.GetCooliteIconUrl(Icon.FolderGo),
+                        Cls = "zeus-tree-node disable-context",
+                        Expanded = false,
+                        // TODO: Check why this was necessary
+                        //NodeID = (-1 * (Int32.Parse(node.NodeID) + uniqueCount)).ToString()
+                        NodeID = node.NodeID + uniqueCount
 					};
 
 					((TreeNode) node).Nodes.Add(folderNode);

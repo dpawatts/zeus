@@ -5,6 +5,8 @@ using System.Net;
 using System.Text;
 using Zeus.AddIns.ECommerce.PaymentGateways.SagePay.Configuration;
 using Zeus.BaseLibrary.ExtensionMethods;
+using Zeus.BaseLibrary.ExtensionMethods.Collections;
+using System.Linq;
 
 namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 {
@@ -13,7 +15,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 	/// </summary>
 	public class SagePayPaymentGateway : IPaymentGateway
 	{
-		private readonly string _vpsProtocol, _vendorName, _currency, _purchaseUrl;
+		private string _vpsProtocol, _vendorName, _currency, _purchaseUrl, _callbackUrlFor3D;
 
 		public SagePayPaymentGateway()
 		{
@@ -24,8 +26,14 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			_vpsProtocol = configSection.VpsProtocol;
 			_vendorName = configSection.VendorName;
 			_currency = configSection.Currency;
-			_purchaseUrl = configSection.PurchaseUrl;
+            _purchaseUrl = configSection.PurchaseUrl;
+            _callbackUrlFor3D = configSection.CallbackFor3D;
 		}
+
+        public void OverrideVendorName(string newVendor)
+        {
+            _vendorName = newVendor;
+        }
 
 		public bool SupportsCardType(PaymentCardType cardType)
 		{
@@ -52,7 +60,9 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			byte[] responseBytes = null;
 			try
 			{
-				responseBytes = webClient.UploadValues(_purchaseUrl, "POST", BuildPostData(paymentRequest));
+                NameValueCollection postData = BuildPostData(paymentRequest);
+                string test = postData.Join(pd => string.Format("{0} = {1}", pd, postData[pd]), "\n");
+                responseBytes = webClient.UploadValues(_purchaseUrl, "POST", postData);
 			}
 			catch (WebException ex)
 			{
@@ -85,12 +95,26 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 
 			switch (status)
 			{
-				case "3DAUTH" :
-					throw new NotImplementedException();
+                case "3DAUTH":
+                    return Process3DAuthResponse(status, statusDetail, responseData);                    
 				default :
 					// If this isn't 3D-Auth, then this is an authorisation result (either successful or otherwise).
 					return ProcessAuthorisationResponse(status, statusDetail, responseData);
 			}
+		}
+        
+        private PaymentResponse Process3DAuthResponse(string status, string statusDetail, NameValueCollection responseData)
+		{
+			// This is a 3D-Secure transaction, so we need to redirect the customer to their bank **
+            // for authentication.  First get the pertinent information from the response **
+            return new PaymentResponse(false)
+			{
+				Message = "3D",
+                MD = responseData["MD"],
+                ACSURL = responseData["ACSURL"],
+                PAReq = responseData["PAReq"],
+                CallBackUrl = _callbackUrlFor3D
+			};
 		}
 
 		private static PaymentResponse ProcessAuthorisationResponse(string status, string statusDetail, NameValueCollection responseData)
@@ -150,7 +174,8 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			}
 			return new PaymentResponse(success)
 			{
-				Message = message
+				Message = message,
+                Token = responseData["Token"]
 			};
 		}
 
@@ -161,7 +186,15 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			foreach (string responseItem in responseItems)
 			{
 				string[] responseItemKeyValue = responseItem.Split(new[] { '=' }, StringSplitOptions.None);
-				responseData.Add(responseItemKeyValue[0], responseItemKeyValue[1]);
+                //deal with = being part of the value
+                string val = "";
+                for (int i = 1; i <= responseItemKeyValue.GetUpperBound(0); i++)
+                {
+                    if (i > 1)
+                        val += "=";
+                    val += responseItemKeyValue[i];
+                }
+                responseData.Add(responseItemKeyValue[0], val);
 			}
 			return responseData;
 		}
@@ -178,19 +211,29 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["VendorTxCode"] = paymentRequest.TransactionCode;
 
 			postData["Amount"] = paymentRequest.Amount.ToString("F2"); // Formatted to 2 decimal places with leading digit but no commas or currency symbols
-			postData["Currency"] = _currency;
+			postData["Currency"] = string.IsNullOrEmpty(paymentRequest.CurrencyOverride) ? _currency : paymentRequest.CurrencyOverride;
 			if (!string.IsNullOrEmpty(paymentRequest.Description))
 				postData["Description"] = paymentRequest.Description.Left(100); // Up to 100 chars of free format description
 
-			postData["CardHolder"] = paymentRequest.Card.NameOnCard;
-			postData["CardNumber"] = paymentRequest.CardNumber;
-			if (paymentRequest.Card.ValidFrom != null)
-                postData["StartDate"] = paymentRequest.Card.ValidFrom.Value.ToString("MMyy");
-            postData["ExpiryDate"] = paymentRequest.Card.ValidTo.ToString("MMyy");
-            if (!string.IsNullOrEmpty(paymentRequest.Card.IssueNumber))
-                postData["IssueNumber"] = paymentRequest.Card.IssueNumber;
-            postData["CV2"] = paymentRequest.CardSecurityCode;
-			postData["CardType"] = GetCardType(paymentRequest.Card.CardType);
+            if (paymentRequest.UseToken)
+            {
+                postData["Token"] = paymentRequest.Token;
+                postData["StoreToken"] = "1";
+                postData["CV2"] = paymentRequest.CardSecurityCode;			    
+            }
+            else
+            { 
+			    postData["CardHolder"] = paymentRequest.Card.NameOnCard;
+			    postData["CardNumber"] = paymentRequest.CardNumber;
+			    if (paymentRequest.Card.ValidFrom != null)
+                    postData["StartDate"] = paymentRequest.Card.ValidFrom.Value.ToString("MMyy");
+                postData["ExpiryDate"] = paymentRequest.Card.ValidTo.ToString("MMyy");
+                if (!string.IsNullOrEmpty(paymentRequest.Card.IssueNumber))
+                    postData["IssueNumber"] = paymentRequest.Card.IssueNumber;
+                postData["CV2"] = paymentRequest.CardSecurityCode;
+			    postData["CardType"] = GetCardType(paymentRequest.Card.CardType);
+                postData["CreateToken"] = paymentRequest.CreateToken ? "1" : "0";
+            }
 
 			postData["BillingSurname"] = paymentRequest.BillingAddress.Surname;
 			postData["BillingFirstnames"] = paymentRequest.BillingAddress.FirstName;
@@ -200,13 +243,15 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["BillingCity"] = paymentRequest.BillingAddress.TownCity;
 			postData["BillingPostCode"] = paymentRequest.BillingAddress.Postcode;
 
-            if (paymentRequest.BillingAddress.Country.Title == "United States")
-            {
-                postData["BillingState"] = paymentRequest.BillingAddress.StateRegion;
-            }
-
             if (paymentRequest.BillingAddress.Country != null)
+            {
                 postData["BillingCountry"] = paymentRequest.BillingAddress.Country.Alpha2;
+
+                if (paymentRequest.BillingAddress.Country.Title == "United States")
+                {
+                    postData["BillingState"] = paymentRequest.BillingAddress.StateRegion;
+                }
+            }
             else
                 postData["BillingCountry"] = "GB";
 
@@ -218,16 +263,19 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			postData["DeliveryCity"] = paymentRequest.ShippingAddress.TownCity;
 			postData["DeliveryPostCode"] = paymentRequest.ShippingAddress.Postcode;
             if (paymentRequest.ShippingAddress.Country != null)
+            {
                 postData["DeliveryCountry"] = paymentRequest.ShippingAddress.Country.Alpha2;
+
+                if (paymentRequest.ShippingAddress.Country.Title == "United States")
+                {
+                    postData["DeliveryState"] = paymentRequest.ShippingAddress.StateRegion;
+                }
+            }
             else
                 postData["DeliveryCountry"] = "GB";
+
 			if (!string.IsNullOrEmpty(paymentRequest.TelephoneNumber))
 				postData["DeliveryPhone"] = paymentRequest.TelephoneNumber;
-
-            if (paymentRequest.ShippingAddress.Country.Title == "United States")
-            {
-                postData["DeliveryState"] = paymentRequest.ShippingAddress.StateRegion;
-            }
 
 			postData["CustomerEMail"] = paymentRequest.EmailAddress;
 			// postData["Basket"] = FormatBasket(paymentRequest); // TODO
@@ -249,6 +297,7 @@ namespace Zeus.AddIns.ECommerce.PaymentGateways.SagePay
 			// Your Sage Pay account MUST be set up for the account type you choose.  If in doubt, use E.
 			postData["AccountType"] = "E";
 
+            
 			return postData;
 		}
 

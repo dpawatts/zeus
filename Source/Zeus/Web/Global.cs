@@ -86,5 +86,6 @@ namespace Zeus.Web
 			HostingEnvironment.RegisterVirtualPathProvider(
 				new EmbeddedResourcePathProvider(Zeus.Context.Current.Resolve<IEmbeddedResourceManager>()));
 		}
+
 	}
 }

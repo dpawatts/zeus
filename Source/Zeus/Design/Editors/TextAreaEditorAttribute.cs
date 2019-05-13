@@ -21,8 +21,6 @@ namespace Zeus.Design.Editors
 	[AttributeUsage(AttributeTargets.Property)]
 	public class TextAreaEditorAttribute : TextEditorAttributeBase
 	{
-		private string _dataTypeText, _dataTypeErrorMessage;
-
 		public TextAreaEditorAttribute()
 		{
 		}

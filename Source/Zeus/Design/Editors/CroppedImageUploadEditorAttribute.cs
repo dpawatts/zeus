@@ -47,16 +47,16 @@ namespace Zeus.Design.Editors
                 int ActualHeight = imageForSize.Height;
                 imageForSize.Dispose();
 
-                if (ActualWidth > image.FixedWidthValue && ActualHeight > image.FixedHeightValue)
-                {
+                //if (ActualWidth > image.FixedWidthValue && ActualHeight > image.FixedHeightValue)
+                //{
                     string selected = System.Web.HttpContext.Current.Request.QueryString["selected"];
                     editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Preview of how the image will look on the page</p><br/><p><a href=\"/admin/ImageCrop.aspx?id=" + image.ID + "&selected=" + selected + "\">Edit Crop</a></p><br/>"));
                     editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<img src=\"" + ((CroppedImage)image).GetUrl(image.FixedWidthValue, image.FixedHeightValue, true, SoundInTheory.DynamicImage.DynamicImageFormat.Jpeg, false) + "?rand=" + new System.Random().Next(1000) + "\" /></div><br/><br/>"));
-                }
-                else
-                {
-                    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Image is not large enough to be cropped - it is advised that you upload a larger image</p><br/>"));                    
-                }
+                //}
+                //else
+                //{
+                //    editor.Controls.AddAt(editor.Controls.Count, new LiteralControl("<div><p>Image is not large enough to be cropped - it is advised that you upload a larger image</p></div><br/>"));                    
+                //}
             }
         }
 

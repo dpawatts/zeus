@@ -36,3 +36,11 @@ httpd.parse.errors
 # Exclude ALL DLLs? (
 # *.dll
 /build/TestResult.xml
+.vs
+Source/packages
+*.FileUpload
+App_Data
+/Source/Backup
+/Source/Backup1
+/Source/UpgradeLog.htm
+/Source/UpgradeLog2.htm

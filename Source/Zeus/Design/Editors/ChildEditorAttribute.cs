@@ -7,6 +7,7 @@ using Ext.Net;
 using Zeus.ContentTypes;
 using Zeus.Web.UI;
 using Zeus.Web.UI.WebControls;
+using Zeus.FileSystem;
 
 namespace Zeus.Design.Editors
 {
@@ -73,8 +74,12 @@ namespace Zeus.Design.Editors
 			ItemUtility.FindInParents<ItemEditView>(editor.Parent).Saved += ((sender, args) =>
 			{
 				ContentItem child;
-				if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
-					Context.Persister.Delete(child);
+
+                if (!((ContentItem)itemEditor.CurrentItem).IsEmpty() || (((ContentItem)itemEditor.CurrentItem) is File && ((FancyFileUpload)editor.Controls[0].Controls[1]).HasNewOrChangedFile))
+                {
+                    if ((child = (ContentItem)itemEditor.Save()).IsEmpty())
+                        Context.Persister.Delete(child);
+                }
 			});
 
 			return true;

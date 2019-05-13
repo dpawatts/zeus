@@ -39,7 +39,9 @@ namespace Zeus.Web.UI.WebControls
 			gridView.GetRowClass.Fn = "childrenEditorGetRowClass";
 			View.Add(gridView);
 
-			ResourceManager.RegisterClientStyleBlock("ChildrenEditorGridPanelStyles", @"
+            if (!ExtNet.IsAjaxRequest)
+            {
+                ExtNet.ResourceManager.RegisterClientStyleBlock("ChildrenEditorGridPanelStyles", @"
 				.childrenEditor-deleted-row {
 	        background: #F0AAB2;
         }
@@ -48,7 +50,7 @@ namespace Zeus.Web.UI.WebControls
 	        background: #c8ffc8;
         }");
 
-			ResourceManager.RegisterClientScriptBlock("ChildrenEditorGridPanelScript", @"
+                ExtNet.ResourceManager.RegisterClientScriptBlock("ChildrenEditorGridPanelScript", @"
 				var childrenEditorGetRowClass = function (record) {
 					if (record.newRecord) {
 						return 'childrenEditor-new-row';
@@ -92,6 +94,7 @@ namespace Zeus.Web.UI.WebControls
 						button2.setDisabled(true); button2.setTooltip('Disabled');
 					}
         };");
+            }
 
 			base.CreateChildControls();
 		}

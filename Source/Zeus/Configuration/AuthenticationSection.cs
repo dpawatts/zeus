@@ -7,7 +7,7 @@ namespace Zeus.Configuration
 {
 	public class AuthenticationSection : ConfigurationSection
 	{
-        private readonly AdminSection _configSection;
+        public readonly AdminSection _configSection;
 
         public AuthenticationSection(AdminSection configSection)
         {
@@ -84,7 +84,7 @@ namespace Zeus.Configuration
 			set { base["credentials"] = value; }
 		}
 
-		internal AuthenticationLocation ToAuthenticationLocation()
+        public AuthenticationLocation ToAuthenticationLocation()
 		{
 			AuthenticationLocation location = new AuthenticationLocation();
 			location.Enabled = Enabled;

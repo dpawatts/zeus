@@ -21,8 +21,8 @@ namespace Zeus.Web.UI
 			if (tabControl == null)
 			{
 				tabControl = new CustomTabPanel { ID = "TabControl" };
-				if (container is ContentPanel)
-					((ContentPanel) container).ContentControls.Add(tabControl);
+				if (container is Component)
+					((Component) container).ContentControls.Add(tabControl);
 				else
 					container.Controls.Add(tabControl);
 			}

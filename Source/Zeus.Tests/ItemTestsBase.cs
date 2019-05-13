@@ -4,23 +4,23 @@ using System.Security.Principal;
 using Rhino.Mocks;
 using Zeus.Tests.Fakes;
 using Zeus.Web;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Zeus.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public abstract class ItemTestsBase
 	{
 		protected MockRepository mocks;
 
-		[TestInitialize]
+		[SetUp]
 		public virtual void SetUp()
 		{
 			RequestItem.Accessor = new StaticContextAccessor();
 			mocks = new MockRepository();
 		}
 
-		[TestCleanup]
+		[TearDown]
 		public virtual void TearDown()
 		{
 			if (mocks != null)

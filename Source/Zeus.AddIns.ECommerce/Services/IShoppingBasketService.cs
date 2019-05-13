@@ -14,7 +14,9 @@ namespace Zeus.AddIns.ECommerce.Services
 		void RemoveItem(Shop shop, Product product, VariationPermutation variationPermutation);
 		void UpdateQuantity(Shop shop, Product product, VariationPermutation variationPermutation, int newQuantity);
 		void SaveBasket(Shop shop);
-
+        decimal? GetPriceOverride(VariationPermutation vp, Product product);
+        bool ApplyDiscount(Shop shop, string code, out string message);
+        
         void CalculateBasketTotal(object sender, Zeus.CancelItemEventArgs e);
 	}
 }

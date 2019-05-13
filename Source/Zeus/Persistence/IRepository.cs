@@ -1,4 +1,6 @@
-﻿namespace Zeus.Persistence
+﻿using System;
+
+namespace Zeus.Persistence
 {
 	public interface IRepository<TKey, TEntity>
 	{
@@ -29,7 +31,15 @@
 		/// <returns>Either the entity that matches the id, or a null</returns>
 		T Get<T>(TKey id)
 			where T : TEntity;
-		
+
+		/// <summary>
+		/// Get the entity from persistance store, or return null
+		/// </summary>
+		/// <typeparam name="T">The type of entity</typeparam>
+		/// <param name="condition">Linq query</param>
+		/// <returns></returns>
+		T Get<T>(Func<T, bool> condition) where T : TEntity;
+
 		/// <summary>
 		/// Load the entity from the persistance store
 		/// Will throw an exception if there isn't an entity that matches

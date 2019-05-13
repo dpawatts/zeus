@@ -7,6 +7,6 @@ namespace Zeus.FileSystem.Images
     [AdminSiteTreeVisibility(AdminSiteTreeVisibility.Hidden)]
     [ContentTypeAuthorizedRoles("Administrators")]    
     public class HiddenImage : Zeus.FileSystem.Images.Image
-    {
+    {        
     }
 }

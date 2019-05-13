@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.ExtensionMethods.Linq;
 
 namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 {
-	[TestClass]
+	[TestFixture]
 	public class EnumerableTests
 	{
-		[TestMethod]
+		[Test]
 		public void AlternateTest()
 		{
 			var source = new[] { "The", "quick", "brown", "fox" };
@@ -23,7 +23,7 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 				yield return " ";
 		}
 
-		[TestMethod]
+		[Test]
 		public void AppendTest()
 		{
 			var ints = new[] { 1, 2, 3 };
@@ -31,11 +31,11 @@ namespace Zeus.BaseLibrary.Tests.ExtensionMethods.Linq
 			CollectionAssert.AreEqual(new[] { 1, 2, 3, 4 }, oneToFour.ToArray());
 		}
 
-		[TestMethod]
+		[Test]
 		public void PrependTest()
 		{
 			var ints = new[] { 1, 2, 3 };
-			var zeroToThree = ints.Prepend(0);
+			IEnumerable<int> zeroToThree = ints.Prepend(0);
 			CollectionAssert.AreEqual(new[] { 0, 1, 2, 3 }, zeroToThree.ToArray());
 		}
 	}

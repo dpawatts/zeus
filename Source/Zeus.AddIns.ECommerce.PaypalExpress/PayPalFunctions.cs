@@ -12,17 +12,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using com.paypal.sdk.profiles;
-using com.paypal.sdk.services;
-using com.paypal.soap.api;
 using System.Linq;
 using Zeus;
 using Zeus.Templates.ContentTypes.ReferenceData;
 using System.Collections.Generic;
 using Zeus.AddIns.ECommerce.PaypalExpress;
 using Zeus.AddIns.ECommerce.PaypalExpress.Mvc.ContentTypeInterfaces;
-
-
 
 /// <summary>
 /// Summary description for NVPAPICaller
@@ -61,11 +56,11 @@ public class NVPAPICaller
     private string BNCode = "PP-ECWizard";
 
     //HttpWebRequest Timeout specified in milliseconds 
-    private const int Timeout = 10000;
+    private const int Timeout = 100000;
     private static readonly string[] SECURED_NVPS = new string[] { ACCT, CVV2, SIGNATURE, PWD };
 
-    public com.paypal.soap.api.DoDirectPaymentResponseType TakeCardPayment(
-        com.paypal.soap.api.CreditCardTypeType cardType,
+    public void TakeCardPayment(
+        string cardType,
         string cardNumber,
         int startMonth,
         int startYear,
@@ -80,12 +75,13 @@ public class NVPAPICaller
         string city,
         string state,
         string postCode,
-        CountryCodeType country,
+        string country,
         decimal amount,
-        com.paypal.soap.api.CurrencyCodeType currency,
+        string currency,
         string ipAddress,
-        com.paypal.soap.api.PaymentActionCodeType paymentType)
+        string paymentType)
     {
+        /*
         CallerServices caller = new CallerServices();
         IAPIProfile profile = ProfileFactory.createSignatureAPIProfile();
         profile.APIUsername = APIUsername;
@@ -95,6 +91,8 @@ public class NVPAPICaller
         profile.APISignature = APISignature;
         caller.APIProfile = profile;
         com.paypal.soap.api.DoDirectPaymentRequestDetailsType directPaymentDetails = new com.paypal.soap.api.DoDirectPaymentRequestDetailsType();
+
+        new PayPal.DefaultSOAPAPICallHandler()
 
         //Set Credit Card
         com.paypal.soap.api.CreditCardDetailsType cc = new com.paypal.soap.api.CreditCardDetailsType();
@@ -145,7 +143,7 @@ public class NVPAPICaller
 
         request.DoDirectPaymentRequestDetails.CreditCard.CardOwner.Address.CountrySpecified = true;
         return (com.paypal.soap.api.DoDirectPaymentResponseType)caller.Call("DoDirectPayment", request);
-
+        */
     }
 
     /// <summary>
@@ -169,7 +167,13 @@ public class NVPAPICaller
     /// <param ref name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost)
+
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency)
+    {
+        return ShortcutExpressCheckout(amt, ref token, ref retMsg, returnURL, cancelURL, items, shippingCost, currency, false, 0);
+    }
+
+    public bool ShortcutExpressCheckout(string amt, ref string token, ref string retMsg, string returnURL, string cancelURL, List<PayPalItem> items, decimal shippingCost, string currency, bool forceReturnURLsOverHttps, decimal tax = 0)
     {
         string host = "www.paypal.com";
         if (StartPage.UseTestEnvironment)
@@ -178,7 +182,7 @@ public class NVPAPICaller
             host = "www.sandbox.paypal.com";
         }
 
-        string siteRoot = ConfigurationSettings.AppSettings["SiteRoot"];
+        string siteRoot = ConfigurationManager.AppSettings["SiteRoot"];
 
         returnURL = "http://" + returnURL;
         cancelURL = "http://" + cancelURL;
@@ -191,15 +195,19 @@ public class NVPAPICaller
         encoder["METHOD"] = "SetExpressCheckout";
         encoder["RETURNURL"] = returnURL;
         encoder["CANCELURL"] = cancelURL;
+        
+        if (!StartPage.UseShipping)
+            encoder["NOSHIPPING"] = "1";
+
         encoder["PAYMENTREQUEST_0_AMT"] = amt;
         encoder["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
         //as uk only
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "GBP";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = string.IsNullOrEmpty(currency) ? "GBP" : currency;
 
         encoder["PAYMENTREQUEST_0_SHIPPINGAMT"] = shippingCost.ToString("0.00");
         encoder["PAYMENTREQUEST_0_HANDLINGAMT"] = "0.00";
-        encoder["PAYMENTREQUEST_0_TAXAMT"] = "0.00";
-        encoder["PAYMENTREQUEST_0_DESC"] = "Order from Shellys.com";
+        encoder["PAYMENTREQUEST_0_TAXAMT"] = tax.ToString("0.00");
+        encoder["PAYMENTREQUEST_0_DESC"] = "Order";
 
         //add the items from the basket and tell PayPal about them...
         encoder["PAYMENTREQUEST_0_ITEMAMT"] = items.Sum(i => i.Amount).ToString("0.00");
@@ -249,7 +257,7 @@ public class NVPAPICaller
     /// <param name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool GetShippingDetails(string token, ref string PayerId, ref Address ShippingAddress, ref string retMsg)
+    public bool GetShippingDetails(string token, ref string PayerId, ref Address ShippingAddress, ref string noteToSeller, ref string retMsg)
     {
         if (StartPage.UseTestEnvironment)
         {
@@ -278,9 +286,10 @@ public class NVPAPICaller
             ShippingAddress.StateRegion = decoder["PAYMENTREQUEST_0_SHIPTOSTATE"];
             ShippingAddress.Postcode = decoder["PAYMENTREQUEST_0_SHIPTOZIP"];
             //ShippingAddress.Country = decoder["PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE"];
+            ShippingAddress.PhoneNumber = decoder["PAYMENTREQUEST_0_SHIPTOPHONENUM"];
             ShippingAddress.Country = decoder["SHIPTOCOUNTRYNAME"];
             ShippingAddress.Email = decoder["EMAIL"];
-
+            noteToSeller = decoder["PAYMENTREQUEST_0_NOTETEXT"];
             return true;
         }
         else
@@ -300,7 +309,7 @@ public class NVPAPICaller
     /// <param name="token"></param>
     /// <param ref name="retMsg"></param>
     /// <returns></returns>
-    public bool ConfirmPayment(string finalPaymentAmount, string token, string payerId, ref NVPCodec decoder, ref string retMsg)
+    public bool ConfirmPayment(string finalPaymentAmount, string token, string payerId, ref NVPCodec decoder, ref string retMsg, string currency)
     {
         if (StartPage.UseTestEnvironment)
         {
@@ -314,7 +323,7 @@ public class NVPAPICaller
         encoder["PAYERID"] = payerId;
         encoder["PAYMENTREQUEST_0_AMT"] = finalPaymentAmount;
         //encoder["CURRENCYCODE"] = SoundInTheory.CatchTheLingo.Web.Classes.Currency.GetPayPalCurrencyCodeAsString();
-        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = "GBP";
+        encoder["PAYMENTREQUEST_0_CURRENCYCODE"] = string.IsNullOrEmpty(currency) ? "GBP" : currency;
 
         string pStrrequestforNvp = encoder.Encode();
         string pStresponsenvp = HttpCall(pStrrequestforNvp);
@@ -362,7 +371,7 @@ public class NVPAPICaller
                 myWriter.Write(strPost);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             /*
             if (log.IsFatalEnabled)

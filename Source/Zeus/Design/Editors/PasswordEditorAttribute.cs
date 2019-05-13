@@ -1,3 +1,4 @@
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using Zeus.Web.Security;
 
@@ -24,5 +25,12 @@ namespace Zeus.Design.Editors
 			}
 			return false;
 		}
-	}
+
+        protected override Control AddEditor(Control container)
+        {
+            TextBox tb = (TextBox)base.AddEditor(container);
+            tb.TextMode = TextBoxMode.Password;
+            return tb;
+        }
+    }
 }

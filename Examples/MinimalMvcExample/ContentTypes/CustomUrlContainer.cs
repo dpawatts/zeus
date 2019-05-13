@@ -11,7 +11,15 @@ namespace Zeus.Examples.MinimalMvcExample.ContentTypes
 {
 	[ContentType("Custom Url Page Container")]
     [RestrictParents(typeof(WebsiteNode))]
+    [AdminSiteTreeVisibility(AdminSiteTreeVisibility.Visible|AdminSiteTreeVisibility.ChildrenHidden)]
 	public class CustomUrlContainer : PageContentItem
 	{
+        public override bool PropogateUpdate
+        {
+            get
+            {
+                return false;
+            }
+        }
 	}
 }

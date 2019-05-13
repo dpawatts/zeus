@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,14 +11,21 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zeus.Templates</RootNamespace>
     <AssemblyName>Zeus.Templates</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <OldToolsVersion>12.0</OldToolsVersion>
+    <UpgradeBackupLocation>C:\Users\edfar\source\repos\zeus\Source\Backup2\</UpgradeBackupLocation>
     <TargetFrameworkProfile />
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +55,7 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -56,6 +66,27 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Argotic.Common, Version=2008.0.2.0, Culture=neutral, PublicKeyToken=84b2ce808fb02469, processorArchitecture=MSIL">
@@ -67,32 +98,53 @@
     <Reference Include="Argotic.Extensions, Version=2008.0.2.0, Culture=neutral, PublicKeyToken=84b2ce808fb02469, processorArchitecture=MSIL">
       <HintPath>..\packages\Argotic.Extensions.2008.0.2.0\lib\Net35\Argotic.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="CodeKicker.BBCode, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\CodeKicker.BBCode.dll</HintPath>
+    <Reference Include="CodeKicker.BBCode, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CodeKicker.BBCode.5.0.0.0\lib\net35\CodeKicker.BBCode.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Ext.Net, Version=1.0.0.36291, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\Ext.Net\Ext.Net.dll</HintPath>
+    <Reference Include="Costura, Version=1.6.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.1.6.2\lib\dotnet\Costura.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Ext.Net, Version=1.3.0.2809, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.1.3.0\lib\Ext.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities, Version=1.3.0.39155, Culture=neutral, PublicKeyToken=2c34ac34702a3c23, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ext.NET.Utilities.1.3.0\lib\Ext.Net.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SoundInTheory.DynamicImage, Version=2.0.2.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DynamicImage.2.0.2\lib\NET40\SoundInTheory.DynamicImage.dll</HintPath>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Spark, Version=1.6.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Spark.1.6\lib\NET40\Spark.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Spark.Web.Mvc">
-      <HintPath>..\packages\Spark.Web.Mvc3.1.6\lib\Spark.Web.Mvc.dll</HintPath>
+    <Reference Include="SoundInTheory.DynamicImage, Version=3.1.1.0, Culture=neutral, PublicKeyToken=fa44558110383067, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicImage.3.1.1\lib\net40\SoundInTheory.DynamicImage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spark, Version=1.8.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spark.1.8.1.0\lib\NET40\Spark.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spark.Web.Mvc, Version=1.8.0.0, Culture=neutral, PublicKeyToken=7f8549eed921a12c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Spark.Web.Mvc5.1.8.1.0\lib\NET45\Spark.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -106,22 +158,49 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="App_Start\DynamicImage.cs" />
     <Compile Include="Configuration\AkismetElement.cs" />
     <Compile Include="Configuration\AntiSpamElement.cs" />
     <Compile Include="Configuration\ReCaptchaElement.cs" />
@@ -138,16 +217,6 @@
     <Compile Include="ContentTypes\RegistrationPage.cs" />
     <Compile Include="ContentTypes\BaseContentItem.cs" />
     <Compile Include="ContentTypes\BaseWidget.cs" />
-    <Compile Include="ContentTypes\Forms\CheckBoxQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Form.cs" />
-    <Compile Include="ContentTypes\Forms\FormPage.cs" />
-    <Compile Include="ContentTypes\Forms\IQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\MultipleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Option.cs" />
-    <Compile Include="ContentTypes\Forms\OptionSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\Question.cs" />
-    <Compile Include="ContentTypes\Forms\SingleSelectQuestion.cs" />
-    <Compile Include="ContentTypes\Forms\TextQuestion.cs" />
     <Compile Include="ContentTypes\BasePage.cs" />
     <Compile Include="ContentTypes\ReferenceData\Currency.cs" />
     <Compile Include="ContentTypes\ReferenceData\CurrencyList.cs" />
@@ -165,10 +234,8 @@
     <Compile Include="ContentTypes\RssFeed.cs" />
     <Compile Include="ContentTypes\Sitemap.cs" />
     <Compile Include="ContentTypes\Widgets\TextItem.cs" />
-    <Compile Include="Design\Editors\QuestionOptionsEditor.cs" />
     <Compile Include="Mvc\Controllers\LoginPageController.cs" />
     <Compile Include="Mvc\Controllers\FeedControllerBase.cs" />
-    <Compile Include="Mvc\Controllers\FormController.cs" />
     <Compile Include="Mvc\Controllers\ForgottenPasswordPageController.cs" />
     <Compile Include="Mvc\Controllers\RegistrationPageControllerBase.cs" />
     <Compile Include="Mvc\Controllers\LoginWidgetController.cs" />
@@ -182,8 +249,6 @@
     <Compile Include="Mvc\ViewModels\BaseLoginFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\LoginPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormPageViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormSubmitViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetFormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageRequestResetViewModel.cs" />
     <Compile Include="Mvc\ViewModels\ForgottenPasswordPageResetConfirmationViewModel.cs" />
@@ -212,7 +277,6 @@
     <Compile Include="TemplatesModule.cs" />
     <Compile Include="Mvc\Controllers\FeedLinkController.cs" />
     <Compile Include="Mvc\Controllers\FileController.cs" />
-    <Compile Include="Mvc\Controllers\FormPageController.cs" />
     <Compile Include="Mvc\Controllers\PageController.cs" />
     <Compile Include="Mvc\Controllers\PageNavigationController.cs" />
     <Compile Include="Mvc\Controllers\RssFeedController.cs" />
@@ -234,7 +298,6 @@
     <Compile Include="Mvc\RssResult.cs" />
     <Compile Include="Mvc\TemplatesAreaRegistration.cs" />
     <Compile Include="Mvc\ViewModels\FeedLinkViewModel.cs" />
-    <Compile Include="Mvc\ViewModels\FormViewModel.cs" />
     <Compile Include="Mvc\ViewModels\PageViewModel.cs" />
     <Compile Include="Mvc\ViewModels\SitemapViewModel.cs" />
     <Compile Include="Mvc\ViewModels\WebsiteNodeViewModel.cs" />
@@ -363,7 +426,25 @@
     <EmbeddedResource Include="Mvc\Assets\markitup\skins\simple\style.css" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Ext.NET.CHANGELOG.txt" />
+    <Content Include="App_Readme\Ext.NET.README.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities.LICENSE.txt" />
+    <Content Include="App_Readme\Ext.NET.Utilities.README.txt" />
+    <Content Include="Ext.NET.Default.aspx" />
+    <None Include="FodyWeavers.xml" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Design\Editors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -392,5 +473,14 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="..\packages\Fody.2.0.0\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.0.0\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.0\build\dotnet\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.6.2\build\dotnet\Costura.Fody.targets')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v16.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>

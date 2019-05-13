@@ -98,14 +98,19 @@ namespace Zeus.Admin.Plugins.EditItem
 
 			try
 			{
-				SaveChanges();
+                if (((ContentItem)zeusItemEditView.CurrentItem).HasMinRequirementsForSaving() || ((ContentItem)zeusItemEditView.CurrentItem).ID == 0)
+                    SaveChanges();
 			}
 			catch (Exception ex)
 			{
 				Engine.Resolve<IErrorHandler>().Notify(ex);
-				csvException.IsValid = false;
-				csvException.ErrorMessage = ex.ToString();
-			}
+                ExtNet.MessageBox.Show(new MessageBoxConfig
+                {
+                    Icon = MessageBox.Icon.ERROR,
+                    Buttons = MessageBox.Button.OK,
+                    Message = "Unexpected error: " + ex
+                });
+            }
 		}
 
 		private void SaveChanges()
@@ -126,10 +131,26 @@ namespace Zeus.Admin.Plugins.EditItem
 				Engine.Resolve<ITreeSorter>().MoveTo(currentItem, NodePosition.After, after);
 			}
 
-			Refresh(currentItem.VersionOf ?? currentItem, AdminFrame.Both, false);
-			Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
-			zeusItemEditView.Visible = false;
-		}
+            if (currentItem.IsPage)
+            {
+                Refresh(currentItem.VersionOf ?? currentItem, AdminFrame.Both, false);
+                Title = string.Format("'{0}' saved, redirecting...", currentItem.Title);
+                zeusItemEditView.Visible = false;
+            }
+            else
+            {
+                ExtNet.MessageBox.Show(new MessageBoxConfig
+                {
+                    Icon = MessageBox.Icon.INFO,
+                    Buttons = MessageBox.Button.OK,
+                    Message = "Item saved",
+                    Handler = string.Format(@"top.zeus.reloadContentPanel('Edit', '{0}');", GetEditUrl(currentItem.VersionOf ?? currentItem)),
+                    Closable = false
+                });
+
+                RefreshNavigationPanel(currentItem.VersionOf ?? currentItem);
+            }
+        }
 
 		protected void btnSaveUnpublished_Click(object sender, EventArgs e)
 		{

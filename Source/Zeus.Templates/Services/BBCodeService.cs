@@ -22,7 +22,7 @@ namespace Zeus.Templates.Services
 					});
 			try
 			{
-				return parser.Transform(bbCode).Replace("\r", string.Empty).Replace("\n", "<br />");
+				return parser.ToHtml(bbCode).Replace("\r", string.Empty).Replace("\n", "<br />");
 			}
 			catch (BBCodeParsingException ex)
 			{

@@ -10,6 +10,7 @@ namespace Zeus.Web.Security
 		IEnumerable<string> GetAllRoles();
 		IEnumerable<User> GetAllUsers();
 		User GetUser(string username);
+		User GetUserFast(string username);
 		bool ValidateUser(string username, string password);
 
 		void SendVerificationEmail(User user, string linkRoot, string recipientEmail,

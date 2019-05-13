@@ -258,12 +258,17 @@ namespace Zeus.Admin
 
 					if (wasUpdated || IsNew(itemToUpdate))
 					{
-						onSavingCallback(itemToUpdate);
+                        onSavingCallback(itemToUpdate);
+                        foreach (ContentItem child in item.Children.ToList())
+                        {
+                            if (!child.HasMinRequirementsForSaving())
+                                item.Children.Remove(child);
+                        }
 						itemToUpdate.Published = published ?? Utility.CurrentTime();
 						_persister.Save(itemToUpdate);
 
                         ContentItem theParent = itemToUpdate.Parent;
-                        while (theParent.Parent != null)
+                        while (theParent.Parent != null && (item.PropogateUpdate && theParent.PropogateUpdate))
                         { 
                             //go up the tree updating - if a child has been changed, so effectively has the parent
                             theParent.Updated = DateTime.Now;
@@ -284,10 +289,15 @@ namespace Zeus.Admin
 				if (wasUpdated || IsNew(item))
 				{
 					onSavingCallback(item);
+                    foreach (ContentItem child in item.Children.ToList())
+                    {
+                        if (!child.HasMinRequirementsForSaving())
+                            item.Children.Remove(child);
+                    }
                     _persister.Save(item);
 
                     ContentItem theParent = item.Parent;
-                    while (theParent.Parent != null)
+                    while (theParent.Parent != null && (item.PropogateUpdate && theParent.PropogateUpdate))
                     {
                         //go up the tree updating - if a child has been changed, so effectively has the parent
                         theParent.Updated = DateTime.Now;
@@ -323,10 +333,9 @@ namespace Zeus.Admin
 					if (wasUpdated || IsNew(item))
 					{
 						onSavingCallback(item);
-						_persister.Save(item);
+                        _persister.Save(item);
+                        tx.Commit();
 					}
-
-					tx.Commit();
 
 					return item;
 				}

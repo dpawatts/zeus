@@ -51,7 +51,6 @@ namespace Zeus.Admin.Plugins.Tree
 			filterField.Listeners.KeyUp.Buffer = 100;
 			filterField.Listeners.TriggerClick.Fn = "clearFilter";
 			topToolbar.Items.Add(filterField);
-
 			topToolbar.Items.Add(new ToolbarFill());
 
 			Button refreshButton = new Button { Icon = Icon.Reload };

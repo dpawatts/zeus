@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.Collections.Generic;
 
 namespace Zeus.BaseLibrary.Tests.Collections.Generic
 {
-	[TestClass]
+	[TestFixture]
 	public class CartesianProductUtilityTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanCombine2By2Groups()
 		{
 			IEnumerable<char> group1 = new[] { 'a', 'b' }, group2 = new[] { 'c', 'd' };
@@ -20,7 +20,7 @@ namespace Zeus.BaseLibrary.Tests.Collections.Generic
 			CollectionAssert.AreEqual(new[] { 'b', 'd' }, cartesianProduct.ElementAt(3).ToList());
 		}
 
-		[TestMethod]
+		[Test]
 		public void CanCombine2By3Groups()
 		{
 			IEnumerable<char> group1 = new[] { 'a', 'b', 'c' }, group2 = new[] { 'd', 'e', 'f' };

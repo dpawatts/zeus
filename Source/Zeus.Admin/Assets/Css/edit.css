@@ -19,7 +19,10 @@ div.editDetail label
 	color: #808285;
 }
 
-.x-panel-body input[type="text"], textarea, div.editDetail > select
+.x-panel-body input[type="text"],
+.x-panel-body input.textEditor,
+textarea,
+div.editDetail > select
 {
 	vertical-align: baseline;
 	border: solid 1px #999;
@@ -33,7 +36,9 @@ div.editDetail label
 	width: auto;
 }
 
-.x-panel-body input[type="text"], textarea
+.x-panel-body input[type="text"],
+.x-panel-body input.textEditor,
+textarea
 {
 	font-size: 13px;
 	background: #FFF url(<%= WebResource("Zeus.Admin.Assets.Images.Edit.inputGradient.png") %>) repeat-x top left;

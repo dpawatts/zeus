@@ -96,6 +96,11 @@ namespace Zeus.Web.Security
 			return _store.GetUser(FormatUsername(username));
 		}
 
+		public User GetUserFast(string username)
+		{
+			return _store.Get(FormatUsername(username));
+		}
+
 		public bool ValidateUser(string username, string password)
 		{
 			// Get user from store.

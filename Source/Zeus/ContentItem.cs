@@ -17,6 +17,7 @@ using Zeus.Security;
 using System.Security.Principal;
 using Zeus.Web.Hosting;
 using System.Threading;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Zeus
 {
@@ -48,6 +49,7 @@ namespace Zeus
         public virtual int ID { get; set; }
 
         /// <summary>Gets or sets this item's parent. This can be null for root items and previous versions but should be another page in other situations.</summary>
+        [BsonIgnore]
         public virtual ContentItem Parent { get; set; }
 
         /// <summary>Gets or sets the item's title. This is used in edit mode and probably in a custom implementation.</summary>
@@ -79,11 +81,14 @@ namespace Zeus
         /// <summary>Gets or sets the date this item was updated.</summary>
         [Copy]
         public virtual DateTime Updated { get; set; }
+        public virtual void ReorderAction() {  }
 
         /// <summary>Gets or sets the publish date of this item.</summary>
+        [BsonIgnore]
         public virtual DateTime? Published { get; set; }
 
         /// <summary>Gets or sets the expiration date of this item.</summary>
+        [BsonIgnore]
         public virtual DateTime? Expires
         {
             get { return _expires; }
@@ -92,6 +97,7 @@ namespace Zeus
 
         /// <summary>Gets or sets the sort order of this item.</summary>
         [Copy]
+        [BsonIgnore]
         public virtual int SortOrder { get; set; }
 
         /// <summary>Gets or sets whether this item is visible. This is normally used to control it's visibility in the site map provider.</summary>
@@ -112,21 +118,25 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets the published version of this item. If this value is not null then this item is a previous version of the item specified by VersionOf.</summary>
+        [BsonIgnore]
         public virtual ContentItem VersionOf { get; set; }
 
         /// <summary>
         /// Gets or sets the version number of this item. This starts at 1, and increases for later versions.
         /// </summary>
         [Copy]
+        [BsonIgnore]
         public virtual int Version { get; set; }
 
         /// <summary>Gets or sets the original language version of this item. If this value is not null then this item is a translated version of the item specified by TranslationOf.</summary>
+        [BsonIgnore]
         public virtual ContentItem TranslationOf { get; set; }
 
         /// <summary>
         /// Gets or sets the language code of this item.
         /// </summary>
         [Copy]
+        [BsonIgnore]
         public virtual string Language { get; set; }
 
         /// <summary>Gets or sets the name of the identity who saved this item.</summary>
@@ -134,6 +144,7 @@ namespace Zeus
         public virtual string SavedBy { get; set; }
 
         /// <summary>Gets or sets the details collection. These are usually accessed using the e.g. item["Detailname"]. This is a place to store content data.</summary>
+        [BsonIgnore]
         public IDictionary<string, PropertyData> Details
         {
             get { return _details; }
@@ -141,6 +152,7 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets the details collection collection. These are details grouped into a collection.</summary>
+        [BsonIgnore]
         public IDictionary<string, PropertyCollection> DetailCollections
         {
             get { return _detailCollections; }
@@ -148,6 +160,7 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
+        [BsonIgnore]
         public virtual IList<ContentItem> Children
         {
             get { return _children; }
@@ -155,11 +168,17 @@ namespace Zeus
         }
 
         /// <summary>Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the current user has permission to use <see cref="GetChildren()"/> instead.</summary>
+        [BsonIgnore]
         public virtual IList<ContentItem> Translations
         {
             get { return _translations; }
             set { _translations = value; }
         }
+
+        [BsonIgnore]
+        public virtual int? OverrideCacheID { get; set; }
+
+        public int CacheID { get { return OverrideCacheID.HasValue ? OverrideCacheID.Value : ID; } }
 
         #endregion
 
@@ -179,6 +198,24 @@ namespace Zeus
 
         /// <summary>Needs to be overridden and set to true for the code needed to match a Custom Url to kick in</summary>
         public virtual bool HasCustomUrl
+        {
+            get { return false; }
+        }
+
+        /// <summary>Needs to be overridden and set to true for the code needed to match a Custom Url to kick in</summary>
+        public virtual bool CheckItselfForCaching
+        {
+            get { return true; }
+        }
+
+        /// <summary>If set to false it will stop the update going up the tree - useful when you don't want caches kicked for simple updates on large sites - cache dependencies are still easy enough to set</summary>
+        public virtual bool PropogateUpdate
+        {
+            get { return true; }
+        }
+
+        /// <summary>Only to be used on Parents with children set to be invisible in tree</summary>
+        public virtual bool IgnoreOrderOnSave
         {
             get { return false; }
         }
@@ -266,6 +303,7 @@ namespace Zeus
         #endregion
 
         /// <summary>Gets an array of roles allowed to read this item. Null or empty list is interpreted as this item has no access restrictions (anyone may read).</summary>
+        [BsonIgnore]
         public virtual IList<AuthorizationRule> AuthorizationRules
         {
             get
@@ -278,6 +316,7 @@ namespace Zeus
         }
 
         /// <summary>Gets an array of language settings for this item. Null or empty list is interpreted as this item inheriting its settings from its parent.</summary>
+        [BsonIgnore]
         public virtual IList<LanguageSetting> LanguageSettings
         {
             get
@@ -294,6 +333,7 @@ namespace Zeus
         /// <summary>Gets or sets the detail or property with the supplied name. If a property with the supplied name exists this is always returned in favour of any detail that might have the same name.</summary>
         /// <param name="detailName">The name of the propery or detail.</param>
         /// <returns>The value of the property or detail. If now property exists null is returned.</returns>
+        [BsonIgnore]
         public virtual object this[string detailName]
         {
             get
@@ -342,7 +382,7 @@ namespace Zeus
         }
 
         #endregion
-
+        
         protected ContentItem()
         {
             Created = DateTime.Now;
@@ -359,9 +399,15 @@ namespace Zeus
         /// <returns>The value stored in the details bag or null if no item was found.</returns>
         public virtual object GetDetail(string detailName)
         {
-            return Details.ContainsKey(detailName)
-                ? Details[detailName].Value
-                : null;
+            IDictionary<string, PropertyData> source = GetCurrentOrMasterLanguageDetails(detailName);
+            lock (source)
+            {
+                IDictionary<string, PropertyData> details = new Dictionary<string, PropertyData>(GetCurrentOrMasterLanguageDetails(detailName));
+
+                return details.ContainsKey(detailName)
+                    ? details[detailName].Value
+                    : null;
+            }
         }
 
         /// <summary>Gets a detail from the details bag.</summary>
@@ -370,54 +416,15 @@ namespace Zeus
         /// <returns>The value stored in the details bag or null if no item was found.</returns>
         public virtual T GetDetail<T>(string detailName, T defaultValue)
         {
-            IDictionary<string, PropertyData> details = GetCurrentOrMasterLanguageDetails(detailName);
-
-            //try inserted to stop "illegal access" error
-            bool? bContains;
-            bContains = tryAndWaitIfNecessary(details, detailName);
-
-            //if failed try again
-            if (bContains == null)
+            IDictionary<string, PropertyData> source = GetCurrentOrMasterLanguageDetails(detailName);
+            lock (source)
             {
-                bContains = tryAndWaitIfNecessary(details, detailName);
-                //if still failed, then another second has already passed so try a final time with no catch
-                if (bContains == null)
-                    bContains = details.ContainsKey(detailName);
-            }
+                IDictionary<string, PropertyData> details = new Dictionary<string, PropertyData>(source);
 
-            if (bContains.Value)
-                return Utility.Convert<T>(details[detailName].Value);
-            return defaultValue;
-        }
+                if (details.ContainsKey(detailName))
+                    return Utility.Convert<T>(details[detailName].Value);
 
-        private bool? tryAndWaitIfNecessary(IDictionary<string, PropertyData> details, string detailName)
-        {
-            try
-            {
-                return details.ContainsKey(detailName);
-            }
-            catch (System.Exception ex)
-            {
-                if (ex.Message.ToLower().IndexOf("illegal access to loading collection") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("could not initialize a collection batch") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else if (ex.Message.ToLower().IndexOf("was deadlocked on lock resources with another process and has been chosen as the deadlock victim") > -1)
-                {
-                    //wait for a second and try again
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    throw (ex);
-                }
-                return null;
+                return defaultValue;
             }
         }
 
@@ -440,24 +447,27 @@ namespace Zeus
 
             if (string.IsNullOrEmpty(detailName))
                 throw new ArgumentNullException("detailName");
-
-            PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
-
-            if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
+            
+            lock (_details)
             {
-                // update an existing detail
-                detail.Value = value;
-            }
-            else
-            {
-                if (detail != null)
-                    // delete detail or remove detail of wrong type
-                    Details.Remove(detailName);
-                if (value != null)
+                PropertyData detail = Details.ContainsKey(detailName) ? Details[detailName] : null;
+
+                if (detail != null && value != null && value.GetType().IsAssignableFrom(detail.ValueType))
                 {
-                    // add new detail
-                    PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
-                    Details.Add(detailName, propertyData);
+                    // update an existing detail
+                    detail.Value = value;
+                }
+                else
+                {
+                    if (detail != null)
+                        // delete detail or remove detail of wrong type
+                        Details.Remove(detailName);
+                    if (value != null)
+                    {
+                        // add new detail
+                        PropertyData propertyData = Context.ContentTypes.GetContentType(GetType()).GetProperty(detailName, value).CreatePropertyData(this, value);
+                        Details.Add(detailName, propertyData);
+                    }
                 }
             }
         }
@@ -519,10 +529,11 @@ namespace Zeus
 
             Parent = newParent;
 
+            //see if we care about ordering...
             if (newParent != null && !newParent.Children.Contains(this))
             {
                 IList<ContentItem> siblings = newParent.Children;
-                if (siblings.Count > 0)
+                if (siblings.Count > 0 && !newParent.IgnoreOrderOnSave)
                 {
                     int lastOrder = siblings[siblings.Count - 1].SortOrder;
 
@@ -542,7 +553,7 @@ namespace Zeus
                         return;
                     }
                 }
-
+                
                 siblings.Add(this);
             }
         }
@@ -911,6 +922,11 @@ namespace Zeus
         {
             return (Published != null && Published.Value <= DateTime.Now)
                 && !(Expires != null && Expires.Value < DateTime.Now);
+        }
+
+        public virtual bool HasMinRequirementsForSaving()
+        {
+            return true;
         }
 
         /// <summary>

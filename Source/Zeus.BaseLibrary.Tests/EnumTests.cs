@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace Zeus.BaseLibrary.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class EnumTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanGetDescription()
 		{
 			Assert.AreEqual("First Value", EnumHelper.GetEnumValueDescription(typeof(MyEnum), "FirstValue"));

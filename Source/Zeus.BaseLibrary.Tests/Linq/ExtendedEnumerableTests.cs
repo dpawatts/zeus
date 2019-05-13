@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.Linq;
 
 namespace Zeus.BaseLibrary.Tests.Linq
 {
-	[TestClass]
+	[TestFixture]
 	public class ExtendedEnumerableTests
 	{
-		[TestMethod]
+		[Test]
 		public void RangeDescendingTest()
 		{
 			int start = 2009;

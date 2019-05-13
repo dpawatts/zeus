@@ -23,17 +23,17 @@ namespace Zeus.Persistence
 		event EventHandler<CancelDestinationEventArgs> ItemCopying;
 		/// <summary>Occurs when an item has been copied</summary>
 		event EventHandler<DestinationEventArgs> ItemCopied;
-		/// <summary>Occurs when an item is loaded</summary>
-		event EventHandler<ItemEventArgs> ItemLoaded;
 
 		ContentItem Copy(ContentItem source, ContentItem destination);
 		ContentItem Copy(ContentItem source, ContentItem destination, bool includeChildren);
 		void Delete(ContentItem contentItem);
 		ContentItem Get(int id);
 		T Get<T>(int id) where T : ContentItem;
+		T Get<T>(Func<T, bool> condition) where T : ContentItem;
 		ContentItem Load(int id);
 		void Move(ContentItem toMove, ContentItem newParent);
 		void Save(ContentItem contentItem);
+        void SetUpdatedToNow(ContentItem contentItem);
 		void UpdateSortOrder(ContentItem contentItem, int newPos);
 	}
 }

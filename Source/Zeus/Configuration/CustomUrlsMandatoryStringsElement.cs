@@ -18,5 +18,19 @@ namespace Zeus.Configuration
             }
 
         }
+
+        [ConfigurationProperty("isRegex", IsRequired = true)]
+        public bool IsRegex
+        {
+            get
+            {
+                return (bool)this["isRegex"];
+            }
+            set
+            {
+                this["isRegex"] = value;
+            }
+
+        }
 	}
 }

@@ -1,12 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Zeus.BaseLibrary.Security;
 
 namespace Zeus.BaseLibrary.Tests.Security
 {
-	[TestClass]
+	[TestFixture]
 	public class NonceUtilityTests
 	{
-		[TestMethod]
+		[Test]
 		public void CanGenerateNonce()
 		{
 			// Act.

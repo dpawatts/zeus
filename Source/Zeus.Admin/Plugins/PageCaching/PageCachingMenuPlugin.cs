@@ -36,7 +36,7 @@ namespace Zeus.Admin.Plugins.PageCaching
 
 		public string GetJavascriptHandler(ContentItem contentItem)
 		{
-			return string.Format("function() {{ Ext.net.DirectMethods.PageCaching.ShowDialog({0}, {{ url: '{1}' }}); }}",
+			return string.Format("function() {{ Ext.net.DirectMethods.PageCaching.ShowDialog('{0}', {{ url: '{1}' }}); }}",
 				contentItem.ID, Context.AdminManager.GetAdminDefaultUrl());
 		}
 

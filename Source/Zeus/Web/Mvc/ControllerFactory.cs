@@ -5,10 +5,11 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.SessionState;
 using Ninject;
+using System.Linq;
 
 namespace Zeus.Web.Mvc
 {
-	public class ControllerFactory : IControllerFactory
+	public class ControllerFactory : DefaultControllerFactory
 	{
 		private readonly IKernel _kernel;
 
@@ -17,7 +18,7 @@ namespace Zeus.Web.Mvc
 			_kernel = kernel;
 		}
 
-		public IController CreateController(RequestContext requestContext, string controllerName)
+		public override IController CreateController(RequestContext requestContext, string controllerName)
 		{
 			string controllerKey = controllerName.ToLowerInvariant();
 
@@ -31,9 +32,11 @@ namespace Zeus.Web.Mvc
 			}
 
 			IController controller = InstantiateController(controllerKey);
-			if (controller == null)
-				throw new HttpException(404, string.Format(CultureInfo.CurrentUICulture, "The controller for path '{0}' was not found or does not implement IController.", requestContext.HttpContext.Request.Path));
-			return controller;
+
+			if (controller != null)
+                return controller;
+
+            return base.CreateController(requestContext, controllerName);
 		}
 
 		public SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, string controllerName)
@@ -43,7 +46,11 @@ namespace Zeus.Web.Mvc
 
 		private IController InstantiateController(string controllerName)
 		{
+#if DEBUG
+			IController controller = _kernel.Get<IController>(controllerName.ToLowerInvariant());
+#else
 			IController controller = _kernel.TryGet<IController>(controllerName.ToLowerInvariant());
+#endif
 
 			var standardController = controller as Controller;
 
@@ -51,11 +58,6 @@ namespace Zeus.Web.Mvc
 				standardController.ActionInvoker = new NinjectActionInvoker(_kernel);
 
 			return controller;
-		}
-
-		public void ReleaseController(IController controller)
-		{
-			//_kernel.ReleaseComponent(controller);
 		}
 	}
 }

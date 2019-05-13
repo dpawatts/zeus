@@ -79,10 +79,14 @@ namespace Zeus.Design.Editors
 
 		protected override ListItem[] GetListItems(IEditableObject item)
 		{
-			IQueryable<ContentItem> items = Context.Current.Finder.QueryItems();
-			if (TypeFilter != null)
-				items = ((IQueryable) items).OfType(TypeFilter).OfType<ContentItem>();
-			IEnumerable<ContentItem> itemList = items.ToList();
+            IQueryable<ContentItem> items = Context.Current.Finder.QueryItems();
+            IEnumerable<ContentItem> itemsAsEnum = items.AsEnumerable();
+            if (TypeFilter != null)
+            {
+                // THIS DOESN'T WORK WITH NHIBERNATE UPGRADE - items = ((IQueryable)items).OfType(TypeFilter).OfType<ContentItem>();
+                itemsAsEnum = itemsAsEnum.OfType(TypeFilter);
+            }
+            IEnumerable<ContentItem> itemList = itemsAsEnum.ToList().Where(i => !string.IsNullOrEmpty(i.Title)).ToList();
 			if (ExcludeSelf)
 				itemList = itemList.Where(i => i != item);
 			return itemList

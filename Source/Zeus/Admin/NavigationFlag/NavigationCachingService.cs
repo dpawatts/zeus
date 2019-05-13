@@ -2,6 +2,8 @@ using Ninject;
 using SoundInTheory.DynamicImage.Caching;
 using Zeus.Persistence;
 using Zeus.Globalization.ContentTypes;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Zeus.Admin.NavigationFlag
 {
@@ -35,12 +37,20 @@ namespace Zeus.Admin.NavigationFlag
             //any time anything is saved or changed, delete all the primary nav app cache data
             if (contentItem.IsPage)
             {
-                foreach (string item in System.Web.HttpContext.Current.Application.AllKeys)
+                List<string> keysToRemove = new List<string>();
+                IDictionaryEnumerator enumerator = System.Web.HttpContext.Current.Cache.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
-                    if (item.StartsWith("primaryNav"))
+                    string key = (string)enumerator.Key;
+                    if (key.StartsWith("primaryNav"))
                     {
-                        System.Web.HttpContext.Current.Application.Remove(item);
+                        keysToRemove.Add(key);
                     }
+                }
+
+                foreach (string key in keysToRemove)
+                {
+                    System.Web.HttpContext.Current.Cache.Remove(key);
                 }
             }
 		}

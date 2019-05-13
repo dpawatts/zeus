@@ -13,7 +13,7 @@ namespace Zeus.Plugin
 	{
 		private readonly ITypeFinder _typeFinder;
 
-		public PluginBootstrapper(ITypeFinder typeFinder)
+        public PluginBootstrapper(ITypeFinder typeFinder)
 		{
 			_typeFinder = typeFinder;
 		}

@@ -66,6 +66,8 @@ namespace Zeus.Web
 			get { return new PathData(); }
 		}
 
+        public bool Is404 { get; set; }
+
 		public ContentItem CurrentItem { get; set; }
 
 		/// <summary>

@@ -97,8 +97,8 @@ namespace Zeus.Engine
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/admin") as AdminSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/contentTypes") as ContentTypesSection);
 			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/dynamicContent") as DynamicContentSection);
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
-			_dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
+            _dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/globalization") as GlobalizationSection ?? new GlobalizationSection());
+            _dependencyInjectionManager.BindInstance(ConfigurationManager.GetSection("zeus/customUrls") as CustomUrlsSection ?? new CustomUrlsSection());
 
 			if (hostSection != null && hostSection.Web != null)
 				Url.DefaultExtension = hostSection.Web.Extension;

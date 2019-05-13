@@ -88,5 +88,10 @@ namespace Zeus.ContentProperties
 				&& Name == other.Name
 				&& Shared == other.Shared;
 		}
-	}
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
 }
