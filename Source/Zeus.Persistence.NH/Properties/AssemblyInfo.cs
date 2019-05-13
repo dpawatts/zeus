@@ -9,7 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Zeus.Persistence.NH")]
 [assembly: AssemblyDescription("0.8.0.3-SessionLockAlpha")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("0.8.0.3")]
+[assembly: AssemblyVersion("0.9.0.0")]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9e2b0e20-21ca-42d6-8f7a-4eafcb0d973c")]
+[assembly: AssemblyFileVersion("0.9.0.0")]
+
